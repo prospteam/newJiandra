@@ -27,7 +27,7 @@ $config['modules_locations'] = array(
 |
 */
 global $base_url;
-$config['base_url'] = $base_url;
+$config['base_url'] = 'http://localhost/newjiandra/';
 /*
 |--------------------------------------------------------------------------
 | Index File
