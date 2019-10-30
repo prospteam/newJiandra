@@ -10,7 +10,7 @@
           ENROLLMENT > <span class="active1"> SUPPLIER </p>
         </div>
         <div class="col-sm-6">
-            <button class="button1 float-sm-right"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add User </button>
+            <button class="button1 float-sm-right" data toggle="modal" data-target="#exmaple"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add User </button>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -37,7 +37,7 @@
               <th>Company Name</th>
               <td>Ariane Donza</td>
               <td>Action</td>
-              <td>Inactive</td>
+              <td class = "action">Inactive</td>
             </tr>
           </tbody>
       </div>
