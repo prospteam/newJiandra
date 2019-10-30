@@ -4855,7 +4855,7 @@ input[type="button"].btn-block {
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
   list-style: none;
-  background-color: #e9ecef;
+  background-color: #f6f8ff;
   border-radius: 0.25rem;
 }
 
@@ -28355,10 +28355,48 @@ span.active1 {
       color: #6061d1;
     }
     .card-body {
-        -ms-flex: 1 1 auto;
-        flex: 1 1 auto;
-        padding: 1.25rem;
-        background-color: #ebf0ff;
-        color: #545454;
-        font-size: 20px;
+    flex: 1 1 auto;
+    padding: 0.25rem;
+    color: #545454;
+    font-size: 20px;
+    }
+    button.button.company1 {
+    border: 0;
+    background-color: #6061d1;
+    width: 200px;
+    height: 55px;
+    border-radius: 5px;
+    color: white;
+    font-family: inherit;
+    font-size: 17px;
+    margin-left: 4px;
+    }
+    button.button.company2 {
+    background-color: #ffff;
+    width: 200px;
+    height: 55px;
+    border-radius: 5px;
+    color: black;
+    font-family: inherit;
+    font-size: 17px;
+    border: 2px solid #6061d1;
+}
+    .card {
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
+    margin-bottom: 1rem;
+    background-color: #f6f8ff;
+    }
+    .card-body > .table > thead > tr > th, .card-body > .table > thead > tr > td {
+        border-top-width: 0;
+        background-color: #e0e7fd;
+    }
+    tbody.tablelist {
+    background-color: white;
+    font-size: 16px;
+    font-family: inherit;
+    text-align: center;
+    }
+    thead.tableheader {
+    text-align: center;
+    font-size: 23px;
     }

@@ -7,7 +7,7 @@
       <div class="row mb-2">
         <div class="col-sm-6">
           <h1><b>Supplier</b></h1>
-          ENROLLMENT > <span class="active1"> USERS </p>
+          ENROLLMENT > <span class="active1"> SUPPLIER </p>
         </div>
         <div class="col-sm-6">
             <button class="button1 float-sm-right"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add User </button>
@@ -15,39 +15,31 @@
       </div>
     </div><!-- /.container-fluid -->
   </section>
-
-  <!-- Main content -->
-  <section class="content">
-
     <!-- Default box -->
-    <div class="card">
-      <div class="card-header">
-        <ol class="breadcrumb float-sm-left">
-          <button class="button" name="button"></button>   <a href="#">Company 1</a></li>
-          <li class="breadcrumb-item active">Company 2</li>
-        </ol>
+    <div class="main header">
+      <div class="middle">
+          <button class="button company1">New Jiandra Enterprises </button>
+          <button class="button company2">Mrs.P Mktg. </button>
       </div>
+
       <div class="card-body">
-        <table id="example" class="table table-striped table-bordered" style="width:100%">
-          <thead>
-          <tr>
-              <th>Super Logo</th>
+        <table class="table table-bordered">
+          <thead class="tableheader">
+            <tr>
+              <th>Supplier Logo</th>
               <th>Supplier Name</th>
               <th>Action</th>
               <th>Status</th>
-          </tr>
-      </thead>
-    </table>
+            </tr>
+          </thead>
+          <tbody class ="tablelist">
+            <tr>
+              <th>Company Name</th>
+              <td>Ariane Donza</td>
+              <td>Action</td>
+              <td>Inactive</td>
+            </tr>
+          </tbody>
       </div>
-      <!-- /.card-body -->
-      <div class="card-footer">
-        Footer
-      </div>
-      <!-- /.card-footer-->
     </div>
-    <!-- /.card -->
-
-  </section>
-  <!-- /.content -->
 </div>
-<!-- /.content-wrapper -->
