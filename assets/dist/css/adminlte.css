@@ -28349,3 +28349,16 @@ span.active1 {
         padding-right: 70px;
         font-size: 20px;
     }
+    .content-header h1 {
+      font-size: 1.8rem;
+      margin: 0;
+      color: #6061d1;
+    }
+    .card-body {
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        padding: 1.25rem;
+        background-color: #ebf0ff;
+        color: #545454;
+        font-size: 20px;
+    }

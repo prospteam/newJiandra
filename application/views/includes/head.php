@@ -130,7 +130,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../layout/boxed.html" class="nav-link">
+                <a href="<?php echo base_url('supplier'); ?>" class="nav-link">
                   <p>Suppliers</p>
                 </a>
               </li>
