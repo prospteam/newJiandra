@@ -10,7 +10,7 @@
           ENROLLMENT > <span class="active1"> SUPPLIER </p>
         </div>
         <div class="col-sm-6">
-            <button class="button1 float-sm-right" data toggle="modal" data-target="#exmaple"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add User </button>
+            <button class="button1 float-sm-right" data toggle="modal" data-target="#exampleModal "><i class="fas fa-plus-circle" aria-hidden="true"></i> Add User </button>
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -34,10 +34,16 @@
           </thead>
           <tbody class ="tablelist">
             <tr>
-              <th>Company Name</th>
+              <th>Ariane's Name</th>
               <td>Ariane Donza</td>
-              <td>Action</td>
-              <td class = "action">Inactive</td>
+              <td><i class="fas fa-edit "></i><i class="fas fa-edit "></i><i class="fas fa-edit "></i></td>
+              <td><button class="status">Inactive</button></td>
+            </tr>
+            <tr>
+              <th>Rogen's Name</th>
+              <td>Rojs Gen</td>
+              <td><i class="fas fa-edit "></i><i class="fas fa-edit "></i><i class="fas fa-edit "></i></td>
+              <td><button class="status1">Active</button></td>
             </tr>
           </tbody>
       </div>

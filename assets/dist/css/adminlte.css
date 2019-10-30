@@ -28400,3 +28400,17 @@ span.active1 {
     text-align: center;
     font-size: 23px;
     }
+    button.status {
+    border: 0;
+    background-color: #de385a;
+    color: #ffff;
+    border-radius: 5px;
+    width: 100px;
+}
+    button.status1 {
+    border: 0;
+    background-color: #529455;
+    color: #ffff;
+    border-radius: 5px;
+    width: 100px;
+    }
