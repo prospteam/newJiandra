@@ -45,21 +45,32 @@
                   <div class="col-sm-12">
                     <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                   <thead>
-                    <tr role="row">
-                      <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 283px;">Rendering engine</th>
-                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 359px;">Browser</th>
-                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 320px;">Platform(s)</th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 243px;">Engine version</th>
-                      <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 176px;">CSS grade</th>
+                    <tr class="table-header" role="row">
+                      <th class="header-title sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 283px;">Name</th>
+                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 359px;">Company</th>
+                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 320px;">Type</th>
+                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 243px;">Accounts</th>
+                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 176px;">Action</th>
+                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 176px;">Status</th>
                     </tr>
                   </thead>
                   <tbody>
 
                     <tr role="row" class="odd">
+                      <td class="table-data sorting_1">Gecko</td>
+                      <td class="table-data">Firefox 1.0</td>
+                      <td class="table-data">Win 98+ / OSX.2+</td>
+                      <td class="table-data">1.7</td>
+                      <td class="action"><i class="fas fa-pen"></i> <i class="fa fa-trash" aria-hidden="true"></i></td>
+                      <td class="table-data"><button type="button" class="inactive btn btn-block btn-danger">inactive</button></td>
+                    </tr>
+                    <tr role="row" class="odd">
                       <td class="sorting_1">Gecko</td>
-                      <td>Firefox 1.0</td>
-                      <td>Win 98+ / OSX.2+</td>
-                      <td>1.7</td>
-                      <td>A</td>
+                      <td class="table-data">Firefox 1.0</td>
+                      <td class="table-data">Win 98+ / OSX.2+</td>
+                      <td class="table-data">1.7</td>
+                      <td class="action"><i class="fas fa-pen"></i> <i class="fa fa-trash" aria-hidden="true"></i></td>
+                      <td class="table-data"><button type="button" class="active btn btn-block btn-success">inactive</button></td>
                     </tr>
                 </tbody>
                 </table>

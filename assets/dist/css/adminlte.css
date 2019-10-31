@@ -1557,7 +1557,7 @@ pre code {
 
 .table-bordered th,
 .table-bordered td {
-  border: 1px solid #dee2e6;
+  border: 1px solid #d8e2fe;
 }
 
 .table-bordered thead th,
@@ -28428,8 +28428,51 @@ span.active1 {
     color: #545454;
 
 }
+<<<<<<< HEAD
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
     color: #ffff;
     background-color: #6061d1;
     border-color: #dee2e6 #dee2e6 #ffffff;
+=======
+
+
+td.action {
+    text-align: center;
+}
+
+i.fas.fa-pen {
+    margin-right: 17px;
+    color: #c8c8c8;
+}
+
+i.fa.fa-trash, i.fa.fa-clone {
+    margin-right: 17px;
+    color: #c8c8c8;
+}
+
+tr.table-header {
+    background: #ebf0ff;
+    height: 62px;
+}
+tr.odd {
+    background: white!important;
+}
+
+button.inactive{
+  background: #e15959;
+}
+
+button.active{
+  background: #80bb6c!important;
+  border-color: #80bb6c!important;
+}
+
+th.header-title {
+    font-size: 20px;
+    color: #626264;
+}
+
+td.table-data {
+    font-size: 20px;
+>>>>>>> e39d4c118198f6f5562284fc20e36b7a3229792c
 }
