@@ -28414,3 +28414,9 @@ span.active1 {
     border-radius: 5px;
     width: 100px;
     }
+    .modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 1rem;
+    max-width: 100px !important;
+}

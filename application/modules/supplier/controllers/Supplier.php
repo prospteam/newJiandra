@@ -9,8 +9,12 @@ class Supplier extends MY_Controller {
 		// $data = getrow('users',$parameters,'array',true);
 		// json($data,false);
 		$this->load_page('supplier');
-
-
 	}
+		public function supplier(){
+
+
+		}
 }
+
+
 ?>
