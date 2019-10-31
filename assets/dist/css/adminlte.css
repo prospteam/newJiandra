@@ -28428,12 +28428,11 @@ span.active1 {
     color: #545454;
 
 }
-<<<<<<< HEAD
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
     color: #ffff;
     background-color: #6061d1;
     border-color: #dee2e6 #dee2e6 #ffffff;
-=======
+}
 
 
 td.action {
@@ -28480,5 +28479,4 @@ th.header-title {
 
 td.table-data {
     font-size: 20px;
->>>>>>> e39d4c118198f6f5562284fc20e36b7a3229792c
 }
