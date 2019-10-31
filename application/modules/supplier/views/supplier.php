@@ -53,35 +53,39 @@
   </section>
     <!-- Default box -->
     <div class="main header">
-      <div class="middle">
-          <button class="button company1">New Jiandra Enterprises </button>
-          <button class="button company2">Mrs.P Mktg. </button>
-      </div>
-
-      <div class="card-body">
-        <table class="table table-bordered">
-          <thead class="tableheader">
-            <tr>
-              <th>Supplier Logo</th>
-              <th>Supplier Name</th>
-              <th>Action</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody class ="tablelist">
-            <tr>
-              <th>Ariane's Name</th>
-              <td>Ariane Donza</td>
-              <td><i class="fa fa-clone" aria-hidden="true"></i><i class="fas fa-pen"></i><i class="fa fa-trash" aria-hidden="true"></i></td>
-              <td><button class="status">Inactive</button></td>
-            </tr>
-            <tr>
-              <th>Rogen's Name</th>
-              <td>Rojs Gen</td>
-              <td><i class="fa fa-clone" aria-hidden="true"></i><i class="fas fa-pen"></i><i class="fa fa-trash" aria-hidden="true"></i></td>
-              <td><button class="status1">Active</button></td>
-            </tr>
-          </tbody>
-      </div>
+      <div class="col-md-12">
+        <nav>
+            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                <button class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">New Jiandra</button>
+                <button class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Mrs.P</button>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+              <table class="table" cellspacing="0">
+                  <thead>
+                      <tr>
+                          <th>Supplier Logo</th>
+                          <th>Supplier Name</th>
+                          <th>Action</th>
+                          <th>Status</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                        <td>Company Logo</td>
+                        <td>Rojs Gen</td>
+                        <td><i class="fa fa-clone" aria-hidden="true"></i><i class="fas fa-pen"></i><i class="fa fa-trash" aria-hidden="true"></i></td>
+                        <td><button class="status1">Active</button></td>
+                      </tr>
+                      <tr>
+                        <td>Company Logo</td>
+                        <td>Ariane</td>
+                        <td><i class="fa fa-clone" aria-hidden="true"></i><i class="fas fa-pen"></i><i class="fa fa-trash" aria-hidden="true"></i></td>
+                        <td><button class="status">Inactive</button></td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
     </div>
 </div>

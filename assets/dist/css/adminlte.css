@@ -28426,5 +28426,10 @@ span.active1 {
     flex: 1 1 auto;
     padding: 0.25rem;
     color: #545454;
-    
+
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: #ffff;
+    background-color: #6061d1;
+    border-color: #dee2e6 #dee2e6 #ffffff;
 }
