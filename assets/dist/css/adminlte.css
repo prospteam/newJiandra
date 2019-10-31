@@ -28454,11 +28454,17 @@ tr.odd {
 
 button.inactive{
   background: #e15959;
+  width: 100%;
+  max-width: 100px;
+  margin: 0 auto;
 }
 
 button.active{
   background: #80bb6c!important;
   border-color: #80bb6c!important;
+  width: 100%;
+  max-width: 100px;
+  margin: 0 auto;
 }
 
 th.header-title {
