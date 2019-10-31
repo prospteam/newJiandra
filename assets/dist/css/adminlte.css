@@ -28480,3 +28480,6 @@ th.header-title {
 td.table-data {
     font-size: 20px;
 }
+ #example2 {
+    display: none;
+}

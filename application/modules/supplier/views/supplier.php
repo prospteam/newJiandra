@@ -95,19 +95,43 @@
                       </thead>
                       <tbody>
                         <tr role="row" class="odd">
-                          <td class="table-data sorting_1">Gecko</td>
-                          <td class="table-data">Arriane</td>
+                          <td class="table-data sorting_1">example1</td>
+                          <td class="table-data">example1</td>
                           <td class="action"><i class="fa fa-clone" aria-hidden="true"></i><i class="fas fa-pen"></i> <i class="fa fa-trash" aria-hidden="true"></i></td>
                           <td class="table-data"><button type="button" class="inactive btn btn-block btn-danger">inactive</button></td>
                         </tr>
                         <tr role="row" class="odd">
-                          <td class="sorting_1">Gecko</td>
-                          <td class="table-data">Rojs</td>
+                          <td class="sorting_1">example1</td>
+                          <td class="table-data">example1</td>
                           <td class="action"><i class="fa fa-clone" aria-hidden="true"></i><i class="fas fa-pen"></i> <i class="fa fa-trash" aria-hidden="true"></i></td>
                           <td class="table-data"><button type="button" class="active btn btn-block btn-success">inactive</button></td>
                         </tr>
                     </tbody>
                     </table>
+                    <table id="example2" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                  <thead>
+                    <tr class="table-header" role="row">
+                      <th class="header-title sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 283px;">Supplier Logo</th>
+                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 359px;">Supplier Name</th>
+                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 320px;">Action</th>
+                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 176px;">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr role="row" class="odd">
+                      <td class="table-data sorting_1">Gecko</td>
+                      <td class="table-data">Arriane</td>
+                      <td class="action"><i class="fa fa-clone" aria-hidden="true"></i><i class="fas fa-pen"></i> <i class="fa fa-trash" aria-hidden="true"></i></td>
+                      <td class="table-data"><button type="button" class="inactive btn btn-block btn-danger">inactive</button></td>
+                    </tr>
+                    <tr role="row" class="odd">
+                      <td class="sorting_1">example2</td>
+                      <td class="table-data">example2</td>
+                      <td class="action"><i class="fa fa-clone" aria-hidden="true"></i><i class="fas fa-pen"></i> <i class="fa fa-trash" aria-hidden="true"></i></td>
+                      <td class="table-data"><button type="button" class="active btn btn-block btn-success">inactive</button></td>
+                    </tr>
+                </tbody>
+                </table>
                     </div>
                   </div>
                   <div class="row">
@@ -148,3 +172,16 @@
 
               <!-- /.card-body -->
             </div>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            <script>
+            $(document).ready(function(){
+              $(".company2").click(function(){
+                $("#example2").show();
+                $("#example1").hide();
+              });
+              $(".company1").click(function(){
+                $("#example1").show();
+                $("#example2").hide();
+              });
+            });
+            </script>
