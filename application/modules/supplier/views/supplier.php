@@ -1,3 +1,4 @@
+<?php echo "hi"; ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -5,7 +6,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Supplier</h1>
+          <h1><b>Supplier</b></h1>
           ENROLLMENT > <span class="active1"> SUPPLIER </p>
         </div>
         <div class="col-sm-6">
@@ -109,7 +110,6 @@
                     </table>
                     </div>
                   </div>
-<<<<<<< HEAD
                   <div class="row">
                     <div class="col-sm-12 col-md-5">
                       <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
@@ -141,67 +141,6 @@
                         </ul>
                       </div>
                     </div>
-=======
-                </div>
-                <div class="row">.
-                  <div class="col-sm-12">
-                    <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
-                  <thead>
-                    <tr class="table-header" role="row">
-                      <th class="header-title sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 283px;">Supplier Logo</th>
-                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 359px;">Supplier Name</th>
-                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 320px;">Action</th>
-                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 176px;">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                    <tr role="row" class="odd">
-                      <td class="table-data sorting_1">Gecko</td>
-                      <td class="table-data">1.7</td>
-                      <td class="action"><i class="fas fa-pen"></i> <i class="fa fa-trash" aria-hidden="true"></i></td>
-                      <td class="table-data"><button type="button" class="inactive btn btn-block btn-danger">inactive</button></td>
-                    </tr>
-                    <tr role="row" class="odd">
-                      <td class="sorting_1">Gecko</td>
-                      <td class="table-data">1.7</td>
-                      <td class="action"><i class="fas fa-pen"></i> <i class="fa fa-trash" aria-hidden="true"></i></td>
-                      <td class="table-data"><button type="button" class="active btn btn-block btn-success">inactive</button></td>
-                    </tr>
-                </tbody>
-                </table>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12 col-md-5">
-                  <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                </div>
-                <div class="col-sm-12 col-md-7">
-                  <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                    <ul class="pagination">
-                      <li class="paginate_button page-item previous disabled" id="example1_previous">
-                        <a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                      </li>
-                      <li class="paginate_button page-item active">
-                        <a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                      </li>
-                      <li class="paginate_button page-item ">
-                        <a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-                      </li>
-                      <li class="paginate_button page-item ">
-                        <a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-                      </li>
-                      <li class="paginate_button page-item ">
-                        <a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-                      </li>
-                      <li class="paginate_button page-item ">
-                        <a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0" class="page-link">6</a>
-                      </li>
-                      <li class="paginate_button page-item next" id="example1_next">
-                        <a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
-                      </li>
-                    </ul>
->>>>>>> b791ae78d798357a8f50ec845359bcfc8595d1ff
                   </div>
                 </div>
               </div>
