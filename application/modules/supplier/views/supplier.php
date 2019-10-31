@@ -1,4 +1,3 @@
-<?php echo "hi"; ?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -6,7 +5,7 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1><b>Supplier</b></h1>
+          <h1>Supplier</h1>
           ENROLLMENT > <span class="active1"> SUPPLIER </p>
         </div>
         <div class="col-sm-6">
@@ -96,7 +95,6 @@
                     </tr>
                     <tr role="row" class="odd">
                       <td class="sorting_1">Gecko</td>
-                      <td class="table-data">Firefox 1.0</td>
                       <td class="table-data">1.7</td>
                       <td class="action"><i class="fas fa-pen"></i> <i class="fa fa-trash" aria-hidden="true"></i></td>
                       <td class="table-data"><button type="button" class="active btn btn-block btn-success">inactive</button></td>
