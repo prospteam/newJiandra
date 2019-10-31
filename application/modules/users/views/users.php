@@ -9,8 +9,49 @@
           ENROLLMENT > <span class="active1"> USERS </p>
         </div>
         <div class="col-sm-6">
-            <button class="button1 float-sm-right"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add User </button>
+            <button class="button1 float-sm-right" data-toggle="modal" data-target="#AddUser"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add User </button>
 
+            <!--Add User Modal -->
+          <div class="modal fade" id="AddUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                <div class="card card-primary">
+                      <div class="card-header">
+                        <h3 class="modal-title card-title" id="exampleModalLabel">Add Supplier</h3>
+                      </div>
+                    </div>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" name="fullname" value="">
+                    <label for="username">Username:</label>
+                    <input type="text" name="supplier_contact_person" value="">
+                    <label for="company">Company:</label>
+                    <input type="text" name="company" value="">
+                    <label for="vendor">Vendor:</label>
+                    <input type="text" name="vendor" value="">
+                    <label for="office_number">Office Number:</label>
+                    <input type="text" name="office_number" value="">
+                    <label for="home_phone">Home Phone:</label>
+                    <input type="text" name="home_phone" value="">
+                    <label for="mobile_number">Mobile Number</label>
+                    <input type="text" name="mobile_number" value="">
+                    <label for="tin">TIN:</label>
+                    <input type="text" name="tin" value="">
+                    <label for="tin">Fax Number:</label>
+                    <input type="text" name="fax_number" value="">
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Add user Modal -->
         </div>
       </div>
     </div><!-- /.container-fluid -->
