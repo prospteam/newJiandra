@@ -76,13 +76,21 @@
                         <td>Company Logo</td>
                         <td>Rojs Gen</td>
                         <td><i class="fa fa-clone" aria-hidden="true"></i><i class="fas fa-pen"></i><i class="fa fa-trash" aria-hidden="true"></i></td>
+<<<<<<< HEAD
                         <td><button type="button" class="active btn btn-block btn-success">active</button></td>
+=======
+                        <td><button class="status1">Active</button></td>
+>>>>>>> cbeadba3339c72b5fa46078ab95155c5e8ce98b2
                       </tr>
                       <tr>
                         <td>Company Logo</td>
                         <td>Ariane</td>
                         <td><i class="fa fa-clone" aria-hidden="true"></i><i class="fas fa-pen"></i><i class="fa fa-trash" aria-hidden="true"></i></td>
+<<<<<<< HEAD
                         <td><button type="button" class="inactive btn btn-block btn-danger">inactive</button></td>
+=======
+                        <td><button class="status">Inactive</button></td>
+>>>>>>> cbeadba3339c72b5fa46078ab95155c5e8ce98b2
                       </tr>
                   </tbody>
               </table>
