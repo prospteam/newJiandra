@@ -1,5 +1,5 @@
 <?php
-$isProduction = true;
+$isProduction = false;
 $base_url = (isset($_SERVER['HTTPS']) ? 'https' : 'http').'://'.$_SERVER['HTTP_HOST'].'/'.(explode("/",$_SERVER['REQUEST_URI'])[1]).'/';
 /**
  * CodeIgniter
