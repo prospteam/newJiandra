@@ -14,7 +14,7 @@
             <!--Add User Modal -->
             <!-- Modal -->
     				<div class="modal fade" id="AddUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
-    					<form action="<?= base_url('users/adduser') ?>" method="post">
+    					<form id="adduser" method="post">
     						<div class="modal-dialog modal-lg" role="document">
     							<div class="modal-content">
     								<div class="modal-header">

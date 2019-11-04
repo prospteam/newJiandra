@@ -28,6 +28,19 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
+  <div class="loader-cont" style="display:none;position: fixed; z-index: 999; width: 100%; height: 100%; background: rgba(23,23,23,0.701);">
+            <div class="sk-cube-grid xr_ar" style="left: 0; top: 35%; width: 80px; height: 80px; position: absolute; right: 0;">
+                <div class="sk-cube sk-cube1"></div>
+                <div class="sk-cube sk-cube2"></div>
+                <div class="sk-cube sk-cube3"></div>
+                <div class="sk-cube sk-cube4"></div>
+                <div class="sk-cube sk-cube5"></div>
+                <div class="sk-cube sk-cube6"></div>
+                <div class="sk-cube sk-cube7"></div>
+                <div class="sk-cube sk-cube8"></div>
+                <div class="sk-cube sk-cube9"></div>
+            </div>
+        </div>
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->

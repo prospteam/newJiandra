@@ -53,7 +53,7 @@ class Users extends MY_Controller {
 			$data_result = $this->MY_Model->getRows('company',$parameters2);
 			json($data_result,false);
 	}
-	
+
 	public function adduser()
 	{
 		$this->load->library("form_validation");
@@ -61,7 +61,7 @@ class Users extends MY_Controller {
 		$data = array(
 			'fullname' => $this->input->post('fullname'),
 			'username' => $this->input->post('username'),
-			'password	' => md5($this->input->post('password')),
+			'password	' => sha1($this->input->post('password')),
 			'position' => $this->input->post('position'),
 			'company' => implode(',',$this->input->post('company')),
 			'status' => 1
@@ -69,17 +69,17 @@ class Users extends MY_Controller {
 
 		$insert = $this->MY_Model->insert('users', $data);
 
+		// $result = array(
+		// 	'status' => 'ok'
+		// );
+		// echo json_encode($result);
 		if ($insert) {
 			$response = array(
-				'type' => 'success',
-				'title' => 'Success!',
-				'msg' => 'User added successfully'
+			'status' => 'ok'
 			);
 		} else {
 			$response = array(
-				'type' => 'error',
-				'title' => 'Error!',
-				'msg' => 'Something Went Wrong!'
+				'status' => 'invalid'
 			);
 		}
 

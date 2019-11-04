@@ -48,6 +48,8 @@ $(document).ready(function(){
           ],
       });
   //end display users_tbl
+
+  //display companies
    $('.js-example-basic-multiple').select2({
 
      width: '80%',
@@ -75,4 +77,49 @@ $(document).ready(function(){
      }
    });
 
+   //successfully added user
+   $(document).on('submit','form#adduser',function(e){
+       e.preventDefault();
+       $('#AddUser').modal('hide');
+       var formData = new FormData($(this)[0]);
+       // formData.append('nob_id',$('a.add').attr('data-id'));
+       // formData.append('nob_code',$('a.add').attr('data-code'));
+       $.ajax({
+           url:base_url+'users/adduser/',
+           data: formData,
+           processData:false,
+           contentType: false,
+           type: 'post',
+           dataType: 'json',
+           beforeSend: function(){
+               show_loader();
+           },
+           success: function(data){
+               console.log(data);
+              hide_loader();
+              if(data.status == "ok"){
+                   $('#adduser')[0].reset();
+                   alertify.set('notifier','position','top-left');
+                   alertify.success('Layout successfully added!');
+                   // layouts();
+               }else if(data.status == 'invalid'){
+                   alertify.set('notifier','position','top-left');
+                   alertify.error('Invalid filetype or your file exceeds 500M');
+               }else{
+                   alertify.set('notifier','position','top-left');
+                   alertify.error('Something went wrong');
+                   // alertify.error(data);
+               }
+           }
+       });
+   });
+
 });
+
+function show_loader(){
+    $('.loader-cont').show();
+}
+
+function hide_loader(){
+    $('.loader-cont').hide();
+}
