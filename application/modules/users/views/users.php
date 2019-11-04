@@ -9,48 +9,77 @@
           ENROLLMENT > <span class="active1"> USERS </p>
         </div>
         <div class="col-sm-6">
-            <button class="button1 float-sm-right" data-toggle="modal" data-target="#AddUser"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add User </button>
+            <button class="users button1 float-sm-right" data-toggle="modal" data-target="#AddUser"><i class="fas fa-plus-circle" aria-hidden="true"></i>  Add User </button>
 
             <!--Add User Modal -->
-          <div class="modal fade" id="AddUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                <div class="card card-primary">
-                      <div class="card-header">
-                        <h3 class="modal-title card-title" id="exampleModalLabel">Add Supplier</h3>
-                      </div>
-                    </div>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <label for="fullname">Full Name</label>
-                    <input type="text" name="fullname" value="">
-                    <label for="username">Username:</label>
-                    <input type="text" name="supplier_contact_person" value="">
-                    <label for="company">Company:</label>
-                    <input type="text" name="company" value="">
-                    <label for="vendor">Vendor:</label>
-                    <input type="text" name="vendor" value="">
-                    <label for="office_number">Office Number:</label>
-                    <input type="text" name="office_number" value="">
-                    <label for="home_phone">Home Phone:</label>
-                    <input type="text" name="home_phone" value="">
-                    <label for="mobile_number">Mobile Number</label>
-                    <input type="text" name="mobile_number" value="">
-                    <label for="tin">TIN:</label>
-                    <input type="text" name="tin" value="">
-                    <label for="tin">Fax Number:</label>
-                    <input type="text" name="fax_number" value="">
-                </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-              </div>
-            </div>
-          </div>
+            <!-- Modal -->
+    				<div class="modal fade" id="AddUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
+    					<form action="<?= base_url('users/adduser') ?>" method="post">
+    						<div class="modal-dialog modal-lg" role="document">
+    							<div class="modal-content">
+    								<div class="modal-header">
+    									<h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-plus" style="color:black" aria-hidden="true"></i>  Add User</h5>
+    									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    										<span aria-hidden="true">&times;</span>
+    									</button>
+    								</div>
+    								<div class="modal-body">
+    									<div class="row">
+    										<div class="col-6">
+    											<div class="form-group">
+    												<label for="fullname">Full Name:</label>
+    												<input type="text" class="form-control" name="fullname" value="" required>
+    											</div>
+    										</div>
+    										<div class="col-6">
+    											<div class="form-group">
+    												<label for="username">Username:</label>
+    												<input type="text" class="form-control" name="username" value="" required>
+    											</div>
+    										</div>
+    									</div>
+    									<div class="row">
+    										<div class="col-6">
+    											<div class="form-group">
+    												<label for="password">Password:</label>
+    												<input type="password" class="form-control" name="password" value="" required>
+    											</div>
+    										</div>
+    										<div class="col-6">
+    											<div class="form-group">
+    												<label for="position">Position:</label>
+    												<input type="text" class="form-control" name="position" value="" required>
+    											</div>
+    										</div>
+    									</div>
+    								<div class = "row">
+    								   <div class="col-6">
+    									<div class="form-group">
+    										<label for="company">Company:</label>
+                        <select class="form-control js-example-basic-multiple" name="company[]" multiple="multiple"></select>
+                    <!-- <span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="8" style="width: 100%;"><span class="selection">
+                      <span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false">
+                        <ul class="select2-selection__rendered">
+                          <li class="select2-search select2-search--inline">
+                            <input class="select2-search__field form-control" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="Select Company">
+                          </li>
+                        </ul>
+                      </span>
+                    </span>
+                    <span class="dropdown-wrapper" aria-hidden="true"></span>
+                  </span> -->
+
+    									</div>
+    									</div>
+                  </div>
+    								</div>
+    								<div class="modal-footer">
+    									<button type="submit" class="btn btn-primary add">Submit</button>
+    								</div>
+    							</div>
+    						</div>
+    					</form>
+    				</div>
           <!-- End Add user Modal -->
         </div>
       </div>
@@ -63,58 +92,30 @@
               <!-- /.card-header -->
               <div class="card-body1">
                 <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                  <div class="row">
-                      <div class="col-sm-12 col-md-6">
-                        <div class="dataTables_length" id="example1_length">
-                          <label>Show
-                            <select name="example1_length" aria-controls="example1" class="custom-select custom-select-sm form-control form-control-sm">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                          </select> entries
-                          </label>
-                        </div>
-                      </div>
-                  <div class="col-sm-12 col-md-6">
-                      <div id="example1_filter" class="dataTables_filter">
-                        <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example1"></label>
-                      </div>
-                  </div>
-                </div>
                 <div class="row">.
                   <div class="col-sm-12">
-                    <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                    <table class="table table-bordered table-striped dataTable users_tbl" role="grid" aria-describedby="example1_info">
                   <thead>
-                    <tr class="table-header" role="row">
+                    <th class="header-title">Name</th>
+                    <th class="header-title">Company</th>
+                    <th class="header-title">Position</th>
+                    <th class="header-title">Action</th>
+                    <th class="header-title">Status</th>
+                    <!-- <tr class="table-header" role="row">
                       <th class="header-title sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 283px;">Name</th>
                       <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 359px;">Company</th>
                       <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 320px;">Type</th>
                       <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 176px;">Action</th>
                       <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 176px;">Status</th>
-                    </tr>
+                    </tr> -->
                   </thead>
                   <tbody>
 
-                    <tr role="row" class="odd">
-                      <td class="table-data sorting_1">Gecko</td>
-                      <td class="table-data">Firefox 1.0</td>
-                      <td class="table-data">1.7</td>
-                      <td class="action"><i class="fas fa-pen"></i> <i class="fa fa-trash" aria-hidden="true"></i></td>
-                      <td class="table-data"><button type="button" class="inactive btn btn-block btn-danger">inactive</button></td>
-                    </tr>
-                    <tr role="row" class="odd">
-                      <td class="sorting_1">Gecko</td>
-                      <td class="table-data">Firefox 1.0</td>
-                      <td class="table-data">1.7</td>
-                      <td class="action"><i class="fas fa-pen"></i> <i class="fa fa-trash" aria-hidden="true"></i></td>
-                      <td class="table-data"><button type="button" class="active btn btn-block btn-success">inactive</button></td>
-                    </tr>
                 </tbody>
                 </table>
                 </div>
               </div>
-              <div class="row">
+              <!-- <div class="row">
                 <div class="col-sm-12 col-md-5">
                   <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
                 </div>
@@ -145,7 +146,7 @@
                     </ul>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
               </div>
               <!-- /.card-body -->

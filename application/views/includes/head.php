@@ -22,6 +22,9 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.min.css" id="theme-styles">
   <!-- jQuery -->
   <script src="<?php echo base_url('assets/plugins/jquery/jquery.min.js'); ?>"></script>
+  <!-- Select2 -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/select2/css/select2.min.css');?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css'); ?>">
 </head>
 
 <body class="hold-transition sidebar-mini">

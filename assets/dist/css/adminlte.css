@@ -27194,3 +27194,8 @@ button.btn.btn-primary.add {
     background-color: #6b6ca5;
     font-size: 20px;
 }
+
+i.fas.fa-clone {
+    color: #c8c8c8;
+    margin-right: 17px;
+}
