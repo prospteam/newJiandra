@@ -25,6 +25,13 @@ class Users extends MY_Controller {
 		$join = array();
 		$select = "fullname,company,position,status";
 		$list = $this->MY_Model->get_datatables1('users',$column_order, $select, $join, $limit, $offset ,$search, $order);
+
+		// if(!empty($list)) {
+		// 	foreach ($list as $key => $value) {
+		// 		$list[$key]['position'] = userType($value['position']);
+		// 	}
+		// }
+
 		$output = array(
 				"draw" => $draw,
 				"recordsTotal" => $list['count_all'],

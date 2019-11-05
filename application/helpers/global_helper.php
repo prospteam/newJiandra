@@ -125,12 +125,11 @@
 	    function userType($k = '')
 	    {
 	        $type = array(
-	            0 => 'Admin',
-	            1 => 'Warehouse',
-	            2 => 'Commissary',
-	            3 => 'Stall',
-	            4 => 'Purchaser',
-	            5 => 'Office'
+	            1 => 'Admin',
+	            2 => 'Encoder',
+	            3 => 'Salesman',
+	            4 => 'Warehouse Personnel',
+	            5 => 'Delivery Personnel'
 	        );
 
 	        return $k == '' ? $type : $type[$k];

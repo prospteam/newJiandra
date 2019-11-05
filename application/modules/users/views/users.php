@@ -51,7 +51,13 @@
     										<div class="col-6">
     											<div class="form-group">
     												<label for="position">Position:</label>
-    												<input type="text" class="form-control" name="position" value="">
+    												<!-- <input type="text" class="form-control" name="position" value=""> -->
+                            <select class="form-control" name="position">
+                            <?php foreach(userType() as $k => $value) : ?>
+                                <option value="<?php echo $k ?>"><?php echo $value ?></option>
+                              
+                          <?php  endforeach; ?>
+                        </select>
                             <span class="err"></span>
     											</div>
     										</div>

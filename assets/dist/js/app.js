@@ -99,6 +99,9 @@ $(document).ready(function(){
                 blankVal();
                  $('#AddUser').modal('hide');
                  Swal.fire("Successfully added user!",data.success, "success");
+                 setTimeout(function(){
+                    location.reload();
+                  }, 1000);
              }
          }
      })
