@@ -58,29 +58,30 @@ class Users extends MY_Controller {
 	{
 		$this->load->library("form_validation");
 
-		$data = array(
-			'fullname' => $this->input->post('fullname'),
-			'username' => $this->input->post('username'),
-			'password	' => sha1($this->input->post('password')),
-			'position' => $this->input->post('position'),
-			'company' => implode(',',$this->input->post('company')),
-			'status' => 1
-		);
+		$this->form_validation->set_rules('fullname', 'Fullname', 'required');
+		$this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('position', 'Position', 'required');
+		// $this->form_validation->set_rules('company', 'Company', 'required');
 
-		$insert = $this->MY_Model->insert('users', $data);
+		if ($this->form_validation->run() !== FALSE) {
+			$data = array(
+				'fullname' => $this->input->post('fullname'),
+				'username' => $this->input->post('username'),
+				'password	' => sha1($this->input->post('password')),
+				'position' => $this->input->post('position'),
+				'company' => implode(',',$this->input->post('company')),
+				'status' => 1
+			);
 
-		// $result = array(
-		// 	'status' => 'ok'
-		// );
-		// echo json_encode($result);
-		if ($insert) {
-			$response = array(
-			'status' => 'ok'
-			);
-		} else {
-			$response = array(
-				'status' => 'invalid'
-			);
+			$insert = $this->MY_Model->insert('users', $data);
+			if ($insert) {
+				$response = array(
+					'status' => 'ok'
+				);
+			}
+		}else{
+			  $response = array('form_error' => $this->form_validation->error_array());
 		}
 
 		echo json_encode($response);

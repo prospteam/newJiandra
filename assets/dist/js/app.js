@@ -51,8 +51,6 @@ $(document).ready(function(){
 
   //display companies
    $('.js-example-basic-multiple').select2({
-
-     width: '80%',
      theme: "classic",
      allowClear: true,
      placeholder: "Select Company",
@@ -79,39 +77,31 @@ $(document).ready(function(){
 
    //successfully added user
    $(document).on('submit','form#adduser',function(e){
-       e.preventDefault();
-       $('#AddUser').modal('hide');
-       var formData = new FormData($(this)[0]);
-       // formData.append('nob_id',$('a.add').attr('data-id'));
-       // formData.append('nob_code',$('a.add').attr('data-code'));
-       $.ajax({
-           url:base_url+'users/adduser/',
-           data: formData,
-           processData:false,
-           contentType: false,
-           type: 'post',
-           dataType: 'json',
-           beforeSend: function(){
-               show_loader();
-           },
-           success: function(data){
-               console.log(data);
-              hide_loader();
-              if(data.status == "ok"){
-                   $('#adduser')[0].reset();
-                   alertify.set('notifier','position','top-left');
-                   alertify.success('Layout successfully added!');
-                   // layouts();
-               }else if(data.status == 'invalid'){
-                   alertify.set('notifier','position','top-left');
-                   alertify.error('Invalid filetype or your file exceeds 500M');
-               }else{
-                   alertify.set('notifier','position','top-left');
-                   alertify.error('Something went wrong');
-                   // alertify.error(data);
-               }
-           }
-       });
+     e.preventDefault();
+     let formData = $(this).serialize();
+
+     $.ajax({
+         method: 'POST',
+         url : base_url + 'users/adduser',
+         data : formData,
+         success : function(response) {
+             let data = JSON.parse(response);
+             console.log(data);
+             if(data.form_error){
+                 clearError();
+                 let keyNames = Object.keys(data.form_error);
+                 $(keyNames).each(function(index , value) {
+                     $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
+                 });
+             }else if (data.error) {
+                 Swal.fire("Error",data.error, "error");
+             }else {
+                blankVal();
+                 $('#AddUser').modal('hide');
+                 Swal.fire("Success",data.success, "success");
+             }
+         }
+     })
    });
 
 });
@@ -122,4 +112,17 @@ function show_loader(){
 
 function hide_loader(){
     $('.loader-cont').hide();
+}
+
+function clearError(){
+    $('.err').text('');
+}
+
+function blankVal(){
+  $('#AddUser input[name="fullname"]').val('');
+  $('.err').text('');
+  $('#AddUser input[name="username"]').val('');
+  $('#AddUser input[name="password"]').val('');
+  $('#AddUser input[name="position"]').val('');
+  $('#AddUser select[name="company"]').val('');
 }

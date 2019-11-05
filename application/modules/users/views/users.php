@@ -28,13 +28,15 @@
     										<div class="col-6">
     											<div class="form-group">
     												<label for="fullname">Full Name:</label>
-    												<input type="text" class="form-control" name="fullname" value="" required>
+    												<input type="text" class="form-control" name="fullname" value="">
+                            <span class="err"></span>
     											</div>
     										</div>
     										<div class="col-6">
     											<div class="form-group">
     												<label for="username">Username:</label>
-    												<input type="text" class="form-control" name="username" value="" required>
+    												<input type="text" class="form-control" name="username" value="">
+                            <span class="err"></span>
     											</div>
     										</div>
     									</div>
@@ -42,13 +44,15 @@
     										<div class="col-6">
     											<div class="form-group">
     												<label for="password">Password:</label>
-    												<input type="password" class="form-control" name="password" value="" required>
+    												<input type="password" class="form-control" name="password" value="">
+                            <span class="err"></span>
     											</div>
     										</div>
     										<div class="col-6">
     											<div class="form-group">
     												<label for="position">Position:</label>
-    												<input type="text" class="form-control" name="position" value="" required>
+    												<input type="text" class="form-control" name="position" value="">
+                            <span class="err"></span>
     											</div>
     										</div>
     									</div>
@@ -57,6 +61,7 @@
     									<div class="form-group">
     										<label for="company">Company:</label>
                         <select class="form-control js-example-basic-multiple" name="company[]" multiple="multiple"></select>
+                        <span class="err"></span>
                     <!-- <span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="8" style="width: 100%;"><span class="selection">
                       <span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false">
                         <ul class="select2-selection__rendered">

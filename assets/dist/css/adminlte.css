@@ -27199,3 +27199,7 @@ i.fas.fa-clone {
     color: #c8c8c8;
     margin-right: 17px;
 }
+
+input.select2-search__field {
+    width: 100%!important;
+}
