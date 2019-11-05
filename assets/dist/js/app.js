@@ -98,7 +98,7 @@ $(document).ready(function(){
              }else {
                 blankVal();
                  $('#AddUser').modal('hide');
-                 Swal.fire("Success",data.success, "success");
+                 Swal.fire("Successfully added user!",data.success, "success");
              }
          }
      })

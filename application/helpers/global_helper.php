@@ -36,7 +36,7 @@
 	if(!function_exists('getrow')) {
 		function getrow($table,$options = array(),$result = 'array'){
 			$ci =& get_instance();
-			return $ci->MY_Model->getRows($table,$options,$result);			
+			return $ci->MY_Model->getRows($table,$options,$result);
 		}
 	}
 
@@ -117,6 +117,23 @@
 		function fetch_method(){
 	        $ci =& get_instance();
 			return $ci->router->fetch_method();
+	    }
+	}
+
+	if ( ! function_exists('userType'))
+	{
+	    function userType($k = '')
+	    {
+	        $type = array(
+	            0 => 'Admin',
+	            1 => 'Warehouse',
+	            2 => 'Commissary',
+	            3 => 'Stall',
+	            4 => 'Purchaser',
+	            5 => 'Office'
+	        );
+
+	        return $k == '' ? $type : $type[$k];
 	    }
 	}
 ?>
