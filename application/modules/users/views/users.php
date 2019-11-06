@@ -52,10 +52,10 @@
     											<div class="form-group">
     												<label for="position">Position:</label>
     												<!-- <input type="text" class="form-control" name="position" value=""> -->
-                            <select class="form-control" name="position">
-                            <?php foreach(userType() as $k => $value) : ?>
-                                <option value="<?php echo $k ?>"><?php echo $value ?></option>
-                              
+                            <select class="form-control" class="position" name="position">
+                              <option value="">Select Position</option>
+                            <?php foreach($position as $k => $value) : ?>
+                                <option value="<?php echo $value['id'] ?>"><?php echo $value['position_name'] ?></option>
                           <?php  endforeach; ?>
                         </select>
                             <span class="err"></span>
@@ -65,7 +65,7 @@
     								<div class = "row">
     								   <div class="col-6">
     									<div class="form-group">
-    										<label for="company">Company:</label>
+    										<label for="company">Companies:</label>
                         <select class="form-control js-example-basic-multiple" name="company[]" multiple="multiple"></select>
                         <span class="err"></span>
                     <!-- <span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="8" style="width: 100%;"><span class="selection">
@@ -92,6 +92,146 @@
     					</form>
     				</div>
           <!-- End Add user Modal -->
+
+          <!--View User Modal -->
+          <!-- Modal -->
+          <div class="modal fade" id="ViewUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
+
+              <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-eye" style="color:black" aria-hidden="true"></i>  View User Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" id="userDetails">
+                    <div class="row">
+                      <div class="col-4">
+                        <div class="form-group">
+                          <label for="fullname">Full Name:</label>
+                          <p class="name"> </p>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="form-group">
+                          <label for="username">Username:</label>
+                            <p class="username"> </p>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="form-group">
+                          <label for="position">Position:</label>
+                          <p class="position"> </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label for="company">Companies:</label>
+                            <p class="company"> </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          </div>
+        <!-- End View user Modal -->
+
+        <!--View Edit Modal -->
+        <!-- Modal -->
+        <div class="modal fade" id="EditUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
+          <form id="edituser" method="post">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit" style="color:black" aria-hidden="true"></i>  Edit User</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="fullname">Full Name:</label>
+                        <input type="text" class="form-control" name="fullname" >
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" class="form-control" name="username">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" name="password">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="position">Position:</label>
+                        <!-- <input type="text" class="form-control" name="position" value=""> -->
+                        <select class="form-control" class="position" name="position">
+                          <option value="">Select Position</option>
+                        <?php foreach($position as $k => $value) : ?>
+                            <option value="<?php echo $value['id'] ?>"><?php echo $value['position_name'] ?></option>
+                      <?php  endforeach; ?>
+                    </select>
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                  </div>
+                <div class = "row">
+                   <div class="col-6">
+                  <div class="form-group">
+                    <label for="company">Companies:</label>
+                    <select class="form-control js-example-basic-multiple" name="company[]" multiple="multiple"></select>
+                    <span class="err"></span>
+
+                  </div>
+                  </div>
+              </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary add">Submit</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      <!-- End Edit user Modal -->
+
+      <!--View Delete Modal -->
+      <!-- Modal -->
+      <div class="modal fade" id="DeleteUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
+        <form id="adduser" method="post">
+          <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-trash" style="color:black" aria-hidden="true"></i>  Delete User</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h1>OKKK</h1>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    <!-- End Add Delete Modal -->
         </div>
       </div>
     </div><!-- /.container-fluid -->
@@ -107,6 +247,7 @@
                   <div class="col-sm-12">
                     <table class="table table-bordered table-striped dataTable users_tbl" role="grid" aria-describedby="example1_info">
                   <thead>
+
                     <th class="header-title">Name</th>
                     <th class="header-title">Company</th>
                     <th class="header-title">Position</th>

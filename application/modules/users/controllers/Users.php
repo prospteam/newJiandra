@@ -11,7 +11,10 @@ class Users extends MY_Controller {
 	public function index(){
 		// $parameters['select'] = '*';
 		// $data['users'] = $this->MY_Model->getRows('users',$parameters);
-    $this->load_page('users');
+		$parameters['where'] = array('id !=' => 1);
+		$parameters['select'] = '*';
+		$data['position'] = $this->MY_Model->getRows('position',$parameters);
+    $this->load_page('users', @$data);
 	}
 
 	public function display_users(){
@@ -20,10 +23,15 @@ class Users extends MY_Controller {
 		$search = $this->input->post('search');
 		$order = $this->input->post('order');
 		$draw = $this->input->post('draw');
-		$column_order = array('fullname','company','position');
+
+
+		$column_order = array('fullname','company.company_name','position.position_name');
 		// $where = array("status" => 1);
-		$join = array();
-		$select = "fullname,company,position,status";
+		$join = array(
+			'company' => 'company.company_id = users.company',
+			'position' => 'position.id = users.position'
+		);
+		$select = "users.id,users.fullname,company.company_name,position.position_name,users.status";
 		$list = $this->MY_Model->get_datatables1('users',$column_order, $select, $join, $limit, $offset ,$search, $order);
 
 		// if(!empty($list)) {
@@ -42,6 +50,29 @@ class Users extends MY_Controller {
 		echo json_encode($output);
 	}
 
+	//view user Details
+	public function view_user_details(){
+		$user_id = $this->input->post('id');
+		$data_array = array();
+
+		$parameters['join'] = array(
+			'company' => 'company.company_id = users.company',
+			'position' => 'position.id = users.position'
+		);
+		$parameters['where'] = array('users.id' => $user_id);
+		$parameters['select'] = '*';
+
+		$data = $this->MY_Model->getRows('users',$parameters,'row');
+
+		$company_id = explode(',',$data->company);
+		$company_parameters['where_in'] = array('col' => 'company_id', 'value' => $company_id);
+		$data_company = $this->MY_Model->getRows('company',$company_parameters);
+
+		$data_array['users'] = $data;
+		$data_array['company'] = $data_company;
+		json($data_array);
+	}
+
 	//display companies
 	public function companies(){
 		$parameters['select'] = '*';
@@ -49,6 +80,8 @@ class Users extends MY_Controller {
 		echo json_encode($data);
 		// print_r($data);
 	}
+
+
 
 	//test for where_in
 	public function test_company(){
@@ -61,6 +94,7 @@ class Users extends MY_Controller {
 			json($data_result,false);
 	}
 
+	//Add User
 	public function adduser()
 	{
 		$this->load->library("form_validation");
@@ -92,5 +126,53 @@ class Users extends MY_Controller {
 		}
 
 		echo json_encode($response);
+	}
+
+	//view details for edit
+	public function user_details(){
+		$user_id = $this->input->post('id');
+		$parameters['where'] = array('id' => $user_id);
+		$data['view_edit'] = $this->MY_Model->getRows('users',$parameters,'row');
+		// echo $this->db->last_query();
+		echo json_encode($data);
+	}
+
+	//Edit user
+	public function edituser()
+	{
+		$user_id = $this->input->post('id');
+			$data = array(
+				'fullname' => $this->input->post('fullname'),
+				'username' => $this->input->post('username'),
+				'password	' => sha1($this->input->post('password')),
+				'position' => $this->input->post('position'),
+				// 'company' => implode(',',$this->input->post('company')),
+				'status' => 1
+			);
+
+			$update = $this->MY_Model->update('users', $data,array('id' => $user_id));
+			if ($update) {
+				$response = array(
+					'status' => 'ok'
+				);
+			}else{
+				$response = array(
+					'status' => 'invalid'
+				);
+			}
+
+		echo json_encode($response);
+	}
+
+	//Delete user
+	public function deleteuser()
+	{
+		$user_id = $this->input->post('id');
+		$user_status = 2;
+		$data = array(
+			'status' => $user_status
+		);
+		$datas['delete'] = $this->MY_Model->update('users',$data,array('id' => $user_id));
+		echo json_encode($datas);
 	}
 }
