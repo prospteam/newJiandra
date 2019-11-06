@@ -41,8 +41,8 @@ $(document).ready(function(){
          //Set column definition initialisation properties.
          "columnDefs": [
               {
-                   "targets": [1], //first column / numbering column
-                   "orderable": true, //set not orderable
+                   "targets": [3,4], //first column / numbering column
+                   "orderable": false, //set not orderable
 
                },
           ],

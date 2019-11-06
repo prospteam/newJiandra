@@ -4,18 +4,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Supplier extends MY_Controller
 {
 
-	public function index()
-	{
-		$this->load_page('supplier');
+	public function index($company_id="") {
+
+		$data['companies'] = $this->MY_Model->getRows('company');
+		$data['supplier'] = $this->MY_Model->getRows('supplier',array('where' => array('companytitle' => $company_id)));
+		$this->load_page('supplier', $data);
 	}
 
-	public function addsupplier()
-	{
+	public function addsupplier() {
 		$data = array(
 			'supplier_name' => $this->input->post('supplier_name'),
 			'supplier_contact_person' => $this->input->post('supplier_contact_person'),
-			'company_one	' => $this->input->post('company_one'),
-			'company_two' => $this->input->post('company_two'),
+			'companytitle' => $this->input->post('companytitle'),
 			'vendor' => $this->input->post('vendor'),
 			'office_number' => $this->input->post('office_number'),
 			'home_number' => $this->input->post('home_number'),
@@ -25,7 +25,6 @@ class Supplier extends MY_Controller
 		);
 
 		$insert = $this->MY_Model->insert('supplier', $data);
-
 		if ($insert) {
 			$response = array(
 				'type' => 'success',
@@ -43,3 +42,8 @@ class Supplier extends MY_Controller
 		echo json_encode($response);
 	}
 }
+
+	// public function company1(){
+	//
+	//
+	// }

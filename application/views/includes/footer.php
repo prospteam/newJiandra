@@ -17,6 +17,9 @@
 <script src="<?php echo base_url('assets/plugins/select2/js/select2.full.min.js'); ?>"></script>
 <!--custom js-->
 <script src="<?php echo base_url('assets/dist/js/app.js'); ?>"></script>
+<!-- supplier js -->
+<script src="<?php echo base_url('assets/dist/js/supplier.js'); ?>"></script>
 
+</script>
 </body>
 </html>

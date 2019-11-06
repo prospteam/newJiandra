@@ -18,7 +18,7 @@
 						<div class="modal-dialog modal-lg" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">Add Supplier</h5>
+									<h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-users"></i> Add Supplier</h5>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
@@ -39,26 +39,24 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-6">
-											<div class="form-group">
-												<label for="company_one">Company One:</label>
-												<input type="text" class="form-control" name="company_one" value="" required>
-											</div>
-										</div>
-										<div class="col-6">
-											<div class="form-group">
-												<label for="company_two">Company Two:</label>
-												<input type="text" class="form-control" name="company_two" value="" required>
-											</div>
-										</div>
+										<div class="col-12">
+												<label for="companytitle">Company</label>
+												<!-- <input type="text" name="companytitle" value="" required> -->
+												<select class="form-control" name="companytitle" >
+														<option value="">Select Company</option>
+														<?php foreach ($companies as $comp): ?>
+															<option value="<?= $comp['company_id'] ?>"><?= $comp['company_name'] ?></option>
+														<?php endforeach; ?>
+												</select>
 									</div>
+								</div>
 								<div class = "row">
 								   <div class="col-6">
-									<div class="form-group">
-										<label for="vendor">Vendor:</label>
-										<input type="text" class="form-control" name="vendor" value="" required>
-									</div>
-									</div>
+										 <div class="form-group">
+											 <label for="vendor">Vendor:</label>
+											 <input type="text" class="form-control" name="vendor" value="" required>
+										 </div>
+										</div>
 								<div class="col-6">
 									<div class="form-group">
 										<label for="office_number">Office Number:</label>
@@ -135,12 +133,13 @@
 						</div>
 					</div>
 					<div class="middle">
-						<button class="button company1">New Jiandra Enterprises </button>
-						<button class="button company2">Mrs.P Mktg. </button>
+						<button class="button company1" onClick="window.location.href = '<?= base_url("supplier/index/1"); ?>supplier/index';return false;">New Jiandra</button>
+						<button class="button company2" onClick="window.location.href = '<?= base_url("supplier/index/2"); ?>supplier/index';return false;">Mrs.P Mktg</button>
 					</div>
 					<div class="row">.
 						<div class="col-sm-12">
-							<table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+							<table id="example1" class="table table-bordered table-striped dataTable " role="grid" aria-describedby="example1_info">
+
 								<thead>
 									<tr class="table-header" role="row">
 										<th class="header-title sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 283px;">Supplier Logo</th>
@@ -150,44 +149,21 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr role="row" class="odd">
-										<td class="table-data sorting_1">example1</td>
-										<td class="table-data">example1</td>
-										<td class="action"><i class="fa fa-clone" aria-hidden="true"></i><i class="fas fa-pen"></i> <i class="fa fa-trash" aria-hidden="true"></i></td>
-										<td class="table-data"><button type="button" class="inactive btn btn-block btn-danger">inactive</button></td>
-									</tr>
-									<tr role="row" class="odd">
-										<td class="sorting_1">example1</td>
-										<td class="table-data">example1</td>
-										<td class="action"><i class="fa fa-clone" aria-hidden="true"></i><i class="fas fa-pen"></i> <i class="fa fa-trash" aria-hidden="true"></i></td>
-										<td class="table-data"><button type="button" class="active btn btn-block btn-success">inactive</button></td>
-									</tr>
+									<?php foreach ($supplier as  $value): ?>
+										<tr>
+											<td><?= $value['id'] ?></td>
+											<td><?= $value['supplier_name'] ?></td>
+											<td>
+												<a href="<?= base_url(); ?>" <i class="fas fa-clone"></i></a>
+												<a href="<?= base_url(); ?>" <i class="fas fa-pen"></i></a>
+												<a href="<?= base_url(); ?>"<i class="fa fa-trash" aria-hidden="true"></i></a>
+											</td>
+											<td><button type="button" class="active btn btn-block btn-success"><?=$value['status'] ?></button></td>
+										</tr>
+									<?php endforeach; ?>
 								</tbody>
 							</table>
-							<table id="example2" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
-								<thead>
-									<tr class="table-header" role="row">
-										<th class="header-title sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 283px;">Supplier Logo</th>
-										<th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 359px;">Supplier Name</th>
-										<th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 320px;">Action</th>
-										<th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 176px;">Status</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr role="row" class="odd">
-										<td class="table-data sorting_1">Gecko</td>
-										<td class="table-data">Arriane</td>
-										<td class="action"><i class="fa fa-clone" aria-hidden="true"></i><i class="fas fa-pen"></i> <i class="fa fa-trash" aria-hidden="true"></i></td>
-										<td class="table-data"><button type="button" class="inactive btn btn-block btn-danger">inactive</button></td>
-									</tr>
-									<tr role="row" class="odd">
-										<td class="sorting_1">example2</td>
-										<td class="table-data">example2</td>
-										<td class="action"><i class="fa fa-clone" aria-hidden="true"></i><i class="fas fa-pen"></i> <i class="fa fa-trash" aria-hidden="true"></i></td>
-										<td class="table-data"><button type="button" class="active btn btn-block btn-success">inactive</button></td>
-									</tr>
-								</tbody>
-							</table>
+
 						</div>
 					</div>
 					<div class="row">
@@ -203,19 +179,7 @@
 									<li class="paginate_button page-item active">
 										<a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0" class="page-link">1</a>
 									</li>
-									<li class="paginate_button page-item ">
-										<a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-									</li>
-									<li class="paginate_button page-item ">
-										<a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-									</li>
-									<li class="paginate_button page-item ">
-										<a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-									<li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-									</li>
-									<li class="paginate_button page-item ">
-										<a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0" class="page-link">6</a>
-									</li>
+							
 									<li class="paginate_button page-item next" id="example1_next">
 										<a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
 									</li>
@@ -229,32 +193,3 @@
 
 		<!-- /.card-body -->
 	</div>
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$(".company2").click(function() {
-				$("#example2").show();
-				$("#example1").hide();
-			});
-			$(".company1").click(function() {
-				$("#example1").show();
-				$("#example2").hide();
-			});
-		});
-
-		$('#addSupplier form').on('submit', function(e) {
-			e.preventDefault();
-
-			$.ajax({
-				url: $(this).attr('action'),
-				method: 'POST',
-				data: $(this).serialize(),
-				dataType: 'json',
-				success: function(result) {
-					$('#addSupplier form')[0].reset();
-					Swal.fire(result.title, result.msg, result.type);
-				}
-			});
-		});
-	</script>
