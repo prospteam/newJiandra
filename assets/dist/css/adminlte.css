@@ -2461,7 +2461,7 @@ a.btn.disabled, fieldset:disabled a.btn {
 .btn-primary:hover {
     color: #ffffff;
     background-color: #0069d9;
-    border-color: #0062cc;
+    border-color: #0069d9;
 }
 
 .btn-primary:focus, .btn-primary.focus {
@@ -27192,6 +27192,7 @@ td.table-data {
 button.btn.btn-primary.add {
     width: 155px;
     background-color: #6b6ca5;
+    border-color: #6b6ca5;
     font-size: 20px;
 }
 
@@ -27231,4 +27232,22 @@ td.sorting_1{
 
 .actions {
     text-align: center;
+}
+
+.card-body-login{
+    flex: 1 1 auto;
+    color: #545454;
+    font-size: 20px;
+
+}
+
+.sign-in-button {
+    background: #6061d1;
+    border-color: #6061d1;
+}
+
+.sign-in-button:hover {
+    background: #d8e2fe;
+    border-color: #d8e2fe;
+    color:black;
 }

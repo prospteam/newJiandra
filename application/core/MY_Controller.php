@@ -5,15 +5,15 @@ class MY_Controller extends MX_Controller {
 
 	public function __construct(){
 		$route = $this->router->fetch_class();
-		// if($route == 'login'){
-		// 	if($this->session->has_userdata('logged_in')){
-		// 		redirect(base_url());
-		// 	}
-		// } else {
-		// 	if(!$this->session->has_userdata('logged_in')){
-		// 		redirect(base_url('login'));
-		// 	}
-		// }
+		if($route == 'login'){
+			if($this->session->has_userdata('logged_in')){
+				redirect(base_url());
+			}
+		} else {
+			if(!$this->session->has_userdata('logged_in')){
+				redirect(base_url('login'));
+			}
+		}
 	}
 
 	public function load_page($page, $data = array()){
@@ -21,5 +21,11 @@ class MY_Controller extends MX_Controller {
       	$this->load->view($page,$data);
       	$this->load->view('includes/footer',$data);
      }
+
+		 public function load_login_page($page, $data = array()){
+	       	$this->load->view('includes/login_head',$data);
+	       	$this->load->view($page,$data);
+	       	$this->load->view('includes/login_footer',$data);
+	      }
 
 }

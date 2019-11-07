@@ -90,7 +90,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
-          <a href="#" class="dropdown-item">
+          <a href="<?php echo base_url('logout') ?>" class="dropdown-item">
             <i class="fas fa-sign-out mr-2"></i> Logout
 
           </a>

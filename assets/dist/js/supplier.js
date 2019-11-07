@@ -154,30 +154,30 @@ $(document).ready(function(){
    });
 
    //display companies foe edit supplier
-   // $('.js-example-basic-multiple').select2({
-   //   theme: "classic",
-   //   allowClear: true,
-   //   placeholder: "Select Company",
-   //   dropdownParent: $('#editSupplier'),
-   //   tags: true,
-   //   ajax: {
-   //     url: base_url+'users/companies',
-   //     dataType: "json",
-   //     data: function (params) {
-   //
-   //    },processResults: function (data) {
-   //
-   //          return {
-   //              results: $.map(data.companies, function (item) {
-   //                  return {
-   //                      text: item.company_name,
-   //                      id: item.company_id
-   //                  }
-   //              })
-   //          };
-   //      }
-   //   }
-   // });
+   $('.js-example-basic-multiple-addsupplier').select2({
+     theme: "classic",
+     allowClear: true,
+     placeholder: "Select Company",
+     dropdownParent: $('#editSupplier'),
+     tags: true,
+     ajax: {
+       url: base_url+'supplier/companies',
+       dataType: "json",
+       data: function (params) {
+
+      },processResults: function (data) {
+
+            return {
+                results: $.map(data.companies, function (item) {
+                    return {
+                        text: item.company_name,
+                        id: item.company_id
+                    }
+                })
+            };
+        }
+     }
+   });
 
    $(document).on("click",".viewSupplier",function(){
      var id = $(this).attr('data-id');

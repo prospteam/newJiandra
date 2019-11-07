@@ -1146,7 +1146,7 @@ function layouts(nob_id = $('input[name="nob_id"]').val(), page = 1, layoutStat 
                     tblbody += '<td colspan="2"></td>';
                 }
                 tblbody += '<td></td></tr>';
-
+                
                 if(res.datas.length > 0){
                     $.each(res.datas, function(key,val){
                         var isActual = false;

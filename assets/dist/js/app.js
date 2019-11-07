@@ -26,7 +26,7 @@ $(document).ready(function(){
                    if(row.status == 1){
                      str += '<button type="button" class="active btn btn-block btn-success">active</button>';
                    }else{
-                     str += '<button type="button" class="inactive btn btn-block btn-success">inactive</button>';
+                     str += '<button type="button" class="inactive btn btn-block btn-danger">inactive</button>';
                    }
                    return str;
               }
@@ -50,7 +50,7 @@ $(document).ready(function(){
   //end display users_tbl
 
   //display companies for add user
-   $('.js-example-basic-multiple').select2({
+   $('.js-example-basic-multiple-add').select2({
      theme: "classic",
      allowClear: true,
      placeholder: "Select Company",
@@ -76,7 +76,7 @@ $(document).ready(function(){
    });
 
    //display companies for edit user
-    $('.js-example-basic-multiple').select2({
+    $('.js-example-basic-multiple-edit').select2({
       theme: "classic",
       allowClear: true,
       placeholder: "Select Company",
