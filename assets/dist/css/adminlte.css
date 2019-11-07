@@ -27232,3 +27232,21 @@ td.sorting_1{
 .actions {
     text-align: center;
 }
+
+.card-body-login{
+    flex: 1 1 auto;
+    color: #545454;
+    font-size: 20px;
+
+}
+
+.sign-in-button {
+    background: #6061d1;
+    border-color: #6061d1;
+}
+
+.sign-in-button:hover {
+    background: #d8e2fe;
+    border-color: #d8e2fe;
+    color:black;
+}

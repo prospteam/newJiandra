@@ -109,7 +109,7 @@ class Users extends MY_Controller {
 			$data = array(
 				'fullname' => $this->input->post('fullname'),
 				'username' => $this->input->post('username'),
-				'password	' => sha1($this->input->post('password')),
+				'password	' => $this->input->post('password'),
 				'position' => $this->input->post('position'),
 				'company' => implode(',',$this->input->post('company')),
 				'status' => 1

@@ -26,8 +26,12 @@ $config['modules_locations'] = array(
 | a PHP script and you can easily do that on your own.
 |
 */
-global $base_url;
-$config['base_url'] = 'http://localhost/newjiandra/';
+$base_path = $_SERVER['SCRIPT_NAME'];
+$base_path = explode('/', $base_path);
+array_pop($base_path);
+$base_path = implode('/', $base_path);
+
+$config['base_url'] = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$base_path;
 /*
 |--------------------------------------------------------------------------
 | Index File
