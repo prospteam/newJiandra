@@ -153,15 +153,15 @@ $(document).ready(function(){
      }
    });
 
-   display companies foe edit supplier
-   $('.js-example-basic-multiple').select2({
+   //display companies foe edit supplier
+   $('.js-example-basic-multiple-addsupplier').select2({
      theme: "classic",
      allowClear: true,
      placeholder: "Select Company",
      dropdownParent: $('#editSupplier'),
      tags: true,
      ajax: {
-       url: base_url+'users/companies',
+       url: base_url+'supplier/companies',
        dataType: "json",
        data: function (params) {
 

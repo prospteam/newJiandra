@@ -101,6 +101,14 @@ class Supplier extends MY_Controller
 	}
 
 
+	//display companies
+	public function companies(){
+		$parameters['select'] = '*';
+		$data['companies'] = $this->MY_Model->getRows('company',$parameters);
+		echo json_encode($data);
+		// print_r($data);
+	}
+	
 	//display suppliers
 	public function display_suppliers(){
 	// 	$parameters['select'] = '*';
