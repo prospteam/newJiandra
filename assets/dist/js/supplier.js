@@ -207,9 +207,64 @@ $(document).ready(function(){
 
        }
      })
-
-
    })
+
+   //edit supplier
+   $(document).on('click', '.editSupplier', function(){
+     var id = $(this).attr('data-id');
+     $.ajax({
+         url: base_url+'supplier/supplier_details',
+         data: {id:id},
+         type: 'post',
+         dataType: 'json',
+         success: function(data){
+           $('#editSupplier').modal('show');
+           console.log(data);
+             $('#editSupplier input[name=supplier_name]').val(data.view_edit.supplier_name);
+             $('#editSupplier input[name=supplier_contact_person]').val(data.view_edit.supplier_contact_person);
+             // $('#editSupplier select[name=company[]').val(data.view_edit.company);
+             $('#editSupplier input[name=office_number]').val(data.view_edit.office_number);
+             $('#editSupplier input[name=home_number]').val(data.view_edit.home_number);
+             $('#editSupplier input[name=mobile_number]').val(data.view_edit.mobile_number);
+             $('#editSupplier input[name=tin_number]').val(data.view_edit.tin_number);
+             $('#editSupplier input[name=fax_number]').val(data.view_edit.fax_number);
+             // $('#editSupplier select[name=position]').val(data.view_edit.position);
+         }
+     });
+
+   });
+   // end edit supplier
+
+   //successfully added user
+   $(document).on('submit','#editSupplier',function(e){
+     e.preventDefault();
+     let formData =  new FormData($(this)[0]);
+     var id = $('.editSupplier').attr('data-id');
+     console.log(id);
+     formData.append("id",id);
+     $.ajax({
+         method: 'POST',
+         url : base_url + 'supplier/editSupplier',
+         data : formData,
+         processData: false,
+        contentType: false,
+        cache: false,
+         dataType: 'json',
+         success : function(data) {
+             console.log(data);
+             if(data.status == "ok"){
+               $('#editSupplier').modal('hide');
+                   Swal.fire("Successfully updated supplier!",data.success, "success");
+                   setTimeout(function(){
+                      location.reload();
+                    }, 1000);
+              }else if(data.status == 'invalid'){
+                 Swal.fire("Error",data.status, "invalid");
+              }
+         }
+     })
+   });
+
 
 });
 

@@ -174,6 +174,46 @@ class Supplier extends MY_Controller
 		// echo $this->db->last_query();
 		echo json_encode($datas);
 	}
+
+	//view details for edit
+	public function supplier_details(){
+		$supplier_id = $this->input->post('id');
+		$parameters['where'] = array('id' => $supplier_id);
+		$data['view_edit'] = $this->MY_Model->getRows('supplier',$parameters,'row');
+		// echo $this->db->last_query();
+		echo json_encode($data);
+	}
+
+	// Edit Supplier
+	public function editSupplier()
+	{
+		$supplier_id = $this->input->post('id');
+			$data = array(
+				'supplier_name' => $this->input->post('supplier_name'),
+				'supplier_contact_person' => $this->input->post('supplier_contact_person'),
+				'company'=>$this->input->post('çompany[]'),
+				'office_number' => $this->input->post('office_number'),
+				'home_number' => $this->input->post('home_number'),
+				'mobile_number' => $this->input->post('mobile_number'),
+				'tin_number' => $this->input->post('tin_number'),
+				'fax_number' => $this->input->post('fax_number'),
+				// 'company' => implode(',',$this->input->post('company')),
+				// 'status' => 1
+			);
+
+			$update = $this->MY_Model->update('supplier', $data,array('id' => $supplier_id));
+			if ($update) {
+				$response = array(
+					'status' => 'ok'
+				);
+			}else{
+				$response = array(
+					'status' => 'invalid'
+				);
+			}
+		echo json_encode($response);
+	}
+	//End Edit Supplier
 }
 
 	// public function company1(){
