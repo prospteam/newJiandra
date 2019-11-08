@@ -109,7 +109,7 @@ class Users extends MY_Controller {
 			$data = array(
 				'fullname' => $this->input->post('fullname'),
 				'username' => $this->input->post('username'),
-				'password	' => $this->input->post('password'),
+				'password	' => password_hash($this->input->post('password'),PASSWORD_DEFAULT),
 				'position' => $this->input->post('position'),
 				'company' => implode(',',$this->input->post('company')),
 				'status' => 1
@@ -156,11 +156,12 @@ class Users extends MY_Controller {
 	//Edit user
 	public function edituser()
 	{
+
 		$user_id = $this->input->post('id');
 			$data = array(
 				'fullname' => $this->input->post('fullname'),
 				'username' => $this->input->post('username'),
-				'password	' => sha1($this->input->post('password')),
+				'password	' => password_hash($this->input->post('password'),PASSWORD_DEFAULT),
 				'position' => $this->input->post('position'),
 				'company' => implode(',',$this->input->post('company')),
 				'status' => 1

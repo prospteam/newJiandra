@@ -15,24 +15,26 @@ class Login extends MY_Controller {
 	public function auth(){
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
-		$data = array(
-			'username' => $username,
-			'password' => $password,
-		);
-		$parameters['where'] =  $data;
-		$parameters['select'] = 'id, fullname, position';
+		// $data = array(
+		// 	'username' => $username,
+		// 	'password' => $password,
+		// );
+		$parameters['where'] =  array('username' => $username);
+		// $parameters['select'] = 'id, fullname, position';
 		$result = $this->MY_Model->getRows('users',$parameters,'row');
 		if($result){
-			$this->setSession($result);
-			redirect(base_url());
+			if(password_verify($password,$result->password)){
+				$this->setSession($result);
+				redirect(base_url());
+			}else{
+				$data['msg'] = 'Password is incorrect';
+	 			$this->load_login_page('login',$data);
+			}
 		} else {
- 			$data['msg'] = 'Invalid Username or password';
+ 			$data['msg'] = 'Username is incorrect';
  			$this->load_login_page('login',$data);
 
 		}
-		// echo "<pre>";
-		// print_r($result);
-		// exit;
 
 	}
 

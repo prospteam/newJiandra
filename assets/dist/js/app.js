@@ -13,10 +13,11 @@ $(document).ready(function(){
               // {"data":"type"},
               {"data":"action","render": function(data, type, row,meta){
                         var str = '';
+                        str += '<div class="actions">';
                         str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
                         str += '<a href="javascript:;" class="editUser" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
                         str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-
+                        str += '</div>';
                         return str;
                    }
               },
