@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/adminlte.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/custom.css'); ?>">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- DataTables -->
@@ -143,7 +144,7 @@
               <p>
                 Enrollment
                 <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">5</span>
+                <span class="badge badge-info right">3</span>
               </p>
             </a>
             <ul class="nav nav-treeview">
@@ -157,11 +158,11 @@
                   <p>Suppliers</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="../layout/fixed-sidebar.html" class="nav-link">
                   <p>Accounts</p>
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a href="../layout/fixed-topnav.html" class="nav-link">
                   <p>Vehicles</p>
@@ -181,9 +182,9 @@
             <a href="#" class="nav-link">
                  <i class="nav-icon fas fa-list-ul"></i>
               <p>
-                Inventory Management
-                <i class="fas fa-angle-left right"></i>
+                Inventory <span class="manage">Management</span>
                 <span class="badge badge-info right">3</span>
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">

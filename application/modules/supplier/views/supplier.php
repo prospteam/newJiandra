@@ -300,6 +300,7 @@
 						<button class="button company2" onClick="window.location.href = '<?= base_url("supplier/index/2"); ?>supplier/index';return false;">Mrs.P Mktg</button>
 					</div>
 					<div class="row">
+						<div class="table-responsive">
 						<div class="col-sm-12">
 							<table id="example1" class="table table-bordered table-striped dataTable suppliers_tbl" role="grid" aria-describedby="example1_info">
 								<thead>
@@ -311,6 +312,7 @@
 							</table>
 
 						</div>
+					</div>
 					</div>
 
 				</div>

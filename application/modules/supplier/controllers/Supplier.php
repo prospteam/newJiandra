@@ -108,7 +108,7 @@ class Supplier extends MY_Controller
 		echo json_encode($data);
 		// print_r($data);
 	}
-	
+
 	//display suppliers
 	public function display_suppliers(){
 	// 	$parameters['select'] = '*';

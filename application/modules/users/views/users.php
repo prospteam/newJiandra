@@ -245,6 +245,7 @@
               <div class="card-body1">
                 <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                 <div class="row">.
+                  <div class="table-responsive">
                   <div class="col-sm-12">
                     <table class="table table-bordered table-striped dataTable users_tbl" role="grid" aria-describedby="example1_info">
                   <thead>
@@ -267,6 +268,7 @@
                 </tbody>
                 </table>
                 </div>
+              </div>
               </div>
               <!-- <div class="row">
                 <div class="col-sm-12 col-md-5">
