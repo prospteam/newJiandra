@@ -131,10 +131,26 @@ class Users extends MY_Controller {
 	//view details for edit
 	public function user_details(){
 		$user_id = $this->input->post('id');
-		$parameters['where'] = array('id' => $user_id);
-		$data['view_edit'] = $this->MY_Model->getRows('users',$parameters,'row');
+
+		$parameters['join'] = array(
+			'company' => 'company.company_id = users.company',
+		);
+		$parameters['where'] = array('users.id' => $user_id);
+		$parameters['select'] = '*';
+
+		$data = $this->MY_Model->getRows('users',$parameters,'row');
+
+		$company_id = explode(',',$data->company);
+		$company_parameters['where_in'] = array('col' => 'company_id', 'value' => $company_id);
+		$data_company = $this->MY_Model->getRows('company',$company_parameters);
+
+		$data_array['users'] = $data;
+		$data_array['company'] = $data_company;
+
+		// $parameters['where'] = array('id' => $user_id);
+		// $data['view_edit'] = $this->MY_Model->getRows('users',$parameters,'row');
 		// echo $this->db->last_query();
-		echo json_encode($data);
+		echo json_encode($data_array);
 	}
 
 	//Edit user
@@ -146,7 +162,7 @@ class Users extends MY_Controller {
 				'username' => $this->input->post('username'),
 				'password	' => sha1($this->input->post('password')),
 				'position' => $this->input->post('position'),
-				// 'company' => implode(',',$this->input->post('company')),
+				'company' => implode(',',$this->input->post('company')),
 				'status' => 1
 			);
 

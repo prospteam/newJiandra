@@ -196,6 +196,7 @@
                    <div class="col-6">
                   <div class="form-group">
                     <label for="company">Companies:</label>
+                    <p class="comp"></p>
                     <select class="form-control edituser js-example-basic-multiple-edit" name="company[]" multiple="multiple"></select>
                     <span class="err"></span>
 

@@ -184,10 +184,17 @@ $(document).ready(function(){
          success: function(data){
            $('#EditUser').modal('show');
            console.log(data);
-             $('#edituser input[name=fullname]').val(data.view_edit.fullname);
-             $('#edituser input[name=username]').val(data.view_edit.username);
-             $('#edituser input[name=password]').val(data.view_edit.password);
-             $('#edituser select[name=position]').val(data.view_edit.position);
+             $('#edituser input[name=fullname]').val(data.users.fullname);
+             $('#edituser input[name=username]').val(data.users.username);
+             $('#edituser input[name=password]').val(data.users.password);
+             $('#edituser select[name=position]').val(data.users.position);
+             var company_list = [];
+             $.each(data.company, function(key,val){
+               // console.log(val);
+               company_list.push(val.company_name);
+               // console.log(val);
+           });
+           $('.comp').text(company_list.join(', '));
          }
      });
 
