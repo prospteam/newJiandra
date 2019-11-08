@@ -13,27 +13,38 @@ class Login extends MY_Controller {
 	}
 
 	public function auth(){
+		$this->load->library('form_validation');
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 		// $data = array(
 		// 	'username' => $username,
 		// 	'password' => $password,
 		// );
-		$parameters['where'] =  array('username' => $username);
-		// $parameters['select'] = 'id, fullname, position';
-		$result = $this->MY_Model->getRows('users',$parameters,'row');
-		if($result){
-			if(password_verify($password,$result->password)){
-				$this->setSession($result);
-				redirect(base_url());
-			}else{
-				$data['msg'] = 'Password is incorrect';
-	 			$this->load_login_page('login',$data);
-			}
-		} else {
- 			$data['msg'] = 'Username is incorrect';
- 			$this->load_login_page('login',$data);
+		// $data = array();
+		$this->form_validation->set_rules('username','Username','required');
+		$this->form_validation->set_rules('password','Password','required');
+		if($this->form_validation->run() === false){
+						$data['msg'] = 'Username or Password field is required';
+		
+			$this->load_login_page('login',$data);
+		}else{
 
+			$parameters['where'] =  array('username' => $username);
+			// $parameters['select'] = 'id, fullname, position';
+			$result = $this->MY_Model->getRows('users',$parameters,'row');
+			if($result){
+				if(password_verify($password,$result->password)){
+					$this->setSession($result);
+					redirect(base_url());
+				}else{
+					$data['msg'] = 'Password is incorrect';
+					$this->load_login_page('login',$data);
+				}
+			} else {
+				$data['msg'] = 'Username is incorrect';
+				$this->load_login_page('login',$data);
+
+			}
 		}
 
 	}

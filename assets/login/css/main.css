@@ -392,6 +392,18 @@ iframe {
   }
 }
 
+@media only screen and (max-width: 810px){
+  .wrap-login100{
+  padding-left: 32%;
+}
+}
+
+@media only screen and (max-width: 769px){
+.wrap-login100 {
+    padding: 142px 85px 33px 85px;
+}
+}
+
 
 /*------------------------------------------------------------------
 [ Alert validate ]*/
