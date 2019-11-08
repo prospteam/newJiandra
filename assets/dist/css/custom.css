@@ -1,0 +1,42 @@
+table#DataTables_Table_0 {
+    width: 100%!important;
+}
+
+.manage{
+  display: table;
+}
+
+@media only screen and (max-width: 362px) {
+    button.button1 {
+        font-size: 19px;
+    }
+}
+
+@media only screen and (max-width: 354px){
+
+  button.button1 {
+    font-size: 15px;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+}
+
+@media only screen and (max-width: 394px){
+  p.account{
+      margin-right:0px;
+      font-size: 15px;
+  }
+}
+
+@media only screen and (max-width: 350px){
+  img.img-circle.elevation-2 {
+      width: 47px;
+      margin-right: 0px;
+  }
+}
+
+@media only screen and (max-width: 330px){
+  p.account{
+      font-size: 14px;
+  }
+}

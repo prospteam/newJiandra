@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/adminlte.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/custom.css'); ?>">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- DataTables -->
@@ -54,7 +55,7 @@
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    <!-- <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -63,7 +64,7 @@
           </button>
         </div>
       </div>
-    </form>
+    </form> -->
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -82,7 +83,9 @@
 
               <div class="image">
 
-                <p class="account"> <img src="<?php echo base_url('assets/dist/img/user2-160x160.jpg'); ?>" class="img-circle elevation-2" alt="User Image"> Proweaver Test &nbsp; <i class="fas fa-angle-down"></i></p>
+                <p class="account"> <img src="<?php echo base_url('assets/dist/img/user.png'); ?>" class="img-circle elevation-2" alt="User Image">
+                   <span class="acc_name"> <?php echo $this->session->userdata('fullname'); ?> </span> &nbsp; <i class="fas fa-angle-down"></i>
+                 </p>
               </div>
 
             <!-- <p> Proweaver Test &nbsp; <i class="fas fa-angle-down"></i></p> -->
@@ -143,7 +146,7 @@
               <p>
                 Enrollment
                 <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">5</span>
+                <span class="badge badge-info right">3</span>
               </p>
             </a>
             <ul class="nav nav-treeview">
@@ -157,11 +160,11 @@
                   <p>Suppliers</p>
                 </a>
               </li>
-              <li class="nav-item">
+              <!-- <li class="nav-item">
                 <a href="../layout/fixed-sidebar.html" class="nav-link">
                   <p>Accounts</p>
                 </a>
-              </li>
+              </li> -->
               <li class="nav-item">
                 <a href="../layout/fixed-topnav.html" class="nav-link">
                   <p>Vehicles</p>
@@ -181,9 +184,9 @@
             <a href="#" class="nav-link">
                  <i class="nav-icon fas fa-list-ul"></i>
               <p>
-                Inventory Management
-                <i class="fas fa-angle-left right"></i>
+                Inventory <span class="manage">Management</span>
                 <span class="badge badge-info right">3</span>
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">

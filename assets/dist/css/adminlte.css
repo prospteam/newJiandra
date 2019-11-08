@@ -518,6 +518,12 @@ pre code {
     }
 }
 
+@media (min-width: 991px) {
+    .main-sidebar{
+    /* width: 0px; */
+    }
+}
+
 @media (min-width: 1200px) {
     .container {
         max-width: 1140px;
@@ -1621,7 +1627,7 @@ pre code {
 
 .table th, .table td {
     padding: 0.75rem;
-    vertical-align: top;
+    /* vertical-align: top; */
     border-top: 1px solid #dee2e6;
 }
 
@@ -11330,7 +11336,7 @@ html, body, .wrapper {
 @media (min-width: 768px) {
     body:not(.sidebar-mini-md) .content-wrapper, body:not(.sidebar-mini-md) .main-footer, body:not(.sidebar-mini-md) .main-header {
         transition: margin-left 0.3s ease-in-out;
-        margin-left: 298px;
+        margin-left: 256px;
     }
 }
 
@@ -11387,7 +11393,7 @@ html, body, .wrapper {
 
 .main-sidebar, .main-sidebar::before {
     transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
-    width: 298px;
+    /* width: 298px; */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -27224,10 +27230,13 @@ span.select2-selection.select2-selection--multiple {
 img.supplier_logo {
     max-width: 100%;
     width: 80px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-td.sorting_1{
-  text-align: center;
+td.sorting_1, img{
+  /* text-align: center; */
 }
 
 .actions {
