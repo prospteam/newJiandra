@@ -55,7 +55,7 @@
     </ul>
 
     <!-- SEARCH FORM -->
-    <form class="form-inline ml-3">
+    <!-- <form class="form-inline ml-3">
       <div class="input-group input-group-sm">
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -64,7 +64,7 @@
           </button>
         </div>
       </div>
-    </form>
+    </form> -->
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -83,7 +83,9 @@
 
               <div class="image">
 
-                <p class="account"> <img src="<?php echo base_url('assets/dist/img/user2-160x160.jpg'); ?>" class="img-circle elevation-2" alt="User Image"> Proweaver Test &nbsp; <i class="fas fa-angle-down"></i></p>
+                <p class="account"> <img src="<?php echo base_url('assets/dist/img/user.png'); ?>" class="img-circle elevation-2" alt="User Image">
+                   <span class="acc_name"> Proweaver Test </span> &nbsp; <i class="fas fa-angle-down"></i>
+                 </p>
               </div>
 
             <!-- <p> Proweaver Test &nbsp; <i class="fas fa-angle-down"></i></p> -->
