@@ -166,7 +166,7 @@
                 </a>
               </li> -->
               <li class="nav-item">
-                <a href="../layout/fixed-topnav.html" class="nav-link">
+                <a href="<?php echo base_url('vehicle'); ?>" class="nav-link">
                   <p>Vehicles</p>
                 </a>
               </li>
