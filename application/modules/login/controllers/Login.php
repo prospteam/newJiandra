@@ -20,8 +20,8 @@ class Login extends MY_Controller {
 			'password' => $password,
 		);
 		$parameters['where'] =  $data;
-		$parameters['select'] = 'id, fullname, position';
-		$result = $this->MY_Model->getRows('users',$parameters,'row');
+		// $parameters['select'] = 'id, fullname, position';
+		$result = $this->MY_Model->getRows('login',$parameters,'row');
 		if($result){
 			$this->setSession($result);
 			redirect(base_url());

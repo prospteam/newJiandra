@@ -31,7 +31,8 @@ $base_path = explode('/', $base_path);
 array_pop($base_path);
 $base_path = implode('/', $base_path);
 
-$config['base_url'] = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$base_path;
+// $config['base_url'] = $_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].$base_path;
+$config['base_url'] = 'http://localhost/newjiandra';
 /*
 |--------------------------------------------------------------------------
 | Index File

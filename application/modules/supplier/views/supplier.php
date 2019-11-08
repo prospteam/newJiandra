@@ -43,7 +43,7 @@
 										<div class="col-12">
 												<label for="companytitle">Company</label>
 												<!-- <input type="text" name="companytitle" value="" required> -->
-											<select class="form-control js-example-basic-multiple-addsupplier" name="company[]" multiple="multiple"></select>
+											<select class="form-control js-example-basic-multiple-add" name="company[]" multiple="multiple"></select>
 												<span class="err"></span>
 									</div>
 								</div>
@@ -214,7 +214,7 @@
 										<div class="col-12">
 												<label for="companytitle">Company</label>
 												<!-- <input type="text" name="companytitle" value="" required> -->
-											<select class="form-control js-example-basic-multiple" name="company[]" multiple="multiple"></select>
+											<select class="form-control js-example-basic-multiple-edit" name="company[]" multiple="multiple"></select>
 												<span class="err"></span>
 									</div>
 								</div>

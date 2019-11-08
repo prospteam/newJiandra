@@ -101,14 +101,6 @@ class Supplier extends MY_Controller
 	}
 
 
-	//display companies
-	public function companies(){
-		$parameters['select'] = '*';
-		$data['companies'] = $this->MY_Model->getRows('company',$parameters);
-		echo json_encode($data);
-		// print_r($data);
-	}
-	
 	//display suppliers
 	public function display_suppliers(){
 	// 	$parameters['select'] = '*';
@@ -170,7 +162,13 @@ class Supplier extends MY_Controller
 		json($data_array);
 	}
 
-
+	//display companies
+	public function companies(){
+		$parameters['select'] = '*';
+		$data['companies'] = $this->MY_Model->getRows('company',$parameters);
+		echo json_encode($data);
+		// print_r($data);
+	}
 	//delete Supplier
 	public function deleteSupplier(){
 		$supplier_id = $this->input->post('id');
@@ -199,7 +197,7 @@ class Supplier extends MY_Controller
 			$data = array(
 				'supplier_name' => $this->input->post('supplier_name'),
 				'supplier_contact_person' => $this->input->post('supplier_contact_person'),
-				'company'=>$this->input->post('çompany[]'),
+				'company'=>$this->input->post('çompany'),
 				'office_number' => $this->input->post('office_number'),
 				'home_number' => $this->input->post('home_number'),
 				'mobile_number' => $this->input->post('mobile_number'),
