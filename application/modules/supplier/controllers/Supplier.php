@@ -5,6 +5,7 @@ class Supplier extends MY_Controller
 {
 
 	public function index() {
+
 		$parameters['where'] = array('position =' => 4);
 		$parameters['select'] = 'id,fullname,position';
 		$data['vendor'] = $this->MY_Model->getRows('users',$parameters);
@@ -102,7 +103,7 @@ class Supplier extends MY_Controller
 
 
 	//display suppliers
-	public function display_suppliers(){
+	public function display_suppliers($id){
 	// 	$parameters['select'] = '*';
 	// 	$data['supplier'] = $this->MY_Model->getRows('supplier',$parameters);
 	// 	echo '<pre>';
@@ -116,12 +117,13 @@ class Supplier extends MY_Controller
 
 
 		$column_order = array('supplier_logo','supplier_name');
-		// $where = array("status" => 1);
+		$where = array("company" => $id);
 		$join = array(
 			// 'company' => 'company.company_id = supplier.company'
 		);
+
 		$select = "id,supplier_logo,supplier_name,status";
-		$list = $this->MY_Model->get_datatables1('supplier',$column_order, $select, $join, $limit, $offset ,$search, $order);
+		$list = $this->MY_Model->get_datatables('supplier',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 
 		// if(!empty($list)) {
 		// 	foreach ($list as $key => $value) {

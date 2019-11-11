@@ -296,8 +296,8 @@
 			<div class="card-body1">
 				<div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
 					<div class="middle">
-						<button class="button company1" onClick="window.location.href = '<?= base_url("supplier/index/1"); ?>supplier/index';return false;">New Jiandra</button>
-						<button class="button company2" onClick="window.location.href = '<?= base_url("supplier/index/2"); ?>supplier/index';return false;">Mrs.P Mktg</button>
+						<button class="button company1" data-id="1">New Jiandra</button>
+						<button class="button company1" data-id="2">Mrs.P Mktg</button>
 					</div>
 					<div class="row">
 						<div class="table-responsive">

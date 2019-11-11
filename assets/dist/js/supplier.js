@@ -1,59 +1,125 @@
-var base_url = $('input[name="base_url"]').val();
-$(document).ready(function(){
-  //display suppliers
-    var suppliers_tbl = $('.suppliers_tbl').DataTable({
-         "processing": true, //Feature control the processing indicator.
-         "serverSide": true, //Feature control DataTables' server-side processing mode.
-         "order": [[0,'desc']], //Initial no order.
-         "columns":[
-              {"data":"supplier_logo","render": function(data, type, row,meta){
-                  if(row.supplier_logo != 1){
+      var base_url = $('input[name="base_url"]').val();
+      $(document).ready(function(){
+        //display suppliers
+      // alert('lol');
+          $('.company1').on('click', function(e){
+            e.preventDefault();
+        
+            // alert($(this).data('id'));
 
-                    return '<img class="supplier_logo" src="'+base_url+'assets/images/supplierLogo/' +data+ '" />';
-                  }else{
-                    return '<img class="supplier_logo" src="'+base_url+'assets/images/supplierLogo/ImageNotAvailable.png" />';
-                  }
-                  }
-              },
-              {"data":"supplier_name"},
-              // {"data":"type"},
-              {"data":"action","render": function(data, type, row,meta){
+         $('.suppliers_tbl').DataTable({
+               "destroy"   : true,
+               "processing": true, //Feature control the processing indicator.
+               "serverSide": true, //Feature control DataTables' server-side processing mode.
+               "order": [[0,'desc']], //Initial no order.
+               "columns":[
+                    {"data":"supplier_logo","render": function(data, type, row,meta){
+                        if(row.supplier_logo != 1){
+
+                          return '<img class="supplier_logo" src="'+base_url+'assets/images/supplierLogo/' +data+ '" />';
+                        }else{
+                          return '<img class="supplier_logo" src="'+base_url+'assets/images/supplierLogo/ImageNotAvailable.png" />';
+                        }
+                        }
+                    },
+                    {"data":"supplier_name"},
+                    // {"data":"type"},
+                    {"data":"action","render": function(data, type, row,meta){
+                              var str = '';
+                              str += '<div class="actions">';
+                              str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
+                              str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                              str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                              str += '</div>';
+                              return str;
+                         }
+                    },
+
+                    {"data":"status","render": function(data, type, row,meta){
                         var str = '';
-                        str += '<div class="actions">';
-                        str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
-                        str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
-                        str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-                        str += '</div>';
-                        return str;
-                   }
-              },
+                         if(row.status == 1){
+                           str += '<button type="button" class="active btn btn-block btn-success">active</button>';
+                         }else{
+                           str += '<button type="button" class="inactive btn btn-block btn-success">inactive</button>';
+                         }
+                         return str;
+                    }
+                  }
 
-              {"data":"status","render": function(data, type, row,meta){
-                  var str = '';
-                   if(row.status == 1){
-                     str += '<button type="button" class="active btn btn-block btn-success">active</button>';
-                   }else{
-                     str += '<button type="button" class="inactive btn btn-block btn-success">inactive</button>';
-                   }
-                   return str;
-              }
-            }
-
-         ],
-         // Load data for the table's content from an Ajax source
-         "ajax": {
-              "url":base_url+"supplier/display_suppliers/",
-              "type": "POST"
-         },
-         //Set column definition initialisation properties.
-         "columnDefs": [
-              {
-                   "targets": [2,3], //first column / numbering column
-                   "orderable": false, //set not orderable
-
+               ],
+               // Load data for the table's content from an Ajax source
+               "ajax": {
+                    "url":base_url+"supplier/display_suppliers/"+$(this).data('id'),
+                    "type": "POST"
                },
+               //Set column definition initialisation properties.
+               "columnDefs": [
+                    {
+                         "targets": [2,3], //first column / numbering column
+                         "orderable": false, //set not orderable
+
+                     },
+                ],
+            });
+          });
+
+
+          var supplier_tbl = $('.suppliers_tbl').DataTable({
+          "destroy"   : true,
+          "processing": true, //Feature control the processing indicator.
+          "serverSide": true, //Feature control DataTables' server-side processing mode.
+          "order": [[0,'desc']], //Initial no order.
+          "columns":[
+               {"data":"supplier_logo","render": function(data, type, row,meta){
+                   if(row.supplier_logo != 1){
+
+                     return '<img class="supplier_logo" src="'+base_url+'assets/images/supplierLogo/' +data+ '" />';
+                   }else{
+                     return '<img class="supplier_logo" src="'+base_url+'assets/images/supplierLogo/ImageNotAvailable.png" />';
+                   }
+                   }
+               },
+               {"data":"supplier_name"},
+               // {"data":"type"},
+               {"data":"action","render": function(data, type, row,meta){
+                         var str = '';
+                         str += '<div class="actions">';
+                         str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
+                         str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                         str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                         str += '</div>';
+                         return str;
+                    }
+               },
+
+               {"data":"status","render": function(data, type, row,meta){
+                   var str = '';
+                    if(row.status == 1){
+                      str += '<button type="button" class="active btn btn-block btn-success">active</button>';
+                    }else{
+                      str += '<button type="button" class="inactive btn btn-block btn-success">inactive</button>';
+                    }
+                    return str;
+               }
+             }
+
           ],
-      });
+          // Load data for the table's content from an Ajax source
+          "ajax": {
+               "url":base_url+"supplier/display_suppliers/1",
+               "type": "POST"
+          },
+          //Set column definition initialisation properties.
+          "columnDefs": [
+               {
+                    "targets": [2,3], //first column / numbering column
+                    "orderable": false, //set not orderable
+
+                },
+           ],
+
+
+       });
   //end display suppliers
 
   // add supplier
@@ -100,7 +166,7 @@ $(document).ready(function(){
 
     Swal.fire({
     title: 'Are you sure?',
-    text: "You want to delete this Suplier!",
+    text: "You want to delete this Supplier!",
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#d33',

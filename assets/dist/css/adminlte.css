@@ -27074,9 +27074,8 @@ button.button.company1 {
     font-family: inherit;
     font-size: 17px;
     margin-left: 4px;
-    color: black;
+    color: #fdfdfd;
 }
-
 button.button.company2 {
     background-color: #ffff;
     width: 200px;
@@ -27258,5 +27257,15 @@ td.sorting_1, img{
 .sign-in-button:hover {
     background: #d8e2fe;
     border-color: #d8e2fe;
+    color:black;
+}
+.middle {
+    padding-bottom: 20px;
+}
+div#example1_filter {
+    margin-right: 36px;
+}
+button.button.company1:focus {
+    background-color: #cecee0;
     color:black;
 }
