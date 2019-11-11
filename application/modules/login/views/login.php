@@ -42,6 +42,9 @@
 
 					<div class="wrap-input100 validate-input" data-validate = "Password is required">
 						<input class="input100" type="password" id="password" name="password" placeholder="Password">
+						<!-- <div class="input-group-append">
+							<a href="javascript:;" class="input-group-text seemypassword"><i class="fa fa-eye"></i></a>
+						</div> -->
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-lock" aria-hidden="true"></i>
