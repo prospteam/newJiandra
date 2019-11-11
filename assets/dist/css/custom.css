@@ -6,6 +6,14 @@ table#DataTables_Table_0 {
   display: table;
 }
 
+h1.inp_head {
+    font-size: 21px;
+    margin-bottom: 10px;
+}
+
+.approx{
+  text-align: center;
+}
 @media only screen and (max-width: 362px) {
     button.button1 {
         font-size: 19px;
