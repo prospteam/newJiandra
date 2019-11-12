@@ -117,7 +117,7 @@ class Supplier extends MY_Controller
 
 
 		$column_order = array('supplier_logo','supplier_name');
-		$where = array("company" => $id);
+		$where = array("company" => $id, 'status !=' => 3);
 		$join = array(
 			// 'company' => 'company.company_id = supplier.company'
 		);
@@ -171,10 +171,35 @@ class Supplier extends MY_Controller
 		echo json_encode($data);
 		// print_r($data);
 	}
+
+	//Enable supplier
+	public function enablesupplier()
+	{
+		$supplier_id = $this->input->post('id');
+		$supplier_status = 1;
+		$data = array(
+			'status' => $supplier_status
+		);
+		$datas['delete'] = $this->MY_Model->update('supplier',$data,array('id' => $supplier_id));
+		echo json_encode($datas);
+	}
+
+	//Disable user
+	public function disablesupplier()
+	{
+		$supplier_id = $this->input->post('id');
+		$supplier_status = 2;
+		$data = array(
+			'status' => $supplier_status
+		);
+		$datas['delete'] = $this->MY_Model->update('supplier',$data,array('id' => $supplier_id));
+		echo json_encode($datas);
+	}
+
 	//delete Supplier
 	public function deleteSupplier(){
 		$supplier_id = $this->input->post('id');
-		$supplier_status = 2;
+		$supplier_status = 3;
 		$data = array(
 			'status' => $supplier_status
 		);

@@ -14,6 +14,12 @@ h1.inp_head {
 .approx{
   text-align: center;
 }
+
+i.fa.fa-window-close, i.fa.fa-check-square {
+    margin-right: 17px;
+    color: #c8c8c8;
+}
+
 @media only screen and (max-width: 362px) {
     button.button1 {
         font-size: 19px;
