@@ -33,8 +33,6 @@
                                 str += '<a href="javascript:;" class="disableSupplier" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
                                 str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                               }else if(row.status == 2){
-                                str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
-                                str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
                                 str += '<a href="javascript:;" class="enableSupplier" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
                                 str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                               }
@@ -98,8 +96,6 @@
                    str += '<a href="javascript:;" class="disableSupplier" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
                    str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                  }else if(row.status == 2){
-                   str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
-                   str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
                    str += '<a href="javascript:;" class="enableSupplier" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
                    str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                  }
@@ -165,9 +161,7 @@
                  blankVal();
                   $('#addSupplier').modal('hide');
                   Swal.fire("Successfully added supplier!",data.success, "success");
-                  setTimeout(function(){
-                     location.reload();
-                   }, 1000);
+                  $(".suppliers_tbl").DataTable().ajax.reload();
               }
           }
       });
@@ -201,9 +195,7 @@
             url:base_url + 'supplier/disablesupplier',
             data: {id: id},
             success:function(data) {
-              setTimeout(function(){
-                     location.reload();
-                   }, 1000);
+              $(".suppliers_tbl").DataTable().ajax.reload();
             }
           })
       }
@@ -236,9 +228,7 @@
             url:base_url + 'supplier/enablesupplier',
             data: {id: id},
             success:function(data) {
-              setTimeout(function(){
-                     location.reload();
-                   }, 1000);
+              $(".suppliers_tbl").DataTable().ajax.reload();
             }
           })
       }
@@ -271,9 +261,7 @@
             url:base_url + 'supplier/deleteSupplier',
             data: {id: id},
             success:function(data) {
-              setTimeout(function(){
-                     location.reload();
-                   }, 1000);
+              $(".suppliers_tbl").DataTable().ajax.reload();
             }
           })
       }
@@ -411,9 +399,7 @@
              if(data.status == "ok"){
                $('#editSupplier').modal('hide');
                    Swal.fire("Successfully updated supplier!",data.success, "success");
-                   setTimeout(function(){
-                      location.reload();
-                    }, 1000);
+                  $(".suppliers_tbl").DataTable().ajax.reload();
               }else if(data.status == 'invalid'){
                  Swal.fire("Error",data.status, "invalid");
               }
@@ -486,9 +472,7 @@
              if(data.status == "ok"){
                $('#editVehicle').modal('hide');
                    Swal.fire("Successfully updated Vehicle!",data.success, "success");
-                   setTimeout(function(){
-                      location.reload();
-                    }, 1000);
+                   $(".vehicle_tbl").DataTable().ajax.reload();
               }else if(data.status == 'invalid'){
                  Swal.fire("Error",data.status, "invalid");
               }
