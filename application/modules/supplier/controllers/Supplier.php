@@ -14,6 +14,7 @@ class Supplier extends MY_Controller
 	}
 
 	public function addsupplier() {
+
 			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				$upload_path = 'assets/images/supplierLogo/';
 				$time = date('ymdhis');
