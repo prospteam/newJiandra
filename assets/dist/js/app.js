@@ -125,14 +125,14 @@ $(document).ready(function(){
 
 
   //display companies for add user
-   $('.js-example-basic-multiple').select2({
+   $('.js-example-basic-multiple-addU').select2({
      theme: "classic",
      allowClear: true,
      placeholder: "Select Company",
      dropdownParent: $('#AddUser'),
      tags: true,
      ajax: {
-       url: base_url+'users/companies',
+       url: base_url+'users/add_companies',
        dataType: "json",
        data: function (params) {
 
@@ -151,14 +151,14 @@ $(document).ready(function(){
    });
 
    //display companies for edit user
-    $('.js-example-basic-multiple').select2({
+    $('.js-example-basic-multiple-editU').select2({
       theme: "classic",
       allowClear: true,
       placeholder: "Select Company",
       dropdownParent: $('#EditUser'),
       tags: true,
       ajax: {
-        url: base_url+'users/companies',
+        url: base_url+'users/edit_companies',
         dataType: "json",
         data: function (params) {
 

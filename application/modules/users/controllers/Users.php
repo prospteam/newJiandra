@@ -74,14 +74,20 @@ class Users extends MY_Controller {
 	}
 
 	//display companies
-	public function companies(){
+	public function add_companies(){
 		$parameters['select'] = '*';
 		$data['companies'] = $this->MY_Model->getRows('company',$parameters);
 		echo json_encode($data);
 		// print_r($data);
 	}
 
-
+	//display companies for edit
+	public function edit_companies(){
+		$parameters['select'] = '*';
+		$data['companies'] = $this->MY_Model->getRows('company',$parameters);
+		echo json_encode($data);
+		// print_r($data);
+	}
 
 	//test for where_in
 	public function test_company(){

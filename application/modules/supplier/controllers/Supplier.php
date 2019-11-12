@@ -164,13 +164,50 @@ class Supplier extends MY_Controller
 		json($data_array);
 	}
 
-	//display companies
-	public function companies(){
+	//display companies for adding supplier
+	public function add_supplier_companies(){
 		$parameters['select'] = '*';
 		$data['companies'] = $this->MY_Model->getRows('company',$parameters);
 		echo json_encode($data);
 		// print_r($data);
 	}
+
+	//display companies
+	public function edit_supplier_companies(){
+		$parameters['select'] = '*';
+		$data['companies'] = $this->MY_Model->getRows('company',$parameters);
+		echo json_encode($data);
+		// print_r($data);
+	}
+<<<<<<< HEAD
+=======
+
+
+	//Enable supplier for editing supplier
+	public function enablesupplier()
+	{
+		$supplier_id = $this->input->post('id');
+		$supplier_status = 1;
+		$data = array(
+			'status' => $supplier_status
+		);
+		$datas['delete'] = $this->MY_Model->update('supplier',$data,array('id' => $supplier_id));
+		echo json_encode($datas);
+	}
+
+	//Disable user
+	public function disablesupplier()
+	{
+		$supplier_id = $this->input->post('id');
+		$supplier_status = 2;
+		$data = array(
+			'status' => $supplier_status
+		);
+		$datas['delete'] = $this->MY_Model->update('supplier',$data,array('id' => $supplier_id));
+		echo json_encode($datas);
+	}
+
+>>>>>>> 683cc235ca96b67887c33d4b14b06ed7df402807
 	//delete Supplier
 	public function deleteSupplier(){
 		$supplier_id = $this->input->post('id');
