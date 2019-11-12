@@ -14,9 +14,18 @@ $(document).ready(function(){
               {"data":"action","render": function(data, type, row,meta){
                         var str = '';
                         str += '<div class="actions">';
-                        str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
-                        str += '<a href="javascript:;" class="editUser" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
-                        str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                        if(row.status == 1){
+
+                          str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
+                          str += '<a href="javascript:;" class="editUser" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                          str += '<a href="javascript:;" class="disableUser" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
+                          str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                        }else if(row.status == 2){
+                          str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
+                          str += '<a href="javascript:;" class="editUser" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                          str += '<a href="javascript:;" class="enableUser" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
+                          str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                        }
                         str += '</div>';
                         return str;
                    }
@@ -26,7 +35,7 @@ $(document).ready(function(){
                   var str = '';
                    if(row.status == 1){
                      str += '<button type="button" class="active btn btn-block btn-success">active</button>';
-                   }else{
+                   }else if(row.status == 2){
                      str += '<button type="button" class="inactive btn btn-block btn-danger">inactive</button>';
                    }
                    return str;
@@ -74,9 +83,17 @@ $(document).ready(function(){
               {"data":"action","render": function(data, type, row,meta){
                         var str = '';
                         str += '<div class="actions">';
-                        str += '<a href="javascript:;" class="viewVehicle" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
-                        str += '<a href="javascript:;" class="editVehicle" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
-                        str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                        if(row.status == 1){
+                          str += '<a href="javascript:;" class="viewVehicle" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
+                          str += '<a href="javascript:;" class="editVehicle" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                          str += '<a href="javascript:;" class="disableVehicle" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
+                          str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                        }else if(row.status == 2){
+                          str += '<a href="javascript:;" class="viewVehicle" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
+                          str += '<a href="javascript:;" class="editVehicle" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                          str += '<a href="javascript:;" class="enableVehicle" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
+                          str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                        }
                         str += '</div>';
                         return str;
                    }
@@ -86,7 +103,7 @@ $(document).ready(function(){
                   var str = '';
                    if(row.status == 1){
                      str += '<button type="button" class="active btn btn-block btn-success">active</button>';
-                   }else{
+                   }else if(row.status == 2){
                      str += '<button type="button" class="inactive btn btn-block btn-danger">inactive</button>';
                    }
                    return str;
@@ -308,7 +325,77 @@ $(document).ready(function(){
      })
    });
 
-   //delete user
+   //disable user
+   $(document).on("click",'.disableUser', function(e) {
+     e.preventDefault();
+     var id = $(this).attr('data-id');
+     console.log(id);
+
+     Swal.fire({
+     title: 'Are you sure?',
+     text: "You want to disable this User!",
+     type: 'warning',
+     showCancelButton: true,
+     confirmButtonColor: '#d33',
+     cancelButtonColor: '#068101',
+     confirmButtonText: 'Yes, Disable User!'
+     }).then((result) => {
+       if (result.value) {
+         Swal.fire(
+           'Disable!',
+           'Successfully Disabled User!',
+           'success'
+         )
+           $.ajax({
+           type: 'POST',
+             url:base_url + 'users/disableuser',
+             data: {id: id},
+             success:function(data) {
+               setTimeout(function(){
+                      location.reload();
+                    }, 1000);
+             }
+           })
+       }
+     })
+   });
+
+   //disable user
+   $(document).on("click",'.enableUser', function(e) {
+     e.preventDefault();
+     var id = $(this).attr('data-id');
+     console.log(id);
+
+     Swal.fire({
+     title: 'Are you sure?',
+     text: "You want to enable this User!",
+     type: 'warning',
+     showCancelButton: true,
+     confirmButtonColor: '#068101',
+     cancelButtonColor: '#d33',
+     confirmButtonText: 'Yes, Enable User!'
+     }).then((result) => {
+       if (result.value) {
+         Swal.fire(
+           'Enable!',
+           'Successfully Enabled User!',
+           'success'
+         )
+           $.ajax({
+           type: 'POST',
+             url:base_url + 'users/enableuser',
+             data: {id: id},
+             success:function(data) {
+               setTimeout(function(){
+                      location.reload();
+                    }, 1000);
+             }
+           })
+       }
+     })
+   });
+
+   //permanently delete user
    $(document).on("click",'.deleteUser', function(e) {
      e.preventDefault();
      var id = $(this).attr('data-id');
@@ -316,16 +403,16 @@ $(document).ready(function(){
 
      Swal.fire({
      title: 'Are you sure?',
-     text: "You want to delete this User!",
+     text: "You want to permanently delete this User!",
      type: 'warning',
      showCancelButton: true,
      confirmButtonColor: '#d33',
      cancelButtonColor: '#068101',
-     confirmButtonText: 'Yes, Delete User!'
+     confirmButtonText: 'Yes, Permanently Delete User!'
      }).then((result) => {
        if (result.value) {
          Swal.fire(
-           'Deactivate!',
+           'Delete!',
            'Successfully Deleted User!',
            'success'
          )
@@ -421,6 +508,76 @@ $(document).ready(function(){
       })
    });
 
+   //disable vehicle
+   $(document).on("click",'.disableVehicle', function(e) {
+     e.preventDefault();
+     var id = $(this).attr('data-id');
+     console.log(id);
+
+     Swal.fire({
+     title: 'Are you sure?',
+     text: "You want to disable this vehicle!",
+     type: 'warning',
+     showCancelButton: true,
+     confirmButtonColor: '#d33',
+     cancelButtonColor: '#068101',
+     confirmButtonText: 'Yes, Disable Vehicle!'
+     }).then((result) => {
+       if (result.value) {
+         Swal.fire(
+           'Disable!',
+           'Successfully Disabled Vehicle!',
+           'success'
+         )
+           $.ajax({
+           type: 'POST',
+             url:base_url + 'vehicle/disablevehicle',
+             data: {id: id},
+             success:function(data) {
+               setTimeout(function(){
+                      location.reload();
+                    }, 1000);
+             }
+           })
+       }
+     })
+   });
+
+   //Enable vehicle
+   $(document).on("click",'.enableVehicle', function(e) {
+     e.preventDefault();
+     var id = $(this).attr('data-id');
+     console.log(id);
+
+     Swal.fire({
+     title: 'Are you sure?',
+     text: "You want to enable this vehicle!",
+     type: 'warning',
+     showCancelButton: true,
+     confirmButtonColor: '#068101',
+     cancelButtonColor: '#d33',
+     confirmButtonText: 'Yes, Enable vehicle!'
+     }).then((result) => {
+       if (result.value) {
+         Swal.fire(
+           'Enable!',
+           'Successfully Enabled vehicle!',
+           'success'
+         )
+           $.ajax({
+           type: 'POST',
+             url:base_url + 'vehicle/enablevehicle',
+             data: {id: id},
+             success:function(data) {
+               setTimeout(function(){
+                      location.reload();
+                    }, 1000);
+             }
+           })
+       }
+     })
+   });
+
    //delete vehicle
    $(document).on("click",'.deleteVehicle', function(e) {
      e.preventDefault();
@@ -429,16 +586,16 @@ $(document).ready(function(){
 
      Swal.fire({
      title: 'Are you sure?',
-     text: "You want to delete this Vehicle!",
+     text: "You want to permenently delete this Vehicle!",
      type: 'warning',
      showCancelButton: true,
      confirmButtonColor: '#d33',
      cancelButtonColor: '#068101',
-     confirmButtonText: 'Yes, Delete Vehicle!'
+     confirmButtonText: 'Yes, Permanently Delete Vehicle!'
      }).then((result) => {
        if (result.value) {
          Swal.fire(
-           'Deactivate!',
+           'Delete!',
            'Successfully Deleted Vehicle!',
            'success'
          )

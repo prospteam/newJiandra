@@ -26,13 +26,13 @@ class Users extends MY_Controller {
 
 
 		$column_order = array('fullname','company.company_name','position.position_name');
-		// $where = array("status" => 1);
+		$where = array('users.status !=' => 3);
 		$join = array(
 			'company' => 'company.company_id = users.company',
 			'position' => 'position.id = users.position'
 		);
 		$select = "users.id,users.fullname,company.company_name,position.position_name,users.status";
-		$list = $this->MY_Model->get_datatables1('users',$column_order, $select, $join, $limit, $offset ,$search, $order);
+		$list = $this->MY_Model->get_datatables('users',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 
 		// if(!empty($list)) {
 		// 	foreach ($list as $key => $value) {
@@ -181,11 +181,35 @@ class Users extends MY_Controller {
 		echo json_encode($response);
 	}
 
-	//Delete user
-	public function deleteuser()
+	//Enable user
+	public function enableuser()
+	{
+		$user_id = $this->input->post('id');
+		$user_status = 1;
+		$data = array(
+			'status' => $user_status
+		);
+		$datas['delete'] = $this->MY_Model->update('users',$data,array('id' => $user_id));
+		echo json_encode($datas);
+	}
+
+	//Disable user
+	public function disableuser()
 	{
 		$user_id = $this->input->post('id');
 		$user_status = 2;
+		$data = array(
+			'status' => $user_status
+		);
+		$datas['delete'] = $this->MY_Model->update('users',$data,array('id' => $user_id));
+		echo json_encode($datas);
+	}
+
+	//Permanently Delete user
+	public function deleteuser()
+	{
+		$user_id = $this->input->post('id');
+		$user_status = 3;
 		$data = array(
 			'status' => $user_status
 		);

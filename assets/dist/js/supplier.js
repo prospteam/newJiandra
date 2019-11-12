@@ -4,6 +4,7 @@
       // alert('lol');
           $('.company1').on('click', function(e){
             e.preventDefault();
+
             // alert($(this).data('id'));
 
          $('.suppliers_tbl').DataTable({
@@ -26,9 +27,17 @@
                     {"data":"action","render": function(data, type, row,meta){
                               var str = '';
                               str += '<div class="actions">';
-                              str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
-                              str += '<a href="javascript:;" class="editSupplier" data-comp="'+row.company+'" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
-                              str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                              if(row.status == 1){
+                                str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
+                                str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                                str += '<a href="javascript:;" class="disableSupplier" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
+                                str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                              }else if(row.status == 2){
+                                str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
+                                str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                                str += '<a href="javascript:;" class="enableSupplier" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
+                                str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                              }
                               str += '</div>';
                               return str;
                          }
@@ -38,8 +47,8 @@
                         var str = '';
                          if(row.status == 1){
                            str += '<button type="button" class="active btn btn-block btn-success">active</button>';
-                         }else{
-                           str += '<button type="button" class="inactive btn btn-block btn-success">inactive</button>';
+                         }else if(row.status == 2){
+                           str += '<button type="button" class="inactive btn btn-block btn-danger">inactive</button>';
                          }
                          return str;
                     }
@@ -81,13 +90,21 @@
                {"data":"supplier_name"},
                // {"data":"type"},
                {"data":"action","render": function(data, type, row,meta){
-                         var str = '';
-                         str += '<div class="actions">';
-                         str += '<a href="javascript:;" class="viewSupplier"  data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
-                         str += '<a href="javascript:;" class="editSupplier"  data-comp="'+row.company+'" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
-                         str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-                         str += '</div>';
-                         return str;
+                 var str = '';
+                 str += '<div class="actions">';
+                 if(row.status == 1){
+                   str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
+                   str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                   str += '<a href="javascript:;" class="disableSupplier" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
+                   str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                 }else if(row.status == 2){
+                   str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
+                   str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                   str += '<a href="javascript:;" class="enableSupplier" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
+                   str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                 }
+                 str += '</div>';
+                 return str;
                     }
                },
 
@@ -95,8 +112,8 @@
                    var str = '';
                     if(row.status == 1){
                       str += '<button type="button" class="active btn btn-block btn-success">active</button>';
-                    }else{
-                      str += '<button type="button" class="inactive btn btn-block btn-success">inactive</button>';
+                    }else if(row.status == 2){
+                      str += '<button type="button" class="inactive btn btn-block btn-danger">inactive</button>';
                     }
                     return str;
                }
@@ -157,6 +174,77 @@
   });
   //end add supplier
 
+
+  //disable supplier
+  $(document).on("click",'.disableSupplier', function(e) {
+    e.preventDefault();
+    var id = $(this).attr('data-id');
+    console.log(id);
+
+    Swal.fire({
+    title: 'Are you sure?',
+    text: "You want to disable this supplier!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#068101',
+    confirmButtonText: 'Yes, Disable Supplier!'
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          'Disable!',
+          'Successfully Disabled Supplier!',
+          'success'
+        )
+          $.ajax({
+          type: 'POST',
+            url:base_url + 'supplier/disablesupplier',
+            data: {id: id},
+            success:function(data) {
+              setTimeout(function(){
+                     location.reload();
+                   }, 1000);
+            }
+          })
+      }
+    })
+  });
+
+  //Enable supplier
+  $(document).on("click",'.enableSupplier', function(e) {
+    e.preventDefault();
+    var id = $(this).attr('data-id');
+    console.log(id);
+
+    Swal.fire({
+    title: 'Are you sure?',
+    text: "You want to enable this supplier!",
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#068101',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, Enable supplier!'
+    }).then((result) => {
+      if (result.value) {
+        Swal.fire(
+          'Enable!',
+          'Successfully Enabled supplier!',
+          'success'
+        )
+          $.ajax({
+          type: 'POST',
+            url:base_url + 'supplier/enablesupplier',
+            data: {id: id},
+            success:function(data) {
+              setTimeout(function(){
+                     location.reload();
+                   }, 1000);
+            }
+          })
+      }
+    })
+  });
+
   //delete suppplier
   $(document).on("click",'.deleteSupplier', function(e) {
     e.preventDefault();
@@ -165,16 +253,16 @@
 
     Swal.fire({
     title: 'Are you sure?',
-    text: "You want to delete this Supplier!",
+    text: "You want to permanently delete this Supplier!",
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#d33',
     cancelButtonColor: '#068101',
-    confirmButtonText: 'Yes, Delete Supplier!'
+    confirmButtonText: 'Yes, Permanently Delete Supplier!'
     }).then((result) => {
       if (result.value) {
         Swal.fire(
-          'Deactivate!',
+          'Delete!',
           'Successfully Deleted Supplier!',
           'success'
         )
