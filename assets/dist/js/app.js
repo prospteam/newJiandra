@@ -212,9 +212,10 @@ $(document).ready(function(){
                 blankVal();
                  $('#AddUser').modal('hide');
                  Swal.fire("Successfully added user!",data.success, "success");
-                 setTimeout(function(){
-                    location.reload();
-                  }, 1000);
+                 $(".users_tbl").DataTable().ajax.reload();
+                 // setTimeout(function(){
+                 //    location.reload();
+                 //  }, 1000);
              }
          }
      })
@@ -295,9 +296,10 @@ $(document).ready(function(){
              if(data.status == "ok"){
                $('#EditUser').modal('hide');
                    Swal.fire("Successfully updated user!",data.success, "success");
-                   setTimeout(function(){
-                      location.reload();
-                    }, 1000);
+                   $(".users_tbl").DataTable().ajax.reload();
+                   // setTimeout(function(){
+                   //    location.reload();
+                   //  }, 1000);
               }else if(data.status == 'invalid'){
                  Swal.fire("Error",data.status, "invalid");
               }
@@ -347,9 +349,7 @@ $(document).ready(function(){
              url:base_url + 'users/disableuser',
              data: {id: id},
              success:function(data) {
-               setTimeout(function(){
-                      location.reload();
-                    }, 1000);
+               $(".users_tbl").DataTable().ajax.reload();
              }
            })
        }
@@ -382,9 +382,7 @@ $(document).ready(function(){
              url:base_url + 'users/enableuser',
              data: {id: id},
              success:function(data) {
-               setTimeout(function(){
-                      location.reload();
-                    }, 1000);
+               $(".users_tbl").DataTable().ajax.reload();
              }
            })
        }
@@ -417,9 +415,7 @@ $(document).ready(function(){
              url:base_url + 'users/deleteuser',
              data: {id: id},
              success:function(data) {
-               setTimeout(function(){
-                      location.reload();
-                    }, 1000);
+               $(".users_tbl").DataTable().ajax.reload();
              }
            })
        }
@@ -452,9 +448,7 @@ $(document).ready(function(){
                 // blankVal();
                  $('#AddVehicle').modal('hide');
                  Swal.fire("Successfully added vehicle!",data.success, "success");
-                 setTimeout(function(){
-                    location.reload();
-                  }, 1000);
+                 $(".vehicle_tbl").DataTable().ajax.reload();
              }
          }
      })
@@ -530,9 +524,7 @@ $(document).ready(function(){
              url:base_url + 'vehicle/disablevehicle',
              data: {id: id},
              success:function(data) {
-               setTimeout(function(){
-                      location.reload();
-                    }, 1000);
+               $(".vehicle_tbl").DataTable().ajax.reload();
              }
            })
        }
@@ -565,9 +557,7 @@ $(document).ready(function(){
              url:base_url + 'vehicle/enablevehicle',
              data: {id: id},
              success:function(data) {
-               setTimeout(function(){
-                      location.reload();
-                    }, 1000);
+               $(".vehicle_tbl").DataTable().ajax.reload();
              }
            })
        }
@@ -600,9 +590,7 @@ $(document).ready(function(){
              url:base_url + 'vehicle/deletevehicle',
              data: {id: id},
              success:function(data) {
-               setTimeout(function(){
-                      location.reload();
-                    }, 1000);
+               $(".vehicle_tbl").DataTable().ajax.reload();
              }
            })
        }
