@@ -419,7 +419,7 @@
            $('#editVehicle').modal('show');
            console.log(data);
              $('#editVehicle input[name=plate_number]').val(data.view_edit.plate_number);
-             $('#editVehicle input[name=supplier_contact_person]').val(data.view_edit.vehicles_brand);
+             $('#editVehicle input[name=vehicle_brand]').val(data.view_edit.vehicle_brand);
              // $('#editVehicle input[name=company[]').val(data.view_edit.vehicles_type);
              $('#editVehicle input[name=fuel_type]').val(data.view_edit.fuel_type);
              $('#editVehicle input[name=num_of_tires]').val(data.view_edit.num_of_tires);
@@ -441,7 +441,7 @@
              $('#editVehicle input[name=land_reg_date]').val(data.view_edit.land_reg_date);
              $('#editVehicle input[name=land_renewal_date]').val(data.view_edit.land_renewal_date);
              $('#editVehicle input[name=land_exp_date]').val(data.view_edit.land_exp_date);
-             $('#editVehicle input[name=material_desc]').val(data.view_edit.material_desc);
+             $('#editVehicle textarea[name=material_desc]').val(data.view_edit.material_desc);
              // $('#editSupplier select[name=position]').val(data.view_edit.position);
          }
      });

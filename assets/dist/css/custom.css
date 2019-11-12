@@ -19,6 +19,10 @@ i.fa.fa-window-close, i.fa.fa-check-square{
   color: #c8c8c8;
     margin-right: 17px;
 }
+
+span.err {
+    color: red;
+}
 @media only screen and (max-width: 362px) {
     button.button1 {
         font-size: 19px;

@@ -445,6 +445,7 @@ $(document).ready(function(){
              }else if (data.error) {
                  Swal.fire("Error",data.error, "error");
              }else {
+                  blankVal_vehicle();
                 // blankVal();
                  $('#AddVehicle').modal('hide');
                  Swal.fire("Successfully added vehicle!",data.success, "success");
@@ -618,4 +619,17 @@ function blankVal(){
   $('#AddUser input[name="password"]').val('');
   $('#AddUser input[name="position"]').val('');
   $('#AddUser select[name="company"]').val('');
+}
+
+function clearError(){
+    $('.err').text('');
+}
+
+function blankVal_vehicle(){
+  $('#AddVehicle input[name="plate_number"]').val('');
+  $('.err').text('');
+  $('#AddVehicle input[name="vehicle_brand"]').val('');
+  $('#AddVehicle select[name="vehicle_type"]').val('');
+  $('#AddVehicle input[name="fuel_type"]').val('');
+  $('#AddVehicle input[name="num_of_tires"]').val('');
 }
