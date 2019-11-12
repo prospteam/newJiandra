@@ -202,7 +202,7 @@ class Supplier extends MY_Controller
 			$data = array(
 				'supplier_name' => $this->input->post('supplier_name'),
 				'supplier_contact_person' => $this->input->post('supplier_contact_person'),
-				'company'=>$int,
+				'company'=>1,
 				'office_number' => $this->input->post('office_number'),
 				'home_number' => $this->input->post('home_number'),
 				'mobile_number' => $this->input->post('mobile_number'),
