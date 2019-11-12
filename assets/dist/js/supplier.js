@@ -340,6 +340,7 @@
            $('.tin').text(data.supplier.tin_number);
            $('.fax_number').text(data.supplier.fax_number);
            var company_list = [];
+
            $.each(data.company, function(key,val){
              company_list.push(val.company_name);
              // console.log(val);
@@ -360,17 +361,25 @@
          type: 'post',
          dataType: 'json',
          success: function(data){
+           console.log(data);
            $('#editSupplier').modal('show');
            // console.log(data.view_edit.supplier_logo);
 
-             $('#editSupplier input[name=supplier_name]').val(data.view_edit.supplier_name);
-             $('#editSupplier input[name=supplier_contact_person]').val(data.view_edit.supplier_contact_person);
+             $('#editSupplier input[name=supplier_name]').val(data.supplier.supplier_name);
+             $('#editSupplier input[name=supplier_contact_person]').val(data.supplier.supplier_contact_person);
+             var company_list = [];
+             $('#editSupplier .js-example-basic-multiple-edit').html('');
+             $.each(data.company, function(key,val){
+               // company_list.push(val.company_name);
+               // console.log(val);
+               $('#editSupplier .js-example-basic-multiple-edit').append( '<option value='+val.company_id+' selected>'+val.company_name+'</option>' );
+             })
              // $('#editSupplier select[name=company[]').val(data.view_edit.company);
-             $('#editSupplier input[name=office_number]').val(data.view_edit.office_number);
-             $('#editSupplier input[name=home_number]').val(data.view_edit.home_number);
-             $('#editSupplier input[name=mobile_number]').val(data.view_edit.mobile_number);
-             $('#editSupplier input[name=tin_number]').val(data.view_edit.tin_number);
-             $('#editSupplier input[name=fax_number]').val(data.view_edit.fax_number);
+             $('#editSupplier input[name=office_number]').val(data.supplier.office_number);
+             $('#editSupplier input[name=home_number]').val(data.supplier.home_number);
+             $('#editSupplier input[name=mobile_number]').val(data.supplier.mobile_number);
+             $('#editSupplier input[name=tin_number]').val(data.supplier.tin_number);
+             $('#editSupplier input[name=fax_number]').val(data.supplier.fax_number);
              $('#editSupplier input[type=file]').val('test');
              // $('#editSupplier input[name=logo]').val(data.view_edit.supplier_logo);
 
@@ -423,7 +432,7 @@
            console.log(data);
              $('#editVehicle input[name=plate_number]').val(data.view_edit.plate_number);
              $('#editVehicle input[name=vehicle_brand]').val(data.view_edit.vehicle_brand);
-             // $('#editVehicle input[name=company[]').val(data.view_edit.vehicles_type);
+             $('#editVehicle input[name=vehicle_type').val(data.view_edit.vehicle_type);
              $('#editVehicle input[name=fuel_type]').val(data.view_edit.fuel_type);
              $('#editVehicle input[name=num_of_tires]').val(data.view_edit.num_of_tires);
              $('#editVehicle input[name=accounting_date_acquired]').val(data.view_edit.accounting_date_acquired);

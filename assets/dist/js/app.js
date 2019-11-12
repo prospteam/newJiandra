@@ -265,12 +265,13 @@ $(document).ready(function(){
              // $('#edituser input[name=password]').val(data.users.password);
              $('#edituser select[name=position]').val(data.users.position);
              var company_list = [];
+             $('#edituser .js-example-basic-multiple-editU').html('');
              $.each(data.company, function(key,val){
+               // company_list.push(val.company_name);
                // console.log(val);
-               company_list.push(val.company_name);
-               // console.log(val);
+               $('#edituser .js-example-basic-multiple-editU').append( '<option value='+val.company_id+' selected>'+val.company_name+'</option>' );
            });
-           $('.comp').text(company_list.join(', '));
+           // $('.comp').text(company_list.join(', '));
          }
      });
 
@@ -441,6 +442,7 @@ $(document).ready(function(){
                  let keyNames = Object.keys(data.form_error);
                  $(keyNames).each(function(index , value) {
                      $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
+                      $("select[name='"+value+"']").next('.err').text(data.form_error[value]);
                  });
              }else if (data.error) {
                  Swal.fire("Error",data.error, "error");
@@ -600,13 +602,6 @@ $(document).ready(function(){
 
 });
 
-function show_loader(){
-    $('.loader-cont').show();
-}
-
-function hide_loader(){
-    $('.loader-cont').hide();
-}
 
 function clearError(){
     $('.err').text('');
@@ -621,15 +616,32 @@ function blankVal(){
   $('#AddUser select[name="company"]').val('');
 }
 
-function clearError(){
-    $('.err').text('');
-}
 
 function blankVal_vehicle(){
   $('#AddVehicle input[name="plate_number"]').val('');
   $('.err').text('');
   $('#AddVehicle input[name="vehicle_brand"]').val('');
-  $('#AddVehicle select[name="vehicle_type"]').val('');
+  // $('#AddVehicle select[name="vehicle_type"]').val('-1');
   $('#AddVehicle input[name="fuel_type"]').val('');
   $('#AddVehicle input[name="num_of_tires"]').val('');
+  $('#AddVehicle input[name="accounting_date_acquired"]').val('');
+  $('#AddVehicle input[name="accounting_acqui_amount"]').val('');
+  $('#AddVehicle input[name="accounting_full_dep_date"]').val('');
+  $('#AddVehicle input[name="accounting_monthly_dep"]').val('');
+  $('#AddVehicle input[name="accounting_accum_dep"]').val('');
+  $('#AddVehicle input[name="accounting_book_val"]').val('');
+  $('#AddVehicle input[name="approx_length"]').val('');
+  $('#AddVehicle input[name="approx_width"]').val('');
+  $('#AddVehicle input[name="approx_height"]').val('');
+  $('#AddVehicle input[name="approx_volume"]').val('');
+  $('#AddVehicle input[name="approx_weight"]').val('');
+  $('#AddVehicle input[name="van_reg_date"]').val('');
+  $('#AddVehicle input[name="van_policy_num"]').val('');
+  $('#AddVehicle input[name="van_renewal_date"]').val('');
+  $('#AddVehicle input[name="van_exp_date"]').val('');
+  $('#AddVehicle input[name="land_reg_date"]').val('');
+  $('#AddVehicle input[name="land_renewal_date"]').val('');
+  $('#AddVehicle input[name="land_exp_date"]').val('');
+  $('#AddVehicle textarea[name="material_desc"]').val('');
+
 }
