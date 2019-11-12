@@ -98,7 +98,7 @@
 							<div class="col-sm-4">
                 <label for=""><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
                 <div class="uploadfile-container2">
-                  <input class="input-file" name="logo" id="my-file" type="file" accept="image/*">
+                  <input class="input-file" name="logo" id="my-file" type="file" accept="image/* ">
                   <p class="file-return"></p>
                 </div>
               </div>

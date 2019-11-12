@@ -361,7 +361,8 @@
          dataType: 'json',
          success: function(data){
            $('#editSupplier').modal('show');
-           console.log(data);
+           // console.log(data.view_edit.supplier_logo);
+
              $('#editSupplier input[name=supplier_name]').val(data.view_edit.supplier_name);
              $('#editSupplier input[name=supplier_contact_person]').val(data.view_edit.supplier_contact_person);
              // $('#editSupplier select[name=company[]').val(data.view_edit.company);
@@ -370,6 +371,9 @@
              $('#editSupplier input[name=mobile_number]').val(data.view_edit.mobile_number);
              $('#editSupplier input[name=tin_number]').val(data.view_edit.tin_number);
              $('#editSupplier input[name=fax_number]').val(data.view_edit.fax_number);
+             $('#editSupplier input[type=file]').val('test');
+             // $('#editSupplier input[name=logo]').val(data.view_edit.supplier_logo);
+
              // $('#editSupplier select[name=position]').val(data.view_edit.position);
          }
      });
