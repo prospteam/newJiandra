@@ -23,6 +23,10 @@ i.fa.fa-window-close, i.fa.fa-check-square{
 span.err {
     color: red;
 }
+
+input.select2-search__field {
+    display: none;
+}
 @media only screen and (max-width: 362px) {
     button.button1 {
         font-size: 19px;

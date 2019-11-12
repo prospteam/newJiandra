@@ -52,7 +52,7 @@
     											<div class="form-group">
     												<label for="position">Position:</label>
     												<!-- <input type="text" class="form-control" name="position" value=""> -->
-                            <select class="form-control" class="position" name="position">
+                            <select class="form-control" class="position" name="position" >
                               <option value="">Select Position</option>
                             <?php foreach($position as $k => $value) : ?>
                                 <option value="<?php echo $value['id'] ?>"><?php echo $value['position_name'] ?></option>
@@ -182,8 +182,8 @@
                       <div class="form-group">
                         <label for="position">Position:</label>
                         <!-- <input type="text" class="form-control" name="position" value=""> -->
-                        <select class="form-control" class="position" name="position">
-                          <option value="">Select Position</option>
+                        <select class="form-control" class="position" name="position" placeholder="Select Position">
+                          <!-- <option value="">Select Position</option> -->
                         <?php foreach($position as $k => $value) : ?>
                             <option value="<?php echo $value['id'] ?>"><?php echo $value['position_name'] ?></option>
                       <?php  endforeach; ?>
@@ -196,7 +196,6 @@
                    <div class="col-6">
                   <div class="form-group">
                     <label for="company">Companies:</label>
-                    <p class="comp"></p>
                     <select class="form-control js-example-basic-multiple-editU" name="company[]" multiple="multiple"></select>
                     <span class="err"></span>
 

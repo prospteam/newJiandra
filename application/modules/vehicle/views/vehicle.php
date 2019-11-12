@@ -45,7 +45,7 @@
                           <div class="form-group">
                             <label for="vehicle_type">Vehicle Type:</label>
                             <select class="form-control" name="vehicle_type">
-                              <option>Select Vehicle Type</option>
+                              <!-- <option value="-1" selected="selected">Select Vehicle Type</option> -->
                               <option value="1">Warehouse Truck</option>
                               <option value="2">Delivery Truck</option>
                             </select>
@@ -102,7 +102,7 @@
                         </div>
                       </div>
                     </div>
-                    <p style="font-weight:bold">Depereciation Period in Months</p>
+                    <p style="font-weight:bold">Depreciation Period in Months</p>
                     <div class = "row">
                       <div class="col-6">
                         <div class="form-group">
@@ -326,7 +326,7 @@
                       </div>
                     </div>
                   </div>
-                  <p style="font-weight:bold">Depereciation Period in Months</p>
+                  <p style="font-weight:bold">Depreciation Period in Months</p>
                   <div class = "row">
                     <div class="col-6">
                       <div class="form-group">
@@ -487,7 +487,7 @@
                       <div class="form-group">
                         <label for="vehicle_type">Vehicle Type:</label>
                         <select class="form-control" name="vehicle_type">
-                          <option>Select Vehicle Type</option>
+                        <!-- <option value="-1" selected="selected" disabled="disabled">Select Vehicle Type</option> -->
                           <option value="1">Warehouse Truck</option>
                           <option value="2">Delivery Truck</option>
                         </select>
@@ -544,7 +544,7 @@
                     </div>
                   </div>
                 </div>
-                <p style="font-weight:bold">Depereciation Period in Months</p>
+                <p style="font-weight:bold">Depreciation Period in Months</p>
                 <div class = "row">
                   <div class="col-6">
                     <div class="form-group">
