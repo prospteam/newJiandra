@@ -45,6 +45,7 @@
                           <div class="form-group">
                             <label for="vehicle_type">Vehicle Type:</label>
                             <select class="form-control" name="vehicle_type">
+                              <option>Select Vehicle Type</option>
                               <option value="1">Warehouse Truck</option>
                               <option value="2">Delivery Truck</option>
                             </select>
@@ -486,6 +487,7 @@
                       <div class="form-group">
                         <label for="vehicle_type">Vehicle Type:</label>
                         <select class="form-control" name="vehicle_type">
+                          <option>Select Vehicle Type</option>
                           <option value="1">Warehouse Truck</option>
                           <option value="2">Delivery Truck</option>
                         </select>
