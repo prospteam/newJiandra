@@ -179,8 +179,6 @@ class Supplier extends MY_Controller
 		echo json_encode($data);
 		// print_r($data);
 	}
-<<<<<<< HEAD
-=======
 
 
 	//Enable supplier for editing supplier
@@ -207,7 +205,6 @@ class Supplier extends MY_Controller
 		echo json_encode($datas);
 	}
 
->>>>>>> 683cc235ca96b67887c33d4b14b06ed7df402807
 	//delete Supplier
 	public function deleteSupplier(){
 		$supplier_id = $this->input->post('id');
@@ -230,8 +227,7 @@ class Supplier extends MY_Controller
 	}
 
 	// Edit Supplier
-	public function editSupplier()
-	{
+	public function editSupplier(){
 
  $int = (int)$this->input->post('company')['0'];
 
@@ -239,7 +235,7 @@ class Supplier extends MY_Controller
 			$data = array(
 				'supplier_name' => $this->input->post('supplier_name'),
 				'supplier_contact_person' => $this->input->post('supplier_contact_person'),
-				'company'=>1,
+				'company'=> 1,
 				'office_number' => $this->input->post('office_number'),
 				'home_number' => $this->input->post('home_number'),
 				'mobile_number' => $this->input->post('mobile_number'),
@@ -248,7 +244,6 @@ class Supplier extends MY_Controller
 				// 'company' => implode(',',$this->input->post('company')),
 				// 'status' => 1
 			);
-
 			$update = $this->MY_Model->update('supplier', $data,array('id' => $supplier_id));
 			if ($update) {
 				$response = array(
