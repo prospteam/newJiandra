@@ -117,12 +117,12 @@ class Supplier extends MY_Controller
 
 
 		$column_order = array('supplier_logo','supplier_name');
-		$where = array("company" => $id, 'status !=' => 3);
+		$where = array("company" => $id);
 		$join = array(
 			// 'company' => 'company.company_id = supplier.company'
 		);
 
-		$select = "id,supplier_logo,supplier_name,status";
+		$select = "id,supplier_logo,supplier_name,status,company";
 		$list = $this->MY_Model->get_datatables('supplier',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 
 		// if(!empty($list)) {
@@ -171,35 +171,10 @@ class Supplier extends MY_Controller
 		echo json_encode($data);
 		// print_r($data);
 	}
-
-	//Enable supplier
-	public function enablesupplier()
-	{
-		$supplier_id = $this->input->post('id');
-		$supplier_status = 1;
-		$data = array(
-			'status' => $supplier_status
-		);
-		$datas['delete'] = $this->MY_Model->update('supplier',$data,array('id' => $supplier_id));
-		echo json_encode($datas);
-	}
-
-	//Disable user
-	public function disablesupplier()
-	{
-		$supplier_id = $this->input->post('id');
-		$supplier_status = 2;
-		$data = array(
-			'status' => $supplier_status
-		);
-		$datas['delete'] = $this->MY_Model->update('supplier',$data,array('id' => $supplier_id));
-		echo json_encode($datas);
-	}
-
 	//delete Supplier
 	public function deleteSupplier(){
 		$supplier_id = $this->input->post('id');
-		$supplier_status = 3;
+		$supplier_status = 2;
 		$data = array(
 			'status' => $supplier_status
 		);
@@ -220,11 +195,14 @@ class Supplier extends MY_Controller
 	// Edit Supplier
 	public function editSupplier()
 	{
+
+ $int = (int)$this->input->post('company')['0'];
+
 		$supplier_id = $this->input->post('id');
 			$data = array(
 				'supplier_name' => $this->input->post('supplier_name'),
 				'supplier_contact_person' => $this->input->post('supplier_contact_person'),
-				'company'=>$this->input->post('çompany'),
+				'company'=>$int,
 				'office_number' => $this->input->post('office_number'),
 				'home_number' => $this->input->post('home_number'),
 				'mobile_number' => $this->input->post('mobile_number'),
