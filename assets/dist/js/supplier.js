@@ -382,8 +382,7 @@
      e.preventDefault();
      let formData =  new FormData($(this)[0]);
      var id = $('.editSupplier').attr('data-id');
-      var comp_id = $(this).attr('comp_id');
-      alert(comp_id);
+      // var comp_id = $(this).attr('comp_id');
      console.log(id);
      formData.append("id",id);
      $.ajax({

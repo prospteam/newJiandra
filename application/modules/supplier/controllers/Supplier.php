@@ -229,21 +229,30 @@ class Supplier extends MY_Controller
 	// Edit Supplier
 	public function editSupplier(){
 
- $int = (int)$this->input->post('company')['0'];
+ // $int = (int)$this->input->post('company')['0'];
 
 		$supplier_id = $this->input->post('id');
+		$post = $this->input->post();
+		$result = false;
+
+		if(!empty($post)) {
+
 			$data = array(
-				'supplier_name' => $this->input->post('supplier_name'),
-				'supplier_contact_person' => $this->input->post('supplier_contact_person'),
-				'company'=> 1,
-				'office_number' => $this->input->post('office_number'),
-				'home_number' => $this->input->post('home_number'),
-				'mobile_number' => $this->input->post('mobile_number'),
-				'tin_number' => $this->input->post('tin_number'),
-				'fax_number' => $this->input->post('fax_number'),
+				'supplier_name' => $post['supplier_name'],
+				'supplier_contact_person' =>$post['supplier_contact_person'],
+				// 'company'=> 1,
+				'office_number' =>$post['office_number'],
+				'home_number' =>$post['home_number'],
+				'mobile_number' => $post['mobile_number'],
+				'tin_number' => $post['tin_number'],
+				'fax_number' => $post['fax_number'],
 				// 'company' => implode(',',$this->input->post('company')),
 				// 'status' => 1
 			);
+
+			if(!empty($post['company'])) {
+				$data['company'] = implode(',',$post['company']);
+			}
 			$update = $this->MY_Model->update('supplier', $data,array('id' => $supplier_id));
 			if ($update) {
 				$response = array(
@@ -254,7 +263,9 @@ class Supplier extends MY_Controller
 					'status' => 'invalid'
 				);
 			}
-		echo json_encode($response);
+			$result = json_encode($response);
+		}
+		die($result);
 	}
 	//End Edit Supplier
 }
