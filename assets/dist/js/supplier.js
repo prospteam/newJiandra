@@ -281,14 +281,14 @@
   });
 
   //display Companies for add supplier
-   $('.js-example-basic-multiple-add').select2({
+   $('.js-example-basic-multiple').select2({
      theme: "classic",
      allowClear: true,
      placeholder: "Select Company",
      dropdownParent: $('#addSupplier'),
      tags: true,
      ajax: {
-       url: base_url+'supplier/companies',
+       url: base_url+'supplier/add_supplier_companies',
        dataType: "json",
        data: function (params) {
 
@@ -314,7 +314,7 @@
      dropdownParent: $('#editSupplier'),
      tags: true,
      ajax: {
-       url: base_url+'supplier/companies',
+       url: base_url+'supplier/edit_supplier_companies',
        dataType: "json",
        data: function (params) {
 

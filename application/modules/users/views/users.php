@@ -66,7 +66,7 @@
     								   <div class="col-6">
     									<div class="form-group">
     										<label for="company">Companies:</label>
-                        <select class="form-control js-example-basic-multiple" name="company[]" multiple="multiple"></select>
+                        <select class="form-control js-example-basic-multiple-addU" name="company[]" multiple="multiple"></select>
                         <span class="err"></span>
                     <!-- <span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="8" style="width: 100%;"><span class="selection">
                       <span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false">
@@ -197,7 +197,7 @@
                   <div class="form-group">
                     <label for="company">Companies:</label>
                     <p class="comp"></p>
-                    <select class="form-control edituser js-example-basic-multiple" name="company[]" multiple="multiple"></select>
+                    <select class="form-control js-example-basic-multiple-editU" name="company[]" multiple="multiple"></select>
                     <span class="err"></span>
 
                   </div>

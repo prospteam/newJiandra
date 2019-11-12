@@ -164,15 +164,24 @@ class Supplier extends MY_Controller
 		json($data_array);
 	}
 
-	//display companies
-	public function companies(){
+	//display companies for adding supplier
+	public function add_supplier_companies(){
 		$parameters['select'] = '*';
 		$data['companies'] = $this->MY_Model->getRows('company',$parameters);
 		echo json_encode($data);
 		// print_r($data);
 	}
 
-	//Enable supplier
+	//display companies
+	public function edit_supplier_companies(){
+		$parameters['select'] = '*';
+		$data['companies'] = $this->MY_Model->getRows('company',$parameters);
+		echo json_encode($data);
+		// print_r($data);
+	}
+
+
+	//Enable supplier for editing supplier
 	public function enablesupplier()
 	{
 		$supplier_id = $this->input->post('id');
