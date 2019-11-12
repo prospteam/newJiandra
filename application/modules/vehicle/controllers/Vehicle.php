@@ -108,11 +108,36 @@ class Vehicle extends MY_Controller {
 		echo json_encode($response);
 	}
 
+	//Enable vehicle
+	public function enablevehicle()
+	{
+		$vehicle_id = $this->input->post('id');
+		$vehicle_status = 1;
+		$data = array(
+			'status' => $vehicle_status
+		);
+		$datas['delete'] = $this->MY_Model->update('vehicles',$data,array('id' => $vehicle_id));
+		echo json_encode($datas);
+	}
+
+	//Disable vehicle
+	public function disablevehicle()
+	{
+		$vehicle_id = $this->input->post('id');
+		$vehicle_status = 2;
+		$data = array(
+			'status' => $vehicle_status
+		);
+		$datas['delete'] = $this->MY_Model->update('vehicles',$data,array('id' => $vehicle_id));
+		echo json_encode($datas);
+	}
+
+
 	//Delete vehicle
 	public function deletevehicle()
 	{
 		$vehicle_id = $this->input->post('id');
-		$vehicle_status = 2;
+		$vehicle_status = 3;
 		$data = array(
 			'status' => $vehicle_status
 		);

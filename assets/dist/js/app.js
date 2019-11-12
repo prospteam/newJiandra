@@ -21,8 +21,6 @@ $(document).ready(function(){
                           str += '<a href="javascript:;" class="disableUser" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
                           str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                         }else if(row.status == 2){
-                          str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
-                          str += '<a href="javascript:;" class="editUser" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
                           str += '<a href="javascript:;" class="enableUser" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
                           str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                         }
@@ -89,8 +87,6 @@ $(document).ready(function(){
                           str += '<a href="javascript:;" class="disableVehicle" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
                           str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                         }else if(row.status == 2){
-                          str += '<a href="javascript:;" class="viewVehicle" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
-                          str += '<a href="javascript:;" class="editVehicle" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
                           str += '<a href="javascript:;" class="enableVehicle" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
                           str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                         }
