@@ -228,8 +228,35 @@ class Supplier extends MY_Controller
 
 	// Edit Supplier
 	public function editSupplier(){
+			if ($_SERVER['REQUEST_METHOD']==='POST') {
+				$upload_path = './assets/images/supplierLogo';
+				$time = date('ymdhis');
+				if (!empty($_FILES['logo']['name'])) {
 
- // $int = (int)$this->input->post('company')['0'];
+					$file_name = explode('.',$_FILES['logo']['name'])[0];
+					$file_ext = explode('.',$_FILES['logo']['name'])[1];
+
+					$config['upload_path'] = './assets/images/supplierLogo';
+					$config['allowed_types'] = 'jpg|png|jpeg';
+					$config['file_name'] = $file_name.$time;
+
+					$this->upload->initialize($config);
+
+					if ($this->upload->do_upload('logo')) {
+						$uploadData = $this->upload->data();
+					}
+					$this->load->library("form_validation");
+
+				$this->form_validation->set_rules('supplier_name', 'Supplier Name', 'required');
+				$this->form_validation->set_rules('supplier_contact_person', 'Supplier Contact Person', 'required');
+				// $this->form_validation->set_rules('vendor', 'Vendor', 'required');
+				$this->form_validation->set_rules('office_number', 'Office Number', 'required');
+
+			}else{
+				$this->load->library("form_validation");
+				}
+		}
+			// end edit supplier Logo
 
 		$supplier_id = $this->input->post('id');
 		$post = $this->input->post();
@@ -238,6 +265,7 @@ class Supplier extends MY_Controller
 		if(!empty($post)) {
 
 			$data = array(
+				'supplier_logo' => $uploadData['file_name'],
 				'supplier_name' => $post['supplier_name'],
 				'supplier_contact_person' =>$post['supplier_contact_person'],
 				// 'company'=> 1,
@@ -269,6 +297,7 @@ class Supplier extends MY_Controller
 	}
 	//End Edit Supplier
 }
+
 
 	// public function company1(){
 	//
