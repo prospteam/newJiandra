@@ -90,13 +90,21 @@
                {"data":"supplier_name"},
                // {"data":"type"},
                {"data":"action","render": function(data, type, row,meta){
-                         var str = '';
-                         str += '<div class="actions">';
-                         str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
-                         str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
-                         str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-                         str += '</div>';
-                         return str;
+                 var str = '';
+                 str += '<div class="actions">';
+                 if(row.status == 1){
+                   str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
+                   str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                   str += '<a href="javascript:;" class="disableSupplier" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
+                   str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                 }else if(row.status == 2){
+                   str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
+                   str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                   str += '<a href="javascript:;" class="enableSupplier" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
+                   str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                 }
+                 str += '</div>';
+                 return str;
                     }
                },
 
@@ -104,8 +112,8 @@
                    var str = '';
                     if(row.status == 1){
                       str += '<button type="button" class="active btn btn-block btn-success">active</button>';
-                    }else{
-                      str += '<button type="button" class="inactive btn btn-block btn-success">inactive</button>';
+                    }else if(row.status == 2){
+                      str += '<button type="button" class="inactive btn btn-block btn-danger">inactive</button>';
                     }
                     return str;
                }
