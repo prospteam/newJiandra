@@ -119,5 +119,72 @@ class Vehicle extends MY_Controller {
 		$datas['delete'] = $this->MY_Model->update('vehicles',$data,array('id' => $vehicle_id));
 		echo json_encode($datas);
 	}
+
+	//view details for edit
+	public function supplier_details(){
+		$supplier_id = $this->input->post('id');
+		$parameters['where'] = array('id' => $supplier_id);
+		$data['view_edit'] = $this->MY_Model->getRows('supplier',$parameters,'row');
+		// echo $this->db->last_query();
+		echo json_encode($data);
+	}
+
+
+
+	// Edit Vehicle
+	public function editVehicle()
+	{
+		$vehicle_id = $this->input->post('id');
+			$data = array(
+			'plate_number' => $this->input->post('plate_number'),
+			'vehicle_brand' => $this->input->post('vehicle_brand'),
+			'vehicle_type' => $this->input->post('vehicle_type'),
+			'fuel_type' => $this->input->post('fuel_type'),
+			'num_of_tires' => $this->input->post('num_of_tires'),
+			'accounting_date_acquired'=> $this->input->post('accounting_date_acquired'),
+			'accounting_acqui_amount'=> $this->input->post('accounting_acqui_amount'),
+			'accounting_full_dep_date'=> $this->input->post('accounting_full_dep_date'),
+			'accounting_monthly_dep'=> $this->input->post('accounting_monthly_dep'),
+			'accounting_accum_dep' => $this->input->post('accounting_accum_dep'),
+			'accounting_book_val' => $this->input->post('accounting_book_val'),
+			'approx_length' => $this->input->post('approx_length'),
+			'approx_width'=>$this->input->post('approx_width'),
+			'approx_height' => $this->input->post('approx_height'),
+			'approx_volume'=> $this->input->post('approx_volume'),
+			'approx_weight'=> $this->input->post('approx_weight'),
+			'van_reg_date' => $this->input->post('van_reg_date'),
+			'van_policy_num' => $this->input->post('van_policy_num'),
+			'van_renewal_date' => $this->input->post('van_renewal_date'),
+			'van_exp_date' => $this->input->post('van_exp_date'),
+			'land_reg_date' => $this->input->post('land_reg_date'),
+			'land_renewal_date' => $this->input->post('land_renewal_date'),
+			'land_exp_date' => $this->input->post('land_exp_date'),
+			'material_desc' => $this->input->post('material_desc'),
+			);
+
+			$update = $this->MY_Model->update('vehicles', $data,array('id' => $vehicle_id));
+			if ($update) {
+				$response = array(
+					'status' => 'ok'
+				);
+			}else{
+				$response = array(
+					'status' => 'invalid'
+				);
+			}
+		echo json_encode($response);
+	}
+	//End Edit Vehiclle
+
+	//view details for edit(Vehicle)
+	public function vehicle_details(){
+		$vehicle_id = $this->input->post('id');
+		$parameters['where'] = array('id' => $vehicle_id);
+		$data['view_edit'] = $this->MY_Model->getRows('vehicles',$parameters,'row');
+		// echo $this->db->last_query();
+		echo json_encode($data);
+	}
+
+
 }
 ?>

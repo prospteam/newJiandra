@@ -184,7 +184,7 @@
 
 				<!-- Modal Edit supplier-->
 				<div class="modal fade" id="editSupplier" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
-					<form id="editSupplier" method="post">
+					<form id="editSupplier" class = "editcompany" method="post">
 						<div class="modal-dialog modal-lg" role="document">
 							<div class="modal-content">
 								<div class="modal-header">

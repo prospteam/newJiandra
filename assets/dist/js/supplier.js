@@ -4,7 +4,6 @@
       // alert('lol');
           $('.company1').on('click', function(e){
             e.preventDefault();
-        
             // alert($(this).data('id'));
 
          $('.suppliers_tbl').DataTable({
@@ -28,7 +27,7 @@
                               var str = '';
                               str += '<div class="actions">';
                               str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
-                              str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                              str += '<a href="javascript:;" class="editSupplier" data-comp="'+row.company+'" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
                               str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                               str += '</div>';
                               return str;
@@ -84,8 +83,8 @@
                {"data":"action","render": function(data, type, row,meta){
                          var str = '';
                          str += '<div class="actions">';
-                         str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
-                         str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                         str += '<a href="javascript:;" class="viewSupplier"  data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
+                         str += '<a href="javascript:;" class="editSupplier"  data-comp="'+row.company+'" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
                          str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                          str += '</div>';
                          return str;
@@ -278,6 +277,7 @@
    //edit supplier
    $(document).on('click', '.editSupplier', function(){
      var id = $(this).attr('data-id');
+     $('.editcompany').attr('data-comp_id', $(this).data('comp'));
      $.ajax({
          url: base_url+'supplier/supplier_details',
          data: {id:id},
@@ -301,11 +301,13 @@
    });
    // end edit supplier
 
-   //successfully added user
+   //successfully edit supplier
    $(document).on('submit','#editSupplier',function(e){
      e.preventDefault();
      let formData =  new FormData($(this)[0]);
      var id = $('.editSupplier').attr('data-id');
+      var comp_id = $(this).attr('comp_id');
+      alert(comp_id);
      console.log(id);
      formData.append("id",id);
      $.ajax({
@@ -331,6 +333,80 @@
      })
    });
 
+
+
+   //edit Vehicle
+   $(document).on('click', '.editVehicle', function(){
+     var id = $(this).attr('data-id');
+     $.ajax({
+         url: base_url+'vehicle/vehicle_details',
+         data: {id:id},
+         type: 'post',
+         dataType: 'json',
+         success: function(data){
+           $('#editVehicle').modal('show');
+           console.log(data);
+             $('#editVehicle input[name=plate_number]').val(data.view_edit.plate_number);
+             $('#editVehicle input[name=supplier_contact_person]').val(data.view_edit.vehicles_brand);
+             // $('#editVehicle input[name=company[]').val(data.view_edit.vehicles_type);
+             $('#editVehicle input[name=fuel_type]').val(data.view_edit.fuel_type);
+             $('#editVehicle input[name=num_of_tires]').val(data.view_edit.num_of_tires);
+             $('#editVehicle input[name=accounting_date_acquired]').val(data.view_edit.accounting_date_acquired);
+             $('#editVehicle input[name=accounting_acqui_amount]').val(data.view_edit.accounting_acqui_amount);
+             $('#editVehicle input[name=accounting_full_dep_date]').val(data.view_edit.accounting_full_dep_date);
+             $('#editVehicle input[name=accounting_monthly_dep]').val(data.view_edit.accounting_monthly_dep);
+             $('#editVehicle input[name=accounting_accum_dep]').val(data.view_edit.accounting_accum_dep);
+             $('#editVehicle input[name=accounting_book_val]').val(data.view_edit.accounting_book_val);
+             $('#editVehicle input[name=approx_length]').val(data.view_edit.approx_length);
+             $('#editVehicle input[name=approx_width]').val(data.view_edit.approx_width);
+             $('#editVehicle input[name=approx_height]').val(data.view_edit.approx_height);
+             $('#editVehicle input[name=approx_volume]').val(data.view_edit.approx_volume);
+             $('#editVehicle input[name=approx_weight]').val(data.view_edit.approx_weight);
+             $('#editVehicle input[name=van_reg_date]').val(data.view_edit.van_reg_date);
+             $('#editVehicle input[name=van_policy_num]').val(data.view_edit.van_policy_num);
+             $('#editVehicle input[name=van_renewal_date]').val(data.view_edit.van_renewal_date);
+             $('#editVehicle input[name=van_exp_date]').val(data.view_edit.van_exp_date);
+             $('#editVehicle input[name=land_reg_date]').val(data.view_edit.land_reg_date);
+             $('#editVehicle input[name=land_renewal_date]').val(data.view_edit.land_renewal_date);
+             $('#editVehicle input[name=land_exp_date]').val(data.view_edit.land_exp_date);
+             $('#editVehicle input[name=material_desc]').val(data.view_edit.material_desc);
+             // $('#editSupplier select[name=position]').val(data.view_edit.position);
+         }
+     });
+
+   });
+
+   //successfully edit vehicle
+   $(document).on('submit','#editVehicle',function(e){
+     e.preventDefault();
+     let formData =  new FormData($(this)[0]);
+     var id = $('.editVehicle').attr('data-id');
+      var comp_id = $(this).attr('comp_id');
+      alert(comp_id);
+     console.log(id);
+     formData.append("id",id);
+     $.ajax({
+         method: 'POST',
+         url : base_url + 'vehicle/editVehicle',
+         data : formData,
+         processData: false,
+        contentType: false,
+        cache: false,
+         dataType: 'json',
+         success : function(data) {
+             console.log(data);
+             if(data.status == "ok"){
+               $('#editVehicle').modal('hide');
+                   Swal.fire("Successfully updated Vehicle!",data.success, "success");
+                   setTimeout(function(){
+                      location.reload();
+                    }, 1000);
+              }else if(data.status == 'invalid'){
+                 Swal.fire("Error",data.status, "invalid");
+              }
+         }
+     })
+   });
 
 });
 
