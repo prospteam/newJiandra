@@ -21,9 +21,11 @@ class Vehicle extends MY_Controller {
 
 
 		$column_order = array('vehicle_type','plate_number','vehicle_brand');
+		$where = array('status !=' => 3);
 		$join = array();
+
 		$select = "id,vehicle_type, plate_number, vehicle_brand, status";
-		$list = $this->MY_Model->get_datatables1('vehicles',$column_order, $select, $join, $limit, $offset ,$search, $order);
+		$list = $this->MY_Model->get_datatables('vehicles',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 
 
 
