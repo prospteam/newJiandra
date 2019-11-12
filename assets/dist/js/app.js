@@ -129,7 +129,7 @@ $(document).ready(function(){
 
 
   //display companies for add user
-   $('.js-example-basic-multiple-add').select2({
+   $('.js-example-basic-multiple').select2({
      theme: "classic",
      allowClear: true,
      placeholder: "Select Company",
@@ -155,7 +155,7 @@ $(document).ready(function(){
    });
 
    //display companies for edit user
-    $('.js-example-basic-multiple-edit').select2({
+    $('.js-example-basic-multiple').select2({
       theme: "classic",
       allowClear: true,
       placeholder: "Select Company",
@@ -265,7 +265,7 @@ $(document).ready(function(){
            console.log(data);
              $('#edituser input[name=fullname]').val(data.users.fullname);
              $('#edituser input[name=username]').val(data.users.username);
-             $('#edituser input[name=password]').val(data.users.password);
+             // $('#edituser input[name=password]').val(data.users.password);
              $('#edituser select[name=position]').val(data.users.position);
              var company_list = [];
              $.each(data.company, function(key,val){

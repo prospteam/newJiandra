@@ -158,14 +158,23 @@ class Users extends MY_Controller {
 	{
 
 		$user_id = $this->input->post('id');
+			$post = $this->input->post();
+			$result = false;
+
+			if(!empty($post)) {
 			$data = array(
-				'fullname' => $this->input->post('fullname'),
-				'username' => $this->input->post('username'),
-				'password	' => password_hash($this->input->post('password'),PASSWORD_DEFAULT),
-				'position' => $this->input->post('position'),
-				'company' => implode(',',$this->input->post('company')),
-				'status' => 1
+				'fullname' => $post['fullname'],
+				'username' => $post['username'],
+				'position' => $post['position']
 			);
+
+			if(!empty($post['password'])) {
+				$data['password'] = password_hash($post['password'],PASSWORD_DEFAULT);
+			}
+
+			if(!empty($post['company'])) {
+				$data['company'] = implode(',',$post['company']);
+			}
 
 			$update = $this->MY_Model->update('users', $data,array('id' => $user_id));
 			if ($update) {
@@ -178,7 +187,11 @@ class Users extends MY_Controller {
 				);
 			}
 
-		echo json_encode($response);
+			$result = json_encode($response);
+
+			}
+
+		die($result);
 	}
 
 	//Enable user
