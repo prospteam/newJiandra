@@ -69,7 +69,7 @@
                      },
                 ],
             });
-          });
+          }) ;
 
 
           var supplier_tbl = $('.suppliers_tbl').DataTable({
@@ -420,8 +420,6 @@
          }
      })
    });
-
-
 
    //edit Vehicle
    $(document).on('click', '.editVehicle', function(){

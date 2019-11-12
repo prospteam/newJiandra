@@ -21,9 +21,10 @@ class Vehicle extends MY_Controller {
 
 
 		$column_order = array('vehicle_type','plate_number','vehicle_brand');
+		$where = array('status !=' => 3);
 		$join = array();
 		$select = "id,vehicle_type, plate_number, vehicle_brand, status";
-		$list = $this->MY_Model->get_datatables1('vehicles',$column_order, $select, $join, $limit, $offset ,$search, $order);
+		$list = $this->MY_Model->get_datatables('vehicles',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 
 
 
@@ -108,11 +109,36 @@ class Vehicle extends MY_Controller {
 		echo json_encode($response);
 	}
 
+
+	//Enable user
+	public function enablevehicle()
+	{
+		$vehicle_id = $this->input->post('id');
+		$vehicle_status = 1;
+		$data = array(
+			'status' => $vehicle_status
+		);
+		$datas['delete'] = $this->MY_Model->update('vehicles',$data,array('id' => $vehicle_id));
+		echo json_encode($datas);
+	}
+
+	//Disable user
+	public function disablevehicle()
+	{
+		$vehicle_id = $this->input->post('id');
+		$vehicle_status = 2;
+		$data = array(
+			'status' => $vehicle_status
+		);
+		$datas['delete'] = $this->MY_Model->update('vehicles',$data,array('id' => $vehicle_id));
+		echo json_encode($datas);
+	}
+
 	//Delete vehicle
 	public function deletevehicle()
 	{
 		$vehicle_id = $this->input->post('id');
-		$vehicle_status = 2;
+		$vehicle_status = 3;
 		$data = array(
 			'status' => $vehicle_status
 		);
