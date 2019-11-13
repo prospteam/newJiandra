@@ -10,7 +10,7 @@ class Supplier extends MY_Controller
 		$parameters['select'] = 'id,fullname,position';
 		$data['vendor'] = $this->MY_Model->getRows('users',$parameters);
 		// print_r($data);
-		$this->load_page('supplier', @$data);
+		$this->load_page('supplier', @$data); 
 	}
 
 	public function addsupplier() {
