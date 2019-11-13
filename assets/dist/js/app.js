@@ -8,7 +8,18 @@ $(document).ready(function(){
          "order": [[0,'desc']], //Initial no order.
          "columns":[
               {"data":"fullname"},
-              {"data":"company_name"},
+              {"data":"company","render": function(data, type, row,meta){
+                  var str = '';
+                  if(row.company == 1){
+                    str += 'New Jiandra Enterprises';
+                  }else if(row.company == 2){
+                    str += 'Mrs.P Mktg';
+                  }else if(row.company == 1,2){
+                    str += 'New Jiandra Enterprises, Mrs.P Mktg';
+                  }
+                  return str;
+                }
+              },
               {"data":"position_name"},
               // {"data":"type"},
               {"data":"action","render": function(data, type, row,meta){
@@ -205,6 +216,7 @@ $(document).ready(function(){
                  let keyNames = Object.keys(data.form_error);
                  $(keyNames).each(function(index , value) {
                      $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
+                     $("select[name='"+value+"']").next('.err').text(data.form_error[value]);
                  });
              }else if (data.error) {
                  Swal.fire("Error",data.error, "error");

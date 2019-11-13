@@ -53,7 +53,7 @@
     												<label for="position">Position:</label>
     												<!-- <input type="text" class="form-control" name="position" value=""> -->
                             <select class="form-control" class="position" name="position" >
-                              <option value="">Select Position</option>
+                              <option value="" selected hidden>Select Position</option>
                             <?php foreach($position as $k => $value) : ?>
                                 <option value="<?php echo $value['id'] ?>"><?php echo $value['position_name'] ?></option>
                           <?php  endforeach; ?>

@@ -66,7 +66,7 @@ class Vehicle extends MY_Controller {
 
 		$this->form_validation->set_rules('plate_number', 'Plate Number', 'required');
 		$this->form_validation->set_rules('vehicle_brand', 'Vehicle Brand', 'required');
-		// $this->form_validation->set_rules('vehicle_type', 'Vehicle Type', 'required');
+		$this->form_validation->set_rules('vehicle_type', 'Vehicle Type', 'required');
 		$this->form_validation->set_rules('fuel_type', 'Fuel Type', 'required');
 			$this->form_validation->set_rules('num_of_tires', 'Number of Tires', 'required');
 

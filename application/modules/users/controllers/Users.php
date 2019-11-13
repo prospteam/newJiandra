@@ -31,9 +31,13 @@ class Users extends MY_Controller {
 			'company' => 'company.company_id = users.company',
 			'position' => 'position.id = users.position'
 		);
-		$select = "users.id,users.fullname,company.company_name,position.position_name,users.status";
+		$select = "users.id,users.fullname,users.company,company.company_name,position.position_name,users.status";
 		$list = $this->MY_Model->get_datatables('users',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
-
+		// foreach($list['data'] as $key => $value){
+		// 	echo "<pre>";
+		// 	print_r($value);
+		//
+		// }
 		// if(!empty($list)) {
 		// 	foreach ($list as $key => $value) {
 		// 		$list[$key]['position'] = userType($value['position']);
@@ -47,6 +51,7 @@ class Users extends MY_Controller {
 				"data" => $list['data']
 		);
 		// $this->load_page('users',$output);
+
 		echo json_encode($output);
 	}
 
