@@ -10,10 +10,11 @@ class Supplier extends MY_Controller
 		$parameters['select'] = 'id,fullname,position';
 		$data['vendor'] = $this->MY_Model->getRows('users',$parameters);
 		// print_r($data);
-		$this->load_page('supplier', @$data); 
+		$this->load_page('supplier', @$data);
 	}
 
 	public function addsupplier() {
+
 			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 				$upload_path = 'assets/images/supplierLogo/';
 				$time = date('ymdhis');
@@ -219,16 +220,34 @@ class Supplier extends MY_Controller
 
 	//view details for edit
 	public function supplier_details(){
+		// $supplier_id = $this->input->post('id');
+		// $parameters['where'] = array('id' => $supplier_id);
+		// $data['view_edit'] = $this->MY_Model->getRows('supplier',$parameters,'row');
+		// // echo $this->db->last_query();
+		// echo json_encode($data);
 		$supplier_id = $this->input->post('id');
-		$parameters['where'] = array('id' => $supplier_id);
-		$data['view_edit'] = $this->MY_Model->getRows('supplier',$parameters,'row');
-		// echo $this->db->last_query();
-		echo json_encode($data);
+
+		$data_array = array();
+
+		$parameters['join'] = array(
+			'company' => 'company.company_id = supplier.company'
+		);
+		$parameters['where'] = array('supplier.id' => $supplier_id);
+		$parameters['select'] = '*';
+
+		$data = $this->MY_Model->getRows('supplier',$parameters,'row');
+		$company_id = explode(',',$data->company);
+
+		$company_parameters['where_in'] = array('col' => 'company_id', 'value' => $company_id);
+		$data_company = $this->MY_Model->getRows('company',$company_parameters);
+
+		$data_array['supplier'] = $data;
+		$data_array['company'] = $data_company;
+		json($data_array);
 	}
 
 	// Edit Supplier
 	public function editSupplier(){
-
 			if ($_SERVER['REQUEST_METHOD']==='POST') {
 				$upload_path = './assets/images/supplierLogo';
 				$time = date('ymdhis');
@@ -243,7 +262,21 @@ class Supplier extends MY_Controller
 
 					$this->upload->initialize($config);
 
- // $int = (int)$this->input->post('company')['0'];
+					if ($this->upload->do_upload('logo')) {
+						$uploadData = $this->upload->data();
+					}
+					$this->load->library("form_validation");
+
+				$this->form_validation->set_rules('supplier_name', 'Supplier Name', 'required');
+				$this->form_validation->set_rules('supplier_contact_person', 'Supplier Contact Person', 'required');
+				// $this->form_validation->set_rules('vendor', 'Vendor', 'required');
+				$this->form_validation->set_rules('office_number', 'Office Number', 'required');
+
+			}else{
+				$this->load->library("form_validation");
+				}
+		}
+			// end edit supplier Logo
 
 		$supplier_id = $this->input->post('id');
 		$post = $this->input->post();
@@ -252,6 +285,7 @@ class Supplier extends MY_Controller
 		if(!empty($post)) {
 
 			$data = array(
+				'supplier_logo' => $uploadData['file_name'],
 				'supplier_name' => $post['supplier_name'],
 				'supplier_contact_person' =>$post['supplier_contact_person'],
 				// 'company'=> 1,
