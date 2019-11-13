@@ -265,14 +265,14 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-4 uploadfile">
 								<label for="SupplierLogo"><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
 								<div class="uploadfile-container2">
 									<input class="input-file my-file" name="logo" id="my-file" type="file" accept="image/*">
 									<p class="file-return"></p>
 								</div>
 							</div>
-							<div class="col-sm-4">
+							<div class="col-sm-4 filecontent">
 									<button type="button">Choose File</button>
 									<span class = "filechosen" >No file chosen</span>
 									<p class="file-return"></p>

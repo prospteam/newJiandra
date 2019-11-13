@@ -16,6 +16,9 @@ class Supplier extends MY_Controller
 	public function addsupplier() {
 
 			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+				$company_name = $this->input->post('company');
+
 				$upload_path = 'assets/images/supplierLogo/';
 				$time = date('ymdhis');
 				if(!empty($_FILES['logo']['name'])){
@@ -41,66 +44,125 @@ class Supplier extends MY_Controller
 					$this->form_validation->set_rules('office_number', 'Office Number', 'required');
 
 					if ($this->form_validation->run() !== FALSE) {
-						$data = array(
-							'supplier_logo' => $uploadData['file_name'],
-							'supplier_name' => $this->input->post('supplier_name'),
-							'supplier_contact_person' => $this->input->post('supplier_contact_person'),
-							'company' => implode(',',$this->input->post('company')),
-							// 'vendor' => $this->input->post('vendor'),
-							'office_number' => $this->input->post('office_number'),
-							'home_number' => $this->input->post('home_number'),
-							'mobile_number' => $this->input->post('mobile_number'),
-							'tin_number' => $this->input->post('tin_number'),
-							'fax_number' => $this->input->post('fax_number'),
-							'status' => 1
-						);
 
-						$insert = $this->MY_Model->insert('supplier', $data);
-						if ($insert) {
-							$response = array(
-								'status' => 'ok'
-							);
-						}
-					}else{
-						$response = array('form_error' => $this->form_validation->error_array());
-					}
+							if(count($company_name) >= 1){
+									foreach ($company_name as $key => $value) {
+
+										$data = array(
+											'supplier_logo' 						=> $uploadData['file_name'],
+											'supplier_name' 						=> $this->input->post('supplier_name'),
+											'supplier_contact_person' 	=> $this->input->post('supplier_contact_person'),
+											'company' 									=> $value,
+											'office_number' 						=> $this->input->post('office_number'),
+											'home_number' 							=> $this->input->post('home_number'),
+											'mobile_number' 						=> $this->input->post('mobile_number'),
+											'tin_number' 								=> $this->input->post('tin_number'),
+											'fax_number' 								=> $this->input->post('fax_number'),
+											'status' 										=> 1
+											// 'vendor' => $this->input->post('vendor'),
+										);
+
+										$insert = $this->MY_Model->insert('supplier', $data);
+										if ($insert) {
+											$response = array(
+												'status' => 'ok'
+											);
+										}
+									}
+								}
+						}else{
+								$data = array(
+									'supplier_logo' 						=> $uploadData['file_name'],
+									'supplier_name' 						=> $this->input->post('supplier_name'),
+									'supplier_contact_person' 	=> $this->input->post('supplier_contact_person'),
+									'company' 									=> $this->input->post('company'),
+									'office_number' 						=> $this->input->post('office_number'),
+									'home_number' 							=> $this->input->post('home_number'),
+									'mobile_number' 						=> $this->input->post('mobile_number'),
+									'tin_number' 								=> $this->input->post('tin_number'),
+									'fax_number' 								=> $this->input->post('fax_number'),
+									'status' 										=> 1
+									// 'vendor' => $this->input->post('vendor'),
+									// 'company' => implode(',',$this->input->post('company')),
+								);
+
+								$insert = $this->MY_Model->insert('supplier', $data);
+								if ($insert) {
+									$response = array(
+										'status' => 'ok'
+									);
+								}
+							}
+
 				}else{
+
 					$this->load->library("form_validation");
 
 					$this->form_validation->set_rules('supplier_name', 'Supplier Name', 'required');
 					$this->form_validation->set_rules('supplier_contact_person', 'Supplier Contact Person', 'required');
-					// $this->form_validation->set_rules('vendor', 'Vendor', 'required');
 					$this->form_validation->set_rules('office_number', 'Office Number', 'required');
+					// $this->form_validation->set_rules('vendor', 'Vendor', 'required');
 
 					if ($this->form_validation->run() !== FALSE) {
-						$data = array(
-							'supplier_logo' => 1,
-							'supplier_name' => $this->input->post('supplier_name'),
-							'supplier_contact_person' => $this->input->post('supplier_contact_person'),
-							'company' => implode(',',$this->input->post('company')),
-							// 'vendor' => $this->input->post('vendor'),
-							'office_number' => $this->input->post('office_number'),
-							'home_number' => $this->input->post('home_number'),
-							'mobile_number' => $this->input->post('mobile_number'),
-							'tin_number' => $this->input->post('tin_number'),
-							'fax_number' => $this->input->post('fax_number'),
-							'status' => 1
-						);
 
-						$insert = $this->MY_Model->insert('supplier', $data);
-						if ($insert) {
-							$response = array(
-								'status' => 'ok'
-							);
-						}
+									if(count($company_name) > 1){
+										foreach ($company_name as $key => $value) {
+
+											 $data = array(
+ 												'supplier_logo' 							=> 1,
+ 												'supplier_name' 							=> $this->input->post('supplier_name'),
+ 												'supplier_contact_person' 		=> $this->input->post('supplier_contact_person'),
+ 												'company' 										=> $value,
+ 												'office_number' 							=> $this->input->post('office_number'),
+ 												'home_number' 								=> $this->input->post('home_number'),
+ 												'mobile_number' 							=> $this->input->post('mobile_number'),
+ 												'tin_number' 									=> $this->input->post('tin_number'),
+ 												'fax_number' 									=> $this->input->post('fax_number'),
+ 												'status' 											=> 1
+												// 'vendor' => $this->input->post('vendor'),
+ 											);
+
+ 											$insert = $this->MY_Model->insert('supplier', $data);
+ 											if ($insert) {
+ 												$response = array(
+ 													'status' => 'ok'
+ 												);
+ 											}
+										}
+
+									}else{
+
+										 $data = array(
+											 'supplier_logo' 							=> 1,
+											 'supplier_name' 							=> $this->input->post('supplier_name'),
+											 'supplier_contact_person' 		=> $this->input->post('supplier_contact_person'),
+											 'company' 										=> $this->input->post('company'),
+											 'office_number' 							=> $this->input->post('office_number'),
+											 'home_number' 								=> $this->input->post('home_number'),
+											 'mobile_number' 							=> $this->input->post('mobile_number'),
+											 'tin_number' 								=> $this->input->post('tin_number'),
+											 'fax_number' 								=> $this->input->post('fax_number'),
+											 'status' 										=> 1
+											 // 'vendor' => $this->input->post('vendor'),
+										 );
+
+										 $insert = $this->MY_Model->insert('supplier', $data);
+										 if ($insert) {
+											 $response = array(
+												 'status' => 'ok'
+											 );
+										 }
+									}
+
+
 					}else{
 						$response = array('form_error' => $this->form_validation->error_array());
 					}
 				}
+
 					echo json_encode($response);
 			}
-
-	}
+		}
 
 
 	//display suppliers

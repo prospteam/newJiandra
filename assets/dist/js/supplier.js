@@ -372,29 +372,31 @@
          type: 'post',
          dataType: 'json',
          success: function(data){
+
+           console.log(data);
            $('#editSupplier').modal('show');
            // console.log(data.view_edit.supplier_logo);
 
-             $('#editSupplier input[name =supplier_name]').val(data.view_edit.supplier_name);
-             $('#editSupplier input[name=supplier_contact_person]').val(data.view_edit.supplier_contact_person);
+             $('#editSupplier input[name =supplier_name]').val(data.supplier.supplier_name);
+             $('#editSupplier input[name=supplier_contact_person]').val(data.supplier.supplier_contact_person);
              var company_list = [];
              $('#editSupplier .js-example-basic-multiple-edit').html('');
              // var test = new Array('test','test2');
 
              // Array.isArray(variable);
-             // $.each(test, function(key,val){
+             $.each(data.company, function(key,val){
                // alert(val);
-               // company_list.push(val.company_name);
+               company_list.push(val.company_name);
                // console.log(data.view_edit.company_name);
-               // $('#editSupplier .js-example-basic-multiple-edit').append( '<option value='+val.company_id+' selected>'+val.company_name+'</option>' );
-             // });
+               $('#editSupplier .js-example-basic-multiple-edit').append( '<option value='+val.company_id+' selected>'+val.company_name+'</option>' );
+             });
              // $('#editSupplier select[name=company').val(company_list);
-             $('#editSupplier input[name=office_number]').val(data.view_edit.office_number);
-             $('#editSupplier input[name=home_number]').val(data.view_edit.home_number);
-             $('#editSupplier input[name=mobile_number]').val(data.view_edit.mobile_number);
-             $('#editSupplier input[name=tin_number]').val(data.view_edit.tin_number);
-             $('#editSupplier input[name=fax_number]').val(data.view_edit.fax_number);
-             $('#editSupplier input:file[name=logo]').val(data.view_edit.supplier_logo);
+             $('#editSupplier input[name=office_number]').val(data.supplier.office_number);
+             $('#editSupplier input[name=home_number]').val(data.supplier.home_number);
+             $('#editSupplier input[name=mobile_number]').val(data.supplier.mobile_number);
+             $('#editSupplier input[name=tin_number]').val(data.supplier.tin_number);
+             $('#editSupplier input[name=fax_number]').val(data.supplier.fax_number);
+             $('#editSupplier .filechosen').text(data.supplier.supplier_logo);
 
              // $('#editSupplier select[name=position]').val(data.view_edit.position);
          }
