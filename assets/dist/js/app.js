@@ -135,6 +135,7 @@ $(document).ready(function(){
   //end display vehicle_tbl
 
 
+
   //display companies for add user
    $('.js-example-basic-multiple-addU').select2({
      theme: "classic",
@@ -160,6 +161,7 @@ $(document).ready(function(){
         }
      }
    });
+
 
    //display companies for edit user
     $('.js-example-basic-multiple-editU').select2({
@@ -215,8 +217,11 @@ $(document).ready(function(){
                  clearError();
                  let keyNames = Object.keys(data.form_error);
                  $(keyNames).each(function(index , value) {
+                   console.log(value);
                      $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
                      $("select[name='"+value+"']").next('.err').text(data.form_error[value]);
+                     $("select[name='"+value+"']").next().next().text(data.form_error[value]);
+                     // $("select[name='"+value+"']").parents('.form-group').next('.err').text(data.form_error[value]);
                  });
              }else if (data.error) {
                  Swal.fire("Error",data.error, "error");

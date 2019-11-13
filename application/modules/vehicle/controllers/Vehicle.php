@@ -120,17 +120,7 @@ class Vehicle extends MY_Controller {
 		echo json_encode($response);
 	}
 
-	//validation for select
-	public function select_validate($vehicleType)
-	 {
-					 if ($vehicleType == -1)  {
-					 $this->form_validation->set_message('select_validate', 'Please choose vehicle type.');
-					 return FALSE;
-			 }
-			 else {
-					 return TRUE;
-			 }
-	 }
+	
 
 	//Enable vehicle
 	public function enablevehicle()
