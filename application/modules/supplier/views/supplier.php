@@ -116,7 +116,6 @@
 						<div class="modal-dialog modal-lg" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-eye"></i> View Supplier Details</h5>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
@@ -267,11 +266,16 @@
 								</div>
 							</div>
 							<div class="col-sm-4">
-								<label for=""><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
+								<label for="SupplierLogo"><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
 								<div class="uploadfile-container2">
-									<input class="input-file" name="logo" id="my-file" type="file" accept="image/*">
+									<input class="input-file my-file" name="logo" id="my-file" type="file" accept="image/*">
 									<p class="file-return"></p>
 								</div>
+							</div>
+							<div class="col-sm-4">
+									<button type="button">Choose File</button>
+									<span class = "filechosen" >No file chosen</span>
+									<p class="file-return"></p>
 							</div>
 								</div>
 								<div class="modal-footer">
