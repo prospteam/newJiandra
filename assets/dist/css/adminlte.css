@@ -5861,6 +5861,7 @@ a.close.disabled, a.disabled.mailbox-attachment-close {
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     padding: 1rem;
+    /* margin-bottom: -67px !important; */
 }
 
 .modal-footer {

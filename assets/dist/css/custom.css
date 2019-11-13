@@ -24,6 +24,23 @@ span.err {
     color: red;
 }
 
+/* btns */
+.btn-newj {
+      background: #6061d1;
+      color: white;
+      border-radius: 9px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 70px;
+      padding-right: 70px;
+      font-size: 20px;
+}
+
+.btn-newj:hover, .btn-newj.active-click {
+  background-color: #cecee0;
+  color:black;
+}
+
 /* input.select2-search__field {
     display: none;
 } */
