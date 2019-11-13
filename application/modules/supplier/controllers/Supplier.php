@@ -229,6 +229,20 @@ class Supplier extends MY_Controller
 	// Edit Supplier
 	public function editSupplier(){
 
+			if ($_SERVER['REQUEST_METHOD']==='POST') {
+				$upload_path = './assets/images/supplierLogo';
+				$time = date('ymdhis');
+				if (!empty($_FILES['logo']['name'])) {
+
+					$file_name = explode('.',$_FILES['logo']['name'])[0];
+					$file_ext = explode('.',$_FILES['logo']['name'])[1];
+
+					$config['upload_path'] = './assets/images/supplierLogo';
+					$config['allowed_types'] = 'jpg|png|jpeg';
+					$config['file_name'] = $file_name.$time;
+
+					$this->upload->initialize($config);
+
  // $int = (int)$this->input->post('company')['0'];
 
 		$supplier_id = $this->input->post('id');

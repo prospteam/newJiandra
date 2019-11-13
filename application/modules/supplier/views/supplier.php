@@ -6,7 +6,7 @@
 			<div class="row mb-2">
 				<div class="col-sm-6">
 					<h1><b>Supplier</b></h1>
-					ENROLLMENT > <span class="active1"> SUPPLIER </p>
+					ENROLLMENT > <span class="active1"> SUPPLIERs </p>
 				</div>
 				<div class="col-sm-6">
 					<button type="button" class="button1 float-sm-right" data-toggle="modal" data-target="#addSupplier "><i class="fas fa-plus-circle" aria-hidden="true"></i> Add Supplier </button>
