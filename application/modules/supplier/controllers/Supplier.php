@@ -40,7 +40,7 @@ class Supplier extends MY_Controller
 
 					$this->form_validation->set_rules('supplier_name', 'Supplier Name', 'required');
 					$this->form_validation->set_rules('supplier_contact_person', 'Supplier Contact Person', 'required');
-					// $this->form_validation->set_rules('vendor', 'Vendor', 'required');
+					$this->form_validation->set_rules('company[]', 'Company', 'required');
 					$this->form_validation->set_rules('office_number', 'Office Number', 'required');
 
 					if ($this->form_validation->run() !== FALSE) {
@@ -99,6 +99,7 @@ class Supplier extends MY_Controller
 					$this->load->library("form_validation");
 					$this->form_validation->set_rules('supplier_name', 'Supplier Name', 'required');
 					$this->form_validation->set_rules('supplier_contact_person', 'Supplier Contact Person', 'required');
+					$this->form_validation->set_rules('company[]', 'Company', 'required');
 					$this->form_validation->set_rules('office_number', 'Office Number', 'required');
 					// $this->form_validation->set_rules('vendor', 'Vendor', 'required');
 
@@ -180,7 +181,7 @@ class Supplier extends MY_Controller
 
 		$column_order = array('supplier_logo','supplier_name');
 		if($id == 0){
-			$where = array();
+			$where = array('status !=' => 3);
 		}else{
 			$where = array("company" => $id, 'status !=' => 3);
 		}

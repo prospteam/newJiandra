@@ -34,7 +34,7 @@
 										<div class="col-6">
 											<div class="form-group">
 												<label for="supplier_contact_person">Supplier Contact Person:</label>
-												<input type="number" class="form-control" name="supplier_contact_person" value="">
+												<input type="text" class="form-control" name="supplier_contact_person" value="">
 												<span class="err"></span>
 											</div>
 										</div>
@@ -116,6 +116,7 @@
 						<div class="modal-dialog modal-lg" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-eye" style="color:black" aria-hidden="true"></i>  View Supplier Details</h5>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
@@ -273,9 +274,12 @@
 								</div>
 							</div>
 							<div class="col-sm-4 filecontent">
+								<label for=""><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
+								<div class="uploadfile-container2">
 									<button type="button">Choose File</button>
 									<span class = "filechosen" >No file chosen</span>
 									<p class="file-return"></p>
+								</div>
 							</div>
 								</div>
 								<div class="modal-footer">

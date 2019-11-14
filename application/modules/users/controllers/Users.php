@@ -114,12 +114,13 @@ class Users extends MY_Controller {
 		$this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		$this->form_validation->set_rules('position', 'Position', 'required');
+		$this->form_validation->set_rules('company[]', 'Company', 'required');
 		$error = array();
 
 
-		if(empty($this->input->post('company'))){
-			$error['company'] = 'The Companies field is required.';
-		}
+		// if(empty($this->input->post('company[]'))){
+		// 	$error['company'] = 'The Companies field is required.';
+		// }
 
 		if ($this->form_validation->run() !== FALSE) {
 			$data = array(

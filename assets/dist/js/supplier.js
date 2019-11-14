@@ -57,7 +57,9 @@ $(document).ready(function(){
                   clearError();
                   let keyNames = Object.keys(data.form_error);
                   $(keyNames).each(function(index , value) {
+                    console.log(value);
                       $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
+                      $("select[name='"+value+"']").next().next().text(data.form_error[value]);
                   });
               }else if (data.error) {
                   Swal.fire("Error",data.error, "error");
@@ -402,8 +404,14 @@ function blankVal(){
   $('#addSupplier input[name="supplier_name"]').val('');
   $('.err').text('');
   $('#addSupplier input[name="supplier_contact_person"]').val('');
-  $('#addSupplier select[name="vendor"]').val('');
+  $('#addSupplier select[name="company[]"]').val('');
   $('#addSupplier input[name="office_number"]').val('');
+  $('#addSupplier input[name="home_number"]').val('');
+  $('#addSupplier input[name="mobile_number"]').val('');
+  $('#addSupplier input[name="tin_number"]').val('');
+  $('#addSupplier input[name="fax_number"]').val('');
+  $('#addSupplier .filechosen').val();
+
 }
 
 function display_suppliers($supplier_id){
