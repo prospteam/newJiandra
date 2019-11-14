@@ -173,6 +173,7 @@ class Vehicle extends MY_Controller {
 	// Edit Vehicle
 	public function editVehicle()
 	{
+		
 		$vehicle_id = $this->input->post('id');
 			$result = false;
 		if(!empty($this->input->post())){

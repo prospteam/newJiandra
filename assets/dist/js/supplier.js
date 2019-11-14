@@ -311,7 +311,6 @@ $(document).ready(function(){
         cache: false,
          dataType: 'json',
          success : function(data) {
-             console.log(data);
              if(data.status == "ok"){
                $('#editSupplier').modal('hide');
                    Swal.fire("Successfully updated supplier!",data.success, "success");
@@ -324,74 +323,7 @@ $(document).ready(function(){
 
    });
 
-   //edit Vehicle
-   $(document).on('click', '.editVehicle', function(){
-     var id = $(this).attr('data-id');
-     $.ajax({
-         url: base_url+'vehicle/vehicle_details',
-         data: {id:id},
-         type: 'post',
-         dataType: 'json',
-         success: function(data){
-             $('#editVehicle').modal('show');
-             $('#editVehicle input[name=plate_number]').val(data.view_edit.plate_number);
-             $('#editVehicle input[name=vehicle_brand]').val(data.view_edit.vehicle_brand);
-             $('#editVehicle input[name=vehicle_type').val(data.view_edit.vehicle_type);
-             $('#editVehicle input[name=fuel_type]').val(data.view_edit.fuel_type);
-             $('#editVehicle input[name=num_of_tires]').val(data.view_edit.num_of_tires);
-             $('#editVehicle input[name=accounting_date_acquired]').val(data.view_edit.accounting_date_acquired);
-             $('#editVehicle input[name=accounting_acqui_amount]').val(data.view_edit.accounting_acqui_amount);
-             $('#editVehicle input[name=accounting_full_dep_date]').val(data.view_edit.accounting_full_dep_date);
-             $('#editVehicle input[name=accounting_monthly_dep]').val(data.view_edit.accounting_monthly_dep);
-             $('#editVehicle input[name=accounting_accum_dep]').val(data.view_edit.accounting_accum_dep);
-             $('#editVehicle input[name=accounting_book_val]').val(data.view_edit.accounting_book_val);
-             $('#editVehicle input[name=approx_length]').val(data.view_edit.approx_length);
-             $('#editVehicle input[name=approx_width]').val(data.view_edit.approx_width);
-             $('#editVehicle input[name=approx_height]').val(data.view_edit.approx_height);
-             $('#editVehicle input[name=approx_volume]').val(data.view_edit.approx_volume);
-             $('#editVehicle input[name=approx_weight]').val(data.view_edit.approx_weight);
-             $('#editVehicle input[name=van_reg_date]').val(data.view_edit.van_reg_date);
-             $('#editVehicle input[name=van_policy_num]').val(data.view_edit.van_policy_num);
-             $('#editVehicle input[name=van_renewal_date]').val(data.view_edit.van_renewal_date);
-             $('#editVehicle input[name=van_exp_date]').val(data.view_edit.van_exp_date);
-             $('#editVehicle input[name=land_reg_date]').val(data.view_edit.land_reg_date);
-             $('#editVehicle input[name=land_renewal_date]').val(data.view_edit.land_renewal_date);
-             $('#editVehicle input[name=land_exp_date]').val(data.view_edit.land_exp_date);
-             $('#editVehicle textarea[name=material_desc]').val(data.view_edit.material_desc);
-         }
-     });
 
-   });
-
-   //successfully edit vehicle
-   $(document).on('submit','#editvehicle',function(e){
-     e.preventDefault();
-     let formData =  new FormData($(this)[0]);
-     var id = $('.editVehicle').attr('data-id');
-      // var comp_id = $(this).attr('comp_id');
-      // alert(comp_id);
-     console.log(id);
-     formData.append("id",id);
-     $.ajax({
-         method: 'POST',
-         url : base_url + 'vehicle/editVehicle',
-         data : formData,
-         processData: false,
-        contentType: false,
-        cache: false,
-         dataType: 'json',
-         success : function(data) {
-             console.log(data);
-             if(data.status == "ok"){
-               $('#editVehicle').modal('hide');
-                   Swal.fire("Successfully updated Vehicle!",data.success, "success");
-                   $(".vehicle_tbl").DataTable().ajax.reload();
-              }else if(data.status == 'invalid'){
-                 Swal.fire("Error",data.status, "invalid");
-              }
-         }
-     })
-   });
 
 });
 
