@@ -279,7 +279,18 @@ class Supplier extends MY_Controller
 		// echo $this->db->last_query();
 		echo json_encode($datas);
 	}
-
+	//Permanently Delete user
+// 	public function deleteSupplier()
+// 	{
+// 		$supplier_id = $this->input->post('id');
+// 		$supplier_status = 3;
+// 		$data = array(
+// 			'status' => $supplier_status
+// 		);
+// 		$datas['delete'] = $this->MY_Model->update('supplier',$data,array('id' => $supplier_id));
+// 		echo json_encode($datas);
+// 	}
+// }
 	//view details for edit
 	public function supplier_details(){
 		// $supplier_id = $this->input->post('id');

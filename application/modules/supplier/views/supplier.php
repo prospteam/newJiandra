@@ -300,10 +300,11 @@
 			<div class="card-body1">
 				<div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
 					<div class="middle">
-						<!-- <a href="javascript:;" class="btn btn-info btn-newj active-click ">New Jiandra</a>
-						<a href="javascript:;" class="btn btn-info btn-newj"> Mrs. P Mktg</a> -->
-						<button class="button company1" data-id="1">New Jiandra</button>
-						<button class="button company1" data-id="2">Mrs.P Mktg</button>
+						<a href="javascript:;" class="btn-newj " onclick='savesubcat()' data-id="1">New Jiandra</a>
+						<a href="javascript:;" class="btn-newj" onclick='savesubcat()' data-id="2">Mrs.P Mktg</a>
+						<a href="javascript:;" class="btn-newj" onclick='savesubcat()' data-id="3">All Suppliers</a>
+						<!-- <button class="button company1" data-id="1">New Jiandra</button>
+						<button class="button company1" data-id="2">Mrs.P Mktg</button> -->
 					</div>
 					<div class="row">
 						<div class="table-responsive">

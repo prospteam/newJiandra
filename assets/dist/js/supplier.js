@@ -12,9 +12,13 @@
             $('.filechosen').html('No file chosen');
           }
         });
-
-          $('.company1').on('click', function(e){
+        function savesubcat(){
+          return null
+        }
+          $('.btn-newj').on('click', function(e){
             e.preventDefault();
+            $(this).siblings().removeClass('active-click');
+            $(this).addClass('active-click')
 
             // alert($(this).data('id'));
 
