@@ -455,11 +455,11 @@
         <!-- End View Vehicle Modal -->
         <!-- Edit Vehicle Modal -->
         <div class="modal fade" id="editVehicle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
-          <form id="editVehicle" method="post">
+          <form id="editvehicle" method="post">
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-truck" style="color:black" aria-hidden="true"></i>  Add Vehicle</h5>
+                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-truck" style="color:black" aria-hidden="true"></i>  Edit Vehicle</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>

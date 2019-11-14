@@ -364,7 +364,7 @@ $(document).ready(function(){
    });
 
    //successfully edit vehicle
-   $(document).on('submit','#editVehicle',function(e){
+   $(document).on('submit','#editvehicle',function(e){
      e.preventDefault();
      let formData =  new FormData($(this)[0]);
      var id = $('.editVehicle').attr('data-id');
