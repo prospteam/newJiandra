@@ -97,7 +97,6 @@ class Supplier extends MY_Controller
 				}else{
 
 					$this->load->library("form_validation");
-
 					$this->form_validation->set_rules('supplier_name', 'Supplier Name', 'required');
 					$this->form_validation->set_rules('supplier_contact_person', 'Supplier Contact Person', 'required');
 					$this->form_validation->set_rules('office_number', 'Office Number', 'required');
@@ -105,7 +104,7 @@ class Supplier extends MY_Controller
 
 					if ($this->form_validation->run() !== FALSE) {
 
-									if(count($company_name) > 1){
+									if(count($company_name) >= 1){
 										foreach ($company_name as $key => $value) {
 
 											 $data = array(
@@ -165,8 +164,9 @@ class Supplier extends MY_Controller
 		}
 
 
-	//display suppliers
-	public function display_suppliers($id){
+	//display all suppliers
+	public function display_supplier($id){
+
 	// 	$parameters['select'] = '*';
 	// 	$data['supplier'] = $this->MY_Model->getRows('supplier',$parameters);
 	// 	echo '<pre>';
@@ -178,21 +178,45 @@ class Supplier extends MY_Controller
 		$order = $this->input->post('order');
 		$draw = $this->input->post('draw');
 
-
 		$column_order = array('supplier_logo','supplier_name');
-		$where = array("company" => $id);
+		if($id == 0){
+			$where = array();
+		}else{
+			$where = array("company" => $id, 'status !=' => 3);
+		}
 		$join = array(
 			// 'company' => 'company.company_id = supplier.company'
 		);
 
-		$select = "id,supplier_logo,supplier_name,status,company";
-		$list = $this->MY_Model->get_datatables('supplier',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
+		$select = "id,supplier_logo,supplier_name,status";
+		$list = $this->MY_Model->get_datatables('supplier',$column_order, $select,$where, $join, $limit, $offset ,$search, $order);
 
-		// if(!empty($list)) {
-		// 	foreach ($list as $key => $value) {
-		// 		$list[$key]['position'] = userType($value['position']);
-		// 	}
-		// }
+		$output = array(
+				"draw" => $draw,
+				"recordsTotal" => $list['count_all'],
+				"recordsFiltered" => $list['count'],
+				"data" => $list['data']
+		);
+
+		echo json_encode($output);
+	}
+	// display all users
+
+	public function display_allVehicles(){
+		$limit = $this->input->post('length');
+		$offset = $this->input->post('start');
+		$search = $this->input->post('search');
+		$order = $this->input->post('order');
+		$draw = $this->input->post('draw');
+
+
+		$column_order = array('supplier_logo','supplier_name');
+		// $where = array('status !=' => 3);
+		$join = array();
+
+		$select = "id,supplier_logo, supplier_name, vehicle_brand, status";
+		$list = $this->MY_Model->get_datatables1('supplier',$column_order, $select, $join, $limit, $offset ,$search, $order);
+
 
 		$output = array(
 				"draw" => $draw,
@@ -203,6 +227,7 @@ class Supplier extends MY_Controller
 		// $this->load_page('users',$output);
 		echo json_encode($output);
 	}
+	// end display all users
 
 	//view supplier Details
 	public function view_supplier_details(){
@@ -271,7 +296,7 @@ class Supplier extends MY_Controller
 	//delete Supplier
 	public function deleteSupplier(){
 		$supplier_id = $this->input->post('id');
-		$supplier_status = 2;
+		$supplier_status = 3;
 		$data = array(
 			'status' => $supplier_status
 		);

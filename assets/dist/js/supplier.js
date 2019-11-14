@@ -1,5 +1,7 @@
-      var base_url = $('input[name="base_url"]').val();
-      $(document).ready(function(){
+var base_url = $('input[name="base_url"]').val();
+$(document).ready(function(){
+
+        display_suppliers('1');
 
         $('.my-file').on('change',function(){
 
@@ -11,150 +13,37 @@
           }else{
             $('.filechosen').html('No file chosen');
           }
-        });
+
+         });
+
         function savesubcat(){
           return null
         }
-          $('.btn-newj').on('click', function(e){
-            e.preventDefault();
-            $(this).siblings().removeClass('active-click');
-            $(this).addClass('active-click')
 
-            // alert($(this).data('id'));
+        $('.f_btn').on('click', function(e){
+              e.preventDefault();
+              $(this).siblings().removeClass('active-click');
+              $(this).addClass('active-click');
+              display_suppliers('1');
+        }) ;
+        $('.s_btn').on('click', function(e){
+              e.preventDefault();
+              $(this).siblings().removeClass('active-click');
+              $(this).addClass('active-click');
+              display_suppliers('2');
+        }) ;
+        $('.t_btn').on('click', function(e){
+              e.preventDefault();
+              $(this).siblings().removeClass('active-click');
+              $(this).addClass('active-click');
+              display_suppliers('0');
+        }) ;
 
-         $('.suppliers_tbl').DataTable({
-               "destroy"   : true,
-               "processing": true, //Feature control the processing indicator.
-               "serverSide": true, //Feature control DataTables' server-side processing mode.
-               "order": [[0,'desc']], //Initial no order.
-               "columns":[
-                    {"data":"supplier_logo","render": function(data, type, row,meta){
-                        if(row.supplier_logo != 1){
-
-                          return '<img class="supplier_logo" src="'+base_url+'assets/images/supplierLogo/' +data+ '" />';
-                        }else{
-                          return '<img class="supplier_logo" src="'+base_url+'assets/images/supplierLogo/ImageNotAvailable.png" />';
-                        }
-                        }
-                    },
-                    {"data":"supplier_name"},
-                    // {"data":"type"},
-                    {"data":"action","render": function(data, type, row,meta){
-                              var str = '';
-                              str += '<div class="actions">';
-                              if(row.status == 1){
-                                str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
-                                str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
-                                str += '<a href="javascript:;" class="disableSupplier" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
-                                str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-                              }else if(row.status == 2){
-                                str += '<a href="javascript:;" class="enableSupplier" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
-                                str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-                              }
-                              str += '</div>';
-                              return str;
-                         }
-                    },
-
-                    {"data":"status","render": function(data, type, row,meta){
-                        var str = '';
-                         if(row.status == 1){
-                           str += '<button type="button" class="active btn btn-block btn-success">active</button>';
-                         }else if(row.status == 2){
-                           str += '<button type="button" class="inactive btn btn-block btn-danger">inactive</button>';
-                         }
-                         return str;
-                    }
-                  }
-
-               ],
-               // Load data for the table's content from an Ajax source
-               "ajax": {
-                    "url":base_url+"supplier/display_suppliers/"+$(this).data('id'),
-                    "type": "POST"
-               },
-               //Set column definition initialisation properties.
-               "columnDefs": [
-                    {
-                         "targets": [2,3], //first column / numbering column
-                         "orderable": false, //set not orderable
-
-                     },
-                ],
-            });
-          }) ;
-
-
-          var supplier_tbl = $('.suppliers_tbl').DataTable({
-          "destroy"   : true,
-          "processing": true, //Feature control the processing indicator.
-          "serverSide": true, //Feature control DataTables' server-side processing mode.
-          "order": [[0,'desc']], //Initial no order.
-          "columns":[
-               {"data":"supplier_logo","render": function(data, type, row,meta){
-                   if(row.supplier_logo != 1){
-
-                     return '<img class="supplier_logo" src="'+base_url+'assets/images/supplierLogo/' +data+ '" />';
-                   }else{
-                     return '<img class="supplier_logo" src="'+base_url+'assets/images/supplierLogo/ImageNotAvailable.png" />';
-                   }
-                   }
-               },
-               {"data":"supplier_name"},
-               // {"data":"type"},
-               {"data":"action","render": function(data, type, row,meta){
-                 var str = '';
-                 str += '<div class="actions">';
-                 if(row.status == 1){
-                   str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
-                   str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
-                   str += '<a href="javascript:;" class="disableSupplier" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
-                   str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-                 }else if(row.status == 2){
-                   str += '<a href="javascript:;" class="enableSupplier" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
-                   str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-                 }
-                 str += '</div>';
-                 return str;
-                    }
-               },
-
-               {"data":"status","render": function(data, type, row,meta){
-                   var str = '';
-                    if(row.status == 1){
-                      str += '<button type="button" class="active btn btn-block btn-success">active</button>';
-                    }else if(row.status == 2){
-                      str += '<button type="button" class="inactive btn btn-block btn-danger">inactive</button>';
-                    }
-                    return str;
-               }
-             }
-
-          ],
-          // Load data for the table's content from an Ajax source
-          "ajax": {
-               "url":base_url+"supplier/display_suppliers/1",
-               "type": "POST"
-          },
-          //Set column definition initialisation properties.
-          "columnDefs": [
-               {
-                    "targets": [2,3], //first column / numbering column
-                    "orderable": false, //set not orderable
-
-                },
-           ],
-
-
-       });
-  //end display suppliers
 
   // add supplier
   $(document).on('submit','form#addsupplier',function(e){
       e.preventDefault();
       var formData = new FormData($(this)[0]);
-      // formData.append('nob_id',$('a.add').attr('data-id'));
-      // formData.append('nob_code',$('a.add').attr('data-code'));
       $.ajax({
           url:base_url+'supplier/addsupplier/',
           data: formData,
@@ -216,6 +105,8 @@
       }
     })
   });
+
+  //end display suppliers
 
   //Enable supplier
   $(document).on("click",'.enableSupplier', function(e) {
@@ -377,24 +268,17 @@
          dataType: 'json',
          success: function(data){
 
-           console.log(data);
-           $('#editSupplier').modal('show');
-           // console.log(data.view_edit.supplier_logo);
-
+             $('#editSupplier').modal('show');
              $('#editSupplier input[name =supplier_name]').val(data.supplier.supplier_name);
              $('#editSupplier input[name=supplier_contact_person]').val(data.supplier.supplier_contact_person);
              var company_list = [];
              $('#editSupplier .js-example-basic-multiple-edit').html('');
-             // var test = new Array('test','test2');
 
-             // Array.isArray(variable);
              $.each(data.company, function(key,val){
-               // alert(val);
                company_list.push(val.company_name);
-               // console.log(data.view_edit.company_name);
                $('#editSupplier .js-example-basic-multiple-edit').append( '<option value='+val.company_id+' selected>'+val.company_name+'</option>' );
              });
-             // $('#editSupplier select[name=company').val(company_list);
+
              $('#editSupplier input[name=office_number]').val(data.supplier.office_number);
              $('#editSupplier input[name=home_number]').val(data.supplier.home_number);
              $('#editSupplier input[name=mobile_number]').val(data.supplier.mobile_number);
@@ -402,7 +286,6 @@
              $('#editSupplier input[name=fax_number]').val(data.supplier.fax_number);
              $('#editSupplier .filechosen').text(data.supplier.supplier_logo);
 
-             // $('#editSupplier select[name=position]').val(data.view_edit.position);
          }
      });
 
@@ -412,11 +295,11 @@
    //successfully edit supplier
    $(document).on('submit','#editSupplier',function(e){
      e.preventDefault();
+
      let formData =  new FormData($(this)[0]);
      var id = $('.editSupplier').attr('data-id');
-      // var comp_id = $(this).attr('comp_id');
-     console.log(id);
      formData.append("id",id);
+
      $.ajax({
          method: 'POST',
          url : base_url + 'supplier/editSupplier',
@@ -436,6 +319,7 @@
               }
          }
      })
+
    });
 
    //edit Vehicle
@@ -447,8 +331,7 @@
          type: 'post',
          dataType: 'json',
          success: function(data){
-           $('#editVehicle').modal('show');
-           console.log(data);
+             $('#editVehicle').modal('show');
              $('#editVehicle input[name=plate_number]').val(data.view_edit.plate_number);
              $('#editVehicle input[name=vehicle_brand]').val(data.view_edit.vehicle_brand);
              $('#editVehicle input[name=vehicle_type').val(data.view_edit.vehicle_type);
@@ -473,7 +356,6 @@
              $('#editVehicle input[name=land_renewal_date]').val(data.view_edit.land_renewal_date);
              $('#editVehicle input[name=land_exp_date]').val(data.view_edit.land_exp_date);
              $('#editVehicle textarea[name=material_desc]').val(data.view_edit.material_desc);
-             // $('#editSupplier select[name=position]').val(data.view_edit.position);
          }
      });
 
@@ -522,4 +404,68 @@ function blankVal(){
   $('#addSupplier input[name="supplier_contact_person"]').val('');
   $('#addSupplier select[name="vendor"]').val('');
   $('#addSupplier input[name="office_number"]').val('');
+}
+
+function display_suppliers($supplier_id){
+  $('.suppliers_tbl').DataTable({
+        "destroy"   : true,
+        "processing": true, //Feature control the processing indicator.
+        "serverSide": true, //Feature control DataTables' server-side processing mode.
+        "order": [[0,'desc']], //Initial no order.
+        "columns":[
+             {"data":"supplier_logo","render": function(data, type, row,meta){
+                 if(row.supplier_logo != 1){
+
+                   return '<img class="supplier_logo" src="'+base_url+'assets/images/supplierLogo/' +data+ '" />';
+                 }else{
+                   return '<img class="supplier_logo" src="'+base_url+'assets/images/supplierLogo/ImageNotAvailable.png" />';
+                 }
+                 }
+             },
+             {"data":"supplier_name"},
+             {"data":"action","render": function(data, type, row,meta){
+                       var str = '';
+                       str += '<div class="actions">';
+                       if(row.status == 1){
+                         str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
+                         str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                         str += '<a href="javascript:;" class="disableSupplier" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
+                         str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                       }else if(row.status == 2){
+                         str += '<a href="javascript:;" class="enableSupplier" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
+                         str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                       }
+                       str += '</div>';
+                       return str;
+                  }
+             },
+
+             {"data":"status","render": function(data, type, row,meta){
+                 var str = '';
+                  if(row.status == 1){
+                    str += '<button type="button" class="active btn btn-block btn-success">active</button>';
+                  }else if(row.status == 2){
+                    str += '<button type="button" class="inactive btn btn-block btn-danger">inactive</button>';
+                  }
+                  return str;
+             }
+           }
+
+        ],
+        // Load data for the table's content from an Ajax source
+        "ajax": {
+             "url":base_url+"supplier/display_supplier/"+$supplier_id,
+             "type": "POST"
+        },
+        //Set column definition initialisation properties.
+        "columnDefs": [
+             {
+                  "targets": [2,3], //first column / numbering column
+                  "orderable": false, //set not orderable
+
+              },
+         ],
+     });
+
+
 }
