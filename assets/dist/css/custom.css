@@ -15,13 +15,38 @@ h1.inp_head {
   text-align: center;
 }
 
-i.fa.fa-window-close, i.fa.fa-check-square{
+i.fa.fa-window-close, i.fa.fa-check-square, i.fas.fa-eye{
   color: #c8c8c8;
     margin-right: 17px;
 }
 
 span.err {
     color: red;
+}
+
+i.fa.fa-window-close {
+    color: red!important;
+}
+i.fa.fa-check-square{
+  color:green;
+}
+
+span.active{
+  background: #28a745!important;
+  border-color: #28a745!important;
+}
+
+img.logo {
+    max-width: 100%;
+}
+
+.bg-info1 {
+    background: #6b6ca5;
+    color: white;
+}
+
+button.close {
+    color: white;
 }
 
 /* btns */

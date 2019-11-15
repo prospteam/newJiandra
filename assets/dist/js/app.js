@@ -8,6 +8,8 @@ $(document).ready(function(){
          "order": [[0,'desc']], //Initial no order.
          "columns":[
               {"data":"fullname"},
+              {"data":"username"},
+              {"data":"position_name"},
               {"data":"company","render": function(data, type, row,meta){
                   var str = '';
                   if(row.company == 1){
@@ -20,15 +22,15 @@ $(document).ready(function(){
                   return str;
                 }
               },
-              {"data":"position_name"},
+
               // {"data":"type"},
               {"data":"action","render": function(data, type, row,meta){
                         var str = '';
                         str += '<div class="actions">';
                         if(row.status == 1){
 
-                          str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
-                          str += '<a href="javascript:;" class="editUser" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                          str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
+                          str += '<a href="javascript:;" class="editUser" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
                           str += '<a href="javascript:;" class="disableUser" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
                           str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                         }else if(row.status == 2){
@@ -43,9 +45,9 @@ $(document).ready(function(){
               {"data":"status","render": function(data, type, row,meta){
                   var str = '';
                    if(row.status == 1){
-                     str += '<button type="button" class="active btn btn-block btn-success">active</button>';
+                     str += '<span class="active btn btn-block btn-sm btn-success">active</button>';
                    }else if(row.status == 2){
-                     str += '<button type="button" class="inactive btn btn-block btn-danger">inactive</button>';
+                     str += '<span class="inactive btn btn-block btn-sm btn-danger">inactive</button>';
                    }
                    return str;
               }
@@ -60,7 +62,7 @@ $(document).ready(function(){
          //Set column definition initialisation properties.
          "columnDefs": [
               {
-                   "targets": [3,4], //first column / numbering column
+                   "targets": [4,5], //first column / numbering column
                    "orderable": false, //set not orderable
 
                },
@@ -93,8 +95,8 @@ $(document).ready(function(){
                         var str = '';
                         str += '<div class="actions">';
                         if(row.status == 1){
-                          str += '<a href="javascript:;" class="viewVehicle" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
-                          str += '<a href="javascript:;" class="editVehicle" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                          str += '<a href="javascript:;" class="viewVehicle" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
+                          str += '<a href="javascript:;" class="editVehicle" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
                           str += '<a href="javascript:;" class="disableVehicle" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
                           str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                         }else if(row.status == 2){
@@ -109,9 +111,9 @@ $(document).ready(function(){
               {"data":"status","render": function(data, type, row,meta){
                   var str = '';
                    if(row.status == 1){
-                     str += '<button type="button" class="active btn btn-block btn-success">active</button>';
+                     str += '<span class="active btn btn-block btn-sm btn-success">active</button>';
                    }else if(row.status == 2){
-                     str += '<button type="button" class="inactive btn btn-block btn-danger">inactive</button>';
+                     str += '<span class="active btn btn-block btn-sm btn-danger">active</button>';
                    }
                    return str;
               }
@@ -349,17 +351,17 @@ $(document).ready(function(){
 
      Swal.fire({
      title: 'Are you sure?',
-     text: "You want to disable this User!",
+     text: "This user will be deactivated!",
      type: 'warning',
      showCancelButton: true,
      confirmButtonColor: '#d33',
      cancelButtonColor: '#068101',
-     confirmButtonText: 'Yes, Disable User!'
+     confirmButtonText: 'Yes, Deactivate User!'
      }).then((result) => {
        if (result.value) {
          Swal.fire(
-           'Disable!',
-           'Successfully Disabled User!',
+           'Success!',
+           'User has been deactivated!',
            'success'
          )
            $.ajax({
@@ -382,17 +384,17 @@ $(document).ready(function(){
 
      Swal.fire({
      title: 'Are you sure?',
-     text: "You want to enable this User!",
+     text: "This user will be activated!",
      type: 'warning',
      showCancelButton: true,
      confirmButtonColor: '#068101',
      cancelButtonColor: '#d33',
-     confirmButtonText: 'Yes, Enable User!'
+     confirmButtonText: 'Yes, Activate User!'
      }).then((result) => {
        if (result.value) {
          Swal.fire(
-           'Enable!',
-           'Successfully Enabled User!',
+           'Success!',
+           'User has been activated!',
            'success'
          )
            $.ajax({
@@ -415,7 +417,7 @@ $(document).ready(function(){
 
      Swal.fire({
      title: 'Are you sure?',
-     text: "You want to permanently delete this User!",
+     text: "This user will be permanently deleted!",
      type: 'warning',
      showCancelButton: true,
      confirmButtonColor: '#d33',
@@ -424,8 +426,8 @@ $(document).ready(function(){
      }).then((result) => {
        if (result.value) {
          Swal.fire(
-           'Delete!',
-           'Successfully Deleted User!',
+           'Success!',
+           'User has been permanently deleted!',
            'success'
          )
            $.ajax({
@@ -595,17 +597,17 @@ $(document).ready(function(){
 
      Swal.fire({
      title: 'Are you sure?',
-     text: "You want to disable this vehicle!",
+     text: "This vehicle will be deactivated!",
      type: 'warning',
      showCancelButton: true,
      confirmButtonColor: '#d33',
      cancelButtonColor: '#068101',
-     confirmButtonText: 'Yes, Disable Vehicle!'
+     confirmButtonText: 'Yes, Deactivate Vehicle!'
      }).then((result) => {
        if (result.value) {
          Swal.fire(
-           'Disable!',
-           'Successfully Disabled Vehicle!',
+           'Success!',
+           'Vehicle has been deactivated!',
            'success'
          )
            $.ajax({
@@ -628,17 +630,17 @@ $(document).ready(function(){
 
      Swal.fire({
      title: 'Are you sure?',
-     text: "You want to enable this vehicle!",
+     text: "This vehicle will be activated!",
      type: 'warning',
      showCancelButton: true,
      confirmButtonColor: '#068101',
      cancelButtonColor: '#d33',
-     confirmButtonText: 'Yes, Enable vehicle!'
+     confirmButtonText: 'Yes, Activate vehicle!'
      }).then((result) => {
        if (result.value) {
          Swal.fire(
-           'Enable!',
-           'Successfully Enabled vehicle!',
+           'Success!',
+           'Vehicle has been activated!',
            'success'
          )
            $.ajax({
@@ -661,7 +663,7 @@ $(document).ready(function(){
 
      Swal.fire({
      title: 'Are you sure?',
-     text: "You want to permenently delete this Vehicle!",
+     text: "This vehicle will be permanently deleted!",
      type: 'warning',
      showCancelButton: true,
      confirmButtonColor: '#d33',
@@ -670,8 +672,8 @@ $(document).ready(function(){
      }).then((result) => {
        if (result.value) {
          Swal.fire(
-           'Delete!',
-           'Successfully Deleted Vehicle!',
+           'Success!',
+           'Vehicle has been permanently deleted!',
            'success'
          )
            $.ajax({

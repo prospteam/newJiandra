@@ -364,8 +364,8 @@ function display_suppliers($supplier_id){
                        var str = '';
                        str += '<div class="actions">';
                        if(row.status == 1){
-                         str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-clone"></i></a>';
-                         str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen"></i></a>';
+                         str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
+                         str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
                          str += '<a href="javascript:;" class="disableSupplier" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
                          str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                        }else if(row.status == 2){
@@ -380,9 +380,9 @@ function display_suppliers($supplier_id){
              {"data":"status","render": function(data, type, row,meta){
                  var str = '';
                   if(row.status == 1){
-                    str += '<button type="button" class="active btn btn-block btn-success">active</button>';
+                    str += '<span class="active btn btn-block btn-sm btn-success">active</button>';
                   }else if(row.status == 2){
-                    str += '<button type="button" class="inactive btn btn-block btn-danger">inactive</button>';
+                    str += '<span class="active btn btn-block btn-sm btn-danger">active</button>';
                   }
                   return str;
              }
