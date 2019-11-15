@@ -16,8 +16,8 @@
               <form id="addvehicle" method="post">
                 <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-truck" style="color:black" aria-hidden="true"></i>  Add Vehicle</h5>
+                    <div class="modal-header bg-info1">
+                      <h5 class="modal-title" id="exampleModalLabel">Add Vehicle</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -254,8 +254,8 @@
             <!-- <form id="addvehicle" method="post"> -->
               <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-eye" style="color:black" aria-hidden="true"></i>  View Vehicle Details</h5>
+                  <div class="modal-header bg-info1">
+                    <h5 class="modal-title" id="exampleModalLabel">View Vehicle Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -458,8 +458,8 @@
           <form id="editvehicle" method="post">
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-truck" style="color:black" aria-hidden="true"></i>  Edit Vehicle</h5>
+                <div class="modal-header bg-info1">
+                  <h5 class="modal-title" id="exampleModalLabel"> Edit Vehicle</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>

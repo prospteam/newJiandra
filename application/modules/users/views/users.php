@@ -17,8 +17,8 @@
     					<form id="adduser" method="post">
     						<div class="modal-dialog modal-lg" role="document">
     							<div class="modal-content">
-    								<div class="modal-header">
-    									<h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-user-plus" style="color:black" aria-hidden="true"></i>  Add User</h5>
+    								<div class="modal-header bg-info1">
+    									<h5 class="modal-title" id="exampleModalLabel">Add User</h5>
     									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
     										<span aria-hidden="true">&times;</span>
     									</button>
@@ -99,8 +99,8 @@
 
               <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-eye" style="color:black" aria-hidden="true"></i>  View User Details</h5>
+                  <div class="modal-header bg-info1">
+                    <h5 class="modal-title" id="exampleModalLabel">View User Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -147,8 +147,8 @@
           <form id="edituser" method="post">
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-edit" style="color:black" aria-hidden="true"></i>  Edit User</h5>
+                <div class="modal-header bg-info1">
+                  <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -250,8 +250,9 @@
                   <thead>
 
                     <th class="header-title">Name</th>
-                    <th class="header-title">Company</th>
+                    <th class="header-title">Username</th>
                     <th class="header-title">Position</th>
+                    <th class="header-title">Company</th>
                     <th class="header-title">Action</th>
                     <th class="header-title">Status</th>
                     <!-- <tr class="table-header" role="row">

@@ -25,13 +25,13 @@ class Users extends MY_Controller {
 		$draw = $this->input->post('draw');
 
 
-		$column_order = array('fullname','company.company_name','position.position_name');
+		$column_order = array('fullname','username','position.position_name','company.company_name');
 		$where = array('users.status !=' => 3);
 		$join = array(
 			'company' => 'company.company_id = users.company',
 			'position' => 'position.id = users.position'
 		);
-		$select = "users.id,users.fullname,users.company,company.company_name,position.position_name,users.status";
+		$select = "users.id,users.fullname,users.username,users.company,company.company_name,position.position_name,users.status";
 		$list = $this->MY_Model->get_datatables('users',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 		// foreach($list['data'] as $key => $value){
 		// 	echo "<pre>";
