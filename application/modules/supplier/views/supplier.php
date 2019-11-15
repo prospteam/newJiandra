@@ -6,7 +6,7 @@
 			<div class="row mb-2">
 				<div class="col-sm-6">
 					<h1><b>Supplier</b></h1>
-					ENROLLMENT > <span class="active1"> SUPPLIERs </p>
+					ENROLLMENT > <span class="active1"> SUPPLIERS</p>
 				</div>
 				<div class="col-sm-6">
 					<button type="button" class="button1 float-sm-right" data-toggle="modal" data-target="#addSupplier "><i class="fas fa-plus-circle" aria-hidden="true"></i> Add Supplier </button>
@@ -17,7 +17,7 @@
 						<div class="modal-dialog modal-lg" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-users"></i> Add Supplier</h5>
+									<h5 class="modal-title" id="exampleModalLabel">Add Supplier</h5>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
@@ -26,27 +26,36 @@
 									<div class="row">
 										<div class="col-6">
 											<div class="form-group">
-												<label for="supplier_name">Supplier Name:</label>
+												<label for="supplier_name">Supplier Name <span style="color:red;">*</span></label>
 												<input type="text" class="form-control" name="supplier_name" value="">
 												<span class="err"></span>
 											</div>
 										</div>
 										<div class="col-6">
 											<div class="form-group">
-												<label for="supplier_contact_person">Supplier Contact Person:</label>
+												<label for="supplier_contact_person">Supplier Contact Person: <span style="color:red;">*</span> </label>
 												<input type="text" class="form-control" name="supplier_contact_person" value="">
 												<span class="err"></span>
 											</div>
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-12">
-												<label for="companytitle">Company</label>
+										<div class="col-6">
+											<div class="form-group">
+												<label for="companytitle">Company <span style="color:red;">*</span> </label>
 												<!-- <input type="text" name="companytitle" value="" required> -->
 											<select class="form-control js-example-basic-multiple" name="company[]" multiple="multiple"></select>
 												<span class="err"></span>
 									</div>
+									</div>
+									<div class="col-6">
+										<div class="form-group">
+											<label for="supplier_contact_person">Email: <span style="color:red;">*</span> </label>
+											<input type="email" class="form-control" name="email" value="">
+											<span class="err"></span>
+										</div>
 								</div>
+							</div>
 								<div class = "row">
 								   <!-- <div class="col-6">
 										 <div class="form-group">
@@ -60,24 +69,18 @@
 												<span class="err"></span>
 										 </div>
 										</div> -->
-								<div class="col-4">
+								<div class="col-6">
 									<div class="form-group">
-										<label for="office_number">Office Number:</label>
+										<label for="office_number">Office Number: <span style="color:red;">*</span> </label>
 										<input type="tel" class="form-control" name="office_number" value="">
 										<span class="err"></span>
 									</div>
 								</div>
 
-                  <div class="col-4">
+									<div class="col-6">
 									<div class="form-group">
-										<label for="home_number">Home Phone:</label>
-										<input type="number" class="form-control" name="home_number" value="">
-									</div>
-									</div>
-									<div class="col-4">
-									<div class="form-group">
-										<label for="mobile_number">Mobile Number</label>
-										<input type="number" class="form-control" name="mobile_number" value="">
+										<label for="fax_number">Fax Number: </label>
+										<input type="number" class="form-control" name="fax_number" value="">
 									</div>
                 </div>
               </div>
@@ -90,18 +93,14 @@
 								</div>
 								<div class="col-6">
 									<div class="form-group">
-										<label for="tin">Fax Number:</label>
-										<input type="number" class="form-control" name="fax_number" value="">
+									  <label for=""><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
+										<div class="uploadfile-container2">
+		                  <input class="input-file" name="logo" id="my-file" type="file" accept="image/* ">
+		                  <p class="file-return"></p>
+		                </div>
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-4">
-                <label for=""><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
-                <div class="uploadfile-container2">
-                  <input class="input-file" name="logo" id="my-file" type="file" accept="image/* ">
-                  <p class="file-return"></p>
-                </div>
-              </div>
 								</div>
 								<div class="modal-footer">
 									<button type="submit" class="btn btn-primary add">Submit</button>
@@ -315,8 +314,9 @@
 						<div class="col-sm-12">
 							<table id="example1" class="table table-bordered table-striped dataTable suppliers_tbl" role="grid" aria-describedby="example1_info">
 								<thead>
-								<th class="header-title">Supplier Logo</th>
-								<th class="header-title">Supplier Name</th>
+								<th class="header-title">Logo</th>
+								<th class="header-title">Name</th>
+								<th class="header-title">Email</th>
 								<th class="header-title">Action</th>
 								<th class="header-title">Status</th>
 							</thead>

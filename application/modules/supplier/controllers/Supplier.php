@@ -41,6 +41,7 @@ class Supplier extends MY_Controller
 					$this->form_validation->set_rules('supplier_name', 'Supplier Name', 'required');
 					$this->form_validation->set_rules('supplier_contact_person', 'Supplier Contact Person', 'required');
 					$this->form_validation->set_rules('company[]', 'Company', 'required');
+					$this->form_validation->set_rules('email','Email','required');
 					$this->form_validation->set_rules('office_number', 'Office Number', 'required');
 
 					if ($this->form_validation->run() !== FALSE) {
@@ -53,9 +54,8 @@ class Supplier extends MY_Controller
 											'supplier_name' 						=> $this->input->post('supplier_name'),
 											'supplier_contact_person' 	=> $this->input->post('supplier_contact_person'),
 											'company' 									=> $value,
+											'email'                     =>$this->value->post('email'),
 											'office_number' 						=> $this->input->post('office_number'),
-											'home_number' 							=> $this->input->post('home_number'),
-											'mobile_number' 						=> $this->input->post('mobile_number'),
 											'tin_number' 								=> $this->input->post('tin_number'),
 											'fax_number' 								=> $this->input->post('fax_number'),
 											'status' 										=> 1
@@ -76,9 +76,8 @@ class Supplier extends MY_Controller
 									'supplier_name' 						=> $this->input->post('supplier_name'),
 									'supplier_contact_person' 	=> $this->input->post('supplier_contact_person'),
 									'company' 									=> $this->input->post('company'),
+									'email'                     =>$this->value->post('email'),
 									'office_number' 						=> $this->input->post('office_number'),
-									'home_number' 							=> $this->input->post('home_number'),
-									'mobile_number' 						=> $this->input->post('mobile_number'),
 									'tin_number' 								=> $this->input->post('tin_number'),
 									'fax_number' 								=> $this->input->post('fax_number'),
 									'status' 										=> 1
@@ -100,6 +99,7 @@ class Supplier extends MY_Controller
 					$this->form_validation->set_rules('supplier_name', 'Supplier Name', 'required');
 					$this->form_validation->set_rules('supplier_contact_person', 'Supplier Contact Person', 'required');
 					$this->form_validation->set_rules('company[]', 'Company', 'required');
+					$this->form_validation->set_rules('email','Email','required');
 					$this->form_validation->set_rules('office_number', 'Office Number', 'required');
 					// $this->form_validation->set_rules('vendor', 'Vendor', 'required');
 
@@ -114,8 +114,7 @@ class Supplier extends MY_Controller
  												'supplier_contact_person' 		=> $this->input->post('supplier_contact_person'),
  												'company' 										=> $value,
  												'office_number' 							=> $this->input->post('office_number'),
- 												'home_number' 								=> $this->input->post('home_number'),
- 												'mobile_number' 							=> $this->input->post('mobile_number'),
+ 												'email'                       =>$this->value->post('email'),
  												'tin_number' 									=> $this->input->post('tin_number'),
  												'fax_number' 									=> $this->input->post('fax_number'),
  												'status' 											=> 1
@@ -138,8 +137,7 @@ class Supplier extends MY_Controller
 											 'supplier_contact_person' 		=> $this->input->post('supplier_contact_person'),
 											 'company' 										=> $this->input->post('company'),
 											 'office_number' 							=> $this->input->post('office_number'),
-											 'home_number' 								=> $this->input->post('home_number'),
-											 'mobile_number' 							=> $this->input->post('mobile_number'),
+											 'email'                      =>$this->value->post('email'),
 											 'tin_number' 								=> $this->input->post('tin_number'),
 											 'fax_number' 								=> $this->input->post('fax_number'),
 											 'status' 										=> 1
@@ -179,7 +177,7 @@ class Supplier extends MY_Controller
 		$order = $this->input->post('order');
 		$draw = $this->input->post('draw');
 
-		$column_order = array('supplier_logo','supplier_name');
+		$column_order = array('supplier_logo','supplier_name','email');
 		if($id == 0){
 			$where = array('status !=' => 3);
 		}else{
@@ -189,7 +187,7 @@ class Supplier extends MY_Controller
 			// 'company' => 'company.company_id = supplier.company'
 		);
 
-		$select = "id,supplier_logo,supplier_name,status";
+		$select = "id,supplier_logo,supplier_name,email,status";
 		$list = $this->MY_Model->get_datatables('supplier',$column_order, $select,$where, $join, $limit, $offset ,$search, $order);
 
 		$output = array(
@@ -370,6 +368,7 @@ class Supplier extends MY_Controller
 				$this->form_validation->set_rules('supplier_contact_person', 'Supplier Contact Person', 'required');
 				// $this->form_validation->set_rules('vendor', 'Vendor', 'required');
 				$this->form_validation->set_rules('office_number', 'Office Number', 'required');
+				$this->form_validation->set_rules('email', 'Email', 'required');
 
 			}else{
 				$this->load->library("form_validation");
@@ -389,8 +388,7 @@ class Supplier extends MY_Controller
 				'supplier_contact_person' =>$post['supplier_contact_person'],
 				// 'company'=> 1,
 				'office_number' =>$post['office_number'],
-				'home_number' =>$post['home_number'],
-				'mobile_number' => $post['mobile_number'],
+				'email'       =>$post['email'],
 				'tin_number' => $post['tin_number'],
 				'fax_number' => $post['fax_number'],
 				// 'company' => implode(',',$this->input->post('company')),
