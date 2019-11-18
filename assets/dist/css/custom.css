@@ -49,6 +49,9 @@ button.close {
     color: white;
 }
 
+.required{
+  color: red;
+}
 /* btns */
 .btn-newj {
       background: #6061d1;

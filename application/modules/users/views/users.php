@@ -27,14 +27,14 @@
     									<div class="row">
     										<div class="col-6">
     											<div class="form-group">
-    												<label for="fullname">Full Name:</label>
+    												<label for="fullname">Full Name: <span class="required">*</span></label>
     												<input type="text" class="form-control" name="fullname" value="">
                             <span class="err"></span>
     											</div>
     										</div>
     										<div class="col-6">
     											<div class="form-group">
-    												<label for="username">Username:</label>
+    												<label for="username">Username: <span class="required">*</span></label>
     												<input type="text" class="form-control" name="username" value="">
                             <span class="err"></span>
     											</div>
@@ -43,14 +43,14 @@
     									<div class="row">
     										<div class="col-6">
     											<div class="form-group">
-    												<label for="password">Password:</label>
+    												<label for="password">Password: <span class="required">*</span></label>
     												<input type="password" class="form-control" name="password" value="">
                             <span class="err"></span>
     											</div>
     										</div>
     										<div class="col-6">
     											<div class="form-group">
-    												<label for="position">Position:</label>
+    												<label for="position">Position: <span class="required">*</span></label>
     												<!-- <input type="text" class="form-control" name="position" value=""> -->
                             <select class="form-control" class="position" name="position" >
                               <option value="" selected hidden>Select Position</option>
@@ -65,7 +65,7 @@
     								<div class = "row">
     								   <div class="col-6">
     									<div class="form-group">
-    										<label for="company">Companies:</label>
+    										<label for="company">Companies: <span class="required">*</span></label>
                         <select class="form-control js-example-basic-multiple-addU" name="company[]" multiple="multiple"></select>
                         <span class="err"></span>
                     <!-- <span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="8" style="width: 100%;"><span class="selection">
@@ -157,14 +157,14 @@
                   <div class="row">
                     <div class="col-6">
                       <div class="form-group">
-                        <label for="fullname">Full Name:</label>
+                        <label for="fullname">Full Name: <span class="required">*</span></label>
                         <input type="text" class="form-control" name="fullname" >
                         <span class="err"></span>
                       </div>
                     </div>
                     <div class="col-6">
                       <div class="form-group">
-                        <label for="username">Username:</label>
+                        <label for="username">Username: <span class="required">*</span></label>
                         <input type="text" class="form-control" name="username">
                         <span class="err"></span>
                       </div>
@@ -173,14 +173,14 @@
                   <div class="row">
                     <div class="col-6">
                       <div class="form-group">
-                        <label for="password">Password:</label>
+                        <label for="password">Password: <span class="required">*</span></label>
                         <input type="password" class="form-control" name="password">
                         <span class="err"></span>
                       </div>
                     </div>
                     <div class="col-6">
                       <div class="form-group">
-                        <label for="position">Position:</label>
+                        <label for="position">Position: <span class="required">*</span></label>
                         <!-- <input type="text" class="form-control" name="position" value=""> -->
                         <select class="form-control" class="position" name="position" placeholder="Select Position">
                           <!-- <option value="">Select Position</option> -->
@@ -195,7 +195,7 @@
                 <div class = "row">
                    <div class="col-6">
                   <div class="form-group">
-                    <label for="company">Companies:</label>
+                    <label for="company">Companies: <span class="required">*</span></label>
                     <select class="form-control js-example-basic-multiple-editU" name="company[]" multiple="multiple"></select>
                     <span class="err"></span>
 
