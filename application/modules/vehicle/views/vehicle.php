@@ -80,7 +80,7 @@
                       <div class="col-6">
                         <div class="form-group">
                           <label for="accounting_date_acquired">Date Acquired:</label>
-                          <input type="text" id="datepicker" class="form-control datepicker" name="accounting_date_acquired" value="">
+                          <input type="text" class="form-control datepicker" name="accounting_date_acquired" value="">
                           <span class="err"></span>
                         </div>
                       </div>

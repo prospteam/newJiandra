@@ -489,6 +489,7 @@ $(document).ready(function(){
                  $(keyNames).each(function(index , value) {
                      $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
                       $("select[name='"+value+"']").next('.err').text(data.form_error[value]);
+                      $("select[name='"+value+"']").next().next().text(data.form_error[value]);
                  });
              }else if (data.error) {
                  Swal.fire("Error",data.error, "error");
@@ -765,9 +766,10 @@ function blankVal_user(){
 function blankVal_vehicle(){
   $('#AddVehicle input[name="plate_number"]').val('');
   $('.err').text('');
-  $('#AddVehicle input[name="vehicle_brand"]').val('');
+  // $('#AddVehicle input[name="vehicle_brand"]').val('');
+  $('#AddVehicle .js-example-basic-multiple-addvehicle').val('').trigger('change');
   $('#AddVehicle select[name="vehicle_type"]').val('');
-  $('#AddVehicle input[name="fuel_type"]').val('');
+  // $('#AddVehicle input[name="fuel_type"]').val('');
   $('#AddVehicle input[name="num_of_tires"]').val('');
   $('#AddVehicle input[name="accounting_date_acquired"]').val('');
   $('#AddVehicle input[name="accounting_acqui_amount"]').val('');
