@@ -242,10 +242,10 @@ $(document).ready(function(){
            console.log(data);
            $('.supplier_name').text(data.supplier.supplier_name);
            $('.supplier_contact_person').text(data.supplier.supplier_contact_person);
-           $('.office_number').text(data.supplier.office_number);
-           $('.email').text(data.supplier.email);
-           $('.tin').text(data.supplier.tin_number);
-           $('.fax_number').text(data.supplier.fax_number);
+           $('.email').email(data.supplier.email);
+           $('.office_number').number(data.supplier.office_number);
+           $('.tin').number(data.supplier.tin_number);
+           $('.fax_number').number(data.supplier.fax_number);
            var company_list = [];
 
            $.each(data.company, function(key,val){
@@ -272,7 +272,7 @@ $(document).ready(function(){
              $('#editSupplier').modal('show');
              $('#editSupplier input[name =supplier_name]').val(data.supplier.supplier_name);
              $('#editSupplier input[name=supplier_contact_person]').val(data.supplier.supplier_contact_person);
-             $('#editSupplier input[name=email]').val(data.supplier.supplier_contact_person);
+             $('#editSupplier input[name=email]').val(data.supplier.email);
              var company_list = [];
              $('#editSupplier .js-example-basic-multiple-edit').html('');
 
@@ -325,24 +325,6 @@ $(document).ready(function(){
 
 });
 
-
-function clearError(){
-    $('.err').text('');
-}
-
-function blankVal(){
-  $('#addSupplier input[name="supplier_name"]').val('');
-  $('.err').text('');
-  $('#addSupplier input[name="supplier_contact_person"]').val('');
-  $('#addSupplier select[name="company[]"]').val('');
-  $('#addSupplier input[name="office_number"]').val('');
-  $('#addSupplier input[name="email"]').val('');
-  $('#addSupplier input[name="tin_number"]').val('');
-  $('#addSupplier input[name="fax_number"]').val('');
-  $('#addSupplier .filechosen').val();
-
-}
-
 function display_suppliers($supplier_id){
   $('.suppliers_tbl').DataTable({
         "destroy"   : true,
@@ -360,6 +342,7 @@ function display_suppliers($supplier_id){
                  }
              },
              {"data":"supplier_name"},
+             {"data":"email"},
              {"data":"action","render": function(data, type, row,meta){
                        var str = '';
                        str += '<div class="actions">';
@@ -376,7 +359,6 @@ function display_suppliers($supplier_id){
                        return str;
                   }
              },
-
              {"data":"status","render": function(data, type, row,meta){
                  var str = '';
                   if(row.status == 1){
@@ -391,18 +373,35 @@ function display_suppliers($supplier_id){
         ],
         // Load data for the table's content from an Ajax source
         "ajax": {
-             "url":base_url+"supplier/display_supplier/"+$supplier_id,
+             "url":base_url+"supplier/display_suppliers/"+$supplier_id,
              "type": "POST"
         },
         //Set column definition initialisation properties.
         "columnDefs": [
              {
-                  "targets": [2,3], //first column / numbering column
+                  "targets": [3,4], //first column / numbering column
                   "orderable": false, //set not orderable
 
               },
          ],
      });
 
+
+}
+
+function clearError(){
+    $('.err').text('');
+}
+
+function blankVal(){
+  $('#addSupplier input[name="supplier_name"]').val('');
+  $('.err').text('');
+  $('#addSupplier input[name="supplier_contact_person"]').val('');
+  $('#addSupplier input[name="email"]').val('');
+  $('#addSupplier select[name="company[]"]').val('');
+  $('#addSupplier input[name="office_number"]').val('');
+  $('#addSupplier input[name="tin_number"]').val('');
+  $('#addSupplier input[name="fax_number"]').val('');
+  $('#addSupplier .filechosen').val();
 
 }

@@ -16,7 +16,7 @@
 					<form id="addsupplier" method="post">
 						<div class="modal-dialog modal-lg" role="document">
 							<div class="modal-content">
-								<div class="modal-header">
+								<div class="modal-header bg-info1">
 									<h5 class="modal-title" id="exampleModalLabel">Add Supplier</h5>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
@@ -50,7 +50,7 @@
 									</div>
 									<div class="col-6">
 										<div class="form-group">
-											<label for="supplier_contact_person">Email: <span style="color:red;">*</span> </label>
+											<label for="email">Email: <span style="color:red;">*</span> </label>
 											<input type="email" class="form-control" name="email" value="">
 											<span class="err"></span>
 										</div>
@@ -142,25 +142,11 @@
 										</div>
 										<div class="col-6">
 											<div class="form-group">
-												<label for="office_number">Office Number:</label>
-												<p class="office_number"> </p>
+												<label for="email">Email</label>
+												<p class="email"> </p>
 											</div>
 										</div>
 									</div>
-								<div class = "row">
-                  <div class="col-6">
-									<div class="form-group">
-										<label for="home_number">Home Phone:</label>
-										<p class="home_number"> </p>
-									</div>
-									</div>
-									<div class="col-6">
-									<div class="form-group">
-										<label for="mobile_number">Mobile Number</label>
-										<p class="mobile_number"> </p>
-									</div>
-                </div>
-              </div>
 							<div class = "row">
 								<div class="col-6">
 									<div class="form-group">
@@ -210,76 +196,62 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-12">
+										<div class="col-6">
+												<div class="form-group">
 												<label for="companytitle">Company</label>
 												<!-- <input type="text" name="companytitle" value="" required> -->
 											<select class="form-control js-example-basic-multiple-edit" name="company[]" multiple="multiple"></select>
 												<span class="err"></span>
 									</div>
+									</div>
+									<div class="col-6">
+										<div class="form-group">
+											<label for="email">Email:</label>
+											<input type="email" class="form-control" name="email" value="">
+											<span class="err"></span>
+										</div>
+									</div>
+
 								</div>
 								<div class = "row">
-									 <!-- <div class="col-6">
-										 <div class="form-group">
-											 <label for="vendor">Vendor:</label>
-											 <select class="form-control" class="vendor" name="vendor">
-												 <option value="">Select Vendor</option>
-													 <?php //foreach($vendor as $k => $value) : ?>
-															 <option value="<?php// echo $value['id'] ?>"><?php //echo $value['fullname'] ?></option>
-												 <?php  //endforeach; ?>
-												</select>
-												<span class="err"></span>
-										 </div>
-										</div> -->
-								<div class="col-4">
-									<div class="form-group">
-										<label for="office_number">Office Number:</label>
-										<input type="tel" class="form-control" name="office_number" value="">
-										<span class="err"></span>
+									<div class="col-6">
+										<div class="form-group">
+											<label for="office_number">Office Number:</label>
+											<input type="tel" class="form-control" name="office_number" value="">
+											<span class="err"></span>
+										</div>
 									</div>
-								</div>
-
-									<div class="col-4">
-									<div class="form-group">
-										<label for="home_number">Home Phone:</label>
-										<input type="number" class="form-control" name="home_number" value="">
+									<div class="col-6">
+										<div class="form-group">
+											<label for="tin_number">TIN:</label>
+											<input type="number" class="form-control" name="tin_number" value="">
+										</div>
 									</div>
-									</div>
-									<div class="col-4">
-									<div class="form-group">
-										<label for="mobile_number">Mobile Number</label>
-										<input type="number" class="form-control" name="mobile_number" value="">
-									</div>
-								</div>
 							</div>
 							<div class = "row">
 								<div class="col-6">
 									<div class="form-group">
-										<label for="tin">TIN:</label>
-										<input type="number" class="form-control" name="tin_number" value="">
-									</div>
-								</div>
-								<div class="col-6">
-									<div class="form-group">
-										<label for="tin">Fax Number:</label>
+										<label for="fax_number">Fax Number:</label>
 										<input type="number" class="form-control" name="fax_number" value="">
 									</div>
 								</div>
-							</div>
-							<div class="col-sm-4 uploadfile">
-								<label for="SupplierLogo"><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
-								<div class="uploadfile-container2">
-									<input class="input-file my-file" name="logo" id="my-file" type="file" accept="image/*">
-									<p class="file-return"></p>
+								<div class="col-sm-6 uploadfile">
+									<label for="SupplierLogo"><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
+									<div class="uploadfile-container2">
+										<input class="input-file my-file" name="logo" id="my-file" type="file" accept="image/*">
+										<p class="file-return"></p>
+									</div>
 								</div>
 							</div>
-							<div class="col-sm-4 filecontent">
+
+							<!-- <div class="col-sm-4 filecontent">
 								<label for=""><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
 								<div class="uploadfile-container2">
 									<button type="button">Choose File</button>
 									<span class = "filechosen" >No file chosen</span>
 									<p class="file-return"></p>
 								</div>
-							</div>
+							</div> -->
 								</div>
 								<div class="modal-footer">
 									<button type="submit" class="btn btn-primary add">Submit</button>
