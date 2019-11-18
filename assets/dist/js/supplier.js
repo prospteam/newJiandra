@@ -66,7 +66,7 @@ $(document).ready(function(){
               }else {
                  blankVal();
                   $('#addSupplier').modal('hide');
-                  Swal.fire("Successfully added supplier!",data.success, "success");
+                  Swal.fire("Supplier has been added!", data.success, "success");
                   $(".suppliers_tbl").DataTable().ajax.reload();
               }
           }
@@ -92,7 +92,7 @@ $(document).ready(function(){
     }).then((result) => {
       if (result.value) {
         Swal.fire(
-          'Disable!',
+          'Disabled!',
           'Successfully Disabled Supplier!',
           'success'
         )
@@ -160,7 +160,7 @@ $(document).ready(function(){
     }).then((result) => {
       if (result.value) {
         Swal.fire(
-          'Delete!',
+          'Deleted!',
           'Successfully Deleted Supplier!',
           'success'
         )
@@ -243,8 +243,7 @@ $(document).ready(function(){
            $('.supplier_name').text(data.supplier.supplier_name);
            $('.supplier_contact_person').text(data.supplier.supplier_contact_person);
            $('.office_number').text(data.supplier.office_number);
-           $('.home_number').text(data.supplier.home_number);
-           $('.mobile_number').text(data.supplier.mobile_number);
+           $('.email').text(data.supplier.email);
            $('.tin').text(data.supplier.tin_number);
            $('.fax_number').text(data.supplier.fax_number);
            var company_list = [];
@@ -273,6 +272,7 @@ $(document).ready(function(){
              $('#editSupplier').modal('show');
              $('#editSupplier input[name =supplier_name]').val(data.supplier.supplier_name);
              $('#editSupplier input[name=supplier_contact_person]').val(data.supplier.supplier_contact_person);
+             $('#editSupplier input[name=email]').val(data.supplier.supplier_contact_person);
              var company_list = [];
              $('#editSupplier .js-example-basic-multiple-edit').html('');
 
@@ -282,8 +282,6 @@ $(document).ready(function(){
              });
 
              $('#editSupplier input[name=office_number]').val(data.supplier.office_number);
-             $('#editSupplier input[name=home_number]').val(data.supplier.home_number);
-             $('#editSupplier input[name=mobile_number]').val(data.supplier.mobile_number);
              $('#editSupplier input[name=tin_number]').val(data.supplier.tin_number);
              $('#editSupplier input[name=fax_number]').val(data.supplier.fax_number);
              $('#editSupplier .filechosen').text(data.supplier.supplier_logo);
@@ -338,8 +336,7 @@ function blankVal(){
   $('#addSupplier input[name="supplier_contact_person"]').val('');
   $('#addSupplier select[name="company[]"]').val('');
   $('#addSupplier input[name="office_number"]').val('');
-  $('#addSupplier input[name="home_number"]').val('');
-  $('#addSupplier input[name="mobile_number"]').val('');
+  $('#addSupplier input[name="email"]').val('');
   $('#addSupplier input[name="tin_number"]').val('');
   $('#addSupplier input[name="fax_number"]').val('');
   $('#addSupplier .filechosen').val();
