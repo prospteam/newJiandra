@@ -709,7 +709,7 @@ function blankVal_vehicle(){
   $('#AddVehicle input[name="plate_number"]').val('');
   $('.err').text('');
   $('#AddVehicle input[name="vehicle_brand"]').val('');
-  // $('#AddVehicle select[name="vehicle_type"]').val('-1');
+  $('#AddVehicle select[name="vehicle_type"]').val('');
   $('#AddVehicle input[name="fuel_type"]').val('');
   $('#AddVehicle input[name="num_of_tires"]').val('');
   $('#AddVehicle input[name="accounting_date_acquired"]').val('');
