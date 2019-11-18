@@ -15,6 +15,8 @@
 <script src="<?php echo base_url('assets/dist/js/demo.js'); ?>"></script>
 <!-- Select2 -->
 <script src="<?php echo base_url('assets/plugins/select2/js/select2.full.min.js'); ?>"></script>
+<!-- bootstrap datepicker -->
+<script src="<?php echo base_url('assets/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js'); ?>"></script>
 <!--custom js-->
 <script src="<?php echo base_url('assets/dist/js/app.js'); ?>"></script>
 <!-- supplier js -->

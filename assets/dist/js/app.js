@@ -228,7 +228,7 @@ $(document).ready(function(){
              }else if (data.error) {
                  Swal.fire("Error",data.error, "error");
              }else {
-                blankVal();
+                blankVal_user();
                  $('#AddUser').modal('hide');
                  Swal.fire("Successfully added user!",data.success, "success");
                  $(".users_tbl").DataTable().ajax.reload();
@@ -695,13 +695,13 @@ function clearError(){
     $('.err').text('');
 }
 
-function blankVal(){
+function blankVal_user(){
   $('#AddUser input[name="fullname"]').val('');
   $('.err').text('');
   $('#AddUser input[name="username"]').val('');
   $('#AddUser input[name="password"]').val('');
-  $('#AddUser input[name="position"]').val('');
-  $('#AddUser select[name="company"]').val('');
+  $('#AddUser select[name="position"]').val('');
+  $('#AddUser .js-example-basic-multiple-addU').val('').trigger('change');
 }
 
 
@@ -709,7 +709,7 @@ function blankVal_vehicle(){
   $('#AddVehicle input[name="plate_number"]').val('');
   $('.err').text('');
   $('#AddVehicle input[name="vehicle_brand"]').val('');
-  // $('#AddVehicle select[name="vehicle_type"]').val('-1');
+  $('#AddVehicle select[name="vehicle_type"]').val('');
   $('#AddVehicle input[name="fuel_type"]').val('');
   $('#AddVehicle input[name="num_of_tires"]').val('');
   $('#AddVehicle input[name="accounting_date_acquired"]').val('');
@@ -733,3 +733,9 @@ function blankVal_vehicle(){
   $('#AddVehicle textarea[name="material_desc"]').val('');
 
 }
+
+$( function() {
+  $('.datepicker').datepicker({
+    autoclose: true
+    })
+ });

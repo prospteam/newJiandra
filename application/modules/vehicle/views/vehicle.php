@@ -27,14 +27,14 @@
                       <div class="row">
                         <div class="col-6">
                           <div class="form-group">
-                            <label for="plate_number">Plate Number:</label>
+                            <label for="plate_number">Plate Number: <span class="required">*</span></label>
                             <input type="text" class="form-control" name="plate_number" value="">
                             <span class="err"></span>
                           </div>
                         </div>
                         <div class="col-6">
                           <div class="form-group">
-                            <label for="vehicle_brand">Vehicle Brand:</label>
+                            <label for="vehicle_brand">Vehicle Brand: <span class="required">*</span></label>
                             <input type="text" class="form-control" name="vehicle_brand" value="">
                             <span class="err"></span>
                           </div>
@@ -43,7 +43,7 @@
                       <div class="row">
                         <div class="col-4">
                           <div class="form-group">
-                            <label for="vehicle_type">Vehicle Type:</label>
+                            <label for="vehicle_type">Vehicle Type: <span class="required">*</span></label>
                             <select class="form-control" name="vehicle_type">
                               <option value="" selected hidden>Select Vehicle Type</option>
                               <option value="1">Warehouse Truck</option>
@@ -55,14 +55,14 @@
                         </div>
                         <div class="col-4">
                           <div class="form-group">
-                            <label for="fuel_type">Fuel Type:</label>
+                            <label for="fuel_type">Fuel Type: <span class="required">*</span></label>
                             <input type="text" class="form-control" name="fuel_type" value="">
                             <span class="err"></span>
                           </div>
                         </div>
                         <div class="col-4">
                           <div class="form-group">
-                            <label for="num_of_tires">Number of Tires:</label>
+                            <label for="num_of_tires">Number of Tires: <span class="required">*</span></label>
                             <input type="number" class="form-control" name="num_of_tires" value="">
                             <span class="err"></span>
                           </div>
@@ -74,7 +74,7 @@
                       <div class="col-6">
                         <div class="form-group">
                           <label for="accounting_date_acquired">Date Acquired:</label>
-                          <input type="date" class="form-control" name="accounting_date_acquired" value="">
+                          <input type="text" id="datepicker" class="form-control datepicker" name="accounting_date_acquired" value="">
                           <span class="err"></span>
                         </div>
                       </div>
@@ -90,7 +90,7 @@
                       <div class="col-6">
                         <div class="form-group">
                           <label for="accounting_full_dep_date">Full Dep. Date:</label>
-                          <input type="date" class="form-control" name="accounting_full_dep_date" value="">
+                          <input type="text" id="datepicker" class="form-control datepicker" name="accounting_full_dep_date" value="">
                           <span class="err"></span>
                         </div>
                       </div>
@@ -177,7 +177,7 @@
                       <div class="col-3">
                         <div class="form-group">
                           <label for="van_reg_date">Registration Date:</label>
-                          <input type="date" class="form-control" name="van_reg_date" value="">
+                          <input type="text" id="datepicker" class="form-control datepicker" name="van_reg_date" value="">
                           <span class="err"></span>
                         </div>
                       </div>
@@ -191,14 +191,14 @@
                       <div class="col-3">
                         <div class="form-group">
                           <label for="van_renewal_date">Renewal Date:</label>
-                          <input type="date" class="form-control" name="van_renewal_date" value="">
+                          <input type="text" id="datepicker" class="form-control datepicker" name="van_renewal_date" value="">
                           <span class="err"></span>
                         </div>
                       </div>
                       <div class="col-3">
                         <div class="form-group">
                           <label for="van_exp_date">Expiration Date:</label>
-                          <input type="date" class="form-control" name="van_exp_date" value="">
+                          <input type="text" id="datepicker" class="form-control datepicker" name="van_exp_date" value="">
                           <span class="err"></span>
                         </div>
                       </div>
@@ -209,21 +209,21 @@
                       <div class="col-4">
                         <div class="form-group">
                           <label for="land_reg_date">Registration Date:</label>
-                          <input type="date" class="form-control" name="land_reg_date" value="">
+                          <input type="text" id="datepicker" class="form-control datepicker" name="land_reg_date" value="">
                           <span class="err"></span>
                         </div>
                       </div>
                       <div class="col-4">
                         <div class="form-group">
                           <label for="land_renewal_date">Renewal Date:</label>
-                          <input type="date" class="form-control" name="land_renewal_date" value="">
+                          <input type="text" id="datepicker" class="form-control datepicker" name="land_renewal_date" value="">
                           <span class="err"></span>
                         </div>
                       </div>
                       <div class="col-4">
                         <div class="form-group">
                           <label for="land_exp_date">Expiration Date:</label>
-                          <input type="date" class="form-control" name="land_exp_date" value="">
+                          <input type="text" id="datepicker" class="form-control datepicker" name="land_exp_date" value="">
                           <span class="err"></span>
                         </div>
                       </div>
@@ -469,14 +469,14 @@
                   <div class="row">
                     <div class="col-6">
                       <div class="form-group">
-                        <label for="plate_number">Plate Number:</label>
+                        <label for="plate_number">Plate Number: <span class="required">*</span></label>
                         <input type="text" class="form-control" name="plate_number" value="">
                         <span class="err"></span>
                       </div>
                     </div>
                     <div class="col-6">
                       <div class="form-group">
-                        <label for="vehicle_brand">Vehicle Brand:</label>
+                        <label for="vehicle_brand">Vehicle Brand: <span class="required">*</span></label>
                         <input type="text" class="form-control" name="vehicle_brand" value="">
                         <span class="err"></span>
                       </div>
@@ -485,7 +485,7 @@
                   <div class="row">
                     <div class="col-4">
                       <div class="form-group">
-                        <label for="vehicle_type">Vehicle Type:</label>
+                        <label for="vehicle_type">Vehicle Type: <span class="required">*</span></label>
                         <select class="form-control" name="vehicle_type">
                         <!-- <option value="-1" selected="selected" disabled="disabled">Select Vehicle Type</option> -->
                           <option value="1">Warehouse Truck</option>
@@ -497,14 +497,14 @@
                     </div>
                     <div class="col-4">
                       <div class="form-group">
-                        <label for="fuel_type">Fuel Type:</label>
+                        <label for="fuel_type">Fuel Type: <span class="required">*</span></label>
                         <input type="text" class="form-control" name="fuel_type" value="">
                         <span class="err"></span>
                       </div>
                     </div>
                     <div class="col-4">
                       <div class="form-group">
-                        <label for="num_of_tires">Number of Tires:</label>
+                        <label for="num_of_tires">Number of Tires: <span class="required">*</span></label>
                         <input type="number" class="form-control" name="num_of_tires" value="">
                         <span class="err"></span>
                       </div>
@@ -516,7 +516,7 @@
                   <div class="col-6">
                     <div class="form-group">
                       <label for="accounting_date_acquired">Date Acquired:</label>
-                      <input type="date" class="form-control" name="accounting_date_acquired" value="">
+                      <input type="text" id="datepicker" class="form-control datepicker" name="accounting_date_acquired" value="">
                       <span class="err"></span>
                     </div>
                   </div>
@@ -532,7 +532,7 @@
                   <div class="col-6">
                     <div class="form-group">
                       <label for="accounting_full_dep_date">Full Dep. Date:</label>
-                      <input type="date" class="form-control" name="accounting_full_dep_date" value="">
+                      <input type="text" id="datepicker" class="form-control datepicker" name="accounting_full_dep_date" value="">
                       <span class="err"></span>
                     </div>
                   </div>
@@ -619,7 +619,7 @@
                   <div class="col-3">
                     <div class="form-group">
                       <label for="van_reg_date">Registration Date:</label>
-                      <input type="date" class="form-control" name="van_reg_date" value="">
+                      <input type="text" id="datepicker" class="form-control datepicker" name="van_reg_date" value="">
                       <span class="err"></span>
                     </div>
                   </div>
@@ -633,14 +633,14 @@
                   <div class="col-3">
                     <div class="form-group">
                       <label for="van_renewal_date">Renewal Date:</label>
-                      <input type="date" class="form-control" name="van_renewal_date" value="">
+                      <input type="text" id="datepicker" class="form-control datepicker" name="van_renewal_date" value="">
                       <span class="err"></span>
                     </div>
                   </div>
                   <div class="col-3">
                     <div class="form-group">
                       <label for="van_exp_date">Expiration Date:</label>
-                      <input type="date" class="form-control" name="van_exp_date" value="">
+                      <input type="text" id="datepicker" class="form-control datepicker" name="van_exp_date" value="">
                       <span class="err"></span>
                     </div>
                   </div>
@@ -651,21 +651,21 @@
                   <div class="col-4">
                     <div class="form-group">
                       <label for="land_reg_date">Registration Date:</label>
-                      <input type="date" class="form-control" name="land_reg_date" value="">
+                      <input type="text" id="datepicker" class="form-control datepicker" name="land_reg_date" value="">
                       <span class="err"></span>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group">
                       <label for="land_renewal_date">Renewal Date:</label>
-                      <input type="date" class="form-control" name="land_renewal_date" value="">
+                      <input type="text" id="datepicker" class="form-control datepicker" name="land_renewal_date" value="">
                       <span class="err"></span>
                     </div>
                   </div>
                   <div class="col-4">
                     <div class="form-group">
                       <label for="land_exp_date">Expiration Date:</label>
-                      <input type="date" class="form-control" name="land_exp_date" value="">
+                      <input type="text" id="datepicker" class="form-control datepicker" name="land_exp_date" value="">
                       <span class="err"></span>
                     </div>
                   </div>
