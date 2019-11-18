@@ -22,6 +22,6 @@ a.btn-newj {
 li.nav-item.has-treeview:hover {
     background: #e2e2f7 !important;
 }
-li.nav-item:hover {
-    background-color: #6061d1;
+ul.nav.nav-treeview:hover {
+    background-color: #e2e2f7 !important;
 }
