@@ -29,7 +29,7 @@ class Login extends MY_Controller {
 			$this->load_login_page('login',$data);
 		}else{
 
-			$parameters['where'] =  array('username' => $username);
+			$parameters['where'] =  array('username' => $username, 'status' => 1);
 			// $parameters['select'] = 'id, fullname, position';
 			$result = $this->MY_Model->getRows('users',$parameters,'row');
 			if($result){

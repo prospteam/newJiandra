@@ -8,12 +8,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Font Awesome -->
+  	<link rel="icon" type="image/png" href="<?php echo base_url('assets/login/images/icons/newjiandra.png'); ?>"/>
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/fontawesome-free/css/all.min.css'); ?>">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/adminlte.css'); ?>">
-  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/custom.css'); ?>">
   <!-- bootstrap datepicker -->
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'); ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/style.css'); ?>">
@@ -29,6 +27,9 @@
   <!-- Select2 -->
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/select2/css/select2.min.css');?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css'); ?>">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/adminlte.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/custom.css'); ?>">
 </head>
 
 <body class="hold-transition sidebar-mini">

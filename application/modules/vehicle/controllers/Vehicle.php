@@ -173,7 +173,7 @@ class Vehicle extends MY_Controller {
 	// Edit Vehicle
 	public function editVehicle()
 	{
-		
+
 		$vehicle_id = $this->input->post('id');
 			$result = false;
 		if(!empty($this->input->post())){
@@ -228,6 +228,24 @@ class Vehicle extends MY_Controller {
 		$data['view_edit'] = $this->MY_Model->getRows('vehicles',$parameters,'row');
 		// echo $this->db->last_query();
 		echo json_encode($data);
+	}
+
+	public function listvehiclebrands()
+	{
+			$post = $this->input->post();
+			$result = false;
+
+			if (!empty($post)) {
+					$postLike = !empty($post['searchfor']['term']) ? $post['searchfor']['term'] : '';
+					$where = $post['search_type'] == 'vehicle_brand' ? "vehicle_brand LIKE '%" . $postLike . "%'" : "fuel_type LIKE '%" . $postLike . "%'";
+					$select = $post['search_type'] == 'vehicle_brand' ? "vehicle_brand AS vehicle_id, vehicle_brand" : "fuel_type AS vehicle_id, fuel_type AS vehicle_brand";
+					$group = "GROUP BY " . $post['search_type'] . " ORDER BY " . $post['search_type'] . " ASC";
+
+					$list = $this->MY_Model->getRowByQuery("SELECT $select FROM " . $this->tables->vehicles . " WHERE $where AND status = 1 $group");
+					$result['items'] = $list;
+			}
+
+			die(json_encode($result));
 	}
 
 
