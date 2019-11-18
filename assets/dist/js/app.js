@@ -140,11 +140,10 @@ $(document).ready(function(){
 
   //display companies for add user
    $('.js-example-basic-multiple-addU').select2({
-     theme: "classic",
      allowClear: true,
      placeholder: "Select Company",
      dropdownParent: $('#AddUser'),
-     tags: true,
+     tags: false,
      ajax: {
        url: base_url+'users/add_companies',
        dataType: "json",
@@ -167,7 +166,6 @@ $(document).ready(function(){
 
    //display companies for edit user
     $('.js-example-basic-multiple-editU').select2({
-      theme: "classic",
       allowClear: true,
       placeholder: "Select Company",
       dropdownParent: $('#EditUser'),
@@ -190,6 +188,35 @@ $(document).ready(function(){
          }
       }
     });
+
+    //display companies for add vehicle brand
+     $('.js-example-basic-multiple-addvehicle').select2({
+       placeholder: "Enter Value",
+       dropdownParent: $('#AddVehicle'),
+       tags: [],
+       ajax: {
+         url: base_url+'vehicle/listvehiclebrands',
+         dataType: "json",
+         type: "POST",
+         quietMillis: 50,
+         data: function (text) {
+           return {
+                       searchfor: text,
+                       search_type: $(this).attr('data-type')
+                   };
+        },processResults: function (data) {
+
+              return {
+                  results: $.map(data.items, function (item) {
+                      return {
+                          text: item.vehicle_brand,
+                          id: item.vehicle_id
+                      }
+                  })
+              };
+          }
+       }
+     });
 
    //display position
     $('.position').change(function(){

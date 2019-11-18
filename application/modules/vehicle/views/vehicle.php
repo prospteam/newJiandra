@@ -35,7 +35,10 @@
                         <div class="col-6">
                           <div class="form-group">
                             <label for="vehicle_brand">Vehicle Brand: <span class="required">*</span></label>
-                            <input type="text" class="form-control" name="vehicle_brand" value="">
+                            <select class="form-control js-example-basic-multiple-addvehicle"  name="vehicle_brand" id="vehicle_brand" data-type="vehicle_brand">
+                              <option></option>
+                          </select>
+                            <!-- <input type="text" class="form-control" name="vehicle_brand" value=""> -->
                             <span class="err"></span>
                           </div>
                         </div>
@@ -56,7 +59,10 @@
                         <div class="col-4">
                           <div class="form-group">
                             <label for="fuel_type">Fuel Type: <span class="required">*</span></label>
-                            <input type="text" class="form-control" name="fuel_type" value="">
+                            <select name="fuel_type" id="fuel_type" class="form-control js-example-basic-multiple-addvehicle"  data-type="fuel_type">
+                              <option></option>
+                          </select>
+                            <!-- <input type="text" class="form-control" name="fuel_type" value=""> -->
                             <span class="err"></span>
                           </div>
                         </div>

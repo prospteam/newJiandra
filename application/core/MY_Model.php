@@ -28,6 +28,21 @@ class MY_Model extends CI_Model {
         }
     }
 
+    public function getRowByQuery($query, $result = '')
+    {
+        $query = $this->db->query($query);
+
+        if ($query->num_rows() > 0) {
+            if (!empty($result) && $result == 'row') {
+                return $query->row_array();
+            } else {
+                return $query->result_array();
+            }
+        } else {
+            return false;
+        }
+    }
+
     public function getRows($table,$options = array(),$result = 'array'){
         (!empty($options['select']))        ? $this->db->select($options['select']) : $this->db->select("*");
         (!empty($options['where']))         ? $this->db->where($options['where']) : null;

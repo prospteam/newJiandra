@@ -22,6 +22,6 @@
 <!-- supplier js -->
 <script src="<?php echo base_url('assets/dist/js/supplier.js'); ?>"></script>
 
-</script>
+
 </body>
 </html>

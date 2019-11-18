@@ -1,5 +1,5 @@
 /*!
- * Select2 4.0.11
+ * Select2 4.0.10
  * https://select2.github.io
  *
  * Released under the MIT license
@@ -4493,14 +4493,7 @@ S2.define('select2/dropdown/attachBody',[
       $offsetParent = $offsetParent.offsetParent();
     }
 
-    var parentOffset = {
-      top: 0,
-      left: 0
-    };
-
-    if ($.contains(document.body, $offsetParent[0])) {
-      parentOffset = $offsetParent.offset();
-    }
+    var parentOffset = $offsetParent.offset();
 
     css.top -= parentOffset.top;
     css.left -= parentOffset.left;

@@ -69,9 +69,22 @@ button.close {
   color:black;
 }
 
-input.select2-search__field {
+/* input.select2-search__field {
     display: none;
+} */
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #6b6ca5a3;
+    border-color: #6b6ca5a3;
+    color: #ffffff;
+    padding: 0 10px;
 }
+
+.select2-container--default .select2-results__option--highlighted[aria-selected], .select2-container--default .select2-results__option--highlighted[aria-selected]:hover {
+    background-color: #a0a1c5;
+    color: #ffffff;
+}
+
 @media only screen and (max-width: 362px) {
     button.button1 {
         font-size: 19px;
