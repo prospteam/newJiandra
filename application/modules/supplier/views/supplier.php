@@ -26,14 +26,14 @@
 									<div class="row">
 										<div class="col-6">
 											<div class="form-group">
-												<label for="supplier_name">Supplier Name <span style="color:red;">*</span></label>
+												<label for="supplier_name">Supplier Name: <span class="required">*</span></label>
 												<input type="text" class="form-control" name="supplier_name" value="">
 												<span class="err"></span>
 											</div>
 										</div>
 										<div class="col-6">
 											<div class="form-group">
-												<label for="supplier_contact_person">Supplier Contact Person: <span style="color:red;">*</span> </label>
+												<label for="supplier_contact_person">Supplier Contact Person:<span class="required"> *</span> </label>
 												<input type="text" class="form-control" name="supplier_contact_person" value="">
 												<span class="err"></span>
 											</div>
@@ -42,7 +42,7 @@
 									<div class="row">
 										<div class="col-6">
 											<div class="form-group">
-												<label for="companytitle">Company <span style="color:red;">*</span> </label>
+												<label for="companytitle">Company: <span class="required">*</span> </label>
 												<!-- <input type="text" name="companytitle" value="" required> -->
 											<select class="form-control js-example-basic-multiple" name="company[]" multiple="multiple"></select>
 												<span class="err"></span>
@@ -50,7 +50,7 @@
 									</div>
 									<div class="col-6">
 										<div class="form-group">
-											<label for="email">Email: <span style="color:red;">*</span> </label>
+											<label for="email">Email: <span class="required">*</span> </label>
 											<input type="email" class="form-control" name="email" value="">
 											<span class="err"></span>
 										</div>
@@ -71,7 +71,7 @@
 										</div> -->
 								<div class="col-6">
 									<div class="form-group">
-										<label for="office_number">Office Number: <span style="color:red;">*</span> </label>
+										<label for="office_number">Office Number: <span class="required">*</span> </label>
 										<input type="tel" class="form-control" name="office_number" value="">
 										<span class="err"></span>
 									</div>
@@ -114,8 +114,8 @@
 				<div class="modal fade" id="viewSupplier" tabindex="-1" role="dialog" aria-	labelledby="exampleModalLabel" aria-hidden="true">\
 						<div class="modal-dialog modal-lg" role="document">
 							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-eye" style="color:black" aria-hidden="true"></i>  View Supplier Details</h5>
+								<div class="modal-header bg-info1">
+									<h5 class="modal-title" id="exampleModalLabel"> View Supplier Details</h5>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
@@ -137,12 +137,12 @@
 									</div>
 								<div class = "row">
 											<div class="col-6">
-													<label for="company">Company</label>
+													<label for="company">Company: </label>
 													<p class="company"> </p>
 										</div>
 										<div class="col-6">
 											<div class="form-group">
-												<label for="email">Email</label>
+												<label for="email">Email: </label>
 												<p class="email"> </p>
 											</div>
 										</div>
@@ -172,8 +172,8 @@
 					<form id="editSupplier" class = "editcompany" method="post">
 						<div class="modal-dialog modal-lg" role="document">
 							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel"> <i class="fas fa-edit"></i> Edit Supplier</h5>
+								<div class="modal-header bg-info1">
+									<h5 class="modal-title" id="exampleModalLabel"> Edit Supplier</h5>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
@@ -190,7 +190,7 @@
 										<div class="col-6">
 											<div class="form-group">
 												<label for="supplier_contact_person">Supplier Contact Person:</label>
-												<input type="number" class="form-control" name="supplier_contact_person" value="">
+												<input type="text" class="form-control" name="supplier_contact_person" value="">
 												<span class="err"></span>
 											</div>
 										</div>
@@ -229,30 +229,36 @@
 									</div>
 							</div>
 							<div class = "row">
+
 								<div class="col-6">
 									<div class="form-group">
 										<label for="fax_number">Fax Number:</label>
 										<input type="number" class="form-control" name="fax_number" value="">
 									</div>
 								</div>
-								<div class="col-sm-6 uploadfile">
-									<label for="SupplierLogo"><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
-									<div class="uploadfile-container2">
-										<input class="input-file my-file" name="logo" id="my-file" type="file" accept="image/*">
-										<p class="file-return"></p>
-									</div>
-								</div>
-							</div>
 
-							<!-- <div class="col-sm-4 filecontent">
-								<label for=""><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
-								<div class="uploadfile-container2">
-									<button type="button">Choose File</button>
-									<span class = "filechosen" >No file chosen</span>
-									<p class="file-return"></p>
+								<div class="col-sm-6">
+
+									<div class="form-group filecontent">
+										<label for=""><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
+										<div class="uploadfile-container2">
+											<button type="button">Choose File</button>
+											<span class = "filechosen" >No file chosen</span>
+											<p class="file-return"></p>
+										</div>
+									</div>
+									<div class="form-group uploadfile">
+										<label for="SupplierLogo"><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
+										<div class="uploadfile-container2">
+											<input class="input-file my-file" name="logo" id="my-file" type="file" accept="image/*">
+											<p class="file-return"></p>
+										</div>
+									</div>
+
+									</div>
+
 								</div>
-							</div> -->
-								</div>
+
 								<div class="modal-footer">
 									<button type="submit" class="btn btn-primary add">Submit</button>
 								</div>
