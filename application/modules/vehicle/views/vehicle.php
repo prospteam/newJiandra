@@ -125,7 +125,7 @@
                       <div class="col-2">
                         <div class="form-group approx">
                           <label for="approx_length">Length:</label>
-                          <input type="number" class="form-control" name="approx_length" value="">
+                          <input type="number" class="form-control capacity" name="approx_length" value="">
                           <span class="err"></span>
                         </div>
                       </div>
@@ -136,7 +136,7 @@
                       <div class="col-2">
                         <div class="form-group approx">
                           <label for="approx_width">Width:</label>
-                          <input type="number" class="form-control" name="approx_width" value="">
+                          <input type="number" class="form-control capacity" name="approx_width" value="">
                           <span class="err"></span>
                         </div>
                       </div>
@@ -146,7 +146,7 @@
                       <div class="col-2">
                         <div class="form-group approx">
                           <label for="approx_height">Height:</label>
-                          <input type="number" class="form-control" name="approx_height" value="">
+                          <input type="number" class="form-control capacity" name="approx_height" value="">
                           <span class="err"></span>
                         </div>
                       </div>
@@ -156,7 +156,7 @@
                       <div class="col-2">
                         <div class="form-group approx">
                           <label for="approx_volume">Volume:</label>
-                          <input type="number" class="form-control" name="approx_volume" value="">
+                          <input type="number" class="form-control" id="volume" name="approx_volume" value="">
                           <span class="err"></span>
                         </div>
                       </div>
@@ -567,7 +567,7 @@
                   <div class="col-2">
                     <div class="form-group approx">
                       <label for="approx_length">Length:</label>
-                      <input type="number" class="form-control" name="approx_length" value="">
+                      <input type="number" class="form-control capacity_edit" name="approx_length" value="">
                       <span class="err"></span>
                     </div>
                   </div>
@@ -578,7 +578,7 @@
                   <div class="col-2">
                     <div class="form-group approx">
                       <label for="approx_width">Width:</label>
-                      <input type="number" class="form-control" name="approx_width" value="">
+                      <input type="number" class="form-control capacity_edit" name="approx_width" value="">
                       <span class="err"></span>
                     </div>
                   </div>
@@ -588,7 +588,7 @@
                   <div class="col-2">
                     <div class="form-group approx">
                       <label for="approx_height">Height:</label>
-                      <input type="number" class="form-control" name="approx_height" value="">
+                      <input type="number" class="form-control capacity_edit" name="approx_height" value="">
                       <span class="err"></span>
                     </div>
                   </div>
@@ -598,7 +598,7 @@
                   <div class="col-2">
                     <div class="form-group approx">
                       <label for="approx_volume">Volume:</label>
-                      <input type="number" class="form-control" name="approx_volume" value="">
+                      <input type="number" id="volume_edit" class="form-control" name="approx_volume" value="">
                       <span class="err"></span>
                     </div>
                   </div>
