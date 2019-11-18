@@ -113,7 +113,7 @@ $(document).ready(function(){
                    if(row.status == 1){
                      str += '<span class="active btn btn-block btn-sm btn-success">active</button>';
                    }else if(row.status == 2){
-                     str += '<span class="active btn btn-block btn-sm btn-danger">active</button>';
+                     str += '<span class="inactive btn btn-block btn-sm btn-danger">inactive</button>';
                    }
                    return str;
               }
@@ -686,6 +686,36 @@ $(document).ready(function(){
            })
        }
      })
+   });
+
+   //auto compute volume in add vehicle
+   $('.capacity').change(function(){
+      var total = 1;
+      $('.capacity').each(function(){
+        var cur_cap = $(this).val();
+        if(cur_cap != ''){
+
+          total *= cur_cap;
+        }
+      });
+
+      $('#volume').val(total);
+
+   });
+
+   //auto compute volume in edit vehicle
+   $('.capacity_edit').change(function(){
+      var total = 1;
+      $('.capacity_edit').each(function(){
+        var cur_cap = $(this).val();
+        if(cur_cap != ''){
+
+          total *= cur_cap;
+        }
+      });
+
+      $('#volume_edit').val(total);
+
    });
 
 });
