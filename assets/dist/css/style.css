@@ -19,6 +19,9 @@
 a.btn-newj {
     margin: 5px;
 }
-/* li.nav-item.has-treeview:hover {
+li.nav-item.has-treeview:hover {
     background: #e2e2f7 !important;
-} */
+}
+li.nav-item:hover {
+    background-color: #6061d1;
+}
