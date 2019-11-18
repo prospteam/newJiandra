@@ -239,13 +239,13 @@ $(document).ready(function(){
          console.log(data);
          $('#viewSupplier').modal('show');
          // $.each(data.supplier, function(key,val){
-           console.log(data);
+           // console.log(data);
            $('.supplier_name').text(data.supplier.supplier_name);
            $('.supplier_contact_person').text(data.supplier.supplier_contact_person);
-           $('.email').email(data.supplier.email);
-           $('.office_number').number(data.supplier.office_number);
-           $('.tin').number(data.supplier.tin_number);
-           $('.fax_number').number(data.supplier.fax_number);
+           $('.email').text(data.supplier.email);
+           $('.office_number').text(data.supplier.office_number);
+           $('.tin').text(data.supplier.tin_number);
+           $('.fax_number').text(data.supplier.fax_number);
            var company_list = [];
 
            $.each(data.company, function(key,val){

@@ -114,8 +114,8 @@
 				<div class="modal fade" id="viewSupplier" tabindex="-1" role="dialog" aria-	labelledby="exampleModalLabel" aria-hidden="true">\
 						<div class="modal-dialog modal-lg" role="document">
 							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-eye" style="color:black" aria-hidden="true"></i>  View Supplier Details</h5>
+								<div class="modal-header bg-info1">
+									<h5 class="modal-title" id="exampleModalLabel"> View Supplier Details</h5>
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
@@ -137,12 +137,12 @@
 									</div>
 								<div class = "row">
 											<div class="col-6">
-													<label for="company">Company</label>
+													<label for="company">Company: </label>
 													<p class="company"> </p>
 										</div>
 										<div class="col-6">
 											<div class="form-group">
-												<label for="email">Email</label>
+												<label for="email">Email: </label>
 												<p class="email"> </p>
 											</div>
 										</div>
