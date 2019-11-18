@@ -27270,3 +27270,6 @@ button.button.company1:focus {
     background-color: #cecee0;
     color:black;
 }
+li.nav-item.has-treeview:hover {
+    background: #e2e2f7 !important;
+}
