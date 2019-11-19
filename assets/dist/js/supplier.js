@@ -1,7 +1,11 @@
 var base_url = $('input[name="base_url"]').val();
 $(document).ready(function(){
 
+<<<<<<< HEAD
       display_suppliers('0');
+=======
+        display_suppliers('0');
+>>>>>>> 8981c03b6c8e1a4fc008b55c4158f3d784974e2f
 
         $('.my-file').on('change',function(){
 
@@ -38,9 +42,15 @@ $(document).ready(function(){
               $(this).addClass('active-click');
               display_suppliers('0');
         }) ;
+<<<<<<< HEAD
         // $('.t_btn').trigger('click', function(e){
         //   display_suppliers('0');
         // });
+=======
+
+        // $('.t_btn').trigger('click');
+
+>>>>>>> 8981c03b6c8e1a4fc008b55c4158f3d784974e2f
 
   // add supplier
   $(document).on('submit','form#addsupplier',function(e){
@@ -180,7 +190,6 @@ $(document).ready(function(){
 
   //display Companies for add supplier
    $('.js-example-basic-multiple').select2({
-     theme: "classic",
      allowClear: true,
      placeholder: "Select Company",
      dropdownParent: $('#addSupplier'),
@@ -206,7 +215,6 @@ $(document).ready(function(){
 
    //display companies foe edit supplier
    $('.js-example-basic-multiple-edit').select2({
-     theme: "classic",
      allowClear: true,
      placeholder: "Select Company",
      dropdownParent: $('#editSupplier'),
@@ -272,6 +280,7 @@ $(document).ready(function(){
          success: function(data){
 
              $('#editSupplier').modal('show');
+             $('#editSupplier input[name =supplier_id]').val(data.supplier.id);
              $('#editSupplier input[name =supplier_name]').val(data.supplier.supplier_name);
              $('#editSupplier input[name=supplier_contact_person]').val(data.supplier.supplier_contact_person);
              $('#editSupplier input[name=email]').val(data.supplier.email);
@@ -299,7 +308,8 @@ $(document).ready(function(){
      e.preventDefault();
 
      let formData =  new FormData($(this)[0]);
-     var id = $('.editSupplier').attr('data-id');
+     var id = $('.supplierID').val();
+     alert(id);
      formData.append("id",id);
 
      $.ajax({
