@@ -1,7 +1,7 @@
 var base_url = $('input[name="base_url"]').val();
 $(document).ready(function(){
 
-        display_suppliers('1');
+        display_suppliers('0');
 
         $('.my-file').on('change',function(){
 
