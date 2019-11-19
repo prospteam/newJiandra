@@ -82,17 +82,17 @@ $(document).ready(function(){
 
     Swal.fire({
     title: 'Are you sure?',
-    text: "You want to disable this supplier!",
+    text: "This supplier will be deactivated!",
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#d33',
     cancelButtonColor: '#068101',
-    confirmButtonText: 'Yes, Disable Supplier!'
+    confirmButtonText: 'Yes, Deactivate Supplier!'
     }).then((result) => {
       if (result.value) {
         Swal.fire(
-          'Disabled!',
-          'Successfully Disabled Supplier!',
+          'Success!',
+          'Supplier has been deactivated!',
           'success'
         )
           $.ajax({
@@ -117,17 +117,17 @@ $(document).ready(function(){
 
     Swal.fire({
     title: 'Are you sure?',
-    text: "You want to enable this supplier!",
+    text: "This supplier will be activated!",
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#068101',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, Enable supplier!'
+    confirmButtonText: 'Yes, Activate supplier!'
     }).then((result) => {
       if (result.value) {
         Swal.fire(
-          'Enable!',
-          'Successfully Enabled supplier!',
+          'Success!',
+          'Supplier has been activated!',
           'success'
         )
           $.ajax({
@@ -150,7 +150,7 @@ $(document).ready(function(){
 
     Swal.fire({
     title: 'Are you sure?',
-    text: "You want to permanently delete this Supplier!",
+    text: "This supplier will be permanently deleted!",
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#d33',
@@ -159,8 +159,8 @@ $(document).ready(function(){
     }).then((result) => {
       if (result.value) {
         Swal.fire(
-          'Deleted!',
-          'Successfully Deleted Supplier!',
+          'Success!',
+          'Supplier has been permanently deleted!',
           'success'
         )
           $.ajax({

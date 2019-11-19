@@ -384,7 +384,7 @@ class Supplier extends MY_Controller
 		if(!empty($post)) {
 
 			$data = array(
-				'supplier_logo' => $uploadData['file_name'],
+				// 'supplier_logo' => $uploadData['file_name'],
 				'supplier_name' => $post['supplier_name'],
 				'supplier_contact_person' =>$post['supplier_contact_person'],
 				'email'       =>$post['email'],
@@ -398,6 +398,9 @@ class Supplier extends MY_Controller
 
 			if(!empty($post['company'])) {
 				$data['company'] = implode(',',$post['company']);
+			}
+			if(!empty($uploadData['file_name'])) {
+				$data['supplier_logo'] = $uploadData['file_name'];
 			}
 			$update = $this->MY_Model->update('supplier', $data,array('id' => $supplier_id));
 			if ($update) {
