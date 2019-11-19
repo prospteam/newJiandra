@@ -1,5 +1,8 @@
 var base_url = $('input[name="base_url"]').val();
 $(document).ready(function(){
+
+        display_suppliers('0');
+
         $('.my-file').on('change',function(){
 
           var myfile = this.value;
@@ -36,7 +39,7 @@ $(document).ready(function(){
               display_suppliers('0');
         }) ;
 
-        $('.t_btn').trigger('click');
+        // $('.t_btn').trigger('click');
 
 
   // add supplier
@@ -267,6 +270,7 @@ $(document).ready(function(){
          success: function(data){
 
              $('#editSupplier').modal('show');
+             $('#editSupplier input[name =supplier_id]').val(data.supplier.id);
              $('#editSupplier input[name =supplier_name]').val(data.supplier.supplier_name);
              $('#editSupplier input[name=supplier_contact_person]').val(data.supplier.supplier_contact_person);
              $('#editSupplier input[name=email]').val(data.supplier.email);
@@ -294,7 +298,8 @@ $(document).ready(function(){
      e.preventDefault();
 
      let formData =  new FormData($(this)[0]);
-     var id = $('.editSupplier').attr('data-id');
+     var id = $('.supplierID').val();
+     alert(id);
      formData.append("id",id);
 
      $.ajax({

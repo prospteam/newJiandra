@@ -18,6 +18,7 @@
 							<div class="modal-content">
 								<div class="modal-header bg-info1">
 									<h5 class="modal-title" id="exampleModalLabel">Add Supplier</h5>
+
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
@@ -174,6 +175,7 @@
 							<div class="modal-content">
 								<div class="modal-header bg-info1">
 									<h5 class="modal-title" id="exampleModalLabel"> Edit Supplier</h5>
+									<input type="hidden" class="form-control supplierID" name="supplier_id" value="">
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
