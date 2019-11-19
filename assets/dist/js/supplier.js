@@ -39,7 +39,7 @@ $(document).ready(function(){
               display_suppliers('0');
         }) ;
 
-        // $('.t_btn').trigger('click');
+        $('.t_btn').trigger('click');
 
 
   // add supplier
