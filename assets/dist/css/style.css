@@ -22,10 +22,32 @@ table#DataTables_Table_0 {
 a.btn-newj {
     margin: 5px;
 }
-/* @media (min-width: 1024px){
-  a.btn-newj {
-    margin: 25px 14px 46px 28px;
-    padding: 15px 132px 14px 53px;
-  }
+.middle div{
+  display: inline-block;
+  margin-top: 28px;
 }
-} */
+@media only screen and (max-width: 555px){
+.middle{
+    text-align: center;
+    margin: auto;
+}
+
+}
+@media only screen and (max-width: 333px){
+.middle{
+  margin-left: -12px;
+  margin-right: -14px;
+}
+}
+@media only screen and (max-width: 585px){
+.middle{
+    text-align: center;
+    margin: auto;
+}
+@media only screen and (max-width: 343px){
+.btn-newj{
+    text-align: center;
+    margin: auto;
+    padding-left: 21px!important;
+    padding-right: 21px!important;
+}

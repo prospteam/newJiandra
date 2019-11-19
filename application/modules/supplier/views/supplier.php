@@ -283,9 +283,16 @@
 			<div class="card-body1">
 				<div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
 					<div class="middle">
-						<a href="javascript:;" class="btn-newj t_btn" data-id="3">All Suppliers</a>
-						<a href="javascript:;" class="btn-newj f_btn" data-id="1">New Jiandra</a>
-						<a href="javascript:;" class="btn-newj s_btn" data-id="2">Mrs.P Mktg</a>
+						<div class="">
+								<a href="javascript:;" class="btn-newj t_btn" data-id="3">All Suppliers</a>
+						</div>
+						<div class="">
+								<a href="javascript:;" class="btn-newj f_btn" data-id="1">New Jiandra</a>
+						</div>
+						<div class="">
+								<a href="javascript:;" class="btn-newj s_btn" data-id="2">Mrs. P Mktg</a>
+						</div>
+
 						<!-- <button class="button company1" data-id="1">New Jiandra</button>
 						<button class="button company1" data-id="2">Mrs.P Mktg</button> -->
 					</div>

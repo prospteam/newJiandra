@@ -22,19 +22,19 @@ $(document).ready(function(){
 
         $('.f_btn').on('click', function(e){
               e.preventDefault();
-              $(this).siblings().removeClass('active-click');
+              $('.btn-newj').removeClass('active-click');
               $(this).addClass('active-click');
               display_suppliers('1');
         }) ;
         $('.s_btn').on('click', function(e){
               e.preventDefault();
-              $(this).siblings().removeClass('active-click');
+              $('.btn-newj').removeClass('active-click');
               $(this).addClass('active-click');
               display_suppliers('2');
         }) ;
         $('.t_btn').on('click', function(e){
               e.preventDefault();
-              $(this).siblings().removeClass('active-click');
+              $('.btn-newj').removeClass('active-click');
               $(this).addClass('active-click');
               display_suppliers('0');
         }) ;
