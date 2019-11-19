@@ -1,11 +1,7 @@
 var base_url = $('input[name="base_url"]').val();
 $(document).ready(function(){
 
-<<<<<<< HEAD
-      display_suppliers('0');
-=======
         display_suppliers('0');
->>>>>>> 8981c03b6c8e1a4fc008b55c4158f3d784974e2f
 
         $('.my-file').on('change',function(){
 
@@ -42,15 +38,9 @@ $(document).ready(function(){
               $(this).addClass('active-click');
               display_suppliers('0');
         }) ;
-<<<<<<< HEAD
-        // $('.t_btn').trigger('click', function(e){
-        //   display_suppliers('0');
-        // });
-=======
 
         // $('.t_btn').trigger('click');
 
->>>>>>> 8981c03b6c8e1a4fc008b55c4158f3d784974e2f
 
   // add supplier
   $(document).on('submit','form#addsupplier',function(e){
