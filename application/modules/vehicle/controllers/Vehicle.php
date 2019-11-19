@@ -108,7 +108,7 @@ class Vehicle extends MY_Controller {
 			// json($data_array,false);
 			// json($data,false);
 
-			
+
 			$insert = $this->MY_Model->insert('vehicles', $data);
 			if ($insert) {
 				$response = array(
@@ -176,6 +176,7 @@ class Vehicle extends MY_Controller {
 	public function editVehicle()
 	{
 
+
 		$vehicle_id = $this->input->post('id');
 			$result = false;
 		if(!empty($this->input->post())){
@@ -233,6 +234,24 @@ class Vehicle extends MY_Controller {
 	}
 
 	public function listvehiclebrands()
+	{
+			$post = $this->input->post();
+			$result = false;
+
+			if (!empty($post)) {
+					$postLike = !empty($post['searchfor']['term']) ? $post['searchfor']['term'] : '';
+					$where = $post['search_type'] == 'vehicle_brand' ? "vehicle_brand LIKE '%" . $postLike . "%'" : "fuel_type LIKE '%" . $postLike . "%'";
+					$select = $post['search_type'] == 'vehicle_brand' ? "vehicle_brand AS vehicle_id, vehicle_brand" : "fuel_type AS vehicle_id, fuel_type AS vehicle_brand";
+					$group = "GROUP BY " . $post['search_type'] . " ORDER BY " . $post['search_type'] . " ASC";
+
+					$list = $this->MY_Model->getRowByQuery("SELECT $select FROM " . $this->tables->vehicles . " WHERE $where AND status = 1 $group");
+					$result['items'] = $list;
+			}
+
+			die(json_encode($result));
+	}
+
+	public function listvehiclebrands_edit()
 	{
 			$post = $this->input->post();
 			$result = false;

@@ -96,7 +96,7 @@ $(document).ready(function(){
                         str += '<div class="actions">';
                         if(row.status == 1){
                           str += '<a href="javascript:;" class="viewVehicle" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
-                          str += '<a href="javascript:;" class="editVehicle" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
+                          str += '<a href="javascript:;" class="editVehicles" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
                           str += '<a href="javascript:;" class="disableVehicle" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
                           str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                         }else if(row.status == 2){
@@ -218,6 +218,35 @@ $(document).ready(function(){
        }
      });
 
+     //display companies for edit vehicle brand
+      $('.js-example-basic-multiple-editvehicle').select2({
+        placeholder: "Enter Value",
+        dropdownParent: $('#editVehicle'),
+        tags: [],
+        ajax: {
+          url: base_url+'vehicle/listvehiclebrands_edit',
+          dataType: "json",
+          type: "POST",
+          quietMillis: 50,
+          data: function (text) {
+            return {
+                        searchfor: text,
+                        search_type: $(this).attr('data-type')
+                    };
+         },processResults: function (data) {
+
+               return {
+                   results: $.map(data.items, function (item) {
+                       return {
+                           text: item.vehicle_brand,
+                           id: item.vehicle_id
+                       }
+                   })
+               };
+           }
+        }
+      });
+
    //display position
     $('.position').change(function(){
       $.ajax({
@@ -323,7 +352,7 @@ $(document).ready(function(){
 
    });
 
-   //successfully added user
+   //successfully edited user
    $(document).on('submit','#edituser',function(e){
      e.preventDefault();
      let formData =  new FormData($(this)[0]);
@@ -550,7 +579,7 @@ $(document).ready(function(){
 
 
    //edit Vehicle
-   $(document).on('click', '.editVehicle', function(){
+   $(document).on('click', '.editVehicles', function(){
      var id = $(this).attr('data-id');
      $.ajax({
          url: base_url+'vehicle/vehicle_details',
@@ -558,11 +587,15 @@ $(document).ready(function(){
          type: 'post',
          dataType: 'json',
          success: function(data){
+           console.log(data);
              $('#editVehicle').modal('show');
+             $('#editVehicle input[name=vehicle_id]').val(data.view_edit.id);
              $('#editVehicle input[name=plate_number]').val(data.view_edit.plate_number);
-             $('#editVehicle input[name=vehicle_brand]').val(data.view_edit.vehicle_brand);
+             $('#editVehicle #vehicle_brand').append( '<option value='+data.view_edit.vehicle_brand+' selected>'+data.view_edit.vehicle_brand+'</option>' )
+             // $('#editVehicle .js-example-basic-multiple-editvehicle').append(data.view_edit.vehicle_brand);
              $('#editVehicle input[name=vehicle_type').val(data.view_edit.vehicle_type);
-             $('#editVehicle input[name=fuel_type]').val(data.view_edit.fuel_type);
+             $('#editVehicle #fuel_type').append( '<option value='+data.view_edit.fuel_type+' selected>'+data.view_edit.fuel_type+'</option>' )
+             // $('#editVehicle .js-example-basic-multiple-editvehicle').append(data.view_edit.fuel_type);
              $('#editVehicle input[name=num_of_tires]').val(data.view_edit.num_of_tires);
              $('#editVehicle input[name=accounting_date_acquired]').val(data.view_edit.accounting_date_acquired);
              $('#editVehicle input[name=accounting_acqui_amount]').val(data.view_edit.accounting_acqui_amount);
@@ -586,36 +619,37 @@ $(document).ready(function(){
          }
      });
 
-   });
 
+
+   });
    //successfully edit vehicle
    $(document).on('submit','#editvehicle',function(e){
      e.preventDefault();
      let formData =  new FormData($(this)[0]);
-     var id = $('.editVehicle').attr('data-id');
-      // var comp_id = $(this).attr('comp_id');
-      // alert(comp_id);
-     console.log(id);
+     var id = $('.vehicleID').val();
+     alert(id);
      formData.append("id",id);
      $.ajax({
-         method: 'POST',
-         url : base_url + 'vehicle/editVehicle',
-         data : formData,
-         processData: false,
-        contentType: false,
-        cache: false,
-         dataType: 'json',
-         success : function(data) {
-             if(data.status == "ok"){
-               $('#editVehicle').modal('hide');
-                   Swal.fire("Successfully updated Vehicle!",data.success, "success");
-                   $(".vehicle_tbl").DataTable().ajax.reload();
-              }else if(data.status == 'invalid'){
-                 Swal.fire("Error",data.status, "invalid");
-              }
+       method: 'POST',
+       url : base_url + 'vehicle/editVehicle',
+       data : formData,
+       processData: false,
+       contentType: false,
+       cache: false,
+       dataType: 'json',
+       success : function(data) {
+         if(data.status == "ok"){
+           $('#editVehicle').modal('hide');
+           Swal.fire("Successfully updated Vehicle!",data.success, "success");
+           $(".vehicle_tbl").DataTable().ajax.reload();
+         }else if(data.status == 'invalid'){
+           Swal.fire("Error",data.status, "invalid");
          }
+       }
      })
    });
+
+
 
    //disable vehicle
    $(document).on("click",'.disableVehicle', function(e) {

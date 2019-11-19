@@ -178,7 +178,6 @@ $(document).ready(function(){
 
   //display Companies for add supplier
    $('.js-example-basic-multiple').select2({
-     theme: "classic",
      allowClear: true,
      placeholder: "Select Company",
      dropdownParent: $('#addSupplier'),
@@ -204,7 +203,6 @@ $(document).ready(function(){
 
    //display companies foe edit supplier
    $('.js-example-basic-multiple-edit').select2({
-     theme: "classic",
      allowClear: true,
      placeholder: "Select Company",
      dropdownParent: $('#editSupplier'),
