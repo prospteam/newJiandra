@@ -108,6 +108,7 @@ class Vehicle extends MY_Controller {
 			// json($data_array,false);
 			// json($data,false);
 
+			
 			$insert = $this->MY_Model->insert('vehicles', $data);
 			if ($insert) {
 				$response = array(
