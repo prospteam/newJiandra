@@ -299,7 +299,7 @@ $(document).ready(function(){
 
      let formData =  new FormData($(this)[0]);
      var id = $('.supplierID').val();
-     alert(id);
+     // alert(id);
      formData.append("id",id);
 
      $.ajax({
