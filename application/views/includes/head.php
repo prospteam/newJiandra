@@ -87,7 +87,8 @@
 
               <div class="image">
 
-                <p class="account"> <img src="<?php echo base_url('assets/dist/img/user.png'); ?>" class="img-circle elevation-2" alt="User Image">
+                <p class="account">
+                  <!-- <img src="<?php// echo base_url('assets/dist/img/user.png'); ?>" class="img-circle elevation-2" alt="User Image"> -->
                    <span class="acc_name"> <?php echo $this->session->userdata('fullname'); ?> </span> &nbsp; <i class="fas fa-angle-down"></i>
                  </p>
               </div>
