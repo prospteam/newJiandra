@@ -335,6 +335,7 @@ $(document).ready(function(){
          success: function(data){
            $('#EditUser').modal('show');
            console.log(data);
+            $('#edituser input[name=user_id]').val(data.users.id);
              $('#edituser input[name=fullname]').val(data.users.fullname);
              $('#edituser input[name=username]').val(data.users.username);
              // $('#edituser input[name=password]').val(data.users.password);
@@ -356,8 +357,8 @@ $(document).ready(function(){
    $(document).on('submit','#edituser',function(e){
      e.preventDefault();
      let formData =  new FormData($(this)[0]);
-     var id = $('.editUser').attr('data-id');
-     console.log(id);
+     var id = $('.userID').val();
+     alert(id);
      formData.append("id",id);
      $.ajax({
          method: 'POST',

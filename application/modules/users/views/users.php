@@ -149,6 +149,7 @@
               <div class="modal-content">
                 <div class="modal-header bg-info1">
                   <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+                  <input type="hidden" class="form-control userID" name="user_id" >
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
