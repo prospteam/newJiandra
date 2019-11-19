@@ -1,5 +1,8 @@
 var base_url = $('input[name="base_url"]').val();
 $(document).ready(function(){
+
+      display_suppliers('0');
+
         $('.my-file').on('change',function(){
 
           var myfile = this.value;
@@ -35,9 +38,9 @@ $(document).ready(function(){
               $(this).addClass('active-click');
               display_suppliers('0');
         }) ;
-
-        $('.t_btn').trigger('click');
-
+        // $('.t_btn').trigger('click', function(e){
+        //   display_suppliers('0');
+        // });
 
   // add supplier
   $(document).on('submit','form#addsupplier',function(e){
@@ -82,17 +85,17 @@ $(document).ready(function(){
 
     Swal.fire({
     title: 'Are you sure?',
-    text: "This supplier will be deactivated!",
+    text: "You want to disable this supplier!",
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#d33',
     cancelButtonColor: '#068101',
-    confirmButtonText: 'Yes, Deactivate Supplier!'
+    confirmButtonText: 'Yes, Disable Supplier!'
     }).then((result) => {
       if (result.value) {
         Swal.fire(
-          'Success!',
-          'Supplier has been deactivated!',
+          'Disabled!',
+          'Successfully Disabled Supplier!',
           'success'
         )
           $.ajax({
@@ -117,17 +120,17 @@ $(document).ready(function(){
 
     Swal.fire({
     title: 'Are you sure?',
-    text: "This supplier will be activated!",
+    text: "You want to enable this supplier!",
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#068101',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'Yes, Activate supplier!'
+    confirmButtonText: 'Yes, Enable supplier!'
     }).then((result) => {
       if (result.value) {
         Swal.fire(
-          'Success!',
-          'Supplier has been activated!',
+          'Enable!',
+          'Successfully Enabled supplier!',
           'success'
         )
           $.ajax({
@@ -150,7 +153,7 @@ $(document).ready(function(){
 
     Swal.fire({
     title: 'Are you sure?',
-    text: "This supplier will be permanently deleted!",
+    text: "You want to permanently delete this Supplier!",
     type: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#d33',
@@ -159,8 +162,8 @@ $(document).ready(function(){
     }).then((result) => {
       if (result.value) {
         Swal.fire(
-          'Success!',
-          'Supplier has been permanently deleted!',
+          'Deleted!',
+          'Successfully Deleted Supplier!',
           'success'
         )
           $.ajax({

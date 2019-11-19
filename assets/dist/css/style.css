@@ -1,3 +1,6 @@
+table#DataTables_Table_0 {
+    width: 100%!important;
+}
 .filecontent{
   display: inline !important;
   position: relative;
@@ -19,9 +22,10 @@
 a.btn-newj {
     margin: 5px;
 }
-/* li.nav-item.has-treeview:hover {
-    background: #e2e2f7 !important;
+/* @media (min-width: 1024px){
+  a.btn-newj {
+    margin: 25px 14px 46px 28px;
+    padding: 15px 132px 14px 53px;
+  }
 }
-ul.nav.nav-treeview:hover {
-    background-color: #e2e2f7 !important;
 } */
