@@ -1,8 +1,5 @@
 var base_url = $('input[name="base_url"]').val();
 $(document).ready(function(){
-
-        display_suppliers('1');
-
         $('.my-file').on('change',function(){
 
           var myfile = this.value;
@@ -38,6 +35,8 @@ $(document).ready(function(){
               $(this).addClass('active-click');
               display_suppliers('0');
         }) ;
+
+        $('.t_btn').trigger('click');
 
 
   // add supplier
