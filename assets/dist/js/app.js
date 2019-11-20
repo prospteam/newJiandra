@@ -357,7 +357,7 @@ $(document).ready(function(){
      e.preventDefault();
      let formData =  new FormData($(this)[0]);
      var id = $('.userID').val();
-     alert(id);
+     // alert(id);
      formData.append("id",id);
      $.ajax({
          method: 'POST',
@@ -627,7 +627,7 @@ $(document).ready(function(){
      e.preventDefault();
      let formData =  new FormData($(this)[0]);
      var id = $('.vehicleID').val();
-     alert(id);
+     // alert(id);
      formData.append("id",id);
      $.ajax({
        method: 'POST',
