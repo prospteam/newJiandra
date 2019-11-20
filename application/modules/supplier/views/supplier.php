@@ -45,7 +45,9 @@
 											<div class="form-group">
 												<label for="companytitle">Company: <span class="required">*</span> </label>
 												<!-- <input type="text" name="companytitle" value="" required> -->
-											<select class="form-control js-example-basic-multiple" name="company[]" multiple="multiple"></select>
+												<div class="select2-purple">
+													<select class="form-control js-example-basic-multiple" name="company[]" multiple="multiple"></select>
+												</div>
 												<span class="err"></span>
 									</div>
 									</div>
@@ -202,7 +204,9 @@
 												<div class="form-group">
 												<label for="companytitle">Company</label>
 												<!-- <input type="text" name="companytitle" value="" required> -->
-											<select class="form-control js-example-basic-multiple-edit" name="company[]" multiple="multiple"></select>
+												<div class="select2-purple">
+													<select class="form-control js-example-basic-multiple-edit" name="company[]" multiple="multiple"></select>
+												</div>
 												<span class="err"></span>
 									</div>
 									</div>

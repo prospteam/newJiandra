@@ -195,7 +195,7 @@ $(document).ready(function(){
        dropdownParent: $('#AddVehicle'),
        tags: [],
        ajax: {
-         url: base_url+'vehicle/listvehiclebrands',
+         url: base_url+'vehicle/listvehiclebrands_add',
          dataType: "json",
          type: "POST",
          quietMillis: 50,
@@ -502,7 +502,7 @@ $(document).ready(function(){
    //Vehicle
 
    //successfully added vehicle
-   $(document).on('submit','form#addvehicle',function(e){
+   $(document).on('submit','form#Addvehicle',function(e){
      e.preventDefault();
      let formData = $(this).serialize();
 
