@@ -13,7 +13,7 @@
             <!--Add User Modal -->
             <!-- Modal -->
             <div class="modal fade" id="AddVehicle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
-              <form id="addvehicle" method="post">
+              <form id="Addvehicle" method="post">
                 <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content">
                     <div class="modal-header bg-info1">
