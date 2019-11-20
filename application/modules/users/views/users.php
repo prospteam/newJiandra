@@ -63,10 +63,12 @@
     										</div>
     									</div>
     								<div class = "row">
-    								   <div class="col-6">
+    								   <div class="col-12">
     									<div class="form-group">
+                        <div class="select2-purple">
     										<label for="company">Companies: <span class="required">*</span></label>
                         <select class="form-control js-example-basic-multiple-addU" name="company[]" multiple="multiple"></select>
+                      </div>
                         <span class="err"></span>
                     <!-- <span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="8" style="width: 100%;"><span class="selection">
                       <span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false">
