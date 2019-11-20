@@ -18,10 +18,10 @@
     </div><!-- /.container-fluid -->
   </section>
   <div class="total_sales">
-      <img src="http://localhost/newjiandra/assets/dist/img/tops.PNG" alt="Total Sales">
+      <img src="<?php echo base_url('/assets/dist/img/tops.PNG'); ?>" alt="Total Sales">
   </div>
   <div class="top_selling_products">
-    <img src="http://localhost/newjiandra/assets/dist/img/middle.png" alt="Total Sales">
+    <img src="<?php echo base_url('/assets/dist/img/middle.png'); ?>" alt="Total Sales">
   </div>
   <!-- Main content -->
   <section class="content">
