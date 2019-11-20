@@ -192,7 +192,6 @@ $(document).ready(function(){
     //display companies for add vehicle brand
      $('.js-example-basic-multiple-addvehicle').select2({
        placeholder: "Enter Value",
-       dropdownParent: $('#AddVehicle'),
        tags: [],
        ajax: {
          url: base_url+'vehicle/listvehiclebrands_add',
@@ -502,7 +501,7 @@ $(document).ready(function(){
    //Vehicle
 
    //successfully added vehicle
-   $(document).on('submit','form#Addvehicle',function(e){
+   $(document).on('submit','form#AddVehicle',function(e){
      e.preventDefault();
      let formData = $(this).serialize();
 
@@ -592,10 +591,10 @@ $(document).ready(function(){
              $('#editVehicle').modal('show');
              $('#editVehicle input[name=vehicle_id]').val(data.view_edit.id);
              $('#editVehicle input[name=plate_number]').val(data.view_edit.plate_number);
-             $('#editVehicle #vehicle_brand').append( '<option value='+data.view_edit.vehicle_brand+' selected>'+data.view_edit.vehicle_brand+'</option>' )
+             $('#editVehicle #vehicle_brand1').append( '<option value='+data.view_edit.vehicle_brand+' selected>'+data.view_edit.vehicle_brand+'</option>' )
              // $('#editVehicle .js-example-basic-multiple-editvehicle').append(data.view_edit.vehicle_brand);
              $('#editVehicle input[name=vehicle_type').val(data.view_edit.vehicle_type);
-             $('#editVehicle #fuel_type').append( '<option value='+data.view_edit.fuel_type+' selected>'+data.view_edit.fuel_type+'</option>' )
+             $('#editVehicle #fuel_type1').append( '<option value='+data.view_edit.fuel_type+' selected>'+data.view_edit.fuel_type+'</option>' )
              // $('#editVehicle .js-example-basic-multiple-editvehicle').append(data.view_edit.fuel_type);
              $('#editVehicle input[name=num_of_tires]').val(data.view_edit.num_of_tires);
              $('#editVehicle input[name=accounting_date_acquired]').val(data.view_edit.accounting_date_acquired);

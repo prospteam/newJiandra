@@ -13,7 +13,8 @@
             <!--Add User Modal -->
             <!-- Modal -->
             <div class="modal fade" id="AddVehicle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
-              <form id="Addvehicle" method="post">
+              <form id="AddVehicle" method="post">
+
                 <div class="modal-dialog modal-lg" role="document">
                   <div class="modal-content">
                     <div class="modal-header bg-info1">
@@ -483,8 +484,8 @@
                     </div>
                     <div class="col-6">
                       <div class="form-group">
-                        <label for="vehicle_brand">Vehicle Brand: <span class="required">*</span></label>
-                        <select name="vehicle_brand" id="vehicle_brand" class="form-control js-example-basic-multiple-editvehicle"  data-type="vehicle_brand">
+                        <label for="vehicle_brand1">Vehicle Brand: <span class="required">*</span></label>
+                        <select name="vehicle_brand" id="vehicle_brand1" class="form-control js-example-basic-multiple-editvehicle"  data-type="vehicle_brand">
                           <option></option>
                       </select>
                         <span class="err"></span>
@@ -506,8 +507,8 @@
                     </div>
                     <div class="col-4">
                       <div class="form-group">
-                        <label for="fuel_type">Fuel Type: <span class="required">*</span></label>
-                        <select name="fuel_type" id="fuel_type" class="form-control js-example-basic-multiple-editvehicle"  data-type="fuel_type">
+                        <label for="fuel_type1">Fuel Type: <span class="required">*</span></label>
+                        <select name="fuel_type" id="fuel_type1" class="form-control js-example-basic-multiple-editvehicle"  data-type="fuel_type">
                           <option></option>
                       </select>
                         <span class="err"></span>

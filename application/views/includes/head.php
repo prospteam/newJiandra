@@ -26,7 +26,7 @@
   <script src="<?php echo base_url('assets/plugins/jquery/jquery.min.js'); ?>"></script>
   <!-- Select2 -->
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/select2/css/select2.min.css');?>">
-    <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/_select2.scss'); ?>">
+    <!-- <link rel="stylesheet" href="<?php //secho base_url('assets/dist/css/_select2.scss'); ?>"> -->
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css'); ?>">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/adminlte.css'); ?>">
