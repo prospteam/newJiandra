@@ -25,14 +25,14 @@
 								</div>
 								<div class="modal-body">
 									<div class="row">
-										<div class="col-6">
+										<div class="col-lg-6">
 											<div class="form-group">
 												<label for="supplier_name">Supplier Name: <span class="required">*</span></label>
 												<input type="text" class="form-control" name="supplier_name" value="">
 												<span class="err"></span>
 											</div>
 										</div>
-										<div class="col-6">
+										<div class="col-lg-6">
 											<div class="form-group">
 												<label for="supplier_contact_person">Supplier Contact Person:<span class="required"> *</span> </label>
 												<input type="text" class="form-control" name="supplier_contact_person" value="">
@@ -41,7 +41,7 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-6">
+										<div class="col-lg-6">
 											<div class="form-group">
 												<label for="companytitle">Company: <span class="required">*</span> </label>
 												<!-- <input type="text" name="companytitle" value="" required> -->
@@ -51,7 +51,7 @@
 												<span class="err"></span>
 									</div>
 									</div>
-									<div class="col-6">
+									<div class="col-lg-6">
 										<div class="form-group">
 											<label for="email">Email: <span class="required">*</span> </label>
 											<input type="email" class="form-control" name="email" value="">
@@ -60,7 +60,7 @@
 								</div>
 							</div>
 								<div class = "row">
-								   <!-- <div class="col-6">
+								   <!-- <div class="col-lg-6">
 										 <div class="form-group">
 											 <label for="vendor">Vendor:</label>
 											 <select class="form-control" class="vendor" name="vendor">
@@ -72,7 +72,7 @@
 												<span class="err"></span>
 										 </div>
 										</div> -->
-								<div class="col-6">
+								<div class="col-lg-6">
 									<div class="form-group">
 										<label for="office_number">Office Number: <span class="required">*</span> </label>
 										<input type="tel" class="form-control" name="office_number" value="">
@@ -80,7 +80,7 @@
 									</div>
 								</div>
 
-									<div class="col-6">
+									<div class="col-lg-6">
 									<div class="form-group">
 										<label for="fax_number">Fax Number: </label>
 										<input type="number" class="form-control" name="fax_number" value="">
@@ -88,13 +88,13 @@
                 </div>
               </div>
 							<div class = "row">
-								<div class="col-6">
+								<div class="col-lg-6">
 									<div class="form-group">
 										<label for="tin">TIN:</label>
 										<input type="number" class="form-control" name="tin_number" value="">
 									</div>
 								</div>
-								<div class="col-6">
+								<div class="col-lg-6">
 									<div class="form-group">
 									  <label for=""><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
 										<div class="uploadfile-container2">
