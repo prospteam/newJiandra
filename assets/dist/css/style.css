@@ -40,18 +40,32 @@ a.btn-newj {
 }
 }
 
-  @media only screen and (max-width: 375px){
-    button.button1{
-    font-size:none !important;
-    }
+@media only screen and (max-width: 375px){
+  button.button1{
+  font-size:none !important;
   }
-  @media only screen and (max-width: 320px){
-    .row{
-    display: inline !important;
-    }
-    button.button1{
-      padding-left: 38px !important;
-      padding-right: 42px !important;
-    }
+}
+@media only screen and (max-width: 320px){
+.row{
+display: inline !important;
+}
+button.button1{
+  padding-left: 38px !important;
+  padding-right: 42px !important;
+}
+.btn-newj{
+  padding-left: 41px !important;
+  padding-right: 56px !important;
+}
+label {
+display: contents !important;
+margin-bottom: 0.5rem !important;
+margin-left: -11px  !important;
+font-size: 18px  !important;
+}
+.form-group {
+    margin-bottom: 1rem !important;
+    width: 229px !important;
+}
 
-  }
+}
