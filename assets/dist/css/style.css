@@ -49,4 +49,9 @@ a.btn-newj {
     .row{
     display: inline !important;
     }
+    button.button1{
+      padding-left: 38px !important;
+      padding-right: 42px !important;
+    }
+
   }
