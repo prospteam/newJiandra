@@ -67,5 +67,10 @@ font-size: 18px  !important;
     margin-bottom: 1rem !important;
     width: 229px !important;
 }
+.col-xs-6 {
+    text-align: center !important;
+    padding-right: 29px;
+
+}
 
 }
