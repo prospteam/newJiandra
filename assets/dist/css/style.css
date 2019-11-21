@@ -39,9 +39,14 @@ a.btn-newj {
   margin-right: -14px;
 }
 }
-/* @media only screen and (max-width: 375px){
-.col-6{
-  flex: none !important;
-  max-width: none !important;
-}
-} */
+
+  @media only screen and (max-width: 375px){
+    button.button1{
+    font-size:none !important;
+    }
+  }
+  @media only screen and (max-width: 320px){
+    .row{
+    display: inline !important;
+    }
+  }

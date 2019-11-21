@@ -26,14 +26,14 @@
                     <div class="modal-body">
                       <h1 class="inp_head"> GENERAL INFORMATION </h1>
                       <div class="row">
-                        <div class="col-6">
+                        <div class="col-lg-6">
                           <div class="form-group">
                             <label for="plate_number">Plate Number: <span class="required">*</span></label>
                             <input type="text" class="form-control" name="plate_number" value="">
                             <span class="err"></span>
                           </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-lg-6">
                           <div class="form-group">
                             <label for="vehicle_brand">Vehicle Brand: <span class="required">*</span></label>
                             <select class="form-control js-example-basic-multiple-addvehicle"  name="vehicle_brand" id="vehicle_brand" data-type="vehicle_brand">
@@ -45,7 +45,7 @@
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-4">
+                        <div class="col-lg-4">
                           <div class="form-group">
                             <label for="vehicle_type">Vehicle Type: <span class="required">*</span></label>
                             <select class="form-control" name="vehicle_type">
@@ -57,7 +57,7 @@
                             <span class="err"></span>
                           </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-lg-4">
                           <div class="form-group">
                             <label for="fuel_type">Fuel Type: <span class="required">*</span></label>
                             <select name="fuel_type" id="fuel_type" class="form-control js-example-basic-multiple-addvehicle"  data-type="fuel_type">
@@ -78,14 +78,14 @@
                   <hr>
                     <h1 class="inp_head"> ACCOUNTING INFORMATION </h1>
                     <div class = "row">
-                      <div class="col-6">
+                      <div class="col-lg-6">
                         <div class="form-group">
                           <label for="accounting_date_acquired">Date Acquired:</label>
                           <input type="text" class="form-control datepicker" name="accounting_date_acquired" value="">
                           <span class="err"></span>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-lg-6">
                         <div class="form-group">
                           <label for="accounting_acqui_amount">Acqui Amount:</label>
                           <input type="text" class="form-control" name="accounting_acqui_amount" value="">
@@ -94,14 +94,14 @@
                       </div>
                     </div>
                     <div class = "row">
-                      <div class="col-6">
+                      <div class="col-lg-6">
                         <div class="form-group">
                           <label for="accounting_full_dep_date">Full Dep. Date:</label>
                           <input type="text" id="datepicker" class="form-control datepicker" name="accounting_full_dep_date" value="">
                           <span class="err"></span>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-lg-6">
                         <div class="form-group">
                           <label for="accounting_monthly_dep">Monthly Dep:</label>
                           <input type="text" class="form-control" name="accounting_monthly_dep" value="">
@@ -111,14 +111,14 @@
                     </div>
                     <p style="font-weight:bold">Depreciation Period in Months</p>
                     <div class = "row">
-                      <div class="col-6">
+                      <div class="col-lg-6">
                         <div class="form-group">
                           <label for="accounting_accum_dep">Accum. Dep.:</label>
                           <input type="text" class="form-control" name="accounting_accum_dep" value="">
                           <span class="err"></span>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-lg-6">
                         <div class="form-group">
                           <label for="accounting_book_val">Book Value:</label>
                           <input type="text" class="form-control" name="accounting_book_val" value="">
@@ -169,7 +169,7 @@
                       </div>
                     </div>
                     <div class = "row">
-                      <div class="col-6">
+                      <div class="col-lg-6">
                         <div class="form-group">
                           <label for="approx_weight">Approx. Weight Capacity (tons):</label>
                           <input type="number" class="form-control" name="approx_weight" value="">
@@ -212,7 +212,7 @@
 
                     </div>
                     <p style="font-weight:bold">Land Transportation Details</p>
-                    <div class = "row">
+                    <div class = "row insurance_details">
                       <div class="col-4">
                         <div class="form-group">
                           <label for="land_reg_date">Registration Date:</label>
@@ -270,13 +270,13 @@
                   <div class="modal-body">
                     <h1 class="inp_head"> GENERAL INFORMATION </h1>
                     <div class="row">
-                      <div class="col-6">
+                      <div class="col-lg-6">
                         <div class="form-group">
                           <label for="plate_number">Plate Number:</label>
                           <p class="plate_number"> </p>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-lg-6">
                         <div class="form-group">
                           <label for="vehicle_brand">Vehicle Brand:</label>
                           <p class="vehicle_brand"> </p>
@@ -306,13 +306,13 @@
                 <hr>
                   <h1 class="inp_head"> ACCOUNTING INFORMATION </h1>
                   <div class = "row">
-                    <div class="col-6">
+                    <div class="col-lg-6">
                       <div class="form-group">
                         <label for="accounting_date_acquired">Date Acquired:</label>
                         <p class="accounting_date_acquired"> </p>
                       </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6">
                       <div class="form-group">
                         <label for="accounting_acqui_amount">Acqui Amount:</label>
                         <p class="accounting_acqui_amount"> </p>
@@ -320,13 +320,13 @@
                     </div>
                   </div>
                   <div class = "row">
-                    <div class="col-6">
+                    <div class="col-lg-6">
                       <div class="form-group">
                         <label for="accounting_full_dep_date">Full Dep. Date:</label>
                         <p class="accounting_full_dep_date"> </p>
                       </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6">
                       <div class="form-group">
                         <label for="accounting_monthly_dep">Monthly Dep:</label>
                         <p class="accounting_monthly_dep"> </p>
@@ -335,13 +335,13 @@
                   </div>
                   <p style="font-weight:bold">Depreciation Period in Months</p>
                   <div class = "row">
-                    <div class="col-6">
+                    <div class="col-lg-6">
                       <div class="form-group">
                         <label for="accounting_accum_dep">Accum. Dep.:</label>
                         <p class="accounting_accum_dep"> </p>
                       </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6">
                       <div class="form-group">
                         <label for="accounting_book_val">Book Value:</label>
                         <p class="accounting_book_val"> </p>
@@ -387,7 +387,7 @@
                     </div>
                   </div>
                   <div class = "row">
-                    <div class="col-6">
+                    <div class="col-lg-6">
                       <div class="form-group">
                         <label for="approx_weight">Approx. Weight Capacity (tons):</label>
                         <p class="approx_weight"> </p>
@@ -475,14 +475,14 @@
                   <h1 class="inp_head"> GENERAL INFORMATION </h1>
                   <input type="hidden" class="form-control vehicleID" name="vehicle_id" value="">
                   <div class="row">
-                    <div class="col-6">
+                    <div class="col-lg-6">
                       <div class="form-group">
                         <label for="plate_number">Plate Number: <span class="required">*</span></label>
                         <input type="text" class="form-control" name="plate_number" value="">
                         <span class="err"></span>
                       </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6">
                       <div class="form-group">
                         <label for="vehicle_brand1">Vehicle Brand: <span class="required">*</span></label>
                         <select name="vehicle_brand" id="vehicle_brand1" class="form-control js-example-basic-multiple-editvehicle"  data-type="vehicle_brand">
@@ -525,14 +525,14 @@
               <hr>
                 <h1 class="inp_head"> ACCOUNTING INFORMATION </h1>
                 <div class = "row">
-                  <div class="col-6">
+                  <div class="col-lg-6">
                     <div class="form-group">
                       <label for="accounting_date_acquired">Date Acquired:</label>
                       <input type="text" id="datepicker" class="form-control datepicker" name="accounting_date_acquired" value="">
                       <span class="err"></span>
                     </div>
                   </div>
-                  <div class="col-6">
+                  <div class="col-lg-6">
                     <div class="form-group">
                       <label for="accounting_acqui_amount">Acqui Amount:</label>
                       <input type="text" class="form-control" name="accounting_acqui_amount" value="">
@@ -541,14 +541,14 @@
                   </div>
                 </div>
                 <div class = "row">
-                  <div class="col-6">
+                  <div class="col-lg-6">
                     <div class="form-group">
                       <label for="accounting_full_dep_date">Full Dep. Date:</label>
                       <input type="text" id="datepicker" class="form-control datepicker" name="accounting_full_dep_date" value="">
                       <span class="err"></span>
                     </div>
                   </div>
-                  <div class="col-6">
+                  <div class="col-lg-6">
                     <div class="form-group">
                       <label for="accounting_monthly_dep">Monthly Dep:</label>
                       <input type="text" class="form-control" name="accounting_monthly_dep" value="">
@@ -558,14 +558,14 @@
                 </div>
                 <p style="font-weight:bold">Depreciation Period in Months</p>
                 <div class = "row">
-                  <div class="col-6">
+                  <div class="col-lg-6">
                     <div class="form-group">
                       <label for="accounting_accum_dep">Accum. Dep.:</label>
                       <input type="text" class="form-control" name="accounting_accum_dep" value="">
                       <span class="err"></span>
                     </div>
                   </div>
-                  <div class="col-6">
+                  <div class="col-lg-6">
                     <div class="form-group">
                       <label for="accounting_book_val">Book Value:</label>
                       <input type="text" class="form-control" name="accounting_book_val" value="">
@@ -616,7 +616,7 @@
                   </div>
                 </div>
                 <div class = "row">
-                  <div class="col-6">
+                  <div class="col-lg-6">
                     <div class="form-group">
                       <label for="approx_weight">Approx. Weight Capacity (tons):</label>
                       <input type="number" class="form-control" name="approx_weight" value="">
