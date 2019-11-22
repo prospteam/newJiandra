@@ -180,7 +180,10 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="<?php echo base_url('purchaseorders'); ?>" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
+              <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
+              <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.0003 0H2.00033C1.26699 0 0.666992 0.6 0.666992 1.33333V10.6667C0.666992 11.4 1.26699 12 2.00033 12H14.0003C14.7337 12 15.3337 11.4 15.3337 10.6667V1.33333C15.3337 0.6 14.7337 0 14.0003 0ZM8.00033 5.33333H2.00033V4H8.00033V5.33333ZM8.00033 2.66667H2.00033V1.33333H8.00033V2.66667Z" fill="#545454"/>
+              </svg>
               <p>
                 Purchase Order
               </p>
@@ -188,7 +191,11 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-                 <i class="nav-icon fas fa-list-ul"></i>
+                 <!-- <i class="nav-icon fas fa-list-ul"></i> -->
+                 <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                   <path d="M0.166992 8.08331H3.33366V4.91665H0.166992V8.08331ZM0.166992 12.0416H3.33366V8.87498H0.166992V12.0416ZM0.166992 4.12498H3.33366V0.958313H0.166992V4.12498ZM4.12533 8.08331H13.6253V4.91665H4.12533V8.08331ZM4.12533 12.0416H13.6253V8.87498H4.12533V12.0416ZM4.12533 0.958313V4.12498H13.6253V0.958313H4.12533Z" fill="#545454"/>
+                 </svg>
+
               <p>
                 Inventory <span class="manage">Management</span>
                 <span class="badge badge-info right">3</span>
@@ -215,7 +222,11 @@
           </li>
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-file"></i>
+              <!-- <i class="nav-icon fas fa-file"></i> -->
+              <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.66667 0.666748C0.75 0.666748 0.00833352 1.41675 0.00833352 2.33341L0 15.6667C0 16.5834 0.741666 17.3334 1.65833 17.3334H11.6667C12.5833 17.3334 13.3333 16.5834 13.3333 15.6667V5.66675L8.33333 0.666748H1.66667ZM7.5 6.50008V1.91675L12.0833 6.50008H7.5Z" fill="#545454"/>
+              </svg>
+
               <p>
                 Reports
                 <i class="fas fa-angle-left right"></i>

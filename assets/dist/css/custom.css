@@ -263,6 +263,12 @@ tr.even {
     border-bottom: 1px solid #d8e2fe;
 }
 
+svg {
+    margin-right: .2rem;
+    text-align: center;
+    width: 1.6rem;
+}
+
 @media only screen and (max-width: 362px) {
     button.button1 {
         font-size: 20px;
