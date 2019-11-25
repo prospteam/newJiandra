@@ -26,7 +26,7 @@
                     <?php foreach($purchase as $k => $value) : ?>
                         <input type="hidden" class="form-control" name="purchase_id" value="<?php echo $value['id']?>">
                   <?php  endforeach; ?>
-    								<div class="modal-body">
+    								<div class="modal-body" id="addProduct">
 
     									<div class="row">
     										<div class="col-4">
@@ -36,7 +36,7 @@
                             <span class="err"></span>
     											</div>
     										</div>
-    										<div class="col-4">
+    										<div class="col-2">
     											<div class="form-group">
     												<label for="ordered">Orders: <span class="required">*</span></label>
     												<input type="number" class="form-control" name="ordered" value="">
@@ -54,6 +54,14 @@
                           <?php  endforeach; ?>
                         </select>
                             <span class="err"></span>
+    											</div>
+    										</div>
+                        <div class="col-2">
+    											<div class="form-group">
+    												<label for="ordered"></label><br>
+                            <p>
+                              <span class="btn btn-md btn-primary" id="addNewPO">Add</span>
+                            </p>
     											</div>
     										</div>
     									</div>

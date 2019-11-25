@@ -137,6 +137,55 @@ $(document).ready(function(){
        }
      })
   });
+
+  //add multiple product in add purchase order
+  $(document).on('click', '#addNewPO', function(){
+    var str = '';
+    var i = $('#addNewPO').size() + 1;
+
+    str = '<div class="row">';
+      str += '<div class="col-4">';
+         str += '<div class="form-group">';
+           str += '<label for="prod_name">Product Name: <span class="required">*</span></label>';
+           str += '<input type="text" class="form-control" name="prod_name' + i +'" value="">';
+           str += '<span class="err"></span>';
+         str += '</div>';
+       str += '</div>';
+
+       str += '<div class="col-2">';
+          str += '<div class="form-group">';
+            str += '<label for="ordered">Orders: <span class="required">*</span></label>';
+            str += '<input type="number" class="form-control" name="ordered" value="">';
+            str += '<span class="err"></span>';
+          str += '</div>';
+        str += '</div>';
+
+        str += '<div class="col-4">';
+           str += '<div class="form-group">';
+             str += '<label for="supplier">Supplier: <span class="required">*</span></label>';
+             str += '<select class="form-control" class="supplier" name="supplier" >';
+                str += '<option value="" selected hidden>Select Supplier</option>';
+             str += '</select>';
+             str += '<span class="err"></span>';
+           str += '</div>';
+         str += '</div>';
+
+         str += '<div class="col-2">';
+            str += '<div class="form-group">';
+              str += '<label for="ordered"></label><br>';
+              str += '<p>';
+              str += '<span class="btn btn-md btn-danger" id="removeNewPO">Remove</span>';
+            str += '</p>';
+          str += '</div>';
+        str += '</div>';
+    str += '</div>';
+    $('#addProduct').append(str);
+
+  });
+
+  $(document).on('click', '#removeNewPO', function(){
+    alert("ok");
+  });
 });
 
 
