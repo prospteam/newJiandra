@@ -269,6 +269,17 @@ svg {
     width: 1.6rem;
 }
 
+h1.inp_head {
+    font-size: 20px;
+    margin: 0;
+    color: #6061d1;
+}
+
+
+.col-6.dateO {
+    text-align: right;
+}
+
 @media only screen and (max-width: 362px) {
     button.button1 {
         font-size: 20px;
