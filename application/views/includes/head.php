@@ -204,7 +204,7 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="../UI/general.html" class="nav-link">
+                <a href="<?php echo base_url('products'); ?>" class="nav-link">
                   <p>Products</p>
                 </a>
               </li>
