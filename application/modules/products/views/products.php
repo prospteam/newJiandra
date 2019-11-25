@@ -9,12 +9,12 @@
           HOME > <span class="active1"> PRODUCTS </p>
         </div>
         <div class="col-sm-6">
-            <button class="users button1 float-sm-right" data-toggle="modal" data-target="#AddUser"><i class="fas fa-plus-circle" aria-hidden="true"></i>  Add Products </button>
+            <button class="users button1 float-sm-right" data-toggle="modal" data-target="#AddProducts"><i class="fas fa-plus-circle" aria-hidden="true"></i>  Add Products </button>
 
             <!--Add User Modal -->
             <!-- Modal -->
-    				<div class="modal fade" id="AddUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
-    					<form id="adduser" method="post">
+    				<div class="modal fade" id="AddProducts" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
+    					<form id="addproducts" method="post">
     						<div class="modal-dialog modal-lg" role="document">
     							<div class="modal-content">
     								<div class="modal-header bg-info1">
@@ -79,7 +79,7 @@
                             <input type="text" class="form-control" name="volume" value="">
                           </div>
                         </div>
-                        <div class="col-lg-6">
+                        <!-- <div class="col-lg-6">
                           <div class="form-group">
                             <label for=""><i class="fa fa-upload" aria-hidden="true"></i> Add raw file </label>
                             <div class="uploadfile-container2">
@@ -87,7 +87,7 @@
                               <p class="file-return"></p>
                             </div>
                           </div>
-                        </div>
+                        </div> -->
                       </div>
 
 
@@ -105,7 +105,7 @@
 
           <!--View User Modal -->
           <!-- Modal -->
-          
+
         <!-- End View user Modal -->
 
         <!--View Edit Modal -->
@@ -147,7 +147,7 @@
                 <div class="row">.
                   <div class="table-responsive">
                   <div class="col-sm-12">
-                    <table class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                    <table class="table table-bordered table-striped dataTable products_tbl" role="grid" aria-describedby="example1_info">
                   <thead>
                       <th class="header-title">Code</th>
                       <th class="header-title">Brand</th>

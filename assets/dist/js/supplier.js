@@ -391,6 +391,46 @@ function display_suppliers($supplier_id){
 
 }
 
+// ProductsProductsProductsProductsProductsProductsProductsProductsProductsProductsProductsProductsProductsProductsProductsProductsProductsProductsProducts
+
+// ADD PRODUCTS
+$(document).on('submit','form#addproducts',function(e){
+  e.preventDefault();
+  var formData = new FormData($(this)[0]);
+  $.ajax({
+            url:base_url+'products/addproducts/',
+            data: formData,
+            processData: false,
+            conten: false,
+            type: 'post',
+            dataType: 'json',
+            success: function (data){
+            //   console.log(data);
+            //     if (data.form_error) {
+            //       clearError();
+            //       let keyNames = Object.keys(data.form_error){
+            //       $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
+            //       $("select[name='"+value+"']").next().next().text(data.form_error[value]);
+            //     });
+            // } else if (data.error) {
+            //   Swal.fire("Error",data.error,"error");
+            // } else {
+            //   blankVal();
+            //   $('#addproducts').modal('hide');
+            //   Swal.fire("Products has been added", data.success, "success");
+            //   $('.products_tbl').DataTable().ajax.reload();
+            // }
+            if(){
+              alert(1);
+            }else{
+              alert(2);
+            }
+          }
+      });
+  });
+
+// END ADD PRODUCTS
+
 function clearError(){
     $('.err').text('');
 }
