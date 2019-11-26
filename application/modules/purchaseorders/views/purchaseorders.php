@@ -32,14 +32,14 @@
     										<div class="col-4">
     											<div class="form-group">
     												<label for="prod_name">Product Name: <span class="required">*</span></label>
-    												<input type="text" class="form-control" name="prod_name" value="">
+    												<input type="text" class="form-control" name="prod_name[]" value="">
                             <span class="err"></span>
     											</div>
     										</div>
     										<div class="col-2">
     											<div class="form-group">
     												<label for="ordered">Orders: <span class="required">*</span></label>
-    												<input type="number" class="form-control" name="ordered" value="">
+    												<input type="number" class="form-control" name="ordered[]" value="">
                             <span class="err"></span>
     											</div>
     										</div>
@@ -47,7 +47,7 @@
                           <div class="form-group">
     												<label for="supplier">Supplier: <span class="required">*</span></label>
     												<!-- <input type="text" class="form-control" name="position" value=""> -->
-                            <select class="form-control" class="supplier" name="supplier" >
+                            <select class="form-control" class="supplier" name="supplier[]" >
                               <option value="" selected hidden>Select Supplier</option>
                             <?php foreach($suppliers as $k => $value) : ?>
                                 <option value="<?php echo $value['id'] ?>"><?php echo $value['supplier_name'] ?></option>
