@@ -34,7 +34,7 @@ class Products extends MY_Controller {
       $data = array(
         'code' => $this->input->post('code'),
         'brand' => $this->input->post('brand'),
-        'categories' => $this->input->post('category'),
+        'category' => $this->input->post('category'),
         'variant' => $this->input->post('variant'),
         'description' => $this->input->post('description'),
         'price' => $this->input->post('price'),
@@ -53,6 +53,34 @@ class Products extends MY_Controller {
         }
         echo json_encode($response);
   }
+	 function display_products(){
+			$limit = $this->input->post('length');
+			$offset = $this->input->post('start');
+			$search = $this->input->post('search');
+			$order = $this->input->post('order');
+			$draw = $this->input->post('draw');
+
+
+			$column_order = array('code','brand','category','variant','description','price','volume',);
+			$where = array('products.status' => 1);
+			$join = array(
+				// 'company' => 'company.company_id = users.company',
+				// 'position' => 'position.id = users.position'
+			);
+			$select = "products.id,products.code,products.brand,products.category,products.variant,products.description,products.price,products.volume";
+			$list = $this->MY_Model->get_datatables('products',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
+
+
+			$output = array(
+					"draw" => $draw,
+					"recordsTotal" => $list['count_all'],
+					"recordsFiltered" => $list['count'],
+					"data" => $list['data']
+			);
+
+
+			echo json_encode($output);
+		}
 
 
 }
