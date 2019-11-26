@@ -20,6 +20,11 @@ class Purchaseorders extends MY_Controller {
     $this->load_page('purchaseorders', @$data);
 	}
 
+	public function get_suppliers(){
+			$data['suppliers'] = $this->MY_Model->getRows('supplier');
+			json($data);
+	}
+
 	//display purchase orders
 	public function display_purchase_orders(){
 		$limit = $this->input->post('length');

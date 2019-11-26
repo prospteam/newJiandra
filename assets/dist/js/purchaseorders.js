@@ -140,14 +140,14 @@ $(document).ready(function(){
 
   //add multiple product in add purchase order
   $(document).on('click', '#addNewPO', function(){
+    var x = 1;
     var str = '';
-    var i = $('#addNewPO').size() + 1;
 
     str = '<div class="row">';
       str += '<div class="col-4">';
          str += '<div class="form-group">';
            str += '<label for="prod_name">Product Name: <span class="required">*</span></label>';
-           str += '<input type="text" class="form-control" name="prod_name' + i +'" value="">';
+           str += '<input type="text" class="form-control" name="prod_name" value="">';
            str += '<span class="err"></span>';
          str += '</div>';
        str += '</div>';
@@ -165,6 +165,7 @@ $(document).ready(function(){
              str += '<label for="supplier">Supplier: <span class="required">*</span></label>';
              str += '<select class="form-control" class="supplier" name="supplier" >';
                 str += '<option value="" selected hidden>Select Supplier</option>';
+                str += get_supplier();
              str += '</select>';
              str += '<span class="err"></span>';
            str += '</div>';
@@ -179,17 +180,37 @@ $(document).ready(function(){
           str += '</div>';
         str += '</div>';
     str += '</div>';
-    $('#addProduct').append(str);
 
+    if(x){
+      x++;
+      $('#addProduct').append(str);
+    }
+    // get_supplier();
   });
 
   $(document).on('click', '#removeNewPO', function(){
-    alert("ok");
+    $(this).parent().parent().parent().parent().remove(); x--;
   });
 });
 
 
-
+function get_supplier(){
+  var data_return = '';
+  $.ajax({
+    url: base_url + '/purchaseorders/get_suppliers/',
+    type:'post',
+    dataType:'json',
+    async:false,
+    success:function(data){
+      var str = '';
+      $.each(data.suppliers,function(index,element){
+        str += '<option value="'+element.id+'">'+element.supplier_name+'</option>';
+      });
+      data_return = str;
+    }
+  });
+  return data_return;
+}
 function blankVal_purchase(){
   $('#AddPurchaseOrder input[name="prod_name"]').val('');
   $('.err').text('');
