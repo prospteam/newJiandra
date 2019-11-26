@@ -21,6 +21,8 @@
 <script src="<?php echo base_url('assets/dist/js/app.js'); ?>"></script>
 <!-- supplier js -->
 <script src="<?php echo base_url('assets/dist/js/supplier.js'); ?>"></script>
+<!-- purchase orders js -->
+<script src="<?php echo base_url('assets/dist/js/purchaseorders.js'); ?>"></script>
 
 
 </body>

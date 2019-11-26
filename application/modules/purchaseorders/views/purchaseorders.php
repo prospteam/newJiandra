@@ -9,82 +9,62 @@
           HOME > <span class="active1"> PURCHASE ORDER </p>
         </div>
         <div class="col-sm-6">
-            <button class="users button1 float-sm-right" data-toggle="modal" data-target="#AddUser"><i class="fas fa-plus-circle" aria-hidden="true"></i>  Purchase Order </button>
+            <button class="users button1 float-sm-right" data-toggle="modal" data-target="#AddPurchaseOrder"><i class="fas fa-plus-circle" aria-hidden="true"></i>  Purchase Order </button>
 
             <!--Add User Modal -->
             <!-- Modal -->
-    				<div class="modal fade" id="AddUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
-    					<form id="adduser" method="post">
-    						<div class="modal-dialog modal-lg" role="document">
+    				<div class="modal fade" id="AddPurchaseOrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    					<form id="addpurchaseorder" method="post">
+    						<div class="modal-dialog modal-xl" role="document">
     							<div class="modal-content">
     								<div class="modal-header bg-info1">
-    									<h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+    									<h5 class="modal-title" id="exampleModalLabel">Add Purchase Order</h5>
     									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
     										<span aria-hidden="true">&times;</span>
     									</button>
     								</div>
-    								<div class="modal-body">
+                    <?php foreach($purchase as $k => $value) : ?>
+                        <input type="hidden" class="form-control" name="purchase_id" value="<?php echo $value['id']?>">
+                  <?php  endforeach; ?>
+    								<div class="modal-body" id="addProduct">
+
     									<div class="row">
-    										<div class="col-6">
+    										<div class="col-4">
     											<div class="form-group">
-    												<label for="fullname">Full Name: <span class="required">*</span></label>
-    												<input type="text" class="form-control" name="fullname" value="">
+    												<label for="prod_name">Product Name: <span class="required">*</span></label>
+    												<input type="text" class="form-control" name="prod_name" value="">
                             <span class="err"></span>
     											</div>
     										</div>
-    										<div class="col-6">
+    										<div class="col-2">
     											<div class="form-group">
-    												<label for="username">Username: <span class="required">*</span></label>
-    												<input type="text" class="form-control" name="username" value="">
+    												<label for="ordered">Orders: <span class="required">*</span></label>
+    												<input type="number" class="form-control" name="ordered" value="">
                             <span class="err"></span>
     											</div>
     										</div>
-    									</div>
-    									<div class="row">
-    										<div class="col-6">
-    											<div class="form-group">
-    												<label for="password">Password: <span class="required">*</span></label>
-    												<input type="password" class="form-control" name="password" value="">
-                            <span class="err"></span>
-    											</div>
-    										</div>
-    										<div class="col-6">
-    											<div class="form-group">
-    												<label for="position">Position: <span class="required">*</span></label>
+                        <div class="col-4">
+                          <div class="form-group">
+    												<label for="supplier">Supplier: <span class="required">*</span></label>
     												<!-- <input type="text" class="form-control" name="position" value=""> -->
-                            <select class="form-control" class="position" name="position" >
-                              <option value="" selected hidden>Select Position</option>
-                            <?php foreach($position as $k => $value) : ?>
-                                <option value="<?php echo $value['id'] ?>"><?php echo $value['position_name'] ?></option>
+                            <select class="form-control" class="supplier" name="supplier" >
+                              <option value="" selected hidden>Select Supplier</option>
+                            <?php foreach($suppliers as $k => $value) : ?>
+                                <option value="<?php echo $value['id'] ?>"><?php echo $value['supplier_name'] ?></option>
                           <?php  endforeach; ?>
                         </select>
                             <span class="err"></span>
     											</div>
     										</div>
+                        <div class="col-2">
+    											<div class="form-group">
+    												<label for="ordered"></label><br>
+                            <p>
+                              <span class="btn btn-md btn-primary" id="addNewPO">Add</span>
+                            </p>
+    											</div>
+    										</div>
     									</div>
-    								<div class = "row">
-    								   <div class="col-12">
-    									<div class="form-group">
-                        <div class="select2-purple">
-    										<label for="company">Companies: <span class="required">*</span></label>
-                        <select class="form-control js-example-basic-multiple-addU" name="company[]" multiple="multiple"></select>
-                        <span class="err"></span>
-                      </div>
-                    <!-- <span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="8" style="width: 100%;"><span class="selection">
-                      <span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false">
-                        <ul class="select2-selection__rendered">
-                          <li class="select2-search select2-search--inline">
-                            <input class="select2-search__field form-control" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="Select Company">
-                          </li>
-                        </ul>
-                      </span>
-                    </span>
-                    <span class="dropdown-wrapper" aria-hidden="true"></span>
-                  </span> -->
-
-    									</div>
-    									</div>
-                  </div>
     								</div>
     								<div class="modal-footer">
     									<button type="submit" class="btn btn-primary add">Submit</button>
@@ -97,42 +77,50 @@
 
           <!--View User Modal -->
           <!-- Modal -->
-          <div class="modal fade" id="ViewUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
+          <div class="modal fade" id="ViewPurchaseOrders" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
 
               <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                   <div class="modal-header bg-info1">
-                    <h5 class="modal-title" id="exampleModalLabel">View User Details</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">View Purchase Ordered Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body" id="userDetails">
-                    <div class="row">
-                      <div class="col-4">
-                        <div class="form-group">
-                          <label for="fullname">Full Name:</label>
-                          <p class="name"> </p>
+                  <div class="modal-body" id="purchaseOrders">
+                      <div class="row">
+                        <div class="col-6">
+                          <h1 class="inp_head">#<span class="code"></span> </h1> <br>
+                        </div>
+                        <div class="col-6 dateO">
+                          <h1 class="inp_head"><span class="date"></span> </h1> <br>
                         </div>
                       </div>
-                      <div class="col-4">
-                        <div class="form-group">
-                          <label for="username">Username:</label>
-                            <p class="username"> </p>
-                        </div>
-                      </div>
-                      <div class="col-4">
-                        <div class="form-group">
-                          <label for="position">Position:</label>
-                          <p class="position"> </p>
-                        </div>
-                      </div>
-                    </div>
                     <div class="row">
                       <div class="col-6">
                         <div class="form-group">
-                          <label for="company">Companies:</label>
-                            <p class="company"> </p>
+                          <label for="product">Product:</label>
+                          <p class="product"> </p>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <div class="form-group">
+                          <label for="ordered">Ordered:</label>
+                            <p class="ordered"> </p>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <div class="form-group">
+                          <label for="delivered">Delivered:</label>
+                          <p class="delivered"> </p>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <div class="form-group">
+                          <label for="editP"></label>
+                          <p>
+                            <button class="btn btn-sm btn-primary">Edit</button>
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -250,15 +238,14 @@
                 <div class="row">.
                   <div class="table-responsive">
                   <div class="col-sm-12">
-                    <table class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
+                    <table class="table table-bordered table-striped dataTable purchase_tbl" role="grid" aria-describedby="example1_info">
                   <thead>
-
+                    <th class="header-title">Date Ordered</th>
                     <th class="header-title">Purchase Code</th>
                     <th class="header-title">Supplier</th>
-                    <th class="header-title">Ordered</th>
-                    <th class="header-title">Delivered</th>
                     <th class="header-title">Action</th>
                     <th class="header-title">Status</th>
+                    <th class="header-title">Delivery Status</th>
                     <!-- <tr class="table-header" role="row">
                       <th class="header-title sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 283px;">Name</th>
                       <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 359px;">Company</th>
