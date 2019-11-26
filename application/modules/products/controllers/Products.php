@@ -23,17 +23,18 @@ class Products extends MY_Controller {
 
     $this->form_validation->set_rules('code','Code','required');
     $this->form_validation->set_rules('brand','Brand','required');
-    $this->form_validation->set_rules('categories','Categories','required');
+    $this->form_validation->set_rules('category','Category','required');
     $this->form_validation->set_rules('variant','Variant','required');
     $this->form_validation->set_rules('description','Description','required');
     $this->form_validation->set_rules('price','Price','required');
     $this->form_validation->set_rules('volume','Volume','required');
+		$error = array();
 
     if ($this->form_validation->run() !== FALSE) {
       $data = array(
-        'code' => $this->input->post('product_code'),
+        'code' => $this->input->post('code'),
         'brand' => $this->input->post('brand'),
-        'categories' => $this->input->post('categories'),
+        'categories' => $this->input->post('category'),
         'variant' => $this->input->post('variant'),
         'description' => $this->input->post('description'),
         'price' => $this->input->post('price'),

@@ -27,8 +27,8 @@
     									<div class="row">
     										<div class="col-6">
     											<div class="form-group">
-    												<label for="product_code">Code: <span class="required">*</span></label>
-    												<input type="text" class="form-control" name="product_code" value="">
+    												<label for="code">Code: <span class="required">*</span></label>
+    												<input type="text" class="form-control" name="code" value="">
                             <span class="err"></span>
     											</div>
     										</div>
@@ -44,7 +44,7 @@
     										<div class="col-6">
     											<div class="form-group">
     												<label for="category">Category: <span class="required">*</span></label>
-    												<input type="password" class="form-control" name="category" value="">
+    												<input type="text" class="form-control" name="category" value="">
                             <span class="err"></span>
     											</div>
     										</div>
