@@ -147,7 +147,7 @@ $(document).ready(function(){
       str += '<div class="col-4">';
          str += '<div class="form-group">';
            str += '<label for="prod_name">Product Name: <span class="required">*</span></label>';
-           str += '<input type="text" class="form-control" name="prod_name" value="">';
+           str += '<input type="text" class="form-control" name="prod_name[]" value="">';
            str += '<span class="err"></span>';
          str += '</div>';
        str += '</div>';
@@ -155,7 +155,7 @@ $(document).ready(function(){
        str += '<div class="col-2">';
           str += '<div class="form-group">';
             str += '<label for="ordered">Orders: <span class="required">*</span></label>';
-            str += '<input type="number" class="form-control" name="ordered" value="">';
+            str += '<input type="number" class="form-control" name="ordered[]" value="">';
             str += '<span class="err"></span>';
           str += '</div>';
         str += '</div>';
@@ -163,7 +163,7 @@ $(document).ready(function(){
         str += '<div class="col-4">';
            str += '<div class="form-group">';
              str += '<label for="supplier">Supplier: <span class="required">*</span></label>';
-             str += '<select class="form-control" class="supplier" name="supplier" >';
+             str += '<select class="form-control" class="supplier" name="supplier[]" >';
                 str += '<option value="" selected hidden>Select Supplier</option>';
                 str += get_supplier();
              str += '</select>';

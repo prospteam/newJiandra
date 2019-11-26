@@ -67,7 +67,10 @@ class Purchaseorders extends MY_Controller {
 
 
 	public function addPurchaseOrder(){
-
+		$post = $this->input->post();
+		// echo "<pre>";
+		// print_r($post);
+		// exit;
 		$date_ordered = date("F d, Y");
 		$id = $this->input->post('purchase_id');
 		$purchase_id = $id + 1;
@@ -75,9 +78,9 @@ class Purchaseorders extends MY_Controller {
 
 		$this->load->library("form_validation");
 
-		$this->form_validation->set_rules('prod_name', 'Product Name', 'required');
-		$this->form_validation->set_rules('ordered', 'Ordered', 'required');
-		$this->form_validation->set_rules('supplier', 'Supplier', 'required');
+		$this->form_validation->set_rules('prod_name[]', 'Product Name', 'required');
+		$this->form_validation->set_rules('ordered[]', 'Ordered', 'required');
+		$this->form_validation->set_rules('supplier[]', 'Supplier', 'required');
 		$error = array();
 
 
@@ -85,26 +88,30 @@ class Purchaseorders extends MY_Controller {
 		// 	$error['company'] = 'The Companies field is required.';
 		// }
 
+		foreach($post['prod_name'] as $pkey => $pVal){
 		if ($this->form_validation->run() !== FALSE) {
-			$data = array(
-				'date_ordered' => $date_ordered,
-				'purchase_code' => $code,
-				'product' => $this->input->post('prod_name'),
-				'ordered' => $this->input->post('ordered'),
-				'supplier' => $this->input->post('supplier'),
-				'status' => 1,
-				'delivery_status' => 1
-			);
 
-			$insert = $this->MY_Model->insert('purchase_orders', $data);
-			if ($insert) {
-				$response = array(
-					'status' => 'ok'
+				$data = array(
+					'date_ordered' => $date_ordered,
+					'purchase_code' => $code,
+					'product' => $pVal,
+					'ordered' => $post['ordered'][$pkey],
+					'supplier' => $post['supplier'][$pkey],
+					'status' => 1,
+					'delivery_status' => 1
 				);
-			}
-		}else{
+
+				$insert = $this->MY_Model->insert('purchase_orders', $data);
+				if ($insert) {
+					$response = array(
+						'status' => 'ok'
+					);
+				}
+			}else{
 				$response = array('form_error' =>  array_merge($this->form_validation->error_array(), $error) );
+			}
 		}
+
 
 		echo json_encode($response);
 	}
