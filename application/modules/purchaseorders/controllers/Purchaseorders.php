@@ -14,7 +14,7 @@ class Purchaseorders extends MY_Controller {
 
 		$parameters1['select'] = '*';
 		$parameters1['limit'] = array(1,0);;
-		$parameters1['order'] = 'id DESC';
+		$parameters1['order'] = 'purchase_code DESC';
 		$data['purchase'] = $this->MY_Model->getRows('purchase_orders',$parameters1);
 
     $this->load_page('purchaseorders', @$data);
@@ -117,6 +117,16 @@ class Purchaseorders extends MY_Controller {
 		echo json_encode($response);
 	}
 
+	public function purchase_details(){
+		$purchase_id = $this->input->post('id');
+
+		$parameters['where'] = array('id' => $purchase_id);
+		$parameters['select'] = '*';
+
+		$data['purch_details'] = $this->MY_Model->getRows('purchase_orders', $parameters);
+
+			echo json_encode($data);
+	}
 	//view list of orders
 	public function view_purchase_orders(){
 		$purchase_id = $this->input->post('id');

@@ -154,6 +154,35 @@ $(document).ready(function(){
   });
 });
 
+  //view edit Orders
+  $(document).on('click', '.editPurchase', function(){
+    var id = $(this).attr('data-id');
+    $.ajax({
+        url: base_url+'purchaseorders/purchase_details',
+        data: {id:id},
+        type: 'post',
+        dataType: 'json',
+        success: function(data){
+          $('#EditPurchaseOrder').modal('show');
+          console.log(data);
+          //  $('#edituser input[name=user_id]').val(data.users.id);
+          //   $('#edituser input[name=fullname]').val(data.users.fullname);
+          //   $('#edituser input[name=username]').val(data.users.username);
+          //   // $('#edituser input[name=password]').val(data.users.password);
+          //   $('#edituser select[name=position]').val(data.users.position);
+          //   var company_list = [];
+          //   $('#edituser .js-example-basic-multiple-editU').html('');
+          //   $.each(data.company, function(key,val){
+          //     // company_list.push(val.company_name);
+          //     // console.log(val);
+          //     $('#edituser .js-example-basic-multiple-editU').append( '<option value='+val.company_id+' selected>'+val.company_name+'</option>' );
+          // });
+          // $('.comp').text(company_list.join(', '));
+        }
+    });
+
+  });
+
   //add multiple product in add purchase order
   $(document).on('click', '#addNewPO', function(){
     var x = 1;
