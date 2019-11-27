@@ -280,6 +280,19 @@ h1.inp_head {
     text-align: right;
 }
 
+table.purchase, th.purch, td.purch_td {
+    padding: 2px!important;
+}
+
+td.purch_td {
+    text-align: center;
+}
+
+th.header-title.purch {
+    text-align: center;
+    font-size: 18px!important;
+}
+
 @media only screen and (max-width: 362px) {
     button.button1 {
         font-size: 20px;

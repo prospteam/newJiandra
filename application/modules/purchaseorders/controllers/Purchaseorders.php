@@ -36,11 +36,12 @@ class Purchaseorders extends MY_Controller {
 
 		$column_order = array('date_ordered','purchase_code','supplier.supplier_name');
 		$where = array();
+		$group = array('purchase_orders.purchase_code');
 		$join = array(
 			'supplier' => 'supplier.id = purchase_orders.supplier',
 		);
-		$select = "purchase_orders.id,purchase_orders.date_ordered,purchase_orders.purchase_code,supplier.id,supplier.supplier_name,purchase_orders.status,purchase_orders.delivery_status";
-		$list = $this->MY_Model->get_datatables('purchase_orders',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
+		$select = "purchase_orders.id AS purchase_id ,purchase_orders.date_ordered,purchase_orders.purchase_code,supplier.id,supplier.supplier_name,purchase_orders.status,purchase_orders.delivery_status";
+		$list = $this->MY_Model->get_datatables('purchase_orders',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
 		// foreach($list['data'] as $key => $value){
 		// 	echo "<pre>";
 		// 	print_r($value);
@@ -51,7 +52,6 @@ class Purchaseorders extends MY_Controller {
 		// 		$list[$key]['position'] = userType($value['position']);
 		// 	}
 		// }
-
 		$output = array(
 				"draw" => $draw,
 				"recordsTotal" => $list['count_all'],
@@ -62,6 +62,7 @@ class Purchaseorders extends MY_Controller {
 		// echo "<pre>";
 		// print_r($output);
 		// exit;
+
 		echo json_encode($output);
 	}
 
@@ -121,11 +122,13 @@ class Purchaseorders extends MY_Controller {
 		$purchase_id = $this->input->post('id');
 
 		$parameters['where'] = array('purchase_code' => $purchase_id);
+		// $parameters['group'] = array('purchase_code');
 		$parameters['select'] = '*';
 
-		$data = $this->MY_Model->getRows('purchase_orders',$parameters,'row');
+		$data = $this->MY_Model->getRows('purchase_orders',$parameters);
 
 		$data_array['purchase'] = $data;
+		// exit;
 		json($data_array);
 	}
 }

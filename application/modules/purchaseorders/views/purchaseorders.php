@@ -88,42 +88,27 @@
                     </button>
                   </div>
                   <div class="modal-body" id="purchaseOrders">
-                      <div class="row">
-                        <div class="col-6">
-                          <h1 class="inp_head">#<span class="code"></span> </h1> <br>
-                        </div>
-                        <div class="col-6 dateO">
-                          <h1 class="inp_head"><span class="date"></span> </h1> <br>
-                        </div>
-                      </div>
                     <div class="row">
                       <div class="col-6">
-                        <div class="form-group">
-                          <label for="product">Product:</label>
-                          <p class="product"> </p>
-                        </div>
+                        <h1 class="inp_head">#<span class="code"></span> </h1> <br>
                       </div>
-                      <div class="col-2">
-                        <div class="form-group">
-                          <label for="ordered">Ordered:</label>
-                            <p class="ordered"> </p>
-                        </div>
-                      </div>
-                      <div class="col-2">
-                        <div class="form-group">
-                          <label for="delivered">Delivered:</label>
-                          <p class="delivered"> </p>
-                        </div>
-                      </div>
-                      <div class="col-2">
-                        <div class="form-group">
-                          <label for="editP"></label>
-                          <p>
-                            <button class="btn btn-sm btn-primary">Edit</button>
-                          </p>
-                        </div>
+                      <div class="col-6 dateO">
+                        <h1 class="inp_head"><span class="date"></span> </h1> <br>
                       </div>
                     </div>
+                    <table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="view_purchase_orders_details">
+                  <thead>
+                    <th class="header-title purch">Product</th>
+                    <th class="header-title purch">Ordered</th>
+                    <th class="header-title purch">Delivered</th>
+                    <th class="header-title purch">Action</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+
+                    </tr>
+                  </tbody>
+                </table>
                   </div>
                 </div>
               </div>

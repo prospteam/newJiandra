@@ -123,20 +123,36 @@ $(document).ready(function(){
        data: {id:id},
        dataType: "json",
        success: function(data){
-         console.log(data);
-         // console.log(data.users);
+         // console.log(data);
          $('#ViewPurchaseOrders').modal('show');
-         // $.each(data.users, function(key,val){
-           // console.log(val);
-           $('.code').text(data.purchase.purchase_code);
-           $('.date').text(data.purchase.date_ordered);
-           $('.product').text(data.purchase.product);
-           $('.ordered').text(data.purchase.ordered);
-           $('.delivered').text(data.purchase.delivered);
-
-       }
-     })
+         var str = '';
+           $.each(data.purchase,function(index,element){
+             if(element.delivered == ''){
+               var deliv = 0;
+             }else{
+                var deliv = element.delivered;
+             }
+             $('.code').text(element.purchase_code);
+             $('.date').text(element.date_ordered);
+             str += '<tr>';
+               str +=     '<td class="purch_td">';
+                   str +=   element.product;
+                  str += '</td>';
+                 str += ' <td class="purch_td">';
+                     str += element.ordered;
+                 str += '</td>';
+               str +=  '<td class="purch_td">';
+                  str += deliv;
+                str += '</td>';
+                 str += '<td class="purch_td">';
+                 str += '<button="" class="btn btn-xs btn-primary"><i class="fas fa-edit" aria-hidden="true"></i></button>';
+                str += '</td>';
+               str += '</tr>';
+         });
+         $('#view_purchase_orders_details tbody').html(str);
+   }
   });
+});
 
   //add multiple product in add purchase order
   $(document).on('click', '#addNewPO', function(){
