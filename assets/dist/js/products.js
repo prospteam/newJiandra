@@ -49,23 +49,23 @@ $(document).on('submit','form#addproducts',function(e){
           {"data":"description"},
           {"data":"price"},
           {"data":"volume"},
-          // {"data":"action","render": function(data, type, row,meta){
-          //                   var str = '';
-          //                   str += '<div class="actions">';
-          //                   if(row.status == 1){
-          //
-          //                     str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
-          //                     str += '<a href="javascript:;" class="editUser" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
-          //                     str += '<a href="javascript:;" class="disableUser" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
-          //                     str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-          //                   }else if(row.status == 2){
-          //                     str += '<a href="javascript:;" class="enableUser" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
-          //                     str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-          //                   }
-          //                   str += '</div>';
-          //                   return str;
-          //              }
-          //         },
+          {"data":"action","render": function(data, type, row,meta){
+                            var str = '';
+                            str += '<div class="actions">';
+                            if(row.status == 1){
+
+                              str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
+                              str += '<a href="javascript:;" class="editUser" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
+                              str += '<a href="javascript:;" class="disableUser" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
+                              str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                            }else if(row.status == 2){
+                              str += '<a href="javascript:;" class="enableUser" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
+                              str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                            }
+                            str += '</div>';
+                            return str;
+                       }
+                  },
 
                   {"data":"status","render": function(data, type, row,meta){
                     var str = '';

@@ -390,8 +390,9 @@ function display_suppliers($supplier_id){
 
 
 }
+// //successfully added user
 
-//successfully added user
+// PRODUCTS---------------------PRODUCTS---------------------PRODUCTS---------------------PRODUCTS---------------------PRODUCTS---------------------PRODUCTS---------------------PRODUCTS
 
 // ADD PRODUCTS
 $(document).on('submit','form#addproducts',function(e){
@@ -411,9 +412,6 @@ $(document).on('submit','form#addproducts',function(e){
               $(keyNames).each(function(index , value) {
                 console.log(value);
                   $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
-                  // $("select[name='"+value+"']").next('.err').text(data.form_error[value]);
-                  // $("select[name='"+value+"']").next().next().text(data.form_error[value]);
-                  // $("select[name='"+value+"']").parents('.form-group').next('.err').text(data.form_error[value]);
               });
           }else if (data.error) {
               Swal.fire("Error",data.error, "error");
@@ -441,35 +439,35 @@ $(document).on('submit','form#addproducts',function(e){
           {"data":"code"},
           {"data":"brand"},
           {"data":"category"},
-          {"data":"variant"},
-          {"data":"description"},
+          // {"data":"variant"},
+          // {"data":"description"},
           {"data":"price"},
           {"data":"volume"},
-          // {"data":"action","render": function(data, type, row,meta){
-          //                   var str = '';
-          //                   str += '<div class="actions">';
-          //                   if(row.status == 1){
-          //
-          //                     str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
-          //                     str += '<a href="javascript:;" class="editUser" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
-          //                     str += '<a href="javascript:;" class="disableUser" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
-          //                     str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-          //                   }else if(row.status == 2){
-          //                     str += '<a href="javascript:;" class="enableUser" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
-          //                     str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-          //                   }
-          //                   str += '</div>';
-          //                   return str;
-          //              }
-          //         },
+          {"data":"action","render": function(data, type, row,meta){
+                            var str = '';
+                            str += '<div class="actions">';
+                            // if(row.status == 1){
 
-                  {"data":"status","render": function(data, type, row,meta){
+                              str += '<a href="javascript:;" class="viewproducts" data-id=""> <i class="fas fa-eye text-info"></i></a>';
+                              str += '<a href="javascript:;" class="editproducts" data-id=""><i class="fas fa-pen text-warning"></i></a>';
+                              str += '<a href="javascript:;" class="deleteproducts" data-id=""><i class="fa fa-trash" aria-hidden="true"></a>';
+                            // }
+                            // }else if(row.status == 2){
+                            //   str += '<a href="javascript:;" class="enableUser" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
+                            //   str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                            // }
+                            str += '</div>';
+                            return str;
+                       }
+                  },
+
+            {"data":"status","render": function(data, type, row,meta){
                     var str = '';
-                     if(row.status == 1){
+                     // if(row.status == 1){
                        str += '<span class="active btn btn-block btn-sm btn-success">active</button>';
-                     }else if(row.status == 2){
-                       str += '<span class="inactive btn btn-block btn-sm btn-danger">inactive</button>';
-                     }
+                     // }else if(row.status == 2){
+                     //   str += '<span class="inactive btn btn-block btn-sm btn-danger">inactive</button>';
+                     // }
                      return str;
                 }
               }
@@ -482,7 +480,7 @@ $(document).on('submit','form#addproducts',function(e){
          //Set column definition initialisation properties.
          "columnDefs": [
               {
-                   "targets": [0,0], //first column / numbering column
+                   "targets": [5,6], //first column / numbering column
                    "orderable": false, //set not orderable
 
                },
@@ -499,8 +497,8 @@ function blankVal_products(){
 $('#AddProducts input[name="code"]').val('');
 $('#AddProducts input[name="brand"]').val('');
 $('#AddProducts input[name="category"]').val('');
-$('#AddProducts input[name="variant"]').val('');
-$('#AddProducts input[name="description"]').val('');
+// $('#AddProducts input[name="variant"]').val('');
+// $('#AddProducts input[name="description"]').val('');
 $('#AddProducts input[name="price"]').val('');
 $('#AddProducts input[name="volume"]').val('');
 }
