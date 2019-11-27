@@ -110,7 +110,81 @@
 
         <!--View Edit Modal -->
         <!-- Modal -->
-
+        <div class="modal fade" id="editProducts" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
+          <form id="editproducts" method="post">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header bg-info1">
+                  <h5 class="modal-title" id="exampleModalLabel">Edit Products</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="code">Code: <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="code" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="brand">Brand: <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="brand" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="category">Category: <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="category" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="variant">Variant: <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="variant" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="description">Description: <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="description" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="price">Price: <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="price" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class = "row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label for="volume">Volume:</label>
+                        <input type="text" class="form-control" name="volume" value="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary add">Submit</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
       <!-- End Edit user Modal -->
 
       <!--View Delete Modal -->
@@ -152,19 +226,10 @@
                       <th class="header-title">Code</th>
                       <th class="header-title">Brand</th>
                       <th class="header-title">Category</th>
-                      <th class="header-title">Variant</th>
-                      <th class="header-title">Description</th>
                       <th class="header-title">Price</th>
                       <th class="header-title">Volume</th>
                       <th class="header-title">Action</th>
                       <th class="header-title">Status</th>
-                    <!-- <tr class="table-header" role="row">
-                      <th class="header-title sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 283px;">Name</th>
-                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 359px;">Company</th>
-                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 320px;">Type</th>
-                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 176px;">Action</th>
-                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 176px;">Status</th>
-                    </tr> -->
                   </thead>
                   <tbody>
 
@@ -173,7 +238,7 @@
                 </div>
               </div>
               </div>
-          
+
             </div>
               </div>
               <!-- /.card-body -->

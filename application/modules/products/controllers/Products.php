@@ -61,13 +61,13 @@ class Products extends MY_Controller {
 			$draw = $this->input->post('draw');
 
 
-			$column_order = array('code','brand','category','variant','description','price','volume',);
+			$column_order = array('code','brand','category','price','volume',);
 			$where = array('products.status' => 1);
 			$join = array(
 				// 'company' => 'company.company_id = users.company',
 				// 'position' => 'position.id = users.position'
 			);
-			$select = "products.id,products.code,products.brand,products.category,products.variant,products.description,products.price,products.volume";
+			$select = "products.id,products.code,products.brand,products.category,products.price,products.volume";
 			$list = $this->MY_Model->get_datatables('products',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 
 
