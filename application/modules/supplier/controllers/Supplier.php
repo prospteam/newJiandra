@@ -341,6 +341,7 @@ class Supplier extends MY_Controller
 
 		$data_array['supplier'] = $data;
 		$data_array['company'] = $data_company;
+
 		json($data_array);
 	}
 

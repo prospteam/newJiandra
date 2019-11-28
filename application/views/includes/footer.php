@@ -24,7 +24,7 @@
 <!-- purchase orders js -->
 <script src="<?php echo base_url('assets/dist/js/purchaseorders.js'); ?>"></script>
 <!-- products js -->
-<script src="<?php echo base_url('assets/dist/js/products.js.js'); ?>"></script>
+<script src="<?php echo base_url('assets/dist/js/products.js'); ?>"></script>
 
 
 </body>

@@ -81,6 +81,70 @@ class Products extends MY_Controller {
 
 			echo json_encode($output);
 		}
+		public function view_all_products(){
+			$product_id = $this->input->post('id');
+
+		$data_array = array();
+
+		$parameters['where'] = array('products.id'=>$product_id);
+		$parameters['select'] = '*';
+
+		$data = $this->MY_Model->getrows('products',$parameters,'row');
+
+		$data_array['products'] = $data;
+		json($data_array);
+
+		}
+
+		public function edit_products(){
+
+				$products_id = $this->input->post('id');
+				$post = $this->input->post();
+				echo "<pre>";
+				 print_r($post);
+				 exit;
+				$result = false;
+
+				if (!empty($post)) {
+					$data = array(
+						'code' => $post['code'],
+						'brand' => $post['brand'],
+						'category' => $post['category'],
+						'variant' => $post['variant'],
+						'description' => $post['description'],
+						'price' => $post['price'],
+						'volume' => $post['volume'],
+					);
+
+
+				$update = $this->MY_Model->update('products',$data, array('id' => $products_id));
+				if ($update) {
+					$response = array(
+						'status' => 'ok'
+					);
+				}else {
+						$response = array(
+							'status' => 'invalid'
+					);
+				}
+
+				$result = json_encode($response);
+			}
+		die($result);
+	}
+	//delete Supplier
+	public function deleteProducts(){
+		$products_id = $this->input->post('id');
+		$products_status = 3;
+		$data = array(
+			'status' => $products_status
+		);
+		$datas['delete'] = $this->MY_Model->update('products',$data,array('id' => $products_id));
+		// echo $this->db->last_query();
+		echo json_encode($datas);
+	}
+
+
 
 
 }
