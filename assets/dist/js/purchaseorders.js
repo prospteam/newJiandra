@@ -19,7 +19,7 @@ $(document).ready(function(){
                         if(row.status == 1){
 
                           str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"> <i class="fas fa-eye text-info"></i></a>';
-                          str += '<a href="javascript:;" class="editPurchase" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
+                          str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'"><i class="fas fa-pen text-warning"></i></a>';
                           str += '<a href="javascript:;" class="disableUser" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
                           str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                         }else if(row.status == 2){
@@ -154,6 +154,31 @@ $(document).ready(function(){
   });
 });
 
+
+  //display suppliers according to company
+  $(document).on('change','select[name="company"]',function(){
+    $.ajax({
+        url: base_url+'purchaseorders/get_suppliers_by_companies',
+        data: {company_id:$(this).val()},
+        type: 'post',
+        dataType: 'json',
+        success: function(data){
+          var str = '';
+          str += '<label for="supplier">Supplier: <span class="required">*</span></label>';
+          str += '<select class="form-control" class="supplier" id="supplier" name="supplier" >';
+              str += '<option value="" selected hidden>Select Supplier</option>';
+                $.each(data.suppliers,function(index,element){
+                      str += '<option value="'+element.id+'">'+element.supplier_name+'</option>';
+                });
+          str += '</select>';
+          str += '<span class="err"></span>';
+
+            $('#show_supplier').html(str);
+
+        }
+    });
+  });
+
   //view edit Orders
   $(document).on('click', '.editPurchase', function(){
     var id = $(this).attr('data-id');
@@ -164,23 +189,95 @@ $(document).ready(function(){
         dataType: 'json',
         success: function(data){
           $('#EditPurchaseOrder').modal('show');
-          console.log(data);
-          //  $('#edituser input[name=user_id]').val(data.users.id);
-          //   $('#edituser input[name=fullname]').val(data.users.fullname);
-          //   $('#edituser input[name=username]').val(data.users.username);
-          //   // $('#edituser input[name=password]').val(data.users.password);
-          //   $('#edituser select[name=position]').val(data.users.position);
-          //   var company_list = [];
-          //   $('#edituser .js-example-basic-multiple-editU').html('');
-          //   $.each(data.company, function(key,val){
-          //     // company_list.push(val.company_name);
-          //     // console.log(val);
-          //     $('#edituser .js-example-basic-multiple-editU').append( '<option value='+val.company_id+' selected>'+val.company_name+'</option>' );
-          // });
-          // $('.comp').text(company_list.join(', '));
+          var str ='';
+          $.each(data.purch_details,function(index,element){
+            console.log(element);
+            str += '<tr>';
+              str +=     '<td class="">';
+                    str += '<div class="col-12">';
+                       str += '<div class="form-group">';
+                       str += '<input type="hidden" class="form-control purchase_id" name="purchase_id[]" value="'+element.purchase_id+'">';
+                         str += '<label for="prod_name">Product Name: <span class="required">*</span></label>';
+                         str += '<input type="text" class="form-control" name="prod_name[]" value="'+element.product+'">';
+                         str += '<span class="err"></span>';
+                       str += '</div>';
+                     str += '</div>';
+                 str += '</td>';
+                str += ' <td class="">';
+                str += '<div class="col-12">';
+                     str += '<div class="form-group">';
+                       str += '<label for="ordered">Orders: <span class="required">*</span></label>';
+                       str += '<input type="number" class="form-control" name="ordered[]" value="'+element.ordered+'">';
+                       str += '<span class="err"></span>';
+                     str += '</div>';
+                   str += '</div>';
+                str += '</td>';
+              str +=  '<td class="">';
+                str += '<div class="col-12">';
+                    str += '<div class="form-group">';
+                      str += '<label for="supplier">Supplier: <span class="required">*</span></label>';
+                      str += '<select class="form-control" class="supplier" name="supplier[]" >';
+                         str += '<option value="'+element.supplier+'" selected>'+element.supplier_name+'</option>';
+                         str += get_supplier();
+                      str += '</select>';
+                      str += '<span class="err"></span>';
+                    str += '</div>';
+                  str += '</div>';
+               str += '</td>';
+              str += '</tr>';
+          });
+          $('#edit_purch tbody').html(str);
         }
     });
 
+  });
+
+
+  //successfully edited purchase order
+  $(document).on('submit','#editpurchaseorder',function(e){
+    e.preventDefault();
+    let formData =  new FormData($(this)[0]);
+    var id = $('input[name="purchase_id[]"]').val();
+    // alert(id);
+    formData.append("id",id);
+    $.ajax({
+        method: 'POST',
+        url : base_url + 'purchaseorders/edit_purchase_orders',
+        data : formData,
+        processData: false,
+       contentType: false,
+       cache: false,
+        dataType: 'json',
+        success : function(data) {
+            console.log(data);
+            // if(data.status == "ok"){
+            //   $('#EditUser').modal('hide');
+            //       Swal.fire("Successfully updated user!",data.success, "success");
+            //       $(".users_tbl").DataTable().ajax.reload();
+            //       // setTimeout(function(){
+            //       //    location.reload();
+            //       //  }, 1000);
+            //  }else if(data.status == 'invalid'){
+            //     Swal.fire("Error",data.status, "invalid");
+            //  }
+            // if(data.form_error){
+            //     clearError();
+            //     let keyNames = Object.keys(data.form_error);
+            //     $(keyNames).each(function(index , value) {
+            //         $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
+            //     });
+            // }else if (data.error) {
+            //     Swal.fire("Error",data.error, "error");
+            // }else {
+            //    // blankVal();
+            //     $('#EditUser').modal('hide');
+            //     Swal.fire("Successfully updated user!",data.success, "success");
+            //     setTimeout(function(){
+            //        location.reload();
+            //      }, 1000);
+            // }
+        }
+    })
   });
 
   //add multiple product in add purchase order
@@ -226,6 +323,7 @@ $(document).ready(function(){
         str += '</div>';
     str += '</div>';
 
+
     if(x){
       x++;
       $('#addProduct').append(str);
@@ -234,6 +332,70 @@ $(document).ready(function(){
   });
 
   $(document).on('click', '#removeNewPO', function(){
+    $(this).parent().parent().parent().parent().remove(); x--;
+  });
+
+  //add multiple product in add purchase order
+  $(document).on('click', '#addNewPO_edit', function(){
+    var x = 1;
+    var str = '';
+
+    str += '<tr>';
+      str +=     '<td class="">';
+          // str +=   element.product;
+          // str += '<input type="text" class="form-control" name="prod_name[]" value="'+element.product+'">';.
+            str += '<div class="col-12">';
+               str += '<div class="form-group">';
+                 str += '<label for="prod_name">Product Name: <span class="required">*</span></label>';
+                 str += '<input type="text" class="form-control" name="prod_name[]" value="">';
+                 str += '<span class="err"></span>';
+               str += '</div>';
+             str += '</div>';
+         str += '</td>';
+        str += ' <td class="">';
+        // str += '<input type="number" class="form-control" name="ordered[]" value="'+element.ordered+'">';
+        str += '<div class="col-12">';
+             str += '<div class="form-group">';
+               str += '<label for="ordered">Orders: <span class="required">*</span></label>';
+               str += '<input type="number" class="form-control" name="ordered[]" value="">';
+               str += '<span class="err"></span>';
+             str += '</div>';
+           str += '</div>';
+               // str += '<span class="err"></span>';
+        str += '</td>';
+      str +=  '<td class="">';
+        str += '<div class="col-12">';
+            str += '<div class="form-group">';
+              str += '<label for="supplier">Supplier: <span class="required">*</span></label>';
+              str += '<select class="form-control" class="supplier" name="supplier[]" >';
+                str += '<option value="" selected hidden>Select Supplier</option>';
+                 str += get_supplier();
+              str += '</select>';
+              str += '<span class="err"></span>';
+            str += '</div>';
+          str += '</div>';
+       str += '</td>';
+
+       str += '<td>';
+       str += '<div class="col-2">';
+          str += '<div class="form-group">';
+            str += '<label for="ordered"></label><br>';
+            str += '<p>';
+            str += '<span class="btn btn-md btn-danger" id="removeNewPO">Remove</span>';
+          str += '</p>';
+        str += '</div>';
+      str += '</div>';
+       str += '</td>';
+      str += '</tr>';
+
+    if(x){
+      x++;
+      $('#edit_purch').append(str);
+    }
+    // get_supplier();
+  });
+
+  $(document).on('click', '#removeNewPO_edit', function(){
     $(this).parent().parent().parent().parent().remove(); x--;
   });
 });

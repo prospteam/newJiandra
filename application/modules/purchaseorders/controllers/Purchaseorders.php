@@ -12,12 +12,21 @@ class Purchaseorders extends MY_Controller {
 		$parameters['select'] = '*';
 		$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
 
+		$parameters['select'] = '*';
+		$data['company'] = $this->MY_Model->getRows('company',$parameters);
+
 		$parameters1['select'] = '*';
 		$parameters1['limit'] = array(1,0);;
 		$parameters1['order'] = 'purchase_code DESC';
 		$data['purchase'] = $this->MY_Model->getRows('purchase_orders',$parameters1);
 
     $this->load_page('purchaseorders', @$data);
+	}
+
+	public function get_suppliers_by_companies(){
+			$parameters['where'] = array('company' => $this->input->post('company_id'));
+			$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
+			json($data);
 	}
 
 	public function get_suppliers(){
@@ -80,8 +89,9 @@ class Purchaseorders extends MY_Controller {
 		$this->load->library("form_validation");
 
 		$this->form_validation->set_rules('prod_name[]', 'Product Name', 'required');
-		$this->form_validation->set_rules('ordered[]', 'Ordered', 'required');
-		$this->form_validation->set_rules('supplier[]', 'Supplier', 'required');
+		$this->form_validation->set_rules('quantity[]', 'Quantity', 'required');
+		$this->form_validation->set_rules('supplier', 'Supplier', 'required');
+		$this->form_validation->set_rules('company', 'Company', 'required');
 		$error = array();
 
 
@@ -117,14 +127,63 @@ class Purchaseorders extends MY_Controller {
 		echo json_encode($response);
 	}
 
+	// edit purchase Orders
+	public function edit_purchase_orders(){
+		$post = $this->input->post();
+		// if(!empty($post)) {
+			foreach($post['purchase_id'] as $pkey => $pVal){
+				$data = array(
+						'product' => $post['prod_name'][$pkey],
+						'ordered' => $post['ordered'][$pkey],
+						'supplier' => $post['supplier'][$pkey],
+					);
+					$update = $this->MY_Model->update('purchase_orders', $data, array('id' => $post['purchase_id'][$pkey]));
+							if ($update) {
+								$response = array(
+									'status' => 'ok'
+								);
+							}
+
+
+			// }
+		}
+		//
+		// if(!empty($post)) {
+		// 	foreach($post['prod_name'] as $pkey => $pVal){
+		// 		if ($this->form_validation->run() !== FALSE) {
+		// 			$data = array(
+		// 				'product' => $pVal,
+		// 				'ordered' => $post['ordered'][$pkey],
+		// 				'supplier' => $post['supplier'][$pkey],
+		// 			);
+		// 			$update = $this->MY_Model->update('purchase_orders', $data, array('id' => $post['purchase_id'][$pKey]));
+		// 			if ($update) {
+		// 				$response = array(
+		// 					'status' => 'ok'
+		// 				);
+		// 			}
+		// 		}else{
+		// 			$response = array('form_error' =>  array_merge($this->form_validation->error_array(), $error) );
+		// 		}
+		// 	}
+		// }
+
+		echo json_encode($response);
+
+	}
+
 	public function purchase_details(){
 		$purchase_id = $this->input->post('id');
 
-		$parameters['where'] = array('id' => $purchase_id);
-		$parameters['select'] = '*';
+		$parameters['where'] = array('purchase_code' => $purchase_id);
+		// $parameters['group'] = array('purchase_code');
+		$parameters['join'] = array('supplier' => 'supplier.id = purchase_orders.supplier');
+		$parameters['select'] = 'purchase_orders.*, purchase_orders.id AS purchase_id, supplier.id AS supplier_id, supplier.*';
 
 		$data['purch_details'] = $this->MY_Model->getRows('purchase_orders', $parameters);
-
+		// echo "<pre>";
+		// print_r($data);
+		// exit;
 			echo json_encode($data);
 	}
 	//view list of orders
@@ -133,12 +192,15 @@ class Purchaseorders extends MY_Controller {
 
 		$parameters['where'] = array('purchase_code' => $purchase_id);
 		// $parameters['group'] = array('purchase_code');
+
 		$parameters['select'] = '*';
 
 		$data = $this->MY_Model->getRows('purchase_orders',$parameters);
 
 		$data_array['purchase'] = $data;
 		// exit;
+
 		json($data_array);
 	}
+
 }

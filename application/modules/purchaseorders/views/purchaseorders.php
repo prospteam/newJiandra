@@ -15,7 +15,7 @@
             <!-- Modal -->
     				<div class="modal fade" id="AddPurchaseOrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     					<form id="addpurchaseorder" method="post">
-    						<div class="modal-dialog modal-xl" role="document">
+    						<div class="modal-dialog modal-lg" role="document">
     							<div class="modal-content">
     								<div class="modal-header bg-info1">
     									<h5 class="modal-title" id="exampleModalLabel">Add Purchase Order</h5>
@@ -27,44 +27,102 @@
                         <input type="hidden" class="form-control" name="purchase_id" value="<?php echo $value['id']?>">
                   <?php  endforeach; ?>
     								<div class="modal-body" id="addProduct">
-
-    									<div class="row">
-    										<div class="col-4">
-    											<div class="form-group">
-    												<label for="prod_name">Product Name: <span class="required">*</span></label>
-    												<input type="text" class="form-control" name="prod_name[]" value="">
-                            <span class="err"></span>
-    											</div>
-    										</div>
-    										<div class="col-2">
-    											<div class="form-group">
-    												<label for="ordered">Orders: <span class="required">*</span></label>
-    												<input type="number" class="form-control" name="ordered[]" value="">
-                            <span class="err"></span>
-    											</div>
-    										</div>
-                        <div class="col-4">
+                      <div class="row">
+                        <div class="col-6">
                           <div class="form-group">
-    												<label for="supplier">Supplier: <span class="required">*</span></label>
-    												<!-- <input type="text" class="form-control" name="position" value=""> -->
-                            <select class="form-control" class="supplier" name="supplier[]" >
-                              <option value="" selected hidden>Select Supplier</option>
-                            <?php foreach($suppliers as $k => $value) : ?>
-                                <option value="<?php echo $value['id'] ?>"><?php echo $value['supplier_name'] ?></option>
+                            <label for="supplier">Company: <span class="required">*</span></label>
+                            <!-- <input type="text" class="form-control" name="position" value=""> -->
+                            <select class="form-control" class="supplier" name="company" >
+                              <option value="" selected hidden>Select Company</option>
+                            <?php foreach($company as $k => $value) : ?>
+                                <option value="<?php echo $value['company_id'] ?>"><?php echo $value['company_name'] ?></option>
                           <?php  endforeach; ?>
                         </select>
                             <span class="err"></span>
+                          </div>
+                        </div>
+                        <div class="col-6">
+                          <div class="form-group" id="show_supplier">
     											</div>
     										</div>
-                        <div class="col-2">
-    											<div class="form-group">
-    												<label for="ordered"></label><br>
-                            <p>
-                              <span class="btn btn-md btn-primary" id="addNewPO">Add</span>
-                            </p>
-    											</div>
-    										</div>
-    									</div>
+                      </div>
+                      <hr>
+                          <span class="btn btn-sm btn-primary" id="addNewPO"><i class="fa fa-plus"></i> Add Product</span>
+                        <br>
+
+                      <div class="table-responsive">
+                            <table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="view_purchase_orders_details">
+                              <thead>
+                                  <th class="header-title purch">Product <span class="required">*</span></th>
+                                  <th class="header-title purch">Quantity <span class="required">*</span></th>
+                                  <th class="header-title purch">Unit Price <span class="required">*</span></th>
+                                  <th class="header-title purch">Total <span class="required">*</span></th>
+
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td class="purch_td">
+                                    <input type="text" class="form-control" name="prod_name[]" value="">
+                                    <span class="err"></span>
+                                  </td>
+                                  <td class="purch_td">
+                                    <input type="number" class="form-control" name="quantity[]" value="">
+                                    <span class="err"></span>
+                                  </td>
+                                  <td class="purch_td">
+                                    <input type="number" class="form-control" name="unit_price[]" value="">
+                                    <span class="err"></span>
+                                  </td>
+                                  <td class="purch_td">
+                                    <input type="number" class="form-control" name="total[]" value="">
+                                    <span class="err"></span>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                      </div>
+                      <hr>
+                      <div class="row">
+                        <div class="col-6">
+                              <label for="note">Note: </label>
+                              <textarea rows="4" cols="50" class="form-control" name="purchase_note" value=""></textarea>
+                        </div>
+                        <div class="col-md-12 col-lg-6 order-md-2">
+                                        <div class="form-horizontal">
+                                            <div class="form-group row m-b-10">
+                                                <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Quantity <span class="text-red">*</span></label>
+                                                <div class="col-lg-8 col-md-12">
+                                                    <input type="text" class="form-control disabled-normal total_quantity" readonly="" disabled="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-horizontal">
+                                            <div class="form-group row m-b-10">
+                                                <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Cost <span class="text-red">*</span></label>
+                                                <div class="col-lg-8 col-md-12">
+                                                    <div class="input-group m-b-0">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">₱</span>
+                                                        </div>
+                                                        <input type="text" class="form-control disabled-normal total_cost" readonly="" disabled="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-horizontal">
+                                            <div class="form-group row m-b-10">
+                                                <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Grand Total <span class="text-red">*</span></label>
+                                                <div class="col-lg-8 col-md-12">
+                                                    <div class="input-group m-b-0">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text">₱</span>
+                                                        </div>
+                                                        <input type="text" class="form-control disabled-normal grand_total" readonly="" disabled="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
     								</div>
     								<div class="modal-footer">
     									<button type="submit" class="btn btn-primary add">Submit</button>
@@ -120,7 +178,7 @@
         <!-- Modal -->
         <div class="modal fade" id="EditPurchaseOrder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <form id="editpurchaseorder" method="post">
-            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header bg-info1">
                   <h5 class="modal-title" id="exampleModalLabel">Edit Purchase Order</h5>
@@ -131,45 +189,28 @@
                 <?php foreach($purchase as $k => $value) : ?>
                     <input type="hidden" class="form-control" name="purchase_id" value="<?php echo $value['id']?>">
               <?php  endforeach; ?>
-                <div class="modal-body" id="editPurchase">
+                <div class="modal-body">
+                    <span class="btn btn-md btn-primary" id="addNewPO_edit"><i class="fa fa-plus"></i> Add New</span>
+                    <br>
+                      <br>
+                      <table id="edit_purch">
+                        <thead>
+                          <!-- <th class="header-title purch"></th>
+                          <th class="header-title purch"></th>
+                          <th class="header-title purch"></th> -->
+                          <!-- <th class="header-title purch">Action</th> -->
+                        </thead>
 
-                  <div class="row">
-                    <div class="col-4">
-                      <div class="form-group">
-                        <label for="prod_name">Product Name: <span class="required">*</span></label>
-                        <input type="text" class="form-control" name="prod_name[]" value="">
-                        <span class="err"></span>
-                      </div>
-                    </div>
-                    <div class="col-2">
-                      <div class="form-group">
-                        <label for="ordered">Orders: <span class="required">*</span></label>
-                        <input type="number" class="form-control" name="ordered[]" value="">
-                        <span class="err"></span>
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <div class="form-group">
-                        <label for="supplier">Supplier: <span class="required">*</span></label>
-                        <!-- <input type="text" class="form-control" name="position" value=""> -->
-                        <select class="form-control" class="supplier" name="supplier[]" >
-                          <option value="" selected hidden>Select Supplier</option>
-                        <?php foreach($suppliers as $k => $value) : ?>
-                            <option value="<?php echo $value['id'] ?>"><?php echo $value['supplier_name'] ?></option>
-                      <?php  endforeach; ?>
-                    </select>
-                        <span class="err"></span>
-                      </div>
-                    </div>
-                    <div class="col-2">
-                      <div class="form-group">
-                        <label for="ordered"></label><br>
-                        <p>
-                          <span class="btn btn-md btn-primary" id="addNewPO">Add</span>
-                        </p>
-                      </div>
-                    </div>
+                      <tbody>
+                        <tr>
+
+                        </tr>
+                      </tbody>
+                    </table>
+                  <!-- <div class="edit">
                   </div>
+                  <div id="editPurchase">
+                  </div> -->
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary add">Submit</button>
