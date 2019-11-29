@@ -100,22 +100,19 @@ class Products extends MY_Controller {
 
 				$products_id = $this->input->post('id');
 				$post = $this->input->post();
-				echo "<pre>";
-				 print_r($post);
-				 exit;
+
 				$result = false;
 
 				if (!empty($post)) {
 					$data = array(
-						'code' => $post['code'],
-						'brand' => $post['brand'],
-						'category' => $post['category'],
-						'variant' => $post['variant'],
+						'code'  	    => $post['code'],
+						'brand'  	    => $post['brand'],
+						'category'    => $post['category'],
+						'variant'     => $post['variant'],
 						'description' => $post['description'],
-						'price' => $post['price'],
-						'volume' => $post['volume'],
+						'price'       => $post['price'],
+						'volume'      => $post['volume']
 					);
-
 
 				$update = $this->MY_Model->update('products',$data, array('id' => $products_id));
 				if ($update) {
@@ -128,10 +125,14 @@ class Products extends MY_Controller {
 					);
 				}
 
-				$result = json_encode($response);
+					$result = json_encode($response);
+
+				}
+
+				die($result);
+
 			}
-		die($result);
-	}
+
 	//delete Supplier
 	public function deleteProducts(){
 		$products_id = $this->input->post('id');
@@ -145,6 +146,28 @@ class Products extends MY_Controller {
 	}
 
 
+	// public function disable_products(){
+	//
+	// 		$product_id = $this->input->post('id');
+	// 		$user_status = 2;
+	// 		$data = array(
+	// 			'status' => $user_status
+	// 		);
+	//
+	// 		$datas['delete'] = $this->MY_Model->update('products',$data,array('id' => $product_id));
+	// }
+	//
+	// public function enable_products(){
+	//
+	// 		$product_id = $this->input->post('id');
+	// 		$user_status = 3;
+	// 		$data = array(
+	// 			'status' => $user_status
+	// 		);
+	//
+	// 		$datas['delete'] = $this->MY_Model->update('products',$data,array('id' => $product_id));
+	// }
+	//
 
 
 }

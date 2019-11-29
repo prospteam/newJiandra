@@ -171,7 +171,7 @@ $(document).ready(function(){
             url:base_url + 'supplier/deleteSupplier',
             data: {id: id},
             success:function(data) {
-              $(".products_tbl").DataTable().ajax.reload();
+              $(".suppliers_tbl").DataTable().ajax.reload();
             }
           })
       }
