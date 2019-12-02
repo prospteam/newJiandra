@@ -43,14 +43,17 @@ class Purchaseorders extends MY_Controller {
 		$draw = $this->input->post('draw');
 
 
-		$column_order = array('date_ordered','purchase_code','supplier.supplier_name');
+		$column_order = array('date_ordered','purchase_code','company.company_name','supplier.supplier_name');
 		$where = array();
 		$group = array('purchase_orders.purchase_code');
 		$join = array(
 			'supplier' => 'supplier.id = purchase_orders.supplier',
+			'company' => 'company.company_id = purchase_orders.company'
 		);
-		$select = "purchase_orders.id AS purchase_id ,purchase_orders.date_ordered,purchase_orders.purchase_code,supplier.id,supplier.supplier_name,purchase_orders.status,purchase_orders.delivery_status";
+		$select = "purchase_orders.id AS purchase_id, purchase_orders.date_ordered,purchase_orders.purchase_code,company.company_id, company.company_name, supplier.id,supplier.supplier_name,purchase_orders.status,purchase_orders.delivery_status";
 		$list = $this->MY_Model->get_datatables('purchase_orders',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
+
+
 		// foreach($list['data'] as $key => $value){
 		// 	echo "<pre>";
 		// 	print_r($value);
@@ -78,9 +81,7 @@ class Purchaseorders extends MY_Controller {
 
 	public function addPurchaseOrder(){
 		$post = $this->input->post();
-		// echo "<pre>";
-		// print_r($post);
-		// exit;
+
 		$date_ordered = date("F d, Y");
 		$id = $this->input->post('purchase_id');
 		$purchase_id = $id + 1;
@@ -92,6 +93,8 @@ class Purchaseorders extends MY_Controller {
 		$this->form_validation->set_rules('quantity[]', 'Quantity', 'required');
 		$this->form_validation->set_rules('supplier', 'Supplier', 'required');
 		$this->form_validation->set_rules('company', 'Company', 'required');
+		$this->form_validation->set_rules('unit_price[]', 'Unit Price', 'required');
+		$this->form_validation->set_rules('total[]', 'Total', 'required');
 		$error = array();
 
 
@@ -106,8 +109,10 @@ class Purchaseorders extends MY_Controller {
 					'date_ordered' => $date_ordered,
 					'purchase_code' => $code,
 					'product' => $pVal,
-					'ordered' => $post['ordered'][$pkey],
-					'supplier' => $post['supplier'][$pkey],
+					'quantity' => $post['quantity'][$pkey],
+					'unit_price' => $post['unit_price'][$pkey],
+					'supplier' => $post['supplier'],
+					'company' => $post['company'],
 					'status' => 1,
 					'delivery_status' => 1
 				);
@@ -192,7 +197,7 @@ class Purchaseorders extends MY_Controller {
 
 		$parameters['where'] = array('purchase_code' => $purchase_id);
 		// $parameters['group'] = array('purchase_code');
-
+		$parameters['join'] = array('company' => 'company.company_id = purchase_orders.company','supplier' => 'supplier.id = purchase_orders.supplier' );
 		$parameters['select'] = '*';
 
 		$data = $this->MY_Model->getRows('purchase_orders',$parameters);

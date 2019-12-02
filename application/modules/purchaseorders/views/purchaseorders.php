@@ -50,7 +50,7 @@
                           <span class="btn btn-sm btn-primary" id="addNewPO"><i class="fa fa-plus"></i> Add Product</span>
                         <br>
 
-                      <div class="table-responsive">
+                      <div class="table-responsive view_purchase_orders_details">
                             <table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="view_purchase_orders_details">
                               <thead>
                                   <th class="header-title purch">Product <span class="required">*</span></th>
@@ -60,24 +60,24 @@
 
                               </thead>
                               <tbody>
-                                <tr>
-                                  <td class="purch_td">
+                                <!-- <tr> -->
+                                  <!-- <td class="purch_td">
                                     <input type="text" class="form-control" name="prod_name[]" value="">
                                     <span class="err"></span>
                                   </td>
                                   <td class="purch_td">
-                                    <input type="number" class="form-control" name="quantity[]" value="">
+                                    <input type="number" class="form-control purchase_quantity" name="quantity[]" value="">
                                     <span class="err"></span>
                                   </td>
                                   <td class="purch_td">
-                                    <input type="number" class="form-control" name="unit_price[]" value="">
+                                    <input type="number" class="form-control purchase_price" name="unit_price[]" value="">
                                     <span class="err"></span>
                                   </td>
                                   <td class="purch_td">
-                                    <input type="number" class="form-control" name="total[]" value="">
+                                    <input type="number" class="form-control purchase_total" name="total[]" value="" readonly>
                                     <span class="err"></span>
-                                  </td>
-                                </tr>
+                                  </td> -->
+                                <!-- </tr> -->
                               </tbody>
                             </table>
                       </div>
@@ -131,11 +131,12 @@
     						</div>
     					</form>
     				</div>
+          </div>
           <!-- End Add user Modal -->
 
           <!--View User Modal -->
           <!-- Modal -->
-          <div class="modal fade" id="ViewPurchaseOrders" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
+          <div class="modal fade" id="ViewPurchaseOrders" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
               <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -154,24 +155,98 @@
                         <h1 class="inp_head"><span class="date"></span> </h1> <br>
                       </div>
                     </div>
-                    <table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="view_purchase_orders_details">
-                  <thead>
-                    <th class="header-title purch">Product</th>
-                    <th class="header-title purch">Ordered</th>
-                    <th class="header-title purch">Delivered</th>
-                    <th class="header-title purch">Action</th>
-                  </thead>
-                  <tbody>
-                    <tr>
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label for="company">Company:</label>
+                            <p class="company"></p> <br>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <label for="supplier">Supplier:</label>
+                          <p class="supplier"></p> <br>
+                        </div>
+                      </div>
+                    </div>
 
-                    </tr>
-                  </tbody>
-                </table>
+                    <div class="table-responsive add_new_product">
+                          <table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_new_product">
+                            <thead>
+                                <th class="header-title purch">Product <span class="required">*</span></th>
+                                <th class="header-title purch">Quantity <span class="required">*</span></th>
+                                <th class="header-title purch">Unit Price <span class="required">*</span></th>
+                                <th class="header-title purch">Total <span class="required">*</span></th>
+
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td class="purch_td">
+                                  <input type="text" class="form-control" name="prod_name[]" value="">
+                                  <span class="err"></span>
+                                </td>
+                                <td class="purch_td">
+                                  <input type="number" class="form-control purchase_quantity" name="quantity[]" value="">
+                                  <span class="err"></span>
+                                </td>
+                                <td class="purch_td">
+                                  <input type="number" class="form-control purchase_price" name="unit_price[]" value="">
+                                  <span class="err"></span>
+                                </td>
+                                <td class="purch_td">
+                                  <input type="number" class="form-control purchase_total" name="total[]" value="" readonly>
+                                  <span class="err"></span>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-6">
+                            <label for="note">Note: </label>
+                            <textarea rows="4" cols="50" class="form-control" name="purchase_note" value=""></textarea>
+                      </div>
+                      <div class="col-md-12 col-lg-6 order-md-2">
+                                      <div class="form-horizontal">
+                                          <div class="form-group row m-b-10">
+                                              <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Quantity <span class="text-red">*</span></label>
+                                              <div class="col-lg-8 col-md-12">
+                                                  <input type="text" class="form-control disabled-normal total_quantity" readonly="" disabled="">
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="form-horizontal">
+                                          <div class="form-group row m-b-10">
+                                              <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Cost <span class="text-red">*</span></label>
+                                              <div class="col-lg-8 col-md-12">
+                                                  <div class="input-group m-b-0">
+                                                      <div class="input-group-prepend">
+                                                          <span class="input-group-text">₱</span>
+                                                      </div>
+                                                      <input type="text" class="form-control disabled-normal total_cost" readonly="" disabled="">
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="form-horizontal">
+                                          <div class="form-group row m-b-10">
+                                              <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Grand Total <span class="text-red">*</span></label>
+                                              <div class="col-lg-8 col-md-12">
+                                                  <div class="input-group m-b-0">
+                                                      <div class="input-group-prepend">
+                                                          <span class="input-group-text">₱</span>
+                                                      </div>
+                                                      <input type="text" class="form-control disabled-normal grand_total" readonly="" disabled="">
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                  </div>
                   </div>
                 </div>
               </div>
 
-          </div>
         <!-- End View user Modal -->
 
         <!--View Edit Modal -->
@@ -259,6 +334,7 @@
                   <thead>
                     <th class="header-title">Date Ordered</th>
                     <th class="header-title">Purchase Code</th>
+                    <th class="header-title">Company</th>
                     <th class="header-title">Supplier</th>
                     <th class="header-title">Action</th>
                     <th class="header-title">Status</th>
@@ -277,38 +353,6 @@
                 </table>
                 </div>
               </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12 col-md-5">
-                  <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div>
-                </div>
-                <div class="col-sm-12 col-md-7">
-                  <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
-                    <ul class="pagination">
-                      <li class="paginate_button page-item previous disabled" id="example1_previous">
-                        <a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
-                      </li>
-                      <li class="paginate_button page-item active">
-                        <a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0" class="page-link">1</a>
-                      </li>
-                      <li class="paginate_button page-item ">
-                        <a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0" class="page-link">2</a>
-                      </li>
-                      <li class="paginate_button page-item ">
-                        <a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0" class="page-link">3</a>
-                      </li>
-                      <li class="paginate_button page-item ">
-                        <a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0" class="page-link">5</a>
-                      </li>
-                      <li class="paginate_button page-item ">
-                        <a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0" class="page-link">6</a>
-                      </li>
-                      <li class="paginate_button page-item next" id="example1_next">
-                        <a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">Next</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
               </div>
             </div>
               </div>

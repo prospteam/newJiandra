@@ -10,6 +10,7 @@ $(document).ready(function(){
          "columns":[
               {"data":"date_ordered"},
               {"data":"purchase_code"},
+              {"data":"company_name"},
               {"data":"supplier_name"},
 
               // {"data":"type"},
@@ -127,6 +128,7 @@ $(document).ready(function(){
          $('#ViewPurchaseOrders').modal('show');
          var str = '';
            $.each(data.purchase,function(index,element){
+             console.log(element);
              if(element.delivered == ''){
                var deliv = 0;
              }else{
@@ -134,15 +136,17 @@ $(document).ready(function(){
              }
              $('.code').text(element.purchase_code);
              $('.date').text(element.date_ordered);
+             $('.company').text(element.company_name);
+             $('.supplier').text(element.supplier_name);
              str += '<tr>';
                str +=     '<td class="purch_td">';
                    str +=   element.product;
                   str += '</td>';
                  str += ' <td class="purch_td">';
-                     str += element.ordered;
+                     str += element.quantity;
                  str += '</td>';
                str +=  '<td class="purch_td">';
-                  str += deliv;
+                  str += element.unit_price;
                 str += '</td>';
                  str += '<td class="purch_td">';
                  str += '<button="" class="btn btn-xs btn-primary"><i class="fas fa-edit" aria-hidden="true"></i></button>';
@@ -285,48 +289,29 @@ $(document).ready(function(){
     var x = 1;
     var str = '';
 
-    str = '<div class="row">';
-      str += '<div class="col-4">';
-         str += '<div class="form-group">';
-           str += '<label for="prod_name">Product Name: <span class="required">*</span></label>';
+    str += '<tr>';
+      str += '<td class="purch_td">';
            str += '<input type="text" class="form-control" name="prod_name[]" value="">';
            str += '<span class="err"></span>';
-         str += '</div>';
-       str += '</div>';
-
-       str += '<div class="col-2">';
-          str += '<div class="form-group">';
-            str += '<label for="ordered">Orders: <span class="required">*</span></label>';
-            str += '<input type="number" class="form-control" name="ordered[]" value="">';
-            str += '<span class="err"></span>';
-          str += '</div>';
-        str += '</div>';
-
-        str += '<div class="col-4">';
-           str += '<div class="form-group">';
-             str += '<label for="supplier">Supplier: <span class="required">*</span></label>';
-             str += '<select class="form-control" class="supplier" name="supplier[]" >';
-                str += '<option value="" selected hidden>Select Supplier</option>';
-                str += get_supplier();
-             str += '</select>';
-             str += '<span class="err"></span>';
-           str += '</div>';
-         str += '</div>';
-
-         str += '<div class="col-2">';
-            str += '<div class="form-group">';
-              str += '<label for="ordered"></label><br>';
-              str += '<p>';
-              str += '<span class="btn btn-md btn-danger" id="removeNewPO">Remove</span>';
-            str += '</p>';
-          str += '</div>';
-        str += '</div>';
-    str += '</div>';
+      str += '</td>';
+      str += '<td class="purch_td">';
+           str += '<input type="number" class="form-control purchase_quantity" name="quantity[]" value="">';
+           str += '<span class="err"></span>';
+      str += '</td>';
+      str += '<td class="purch_td">';
+          str += '<input type="number" class="form-control purchase_price" name="unit_price[]" value="">';
+          str += '<span class="err"></span>';
+      str += '</td>';
+      str += '<td class="purch_td">';
+          str += '<input type="number" class="form-control purchase_total" name="total[]" value="" readonly>';
+          str += '<span class="err"></span>';
+      str += '</td>';
+    str += '</tr>';
 
 
     if(x){
       x++;
-      $('#addProduct').append(str);
+      $('#add_new_product tbody').append(str);
     }
     // get_supplier();
   });
@@ -341,52 +326,23 @@ $(document).ready(function(){
     var str = '';
 
     str += '<tr>';
-      str +=     '<td class="">';
-          // str +=   element.product;
-          // str += '<input type="text" class="form-control" name="prod_name[]" value="'+element.product+'">';.
-            str += '<div class="col-12">';
-               str += '<div class="form-group">';
-                 str += '<label for="prod_name">Product Name: <span class="required">*</span></label>';
-                 str += '<input type="text" class="form-control" name="prod_name[]" value="">';
-                 str += '<span class="err"></span>';
-               str += '</div>';
-             str += '</div>';
-         str += '</td>';
-        str += ' <td class="">';
-        // str += '<input type="number" class="form-control" name="ordered[]" value="'+element.ordered+'">';
-        str += '<div class="col-12">';
-             str += '<div class="form-group">';
-               str += '<label for="ordered">Orders: <span class="required">*</span></label>';
-               str += '<input type="number" class="form-control" name="ordered[]" value="">';
-               str += '<span class="err"></span>';
-             str += '</div>';
-           str += '</div>';
-               // str += '<span class="err"></span>';
-        str += '</td>';
-      str +=  '<td class="">';
-        str += '<div class="col-12">';
-            str += '<div class="form-group">';
-              str += '<label for="supplier">Supplier: <span class="required">*</span></label>';
-              str += '<select class="form-control" class="supplier" name="supplier[]" >';
-                str += '<option value="" selected hidden>Select Supplier</option>';
-                 str += get_supplier();
-              str += '</select>';
-              str += '<span class="err"></span>';
-            str += '</div>';
-          str += '</div>';
-       str += '</td>';
-
-       str += '<td>';
-       str += '<div class="col-2">';
-          str += '<div class="form-group">';
-            str += '<label for="ordered"></label><br>';
-            str += '<p>';
-            str += '<span class="btn btn-md btn-danger" id="removeNewPO">Remove</span>';
-          str += '</p>';
-        str += '</div>';
-      str += '</div>';
-       str += '</td>';
-      str += '</tr>';
+      str += '<td class="purch_td">';
+           str += '<input type="text" class="form-control" name="prod_name[]" value="">';
+           str += '<span class="err"></span>';
+      str += '</td>';
+      str += '<td class="purch_td">';
+           str += '<input type="number" class="form-control purchase_quantity" name="quantity[]" value="">';
+           str += '<span class="err"></span>';
+      str += '</td>';
+      str += '<td class="purch_td">';
+          str += '<input type="number" class="form-control purchase_price" name="unit_price[]" value="">';
+          str += '<span class="err"></span>';
+      str += '</td>';
+      str += '<td class="purch_td">';
+          str += '<input type="number" class="form-control purchase_total" name="total[]" value="" readonly>';
+          str += '<span class="err"></span>';
+      str += '</td>';
+    str += '</tr>';
 
     if(x){
       x++;
@@ -398,6 +354,47 @@ $(document).ready(function(){
   $(document).on('click', '#removeNewPO_edit', function(){
     $(this).parent().parent().parent().parent().remove(); x--;
   });
+
+  //compute total for qunatity * unit Price
+    $(document).on('keyup', '.purchase_price, .purchase_quantity', function(){
+        var total = 1;
+        var grand_total = '';
+        var price = $(this).parents('tr').find('.purchase_price').val();
+        var quantity = $(this).parents('tr').find('.purchase_quantity').val();
+
+        quantity = quantity === undefined || quantity === null || quantity === '' ? 0 : quantity;
+        price = price === undefined || price === null || price === '' ? 0 : price;
+
+        var total = price * quantity;
+
+         $(this).parents('tr').find('.purchase_total').val(total.toFixed(2));
+
+         // grand total
+         var grand_total = 0;
+         $(".purchase_total").each(function() {
+             var gtval = $(this).val();
+             grand_total += +gtval.replace(/\,/g, '');
+         });
+
+          $('.grand_total').val(grand_total.toFixed(2));
+
+          //  total quantity
+          var total_quantity = 0;
+          $(".purchase_quantity").each(function() {
+              total_quantity += +$(this).val();
+          });
+          $(".total_quantity").val(total_quantity);
+
+          var total_cost = 0;
+          $(".purchase_price").each(function() {
+              total_cost += +$(this).val();
+          });
+          $(".total_cost").val(total_cost.toFixed(2));
+
+
+
+      });
+
 });
 
 
