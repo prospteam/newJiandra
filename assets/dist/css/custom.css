@@ -296,6 +296,10 @@ th.header-title.purch {
 .add_new_product{
   margin-top: 9px;
 }
+
+.purch_prod, .summary{
+  padding: 10px;
+}
 @media only screen and (max-width: 362px) {
     button.button1 {
         font-size: 20px;

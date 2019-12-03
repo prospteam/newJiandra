@@ -136,11 +136,17 @@ class Purchaseorders extends MY_Controller {
 	public function edit_purchase_orders(){
 		$post = $this->input->post();
 		// if(!empty($post)) {
+		// echo "<pre>";
+		// print_r($post);
+		// exit;
 			foreach($post['purchase_id'] as $pkey => $pVal){
 				$data = array(
+						'company' => $post['company_edit'],
+						'supplier' => $post['supplier'],
 						'product' => $post['prod_name'][$pkey],
-						'ordered' => $post['ordered'][$pkey],
-						'supplier' => $post['supplier'][$pkey],
+						'quantity' => $post['quantity'][$pkey],
+						'unit_price' => $post['unit_price'][$pkey],
+						'note' => $post['purchase_note'],
 					);
 					$update = $this->MY_Model->update('purchase_orders', $data, array('id' => $post['purchase_id'][$pkey]));
 							if ($update) {
@@ -152,6 +158,9 @@ class Purchaseorders extends MY_Controller {
 
 			// }
 		}
+		echo "<pre>";
+		print_r($this->db->last_query());
+		exit;
 		//
 		// if(!empty($post)) {
 		// 	foreach($post['prod_name'] as $pkey => $pVal){
@@ -182,8 +191,8 @@ class Purchaseorders extends MY_Controller {
 
 		$parameters['where'] = array('purchase_code' => $purchase_id);
 		// $parameters['group'] = array('purchase_code');
-		$parameters['join'] = array('supplier' => 'supplier.id = purchase_orders.supplier');
-		$parameters['select'] = 'purchase_orders.*, purchase_orders.id AS purchase_id, supplier.id AS supplier_id, supplier.*';
+		$parameters['join'] = array('company' => 'company.company_id = purchase_orders.company','supplier' => 'supplier.id = purchase_orders.supplier');
+		$parameters['select'] = 'purchase_orders.*, purchase_orders.id AS purchase_id, supplier.id AS supplier_id, supplier.*, company.*';
 
 		$data['purch_details'] = $this->MY_Model->getRows('purchase_orders', $parameters);
 		// echo "<pre>";

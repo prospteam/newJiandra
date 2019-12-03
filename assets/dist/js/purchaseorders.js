@@ -127,8 +127,17 @@ $(document).ready(function(){
          // console.log(data);
          $('#ViewPurchaseOrders').modal('show');
          var str = '';
+         var total_quantity = 0;
+         var total_cost = 0;
+         var grand_total = 0;
+
            $.each(data.purchase,function(index,element){
-             console.log(element);
+
+             total_quantity = parseFloat(total_quantity) + parseFloat(element.quantity);
+             total_cost = parseFloat(total_cost) + parseFloat(element.unit_price);
+             var total = element.quantity * element.unit_price;
+             grand_total = parseFloat(grand_total) + parseFloat(total);
+
              if(element.delivered == ''){
                var deliv = 0;
              }else{
@@ -142,18 +151,33 @@ $(document).ready(function(){
                str +=     '<td class="purch_td">';
                    str +=   element.product;
                   str += '</td>';
-                 str += ' <td class="purch_td">';
+                 str += ' <td class="purch_td qty">';
                      str += element.quantity;
                  str += '</td>';
-               str +=  '<td class="purch_td">';
+               str +=  '<td class="purch_td price">';
                   str += element.unit_price;
                 str += '</td>';
+                str +=  '<td class="purch_td total">';
+                str += total;
+                 str += '</td>';
+                 str +=  '<td class="purch_td">';
+                    str += deliv;
+                  str += '</td>';
                  str += '<td class="purch_td">';
                  str += '<button="" class="btn btn-xs btn-primary"><i class="fas fa-edit" aria-hidden="true"></i></button>';
                 str += '</td>';
                str += '</tr>';
+
+
+               $('.note').text(element.note);
          });
+
+         $('.qty').val(total_quantity);
+         $('.total_cost').val(total_cost.toFixed(2));
+
          $('#view_purchase_orders_details tbody').html(str);
+         $('.grand_total').val(grand_total.toFixed(2));
+
    }
   });
 });
@@ -183,6 +207,30 @@ $(document).ready(function(){
     });
   });
 
+  //display suppliers according to company on edit
+  $(document).on('change','select[name="company_edit"]',function(){
+    $.ajax({
+        url: base_url+'purchaseorders/get_suppliers_by_companies',
+        data: {company_id:$(this).val()},
+        type: 'post',
+        dataType: 'json',
+        success: function(data){
+          var str = '';
+          str += '<label for="supplier">Supplier: <span class="required">*</span></label>';
+          str += '<select class="form-control" class="supplier" id="supplier" name="supplier" >';
+              // str += '<option value="" selected hidden>Select Supplier</option>';
+                $.each(data.suppliers,function(index,element){
+                      str += '<option value="'+element.id+'">'+element.supplier_name+'</option>';
+                });
+          str += '</select>';
+          str += '<span class="err"></span>';
+
+            $('#edit_show_supplier').html(str);
+
+        }
+    });
+  });
+
   //view edit Orders
   $(document).on('click', '.editPurchase', function(){
     var id = $(this).attr('data-id');
@@ -194,43 +242,48 @@ $(document).ready(function(){
         success: function(data){
           $('#EditPurchaseOrder').modal('show');
           var str ='';
+          var total = 0;
+          var total_quantity = 0;
+          var total_cost = 0;
+          var grand_total = 0;
+
           $.each(data.purch_details,function(index,element){
             console.log(element);
+            total = parseFloat(element.quantity) + parseFloat(element.unit_price)
+            total_quantity = parseFloat(total_quantity) + parseFloat(element.quantity);
+            total_cost = parseFloat(total_cost) + parseFloat(element.unit_price);
+            var total = element.quantity * element.unit_price;
+            grand_total = parseFloat(grand_total) + parseFloat(total);
+
+            $('#editpurchaseorder textarea[name=purchase_note]').val(element.note);
+            $('#editpurchaseorder select[name=company_edit]').val(element.company_id);
+            $('#editpurchaseorder select[name="company_edit"]').trigger('change');
+            $('#editpurchaseorder select[name=supplier]').val(element.supplier_id);
+            str += '<input type="hidden" name="purchase_id" value='+element.purchase_id+'>';
             str += '<tr>';
-              str +=     '<td class="">';
-                    str += '<div class="col-12">';
-                       str += '<div class="form-group">';
-                       str += '<input type="hidden" class="form-control purchase_id" name="purchase_id[]" value="'+element.purchase_id+'">';
-                         str += '<label for="prod_name">Product Name: <span class="required">*</span></label>';
-                         str += '<input type="text" class="form-control" name="prod_name[]" value="'+element.product+'">';
-                         str += '<span class="err"></span>';
-                       str += '</div>';
-                     str += '</div>';
-                 str += '</td>';
-                str += ' <td class="">';
-                str += '<div class="col-12">';
-                     str += '<div class="form-group">';
-                       str += '<label for="ordered">Orders: <span class="required">*</span></label>';
-                       str += '<input type="number" class="form-control" name="ordered[]" value="'+element.ordered+'">';
-                       str += '<span class="err"></span>';
-                     str += '</div>';
-                   str += '</div>';
-                str += '</td>';
-              str +=  '<td class="">';
-                str += '<div class="col-12">';
-                    str += '<div class="form-group">';
-                      str += '<label for="supplier">Supplier: <span class="required">*</span></label>';
-                      str += '<select class="form-control" class="supplier" name="supplier[]" >';
-                         str += '<option value="'+element.supplier+'" selected>'+element.supplier_name+'</option>';
-                         str += get_supplier();
-                      str += '</select>';
-                      str += '<span class="err"></span>';
-                    str += '</div>';
-                  str += '</div>';
-               str += '</td>';
-              str += '</tr>';
+              str += '<td class="purch_td">';
+                   str += '<input type="text" class="form-control" name="prod_name[]" value='+element.product+'>';
+                   str += '<span class="err"></span>';
+              str += '</td>';
+              str += '<td class="purch_td">';
+                   str += '<input type="number" class="form-control purchase_quantity" name="quantity[]" value='+element.quantity+'>';
+                   str += '<span class="err"></span>';
+              str += '</td>';
+              str += '<td class="purch_td">';
+                  str += '<input type="number" class="form-control purchase_price" name="unit_price[]" value='+element.unit_price+'>';
+                  str += '<span class="err"></span>';
+              str += '</td>';
+              str += '<td class="purch_td">';
+                  str += '<input type="number" class="form-control purchase_total" name="total[]" value='+total+' readonly>';
+                  str += '<span class="err"></span>';
+              str += '</td>';
+            str += '</tr>';
           });
+
+          $('.total_quantity').val(total_quantity);
+          $('.total_cost').val(total_cost.toFixed(2));
           $('#edit_purch tbody').html(str);
+          $('.grand_total').val(grand_total.toFixed(2));
         }
     });
 
@@ -241,7 +294,7 @@ $(document).ready(function(){
   $(document).on('submit','#editpurchaseorder',function(e){
     e.preventDefault();
     let formData =  new FormData($(this)[0]);
-    var id = $('input[name="purchase_id[]"]').val();
+    var id = $('input[name="purchase_id"]').val();
     // alert(id);
     formData.append("id",id);
     $.ajax({
