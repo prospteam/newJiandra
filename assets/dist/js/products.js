@@ -27,11 +27,8 @@ $(document).on('submit','form#addproducts',function(e){
              blankVal_products();
               $('#AddProducts').modal('hide');
               Swal.fire("Successfully added products!",data.success, "success");
-              $(".products_tbl").DataTable().ajax.reload();
-              // setTimeout(function(){
-              //    location.reload();
-              //  }, 1000);
-          }
+            }
+            $(".products_tbl").DataTable().ajax.reload();
       }
   });
 });
@@ -151,6 +148,8 @@ $(document).on("click",'.deleteproducts', function(e) {
         })
     }
   });
+
+  });
 // DISABLED PRODUCTS
   $(document).on("click",".disableproducts",function(e){
       e.preventDefault();
@@ -216,17 +215,13 @@ $(document).on("click",'.deleteproducts', function(e) {
             })
         }
       });
-
-
   });
 
 // End Enabled Products
 
-
-
-});
 // DISPLAY Products
-  var products_tbl = $('.products_tbl').DataTable({
+
+    var products_tbl = $('.products_tbl').DataTable({
     "processing"  : true,
     "serverside"  : true,
     "order"       : [[0,'desc']],
@@ -240,13 +235,13 @@ $(document).on("click",'.deleteproducts', function(e) {
           {"data":"volume"},
           {"data":"action","render": function(data, type, row,meta){
                             var str = '';
-                            if (row.status == 1) {
-                              str += '<div class="actions">';
+                            str += '<div class="actions">';
+                            if(row.status == 1) {
                               str += '<a href="javascript:;" class="viewproducts" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
                               str += '<a href="javascript:;" class="editproducts" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
                               str += '<a href="javascript:;" class="disableproducts" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
                               str += '<a href="javascript:;" class="deleteproducts" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-                            } else if (row.status == 2) {
+                            } else if(row.status == 2) {
                               str += '<a href="javascript:;" class="enableproducts" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
                               str += '<a href="javascript:;" class="deleteproducts" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                             }
