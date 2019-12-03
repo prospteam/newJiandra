@@ -286,13 +286,10 @@ $(document).ready(function(){
                 blankVal_user();
                  $('#AddUser').modal('hide');
                  Swal.fire("Successfully added user!",data.success, "success");
-                 $(".users_tbl").DataTable().ajax.reload();
-                 // setTimeout(function(){
-                 //    location.reload();
-                 //  }, 1000);
              }
+             $(".users_tbl").DataTable().ajax.reload();
          }
-     })
+     });
    });
 
    //modal for view user

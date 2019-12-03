@@ -1,4 +1,5 @@
 var base_url = $('input[name="base_url"]').val();
+
 $(document).ready(function(){
 
         display_suppliers('0');
@@ -69,7 +70,8 @@ $(document).ready(function(){
                  blankVal();
                   $('#addSupplier').modal('hide');
                   Swal.fire("Supplier has been added!", data.success, "success");
-                  $(".suppliers_tbl").DataTable().ajax.reload();
+                  display_suppliers();
+                  // $(".suppliers_tbl").DataTable().ajax.reload();
               }
           }
       });

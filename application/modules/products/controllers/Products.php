@@ -61,13 +61,13 @@ class Products extends MY_Controller {
 			$draw = $this->input->post('draw');
 
 
-			$column_order = array('code','brand','category','price','volume',);
-			$where = array('products.status' => 1);
+			$column_order = array('code','brand','category','price','volume','status');
+		 	$where = array('status !=' => 3);
 			$join = array(
 				// 'company' => 'company.company_id = users.company',
 				// 'position' => 'position.id = users.position'
 			);
-			$select = "products.id,products.code,products.brand,products.category,products.price,products.volume";
+			$select = "products.id,products.code,products.brand,products.category,products.price,products.volume,products.status";
 			$list = $this->MY_Model->get_datatables('products',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 
 
@@ -133,6 +133,29 @@ class Products extends MY_Controller {
 
 			}
 
+			public function enable_products(){
+
+					$product_id = $this->input->post('id');
+					$products_status = 1;
+					$data = array(
+						'status' => $products_status
+					);
+
+					$datas['delete'] = $this->MY_Model->update('products',$data,array('id' => $product_id));
+					echo json_encode($datas);
+			}
+
+			public function disable_products(){
+
+					$product_id = $this->input->post('id');
+					$products_status = 2;
+					$data = array(
+						'status' => $products_status
+					);
+					$datas['delete'] = $this->MY_Model->update('products',$data,array('id' => $product_id));
+					echo json_encode($datas);
+			}
+
 	//delete Supplier
 	public function deleteProducts(){
 		$products_id = $this->input->post('id');
@@ -146,28 +169,24 @@ class Products extends MY_Controller {
 	}
 
 
-	// public function disable_products(){
-	//
-	// 		$product_id = $this->input->post('id');
-	// 		$user_status = 2;
-	// 		$data = array(
-	// 			'status' => $user_status
-	// 		);
-	//
-	// 		$datas['delete'] = $this->MY_Model->update('products',$data,array('id' => $product_id));
-	// }
-	//
-	// public function enable_products(){
-	//
-	// 		$product_id = $this->input->post('id');
-	// 		$user_status = 3;
-	// 		$data = array(
-	// 			'status' => $user_status
-	// 		);
-	//
-	// 		$datas['delete'] = $this->MY_Model->update('products',$data,array('id' => $product_id));
-	// }
-	//
 
 
+
+	// public function listofproducts_add()
+	// {
+	// 		$post = $this->input->post();
+	// 		$result = false;
+	//
+	// 		if (!empty($post)) {
+	// 				$postLike = !empty($post['searchfor']['term']) ? $post['searchfor']['term'] : '';
+	// 				$where = $post['search_type'] == 'brand' ? "brand LIKE '%" . $postLike . "%'" : "category LIKE '%" . $postLike . "%'" : "variant LIKE '%" . $postLike . "%'" ;
+	// 				$select = $post['search_type'] == 'brand' ? "brand AS product_id, brand" : "category AS product_id, category AS brand";
+	// 				$group = "GROUP BY " . $post['search_type'] . " ORDER BY " . $post['search_type'] . " ASC";
+	//
+	// 				$list = $this->MY_Model->getRowByQuery("SELECT $select FROM " . $this->tables->products . " WHERE $where AND status = 1 $group");
+	// 				$result['items'] = $list;
+	// 		}
+	//
+	// 		die(json_encode($result));
+	// }
 }
