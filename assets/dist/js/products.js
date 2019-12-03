@@ -152,73 +152,73 @@ $(document).on("click",'.deleteproducts', function(e) {
     }
   });
 // DISABLED PRODUCTS
-  // $(document).on("click",".disableproducts",function(e){
-  //     e.preventDefault();
-  //     var id = $(this).attr('data-id');
-  //     console.log(id);
-  //
-  //     Swal.fire({
-  //     title: 'Are you sure?',
-  //     text: "You want to disable this Product!",
-  //     type: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#d33',
-  //     cancelButtonColor: '#068101',
-  //     confirmButtonText: 'Yes, Disable Product!'
-  //     }).then((result) => {
-  //       if (result.value) {
-  //         Swal.fire(
-  //           'Disabled!',
-  //           'Successfully Disabled Product!',
-  //           'success'
-  //         )
-  //           $.ajax({
-  //           type: 'POST',
-  //             url:base_url + 'products/disable_products',
-  //             data: {id: id},
-  //             success:function(data) {
-  //               $(".products_tbl").DataTable().ajax.reload();
-  //             }
-  //           })
-  //       }
-  //     });
-  // });
+  $(document).on("click",".disableproducts",function(e){
+      e.preventDefault();
+      var id = $(this).attr('data-id');
+      console.log(id);
+
+      Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to disable this Product!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#068101',
+      confirmButtonText: 'Yes, Disable Product!'
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire(
+            'Disabled!',
+            'Successfully Disabled Product!',
+            'success'
+          )
+            $.ajax({
+            type: 'POST',
+              url:base_url + 'products/disable_products',
+              data: {id: id},
+              success:function(data) {
+                $(".products_tbl").DataTable().ajax.reload();
+              }
+            })
+        }
+      });
+  });
 // DISABLED PRODUCTS
 
 // enabled products
-  // $(document).on("click",".enableproducts",function(e){
-  //     e.preventDefault();
-  //     var id = $(this).attr('data-id');
-  //     console.log(id);
-  //
-  //     Swal.fire({
-  //     title: 'Are you sure?',
-  //     text: "You want to enable this Product!",
-  //     type: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonColor: '#d33',
-  //     cancelButtonColor: '#068101',
-  //     confirmButtonText: 'Yes, Enable Product!'
-  //     }).then((result) => {
-  //       if (result.value) {
-  //         Swal.fire(
-  //           'Disabled!',
-  //           'Successfully Enable Product!',
-  //           'success'
-  //         )
-  //           $.ajax({
-  //           type: 'POST',
-  //             url:base_url + 'products/enable_products',
-  //             data: {id: id},
-  //             success:function(data) {
-  //               $(".products_tbl").DataTable().ajax.reload();
-  //             }
-  //           })
-  //       }
-  //     });
-  //
-  //
-  // });
+  $(document).on("click",".enableproducts",function(e){
+      e.preventDefault();
+      var id = $(this).attr('data-id');
+      console.log(id);
+
+      Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to enable this Product!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#068101',
+      confirmButtonText: 'Yes, Enable Product!'
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire(
+            'Disabled!',
+            'Successfully Enable Product!',
+            'success'
+          )
+            $.ajax({
+            type: 'POST',
+              url:base_url + 'products/enable_products',
+              data: {id: id},
+              success:function(data) {
+                $(".products_tbl").DataTable().ajax.reload();
+              }
+            })
+        }
+      });
+
+
+  });
 
 // End Enabled Products
 
@@ -240,16 +240,16 @@ $(document).on("click",'.deleteproducts', function(e) {
           {"data":"volume"},
           {"data":"action","render": function(data, type, row,meta){
                             var str = '';
-                            // if (row.status == 1) {
+                            if (row.status == 1) {
                               str += '<div class="actions">';
                               str += '<a href="javascript:;" class="viewproducts" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
                               str += '<a href="javascript:;" class="editproducts" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
                               str += '<a href="javascript:;" class="disableproducts" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
                               str += '<a href="javascript:;" class="deleteproducts" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-                            // } else if (row.status == 2) {
-                            //   str += '<a href="javascript:;" class="enableproducts" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
-                            //   str += '<a href="javascript:;" class="deleteproducts" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-                            // }
+                            } else if (row.status == 2) {
+                              str += '<a href="javascript:;" class="enableproducts" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
+                              str += '<a href="javascript:;" class="deleteproducts" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                            }
                             str += '</div>';
                             return str;
                        }
@@ -257,11 +257,11 @@ $(document).on("click",'.deleteproducts', function(e) {
 
             {"data":"status","render": function(data, type, row,meta){
                     var str = '';
-                     // if(row.status == 1){
+                     if(row.status == 1){
                        str += '<span class="active btn btn-block btn-sm btn-success">active</button>';
-                     // }else if(row.status == 2){
-                     //   str += '<span class="inactive btn btn-block btn-sm btn-danger">inactive</button>';
-                     // }
+                     }else if(row.status == 2){
+                       str += '<span class="inactive btn btn-block btn-sm btn-danger">inactive</button>';
+                     }
                      return str;
                 }
               }

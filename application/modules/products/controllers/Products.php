@@ -61,13 +61,13 @@ class Products extends MY_Controller {
 			$draw = $this->input->post('draw');
 
 
-			$column_order = array('code','brand','category','price','volume',);
+			$column_order = array('code','brand','category','price','volume','status');
 			$where = array('products.status' => 1);
 			$join = array(
 				// 'company' => 'company.company_id = users.company',
 				// 'position' => 'position.id = users.position'
 			);
-			$select = "products.id,products.code,products.brand,products.category,products.price,products.volume";
+			$select = "products.id,products.code,products.brand,products.category,products.price,products.volume,products.status";
 			$list = $this->MY_Model->get_datatables('products',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 
 
@@ -141,33 +141,30 @@ class Products extends MY_Controller {
 			'status' => $products_status
 		);
 		$datas['delete'] = $this->MY_Model->update('products',$data,array('id' => $products_id));
-		// echo $this->db->last_query();
+		echo $this->db->last_query();
 		echo json_encode($datas);
 	}
 
 
-	// public function disable_products(){
-	//
-	// 		$product_id = $this->input->post('id');
-	// 		$user_status = 2;
-	// 		$data = array(
-	// 			'status' => $user_status
-	// 		);
-	//
-	// 		$datas['delete'] = $this->MY_Model->update('products',$data,array('id' => $product_id));
-	// }
-	//
-	// public function enable_products(){
-	//
-	// 		$product_id = $this->input->post('id');
-	// 		$user_status = 3;
-	// 		$data = array(
-	// 			'status' => $user_status
-	// 		);
-	//
-	// 		$datas['delete'] = $this->MY_Model->update('products',$data,array('id' => $product_id));
-	// }
-	//
+	public function disable_products(){
 
+			$product_id = $this->input->post('id');
+			$user_status = 2;
+			$data = array(
+				'status' => $user_status
+			);
 
+			$datas['delete'] = $this->MY_Model->update('products',$data,array('id' => $product_id));
+	}
+
+	public function enable_products(){
+
+			$product_id = $this->input->post('id');
+			$user_status = 1;
+			$data = array(
+				'status' => $user_status
+			);
+
+			$datas['delete'] = $this->MY_Model->update('products',$data,array('id' => $product_id));
+	}
 }
