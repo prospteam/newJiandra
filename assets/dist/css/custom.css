@@ -300,6 +300,24 @@ th.header-title.purch {
 .purch_prod, .summary{
   padding: 10px;
 }
+
+span#addNewPO_edit {
+    float: right;
+    margin-bottom: 7px;
+}
+
+span#addNewPO {
+    float: right;
+    margin-bottom: 7px;
+}
+td.purch_td.hide {
+    display: none;
+}
+
+.row.deliver {
+    text-align: center;
+    display: block;
+}
 @media only screen and (max-width: 362px) {
     button.button1 {
         font-size: 20px;
