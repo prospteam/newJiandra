@@ -21,11 +21,11 @@ $(document).ready(function(){
 
                           str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"> <i class="fas fa-eye text-info"></i></a>';
                           str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'"><i class="fas fa-pen text-warning"></i></a>';
-                          str += '<a href="javascript:;" class="disableUser" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
-                          str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                          str += '<a href="javascript:;" class="disablePurchase" data-id="'+row.purchase_code+'"><i class="fa fa-window-close"></i></a>';
+                          str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                         }else if(row.status == 2){
-                          str += '<a href="javascript:;" class="enableUser" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
-                          str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                          str += '<a href="javascript:;" class="enablepurchase" data-id="'+row.purchase_code+'"><i class="fa fa-check-square"></i></a>';
+                          str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                         }
                         str += '</div>';
                         return str;
@@ -181,7 +181,47 @@ $(document).ready(function(){
    }
   });
 });
+  // DELETE PURCHASE ORDER
+  $(document).on('click', '.deletePurchase', function(e){
+      e.preventDefault();
+      // alert("hi");
+      var id = $(this).attr('data-id');
+      console.log(id);
 
+      Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to permanently delete this Purchase Order!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#068101',
+      confirmButtonText: 'Yes, Permanently Purchase Order!'
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire(
+            'Deleted!',
+            'Successfully Deleted Purchase Order!',
+            'success'
+          )
+            $.ajax({
+            type: 'POST',
+              url:base_url + 'purchaseorders/deletePurchaseO',
+              data: {id: id},
+              success:function(data) {
+                $(".purchase_tbl").DataTable().ajax.reload();
+              }
+            })
+        }
+      });
+
+
+  }),
+
+
+
+
+
+  // ENDDELETE PURCHASE ORDER
 
   //display suppliers according to company
   $(document).on('change','select[name="company"]',function(){

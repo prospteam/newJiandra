@@ -158,9 +158,9 @@ class Purchaseorders extends MY_Controller {
 
 			// }
 		}
-		echo "<pre>";
-		print_r($this->db->last_query());
-		exit;
+		// echo "<pre>";
+		// print_r($this->db->last_query());
+		// exit;
 		//
 		// if(!empty($post)) {
 		// 	foreach($post['prod_name'] as $pkey => $pVal){
@@ -217,4 +217,17 @@ class Purchaseorders extends MY_Controller {
 		json($data_array);
 	}
 
+	// DELETE PURCHASE Order
+		public function deletePurchaseO(){
+			$purchase_id = $this->input->post('id');
+			$purchase_status = 3;
+			$data = array(
+				'status' => $purchase_status
+			);
+			$datas['delete'] = $this->MY_Model->update('purchase_orders',$data,array('id' => $purchase_status));
+
+			echo json_encode($datas);
+
+		}
+	// DELETE PURCHASE ORDER
 }
