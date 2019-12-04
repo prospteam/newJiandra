@@ -86,7 +86,6 @@ class Purchaseorders extends MY_Controller {
 		$id = $this->input->post('purchase_id');
 		$purchase_id = $id + 1;
 		$code = sprintf('%04d',$purchase_id);
-
 		$this->load->library("form_validation");
 
 		$this->form_validation->set_rules('prod_name[]', 'Product Name', 'required');

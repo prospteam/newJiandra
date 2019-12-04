@@ -23,10 +23,10 @@
     										<span aria-hidden="true">&times;</span>
     									</button>
     								</div>
-                    <?php //foreach($purchase as $k => $value) : ?>
+                    <?php foreach($purchase as $k => $value) :  ?>
 
-                        <!-- <input type="hidden" class="form-control" name="purchase_id" value="<?php //echo $value['id']?>"> -->
-                  <?php  //endforeach; ?>
+                        <input type="hidden" class="form-control" name="purchase_id" value="<?php echo $value['purchase_code']?>">
+                  <?php  endforeach; ?>
     								<div class="modal-body" id="addProduct">
                       <div class="row">
                         <div class="col-6">
