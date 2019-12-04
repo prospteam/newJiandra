@@ -8,4 +8,5 @@ class Tables{
     public $position   = 'position';
     public $vehicles    = 'vehicles';
     public $supplier     = 'supplier';
+    public $products     = 'products';
 }

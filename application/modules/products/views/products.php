@@ -35,7 +35,10 @@
     										<div class="col-6">
     											<div class="form-group">
     												<label for="brand">Brand: <span class="required">*</span></label>
-    												<input type="text" class="form-control" name="brand" value="">
+    												<!-- <input type="text" class="form-control" name="brand" value=""> -->
+                            <select class="form-control js-example-basic-multiple-addproducts"  name="brand" id="brand" data-type="brand">
+                              <option></option>
+                          </select>
                             <span class="err"></span>
     											</div>
     										</div>
@@ -44,14 +47,20 @@
     										<div class="col-6">
     											<div class="form-group">
     												<label for="category">Category: <span class="required">*</span></label>
-    												<input type="text" class="form-control" name="category" value="">
+    												<!-- <input type="text" class="form-control" name="category" value=""> -->
+                            <select class="form-control js-example-basic-multiple-addproducts"  name="category" id="category" data-type="category">
+                              <option></option>
+                          </select>
                             <span class="err"></span>
     											</div>
     										</div>
                         <div class="col-6">
                           <div class="form-group">
                             <label for="variant">Variant: <span class="required">*</span></label>
-                            <input type="text" class="form-control" name="variant" value="">
+                            <!-- <input type="text" class="form-control" name="variant" value=""> -->
+                            <select class="form-control js-example-basic-multiple-addproducts"  name="variant" id="variant" data-type="variant">
+                              <option></option>
+                          </select>
                             <span class="err"></span>
                           </div>
                         </div>
@@ -198,8 +207,11 @@
                     </div>
                     <div class="col-6">
                       <div class="form-group">
-                        <label for="brand">Brand: <span class="required">*</span></label>
-                        <input type="text" class="form-control" name="brand" value="">
+                        <label for="brand1">Brand: <span class="required">*</span></label>
+                        <!-- <input type="text" class="form-control" name="brand" value=""> -->
+                        <select class="form-control js-example-basic-multiple-editproducts"  name="brand" id="brand1" data-type="brand">
+                          <option></option>
+                      </select>
                         <span class="err"></span>
                       </div>
                     </div>
@@ -207,15 +219,21 @@
                   <div class="row">
                     <div class="col-6">
                       <div class="form-group">
-                        <label for="category">Category: <span class="required">*</span></label>
-                        <input type="text" class="form-control" name="category" value="">
+                        <label for="category1">Category: <span class="required">*</span></label>
+                        <!-- <input type="text" class="form-control" name="category" value=""> -->
+                        <select class="form-control js-example-basic-multiple-editproducts"  name="category" id="category1" data-type="category">
+                          <option></option>
+                      </select>
                         <span class="err"></span>
                       </div>
                     </div>
                     <div class="col-6">
                       <div class="form-group">
-                        <label for="variant">Variant: <span class="required">*</span></label>
-                        <input type="text" class="form-control" name="variant" value="">
+                        <label for="variant1">Variant: <span class="required">*</span></label>
+                        <!-- <input type="text" class="form-control" name="variant" value=""> -->
+                        <select class="form-control js-example-basic-multiple-editproducts"  name="variant" id="variant1" data-type="variant">
+                          <option></option>
+                      </select>
                         <span class="err"></span>
                       </div>
                     </div>

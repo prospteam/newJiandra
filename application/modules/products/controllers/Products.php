@@ -169,24 +169,73 @@ class Products extends MY_Controller {
 	}
 
 
+	public function listofproducts_add()
+	{
+
+			$post = $this->input->post();
+			$result = false;
+
+			$where = "";
+			$select = "";
+
+			if (!empty($post)) {
+					$postLike = !empty($post['searchfor']['term']) ? $post['searchfor']['term'] : '';
+					// $where = $post['search_type'] == 'brand' ? "brand LIKE '%" . $postLike . "%'" : "category LIKE '%" . $postLike . "%'";
+					if ($post['search_type'] == 'brand') {
+						$where = "brand LIKE '%" . $postLike . "%'";
+						$select = "brand AS product_id, brand";
+					} else if ($post['search_type'] == 'brand') {
+					 	$where = "category LIKE '%" . $postLike . "%'";
+					 	$select = "category AS product_id, category AS brand";
+			 	  } else {
+				 		$where = "variant LIKE '%" . $postLike . "%'";
+				 		$select = "variant AS product_id, variant AS brand";
+				  }
+					// $select = $post['search_type'] == 'brand' ? "brand AS product_id, brand" : "category AS product_id, category AS brand";
+
+					$group = "GROUP BY " . $post['search_type'] . " ORDER BY " . $post['search_type'] . " ASC";
+					$list = $this->MY_Model->getRowByQuery("SELECT $select FROM " . $this->tables->products . " WHERE $where AND status = 1 $group");
+
+					$result['items'] = $list;
+			}
+			die(json_encode($result));
+	}
+
+
+	public function listofproducts_edit()
+	{
+
+			$post = $this->input->post();
+			$result = false;
+
+			$where = "";
+			$select = "";
+
+			if (!empty($post)) {
+					$postLike = !empty($post['searchfor']['term']) ? $post['searchfor']['term'] : '';
+					// $where = $post['search_type'] == 'brand' ? "brand LIKE '%" . $postLike . "%'" : "category LIKE '%" . $postLike . "%'";
+					if ($post['search_type'] == 'brand') {
+						$where = "brand LIKE '%" . $postLike . "%'";
+						$select = "brand AS product_id, brand";
+					} else if ($post['search_type'] == 'brand') {
+						$where = "category LIKE '%" . $postLike . "%'";
+						$select = "category AS product_id, category AS brand";
+					} else {
+						$where = "variant LIKE '%" . $postLike . "%'";
+						$select = "variant AS product_id, variant AS brand";
+					}
+					// $select = $post['search_type'] == 'brand' ? "brand AS product_id, brand" : "category AS product_id, category AS brand";
+
+					$group = "GROUP BY " . $post['search_type'] . " ORDER BY " . $post['search_type'] . " ASC";
+					$list = $this->MY_Model->getRowByQuery("SELECT $select FROM " . $this->tables->products . " WHERE $where AND status = 1 $group");
+
+					$result['items'] = $list;
+			}
+			die(json_encode($result));
+	}
 
 
 
-	// public function listofproducts_add()
-	// {
-	// 		$post = $this->input->post();
-	// 		$result = false;
-	//
-	// 		if (!empty($post)) {
-	// 				$postLike = !empty($post['searchfor']['term']) ? $post['searchfor']['term'] : '';
-	// 				$where = $post['search_type'] == 'brand' ? "brand LIKE '%" . $postLike . "%'" : "category LIKE '%" . $postLike . "%'" : "variant LIKE '%" . $postLike . "%'" ;
-	// 				$select = $post['search_type'] == 'brand' ? "brand AS product_id, brand" : "category AS product_id, category AS brand";
-	// 				$group = "GROUP BY " . $post['search_type'] . " ORDER BY " . $post['search_type'] . " ASC";
-	//
-	// 				$list = $this->MY_Model->getRowByQuery("SELECT $select FROM " . $this->tables->products . " WHERE $where AND status = 1 $group");
-	// 				$result['items'] = $list;
-	// 		}
-	//
-	// 		die(json_encode($result));
-	// }
+
+
 }

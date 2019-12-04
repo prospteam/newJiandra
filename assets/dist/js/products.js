@@ -278,13 +278,67 @@ $(document).on("click",'.deleteproducts', function(e) {
 // END DISPLAY PRODUCTS
 // End delete Products
 
+    $('.js-example-basic-multiple-addproducts').select2({
+      placeholder: "Enter Value",
+      tags: [],
+      ajax: {
+        url: base_url+'products/listofproducts_add',
+        dataType: "json",
+        type: "POST",
+        quietMillis: 50,
+        data: function (text) {
+          return {
+                      searchfor: text,
+                      search_type: $(this).attr('data-type')
+                  };
+       },processResults: function (data) {
+
+             return {
+                 results: $.map(data.items, function (item) {
+                     return {
+                         text: item.brand,
+                         id: item.product_id
+                     }
+                 })
+             };
+         }
+      }
+    });
+
+    $('.js-example-basic-multiple-editproducts').select2({
+      placeholder: "Enter Value",
+      tags: [],
+      ajax: {
+        url: base_url+'products/listofproducts_edit',
+        dataType: "json",
+        type: "POST",
+        quietMillis: 50,
+        data: function (text) {
+          return {
+                      searchfor: text,
+                      search_type: $(this).attr('data-type')
+                  };
+       },processResults: function (data) {
+
+             return {
+                 results: $.map(data.items, function (item) {
+                     return {
+                         text: item.brand,
+                         id: item.product_id
+                     }
+                 })
+             };
+         }
+      }
+    });
 
 function blankVal_products(){
 $('#AddProducts input[name="code"]').val('');
-$('#AddProducts input[name="brand"]').val('');
-$('#AddProducts input[name="category"]').val('');
+  $('#AddProducts .js-example-basic-multiple-addproducts').val('').trigger('change');
+// $('#AddProducts input[name="brand"]').val('');
+// $('#AddProducts input[name="category"]').val('');
 // $('#AddProducts input[name="variant"]').val('');
-// $('#AddProducts input[name="description"]').val('');
+$('#AddProducts input[name="description"]').val('');
 $('#AddProducts input[name="price"]').val('');
 $('#AddProducts input[name="volume"]').val('');
 }
