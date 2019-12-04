@@ -194,6 +194,31 @@ class Purchaseorders extends MY_Controller {
 					// }
 				}
 
+			// }
+		}
+		// echo "<pre>";
+		// print_r($this->db->last_query());
+		// exit;
+		//
+		// if(!empty($post)) {
+		// 	foreach($post['prod_name'] as $pkey => $pVal){
+		// 		if ($this->form_validation->run() !== FALSE) {
+		// 			$data = array(
+		// 				'product' => $pVal,
+		// 				'ordered' => $post['ordered'][$pkey],
+		// 				'supplier' => $post['supplier'][$pkey],
+		// 			);
+		// 			$update = $this->MY_Model->update('purchase_orders', $data, array('id' => $post['purchase_id'][$pKey]));
+		// 			if ($update) {
+		// 				$response = array(
+		// 					'status' => 'ok'
+		// 				);
+		// 			}
+		// 		}else{
+		// 			$response = array('form_error' =>  array_merge($this->form_validation->error_array(), $error) );
+		// 		}
+		// 	}
+		// }
 
 		echo json_encode($response);
 
@@ -230,6 +255,21 @@ class Purchaseorders extends MY_Controller {
 		json($data_array);
 	}
 
+<<<<<<< HEAD
+	// DELETE PURCHASE Order
+		public function deletePurchaseO(){
+			$purchase_id = $this->input->post('id');
+			$purchase_status = 3;
+			$data = array(
+				'status' => $purchase_status
+			);
+			$datas['delete'] = $this->MY_Model->update('purchase_orders',$data,array('id' => $purchase_status));
+
+			echo json_encode($datas);
+
+		}
+	// DELETE PURCHASE ORDER
+=======
 	//change delivered quantity on purchase Orders
 	public function change_delivered_qty(){
 		$post = $this->input->post();
@@ -261,4 +301,5 @@ class Purchaseorders extends MY_Controller {
 		$data['delivStat'] = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['purchase_code_delivery']));
 		json($data);
 	}
+>>>>>>> 08a538f2a92eb24fe42765143ca15b7c88e23662
 }
