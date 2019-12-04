@@ -240,6 +240,7 @@ class Vehicle extends MY_Controller {
 
 			if (!empty($post)) {
 					$postLike = !empty($post['searchfor']['term']) ? $post['searchfor']['term'] : '';
+
 					$where = $post['search_type'] == 'vehicle_brand' ? "vehicle_brand LIKE '%" . $postLike . "%'" : "fuel_type LIKE '%" . $postLike . "%'";
 					$select = $post['search_type'] == 'vehicle_brand' ? "vehicle_brand AS vehicle_id, vehicle_brand" : "fuel_type AS vehicle_id, fuel_type AS vehicle_brand";
 					$group = "GROUP BY " . $post['search_type'] . " ORDER BY " . $post['search_type'] . " ASC";
