@@ -47,13 +47,13 @@ $(document).ready(function(){
             {"data":"delivery_status","render": function(data, type, row,meta){
                 var str = '';
                  if(row.delivery_status == 1){
-                   str += '<span class="btn btn-block btn-sm btn-primary">pending</button>';
+                   str += '<a href="javascript:;" class="btn btn-block btn-sm btn-primary deliveryStat" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">pending</a>';
                  }else if(row.delivery_status == 2){
-                   str += '<span class="inactive btn btn-block btn-sm btn-danger">on hold</button>';
+                   str += '<a href="javascript:;" class="inactive btn btn-block btn-sm btn-danger deliveryStat" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">on hold</a>';
                  }else if(row.delivery_status == 3){
-                   str += '<span class="btn btn-block btn-sm btn-warning">on process</button>';
+                   str += '<a href="javascript:;" class="btn btn-block btn-sm btn-warning deliveryStat" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">on process</a>';
                  }else if(row.delivery_status == 4){
-                   str += '<span class="btn btn-block btn-sm btn-success">delivered</button>';
+                   str += '<a href="javascript:;" class="btn btn-block btn-sm btn-success" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'" disabled>delivered</a>';
                  }
                  return str;
             }
@@ -75,6 +75,62 @@ $(document).ready(function(){
           ],
       });
   //end display purchase_tbl
+
+  //update delivery Status
+  // $(document).on('click', '.viewPurchase', function(){
+  //    var id = $(this).attr('data-id');
+  //    $.ajax({
+  //      method: 'POST',
+  //      url: base_url + 'purchaseorders/view_purchase_orders',
+  //      data: {id:id},
+  //      dataType: "json",
+  //      success: function(data){
+  //        console.log(data);
+  //        $('#DeliveryStatus').modal('show');
+  //      });
+  //    });
+
+  //view list of Orders
+  $(document).on('click', '.deliveryStat', function(){
+     var id = $(this).attr('data-id');
+     var deliv_status = $(this).attr('data-status');
+     $.ajax({
+       method: 'POST',
+       url: base_url + 'purchaseorders/view_deliv_status',
+       data: {id:id,deliv_status:deliv_status},
+       dataType: "json",
+       success: function(data){
+         console.log(data);
+         $('#DeliveryStatus').modal('show');
+         $('#change_deliveryStat select[name=delivery_status]').val(data.delivery.delivery_status);
+           $('input[name="purchase_code_delivery"]').val(data.delivery.purchase_code);
+     }
+    });
+  });
+
+  $(document).on('submit','form#change_deliveryStat',function(e){
+    e.preventDefault();
+    let formData =  new FormData($(this)[0]);
+    var id = $('input[name="purchase_code_delivery"]').val();
+    // alert(id);
+    formData.append("id",id);
+    $.ajax({
+        method: 'POST',
+        url : base_url + 'purchaseorders/change_deliv_status',
+        data : formData,
+        processData: false,
+       contentType: false,
+       cache: false,
+        dataType: 'json',
+        success : function(data) {
+            console.log(data);
+            $('#DeliveryStatus').modal('hide');
+            Swal.fire("Successfully updated delivery status!",data.success, "success");
+            $(".purchase_tbl").DataTable().ajax.reload();
+
+        }
+    })
+  });
 
   //successfully added purchas order
   $(document).on('submit','form#addpurchaseorder',function(e){
@@ -124,7 +180,7 @@ $(document).ready(function(){
        data: {id:id},
        dataType: "json",
        success: function(data){
-         // console.log(data);
+         console.log(data);
          $('#ViewPurchaseOrders').modal('show');
          var str = '';
          var total_quantity = 0;
@@ -135,7 +191,8 @@ $(document).ready(function(){
 
              total_quantity = parseFloat(total_quantity) + parseFloat(element.quantity);
              total_cost = parseFloat(total_cost) + parseFloat(element.unit_price);
-             var total = element.quantity * element.unit_price;
+             var total = parseFloat(element.quantity) * parseFloat(element.unit_price);
+             var prod_total = total.toFixed(2);
              grand_total = parseFloat(grand_total) + parseFloat(total);
 
              if(element.delivered == ''){
@@ -148,6 +205,9 @@ $(document).ready(function(){
              $('.company').text(element.company_name);
              $('.supplier').text(element.supplier_name);
              str += '<tr>';
+             str +=     '<td class="purch_td hide">';
+                 str +=   '<input type="hidden" class="edit_purchID" name="view_purchase_id[]" value='+element.purchase_id+'>';
+                str += '</td>';
                str +=     '<td class="purch_td">';
                    str +=   element.product;
                   str += '</td>';
@@ -158,13 +218,15 @@ $(document).ready(function(){
                   str += element.unit_price;
                 str += '</td>';
                 str +=  '<td class="purch_td total">';
-                str += total;
+                str += prod_total;
                  str += '</td>';
-                 str +=  '<td class="purch_td">';
-                    str += deliv;
+                 str +=  '<td class="purch_td delivered">';
+                    str += '<span class="deliv">'+deliv+'</span>';
+                    str +=   '<input type="number" class="edit_deliv" name="delivered[]" value='+deliv+' disabled hidden>';
                   str += '</td>';
-                 str += '<td class="purch_td">';
-                 str += '<button="" class="btn btn-xs btn-primary"><i class="fas fa-edit" aria-hidden="true"></i></button>';
+                 str += '<td class="purch_td submit_delivered">';
+                 str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_delivered"><i class="fa fa-edit"></i></a>';
+                 str += '<a href="javascript:;" class="btn btn-xs btn-success submit_delivered_qty" hidden><i class="fa fa-check"></i></a>';
                 str += '</td>';
                str += '</tr>';
 
@@ -182,6 +244,36 @@ $(document).ready(function(){
   });
 });
 
+  //show edit delivered input on view purchase order
+  $(document).on('click','.edit_delivered', function(){
+    var pTr = $(this).parents('tr');
+
+    pTr.find('.edit_deliv').show().prop('disabled', false).prop('hidden', false);
+    pTr.find('.deliv').hide();
+
+    pTr.find('.submit_delivered_qty').show().prop('hidden', false);
+    pTr.find('.edit_delivered').hide().prop('hidden', true);
+
+
+    $('.submit_delivered_qty').unbind('click').click(function(e) {
+      var id = pTr.find('.edit_purchID').val();
+      var qty = pTr.find('.edit_deliv').val();
+
+      $.ajax({
+        url: base_url+'purchaseorders/change_delivered_qty',
+        data: {id:id,delivered:qty},
+        type: 'post',
+        dataType: 'json',
+        success: function(data){
+            pTr.find('.deliv').text(qty).show();
+            pTr.find('.edit_deliv').hide().prop('hidden', true);
+            pTr.find('.edit_delivered').show().prop('hidden', false);
+            pTr.find('.submit_delivered_qty').hide().prop('hidden', true);
+        }
+      });
+    });
+
+  });
 
   //display suppliers according to company
   $(document).on('change','select[name="company"]',function(){
@@ -252,15 +344,20 @@ $(document).ready(function(){
             total = parseFloat(element.quantity) + parseFloat(element.unit_price)
             total_quantity = parseFloat(total_quantity) + parseFloat(element.quantity);
             total_cost = parseFloat(total_cost) + parseFloat(element.unit_price);
-            var total = element.quantity * element.unit_price;
+            var total = parseFloat(element.quantity) * parseFloat(element.unit_price);
+             var prod_total = total.toFixed(2);
             grand_total = parseFloat(grand_total) + parseFloat(total);
 
+            $('#editpurchaseorder input[name=edit_purchase_code]').val(element.purchase_code);
             $('#editpurchaseorder textarea[name=purchase_note]').val(element.note);
             $('#editpurchaseorder select[name=company_edit]').val(element.company_id);
             $('#editpurchaseorder select[name="company_edit"]').trigger('change');
             $('#editpurchaseorder select[name=supplier]').val(element.supplier_id);
-            str += '<input type="hidden" name="purchase_id" value='+element.purchase_id+'>';
+            // str += '<input type="hidden" name="purchase_id" value='+element.purchase_id+'>';
             str += '<tr>';
+            str += '<td class="purch_td hide">';
+            str += '<input type="hidden" class="form-control" name="edit_purchase_id[]" value='+element.purchase_id+'>';
+            str += '</td>';
               str += '<td class="purch_td">';
                    str += '<input type="text" class="form-control" name="prod_name[]" value='+element.product+'>';
                    str += '<span class="err"></span>';
@@ -270,11 +367,11 @@ $(document).ready(function(){
                    str += '<span class="err"></span>';
               str += '</td>';
               str += '<td class="purch_td">';
-                  str += '<input type="number" class="form-control purchase_price" name="unit_price[]" value='+element.unit_price+'>';
+                  str += '<input type="text" class="form-control purchase_price" name="unit_price[]" value='+element.unit_price+'>';
                   str += '<span class="err"></span>';
               str += '</td>';
               str += '<td class="purch_td">';
-                  str += '<input type="number" class="form-control purchase_total" name="total[]" value='+total+' readonly>';
+                  str += '<input type="number" class="form-control purchase_total" name="total[]" value='+prod_total+' readonly>';
                   str += '<span class="err"></span>';
               str += '</td>';
             str += '</tr>';
@@ -294,7 +391,7 @@ $(document).ready(function(){
   $(document).on('submit','#editpurchaseorder',function(e){
     e.preventDefault();
     let formData =  new FormData($(this)[0]);
-    var id = $('input[name="purchase_id"]').val();
+    var id = $('input[name="edit_purchase_id"]').val();
     // alert(id);
     formData.append("id",id);
     $.ajax({
@@ -307,32 +404,32 @@ $(document).ready(function(){
         dataType: 'json',
         success : function(data) {
             console.log(data);
-            // if(data.status == "ok"){
-            //   $('#EditUser').modal('hide');
-            //       Swal.fire("Successfully updated user!",data.success, "success");
-            //       $(".users_tbl").DataTable().ajax.reload();
-            //       // setTimeout(function(){
-            //       //    location.reload();
-            //       //  }, 1000);
-            //  }else if(data.status == 'invalid'){
-            //     Swal.fire("Error",data.status, "invalid");
-            //  }
-            // if(data.form_error){
-            //     clearError();
-            //     let keyNames = Object.keys(data.form_error);
-            //     $(keyNames).each(function(index , value) {
-            //         $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
-            //     });
-            // }else if (data.error) {
-            //     Swal.fire("Error",data.error, "error");
-            // }else {
-            //    // blankVal();
-            //     $('#EditUser').modal('hide');
-            //     Swal.fire("Successfully updated user!",data.success, "success");
-            //     setTimeout(function(){
-            //        location.reload();
-            //      }, 1000);
-            // }
+            if(data.status == "ok"){
+              $('#EditPurchaseOrder').modal('hide');
+                  Swal.fire("Successfully updated purchase order!",data.success, "success");
+                  $(".purchase_tbl").DataTable().ajax.reload();
+                  // setTimeout(function(){
+                  //    location.reload();
+                  //  }, 1000);
+             }else if(data.status == 'invalid'){
+                Swal.fire("Error",data.status, "invalid");
+             }
+            if(data.form_error){
+                clearError();
+                let keyNames = Object.keys(data.form_error);
+                $(keyNames).each(function(index , value) {
+                    $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
+                });
+            }else if (data.error) {
+                Swal.fire("Error",data.error, "error");
+            }else {
+               // blankVal();
+                $('#EditUser').modal('hide');
+                Swal.fire("Successfully updated purchase order!",data.success, "success");
+                setTimeout(function(){
+                   location.reload();
+                 }, 1000);
+            }
         }
     })
   });
@@ -359,6 +456,9 @@ $(document).ready(function(){
           str += '<input type="number" class="form-control purchase_total" name="total[]" value="" readonly>';
           str += '<span class="err"></span>';
       str += '</td>';
+      str += '<td class="purch_td">';
+          str += '<button id="removeNewPO" class="btn btn-md btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>';
+      str += '</td>';
     str += '</tr>';
 
 
@@ -370,7 +470,7 @@ $(document).ready(function(){
   });
 
   $(document).on('click', '#removeNewPO', function(){
-    $(this).parent().parent().parent().parent().remove(); x--;
+    $(this).parent().parent().remove(); x--;
   });
 
   //add multiple product in add purchase order
@@ -380,20 +480,23 @@ $(document).ready(function(){
 
     str += '<tr>';
       str += '<td class="purch_td">';
-           str += '<input type="text" class="form-control" name="prod_name[]" value="">';
+           str += '<input type="text" class="form-control" name="edit_prod_name[]" value="">';
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
-           str += '<input type="number" class="form-control purchase_quantity" name="quantity[]" value="">';
+           str += '<input type="number" class="form-control purchase_quantity" name="edit_quantity[]" value="">';
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
-          str += '<input type="number" class="form-control purchase_price" name="unit_price[]" value="">';
+          str += '<input type="number" class="form-control purchase_price" name="edit_unit_price[]" value="">';
           str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
-          str += '<input type="number" class="form-control purchase_total" name="total[]" value="" readonly>';
+          str += '<input type="number" class="form-control purchase_total" name="edit_total[]" value="" readonly>';
           str += '<span class="err"></span>';
+      str += '</td>';
+      str += '<td class="purch_td">';
+          str += '<button id="removeNewPO_edit" class="btn btn-md btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>';
       str += '</td>';
     str += '</tr>';
 
@@ -405,7 +508,7 @@ $(document).ready(function(){
   });
 
   $(document).on('click', '#removeNewPO_edit', function(){
-    $(this).parent().parent().parent().parent().remove(); x--;
+    $(this).parent().parent().remove(); x--;
   });
 
   //compute total for qunatity * unit Price

@@ -72,7 +72,7 @@
                                       <span class="err"></span>
                                     </td>
                                     <td class="purch_td">
-                                      <input type="number" class="form-control purchase_price" name="unit_price[]" value="">
+                                      <input type="text" class="form-control purchase_price" name="unit_price[]" value="">
                                       <span class="err"></span>
                                     </td>
                                     <td class="purch_td">
@@ -267,13 +267,14 @@
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <?php foreach($purchase as $k => $value) : ?>
-                    <input type="hidden" class="form-control" name="purchase_id" value="<?php echo $value['purchase_code']?>">
-              <?php  endforeach; ?>
+                <?php //foreach($purchase as $k => $value) : ?>
+                    <!-- <input type="hidden" class="form-control" name="purchase_code" value="<?php //echo $value['purchase_code']?>"> -->
+              <?php  //endforeach; ?>
                 <div class="modal-body" id="addProduct">
                   <div class="row">
                     <div class="col-6">
                       <div class="form-group">
+                          <input type="hidden" class="form-control" name="edit_purchase_code" value="">
                         <label for="supplier">Company: <span class="required">*</span></label>
                         <!-- <input type="text" class="form-control" name="position" value=""> -->
                         <select class="form-control" class="company" name="company_edit" value="">
@@ -384,7 +385,7 @@
       <!-- Modal -->
       <div class="modal fade" id="DeleteUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
         <form id="adduser" method="post">
-          <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-dialog modal-xs" role="document">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-trash" style="color:black" aria-hidden="true"></i>  Delete User</h5>
@@ -400,6 +401,43 @@
         </form>
       </div>
     <!-- End Add Delete Modal -->
+
+    <!--View Delete Modal -->
+    <!-- Modal -->
+        <div class="modal fade" id="DeliveryStatus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
+          <form id="change_deliveryStat" method="post">
+            <div class="modal-dialog modal-xs" role="document">
+              <div class="modal-content">
+                <div class="modal-header bg-info1">
+                  <h5 class="modal-title" id="exampleModalLabel">Update Delivery Status</h5>
+                    <input type="hidden" class="form-control purchaseID" name="purchase_id[]" >
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="row deliver">
+                    <div class="col-6">
+                      <div class="form-group">
+                          <input type="hidden" class="form-control" name="purchase_code_delivery" value="">
+                          <!-- <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Status</label> -->
+                          <select class="form-control" class="delivery_status" name="delivery_status" value="">
+                            <option value="1" selected>Pending</option>
+                            <option value="2">On Hold</option>
+                            <option value="3">On Process</option>
+                            <option value="4">Delivered</option>
+                          </select>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-sm btn-primary add">Submit</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      <!-- End Add Delete Modal -->
         </div>
       </div>
     </div><!-- /.container-fluid -->

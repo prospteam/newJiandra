@@ -135,52 +135,66 @@ class Purchaseorders extends MY_Controller {
 	// edit purchase Orders
 	public function edit_purchase_orders(){
 		$post = $this->input->post();
+		$date_ordered = date("F d, Y");
 		// if(!empty($post)) {
 		// echo "<pre>";
 		// print_r($post);
 		// exit;
-			foreach($post['purchase_id'] as $pkey => $pVal){
+			if(!empty($post['edit_prod_name'])){
+
+					foreach($post['edit_prod_name'] as $pkey => $pVal){
+						$data = array(
+								'date_ordered' => $date_ordered,
+								'purchase_code' => $post['edit_purchase_code'],
+								'note' => $post['purchase_note'],
+								'product' => $pVal,
+								'quantity' => $post['edit_quantity'][$pkey],
+								'unit_price' => $post['edit_unit_price'][$pkey],
+								'company' => $post['company_edit'],
+								'supplier' => $post['supplier'],
+								'status' => 1,
+								'delivery_status' => 1
+							);
+							$add = $this->MY_Model->insert('purchase_orders', $data,array('purchase_code' => $post['edit_purchase_code']));
+
+
+					// }
+				}
+			}
+
 				$data = array(
-						'company' => $post['company_edit'],
-						'supplier' => $post['supplier'],
+					'company' => $post['company_edit'],
+					'supplier' => $post['supplier'],
+					'note' => $post['purchase_note'],
+				);
+				$update1 = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['edit_purchase_code']));
+
+
+				foreach($post['edit_purchase_id'] as $pkey => $pVal){
+					$data = array(
 						'product' => $post['prod_name'][$pkey],
 						'quantity' => $post['quantity'][$pkey],
 						'unit_price' => $post['unit_price'][$pkey],
-						'note' => $post['purchase_note'],
 					);
-					$update = $this->MY_Model->update('purchase_orders', $data, array('id' => $post['purchase_id'][$pkey]));
-							if ($update) {
-								$response = array(
-									'status' => 'ok'
-								);
-							}
+					$update = $this->MY_Model->update('purchase_orders', $data, array('id' => $post['edit_purchase_id'][$pkey]));
+					if ($update) {
+						$response = array(
+							'status' => 'ok'
+						);
+					}	else if ($update1) {
+						$response = array(
+							'status' => 'ok'
+						);
+					}else if ($add) {
+						$response = array(
+							'status' => 'ok'
+						);
+					}
 
 
-			// }
-		}
-		echo "<pre>";
-		print_r($this->db->last_query());
-		exit;
-		//
-		// if(!empty($post)) {
-		// 	foreach($post['prod_name'] as $pkey => $pVal){
-		// 		if ($this->form_validation->run() !== FALSE) {
-		// 			$data = array(
-		// 				'product' => $pVal,
-		// 				'ordered' => $post['ordered'][$pkey],
-		// 				'supplier' => $post['supplier'][$pkey],
-		// 			);
-		// 			$update = $this->MY_Model->update('purchase_orders', $data, array('id' => $post['purchase_id'][$pKey]));
-		// 			if ($update) {
-		// 				$response = array(
-		// 					'status' => 'ok'
-		// 				);
-		// 			}
-		// 		}else{
-		// 			$response = array('form_error' =>  array_merge($this->form_validation->error_array(), $error) );
-		// 		}
-		// 	}
-		// }
+					// }
+				}
+
 
 		echo json_encode($response);
 
@@ -207,7 +221,7 @@ class Purchaseorders extends MY_Controller {
 		$parameters['where'] = array('purchase_code' => $purchase_id);
 		// $parameters['group'] = array('purchase_code');
 		$parameters['join'] = array('company' => 'company.company_id = purchase_orders.company','supplier' => 'supplier.id = purchase_orders.supplier' );
-		$parameters['select'] = '*';
+		$parameters['select'] = 'purchase_orders.*, purchase_orders.id AS purchase_id, supplier.id AS supplier_id, supplier.*, company.*';
 
 		$data = $this->MY_Model->getRows('purchase_orders',$parameters);
 
@@ -217,4 +231,35 @@ class Purchaseorders extends MY_Controller {
 		json($data_array);
 	}
 
+	//change delivered quantity on purchase Orders
+	public function change_delivered_qty(){
+		$post = $this->input->post();
+
+
+		$data = array('delivered' => $post['delivered']);
+		$data['delivered_qty'] = $this->MY_Model->update('purchase_orders', $data, array('id' => $post['id']));
+		json($data);
+
+	}
+
+	//view delivery Status
+	public function view_deliv_status(){
+		$post = $this->input->post();
+
+		$parameters['where'] = array('purchase_code' => $post['id']);
+		$parameters['select'] = '*';
+
+		$data['delivery'] = $this->MY_Model->getRows('purchase_orders',$parameters,'row');
+
+		json($data);
+	}
+
+	//change delivery Status
+	public function change_deliv_status(){
+		$post = $this->input->post();
+
+		$data = array('delivery_status' => $post['delivery_status']);
+		$data['delivStat'] = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['purchase_code_delivery']));
+		json($data);
+	}
 }
