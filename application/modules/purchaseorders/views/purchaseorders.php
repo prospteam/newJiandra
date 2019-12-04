@@ -126,34 +126,10 @@
                                             </div>
                                         </div>
                                     </div>
-    								            </div>
-                              <div class="row">
-            										<div class="col-2">
-            											<div class="form-group">
-            												<label for="purchaseO_status">
-            												 <select class="form-control" class="selectStatus" name="selectStatus" value="">
-                                        <option value="" selected hidden>Status</option>
-                                         <option value="">Approved</option>
-                                         <option value="">Cancelled</option>
-                                      </select>
-            												<span class="err"></span>
-            											</div>
-            										</div>
-            										<div class="col-10">
-            											<div class="form-group">
-            												<label for="delivery_status">
-                                    <select class="form-control" class="selectDstatus" name="selectDstatus" value="">
-                                         <option value="" selected hidden>Delivery Status</option>
-                                        <option value="">Pending</option>
-                                        <option value="">For Deliver</option>
-                                     </select>
-          												<span class="err"></span>
-          											</div>
-          										</div>
-          									</div>
-          								<div class="modal-footer">
-            									<button type="submit" class="btn btn-primary add">Submit</button>
-            								</div>
+    								</div>
+    								<div class="modal-footer">
+    									<button type="submit" class="btn btn-primary add">Submit</button>
+    								</div>
     							</div>
     						</div>
     					</form>
