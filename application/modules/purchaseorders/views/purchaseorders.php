@@ -402,7 +402,7 @@
       </div>
     <!-- End Add Delete Modal -->
 
-    <!--View Delete Modal -->
+    <!--update delivery status Modal -->
     <!-- Modal -->
         <div class="modal fade" id="DeliveryStatus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
           <form id="change_deliveryStat" method="post">
@@ -437,7 +437,83 @@
             </div>
           </form>
         </div>
-      <!-- End Add Delete Modal -->
+      <!-- End update delivery status Modal -->
+
+      <!--update  status Modal -->
+      <!-- Modal -->
+          <div class="modal fade" id="Status" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
+            <form id="change_Stat" method="post">
+              <div class="modal-dialog modal-xs" role="document">
+                <div class="modal-content">
+                  <div class="modal-header bg-info1">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
+                      <input type="hidden" class="form-control purchaseID" name="purchase_id[]" >
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row deliver">
+                      <div class="col-6">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" name="purchase_code_status" value="">
+                            <!-- <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Status</label> -->
+                            <select class="form-control" class="status" name="status" value="" id="status">
+                              <option value="1" selected>Pending</option>
+                              <option value="2">Approved</option>
+                              <option value="3">Cancelled</option>
+                            </select>
+                            <br>
+                            <hr>
+                            <div class = "row" id="remarks" style="display:none;">
+                              <div class="col-12">
+                                <div class="form-group">
+                                  <label for="remarks">Remarks (if any):</label>
+                                    <textarea rows="4" cols="50" class="form-control" name="remarks" value=""></textarea>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                      </div>
+                      <button type="submit" class="btn btn-sm btn-primary add">Submit</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        <!-- End update  status Modal -->
+
+        <!--view view remarks Modal -->
+        <!-- Modal -->
+            <div class="modal fade" id="viewRemarks" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
+              <form id="viewRemarks" method="post">
+                <div class="modal-dialog modal-xs" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header bg-info1">
+                      <h5 class="modal-title" id="exampleModalLabel">Remarks</h5>
+                        <input type="hidden" class="form-control purchaseID" name="purchase_id[]" >
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class = "row">
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label for="remarks">Remarks (if any):</label>
+                              <p class="viewremarks"></p>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          <!-- End view remarks Modal -->
         </div>
       </div>
     </div><!-- /.container-fluid -->

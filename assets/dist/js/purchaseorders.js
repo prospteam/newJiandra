@@ -26,6 +26,8 @@ $(document).ready(function(){
                         }else if(row.status == 2){
                           str += '<a href="javascript:;" class="enableUser" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
                           str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                        }else if(row.status == 3){
+                          str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                         }
                         str += '</div>';
                         return str;
@@ -35,11 +37,11 @@ $(document).ready(function(){
               {"data":"status","render": function(data, type, row,meta){
                   var str = '';
                    if(row.status == 1){
-                     str += '<span class="btn btn-block btn-sm btn-primary">pending</button>';
+                     str += '<a href="javascript:;" class="btn btn-block btn-sm btn-primary status" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">pending</a>';
                    }else if(row.status == 2){
-                     str += '<span class="inactive btn btn-block btn-sm btn-danger">approved</button>';
+                     str += '<a href="javascript:;" class="inactive btn btn-block btn-sm btn-success status" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">approved</a>';
                    }else if(row.status == 3){
-                     str += '<span class="active btn btn-block btn-sm btn-success">cancelled</button>';
+                     str += '<a href="javascript:;" class="active btn btn-block btn-sm btn-danger remarks" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">cancelled</a>';
                    }
                    return str;
               }
@@ -76,21 +78,79 @@ $(document).ready(function(){
       });
   //end display purchase_tbl
 
-  //update delivery Status
-  // $(document).on('click', '.viewPurchase', function(){
-  //    var id = $(this).attr('data-id');
-  //    $.ajax({
-  //      method: 'POST',
-  //      url: base_url + 'purchaseorders/view_purchase_orders',
-  //      data: {id:id},
-  //      dataType: "json",
-  //      success: function(data){
-  //        console.log(data);
-  //        $('#DeliveryStatus').modal('show');
-  //      });
-  //    });
+  //add remarkd if cancelled Status
+  $('#status').on('change', function(){
+    if( $(this).val()==="3"){
+      $("#remarks").show();
+    }else{
+      $("#remarks").hide();
+    }
+  });
 
-  //view list of Orders
+  //view remarks
+  $(document).on('click', '.remarks', function(){
+    var id = $(this).attr('data-id');
+    var status = $(this).attr('data-status');
+    $.ajax({
+      method: 'POST',
+      url: base_url + 'purchaseorders/view_remarks',
+      data: {id:id,status:status},
+      dataType: "json",
+      success: function(data){
+        console.log(data);
+        $('#viewRemarks').modal('show');
+         $('.viewremarks').text(data.remarks.remarks);
+        // $('#change_Stat select[name=status]').val(data.status.status);
+        //   $('input[name="purchase_code_status"]').val(data.status.purchase_code);
+    }
+   });
+  });
+
+  //Update  status
+  $(document).on('click', '.status', function(){
+     var id = $(this).attr('data-id');
+     var status = $(this).attr('data-status');
+     $.ajax({
+       method: 'POST',
+       url: base_url + 'purchaseorders/view_status',
+       data: {id:id,status:status},
+       dataType: "json",
+       success: function(data){
+         console.log(data);
+         $('#Status').modal('show');
+         $('#change_Stat select[name=status]').val(data.status.status);
+           $('input[name="purchase_code_status"]').val(data.status.purchase_code);
+     }
+    });
+  });
+
+  $(document).on('submit','form#change_Stat',function(e){
+    e.preventDefault();
+    let formData =  new FormData($(this)[0]);
+    var id = $('input[name="purchase_code_status"]').val();
+    // alert(id);
+    formData.append("id",id);
+    $.ajax({
+        method: 'POST',
+        url : base_url + 'purchaseorders/change_status',
+        data : formData,
+        processData: false,
+       contentType: false,
+       cache: false,
+        dataType: 'json',
+        success : function(data) {
+            console.log(data);
+            $('#Status').modal('hide');
+            Swal.fire("Successfully updated status!",data.success, "success");
+            $(".purchase_tbl").DataTable().ajax.reload();
+
+        }
+    })
+  });
+  //End of Update status
+
+
+  //Update delivery status
   $(document).on('click', '.deliveryStat', function(){
      var id = $(this).attr('data-id');
      var deliv_status = $(this).attr('data-status');
@@ -131,6 +191,7 @@ $(document).ready(function(){
         }
     })
   });
+  //End of Update delivery status
 
   //successfully added purchas order
   $(document).on('submit','form#addpurchaseorder',function(e){

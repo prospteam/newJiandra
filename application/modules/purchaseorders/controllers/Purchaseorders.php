@@ -261,4 +261,38 @@ class Purchaseorders extends MY_Controller {
 		$data['delivStat'] = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['purchase_code_delivery']));
 		json($data);
 	}
+
+	//view Status
+	public function view_status(){
+		$post = $this->input->post();
+
+		$parameters['where'] = array('purchase_code' => $post['id']);
+		$parameters['select'] = '*';
+
+		$data['status'] = $this->MY_Model->getRows('purchase_orders',$parameters,'row');
+
+		json($data);
+	}
+
+	//change  Status
+	public function change_status(){
+		$post = $this->input->post();
+
+
+		$data = array('status' => $post['status'], 'remarks' => $post['remarks']);
+		$data['change_status'] = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['purchase_code_status']));
+		json($data);
+	}
+
+	//view remarks
+	public function view_remarks(){
+		$post = $this->input->post();
+
+		$parameters['where'] = array('purchase_code' => $post['id']);
+		$parameters['select'] = '*';
+
+		$data['remarks'] = $this->MY_Model->getRows('purchase_orders',$parameters,'row');
+
+		json($data);
+	}
 }
