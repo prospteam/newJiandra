@@ -25,7 +25,7 @@ $(document).on('submit','form#addproducts',function(e){
               Swal.fire("Error",data.error, "error");
           }else {
              blankVal_products();
-              $('#AddProducts').modal('hide');
+              // $('#AddProducts').modal('hide');
               Swal.fire("Successfully added products!",data.success, "success");
             }
             $(".products_tbl").DataTable().ajax.reload();
@@ -71,11 +71,12 @@ $(document).on("click",".editproducts", function(){
       success: function(data){
         $('#editProducts').modal('show');
         $('#editProducts input[name="products_id"]').val(data.products.id);
+        $('#editProducts #brand1').append( '<option value='+data.products.brand+' selected>'+data.products.brand+'</option>' )
         $('#editProducts .editproducts_id').val(data.products.id);
         $('#editProducts input[name="code"]').val(data.products.code);
         $('#editProducts input[name="brand"]').val(data.products.brand);
-        $('#editProducts input[name="category"]').val(data.products.category);
-        $('#editProducts input[name="variant"]').val(data.products.variant);
+        $('#editProducts #category1').append( '<option value='+data.products.category+' selected>'+data.products.category+'</option>' )
+        $('#editProducts #variant1').append( '<option value='+data.products.variant+' selected>'+data.products.variant+'</option>' )
         $('#editProducts input[name="description"]').val(data.products.description);
         $('#editProducts input[name="price"]').val(data.products.price);
         $('#editProducts input[name="volume"]').val(data.products.volume);

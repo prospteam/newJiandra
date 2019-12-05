@@ -165,7 +165,7 @@ class Purchaseorders extends MY_Controller {
 				$data = array(
 					'company' => $post['company_edit'],
 					'supplier' => $post['supplier'],
-					'note' => $post['purchase_note'],
+					'note' => $post['purchase_note'], 
 				);
 				$update1 = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['edit_purchase_code']));
 
