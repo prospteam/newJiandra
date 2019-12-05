@@ -95,7 +95,7 @@
                                             <div class="form-group row m-b-10">
                                                 <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Quantity <span class="text-red">*</span></label>
                                                 <div class="col-lg-8 col-md-12">
-                                                    <input type="text" class="form-control disabled-normal total_quantity" readonly="" disabled="">
+                                                    <input type="text" class="form-control disabled-normal total_quantity" name="total_quantity" readonly="" disabled="">
                                                 </div>
                                             </div>
                                         </div>
@@ -107,7 +107,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text">₱</span>
                                                         </div>
-                                                        <input type="text" class="form-control disabled-normal total_cost" readonly="" disabled="">
+                                                        <input type="text" class="form-control disabled-normal total_cost" name="total_cost" readonly="" disabled="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -120,7 +120,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text">₱</span>
                                                         </div>
-                                                        <input type="text" class="form-control disabled-normal grand_total" readonly="" disabled="">
+                                                        <input type="text" class="form-control disabled-normal grand_total" name="grand_total" readonly="" disabled="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -453,8 +453,8 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <div class="row deliver">
-                      <div class="col-6">
+                    <div class="row">
+                      <div class="col-12">
                         <div class="form-group">
                             <input type="hidden" class="form-control" name="purchase_code_status" value="">
                             <!-- <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Status</label> -->
@@ -464,18 +464,20 @@
                               <option value="3">Cancelled</option>
                             </select>
                             <br>
-                            <hr>
                             <div class = "row" id="remarks" style="display:none;">
                               <div class="col-12">
                                 <div class="form-group">
-                                  <label for="remarks">Remarks (if any):</label>
+                                  <label for="remarks">Remarks:</label>
                                     <textarea rows="4" cols="50" class="form-control" name="remarks" value=""></textarea>
                                 </div>
                               </div>
                             </div>
                         </div>
                       </div>
-                      <button type="submit" class="btn btn-sm btn-primary add">Submit</button>
+                      <!-- <button type="submit" class="btn btn-sm btn-primary add">Submit</button> -->
+                    </div>
+                    <div class="modal-footer deliver">
+                      <button type="submit" class="btn btn-primary add">Submit</button>
                     </div>
 
                   </div>
@@ -502,7 +504,7 @@
                       <div class = "row">
                         <div class="col-12">
                           <div class="form-group">
-                            <label for="remarks">Remarks (if any):</label>
+                            <label for="remarks">Remarks:</label>
                               <p class="viewremarks"></p>
                           </div>
                         </div>

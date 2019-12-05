@@ -44,13 +44,13 @@ class Purchaseorders extends MY_Controller {
 
 
 		$column_order = array('date_ordered','purchase_code','company.company_name','supplier.supplier_name');
-		$where = array();
+		$where = array('purchase_orders.order_status !=' => 2);
 		$group = array('purchase_orders.purchase_code');
 		$join = array(
 			'supplier' => 'supplier.id = purchase_orders.supplier',
 			'company' => 'company.company_id = purchase_orders.company'
 		);
-		$select = "purchase_orders.id AS purchase_id, purchase_orders.date_ordered,purchase_orders.purchase_code,company.company_id, company.company_name, supplier.id,supplier.supplier_name,purchase_orders.status,purchase_orders.delivery_status";
+		$select = "purchase_orders.id AS purchase_id, purchase_orders.date_ordered,purchase_orders.purchase_code,company.company_id, company.company_name, supplier.id,supplier.supplier_name,purchase_orders.status,purchase_orders.delivery_status,purchase_orders.order_status";
 		$list = $this->MY_Model->get_datatables('purchase_orders',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
 
 
@@ -113,7 +113,8 @@ class Purchaseorders extends MY_Controller {
 					'supplier' => $post['supplier'],
 					'company' => $post['company'],
 					'status' => 1,
-					'delivery_status' => 1
+					'delivery_status' => 1,
+					'order_status' => 1
 				);
 
 				$insert = $this->MY_Model->insert('purchase_orders', $data);
@@ -278,9 +279,14 @@ class Purchaseorders extends MY_Controller {
 	public function change_status(){
 		$post = $this->input->post();
 
+		$remarks = empty($post['remarks']) ? "None" : $post['remarks'];
 
-		$data = array('status' => $post['status'], 'remarks' => $post['remarks']);
+		$data = array('status' => $post['status'], 'remarks' => $remarks);
+
 		$data['change_status'] = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['purchase_code_status']));
+		// echo "<pre>";
+		// print_r($data);
+		// exit;
 		json($data);
 	}
 
@@ -294,5 +300,17 @@ class Purchaseorders extends MY_Controller {
 		$data['remarks'] = $this->MY_Model->getRows('purchase_orders',$parameters,'row');
 
 		json($data);
+	}
+
+	//delete purchase
+	public function deletePurchaseO(){
+	  $purchase_code = $this->input->post('id');
+	  $purchase_status = 2;
+	  $data = array(
+	    'order_status' => $purchase_status
+	  );
+	  $datas['delete'] = $this->MY_Model->update('purchase_orders',$data,array('purchase_code' => $purchase_code));
+	  echo json_encode($datas);
+
 	}
 }
