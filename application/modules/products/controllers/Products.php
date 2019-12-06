@@ -184,7 +184,7 @@ class Products extends MY_Controller {
 					if ($post['search_type'] == 'brand') {
 						$where = "brand LIKE '%" . $postLike . "%'";
 						$select = "brand AS product_id, brand";
-					} else if ($post['search_type'] == 'brand') {
+					} else if ($post['search_type'] == 'category') {
 					 	$where = "category LIKE '%" . $postLike . "%'";
 					 	$select = "category AS product_id, category AS brand";
 			 	  } else {
@@ -217,7 +217,7 @@ class Products extends MY_Controller {
 					if ($post['search_type'] == 'brand') {
 						$where = "brand LIKE '%" . $postLike . "%'";
 						$select = "brand AS product_id, brand";
-					} else if ($post['search_type'] == 'brand') {
+					} else if ($post['search_type'] == 'category') {
 						$where = "category LIKE '%" . $postLike . "%'";
 						$select = "category AS product_id, category AS brand";
 					} else {
