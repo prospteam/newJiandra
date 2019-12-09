@@ -50,9 +50,9 @@ $(document).on('submit','form#addproducts',function(e){
             $('.brand').text(data.products.brand);
             $('.category').text(data.products.category);
             $('.variant').text(data.products.variant);
-            $('.description').text(data.products.description);
-            $('.price').text(data.products.price);
             $('.volume').text(data.products.volume);
+            $('.unit').text(data.products.unit);
+            $('.description').text(data.products.description);
           }
       })
 
@@ -77,10 +77,9 @@ $(document).on("click",".editproducts", function(){
         $('#editProducts input[name="brand"]').val(data.products.brand);
         $('#editProducts #category1').append( '<option value='+data.products.category+' selected>'+data.products.category+'</option>' )
         $('#editProducts #variant1').append( '<option value='+data.products.variant+' selected>'+data.products.variant+'</option>' )
-        $('#editProducts input[name="description"]').val(data.products.description);
-        $('#editProducts input[name="price"]').val(data.products.price);
         $('#editProducts input[name="volume"]').val(data.products.volume);
-
+        $('#editProducts #unit1').append( '<option value='+data.products.unit+' selected>'+data.products.unit+'</option>' )
+        $('#editProducts textarea[name="description"]').val(data.products.description);
         }
   });
 
@@ -231,9 +230,15 @@ $(document).on("click",'.deleteproducts', function(e) {
           {"data":"brand"},
           {"data":"category"},
           // {"data":"variant"},
-          // {"data":"description"},
-          {"data":"price"},
-          {"data":"volume"},
+          // // {"data":"description"},
+          // {"data":{'volume'}},
+          {"data":"volume","render":function(data, type, row, meta){
+                    var str = '';
+                    str = row.volume+' '+row.unit;
+                    return str;
+               }
+           },
+          // {"data":"unit"},
           {"data":"action","render": function(data, type, row,meta){
                             var str = '';
                             str += '<div class="actions">';
@@ -270,7 +275,7 @@ $(document).on("click",'.deleteproducts', function(e) {
          //Set column definition initialisation properties.
          "columnDefs": [
               {
-                   "targets": [5,6], //first column / numbering column
+                   "targets": [4,5], //first column / numbering column
                    "orderable": false, //set not orderable
 
                },
@@ -339,7 +344,7 @@ $('#AddProducts input[name="code"]').val('');
 // $('#AddProducts input[name="brand"]').val('');
 // $('#AddProducts input[name="category"]').val('');
 // $('#AddProducts input[name="variant"]').val('');
-$('#AddProducts input[name="description"]').val('');
-$('#AddProducts input[name="price"]').val('');
 $('#AddProducts input[name="volume"]').val('');
+// $('#AddProducts input[name="unit"]').val('');
+$('#AddProducts textarea[name="description"]').val('');
 }

@@ -68,15 +68,17 @@
                       <div class="row">
                         <div class="col-6">
                           <div class="form-group">
-                            <label for="description">Description: <span class="required">*</span></label>
-                            <input type="text" class="form-control" name="description" value="">
+                            <label for="volume">Volume: <span class="required">*</span></label>
+                            <input type="text" class="form-control" name="volume" value="">
                             <span class="err"></span>
                           </div>
                         </div>
                         <div class="col-6">
                           <div class="form-group">
-                            <label for="price">Price: <span class="required">*</span></label>
-                            <input type="text" class="form-control" name="price" value="">
+                            <label for="unit">Unit: <span class="required">*</span></label>
+                            <select class="form-control js-example-basic-multiple-addproducts"  name="unit" id="unit" data-type="unit">
+                              <option></option>
+                            </select>
                             <span class="err"></span>
                           </div>
                         </div>
@@ -84,8 +86,10 @@
                       <div class = "row">
                         <div class="col-lg-6">
                           <div class="form-group">
-                            <label for="volume">Volume:</label>
-                            <input type="text" class="form-control" name="volume" value="">
+                            <label for="description">Description:</label>
+                            <textarea rows="2" cols="50" name="description" class="form-control" >
+
+                            </textarea>
                           </div>
                         </div>
                         <!-- <div class="col-lg-6">
@@ -149,21 +153,21 @@
                 <div class = "row">
                   <div class="col-6">
                     <div class="form-group">
-                      <label for="description">Description:</label>
-                      <p class="description"> </p>
+                      <label for="volume">Volume:</label>
+                      <p class="volume"> </p>
                     </div>
                   </div>
                   <div class="col-6">
                     <div class="form-group">
-                      <label for="price">Price:</label>
-                      <p class="price"> </p>
+                      <label for="unit">Unit:</label>
+                      <p class="unit"> </p>
                     </div>
                   </div>
                   <div class = "row">
-                      <div class="col-6">
+                      <div class="col-12">
                         <div class="form-group">
-                          <label for="volume">Volume:</label>
-                            <p class="volume"> </p>
+                          <label for="description">Description:</label>
+                            <p class="description"> </p>
                         </div>
                       </div>
                       <!-- <div class="col-lg-6">
@@ -241,15 +245,17 @@
                   <div class="row">
                     <div class="col-6">
                       <div class="form-group">
-                        <label for="description">Description: <span class="required">*</span></label>
-                        <input type="text" class="form-control" name="description" value="">
+                        <label for="volume">Volume: <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="volume" value="">
                         <span class="err"></span>
                       </div>
                     </div>
                     <div class="col-6">
                       <div class="form-group">
-                        <label for="price">Price: <span class="required">*</span></label>
-                        <input type="text" class="form-control" name="price" value="">
+                        <label for="unit1">Unit: <span class="required">*</span></label>
+                        <select class="form-control js-example-basic-multiple-editproducts"  name="unit" id="unit1" data-type="unit">
+                          <option></option>
+                      </select>
                         <span class="err"></span>
                       </div>
                     </div>
@@ -257,8 +263,10 @@
                   <div class = "row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label for="volume">Volume:</label>
-                        <input type="text" class="form-control" name="volume" value="">
+                        <label for="description">Description:</label>
+                        <textarea rows="2" cols="50" name="description" class="form-control" >
+
+                        </textarea>
                       </div>
                     </div>
                   </div>
@@ -311,8 +319,8 @@
                       <th class="header-title">Code</th>
                       <th class="header-title">Brand</th>
                       <th class="header-title">Category</th>
-                      <th class="header-title">Price</th>
                       <th class="header-title">Volume</th>
+                      <!-- <th class="header-title">Unit</th> -->
                       <th class="header-title">Action</th>
                       <th class="header-title">Status</th>
                   </thead>
