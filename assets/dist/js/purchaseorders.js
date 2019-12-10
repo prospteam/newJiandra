@@ -76,6 +76,7 @@ $(document).ready(function(){
       });
   //end display purchase_tbl
 
+
   //add remarkd if cancelled Status
   $('#status').on('change', function(){
     if( $(this).val()==="3"){
@@ -191,6 +192,32 @@ $(document).ready(function(){
   });
   //End of Update delivery status
 
+  //select product from product list
+  //display companies for edit user
+   // $('.select2').select2({
+   //   allowClear: true,
+   //   placeholder: "Select Company",
+   //   dropdownParent: $('#EditUser'),
+   //   tags: true,
+   //   ajax: {
+   //     url: base_url+'purchaseorders/choose_product_add',
+   //     dataType: "json",
+   //     data: function (params) {
+   //
+   //    },processResults: function (data) {
+   //
+   //          return {
+   //              results: $.map(data.companies, function (item) {
+   //                  return {
+   //                      text: item.company_name,
+   //                      id: item.company_id
+   //                  }
+   //              })
+   //          };
+   //      }
+   //   }
+
+
   //successfully added purchas order
   $(document).on('submit','form#addpurchaseorder',function(e){
     e.preventDefault();
@@ -247,7 +274,7 @@ $(document).ready(function(){
          var grand_total = 0;
 
            $.each(data.purchase,function(index,element){
-
+             console.log(element);
              total_quantity = parseFloat(total_quantity) + parseFloat(element.quantity);
              total_cost = parseFloat(total_cost) + parseFloat(element.unit_price);
              var total = parseFloat(element.quantity) * parseFloat(element.unit_price);
