@@ -47,7 +47,7 @@ $(document).on('submit','form#addproducts',function(e){
             $('#viewproducts').modal('show');
 
             $('.code').text(data.products.code);
-            $('.brand').text(data.products.brand);
+            $('.product_name').text(data.products.product_name);
             $('.category').text(data.products.category);
             $('.variant').text(data.products.variant);
             $('.volume').text(data.products.volume);
@@ -71,10 +71,10 @@ $(document).on("click",".editproducts", function(){
       success: function(data){
         $('#editProducts').modal('show');
         $('#editProducts input[name="products_id"]').val(data.products.id);
-        $('#editProducts #brand1').append( '<option value='+data.products.brand+' selected>'+data.products.brand+'</option>' )
+        $('#editProducts #product_name1').append( '<option value='+data.products.product_name+' selected>'+data.products.product_name+'</option>' )
         $('#editProducts .editproducts_id').val(data.products.id);
         $('#editProducts input[name="code"]').val(data.products.code);
-        $('#editProducts input[name="brand"]').val(data.products.brand);
+        $('#editProducts input[name="product_name"]').val(data.products.product_name);
         $('#editProducts #category1').append( '<option value='+data.products.category+' selected>'+data.products.category+'</option>' )
         $('#editProducts #variant1').append( '<option value='+data.products.variant+' selected>'+data.products.variant+'</option>' )
         $('#editProducts input[name="volume"]').val(data.products.volume);
@@ -227,7 +227,7 @@ $(document).on("click",'.deleteproducts', function(e) {
     "order"       : [[0,'desc']],
     "columns"     :[
           {"data":"code"},
-          {"data":"brand"},
+          {"data":"product_name"},
           {"data":"category"},
           // {"data":"variant"},
           // // {"data":"description"},
@@ -302,7 +302,7 @@ $(document).on("click",'.deleteproducts', function(e) {
              return {
                  results: $.map(data.items, function (item) {
                      return {
-                         text: item.brand,
+                         text: item.product_name,
                          id: item.product_id
                      }
                  })
@@ -329,7 +329,7 @@ $(document).on("click",'.deleteproducts', function(e) {
              return {
                  results: $.map(data.items, function (item) {
                      return {
-                         text: item.brand,
+                         text: item.product_name,
                          id: item.product_id
                      }
                  })
@@ -338,8 +338,12 @@ $(document).on("click",'.deleteproducts', function(e) {
       }
     });
 
+    function clearError(){
+        $('.err').text('');
+    }
 function blankVal_products(){
 $('#AddProducts input[name="code"]').val('');
+  $('.err').text('');
   $('#AddProducts .js-example-basic-multiple-addproducts').val('').trigger('change');
 // $('#AddProducts input[name="brand"]').val('');
 // $('#AddProducts input[name="category"]').val('');
