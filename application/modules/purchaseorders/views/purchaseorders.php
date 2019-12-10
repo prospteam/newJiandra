@@ -64,7 +64,15 @@
 
                                   <tr>
                                     <td class="purch_td">
-                                      <input type="text" class="form-control" name="prod_name[]" value="">
+                                      <select class="form-control select2" style="width: 100%;" name="prod_name[]">
+                                        <option value="">Select Product</option>
+                                        <?php
+                                            foreach($products as $key => $value){
+                                                echo '<option value="'.$value['id'].'">'.$value['product_name'].'</option>';
+                                            }
+                                        ?>
+                                      </select>
+                                      <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
                                       <span class="err"></span>
                                     </td>
                                     <td class="purch_td">

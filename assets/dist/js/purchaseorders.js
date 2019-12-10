@@ -17,15 +17,22 @@ $(document).ready(function(){
               {"data":"action","render": function(data, type, row,meta){
                         var str = '';
                         str += '<div class="actions">';
-                        if(row.status == 1){
+                        if(row.status == 1 && row.delivery_status != 4){
 
                           str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"> <i class="fas fa-eye text-info"></i></a>';
                           str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'"><i class="fas fa-pen text-warning"></i></a>';
-                          str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-                        }else if(row.status == 2){
-                          str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-                        }else if(row.status == 3){
-                          str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                          str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
+                        }else if(row.status == 2 && row.delivery_status != 4){
+                          str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"> <i class="fas fa-eye text-info"></i></a>';
+                          str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'"><i class="fas fa-pen text-warning"></i></a>';
+                          str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><i class="fa fa-trash" aria-hidden="true"</i></a>';
+                        }else if(row.status == 3 && row.delivery_status != 4){
+                          str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"> <i class="fas fa-eye text-info"></i></a>';
+                          str += '<a href="javascript:;" class="remarks" data-id="'+row.purchase_code+'"><i class="fa fa-comment" aria-hidden="true"></i></a>';
+                          str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'"><i class="fas fa-pen text-warning"></i></a>';
+                          str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
+                        }else if(row.delivery_status == 4){
+                          str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"> <i class="fas fa-eye text-info"></i></a>';
                         }
                         str += '</div>';
                         return str;
@@ -37,9 +44,9 @@ $(document).ready(function(){
                    if(row.status == 1){
                      str += '<a href="javascript:;" class="btn btn-block btn-sm btn-primary status" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">pending</a>';
                    }else if(row.status == 2){
-                     str += '<a href="javascript:;" class="inactive btn btn-block btn-sm btn-success approved" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">approved</a>';
+                     str += '<a href="javascript:;" class="inactive btn btn-block btn-sm btn-success status" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">approved</a>';
                    }else if(row.status == 3){
-                     str += '<a href="javascript:;" class="active btn btn-block btn-sm btn-danger remarks" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">cancelled</a>';
+                     str += '<a href="javascript:;" class="active btn btn-block btn-sm btn-danger status" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">cancelled</a>';
                    }
                    return str;
               }
@@ -75,7 +82,6 @@ $(document).ready(function(){
           ],
       });
   //end display purchase_tbl
-
 
   //add remarkd if cancelled Status
   $('#status').on('change', function(){
@@ -201,32 +207,9 @@ $(document).ready(function(){
   });
   //End of Update delivery status
 
-  //select product from product list
-  //display companies for edit user
-   // $('.select2').select2({
-   //   allowClear: true,
-   //   placeholder: "Select Company",
-   //   dropdownParent: $('#EditUser'),
-   //   tags: true,
-   //   ajax: {
-   //     url: base_url+'purchaseorders/choose_product_add',
-   //     dataType: "json",
-   //     data: function (params) {
-   //
-   //    },processResults: function (data) {
-   //
-   //          return {
-   //              results: $.map(data.companies, function (item) {
-   //                  return {
-   //                      text: item.company_name,
-   //                      id: item.company_id
-   //                  }
-   //              })
-   //          };
-   //      }
-   //   }
-
-
+  //choose from product name
+    $('select[name="prod_name[]"]').select2();
+    // $('.select2_add').select2();
   //successfully added purchas order
   $(document).on('submit','form#addpurchaseorder',function(e){
     e.preventDefault();
@@ -249,6 +232,7 @@ $(document).ready(function(){
                     $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
                     $("select[name='"+value+"']").next('.err').text(data.form_error[value]);
                     $("select[name='"+value+"']").next('.err').text(data.form_error[value]);
+                    $("select[name='"+value+"']").next().next().text(data.form_error[value]);
                     // $("select[name='"+value+"']").parents('.form-group').next('.err').text(data.form_error[value]);
                 });
             }else if (data.error) {
@@ -283,7 +267,6 @@ $(document).ready(function(){
          var grand_total = 0;
 
            $.each(data.purchase,function(index,element){
-             console.log(element);
              total_quantity = parseFloat(total_quantity) + parseFloat(element.quantity);
              total_cost = parseFloat(total_cost) + parseFloat(element.unit_price);
              var total = parseFloat(element.quantity) * parseFloat(element.unit_price);
@@ -304,7 +287,7 @@ $(document).ready(function(){
                  str +=   '<input type="hidden" class="edit_purchID" name="view_purchase_id[]" value='+element.purchase_id+'>';
                 str += '</td>';
                str +=     '<td class="purch_td">';
-                   str +=   element.product;
+                   str +=   element.product_name;
                   str += '</td>';
                  str += ' <td class="purch_td qty">';
                      str += element.quantity;
@@ -447,14 +430,19 @@ $(document).ready(function(){
             $('#editpurchaseorder textarea[name=purchase_note]').val(element.note);
             $('#editpurchaseorder select[name=company_edit]').val(element.company_id);
             $('#editpurchaseorder select[name="company_edit"]').trigger('change');
-            $('#editpurchaseorder select[name=supplier]').val(element.supplier_id);
+            $('#editpurchaseorder select[name="supplier"]').val(element.supplier_id);
+
             // str += '<input type="hidden" name="purchase_id" value='+element.purchase_id+'>';
             str += '<tr>';
             str += '<td class="purch_td hide">';
             str += '<input type="hidden" class="form-control" name="edit_purchase_id[]" value='+element.purchase_id+'>';
             str += '</td>';
               str += '<td class="purch_td">';
-                   str += '<input type="text" class="form-control" name="prod_name[]" value='+element.product+'>';
+                str += '<select class="form-control select2_edit" style="width: 100%;" name="prod_name[]" data-id="'+element.product_id+'" value="'+element.product_name+'">';
+                  str += '<option value="'+element.id+'" selected hidden>'+element.product_name+'</option>';
+                   str += get_products();
+                str += '</select>';
+                   // str += '<input type="text" class="form-control" name="prod_name[]" value='+element.product+'>';
                    str += '<span class="err"></span>';
               str += '</td>';
               str += '<td class="purch_td">';
@@ -470,17 +458,42 @@ $(document).ready(function(){
                   str += '<span class="err"></span>';
               str += '</td>';
             str += '</tr>';
+
           });
 
           $('.total_quantity').val(total_quantity);
           $('.total_cost').val(total_cost.toFixed(2));
           $('#edit_purch tbody').html(str);
+          $('.select2_edit').select2();
           $('.grand_total').val(grand_total.toFixed(2));
+          // $('#editpurchaseorder select[name="prod_name[]"]').trigger('change');
         }
     });
 
   });
 
+  // $(document).on('change','select[name="prod_name[]"]',function(){
+  //   var id = $(this).attr('data-id');
+  //   $.ajax({
+  //       url: base_url+'purchaseorders/get_edit_products',
+  //       data: {id:id},
+  //       type: 'post',
+  //       dataType: 'json',
+  //       success: function(data){
+  //         var str = '';
+  //             // str += '<option value="" selected hidden>Select Supplier</option>';
+  //               $.each(data.products,function(index,element){
+  //                 str += '<select class="form-control select2_edit" style="width: 100%;" name="prod_name[]" data-id="'+element.product_id+'" value="'+element.product_name+'">';
+  //                     str += '<option value="'+element.id+'" selected>'+element.product_name+'</option>';
+  //                    str += get_products();
+  //                 str += '</select>';
+  //               });
+  //
+  //           $('#edit_purch tbody').html(str);
+  //
+  //       }
+  //   });
+  // });
 
   //successfully edited purchase order
   $(document).on('submit','#editpurchaseorder',function(e){
@@ -499,31 +512,30 @@ $(document).ready(function(){
         dataType: 'json',
         success : function(data) {
             console.log(data);
-            if(data.status == "ok"){
-              $('#EditPurchaseOrder').modal('hide');
-                  Swal.fire("Successfully updated purchase order!",data.success, "success");
-                  $(".purchase_tbl").DataTable().ajax.reload();
-                  // setTimeout(function(){
-                  //    location.reload();
-                  //  }, 1000);
-             }else if(data.status == 'invalid'){
-                Swal.fire("Error",data.status, "invalid");
-             }
+            // if(data.status == "ok"){
+            //   $('#EditPurchaseOrder').modal('hide');
+            //       Swal.fire("Successfully updated purchase order!",data.success, "success");
+            //       $(".purchase_tbl").DataTable().ajax.reload();
+            //       // setTimeout(function(){
+            //       //    location.reload();
+            //       //  }, 1000);
+            //  }else if(data.status == 'invalid'){
+            //     Swal.fire("Error",data.status, "invalid");
+            //  }
             if(data.form_error){
                 clearError();
                 let keyNames = Object.keys(data.form_error);
                 $(keyNames).each(function(index , value) {
                     $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
+                    $("select[name='"+value+"']").next().next().text(data.form_error[value]);
                 });
             }else if (data.error) {
                 Swal.fire("Error",data.error, "error");
             }else {
                // blankVal();
-                $('#EditUser').modal('hide');
+                $('#EditPurchaseOrder').modal('hide');
                 Swal.fire("Successfully updated purchase order!",data.success, "success");
-                setTimeout(function(){
-                   location.reload();
-                 }, 1000);
+                $(".purchase_tbl").DataTable().ajax.reload();
             }
         }
     })
@@ -536,7 +548,10 @@ $(document).ready(function(){
 
     str += '<tr>';
       str += '<td class="purch_td">';
-           str += '<input type="text" class="form-control" name="prod_name[]" value="">';
+           str += '<select class="form-control select2_add" style="width: 100%;" name="prod_name[]">';
+              str += '<option value="">Select Product</option>';
+              str += get_products();
+           str += '</select>';
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
@@ -560,9 +575,11 @@ $(document).ready(function(){
     if(x){
       x++;
       $('#add_new_product tbody').append(str);
+      $('.select2_add').select2();
     }
     // get_supplier();
-  });
+    });
+
 
   $(document).on('click', '#removeNewPO', function(){
     $(this).parent().parent().remove(); x--;
@@ -575,7 +592,10 @@ $(document).ready(function(){
 
     str += '<tr>';
       str += '<td class="purch_td">';
-           str += '<input type="text" class="form-control" name="edit_prod_name[]" value="">';
+        str += '<select class="form-control select2_edit" style="width: 100%;" name="edit_prod_name[]">';
+         str += '<option value="">Select Product</option>';
+         str += get_products();
+        str += '</select>';
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
@@ -598,6 +618,7 @@ $(document).ready(function(){
     if(x){
       x++;
       $('#edit_purch').append(str);
+      $('.select2_edit').select2();
     }
     // get_supplier();
   });
@@ -699,6 +720,48 @@ function get_supplier(){
   });
   return data_return;
 }
+
+function get_products(){
+  // var id = $('.select2_edit').attr('data-id');
+  // alert(id);
+  var data_return = '';
+  $.ajax({
+    url: base_url + '/purchaseorders/get_products/',
+    type:'post',
+    dataType:'json',
+    async:false,
+    success:function(data){
+      var str = '';
+      $.each(data.products,function(index,element){
+        str += '<option value="'+element.id+'">'+element.product_name+'</option>';
+      });
+      data_return = str;
+    }
+  });
+  return data_return;
+}
+
+function get_edit_products(){
+    var id = $('.editPurchase').attr('data-id');
+  var data_return = '';
+  $.ajax({
+    url: base_url + '/purchaseorders/get_edit_products/',
+    type:'post',
+    data: {id:id},
+    dataType:'json',
+    async:false,
+    success:function(data){
+      var str = '';
+      $.each(data.products,function(index,element){
+        str += '<option value="'+element.id+'">'+element.product_name+'</option>';
+      });
+      data_return = str;
+    }
+  });
+  return data_return;
+}
+
+
 function blankVal_purchase(){
   $('#AddPurchaseOrder select[name="company"]').val('');
   $('#AddPurchaseOrder select[name="supplier"]').val('');

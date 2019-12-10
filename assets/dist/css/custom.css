@@ -30,7 +30,12 @@ i.fa.fa-window-close {
 i.fa.fa-check-square{
   color:green;
 }
- 
+
+i.fa.fa-comment{
+   margin-right: 17px;
+   color: #756f6f;
+}
+
 span.active{
   background: #28a745!important;
   border-color: #28a745!important;
