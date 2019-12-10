@@ -25,9 +25,9 @@ class Products extends MY_Controller {
     $this->form_validation->set_rules('brand','Brand','required');
     $this->form_validation->set_rules('category','Category','required');
     $this->form_validation->set_rules('variant','Variant','required');
-    $this->form_validation->set_rules('description','Description','required');
-    $this->form_validation->set_rules('price','Price','required');
     $this->form_validation->set_rules('volume','Volume','required');
+    $this->form_validation->set_rules('unit','Unit','required');
+		$this->form_validation->set_rules('description','Description','required');
 		$error = array();
 
     if ($this->form_validation->run() !== FALSE) {
@@ -36,9 +36,9 @@ class Products extends MY_Controller {
         'brand' => $this->input->post('brand'),
         'category' => $this->input->post('category'),
         'variant' => $this->input->post('variant'),
-        'description' => $this->input->post('description'),
-        'price' => $this->input->post('price'),
         'volume'=> $this->input->post('volume'),
+        'unit'=> $this->input->post('unit'),
+				'description' => $this->input->post('description'),
         'status' => 1
       );
 
@@ -61,13 +61,13 @@ class Products extends MY_Controller {
 			$draw = $this->input->post('draw');
 
 
-			$column_order = array('code','brand','category','price','volume','status');
+			$column_order = array('code','brand','category','volume','unit','status');
 		 	$where = array('status !=' => 3);
 			$join = array(
 				// 'company' => 'company.company_id = users.company',
 				// 'position' => 'position.id = users.position'
 			);
-			$select = "products.id,products.code,products.brand,products.category,products.price,products.volume,products.status";
+			$select = "products.id,products.code,products.brand,products.category,products.volume,products.unit,products.status";
 			$list = $this->MY_Model->get_datatables('products',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 
 
@@ -109,9 +109,9 @@ class Products extends MY_Controller {
 						'brand'  	    => $post['brand'],
 						'category'    => $post['category'],
 						'variant'     => $post['variant'],
-						'description' => $post['description'],
-						'price'       => $post['price'],
-						'volume'      => $post['volume']
+						'volume'      => $post['volume'],
+						'unit'        => $post['unit'],
+						'description' => $post['description']
 					);
 
 				$update = $this->MY_Model->update('products',$data, array('id' => $products_id));
@@ -184,14 +184,16 @@ class Products extends MY_Controller {
 					if ($post['search_type'] == 'brand') {
 						$where = "brand LIKE '%" . $postLike . "%'";
 						$select = "brand AS product_id, brand";
-					} else if ($post['search_type'] == 'brand') {
+					} else if ($post['search_type'] == 'category') {
 					 	$where = "category LIKE '%" . $postLike . "%'";
 					 	$select = "category AS product_id, category AS brand";
-			 	  } else {
-				 		$where = "variant LIKE '%" . $postLike . "%'";
-				 		$select = "variant AS product_id, variant AS brand";
+			 	  } else if ($post['search_type'] == 'variant') {
+						$where = "variant LIKE '%" . $postLike . "%'";
+					 	$select = "variant AS product_id, variant AS brand";
+			 	  }	else {
+				 		$where = "unit LIKE '%" . $postLike . "%'";
+				 		$select = "unit AS product_id, unit AS brand";
 				  }
-					// $select = $post['search_type'] == 'brand' ? "brand AS product_id, brand" : "category AS product_id, category AS brand";
 
 					$group = "GROUP BY " . $post['search_type'] . " ORDER BY " . $post['search_type'] . " ASC";
 					$list = $this->MY_Model->getRowByQuery("SELECT $select FROM " . $this->tables->products . " WHERE $where AND status = 1 $group");
@@ -217,12 +219,15 @@ class Products extends MY_Controller {
 					if ($post['search_type'] == 'brand') {
 						$where = "brand LIKE '%" . $postLike . "%'";
 						$select = "brand AS product_id, brand";
-					} else if ($post['search_type'] == 'brand') {
+					} else if ($post['search_type'] == 'category') {
 						$where = "category LIKE '%" . $postLike . "%'";
 						$select = "category AS product_id, category AS brand";
-					} else {
+					}else if ($post['search_type'] == 'variant') {
 						$where = "variant LIKE '%" . $postLike . "%'";
 						$select = "variant AS product_id, variant AS brand";
+					} else {
+						$where = "unit LIKE '%" . $postLike . "%'";
+						$select = "unit AS product_id, variant AS brand";
 					}
 					// $select = $post['search_type'] == 'brand' ? "brand AS product_id, brand" : "category AS product_id, category AS brand";
 

@@ -2,141 +2,6 @@ var base_url = $('input[name="base_url"]').val();
 $(document).ready(function(){
 
   //display_users
-    var users_tbl = $('.users_tbl').DataTable({
-         "processing": true, //Feature control the processing indicator.
-         "serverSide": true, //Feature control DataTables' server-side processing mode.
-         "order": [[0,'desc']], //Initial no order.
-         "columns":[
-              {"data":"fullname"},
-              {"data":"username"},
-              {"data":"position_name"},
-              {"data":"company","render": function(data, type, row,meta){
-                  var str = '';
-                  if(row.company == 1){
-                    str += 'New Jiandra Enterprises';
-                  }else if(row.company == 2){
-                    str += 'Mrs.P Mktg';
-                  }else if(row.company == 1,2){
-                    str += 'New Jiandra Enterprises, Mrs.P Mktg';
-                  }
-                  return str;
-                }
-              },
-
-              // {"data":"type"},
-              {"data":"action","render": function(data, type, row,meta){
-                        var str = '';
-                        str += '<div class="actions">';
-                        if(row.status == 1){
-
-                          str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
-                          str += '<a href="javascript:;" class="editUser" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
-                          str += '<a href="javascript:;" class="disableUser" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
-                          str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-                        }else if(row.status == 2){
-                          str += '<a href="javascript:;" class="enableUser" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
-                          str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-                        }
-                        str += '</div>';
-                        return str;
-                   }
-              },
-
-              {"data":"status","render": function(data, type, row,meta){
-                  var str = '';
-                   if(row.status == 1){
-                     str += '<span class="active btn btn-block btn-sm btn-success">active</button>';
-                   }else if(row.status == 2){
-                     str += '<span class="inactive btn btn-block btn-sm btn-danger">inactive</button>';
-                   }
-                   return str;
-              }
-            }
-
-         ],
-         // Load data for the table's content from an Ajax source
-         "ajax": {
-              "url":base_url+"users/display_users/",
-              "type": "POST"
-         },
-         //Set column definition initialisation properties.
-         "columnDefs": [
-              {
-                   "targets": [4,5], //first column / numbering column
-                   "orderable": false, //set not orderable
-
-               },
-          ],
-      });
-  //end display users_tbl
-
-
-  //display vehicle_tbl
-    var vehicle_tbl = $('.vehicle_tbl').DataTable({
-         "processing": true, //Feature control the processing indicator.
-         "serverSide": true, //Feature control DataTables' server-side processing mode.
-         "order": [[0,'desc']], //Initial no order.
-         "columns":[
-               {"data":"vehicle_type","render": function(data, type, row,meta){
-                 var str = '';
-                  if(row.vehicle_type == 1){
-                     str += 'Warehouse Truck';
-                  }else{
-                    str += 'Delivery Truck';
-                  }
-                  return str;
-                }
-               },
-              // {"data":"vehicle_type"},
-              {"data":"plate_number"},
-              {"data":"vehicle_brand"},
-              // {"data":"type"},
-              {"data":"action","render": function(data, type, row,meta){
-                        var str = '';
-                        str += '<div class="actions">';
-                        if(row.status == 1){
-                          str += '<a href="javascript:;" class="viewVehicle" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
-                          str += '<a href="javascript:;" class="editVehicles" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
-                          str += '<a href="javascript:;" class="disableVehicle" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
-                          str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-                        }else if(row.status == 2){
-                          str += '<a href="javascript:;" class="enableVehicle" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
-                          str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
-                        }
-                        str += '</div>';
-                        return str;
-                   }
-              },
-
-              {"data":"status","render": function(data, type, row,meta){
-                  var str = '';
-                   if(row.status == 1){
-                     str += '<span class="active btn btn-block btn-sm btn-success">active</button>';
-                   }else if(row.status == 2){
-                     str += '<span class="inactive btn btn-block btn-sm btn-danger">inactive</button>';
-                   }
-                   return str;
-              }
-            }
-
-         ],
-         // Load data for the table's content from an Ajax source
-         "ajax": {
-              "url":base_url+"vehicle/display_vehicles/",
-              "type": "POST"
-         },
-         //Set column definition initialisation properties.
-         "columnDefs": [
-              {
-                   "targets": [3,4], //first column / numbering column
-                   "orderable": false, //set not orderable
-
-               },
-          ],
-      });
-  //end display vehicle_tbl
-
-
 
   //display companies for add user
    $('.js-example-basic-multiple-addU').select2({
@@ -524,8 +389,8 @@ $(document).ready(function(){
                 // blankVal();
                  $('#AddVehicle').modal('hide');
                  Swal.fire("Successfully added vehicle!",data.success, "success");
-                 $(".vehicle_tbl").DataTable().ajax.reload();
              }
+             $(".vehicle_tbl").DataTable().ajax.reload();
          }
      })
    });
@@ -778,6 +643,139 @@ $(document).ready(function(){
    });
 
 });
+var users_tbl = $('.users_tbl').DataTable({
+     "processing": true, //Feature control the processing indicator.
+     "serverSide": true, //Feature control DataTables' server-side processing mode.
+     "order": [[0,'desc']], //Initial no order.
+     "columns":[
+          {"data":"fullname"},
+          {"data":"username"},
+          {"data":"position_name"},
+          {"data":"company","render": function(data, type, row,meta){
+              var str = '';
+              if(row.company == 1){
+                str += 'New Jiandra Enterprises';
+              }else if(row.company == 2){
+                str += 'Mrs.P Mktg';
+              }else if(row.company == 1,2){
+                str += 'New Jiandra Enterprises, Mrs.P Mktg';
+              }
+              return str;
+            }
+          },
+
+          // {"data":"type"},
+          {"data":"action","render": function(data, type, row,meta){
+                    var str = '';
+                    str += '<div class="actions">';
+                    if(row.status == 1){
+
+                      str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
+                      str += '<a href="javascript:;" class="editUser" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
+                      str += '<a href="javascript:;" class="disableUser" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
+                      str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                    }else if(row.status == 2){
+                      str += '<a href="javascript:;" class="enableUser" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
+                      str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                    }
+                    str += '</div>';
+                    return str;
+               }
+          },
+
+          {"data":"status","render": function(data, type, row,meta){
+              var str = '';
+               if(row.status == 1){
+                 str += '<span class="active btn btn-block btn-sm btn-success">active</button>';
+               }else if(row.status == 2){
+                 str += '<span class="inactive btn btn-block btn-sm btn-danger">inactive</button>';
+               }
+               return str;
+          }
+        }
+
+     ],
+     // Load data for the table's content from an Ajax source
+     "ajax": {
+          "url":base_url+"users/display_users/",
+          "type": "POST"
+     },
+     //Set column definition initialisation properties.
+     "columnDefs": [
+          {
+               "targets": [4,5], //first column / numbering column
+               "orderable": false, //set not orderable
+
+           },
+      ],
+  });
+//end display users_tbl
+
+
+//display vehicle_tbl
+var vehicle_tbl = $('.vehicle_tbl').DataTable({
+     "processing": true, //Feature control the processing indicator.
+     "serverSide": true, //Feature control DataTables' server-side processing mode.
+     "order": [[0,'desc']], //Initial no order.
+     "columns":[
+           {"data":"vehicle_type","render": function(data, type, row,meta){
+             var str = '';
+              if(row.vehicle_type == 1){
+                 str += 'Warehouse Truck';
+              }else{
+                str += 'Delivery Truck';
+              }
+              return str;
+            }
+           },
+          // {"data":"vehicle_type"},
+          {"data":"plate_number"},
+          {"data":"vehicle_brand"},
+          // {"data":"type"},
+          {"data":"action","render": function(data, type, row,meta){
+                    var str = '';
+                    str += '<div class="actions">';
+                    if(row.status == 1){
+                      str += '<a href="javascript:;" class="viewVehicle" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
+                      str += '<a href="javascript:;" class="editVehicles" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
+                      str += '<a href="javascript:;" class="disableVehicle" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
+                      str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                    }else if(row.status == 2){
+                      str += '<a href="javascript:;" class="enableVehicle" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
+                      str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                    }
+                    str += '</div>';
+                    return str;
+               }
+          },
+
+          {"data":"status","render": function(data, type, row,meta){
+              var str = '';
+               if(row.status == 1){
+                 str += '<span class="active btn btn-block btn-sm btn-success">active</button>';
+               }else if(row.status == 2){
+                 str += '<span class="inactive btn btn-block btn-sm btn-danger">inactive</button>';
+               }
+               return str;
+          }
+        }
+
+     ],
+     // Load data for the table's content from an Ajax source
+     "ajax": {
+          "url":base_url+"vehicle/display_vehicles/",
+          "type": "POST"
+     },
+     //Set column definition initialisation properties.
+     "columnDefs": [
+          {
+               "targets": [3,4], //first column / numbering column
+               "orderable": false, //set not orderable
+
+           },
+      ],
+  });
+//end display vehicle_tbl
 
 
 function clearError(){

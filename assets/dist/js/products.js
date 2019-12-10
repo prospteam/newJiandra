@@ -25,7 +25,7 @@ $(document).on('submit','form#addproducts',function(e){
               Swal.fire("Error",data.error, "error");
           }else {
              blankVal_products();
-              $('#AddProducts').modal('hide');
+              // $('#AddProducts').modal('hide');
               Swal.fire("Successfully added products!",data.success, "success");
             }
             $(".products_tbl").DataTable().ajax.reload();
@@ -50,9 +50,9 @@ $(document).on('submit','form#addproducts',function(e){
             $('.brand').text(data.products.brand);
             $('.category').text(data.products.category);
             $('.variant').text(data.products.variant);
-            $('.description').text(data.products.description);
-            $('.price').text(data.products.price);
             $('.volume').text(data.products.volume);
+            $('.unit').text(data.products.unit);
+            $('.description').text(data.products.description);
           }
       })
 
@@ -71,15 +71,15 @@ $(document).on("click",".editproducts", function(){
       success: function(data){
         $('#editProducts').modal('show');
         $('#editProducts input[name="products_id"]').val(data.products.id);
+        $('#editProducts #brand1').append( '<option value='+data.products.brand+' selected>'+data.products.brand+'</option>' )
         $('#editProducts .editproducts_id').val(data.products.id);
         $('#editProducts input[name="code"]').val(data.products.code);
         $('#editProducts input[name="brand"]').val(data.products.brand);
-        $('#editProducts input[name="category"]').val(data.products.category);
-        $('#editProducts input[name="variant"]').val(data.products.variant);
-        $('#editProducts input[name="description"]').val(data.products.description);
-        $('#editProducts input[name="price"]').val(data.products.price);
+        $('#editProducts #category1').append( '<option value='+data.products.category+' selected>'+data.products.category+'</option>' )
+        $('#editProducts #variant1').append( '<option value='+data.products.variant+' selected>'+data.products.variant+'</option>' )
         $('#editProducts input[name="volume"]').val(data.products.volume);
-
+        $('#editProducts #unit1').append( '<option value='+data.products.unit+' selected>'+data.products.unit+'</option>' )
+        $('#editProducts textarea[name="description"]').val(data.products.description);
         }
   });
 
@@ -230,9 +230,15 @@ $(document).on("click",'.deleteproducts', function(e) {
           {"data":"brand"},
           {"data":"category"},
           // {"data":"variant"},
-          // {"data":"description"},
-          {"data":"price"},
-          {"data":"volume"},
+          // // {"data":"description"},
+          // {"data":{'volume'}},
+          {"data":"volume","render":function(data, type, row, meta){
+                    var str = '';
+                    str = row.volume+' '+row.unit;
+                    return str;
+               }
+           },
+          // {"data":"unit"},
           {"data":"action","render": function(data, type, row,meta){
                             var str = '';
                             str += '<div class="actions">';
@@ -269,7 +275,7 @@ $(document).on("click",'.deleteproducts', function(e) {
          //Set column definition initialisation properties.
          "columnDefs": [
               {
-                   "targets": [5,6], //first column / numbering column
+                   "targets": [4,5], //first column / numbering column
                    "orderable": false, //set not orderable
 
                },
@@ -338,7 +344,7 @@ $('#AddProducts input[name="code"]').val('');
 // $('#AddProducts input[name="brand"]').val('');
 // $('#AddProducts input[name="category"]').val('');
 // $('#AddProducts input[name="variant"]').val('');
-$('#AddProducts input[name="description"]').val('');
-$('#AddProducts input[name="price"]').val('');
 $('#AddProducts input[name="volume"]').val('');
+// $('#AddProducts input[name="unit"]').val('');
+$('#AddProducts textarea[name="description"]').val('');
 }

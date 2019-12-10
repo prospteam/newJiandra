@@ -37,7 +37,7 @@ $(document).ready(function(){
                    if(row.status == 1){
                      str += '<a href="javascript:;" class="btn btn-block btn-sm btn-primary status" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">pending</a>';
                    }else if(row.status == 2){
-                     str += '<a href="javascript:;" class="inactive btn btn-block btn-sm btn-success status" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">approved</a>';
+                     str += '<a href="javascript:;" class="inactive btn btn-block btn-sm btn-success approved" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">approved</a>';
                    }else if(row.status == 3){
                      str += '<a href="javascript:;" class="active btn btn-block btn-sm btn-danger remarks" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">cancelled</a>';
                    }
@@ -85,6 +85,15 @@ $(document).ready(function(){
       $("#remarks").hide();
     }
   });
+// IF APPROVED STATUS
+  $('#status').on('change', function(){
+    if( $(this).val()==="2"){
+      $("#approved").show();
+    }else{
+      $("#approved").hide();
+    }
+  });
+  // END IF APPROVED STATUS
 
   //view remarks
   $(document).on('click', '.remarks', function(){
