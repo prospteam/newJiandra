@@ -15,6 +15,9 @@ class Purchaseorders extends MY_Controller {
 		$parameters['select'] = '*';
 		$data['company'] = $this->MY_Model->getRows('company',$parameters);
 
+		$param['select'] = '*';
+		$data['products'] = $this->MY_Model->getRows('products', $parameters);
+		
 		$parameters1['select'] = '*';
 		$parameters1['limit'] = array(1,0);;
 		$parameters1['order'] = 'purchase_code DESC';
@@ -79,6 +82,7 @@ class Purchaseorders extends MY_Controller {
 	}
 
 
+
 	public function addPurchaseOrder(){
 		$post = $this->input->post();
 
@@ -112,6 +116,7 @@ class Purchaseorders extends MY_Controller {
 					'unit_price' => $post['unit_price'][$pkey],
 					'supplier' => $post['supplier'],
 					'company' => $post['company'],
+					'note' => $post['purchase_note'],
 					'status' => 1,
 					'delivery_status' => 1,
 					'order_status' => 1
