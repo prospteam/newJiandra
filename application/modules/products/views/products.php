@@ -34,9 +34,9 @@
     										</div>
     										<div class="col-6">
     											<div class="form-group">
-    												<label for="brand">Brand: <span class="required">*</span></label>
-    												<!-- <input type="text" class="form-control" name="brand" value=""> -->
-                            <select class="form-control js-example-basic-multiple-addproducts"  name="brand" id="brand" data-type="brand">
+    												<label for="product_name">Name: <span class="required">*</span></label>
+    												<!-- <input type="text" class="form-control" product_name="brand" value=""> -->
+                            <select class="form-control js-example-basic-multiple-addproducts"  name="product_name" id="product_name" data-type="product_name">
                               <option></option>
                           </select>
                             <span class="err"></span>
@@ -47,8 +47,8 @@
     										<div class="col-6">
     											<div class="form-group">
     												<label for="category">Category: <span class="required">*</span></label>
-    												<!-- <input type="text" class="form-control" name="category" value=""> -->
-                            <select class="form-control js-example-basic-multiple-addproducts"  name="category" id="category" data-type="category">
+    												<!-- <input type="text" class="form-control" product_name="category" value=""> -->
+                            <select class="form-control js-example-basic-multiple-addproducts" name="category" id="category" data-type="category">
                               <option></option>
                           </select>
                             <span class="err"></span>
@@ -57,8 +57,8 @@
                         <div class="col-6">
                           <div class="form-group">
                             <label for="variant">Variant: <span class="required">*</span></label>
-                            <!-- <input type="text" class="form-control" name="variant" value=""> -->
-                            <select class="form-control js-example-basic-multiple-addproducts"  name="variant" id="variant" data-type="variant">
+                            <!-- <input type="text" class="form-control" product_name="variant" value=""> -->
+                            <select class="form-control js-example-basic-multiple-addproducts" name="variant" id="variant" data-type="variant">
                               <option></option>
                           </select>
                             <span class="err"></span>
@@ -76,7 +76,7 @@
                         <div class="col-6">
                           <div class="form-group">
                             <label for="unit">Unit: <span class="required">*</span></label>
-                            <select class="form-control js-example-basic-multiple-addproducts"  name="unit" id="unit" data-type="unit">
+                            <select class="form-control js-example-basic-multiple-addproducts" name="unit" id="unit" data-type="unit">
                               <option></option>
                             </select>
                             <span class="err"></span>
@@ -96,7 +96,7 @@
                           <div class="form-group">
                             <label for=""><i class="fa fa-upload" aria-hidden="true"></i> Add raw file </label>
                             <div class="uploadfile-container2">
-                              <input class="input-file" name="logo" id="my-file" type="file" accept="image/* ">
+                              <input class="input-file" product_name="logo" id="my-file" type="file" accept="image/* ">
                               <p class="file-return"></p>
                             </div>
                           </div>
@@ -133,8 +133,8 @@
                       </div>
                       <div class="col-6">
                         <div class="form-group">
-                          <label for="brand">Brand:</label>
-                          <p class="brand"> </p>
+                          <label for="product_name">Name:</label>
+                          <p class="product_name"> </p>
                         </div>
                       </div>
                     </div>
@@ -174,7 +174,7 @@
                         <div class="form-group">
                           <label for=""><i class="fa fa-upload" aria-hidden="true"></i> Add raw file </label>
                           <div class="uploadfile-container2">
-                            <input class="input-file" name="logo" id="my-file" type="file" accept="image/* ">
+                            <input class="input-file" product_name="logo" id="my-file" type="file" accept="image/* ">
                             <p class="file-return"></p>
                           </div>
                         </div>
@@ -211,9 +211,9 @@
                     </div>
                     <div class="col-6">
                       <div class="form-group">
-                        <label for="brand1">Brand: <span class="required">*</span></label>
-                        <!-- <input type="text" class="form-control" name="brand" value=""> -->
-                        <select class="form-control js-example-basic-multiple-editproducts"  name="brand" id="brand1" data-type="brand">
+                        <label for="product_name1">Name: <span class="required">*</span></label>
+                        <!-- <input type="text" class="form-control" product_name="brand" value=""> -->
+                        <select class="form-control js-example-basic-multiple-editproducts"  name="product_name" id="product_name1" data-type="product_name">
                           <option></option>
                       </select>
                         <span class="err"></span>
@@ -224,7 +224,7 @@
                     <div class="col-6">
                       <div class="form-group">
                         <label for="category1">Category: <span class="required">*</span></label>
-                        <!-- <input type="text" class="form-control" name="category" value=""> -->
+                        <!-- <input type="text" class="form-control" product_name="category" value=""> -->
                         <select class="form-control js-example-basic-multiple-editproducts"  name="category" id="category1" data-type="category">
                           <option></option>
                       </select>
@@ -234,7 +234,7 @@
                     <div class="col-6">
                       <div class="form-group">
                         <label for="variant1">Variant: <span class="required">*</span></label>
-                        <!-- <input type="text" class="form-control" name="variant" value=""> -->
+                        <!-- <input type="text" class="form-control" product_name="variant" value=""> -->
                         <select class="form-control js-example-basic-multiple-editproducts"  name="variant" id="variant1" data-type="variant">
                           <option></option>
                       </select>
@@ -317,7 +317,7 @@
                     <table class="table table-bordered table-striped dataTable products_tbl" role="grid" aria-describedby="example1_info">
                   <thead>
                       <th class="header-title">Code</th>
-                      <th class="header-title">Brand</th>
+                      <th class="header-title">Name</th>
                       <th class="header-title">Category</th>
                       <th class="header-title">Volume</th>
                       <!-- <th class="header-title">Unit</th> -->
