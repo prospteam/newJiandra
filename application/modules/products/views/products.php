@@ -46,9 +46,9 @@
     									<div class="row">
     										<div class="col-6">
     											<div class="form-group">
-    												<label for="category">Category: <span class="required">*</span></label>
+    												<label for="brand">Brand: <span class="required">*</span></label>
     												<!-- <input type="text" class="form-control" product_name="category" value=""> -->
-                            <select class="form-control js-example-basic-multiple-addproducts" name="category" id="category" data-type="category">
+                            <select class="form-control js-example-basic-multiple-addproducts" name="brand" id="brand" data-type="brand">
                               <option></option>
                           </select>
                             <span class="err"></span>
@@ -56,9 +56,9 @@
     										</div>
                         <div class="col-6">
                           <div class="form-group">
-                            <label for="variant">Variant: <span class="required">*</span></label>
+                            <label for="category">Category: <span class="required">*</span></label>
                             <!-- <input type="text" class="form-control" product_name="variant" value=""> -->
-                            <select class="form-control js-example-basic-multiple-addproducts" name="variant" id="variant" data-type="variant">
+                            <select class="form-control js-example-basic-multiple-addproducts" name="category" id="category" data-type="category">
                               <option></option>
                           </select>
                             <span class="err"></span>
@@ -68,11 +68,22 @@
                       <div class="row">
                         <div class="col-6">
                           <div class="form-group">
-                            <label for="volume">Volume: <span class="required">*</span></label>
-                            <input type="text" class="form-control" name="volume" value="">
+                            <label for="variant">Variant: <span class="required">*</span></label>
+                            <input type="text" class="form-control" name="variant" value="">
                             <span class="err"></span>
                           </div>
                         </div>
+                        <div class="col-6">
+                          <div class="form-group">
+                            <label for="volume">Volume: <span class="required">*</span></label>
+                            <select class="form-control js-example-basic-multiple-addproducts" name="volume" id="volume" data-type="volume">
+                              <option></option>
+                            </select>
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class = "row">
                         <div class="col-6">
                           <div class="form-group">
                             <label for="unit">Unit: <span class="required">*</span></label>
@@ -82,8 +93,6 @@
                             <span class="err"></span>
                           </div>
                         </div>
-                      </div>
-                      <div class = "row">
                         <div class="col-lg-6">
                           <div class="form-group">
                             <label for="description">Description:</label>
@@ -92,15 +101,6 @@
                             </textarea>
                           </div>
                         </div>
-                        <!-- <div class="col-lg-6">
-                          <div class="form-group">
-                            <label for=""><i class="fa fa-upload" aria-hidden="true"></i> Add raw file </label>
-                            <div class="uploadfile-container2">
-                              <input class="input-file" product_name="logo" id="my-file" type="file" accept="image/* ">
-                              <p class="file-return"></p>
-                            </div>
-                          </div>
-                        </div> -->
                       </div>
     								</div>
     								<div class="modal-footer">
@@ -140,47 +140,44 @@
                     </div>
                   <div class = "row">
                         <div class="col-6">
-                            <label for="category">Category: </label>
-                            <p class="category"> </p>
+                            <label for="brand">Brand: </label>
+                            <p class="brand"> </p>
                       </div>
                       <div class="col-6">
                         <div class="form-group">
-                          <label for="variant">Variant: </label>
-                          <p class="variant"> </p>
+                          <label for="category">Category: </label>
+                          <p class="category"> </p>
                         </div>
                       </div>
                     </div>
                 <div class = "row">
                   <div class="col-6">
                     <div class="form-group">
-                      <label for="volume">Volume:</label>
-                      <p class="volume"> </p>
+                      <label for="variant">Variant:</label>
+                      <p class="variant"> </p>
                     </div>
                   </div>
                   <div class="col-6">
                     <div class="form-group">
-                      <label for="unit">Unit:</label>
-                      <p class="unit"> </p>
+                      <label for="volume">Volume:</label>
+                      <p class="volume"> </p>
                     </div>
                   </div>
+                </div>
                   <div class = "row">
-                      <div class="col-12">
+                      <div class="col-6">
                         <div class="form-group">
-                          <label for="description">Description:</label>
+                          <label for="unit">Unit:</label>
+                            <p class="unit"> </p>
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group">
+                          <label for="description">Desription:</label>
                             <p class="description"> </p>
                         </div>
                       </div>
-                      <!-- <div class="col-lg-6">
-                        <div class="form-group">
-                          <label for=""><i class="fa fa-upload" aria-hidden="true"></i> Add raw file </label>
-                          <div class="uploadfile-container2">
-                            <input class="input-file" product_name="logo" id="my-file" type="file" accept="image/* ">
-                            <p class="file-return"></p>
-                          </div>
-                        </div>
-                      </div> -->
                     </div>
-                </div>
                   </div>
                 </div>
               </div>
@@ -223,9 +220,9 @@
                   <div class="row">
                     <div class="col-6">
                       <div class="form-group">
-                        <label for="category1">Category: <span class="required">*</span></label>
+                        <label for="brand1">Brand: <span class="required">*</span></label>
                         <!-- <input type="text" class="form-control" product_name="category" value=""> -->
-                        <select class="form-control js-example-basic-multiple-editproducts"  name="category" id="category1" data-type="category">
+                        <select class="form-control js-example-basic-multiple-editproducts"  name="brand" id="brand1" data-type="brand">
                           <option></option>
                       </select>
                         <span class="err"></span>
@@ -233,9 +230,9 @@
                     </div>
                     <div class="col-6">
                       <div class="form-group">
-                        <label for="variant1">Variant: <span class="required">*</span></label>
+                        <label for="category1">Category: <span class="required">*</span></label>
                         <!-- <input type="text" class="form-control" product_name="variant" value=""> -->
-                        <select class="form-control js-example-basic-multiple-editproducts"  name="variant" id="variant1" data-type="variant">
+                        <select class="form-control js-example-basic-multiple-editproducts"  name="category" id="category1" data-type="category">
                           <option></option>
                       </select>
                         <span class="err"></span>
@@ -245,31 +242,46 @@
                   <div class="row">
                     <div class="col-6">
                       <div class="form-group">
-                        <label for="volume">Volume: <span class="required">*</span></label>
-                        <input type="text" class="form-control" name="volume" value="">
-                        <span class="err"></span>
-                      </div>
-                    </div>
-                    <div class="col-6">
-                      <div class="form-group">
-                        <label for="unit1">Unit: <span class="required">*</span></label>
-                        <select class="form-control js-example-basic-multiple-editproducts"  name="unit" id="unit1" data-type="unit">
+                        <label for="variant1">Variant: <span class="required">*</span></label>
+                        <select class="form-control js-example-basic-multiple-editproducts"  name="variant" id="variant1" data-type="variant">
                           <option></option>
                       </select>
                         <span class="err"></span>
                       </div>
                     </div>
+                    <div class="col-6">
+                      <div class="form-group">
+                        <label for="volume">Volume: <span class="required">*</span></label>
+                          <input type="text" class="form-control" name="volume" value="">
+                        <span class="err"></span>
+                      </div>
+                      <!-- <div class="form-group">
+                        <label for="volume1">Volume: <span class="required">*</span></label>
+                        <select class="form-control js-example-basic-multiple-editproducts"  name="volume" id="volume1" data-type="volume">
+                          <option></option>
+                      </select>
+                        <span class="err"></span>
+                      </div> -->
+                    </div>
                   </div>
                   <div class = "row">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label for="description">Description:</label>
-                        <textarea rows="2" cols="50" name="description" class="form-control" >
-
-                        </textarea>
+                        <label for="unit1">Unit: <span class="required">*</span></label>
+                          <select class="form-control js-example-basic-multiple-editproducts"  name="unit" id="unit1" data-type="unit">
+                            <option></option>
+                          </select>
                       </div>
                     </div>
+                  <div class="col-6">
+                        <div class="form-group">
+                          <label for="description">Description:</label>
+                            <textarea rows="2" cols="50" name="description" class="form-control" >
+                          </textarea>
+                        </div>
+                    </div>
                   </div>
+
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary add">Submit</button>
@@ -318,6 +330,7 @@
                   <thead>
                       <th class="header-title">Code</th>
                       <th class="header-title">Name</th>
+                      <th class="header-title">Brand</th>
                       <th class="header-title">Category</th>
                       <th class="header-title">Volume</th>
                       <!-- <th class="header-title">Unit</th> -->

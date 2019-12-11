@@ -23,6 +23,7 @@ class Products extends MY_Controller {
 
     $this->form_validation->set_rules('code','Code','required');
     $this->form_validation->set_rules('product_name','Name','required');
+    $this->form_validation->set_rules('brand','Brand','required');
     $this->form_validation->set_rules('category','Category','required');
     $this->form_validation->set_rules('variant','Variant','required');
     $this->form_validation->set_rules('volume','Volume','required');
@@ -34,6 +35,7 @@ class Products extends MY_Controller {
       $data = array(
         'code' => $this->input->post('code'),
         'product_name' => $this->input->post('product_name'),
+        'brand' => $this->input->post('brand'),
         'category' => $this->input->post('category'),
         'variant' => $this->input->post('variant'),
         'volume'=> $this->input->post('volume'),
@@ -61,13 +63,13 @@ class Products extends MY_Controller {
 			$draw = $this->input->post('draw');
 
 
-			$column_order = array('code','product_name','category','volume','unit','status');
+			$column_order = array('code','product_name','brand','category','volume','unit','status');
 		 	$where = array('status !=' => 3);
 			$join = array(
 				// 'company' => 'company.company_id = users.company',
 				// 'position' => 'position.id = users.position'
 			);
-			$select = "products.id,products.code,products.product_name,products.category,products.volume,products.unit,products.status";
+			$select = "products.id,products.code,products.product_name,products.brand,products.category,products.volume,products.unit,products.status";
 			$list = $this->MY_Model->get_datatables('products',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 
 
@@ -107,6 +109,7 @@ class Products extends MY_Controller {
 					$data = array(
 						'code'  	   				  => $post['code'],
 						'product_name'  	    => $post['product_name'],
+						'brand'  	   				  => $post['brand'],
 						'category'    			  => $post['category'],
 						'variant'    				  => $post['variant'],
 						'volume'    				  => $post['volume'],
@@ -184,6 +187,9 @@ class Products extends MY_Controller {
 					if ($post['search_type'] == 'product_name') {
 						$where = "product_name LIKE '%" . $postLike . "%'";
 						$select = "product_name AS product_id, product_name";
+					}else if ($post['search_type']== 'brand') {
+						$where = "brand LIKE '%" . $postLike . "%'";
+						$select = "brand AS product_id, brand";
 					} else if ($post['search_type'] == 'category') {
 					 	$where = "category LIKE '%" . $postLike . "%'";
 					 	$select = "category AS product_id, category AS product_name";
@@ -219,7 +225,10 @@ class Products extends MY_Controller {
 					if ($post['search_type'] == 'product_name') {
 						$where = "product_name LIKE '%" . $postLike . "%'";
 						$select = "product_name AS product_id, product_name";
-					} else if ($post['search_type'] == 'category') {
+					} else if ($post['search_type'] == 'brand') {
+						$where = "brand LIKE '%" . $postLike . "%'";
+						$select = "brand AS product_id, category AS brand";
+					}	else if ($post['search_type'] == 'category') {
 						$where = "category LIKE '%" . $postLike . "%'";
 						$select = "category AS product_id, category AS product_name";
 					}else if ($post['search_type'] == 'variant') {
@@ -238,9 +247,6 @@ class Products extends MY_Controller {
 			}
 			die(json_encode($result));
 	}
-
-
-
 
 
 }

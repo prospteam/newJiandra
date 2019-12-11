@@ -45,9 +45,9 @@ $(document).on('submit','form#addproducts',function(e){
           success: function(data){
             console.log(data);
             $('#viewproducts').modal('show');
-
             $('.code').text(data.products.code);
             $('.product_name').text(data.products.product_name);
+            $('.brand').text(data.products.brand);
             $('.category').text(data.products.category);
             $('.variant').text(data.products.variant);
             $('.volume').text(data.products.volume);
@@ -72,6 +72,7 @@ $(document).on("click",".editproducts", function(){
         $('#editProducts').modal('show');
         $('#editProducts input[name="products_id"]').val(data.products.id);
         $('#editProducts #product_name1').append( '<option value='+data.products.product_name+' selected>'+data.products.product_name+'</option>' )
+        $('#editProducts #brand1').append( '<option value='+data.products.brand+' selected>'+data.products.brand+'</option>' )
         $('#editProducts .editproducts_id').val(data.products.id);
         $('#editProducts input[name="code"]').val(data.products.code);
         $('#editProducts input[name="product_name"]').val(data.products.product_name);
@@ -228,6 +229,7 @@ $(document).on("click",'.deleteproducts', function(e) {
     "columns"     :[
           {"data":"code"},
           {"data":"product_name"},
+          {"data":"brand"},
           {"data":"category"},
           // {"data":"variant"},
           // // {"data":"description"},
@@ -275,7 +277,7 @@ $(document).on("click",'.deleteproducts', function(e) {
          //Set column definition initialisation properties.
          "columnDefs": [
               {
-                   "targets": [4,5], //first column / numbering column
+                   "targets": [5,6], //first column / numbering column
                    "orderable": false, //set not orderable
 
                },
