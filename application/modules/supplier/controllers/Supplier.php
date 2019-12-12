@@ -41,6 +41,7 @@ class Supplier extends MY_Controller
 					$this->form_validation->set_rules('supplier_name', 'Supplier Name', 'required');
 					$this->form_validation->set_rules('supplier_contact_person', 'Supplier Contact Person', 'required');
 					$this->form_validation->set_rules('email','Email','required');
+					$this->form_validation->set_rules('address','Address','required');
 					$this->form_validation->set_rules('company[]', 'Company', 'required');
 					$this->form_validation->set_rules('office_number', 'Office Number', 'required');
 
@@ -54,6 +55,7 @@ class Supplier extends MY_Controller
 											'supplier_name' 						=> $this->input->post('supplier_name'),
 											'supplier_contact_person' 	=> $this->input->post('supplier_contact_person'),
 											'email'                     =>$this->input->post('email'),
+											'address'                   =>$this->input->post('address'),
 											'company' 									=> $value,
 											'office_number' 						=> $this->input->post('office_number'),
 											'tin_number' 								=> $this->input->post('tin_number'),
@@ -76,6 +78,7 @@ class Supplier extends MY_Controller
 									'supplier_name' 						=> $this->input->post('supplier_name'),
 									'supplier_contact_person' 	=> $this->input->post('supplier_contact_person'),
 									'email'                     =>$this->input->post('email'),
+									'address'                   =>$this->input->post('address'),
 									'company' 									=> $this->input->post('company'),
 									'office_number' 						=> $this->input->post('office_number'),
 									'tin_number' 								=> $this->input->post('tin_number'),
@@ -99,6 +102,7 @@ class Supplier extends MY_Controller
 					$this->form_validation->set_rules('supplier_name', 'Supplier Name', 'required');
 					$this->form_validation->set_rules('supplier_contact_person', 'Supplier Contact Person', 'required');
 					$this->form_validation->set_rules('email','Email','required');
+					$this->form_validation->set_rules('address','Address','required');
 					$this->form_validation->set_rules('company[]', 'Company', 'required');
 
 					$this->form_validation->set_rules('office_number', 'Office Number', 'required');
@@ -114,6 +118,7 @@ class Supplier extends MY_Controller
  												'supplier_name' 							=> $this->input->post('supplier_name'),
  												'supplier_contact_person' 		=> $this->input->post('supplier_contact_person'),
 												'email'                       =>$this->input->post('email'),
+												'address'                       =>$this->input->post('Address'),
  												'company' 										=> $value,
  												'office_number' 							=> $this->input->post('office_number'),
  												'tin_number' 									=> $this->input->post('tin_number'),
@@ -137,6 +142,7 @@ class Supplier extends MY_Controller
 											 'supplier_name' 							=> $this->input->post('supplier_name'),
 											 'supplier_contact_person' 		=> $this->input->post('supplier_contact_person'),
 											 'email'                      =>$this->input->post('email'),
+											 'address'                    =>$this->input->post('address'),
 											 'company' 										=> $this->input->post('company'),
 											 'office_number' 							=> $this->input->post('office_number'),
 											 'tin_number' 								=> $this->input->post('tin_number'),
@@ -369,7 +375,7 @@ class Supplier extends MY_Controller
 				$this->form_validation->set_rules('supplier_name', 'Supplier Name', 'required');
 				$this->form_validation->set_rules('supplier_contact_person', 'Supplier Contact Person', 'required');
 				$this->form_validation->set_rules('email', 'Email', 'required');
-				// $this->form_validation->set_rules('vendor', 'Vendor', 'required');
+				$this->form_validation->set_rules('address', 'Address', 'required');
 				$this->form_validation->set_rules('office_number', 'Office Number', 'required');
 
 			}else{
@@ -386,13 +392,14 @@ class Supplier extends MY_Controller
 
 			$data = array(
 				// 'supplier_logo' => $uploadData['file_name'],
-				'supplier_name' => $post['supplier_name'],
+				'supplier_name' 				  => $post['supplier_name'],
 				'supplier_contact_person' =>$post['supplier_contact_person'],
-				'email'       =>$post['email'],
+				'email'    						    =>$post['email'],
+				'address'     					  =>$post['address'],
 				// 'company'=> 1,
-				'office_number' =>$post['office_number'],
-				'tin_number' => $post['tin_number'],
-				'fax_number' => $post['fax_number'],
+				'office_number' 					=>$post['office_number'],
+				'tin_number' 							=> $post['tin_number'],
+				'fax_number' 							=> $post['fax_number'],
 				// 'company' => implode(',',$this->input->post('company')),
 				// 'status' => 1
 			);

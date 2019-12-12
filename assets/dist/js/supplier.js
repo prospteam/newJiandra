@@ -245,6 +245,7 @@ $(document).ready(function(){
            $('.supplier_name').text(data.supplier.supplier_name);
            $('.supplier_contact_person').text(data.supplier.supplier_contact_person);
            $('.email').text(data.supplier.email);
+           $('.address').text(data.supplier.address);
            $('.office_number').text(data.supplier.office_number);
            $('.tin').text(data.supplier.tin_number);
            $('.fax_number').text(data.supplier.fax_number);
@@ -276,6 +277,7 @@ $(document).ready(function(){
              $('#editSupplier input[name =supplier_name]').val(data.supplier.supplier_name);
              $('#editSupplier input[name=supplier_contact_person]').val(data.supplier.supplier_contact_person);
              $('#editSupplier input[name=email]').val(data.supplier.email);
+             $('#editSupplier input[name=address]').val(data.supplier.address);
              var company_list = [];
              $('#editSupplier .js-example-basic-multiple-edit').html('');
 
@@ -396,6 +398,7 @@ function blankVal(){
   $('.err').text('');
   $('#addSupplier input[name="supplier_contact_person"]').val('');
   $('#addSupplier input[name="email"]').val('');
+  $('#addSupplier input[name="address"]').val('');
   $('#addSupplier select[name="company[]"]').val('');
   $('#addSupplier input[name="office_number"]').val('');
   $('#addSupplier input[name="tin_number"]').val('');
