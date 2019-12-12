@@ -512,12 +512,60 @@ $(document).ready(function(){
    });
 
 
+   $(document).on('submit','form#addremarks_inactive',function(e){
+     e.preventDefault();
+     let formData =  new FormData($(this)[0]);
+     var id = $('.disableVehicle').attr('data-id');
+     // var id = $('input[name="purchase_code_status"]').val();
+     // alert(id);
+     formData.append("id",id);
+     $.ajax({
+         method: 'POST',
+         url : base_url + 'vehicle/addremarks_inactive',
+         data : formData,
+         processData: false,
+        contentType: false,
+        cache: false,
+         dataType: 'json',
+         success : function(data) {
+             console.log(data);
+             $('#addRemarks').modal('hide');
+             Swal.fire("Vehicle has been deactivated!",data.success, "success");
+             blank_remarks();
+
+
+         }
+     })
+   });
+
+   //view remarks
+   $(document).on('click', '.remarks_inactive', function(){
+      var id = $('.disableVehicle').attr('data-id');
+     $.ajax({
+       method: 'POST',
+       url: base_url + 'vehicle/view_remarks_inactive',
+       data: {id:id},
+       dataType: "json",
+       success: function(data){
+         console.log(data);
+         $('#viewRemarks_inactive').modal('show');
+         if(data.remarks.remarks !== ''){
+
+           $('.viewremarks').text(data.remarks.remarks);
+         }else{
+            $('.viewremarks').text("None");
+         }
+         // $('#change_Stat select[name=status]').val(data.status.status);
+         //   $('input[name="purchase_code_status"]').val(data.status.purchase_code);
+     }
+    });
+   });
 
    //disable vehicle
    $(document).on("click",'.disableVehicle', function(e) {
      e.preventDefault();
      var id = $(this).attr('data-id');
-     console.log(id);
+     // console.log(id);
 
      Swal.fire({
      title: 'Are you sure?',
@@ -529,22 +577,26 @@ $(document).ready(function(){
      confirmButtonText: 'Yes, Deactivate Vehicle!'
      }).then((result) => {
        if (result.value) {
-         Swal.fire(
-           'Success!',
-           'Vehicle has been deactivated!',
-           'success'
-         )
+         // Swal.fire(
+         //   'Success!',
+         //   'Vehicle has been deactivated!',
+         //   'success'
+         // )
            $.ajax({
            type: 'POST',
              url:base_url + 'vehicle/disablevehicle',
              data: {id: id},
              success:function(data) {
-               $(".vehicle_tbl").DataTable().ajax.reload();
+               // setTimeout(function(){$('#addRemarks').modal('show'); }, 1000);
+                 // $('#addRemarks input[name=vehicle_id]').val(data.vehicle.id);
+                 $('#addRemarks').modal('show');
+                 $(".vehicle_tbl").DataTable().ajax.reload();
              }
            })
        }
      })
    });
+
 
    //Enable vehicle
    $(document).on("click",'.enableVehicle', function(e) {
@@ -738,9 +790,10 @@ var vehicle_tbl = $('.vehicle_tbl').DataTable({
                     if(row.status == 1){
                       str += '<a href="javascript:;" class="viewVehicle" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
                       str += '<a href="javascript:;" class="editVehicles" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
-                      str += '<a href="javascript:;" class="disableVehicle" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
+                      str += '<a href="javascript:;" class="disableVehicle" data-id="'+row.id+'" value="'+row.id+'"><i class="fa fa-window-close"></i></a>';
                       str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                     }else if(row.status == 2){
+                      str += '<a href="javascript:;" class="remarks_inactive" data-id="'+row.id+'" value="'+row.id+'"><i class="fa fa-comment" aria-hidden="true"></i></a>';
                       str += '<a href="javascript:;" class="enableVehicle" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
                       str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                     }
@@ -780,6 +833,10 @@ var vehicle_tbl = $('.vehicle_tbl').DataTable({
 
 function clearError(){
     $('.err').text('');
+}
+
+function blank_remarks(){
+  $('#addRemarks textarea[name="remarks"]').val('');
 }
 
 function blankVal_user(){

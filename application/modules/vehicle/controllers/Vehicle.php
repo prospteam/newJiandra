@@ -128,8 +128,10 @@ class Vehicle extends MY_Controller {
 	public function enablevehicle()
 	{
 		$vehicle_id = $this->input->post('id');
+		$remarks = '';
 		$vehicle_status = 1;
 		$data = array(
+			'remarks' => $remarks,
 			'status' => $vehicle_status
 		);
 		$datas['delete'] = $this->MY_Model->update('vehicles',$data,array('id' => $vehicle_id));
@@ -140,6 +142,8 @@ class Vehicle extends MY_Controller {
 	public function disablevehicle()
 	{
 		$vehicle_id = $this->input->post('id');
+		$parameters['where'] = array('id' => $vehicle_id);
+		$datas['vehicle'] = $this->MY_Model->getRows('vehicles',$parameters,'row');
 		$vehicle_status = 2;
 		$data = array(
 			'status' => $vehicle_status
@@ -158,6 +162,7 @@ class Vehicle extends MY_Controller {
 			'status' => $vehicle_status
 		);
 		$datas['delete'] = $this->MY_Model->update('vehicles',$data,array('id' => $vehicle_id));
+
 		echo json_encode($datas);
 	}
 
@@ -270,6 +275,32 @@ class Vehicle extends MY_Controller {
 			die(json_encode($result));
 	}
 
+	//add remarks when vehicle is inactive
+	public function addremarks_inactive(){
+		$post = $this->input->post();
+		$remarks = empty($post['remarks']) ? "None" : $post['remarks'];
+
+		$data = array('remarks' => $remarks);
+
+		$data['add_remarks'] = $this->MY_Model->update('vehicles', $data, array('id' => $post['id']));
+
+		// echo "<pre>";
+		// print_r($data);
+		// exit;
+		json($data);
+	}
+
+	//view remarks
+	public function view_remarks_inactive(){
+		$post = $this->input->post();
+
+		$parameters['where'] = array('id' => $post['id']);
+		$parameters['select'] = 'id,remarks,status';
+
+		$data['remarks'] = $this->MY_Model->getRows('vehicles',$parameters,'row');
+
+		json($data);
+	}
 
 }
 ?>
