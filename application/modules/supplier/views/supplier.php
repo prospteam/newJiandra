@@ -22,7 +22,7 @@
 									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
-								</div> 
+								</div>
 								<div class="modal-body">
 									<div class="row">
 										<div class="col-lg-6">
@@ -74,44 +74,52 @@
 										</div> -->
 								<div class="col-lg-6">
 									<div class="form-group">
-										<label for="office_number">Office Number: <span class="required">*</span> </label>
-										<input type="tel" class="form-control" name="office_number" value="">
+										<label for="address">Address: <span class="required">*</span> </label>
+										<input type="text" class="form-control" name="address" value="">
 										<span class="err"></span>
 									</div>
 								</div>
 
 									<div class="col-lg-6">
 									<div class="form-group">
-										<label for="fax_number">Fax Number: </label>
-										<input type="number" class="form-control" name="fax_number" value="">
+										<label for="office_number">Office Number: </label>
+										<input type="number" class="form-control" name="office_number" value="">
 									</div>
                 </div>
               </div>
 							<div class = "row">
 								<div class="col-lg-6">
 									<div class="form-group">
-										<label for="tin">TIN:</label>
-										<input type="number" class="form-control" name="tin_number" value="">
+										<label for="fax_number">Fax Number:</label>
+										<input type="number" class="form-control" name="fax_number" value="">
 									</div>
 								</div>
-								<div class="col-lg-6">
-									<div class="form-group">
-									  <label for=""><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
-										<div class="uploadfile-container2">
-		                  <input class="input-file" name="logo" id="my-file" type="file" accept="image/* ">
-		                  <p class="file-return"></p>
-		                </div>
-									</div>
-								</div>
-							</div>
-								</div>
-								<div class="modal-footer">
-									<button type="submit" class="btn btn-primary add">Submit</button>
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label for="tin_number">TIN: </label>
+									<input type="number" class="form-control" name="tin_number" value="">
 								</div>
 							</div>
 						</div>
-					</form>
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="form-group">
+									<label for=""><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
+									<div class="uploadfile-container2">
+										<input class="input-file" name="logo" id="my-file" type="file" accept="image/* ">
+										<p class="file-return"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary add">Submit</button>
 				</div>
+			</div>
+		</div>
+	</form>
+</div>
 
 				<!--view supplier modal -->
 				<div class="modal fade" id="viewSupplier" tabindex="-1" role="dialog" aria-	labelledby="exampleModalLabel" aria-hidden="true">\
@@ -153,10 +161,18 @@
 							<div class = "row">
 								<div class="col-6">
 									<div class="form-group">
-										<label for="tin">TIN:</label>
-										<p class="tin"> </p>
+										<label for="address">Address:</label>
+										<p class="address"> </p>
 									</div>
 								</div>
+								<div class="col-6">
+									<div class="form-group">
+										<label for="tin_number">TIN:</label>
+										<p class="tin_number"> </p>
+									</div>
+								</div>
+							</div>
+							<div class="row">
 								<div class="col-6">
 									<div class="form-group">
 										<label for="fax_number">Fax Number:</label>
@@ -164,9 +180,9 @@
 									</div>
 								</div>
 							</div>
-								</div>
-							</div>
 						</div>
+					</div>
+			</div>
 				</div>
 				<!-- End of view Supplier -->
 
@@ -202,13 +218,13 @@
 									<div class="row">
 										<div class="col-6">
 												<div class="form-group">
-												<label for="companytitle">Company</label>
-												<!-- <input type="text" name="companytitle" value="" required> -->
-												<div class="select2-purple">
-													<select class="form-control js-example-basic-multiple-edit" name="company[]" multiple="multiple"></select>
-												</div>
-												<span class="err"></span>
-									</div>
+														<label for="companytitle">Company</label>
+															<div class="select2-purple">
+																<select class="form-control js-example-basic-multiple-edit" name="company[]" multiple="multiple">
+												 				</select>
+															</div>
+															<span class="err"></span>
+											</div>
 									</div>
 									<div class="col-6">
 										<div class="form-group">
@@ -217,52 +233,54 @@
 											<span class="err"></span>
 										</div>
 									</div>
-
 								</div>
 								<div class = "row">
 									<div class="col-6">
 										<div class="form-group">
-											<label for="office_number">Office Number:</label>
-											<input type="tel" class="form-control" name="office_number" value="">
+											<label for="address">Address:</label>
+											<input type="text" class="form-control" name="address" value="">
 											<span class="err"></span>
 										</div>
 									</div>
 									<div class="col-6">
 										<div class="form-group">
-											<label for="tin_number">TIN:</label>
-											<input type="number" class="form-control" name="tin_number" value="">
+											<label for="office_number">Office Number:</label>
+											<input type="number" class="form-control" name="office_number" value="">
 										</div>
 									</div>
 							</div>
 							<div class = "row">
-
 								<div class="col-6">
 									<div class="form-group">
 										<label for="fax_number">Fax Number:</label>
 										<input type="number" class="form-control" name="fax_number" value="">
 									</div>
 								</div>
-
-								<div class="col-sm-6">
-
-									<div class="form-group filecontent">
-										<label for=""><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
-										<div class="uploadfile-container2">
-											<button type="button">Choose File</button>
-											<span class = "filechosen" >No file chosen</span>
-											<p class="file-return"></p>
+								<div class="col-6">
+									<div class="form-group">
+										<label for="tin_number">TIN:</label>
+										<input type="number" class="form-control" name="tin_number" value="">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group filecontent">
+											<label for=""><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
+											<div class="uploadfile-container2">
+												<button type="button">Choose File</button>
+												<span class = "filechosen" >No file chosen</span>
+												<p class="file-return"></p>
+											</div>
+										</div>
+										<div class="form-group uploadfile">
+											<label for="SupplierLogo"><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
+											<div class="uploadfile-container2">
+												<input class="input-file my-file" name="logo" id="my-file" type="file" accept="image/*">
+												<p class="file-return"></p>
+											</div>
 										</div>
 									</div>
-									<div class="form-group uploadfile">
-										<label for="SupplierLogo"><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
-										<div class="uploadfile-container2">
-											<input class="input-file my-file" name="logo" id="my-file" type="file" accept="image/*">
-											<p class="file-return"></p>
-										</div>
-									</div>
-
-									</div>
-
+								</div>
 								</div>
 
 								<div class="modal-footer">
