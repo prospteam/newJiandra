@@ -326,10 +326,38 @@ $(document).ready(function(){
      })
 
    });
-
-
-
 });
+
+  $(document).on('click','#addnewCP',function(){
+
+    var x = 1;
+    var str = '';
+
+    str += '<tr>'
+    str += '<td class = "supp_td">';
+      str += '<input type="text" class="form-control contact_person" name="contact_name" value="">';
+      str += '<span class="err"></span>';
+      str += '</td>';
+    str += '<td class="supp_td">';
+        str += '<input type="number" class="form-control contact_mobileno" name="mobile_number" value="">';
+      str += '<span class="err"></span>';
+      str += '</td>'
+    str += '<td class="supp_td">';
+      str += ' <input type="text" class="form-control contact_email" name="contact_email" value="">';
+      str += '<form-control contact_email" name="contact_email" value="">';
+   str += '</td>';
+   str += '</tr>'
+   str += '<td class="purch_td">';
+       str += '<button id="remve" class="btn btn-md btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>';
+   str += '</td>';
+ str += '</tr>';
+
+     if (x) {
+       x++;
+       $('.add_contact_person tbody').append(str);
+     }
+  });
+
 
 function display_suppliers($supplier_id){
   $('.suppliers_tbl').DataTable({
@@ -340,7 +368,6 @@ function display_suppliers($supplier_id){
         "columns":[
              {"data":"supplier_logo","render": function(data, type, row,meta){
                  if(row.supplier_logo != 1){
-
                    return '<img class="supplier_logo" src="'+base_url+'assets/images/supplierLogo/' +data+ '" />';
                  }else{
                    return '<img class="supplier_logo" src="'+base_url+'assets/images/supplierLogo/ImageNotAvailable.png" />';

@@ -70,7 +70,9 @@ font-size: 18px  !important;
 .col-xs-6 {
     text-align: center !important;
     padding-right: 29px;
-
 }
-
+}
+span#addnewCP {
+    float: right !important;
+    margin-bottom: 9px !important;
 }
