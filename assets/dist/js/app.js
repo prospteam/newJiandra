@@ -511,36 +511,9 @@ $(document).ready(function(){
      })
    });
 
-
-   $(document).on('submit','form#addremarks_inactive',function(e){
-     e.preventDefault();
-     let formData =  new FormData($(this)[0]);
-     var id = $('.disableVehicle').attr('data-id');
-     // var id = $('input[name="purchase_code_status"]').val();
-     // alert(id);
-     formData.append("id",id);
-     $.ajax({
-         method: 'POST',
-         url : base_url + 'vehicle/addremarks_inactive',
-         data : formData,
-         processData: false,
-        contentType: false,
-        cache: false,
-         dataType: 'json',
-         success : function(data) {
-             console.log(data);
-             $('#addRemarks').modal('hide');
-             Swal.fire("Vehicle has been deactivated!",data.success, "success");
-             blank_remarks();
-
-
-         }
-     })
-   });
-
-   //view remarks
+   // //view remarks
    $(document).on('click', '.remarks_inactive', function(){
-      var id = $('.disableVehicle').attr('data-id');
+      var id = $(this).attr('data-id');
      $.ajax({
        method: 'POST',
        url: base_url + 'vehicle/view_remarks_inactive',
@@ -570,30 +543,46 @@ $(document).ready(function(){
      Swal.fire({
      title: 'Are you sure?',
      text: "This vehicle will be deactivated!",
+     html:
+    '<span>This vehicle will be deactivated!</span><br><br><textarea  rows="4" cols="50" class="form-control" name="remarks" id="swal-input1" placeholder="Add Remarks" class="form-control mb-1" type="text"></textarea>',
+     inputPlaceholder: "Add remarks",
      type: 'warning',
      showCancelButton: true,
      confirmButtonColor: '#d33',
      cancelButtonColor: '#068101',
-     confirmButtonText: 'Yes, Deactivate Vehicle!'
-     }).then((result) => {
-       if (result.value) {
+     confirmButtonText: 'Yes, Deactivate Vehicle!',
+     preConfirm: function () {
+    return new Promise((resolve, reject) => {
+
+            resolve({
+                Remarks: $('textarea[placeholder="Add Remarks"]').val()
+            });
+
+
+        });
+    },
+    allowOutsideClick: false
+  }).then(function(result){
+       // if (result.value) {
          // Swal.fire(
          //   'Success!',
          //   'Vehicle has been deactivated!',
          //   'success'
          // )
-           $.ajax({
-           type: 'POST',
-             url:base_url + 'vehicle/disablevehicle',
-             data: {id: id},
-             success:function(data) {
-               // setTimeout(function(){$('#addRemarks').modal('show'); }, 1000);
-                 // $('#addRemarks input[name=vehicle_id]').val(data.vehicle.id);
-                 $('#addRemarks').modal('show');
-                 $(".vehicle_tbl").DataTable().ajax.reload();
-             }
-           })
-       }
+         $.ajax({
+         type: 'POST',
+           url:base_url + 'vehicle/disablevehicle',
+           data: {id: id, Remarks:$('textarea[placeholder="Add Remarks"]').val()},
+           cache: false,
+           success:function(data) {
+             // setTimeout(function(){$('#addRemarks').modal('show'); }, 1000);
+               // $('#addRemarks input[name=vehicle_id]').val(data.vehicle.id);
+               // $('#addRemarks').modal('show');
+               $(".vehicle_tbl").DataTable().ajax.reload();
+           }
+         })
+
+       // }
      })
    });
 

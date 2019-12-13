@@ -702,48 +702,7 @@
         </div>
       <!-- End E Vehicle Modal -->
 
-      <!--add remarks Modal -->
-      <!-- Modal -->
-          <div class="modal fade" id="addRemarks" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
-            <form id="addremarks_inactive" method="post">
-              <div class="modal-dialog modal-xs" role="document">
-                <div class="modal-content">
-                  <div class="modal-header bg-info1">
-                    <h5 class="modal-title" id="exampleModalLabel">Add remarks</h5>
-                      <input type="hidden" class="form-control vehicleID" name="vehicle_id" value="" >
-                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button> -->
-                  </div>
-                  <div class="modal-body">
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="form-group">
-                            <!-- <input type="hidden" class="form-control" name="purchase_code_status" value=""> -->
-                            <!-- <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Status</label> -->
-
-                            <div class = "row" id="remarks">
-                              <div class="col-12">
-                                <div class="form-group">
-                                  <label for="remarks">Remarks:</label>
-                                    <textarea rows="4" cols="50" class="form-control" name="remarks" value=""></textarea>
-                                </div>
-                              </div>
-                            </div>
-                        </div>
-                      </div>
-                      <!-- <button type="submit" class="btn btn-sm btn-primary add">Submit</button> -->
-                    </div>
-                    <div class="modal-footer deliver">
-                      <button type="submit" class="btn btn-primary add">Submit</button>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        <!-- End add remarks Modal -->
+    
 
         <!--view view remarks Modal -->
         <!-- Modal -->

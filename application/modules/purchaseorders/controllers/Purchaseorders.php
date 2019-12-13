@@ -32,6 +32,12 @@ class Purchaseorders extends MY_Controller {
 			json($data);
 	}
 
+	public function get_productName_by_code(){
+		$parameters['where'] = array('id' => $this->input->post('prod_id'));
+		$data['products'] = $this->MY_Model->getRows('products',$parameters);
+
+		json($data);
+	}
 	public function get_suppliers(){
 			$data['suppliers'] = $this->MY_Model->getRows('supplier');
 			json($data);
@@ -96,13 +102,13 @@ class Purchaseorders extends MY_Controller {
 
 	public function addPurchaseOrder(){
 		$post = $this->input->post();
-
 		$date_ordered = date("F d, Y");
 		$id = $this->input->post('purchase_id');
 		$purchase_id = $id + 1;
 		$code = sprintf('%04d',$purchase_id);
 		$this->load->library("form_validation");
 
+		$this->form_validation->set_rules('prod_code[]', 'SKU', 'required');
 		$this->form_validation->set_rules('prod_name[]', 'Product Name', 'required');
 		$this->form_validation->set_rules('quantity[]', 'Quantity', 'required');
 		$this->form_validation->set_rules('supplier', 'Supplier', 'required');
@@ -116,7 +122,7 @@ class Purchaseorders extends MY_Controller {
 		// 	$error['company'] = 'The Companies field is required.';
 		// }
 
-		foreach($post['prod_name'] as $pkey => $pVal){
+		foreach($post['prod_code'] as $pkey => $pVal){
 		if ($this->form_validation->run() !== FALSE) {
 
 				$data = array(
@@ -158,6 +164,7 @@ class Purchaseorders extends MY_Controller {
 		// exit;
 		$this->load->library("form_validation");
 
+		$this->form_validation->set_rules('edit_prod_code[]', 'SKU', 'required');
 		$this->form_validation->set_rules('edit_prod_name[]', 'Product Name', 'required');
 		$this->form_validation->set_rules('edit_quantity[]', 'Quantity', 'required');
 		$this->form_validation->set_rules('edit_unit_price[]', 'Unit Price', 'required');
@@ -165,8 +172,8 @@ class Purchaseorders extends MY_Controller {
 		$error = array();
 
 
-			if(!empty($post['edit_prod_name'])){
-					foreach($post['edit_prod_name'] as $pkey => $pVal){
+			if(!empty($post['edit_prod_code'])){
+					foreach($post['edit_prod_code'] as $pkey => $pVal){
 						if ($this->form_validation->run() !== FALSE) {
 								$data = array(
 										'date_ordered' => $date_ordered,
@@ -206,7 +213,7 @@ class Purchaseorders extends MY_Controller {
 
 				foreach($post['edit_purchase_id'] as $pkey => $pVal){
 					$data = array(
-						'product' => $post['prod_name'][$pkey],
+						'product' => $post['prod_code'][$pkey],
 						'quantity' => $post['quantity'][$pkey],
 						'unit_price' => $post['unit_price'][$pkey],
 					);

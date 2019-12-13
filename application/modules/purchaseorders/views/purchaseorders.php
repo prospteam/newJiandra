@@ -54,6 +54,7 @@
                       <div class="table-responsive view_purchase_orders_details">
                             <table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_new_product">
                               <thead>
+                                  <th class="header-title purch">SKU <span class="required">*</span></th>
                                   <th class="header-title purch">Product <span class="required">*</span></th>
                                   <th class="header-title purch">Quantity <span class="required">*</span></th>
                                   <th class="header-title purch">Unit Price <span class="required">*</span></th>
@@ -64,14 +65,19 @@
 
                                   <tr>
                                     <td class="purch_td">
-                                      <select class="form-control select2" style="width: 100%;" name="prod_name[]">
-                                        <option value="">Select Product</option>
+                                      <select class="form-control code select2" style="width: 100%;" name="prod_code[]">
+                                        <option value="">Select SKU</option>
                                         <?php
                                             foreach($products as $key => $value){
-                                                echo '<option value="'.$value['id'].'">'.$value['product_name'].'</option>';
+                                                echo '<option value="'.$value['id'].'">'.$value['code'].'</option>';
                                             }
                                         ?>
                                       </select>
+                                      <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
+                                      <span class="err"></span>
+                                    </td>
+                                    <td class="purch_td">
+                                        <input type="text" class="form-control prod_name" name="prod_name[]" value="">
                                       <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
                                       <span class="err"></span>
                                     </td>
@@ -183,6 +189,7 @@
                     <div class="table-responsive purch_prod">
                           <table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="view_purchase_orders_details">
                             <thead>
+                                <th class="header-title purch">SKU</th>
                                 <th class="header-title purch">Product</th>
                                 <th class="header-title purch">Quantity </th>
                                 <th class="header-title purch">Unit Price</th>
@@ -306,6 +313,7 @@
                   <div class="table-responsive view_purchase_orders_details">
                         <table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="edit_purch">
                           <thead>
+                              <th class="header-title purch">SKU <span class="required">*</span></th>
                               <th class="header-title purch">Product <span class="required">*</span></th>
                               <th class="header-title purch">Quantity <span class="required">*</span></th>
                               <th class="header-title purch">Unit Price <span class="required">*</span></th>

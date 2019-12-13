@@ -7,6 +7,7 @@
 <script src="<?php echo base_url('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js'); ?>"></script>
 <!-- <script type="text/javascript" src="<?php //echo base_url('assets/plugins/alertify/alertify.min.js' ); ?>"></script> -->
 <!-- Sweet-Alert  -->
+<!-- <script src="<?php //echo base_url('assets/plugins/swal-forms-master/swal-forms.js') ?>"></script> -->
 <script src="<?php echo base_url('assets/plugins/sweetalert2/dist/sweetalert2.all.min.js') ?>"></script>
 <script src="<?php echo base_url('assets/plugins/sweetalert2/sweet-alert.init.js') ?>"></script>
 <!-- AdminLTE App -->

@@ -208,8 +208,74 @@ $(document).ready(function(){
   //End of Update delivery status
 
   //choose from product name
-    $('select[name="prod_name[]"]').select2();
-    // $('.select2_add').select2();
+    $('select[name="prod_code[]"]').select2();
+
+  //autocomplete product name after choosing sku Code
+  $(document).on('change','.code',function(){
+    $.ajax({
+        url: base_url+'purchaseorders/get_productName_by_code',
+        data: {prod_id:$(this).val()},
+        type: 'post',
+        dataType: 'json',
+        success: function(data){
+                $.each(data.products,function(index,element){
+                      $('.prod_name').val(element.product_name);
+                });
+
+        }
+    });
+  });
+
+  //autocomplete product name after choosing sku Code if add new product
+  $(document).on('change','.add_code',function(){
+    $.ajax({
+        url: base_url+'purchaseorders/get_productName_by_code',
+        data: {prod_id:$(this).val()},
+        type: 'post',
+        dataType: 'json',
+        success: function(data){
+                $.each(data.products,function(index,element){
+                      $('.add_prod').val(element.product_name);
+                });
+
+        }
+    });
+  });
+
+  //autocomplete product name after choosing sku Code
+  $(document).on('change','.edit_new_code',function(){
+    var id = $('input[name="edit_purchase_id_select[]"]').val();
+    alert(id);
+    $.ajax({
+        url: base_url+'purchaseorders/get_productName_by_code',
+        data: {prod_id:$(this).val()},
+        type: 'post',
+        dataType: 'json',
+        success: function(data){
+                $.each(data.products,function(index,element){
+                      $('.edit_new_name').val(element.product_name);
+                });
+
+        }
+    });
+  });
+
+  //autocomplete product name after choosing sku Code if edit new product
+  $(document).on('change','.edit_code',function(){
+    $.ajax({
+        url: base_url+'purchaseorders/get_productName_by_code',
+        data: {prod_id:$(this).val()},
+        type: 'post',
+        dataType: 'json',
+        success: function(data){
+                $.each(data.products,function(index,element){
+                      $('.edit_name').val(element.product_name);
+                });
+
+        }
+    });
+  });
+
   //successfully added purchas order
   $(document).on('submit','form#addpurchaseorder',function(e){
     e.preventDefault();
@@ -286,6 +352,9 @@ $(document).ready(function(){
              str +=     '<td class="purch_td hide">';
                  str +=   '<input type="hidden" class="edit_purchID" name="view_purchase_id[]" value='+element.purchase_id+'>';
                 str += '</td>';
+                str +=     '<td class="purch_td">';
+                    str +=   element.code;
+                   str += '</td>';
                str +=     '<td class="purch_td">';
                    str +=   element.product_name;
                   str += '</td>';
@@ -438,11 +507,16 @@ $(document).ready(function(){
             str += '<input type="hidden" class="form-control" name="edit_purchase_id[]" value='+element.purchase_id+'>';
             str += '</td>';
               str += '<td class="purch_td">';
-                str += '<select class="form-control select2_edit" style="width: 100%;" name="prod_name[]" data-id="'+element.product_id+'" value="'+element.product_name+'">';
-                  str += '<option value="'+element.id+'" selected hidden>'+element.product_name+'</option>';
+              str += '<input type="hidden" class="form-control" name="edit_purchase_id_select[]" value='+element.purchase_id+'>';
+                str += '<select class="form-control edit_new_code select2_edit" style="width: 100%;" name="prod_code[]" data-id="'+element.product_id+'" value="'+element.code+'">';
+                  str += '<option value="'+element.id+'" selected hidden>'+element.code+'</option>';
                    str += get_products();
                 str += '</select>';
                    // str += '<input type="text" class="form-control" name="prod_name[]" value='+element.product+'>';
+                   str += '<span class="err"></span>';
+              str += '</td>';
+              str += '<td class="purch_td">';
+                   str += '<input type="text" class="form-control edit_new_name" name="prod_name[]" value="'+element.product_name+'">';
                    str += '<span class="err"></span>';
               str += '</td>';
               str += '<td class="purch_td">';
@@ -548,10 +622,14 @@ $(document).ready(function(){
 
     str += '<tr>';
       str += '<td class="purch_td">';
-           str += '<select class="form-control select2_add" style="width: 100%;" name="prod_name[]">';
-              str += '<option value="">Select Product</option>';
+           str += '<select class="form-control add_code select2_add" style="width: 100%;" name="prod_code[]">';
+              str += '<option value="">Select SKU</option>';
               str += get_products();
            str += '</select>';
+           str += '<span class="err"></span>';
+      str += '</td>';
+      str += '<td class="purch_td">';
+           str += '<input type="text" class="form-control add_prod" name="prod_name[]" value="">';
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
@@ -592,10 +670,14 @@ $(document).ready(function(){
 
     str += '<tr>';
       str += '<td class="purch_td">';
-        str += '<select class="form-control select2_edit" style="width: 100%;" name="edit_prod_name[]">';
-         str += '<option value="">Select Product</option>';
+        str += '<select class="form-control edit_code select2_edit" style="width: 100%;" name="edit_prod_code[]">';
+         str += '<option value="">Select SKU</option>';
          str += get_products();
         str += '</select>';
+           str += '<span class="err"></span>';
+      str += '</td>';
+      str += '<td class="purch_td">';
+           str += '<input type="text" class="form-control edit_name" name="edit_prod_name[]" value="">';
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
@@ -733,7 +815,7 @@ function get_products(){
     success:function(data){
       var str = '';
       $.each(data.products,function(index,element){
-        str += '<option value="'+element.id+'">'+element.product_name+'</option>';
+        str += '<option value="'+element.id+'">'+element.code+'</option>';
       });
       data_return = str;
     }

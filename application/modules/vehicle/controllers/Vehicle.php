@@ -142,10 +142,11 @@ class Vehicle extends MY_Controller {
 	public function disablevehicle()
 	{
 		$vehicle_id = $this->input->post('id');
-		$parameters['where'] = array('id' => $vehicle_id);
-		$datas['vehicle'] = $this->MY_Model->getRows('vehicles',$parameters,'row');
+
 		$vehicle_status = 2;
+		$remarks = $this->input->post('Remarks');
 		$data = array(
+			'remarks' => $remarks,
 			'status' => $vehicle_status
 		);
 		$datas['delete'] = $this->MY_Model->update('vehicles',$data,array('id' => $vehicle_id));
