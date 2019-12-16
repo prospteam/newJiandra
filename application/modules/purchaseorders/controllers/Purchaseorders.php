@@ -38,6 +38,26 @@ class Purchaseorders extends MY_Controller {
 
 		json($data);
 	}
+
+
+	public function get_productName_by_code_edit(){
+		$parameters['where'] = array('id' => $this->input->post('prod_id'));
+		$data['products'] = $this->MY_Model->getRows('products',$parameters, 'rows');
+		// echo "<pre>";
+		// print_r($this->input->post());
+		// exit;
+		// $prod_id = $this->input->post('prod_id');
+		// $parameters['select'] = 'id,(SELECT * FROM products WHERE id = '.$prod_id.' ) as product';
+		// $parameters['where'] = array('id' => $this->input->post('purchase_id'));
+		// $data['products'] = $this->MY_Model->getRows('purchase_orders',$parameters);
+		// echo "<pre>";
+		// print_r($datas);
+		// exit;
+		// $data['edit_purch_prod'] = $this->MY_Model->getRows('purchase_orders',$parameters);
+
+		json($data);
+	}
+
 	public function get_suppliers(){
 			$data['suppliers'] = $this->MY_Model->getRows('supplier');
 			json($data);
@@ -211,13 +231,13 @@ class Purchaseorders extends MY_Controller {
 				$update1 = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['edit_purchase_code']));
 
 
-				foreach($post['edit_purchase_id'] as $pkey => $pVal){
+				foreach($post['edit_purchase_id_select'] as $pkey => $pVal){
 					$data = array(
 						'product' => $post['prod_code'][$pkey],
 						'quantity' => $post['quantity'][$pkey],
 						'unit_price' => $post['unit_price'][$pkey],
 					);
-					$update = $this->MY_Model->update('purchase_orders', $data, array('id' => $post['edit_purchase_id'][$pkey]));
+					$update = $this->MY_Model->update('purchase_orders', $data, array('id' => $post['edit_purchase_id_select'][$pkey]));
 					if ($update) {
 						$response = array(
 							'status' => 'ok'

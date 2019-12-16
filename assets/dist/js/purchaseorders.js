@@ -244,18 +244,22 @@ $(document).ready(function(){
 
   //autocomplete product name after choosing sku Code
   $(document).on('change','.edit_new_code',function(){
-    var id = $('input[name="edit_purchase_id_select[]"]').val();
-    alert(id);
+    var el = $(this);
+    var id = $(this).attr('data-prod');
+    // alert(id);
     $.ajax({
-        url: base_url+'purchaseorders/get_productName_by_code',
-        data: {prod_id:$(this).val()},
+        url: base_url+'purchaseorders/get_productName_by_code_edit',
+        data: {prod_id:$(this).val(),purchase_id:id},
         type: 'post',
         dataType: 'json',
         success: function(data){
                 $.each(data.products,function(index,element){
-                      $('.edit_new_name').val(element.product_name);
+                  // $(this).closest('tr').find('.edit_new_name').val($('option:selected', this).data('price'))
+                  // console.log($(this).closest('tr').find('.edit_new_name').val($('option:selected', this).data('price')));
+                  // $('.edit_new_code').next().closest('td').find('.edit_new_name').val($('option:selected', this).data('price'));
+                  // $('input[name="prod_name[]"]').val(element.product_name);
+                  el.parents('tr').find('input[name="prod_name[]"]').val(element.product_name);
                 });
-
         }
     });
   });
@@ -270,6 +274,7 @@ $(document).ready(function(){
         success: function(data){
                 $.each(data.products,function(index,element){
                       $('.edit_name').val(element.product_name);
+
                 });
 
         }
@@ -504,11 +509,11 @@ $(document).ready(function(){
             // str += '<input type="hidden" name="purchase_id" value='+element.purchase_id+'>';
             str += '<tr>';
             str += '<td class="purch_td hide">';
-            str += '<input type="hidden" class="form-control" name="edit_purchase_id[]" value='+element.purchase_id+'>';
+            str += '<input type="hidden" class="form-control edit_purchase_id" name="edit_purchase_id[]" value='+element.purchase_id+'>';
             str += '</td>';
               str += '<td class="purch_td">';
               str += '<input type="hidden" class="form-control" name="edit_purchase_id_select[]" value='+element.purchase_id+'>';
-                str += '<select class="form-control edit_new_code select2_edit" style="width: 100%;" name="prod_code[]" data-id="'+element.product_id+'" value="'+element.code+'">';
+              str += '<select class="form-control edit_new_code select2_edit" data-prod="'+element.purchase_id+'" style="width: 100%;" name="prod_code[]" data-id="'+element.product_id+'" value="'+element.code+'">';
                   str += '<option value="'+element.id+'" selected hidden>'+element.code+'</option>';
                    str += get_products();
                 str += '</select>';
@@ -516,7 +521,7 @@ $(document).ready(function(){
                    str += '<span class="err"></span>';
               str += '</td>';
               str += '<td class="purch_td">';
-                   str += '<input type="text" class="form-control edit_new_name" name="prod_name[]" value="'+element.product_name+'">';
+                   str += '<input type="text" data-price="'+element.product_name+'" class="form-control edit_new_name" name="prod_name[]" value="'+element.product_name+'">';
                    str += '<span class="err"></span>';
               str += '</td>';
               str += '<td class="purch_td">';
