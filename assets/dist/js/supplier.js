@@ -273,9 +273,12 @@ $(document).ready(function(){
          success: function(data){
 
              $('#editSupplier').modal('show');
-             $('#editSupplier input[name =supplier_id]').val(data.supplier.id);
-             $('#editSupplier input[name =supplier_name]').val(data.supplier.supplier_name);
-             $('#editSupplier input[name=supplier_contact_person]').val(data.supplier.supplier_contact_person);
+             $('#editSupplier input[name=supplier_id]').val(data.supplier.id);
+             $('#editSupplier input[name=supplier_name]').val(data.supplier.supplier_name);
+             $('#editSupplier input[name=contact_name]').val(data.supplier.contact_name);
+             $('#editSupplier input[name=mobile_number]').val(data.supplier.mobile_number);
+             $('#editSupplier input[name=contact_email]').val(data.supplier.contact_email);
+             $('#editSupplier input[name=supp_position]').val(data.supplier.supp_position);
              $('#editSupplier input[name=email]').val(data.supplier.email);
              $('#editSupplier input[name=address]').val(data.supplier.address);
              var company_list = [];
@@ -327,7 +330,6 @@ $(document).ready(function(){
 
    });
 });
-
   $(document).on('click','#addnewCP',function(){
 
     var x = 1;
@@ -346,18 +348,25 @@ $(document).ready(function(){
       str += ' <input type="text" class="form-control contact_email" name="contact_email" value="">';
       str += '<form-control contact_email" name="contact_email" value="">';
    str += '</td>';
+ str += '<td class="supp_td">';
+   str += ' <input type="text" class="form-control supp_position" name="position" value="">';
+   str += '	<form-control supp_position" name="position" value="">';
+str += '</td>';
    str += '</tr>'
-   str += '<td class="purch_td">';
-       str += '<button id="remve" class="btn btn-md btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>';
+   str += '<td class="supp_td">';
+       str += '<button id="removeSupplier" class="btn btn-md btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>';
    str += '</td>';
  str += '</tr>';
 
      if (x) {
        x++;
-       $('.add_contact_person tbody').append(str);
+       $('#add_contact_person tbody').append(str);
      }
   });
 
+  $(document).on('click', '#removeSupplier', function(){
+    $(this).parent().parent().remove(); x--;
+  });
 
 function display_suppliers($supplier_id){
   $('.suppliers_tbl').DataTable({
@@ -423,13 +432,16 @@ function clearError(){
 function blankVal(){
   $('#addSupplier input[name="supplier_name"]').val('');
   $('.err').text('');
-  $('#addSupplier input[name="supplier_contact_person"]').val('');
-  $('#addSupplier input[name="email"]').val('');
+  $('#addSupplier input[name="contact_name"]').val('');
+  $('#addSupplier input[name="mobile_number"]').val('');
+  $('#addSupplier input[name="contact_email"]').val('');
+  $('#addSupplier input[name="supp_position"]').val('');
+  $('#addSupplier input[name="company[]"]').val('');
+  $('#addSupplier select[name="email"]').val('');
   $('#addSupplier input[name="address"]').val('');
-  $('#addSupplier select[name="company[]"]').val('');
   $('#addSupplier input[name="office_number"]').val('');
-  $('#addSupplier input[name="tin_number"]').val('');
   $('#addSupplier input[name="fax_number"]').val('');
+  $('#addSupplier input[name="tin_number"]').val('');
   $('#addSupplier .filechosen').val();
 
 }
