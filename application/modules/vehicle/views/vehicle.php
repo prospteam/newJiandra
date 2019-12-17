@@ -15,7 +15,7 @@
             <div class="modal fade" id="AddVehicle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
               <form id="AddVehicle" method="post">
 
-                <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-dialog modal-xl" role="document">
                   <div class="modal-content">
                     <div class="modal-header bg-info1">
                       <h5 class="modal-title" id="exampleModalLabel">Add Vehicle</h5>
@@ -28,18 +28,20 @@
                       <div class="row">
                         <div class="col-lg-6">
                           <div class="form-group">
-                            <label for="plate_number">Plate Number: <span class="required">*</span></label>
-                            <input type="text" class="form-control" name="plate_number" value="">
+                            <label for="vehicle_type">Vehicle Type: <span class="required">*</span></label>
+                            <select class="form-control" name="vehicle_type">
+                              <option value="" selected hidden>Select Vehicle Type</option>
+                              <option value="1">EX Truck</option>
+                              <option value="2">Delivery Truck</option>
+                            </select>
+                            <!-- <input type="text" class="form-control" name="vehicle_type" value=""> -->
                             <span class="err"></span>
                           </div>
                         </div>
                         <div class="col-lg-6">
                           <div class="form-group">
-                            <label for="vehicle_brand">Vehicle Brand: <span class="required">*</span></label>
-                            <select class="form-control js-example-basic-multiple-addvehicle"  name="vehicle_brand" id="vehicle_brand" data-type="vehicle_brand">
-                              <option></option>
-                          </select>
-                            <!-- <input type="text" class="form-control" name="vehicle_brand" value=""> -->
+                            <label for="cr_no">CR No.: <span class="required">*</span></label>
+                            <input type="text" class="form-control" name="cr_no" value="">
                             <span class="err"></span>
                           </div>
                         </div>
@@ -47,19 +49,82 @@
                       <div class="row">
                         <div class="col-lg-4">
                           <div class="form-group">
-                            <label for="vehicle_type">Vehicle Type: <span class="required">*</span></label>
-                            <select class="form-control" name="vehicle_type">
-                              <option value="" selected hidden>Select Vehicle Type</option>
-                              <option value="1">Warehouse Truck</option>
-                              <option value="2">Delivery Truck</option>
-                            </select>
-                            <!-- <input type="text" class="form-control" name="vehicle_type" value=""> -->
+                            <label for="owner">Complete Owners Name.: <span class="required">*</span></label>
+                            <input type="text" class="form-control" name="owner" value="">
                             <span class="err"></span>
                           </div>
                         </div>
                         <div class="col-lg-4">
                           <div class="form-group">
-                            <label for="fuel_type">Fuel Type: <span class="required">*</span></label>
+                            <label for="or_no">O.R No.: <span class="required">*</span></label>
+                            <input type="text" class="form-control" name="or_no" value="">
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                        <div class="col-lg-4">
+                          <div class="form-group">
+                            <label for="or_date">O.R Date:</label>
+                            <input type="text" class="form-control datepicker" name="or_date" value="">
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+
+                        <div class="col-lg-3">
+                          <div class="form-group">
+                            <label for="mv_file_no">MV File No.:</label>
+                            <input type="text" class="form-control" name="mv_file_no" value="">
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                        <div class="col-lg-3">
+                          <div class="form-group">
+                            <label for="plate_number">Plate Number: <span class="required">*</span></label>
+                            <input type="text" class="form-control" name="plate_number" value="">
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                        <div class="col-lg-3">
+                          <div class="form-group">
+                            <label for="engine_no">Engine No.:</label>
+                            <input type="text" class="form-control" name="engine_no" value="">
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                        <div class="col-lg-3">
+                          <div class="form-group">
+                            <label for="chassis_no">Chassis No.:</label>
+                            <input type="text" class="form-control" name="chassis_no" value="">
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3">
+                          <div class="form-group">
+                            <label for="denomination">Denomination:</label>
+                            <input type="text" class="form-control" name="denomination" value="">
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                        <div class="col-lg-3">
+                          <div class="form-group">
+                            <label for="piston_displacement">Piston Displacement:</label>
+                            <input type="text" class="form-control" name="piston_displacement" value="">
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <div class="form-group">
+                            <label for="num_of_tires">Number of Cylinders:</label>
+                            <input type="number" class="form-control" name="num_of_tires" value="">
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                        <div class="col-lg-3">
+                          <div class="form-group">
+                            <label for="fuel_type">Fuel:</label>
                             <select name="fuel_type" id="fuel_type" class="form-control js-example-basic-multiple-addvehicle"  data-type="fuel_type">
                               <option></option>
                           </select>
@@ -67,10 +132,75 @@
                             <span class="err"></span>
                           </div>
                         </div>
-                        <div class="col-4">
+
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-3">
                           <div class="form-group">
-                            <label for="num_of_tires">Number of Tires: <span class="required">*</span></label>
-                            <input type="number" class="form-control" name="num_of_tires" value="">
+                            <label for="vehicle_brand">Make: <span class="required">*</span></label>
+                            <select class="form-control js-example-basic-multiple-addvehicle"  name="vehicle_brand" id="vehicle_brand" data-type="vehicle_brand">
+                              <option></option>
+                          </select>
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <div class="form-group">
+                            <label for="series">Series: <span class="required">*</span></label>
+                            <input type="number" class="form-control" name="series" value="">
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                        <div class="col-lg-2">
+                          <div class="form-group">
+                            <label for="body_type">Body type: <span class="required">*</span></label>
+                            <select class="form-control js-example-basic-multiple-bodyType-add"  name="body_type" id="body_type" data-type="body_type">
+                              <option></option>
+                          </select>
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                        <div class="col-2">
+                          <div class="form-group">
+                            <label for="body_no">Body No.: </label>
+                            <input type="number" class="form-control" name="body_no" value="">
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                        <div class="col-2">
+                          <div class="form-group">
+                            <label for="year_model">Year Model:</label>
+                            <input type="number" class="form-control" name="year_model" value="">
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-3">
+                          <div class="form-group">
+                            <label for="gross">Gross WT:</label>
+                            <input type="number" class="form-control" name="gross" value="">
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <div class="form-group">
+                            <label for="net">Net WT:</label>
+                            <input type="number" class="form-control" name="net" value="">
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <div class="form-group">
+                            <label for="shipping_wt">Shipping WT:</label>
+                            <input type="number" class="form-control" name="shipping_wt" value="">
+                            <span class="err"></span>
+                          </div>
+                        </div>
+                        <div class="col-3">
+                          <div class="form-group">
+                            <label for="net_capacity">Net Capacity:</label>
+                            <input type="number" class="form-control" name="net_capacity" value="">
                             <span class="err"></span>
                           </div>
                         </div>
@@ -272,34 +402,146 @@
                     <div class="row">
                       <div class="col-lg-6">
                         <div class="form-group">
+                          <label for="vehicle_type">Vehicle Type:</label>
+                          <p class="vehicle_type"> </p>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label for="cr_no">CR No.:</label>
+                          <p class="cr_no"> </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <label for="owner">Complete Owners Name.:</label>
+                          <p class="owner"> </p>
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <label for="or_no">O.R No.:</label>
+                          <p class="or_no"> </p>
+                        </div>
+                      </div>
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <label for="or_date">O.R Date:</label>
+                          <p class="or_date"> </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <label for="mv_file_no">MV File No.:</label>
+                          <p class="mv_file_no"> </p>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="form-group">
                           <label for="plate_number">Plate Number:</label>
                           <p class="plate_number"> </p>
                         </div>
                       </div>
-                      <div class="col-lg-6">
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <label for="engine_no">Engine No.:</label>
+                          <p class="engine_no"> </p>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <label for="chassis_no">Chassis No.:</label>
+                          <p class="chassis_no"> </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <label for="denomination">Denomination:</label>
+                          <p class="denomination"> </p>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <label for="piston_displacement">Piston Displacement:</label>
+                          <p class="piston_displacement"> </p>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label for="num_of_tires">Number of Cylinders:</label>
+                          <p class="num_of_tires"> </p>
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <label for="fuel_type">Fuel:</label>
+                          <p class="fuel_type"> </p>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-3">
                         <div class="form-group">
                           <label for="vehicle_brand">Vehicle Brand:</label>
                           <p class="vehicle_brand"> </p>
                         </div>
                       </div>
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label for="series">Series:</label>
+                          <p class="series"> </p>
+                        </div>
+                      </div>
+                      <div class="col-lg-2">
+                        <div class="form-group">
+                          <label for="body_type">Body type:</label>
+                          <p class="body_type"> </p>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <div class="form-group">
+                          <label for="body_no">Body No.:</label>
+                          <p class="body_no"> </p>
+                        </div>
+                      </div>
+                      <div class="col-2">
+                        <div class="form-group">
+                          <label for="year_model">Year Model:</label>
+                          <p class="year_model"> </p>
+                        </div>
+                      </div>
                     </div>
                     <div class="row">
-                      <div class="col-4">
+                      <div class="col-3">
                         <div class="form-group">
-                          <label for="vehicle_type">Vehicle Type:</label>
-                          <p class="vehicle_type"> </p>
+                          <label for="gross">Gross WT: </label>
+                          <p class="gross"> </p>
                         </div>
                       </div>
-                      <div class="col-4">
+                      <div class="col-3">
                         <div class="form-group">
-                          <label for="fuel_type">Fuel Type:</label>
-                          <p class="fuel_type"> </p>
+                          <label for="net">Net WT:</label>
+                          <p class="net"> </p>
                         </div>
                       </div>
-                      <div class="col-4">
+                      <div class="col-3">
                         <div class="form-group">
-                          <label for="num_of_tires">Number of Tires:</label>
-                          <p class="num_of_tires"> </p>
+                          <label for="shipping_wt">Shipping WT:</label>
+                          <p class="shipping_wt"> </p>
+                        </div>
+                      </div>
+                      <div class="col-3">
+                        <div class="form-group">
+                          <label for="net_capacity">Net Capacity:</label>
+                          <p class="net_capacity"> </p>
                         </div>
                       </div>
                     </div>
@@ -463,7 +705,7 @@
         <!-- Edit Vehicle Modal -->
         <div class="modal fade" id="editVehicle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
           <form id="editvehicle" method="post">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog modal-xl" role="document">
               <div class="modal-content">
                 <div class="modal-header bg-info1">
                   <h5 class="modal-title" id="exampleModalLabel"> Edit Vehicle</h5>
@@ -473,51 +715,183 @@
                 </div>
                 <div class="modal-body">
                   <h1 class="inp_head"> GENERAL INFORMATION </h1>
-                  <input type="hidden" class="form-control vehicleID" name="vehicle_id" value="">
+                  <input type="hidden" class="form-control vehicleID" name="id" value="">
+
                   <div class="row">
                     <div class="col-lg-6">
-                      <div class="form-group">
-                        <label for="plate_number">Plate Number: <span class="required">*</span></label>
-                        <input type="text" class="form-control" name="plate_number" value="">
-                        <span class="err"></span>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label for="vehicle_brand1">Vehicle Brand: <span class="required">*</span></label>
-                        <select name="vehicle_brand" id="vehicle_brand1" class="form-control js-example-basic-multiple-editvehicle"  data-type="vehicle_brand">
-                          <option></option>
-                      </select>
-                        <span class="err"></span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-4">
                       <div class="form-group">
                         <label for="vehicle_type">Vehicle Type: <span class="required">*</span></label>
                         <select class="form-control" name="vehicle_type">
                         <!-- <option value="-1" selected="selected" disabled="disabled">Select Vehicle Type</option> -->
-                          <option value="1">Warehouse Truck</option>
+                          <option value="1">EX Truck</option>
                           <option value="2">Delivery Truck</option>
                         </select>
                         <!-- <input type="text" class="form-control" name="vehicle_type" value=""> -->
                         <span class="err"></span>
                       </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-lg-6">
                       <div class="form-group">
-                        <label for="fuel_type1">Fuel Type: <span class="required">*</span></label>
+                        <label for="cr_no">CR No.: <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="cr_no" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label for="owner">Complete Owners Name.: <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="owner" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label for="or_no">O.R No.: <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="or_no" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label for="or_date">O.R Date:</label>
+                        <input type="text" class="form-control datepicker" name="or_date" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label for="mv_file_no">MV File No.:</label>
+                        <input type="text" class="form-control" name="mv_file_no" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label for="plate_number">Plate Number: <span class="required">*</span></label>
+                        <input type="text" class="form-control" name="plate_number" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label for="engine_no">Engine No.:</label>
+                        <input type="text" class="form-control" name="engine_no" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label for="chassis_no">Chassis No.:</label>
+                        <input type="text" class="form-control" name="chassis_no" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label for="denomination">Denomination:</label>
+                        <input type="text" class="form-control" name="denomination" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label for="piston_displacement">Piston Displacement:</label>
+                        <input type="text" class="form-control" name="piston_displacement" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="form-group">
+                        <label for="num_of_tires">Number of Cylinders: </label>
+                        <input type="number" class="form-control" name="num_of_tires" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-lg-3">
+                      <div class="form-group">
+                        <label for="fuel_type">Fuel:</label>
                         <select name="fuel_type" id="fuel_type1" class="form-control js-example-basic-multiple-editvehicle"  data-type="fuel_type">
                           <option></option>
                       </select>
                         <span class="err"></span>
                       </div>
                     </div>
-                    <div class="col-4">
+
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3">
                       <div class="form-group">
-                        <label for="num_of_tires">Number of Tires: <span class="required">*</span></label>
-                        <input type="number" class="form-control" name="num_of_tires" value="">
+                        <label for="vehicle_brand">Make: <span class="required">*</span></label>
+                        <select name="vehicle_brand" id="vehicle_brand1" class="form-control js-example-basic-multiple-editvehicle"  data-type="vehicle_brand">
+                          <option></option>
+                      </select>
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="form-group">
+                        <label for="series">Series: <span class="required">*</span></label>
+                        <input type="number" class="form-control" name="series" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-lg-2">
+                      <div class="form-group">
+                        <label for="body_type">Body type: <span class="required">*</span></label>
+                        <select id="body_type1" class="form-control js-example-basic-multiple-bodyType-edit"  data-type="body_type">
+                          <option></option>
+                      </select>
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <div class="form-group">
+                        <label for="body_no">Body No.:</label>
+                        <input type="number" class="form-control" name="body_no" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-2">
+                      <div class="form-group">
+                        <label for="year_model">Year Model:</label>
+                        <input type="number" class="form-control" name="year_model" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-3">
+                      <div class="form-group">
+                        <label for="gross">Gross WT: </label>
+                        <input type="number" class="form-control" name="gross" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="form-group">
+                        <label for="net">Net WT:</label>
+                        <input type="number" class="form-control" name="net" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="form-group">
+                        <label for="shipping_wt">Shipping WT:</label>
+                        <input type="number" class="form-control" name="shipping_wt" value="">
+                        <span class="err"></span>
+                      </div>
+                    </div>
+                    <div class="col-3">
+                      <div class="form-group">
+                        <label for="net_capacity">Net Capacity:</label>
+                        <input type="number" class="form-control" name="net_capacity" value="">
                         <span class="err"></span>
                       </div>
                     </div>
@@ -702,7 +1076,7 @@
         </div>
       <!-- End E Vehicle Modal -->
 
-    
+
 
         <!--view view remarks Modal -->
         <!-- Modal -->

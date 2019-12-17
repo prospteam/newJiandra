@@ -65,51 +65,54 @@ class Vehicle extends MY_Controller {
 		// $vehicleType = $this->input->post('vehicle_type');
 
 		$this->form_validation->set_rules('plate_number', 'Plate Number', 'required');
-		$this->form_validation->set_rules('vehicle_brand', 'Vehicle Brand', 'required');
+		$this->form_validation->set_rules('vehicle_brand', 'Make', 'required');
+		$this->form_validation->set_rules('series', 'Series', 'required');
+		$this->form_validation->set_rules('body_type', 'Body Type', 'required');
 		$this->form_validation->set_rules('vehicle_type', 'Vehicle Type', 'required');
-		$this->form_validation->set_rules('fuel_type', 'Fuel Type', 'required');
-			$this->form_validation->set_rules('num_of_tires', 'Number of Tires', 'required');
+		$this->form_validation->set_rules('or_no', 'OR No.', 'required');
+		$this->form_validation->set_rules('cr_no', 'CR No.', 'required');
+		$this->form_validation->set_rules('owner', 'Complete Owners Name', 'required');
 
 		if ($this->form_validation->run() !== FALSE) {
-			// $data_array = array();
-			// foreach($this->input->post() as $key => $value){
-			//
-			// 		$data_array[$key] = $value;
-			// }
-			// $data_array['status'] = 1;
-			$data = array(
-				'plate_number' => $this->input->post('plate_number'),
-				'vehicle_brand' => $this->input->post('vehicle_brand'),
-				'vehicle_type' => $this->input->post('vehicle_type'),
-				'fuel_type' => $this->input->post('fuel_type'),
-				'num_of_tires' => $this->input->post('num_of_tires'),
-				'accounting_date_acquired' => $this->input->post('accounting_date_acquired'),
-				'accounting_acqui_amount' => $this->input->post('accounting_acqui_amount'),
-				'accounting_full_dep_date' => $this->input->post('accounting_full_dep_date'),
-				'accounting_monthly_dep' => $this->input->post('accounting_monthly_dep'),
-				'accounting_accum_dep' => $this->input->post('accounting_accum_dep'),
-				'accounting_book_val' => $this->input->post('accounting_book_val'),
-				'approx_length' => $this->input->post('approx_length'),
-				'approx_width' => $this->input->post('approx_width'),
-				'approx_height' => $this->input->post('approx_height'),
-				'approx_volume' => $this->input->post('approx_volume'),
-				'approx_weight' => $this->input->post('approx_weight'),
-				'van_reg_date' => $this->input->post('van_reg_date'),
-				'van_policy_num' => $this->input->post('van_policy_num'),
-				'van_renewal_date' => $this->input->post('van_renewal_date'),
-				'van_exp_date' => $this->input->post('van_exp_date'),
-				'land_reg_date' => $this->input->post('land_reg_date'),
-				'land_renewal_date' => $this->input->post('land_renewal_date'),
-				'land_exp_date' => $this->input->post('land_exp_date'),
-				'material_desc' => $this->input->post('material_desc'),
-				'status' => 1
-			);
+			$data_array = array();
+			foreach($this->input->post() as $key => $value){
+
+					$data_array[$key] = $value;
+			}
+			$data_array['status'] = 1;
+			// $data = array(
+			// 	'plate_number' => $this->input->post('plate_number'),
+			// 	'vehicle_brand' => $this->input->post('vehicle_brand'),
+			// 	'vehicle_type' => $this->input->post('vehicle_type'),
+			// 	'fuel_type' => $this->input->post('fuel_type'),
+			// 	'num_of_tires' => $this->input->post('num_of_tires'),
+			// 	'accounting_date_acquired' => $this->input->post('accounting_date_acquired'),
+			// 	'accounting_acqui_amount' => $this->input->post('accounting_acqui_amount'),
+			// 	'accounting_full_dep_date' => $this->input->post('accounting_full_dep_date'),
+			// 	'accounting_monthly_dep' => $this->input->post('accounting_monthly_dep'),
+			// 	'accounting_accum_dep' => $this->input->post('accounting_accum_dep'),
+			// 	'accounting_book_val' => $this->input->post('accounting_book_val'),
+			// 	'approx_length' => $this->input->post('approx_length'),
+			// 	'approx_width' => $this->input->post('approx_width'),
+			// 	'approx_height' => $this->input->post('approx_height'),
+			// 	'approx_volume' => $this->input->post('approx_volume'),
+			// 	'approx_weight' => $this->input->post('approx_weight'),
+			// 	'van_reg_date' => $this->input->post('van_reg_date'),
+			// 	'van_policy_num' => $this->input->post('van_policy_num'),
+			// 	'van_renewal_date' => $this->input->post('van_renewal_date'),
+			// 	'van_exp_date' => $this->input->post('van_exp_date'),
+			// 	'land_reg_date' => $this->input->post('land_reg_date'),
+			// 	'land_renewal_date' => $this->input->post('land_renewal_date'),
+			// 	'land_exp_date' => $this->input->post('land_exp_date'),
+			// 	'material_desc' => $this->input->post('material_desc'),
+			// 	'status' => 1
+			// );
 
 			// json($data_array,false);
 			// json($data,false);
 
 
-			$insert = $this->MY_Model->insert('vehicles', $data);
+			$insert = $this->MY_Model->insert('vehicles', $data_array);
 			if ($insert) {
 				$response = array(
 					'status' => 'ok'
@@ -186,35 +189,39 @@ class Vehicle extends MY_Controller {
 		$vehicle_id = $this->input->post('id');
 			$result = false;
 		if(!empty($this->input->post())){
+			$data_array = array();
+			foreach($this->input->post() as $key => $value){
+					$data_array[$key] = $value;
+			}
+			// $data_array['status'] = 1;
+			// $data = array(
+			// 	'plate_number' => $this->input->post('plate_number'),
+			// 	'vehicle_brand' => $this->input->post('vehicle_brand'),
+			// 	'vehicle_type' => $this->input->post('vehicle_type'),
+			// 	'fuel_type' => $this->input->post('fuel_type'),
+			// 	'num_of_tires' => $this->input->post('num_of_tires'),
+			// 	'accounting_date_acquired'=> $this->input->post('accounting_date_acquired'),
+			// 	'accounting_acqui_amount'=> $this->input->post('accounting_acqui_amount'),
+			// 	'accounting_full_dep_date'=> $this->input->post('accounting_full_dep_date'),
+			// 	'accounting_monthly_dep'=> $this->input->post('accounting_monthly_dep'),
+			// 	'accounting_accum_dep' => $this->input->post('accounting_accum_dep'),
+			// 	'accounting_book_val' => $this->input->post('accounting_book_val'),
+			// 	'approx_length' => $this->input->post('approx_length'),
+			// 	'approx_width'=>$this->input->post('approx_width'),
+			// 	'approx_height' => $this->input->post('approx_height'),
+			// 	'approx_volume'=> $this->input->post('approx_volume'),
+			// 	'approx_weight'=> $this->input->post('approx_weight'),
+			// 	'van_reg_date' => $this->input->post('van_reg_date'),
+			// 	'van_policy_num' => $this->input->post('van_policy_num'),
+			// 	'van_renewal_date' => $this->input->post('van_renewal_date'),
+			// 	'van_exp_date' => $this->input->post('van_exp_date'),
+			// 	'land_reg_date' => $this->input->post('land_reg_date'),
+			// 	'land_renewal_date' => $this->input->post('land_renewal_date'),
+			// 	'land_exp_date' => $this->input->post('land_exp_date'),
+			// 	'material_desc' => $this->input->post('material_desc'),
+			// );
 
-			$data = array(
-				'plate_number' => $this->input->post('plate_number'),
-				'vehicle_brand' => $this->input->post('vehicle_brand'),
-				'vehicle_type' => $this->input->post('vehicle_type'),
-				'fuel_type' => $this->input->post('fuel_type'),
-				'num_of_tires' => $this->input->post('num_of_tires'),
-				'accounting_date_acquired'=> $this->input->post('accounting_date_acquired'),
-				'accounting_acqui_amount'=> $this->input->post('accounting_acqui_amount'),
-				'accounting_full_dep_date'=> $this->input->post('accounting_full_dep_date'),
-				'accounting_monthly_dep'=> $this->input->post('accounting_monthly_dep'),
-				'accounting_accum_dep' => $this->input->post('accounting_accum_dep'),
-				'accounting_book_val' => $this->input->post('accounting_book_val'),
-				'approx_length' => $this->input->post('approx_length'),
-				'approx_width'=>$this->input->post('approx_width'),
-				'approx_height' => $this->input->post('approx_height'),
-				'approx_volume'=> $this->input->post('approx_volume'),
-				'approx_weight'=> $this->input->post('approx_weight'),
-				'van_reg_date' => $this->input->post('van_reg_date'),
-				'van_policy_num' => $this->input->post('van_policy_num'),
-				'van_renewal_date' => $this->input->post('van_renewal_date'),
-				'van_exp_date' => $this->input->post('van_exp_date'),
-				'land_reg_date' => $this->input->post('land_reg_date'),
-				'land_renewal_date' => $this->input->post('land_renewal_date'),
-				'land_exp_date' => $this->input->post('land_exp_date'),
-				'material_desc' => $this->input->post('material_desc'),
-			);
-
-			$update = $this->MY_Model->update('vehicles', $data,array('id' => $vehicle_id));
+			$update = $this->MY_Model->update('vehicles', $data_array,array('id' => $vehicle_id));
 			if ($update) {
 				$response = array(
 					'status' => 'ok'
@@ -267,6 +274,44 @@ class Vehicle extends MY_Controller {
 					$postLike = !empty($post['searchfor']['term']) ? $post['searchfor']['term'] : '';
 					$where = $post['search_type'] == 'vehicle_brand' ? "vehicle_brand LIKE '%" . $postLike . "%'" : "fuel_type LIKE '%" . $postLike . "%'";
 					$select = $post['search_type'] == 'vehicle_brand' ? "vehicle_brand AS vehicle_id, vehicle_brand" : "fuel_type AS vehicle_id, fuel_type AS vehicle_brand";
+					$group = "GROUP BY " . $post['search_type'] . " ORDER BY " . $post['search_type'] . " ASC";
+
+					$list = $this->MY_Model->getRowByQuery("SELECT $select FROM " . $this->tables->vehicles . " WHERE $where AND status = 1 $group");
+					$result['items'] = $list;
+			}
+
+			die(json_encode($result));
+	}
+
+	public function bodytype_add()
+	{
+			$post = $this->input->post();
+			$result = false;
+
+			if (!empty($post)) {
+					$postLike = !empty($post['searchfor']['term']) ? $post['searchfor']['term'] : '';
+
+					$where = $post['search_type'] == 'body_type' ? "body_type LIKE '%" . $postLike . "%'" : "none";
+					$select = $post['search_type'] == 'body_type' ? "body_type AS vehicle_id, body_type" : "none";
+					$group = "GROUP BY " . $post['search_type'] . " ORDER BY " . $post['search_type'] . " ASC";
+
+					$list = $this->MY_Model->getRowByQuery("SELECT $select FROM " . $this->tables->vehicles . " WHERE $where AND status = 1 $group");
+					$result['items'] = $list;
+			}
+
+			die(json_encode($result));
+	}
+
+	public function bodytype_edit()
+	{
+			$post = $this->input->post();
+			$result = false;
+
+			if (!empty($post)) {
+					$postLike = !empty($post['searchfor']['term']) ? $post['searchfor']['term'] : '';
+
+					$where = $post['search_type'] == 'body_type' ? "body_type LIKE '%" . $postLike . "%'" : "none";
+					$select = $post['search_type'] == 'body_type' ? "body_type AS vehicle_id, body_type" : "none";
 					$group = "GROUP BY " . $post['search_type'] . " ORDER BY " . $post['search_type'] . " ASC";
 
 					$list = $this->MY_Model->getRowByQuery("SELECT $select FROM " . $this->tables->vehicles . " WHERE $where AND status = 1 $group");
