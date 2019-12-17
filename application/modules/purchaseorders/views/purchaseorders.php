@@ -433,7 +433,7 @@
                 </div>
                 <div class="modal-body">
                   <div class="row deliver">
-                    <div class="col-6">
+                    <div class="col-12">
                       <div class="form-group">
                           <input type="hidden" class="form-control" name="purchase_code_delivery" value="">
                           <!-- <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Status</label> -->
