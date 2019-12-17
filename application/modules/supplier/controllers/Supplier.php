@@ -39,29 +39,38 @@ class Supplier extends MY_Controller
 					$this->load->library("form_validation");
 
 					$this->form_validation->set_rules('supplier_name', 'Supplier Name', 'required');
-					$this->form_validation->set_rules('supplier_contact_person', 'Supplier Contact Person', 'required');
+					// $this->form_validation->set_rules('supplier_contact_person', 'Supplier Contact Person', 'required');
+					$this->form_validation->set_rules('contact_name','Name');
+					$this->form_validation->set_rules('mobile_number','Mobile Number');
+					$this->form_validation->set_rules('contact_email','Email');
+					$this->form_validation->set_rules('supp_position','Position');
+					$this->form_validation->set_rules('company[]', 'Company', 'required');
 					$this->form_validation->set_rules('email','Email','required');
 					$this->form_validation->set_rules('address','Address','required');
-					$this->form_validation->set_rules('company[]', 'Company', 'required');
 					$this->form_validation->set_rules('office_number', 'Office Number', 'required');
+					$this->form_validation->set_rules('fax_number', 'Fax Number', 'required');
+					$this->form_validation->set_rules('tin_number', 'TIN', 'required');
 
 					if ($this->form_validation->run() !== FALSE) {
 
 							if(count($company_name) >= 1){
 									foreach ($company_name as $key => $value) {
 
+
 										$data = array(
 											'supplier_logo' 						=> $uploadData['file_name'],
 											'supplier_name' 						=> $this->input->post('supplier_name'),
-											'supplier_contact_person' 	=> $this->input->post('supplier_contact_person'),
-											'email'                     =>$this->input->post('email'),
-											'address'                   =>$this->input->post('address'),
+											'contact_name'              => $this->input->post('contact_name'),
+											'mobile_number'             => $this->input->post('mobile_number'),
+											'contact_email'             => $this->input->post('contact_email'),
+											'supp_position'             => $this->input->post('supp_position'),
 											'company' 									=> $value,
+											'email'                     => $this->input->post('email'),
+											'address'                   => $this->input->post('address'),
 											'office_number' 						=> $this->input->post('office_number'),
-											'tin_number' 								=> $this->input->post('tin_number'),
 											'fax_number' 								=> $this->input->post('fax_number'),
+											'tin_number' 								=> $this->input->post('tin_number'),
 											'status' 										=> 1
-											// 'vendor' => $this->input->post('vendor'),
 										);
 
 										$insert = $this->MY_Model->insert('supplier', $data);
@@ -76,13 +85,16 @@ class Supplier extends MY_Controller
 								$data = array(
 									'supplier_logo' 						=> $uploadData['file_name'],
 									'supplier_name' 						=> $this->input->post('supplier_name'),
-									'supplier_contact_person' 	=> $this->input->post('supplier_contact_person'),
-									'email'                     =>$this->input->post('email'),
-									'address'                   =>$this->input->post('address'),
+									'contact_name'              => $this->input->post('contact_name'),
+									'mobile_number'             => $this->input->post('mobile_number'),
+									'contact_email'             => $this->input->post('contact_email'),
+									'supp_position'             => $this->input->post('supp_position'),
 									'company' 									=> $this->input->post('company'),
+									'email'                     => $this->input->post('email'),
+									'address'                   => $this->input->post('address'),
 									'office_number' 						=> $this->input->post('office_number'),
-									'tin_number' 								=> $this->input->post('tin_number'),
 									'fax_number' 								=> $this->input->post('fax_number'),
+									'tin_number' 								=> $this->input->post('tin_number'),
 									'status' 										=> 1
 									// 'vendor' => $this->input->post('vendor'),
 									// 'company' => implode(',',$this->input->post('company')),
@@ -100,12 +112,17 @@ class Supplier extends MY_Controller
 
 					$this->load->library("form_validation");
 					$this->form_validation->set_rules('supplier_name', 'Supplier Name', 'required');
-					$this->form_validation->set_rules('supplier_contact_person', 'Supplier Contact Person', 'required');
+					$this->form_validation->set_rules('contact_name', 'Name');
+					$this->form_validation->set_rules('mobile_number', 'Mobile Number');
+					$this->form_validation->set_rules('contact_email', 'Email');
+					$this->form_validation->set_rules('supp_position', 'Position');
+					$this->form_validation->set_rules('company[]', 'Company', 'required');
 					$this->form_validation->set_rules('email','Email','required');
 					$this->form_validation->set_rules('address','Address','required');
-					$this->form_validation->set_rules('company[]', 'Company', 'required');
-
 					$this->form_validation->set_rules('office_number', 'Office Number', 'required');
+					$this->form_validation->set_rules('fax_number', 'Fax Number', 'required');
+					$this->form_validation->set_rules('tin_number', 'TIN', 'required');
+
 					// $this->form_validation->set_rules('vendor', 'Vendor', 'required');
 
 					if ($this->form_validation->run() !== FALSE) {
@@ -116,13 +133,16 @@ class Supplier extends MY_Controller
 											 $data = array(
  												'supplier_logo' 							=> 1,
  												'supplier_name' 							=> $this->input->post('supplier_name'),
- 												'supplier_contact_person' 		=> $this->input->post('supplier_contact_person'),
-												'email'                       =>$this->input->post('email'),
-												'address'                       =>$this->input->post('Address'),
+ 												'contact_name' 						  	=> $this->input->post('contact_name'),
+ 												'mobile_number' 							=> $this->input->post('mobile_number'),
+												'contact_email'               =>$this->input->post('contact_email'),
+												'supp_position'               =>$this->input->post('supp_position'),
  												'company' 										=> $value,
+ 												'email' 						        	=> $this->input->post('email'),
+ 												'address' 										=> $this->input->post('address'),
  												'office_number' 							=> $this->input->post('office_number'),
- 												'tin_number' 									=> $this->input->post('tin_number'),
  												'fax_number' 									=> $this->input->post('fax_number'),
+ 												'tin_number' 									=> $this->input->post('tin_number'),
  												'status' 											=> 1
 												// 'vendor' => $this->input->post('vendor'),
  											);
@@ -140,13 +160,16 @@ class Supplier extends MY_Controller
 										 $data = array(
 											 'supplier_logo' 							=> 1,
 											 'supplier_name' 							=> $this->input->post('supplier_name'),
-											 'supplier_contact_person' 		=> $this->input->post('supplier_contact_person'),
-											 'email'                      =>$this->input->post('email'),
-											 'address'                    =>$this->input->post('address'),
-											 'company' 										=> $this->input->post('company'),
+											 'contact_name' 						  	=> $this->input->post('contact_name'),
+											 'mobile_number' 							=> $this->input->post('mobile_number'),
+											 'contact_email'               =>$this->input->post('contact_email'),
+											 'supp_position'               =>$this->input->post('supp_position'),
+											 'company' 										=> $value,
+											 'email' 						        	=> $this->input->post('email'),
+											 'address' 										=> $this->input->post('address'),
 											 'office_number' 							=> $this->input->post('office_number'),
-											 'tin_number' 								=> $this->input->post('tin_number'),
-											 'fax_number' 								=> $this->input->post('fax_number'),
+											 'fax_number' 									=> $this->input->post('fax_number'),
+											 'tin_number' 									=> $this->input->post('tin_number'),
 											 'status' 										=> 1
 											 // 'vendor' => $this->input->post('vendor'),
 										 );
@@ -373,10 +396,15 @@ class Supplier extends MY_Controller
 					$this->load->library("form_validation");
 
 				$this->form_validation->set_rules('supplier_name', 'Supplier Name', 'required');
-				$this->form_validation->set_rules('supplier_contact_person', 'Supplier Contact Person', 'required');
+				$this->form_validation->set_rules('contact_name', 'Name');
+				$this->form_validation->set_rules('mobile_number', 'Mobile Number');
+				$this->form_validation->set_rules('contact_email', 'Email');
+				$this->form_validation->set_rules('supp_position', 'Position');
 				$this->form_validation->set_rules('email', 'Email', 'required');
 				$this->form_validation->set_rules('address', 'Address', 'required');
 				$this->form_validation->set_rules('office_number', 'Office Number', 'required');
+				$this->form_validation->set_rules('fax_number', 'Fax Number', 'required');
+				$this->form_validation->set_rules('tin_number', 'TIN', 'required');
 
 			}else{
 				$this->load->library("form_validation");
@@ -393,13 +421,16 @@ class Supplier extends MY_Controller
 			$data = array(
 				// 'supplier_logo' => $uploadData['file_name'],
 				'supplier_name' 				  => $post['supplier_name'],
-				'supplier_contact_person' =>$post['supplier_contact_person'],
+				'contact_name'    			  =>$post['contact_name'],
+				'mobile_number'    			  =>$post['mobile_number'],
+				'contact_email'    			  =>$post['contact_email'],
+				'supp_position'    			  =>$post['supp_position'],
 				'email'    						    =>$post['email'],
 				'address'     					  =>$post['address'],
 				// 'company'=> 1,
 				'office_number' 					=>$post['office_number'],
-				'tin_number' 							=> $post['tin_number'],
 				'fax_number' 							=> $post['fax_number'],
+				'tin_number' 							=> $post['tin_number'],
 				// 'company' => implode(',',$this->input->post('company')),
 				// 'status' => 1
 			);

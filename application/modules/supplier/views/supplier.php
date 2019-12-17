@@ -60,7 +60,7 @@
 																	<span class="err"></span>
 																</td>
 																<td class="supp_td">
-																	<input type="text" class="form-control supp_position" name="position" value="">
+																	<input type="text" class="form-control supp_position" name="supp_position" value="">
 																	<span class="err"></span>
 																</td>
 															</tr>
@@ -210,7 +210,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> 
 					</div>
 			</div>
 				</div>
@@ -237,14 +237,43 @@
 												<span class="err"></span>
 											</div>
 										</div>
-										<div class="col-6">
-											<div class="form-group">
-												<label for="supplier_contact_person">Supplier Contact Person:</label>
-												<input type="text" class="form-control" name="supplier_contact_person" value="">
-												<span class="err"></span>
-											</div>
-										</div>
 									</div>
+									<hr>
+											<span class="btn btn-sm btn-primary" id="addnewCP"><i class="fa fa-plus"></i> Supplier Contact Person</span>
+										<br>
+										<div class="table-responsive view_purchase_orders_details">
+													<table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_contact_person">
+														<thead>
+																<th class="header-title supp">Name <span class="required">*</span></th>
+																<th class="header-title supp">Mobile Number <span class="required">*</span></th>
+																<th class="header-title supp">Email <span class="required">*</span></th>
+																<th class="header-title supp">Position <span class="required">*</span></th>
+														</thead>
+														<tbody>
+
+																<tr>
+																	<td class="supp_td">
+																		<input type="text" class="form-control contact_person" name="contact_name" value="">
+																		<span class="err"></span>
+																	</td>
+																	<td class="supp_td">
+																		<input type="number" class="form-control contact_mobileno" name="mobile_number" value="">
+																		<span class="err"></span>
+																	</td>
+																	<td class="supp_td">
+																		<input type="text" class="form-control contact_email" name="contact_email" value="">
+																		<span class="err"></span>
+																	</td>
+																	<td class="supp_td">
+																		<input type="text" class="form-control supp_position" name="supp_position" value="">
+																		<span class="err"></span>
+																	</td>
+																</tr>
+
+														</tbody>
+													</table>
+										</div>
+										<hr>
 									<div class="row">
 										<div class="col-6">
 												<div class="form-group">
