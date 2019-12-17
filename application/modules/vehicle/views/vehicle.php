@@ -115,7 +115,7 @@
                             <span class="err"></span>
                           </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-lg-3">
                           <div class="form-group">
                             <label for="num_of_tires">Number of Cylinders:</label>
                             <input type="number" class="form-control" name="num_of_tires" value="">
@@ -144,7 +144,7 @@
                             <span class="err"></span>
                           </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-lg-3">
                           <div class="form-group">
                             <label for="series">Series: <span class="required">*</span></label>
                             <input type="number" class="form-control" name="series" value="">
@@ -160,14 +160,14 @@
                             <span class="err"></span>
                           </div>
                         </div>
-                        <div class="col-2">
+                        <div class="col-lg-2">
                           <div class="form-group">
                             <label for="body_no">Body No.: </label>
                             <input type="number" class="form-control" name="body_no" value="">
                             <span class="err"></span>
                           </div>
                         </div>
-                        <div class="col-2">
+                        <div class="col-lg-2">
                           <div class="form-group">
                             <label for="year_model">Year Model:</label>
                             <input type="number" class="form-control" name="year_model" value="">
@@ -176,28 +176,28 @@
                         </div>
                       </div>
                       <div class="row">
-                        <div class="col-3">
+                        <div class="col-lg-3">
                           <div class="form-group">
                             <label for="gross">Gross WT:</label>
                             <input type="number" class="form-control" name="gross" value="">
                             <span class="err"></span>
                           </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-lg-3">
                           <div class="form-group">
                             <label for="net">Net WT:</label>
                             <input type="number" class="form-control" name="net" value="">
                             <span class="err"></span>
                           </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-lg-3">
                           <div class="form-group">
                             <label for="shipping_wt">Shipping WT:</label>
                             <input type="number" class="form-control" name="shipping_wt" value="">
                             <span class="err"></span>
                           </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col-lg-3">
                           <div class="form-group">
                             <label for="net_capacity">Net Capacity:</label>
                             <input type="number" class="form-control" name="net_capacity" value="">
@@ -266,7 +266,7 @@
                           <span class="err"></span>
                         </div>
                       </div>
-                      <div class="col-xs-6">
+                      <div class="col-xs-6 multiply">
                         <p>x</p>
                       </div>
 
@@ -277,7 +277,7 @@
                           <span class="err"></span>
                         </div>
                       </div>
-                      <div class="col-xs-6">
+                      <div class="col-xs-6 multiply">
                         <p>x</p>
                       </div>
                       <div class="col-lg-2">
@@ -287,7 +287,7 @@
                           <span class="err"></span>
                         </div>
                       </div>
-                      <div class="col-xs-6">
+                      <div class="col-xs-6 multiply">
                         <p>=</p>
                       </div>
                       <div class="col-lg-2">
@@ -311,28 +311,28 @@
                     <hr>
                     <p style="font-weight:bold">Van Insurance Details</p>
                     <div class = "row">
-                      <div class="col-3">
+                      <div class="col-lg-3">
                         <div class="form-group">
                           <label for="van_reg_date">Registration Date:</label>
                           <input type="text" id="datepicker" class="form-control datepicker" name="van_reg_date" value="">
                           <span class="err"></span>
                         </div>
                       </div>
-                      <div class="col-3">
+                      <div class="col-lg-3">
                         <div class="form-group">
                           <label for="van_policy_num">Policy Number:</label>
                           <input type="text" class="form-control" name="van_policy_num" value="">
                           <span class="err"></span>
                         </div>
                       </div>
-                      <div class="col-3">
+                      <div class="col-lg-3">
                         <div class="form-group">
                           <label for="van_renewal_date">Renewal Date:</label>
                           <input type="text" id="datepicker" class="form-control datepicker" name="van_renewal_date" value="">
                           <span class="err"></span>
                         </div>
                       </div>
-                      <div class="col-3">
+                      <div class="col-lg-3">
                         <div class="form-group">
                           <label for="van_exp_date">Expiration Date:</label>
                           <input type="text" id="datepicker" class="form-control datepicker" name="van_exp_date" value="">
@@ -473,7 +473,7 @@
                           <p class="piston_displacement"> </p>
                         </div>
                       </div>
-                      <div class="col-3">
+                      <div class="col-lg-3">
                         <div class="form-group">
                           <label for="num_of_tires">Number of Cylinders:</label>
                           <p class="num_of_tires"> </p>
@@ -494,7 +494,7 @@
                           <p class="vehicle_brand"> </p>
                         </div>
                       </div>
-                      <div class="col-3">
+                      <div class="col-lg-3">
                         <div class="form-group">
                           <label for="series">Series:</label>
                           <p class="series"> </p>
@@ -506,13 +506,13 @@
                           <p class="body_type"> </p>
                         </div>
                       </div>
-                      <div class="col-2">
+                      <div class="col-lg-2">
                         <div class="form-group">
                           <label for="body_no">Body No.:</label>
                           <p class="body_no"> </p>
                         </div>
                       </div>
-                      <div class="col-2">
+                      <div class="col-lg-2">
                         <div class="form-group">
                           <label for="year_model">Year Model:</label>
                           <p class="year_model"> </p>
@@ -520,25 +520,25 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-3">
+                      <div class="col-lg-3">
                         <div class="form-group">
                           <label for="gross">Gross WT: </label>
                           <p class="gross"> </p>
                         </div>
                       </div>
-                      <div class="col-3">
+                      <div class="col-lg-3">
                         <div class="form-group">
                           <label for="net">Net WT:</label>
                           <p class="net"> </p>
                         </div>
                       </div>
-                      <div class="col-3">
+                      <div class="col-lg-3">
                         <div class="form-group">
                           <label for="shipping_wt">Shipping WT:</label>
                           <p class="shipping_wt"> </p>
                         </div>
                       </div>
-                      <div class="col-3">
+                      <div class="col-lg-3">
                         <div class="form-group">
                           <label for="net_capacity">Net Capacity:</label>
                           <p class="net_capacity"> </p>
@@ -599,7 +599,7 @@
                         <p class="approx_length"> </p>
                       </div>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 multiply">
                       <p>x</p>
                     </div>
 
@@ -609,7 +609,7 @@
                         <p class="approx_width"> </p>
                       </div>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 multiply">
                       <p>x</p>
                     </div>
                     <div class="col-lg-2">
@@ -618,7 +618,7 @@
                         <p class="approx_height"> </p>
                       </div>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-6 multiply">
                       <p>=</p>
                     </div>
                     <div class="col-lg-2">
@@ -640,25 +640,25 @@
                   <hr>
                   <p style="font-weight:bold">Van Insurance Details</p>
                   <div class = "row">
-                    <div class="col-3">
+                    <div class="col-lg-3">
                       <div class="form-group">
                         <label for="van_reg_date">Registration Date:</label>
                         <p class="van_reg_date"> </p>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3">
                       <div class="form-group">
                         <label for="van_policy_num">Policy Number:</label>
                         <p class="van_policy_num"> </p>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3">
                       <div class="form-group">
                         <label for="van_renewal_date">Renewal Date:</label>
                         <p class="van_renewal_date"> </p>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3">
                       <div class="form-group">
                         <label for="van_exp_date">Expiration Date:</label>
                         <p class="van_exp_date"> </p>
@@ -807,7 +807,7 @@
                         <span class="err"></span>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3">
                       <div class="form-group">
                         <label for="num_of_tires">Number of Cylinders: </label>
                         <input type="number" class="form-control" name="num_of_tires" value="">
@@ -835,7 +835,7 @@
                         <span class="err"></span>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3">
                       <div class="form-group">
                         <label for="series">Series: <span class="required">*</span></label>
                         <input type="number" class="form-control" name="series" value="">
@@ -851,14 +851,14 @@
                         <span class="err"></span>
                       </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-lg-2">
                       <div class="form-group">
                         <label for="body_no">Body No.:</label>
                         <input type="number" class="form-control" name="body_no" value="">
                         <span class="err"></span>
                       </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-lg-2">
                       <div class="form-group">
                         <label for="year_model">Year Model:</label>
                         <input type="number" class="form-control" name="year_model" value="">
@@ -867,28 +867,28 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-3">
+                    <div class="col-lg-3">
                       <div class="form-group">
                         <label for="gross">Gross WT: </label>
                         <input type="number" class="form-control" name="gross" value="">
                         <span class="err"></span>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3">
                       <div class="form-group">
                         <label for="net">Net WT:</label>
                         <input type="number" class="form-control" name="net" value="">
                         <span class="err"></span>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3">
                       <div class="form-group">
                         <label for="shipping_wt">Shipping WT:</label>
                         <input type="number" class="form-control" name="shipping_wt" value="">
                         <span class="err"></span>
                       </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3">
                       <div class="form-group">
                         <label for="net_capacity">Net Capacity:</label>
                         <input type="number" class="form-control" name="net_capacity" value="">
@@ -957,7 +957,7 @@
                       <span class="err"></span>
                     </div>
                   </div>
-                  <div class="col-xs-6">
+                  <div class="col-xs-6 multiply">
                     <p>x</p>
                   </div>
 
@@ -968,7 +968,7 @@
                       <span class="err"></span>
                     </div>
                   </div>
-                  <div class="col-xs-6">
+                  <div class="col-xs-6 multiply">
                     <p>x</p>
                   </div>
                   <div class="col-lg-2">
@@ -978,7 +978,7 @@
                       <span class="err"></span>
                     </div>
                   </div>
-                  <div class="col-xs-6">
+                  <div class="col-xs-6 multiply">
                     <p>=</p>
                   </div>
                   <div class="col-lg-2">
@@ -1002,28 +1002,28 @@
                 <hr>
                 <p style="font-weight:bold">Van Insurance Details</p>
                 <div class = "row">
-                  <div class="col-3">
+                  <div class="col-lg-3">
                     <div class="form-group">
                       <label for="van_reg_date">Registration Date:</label>
                       <input type="text" id="datepicker" class="form-control datepicker" name="van_reg_date" value="">
                       <span class="err"></span>
                     </div>
                   </div>
-                  <div class="col-3">
+                  <div class="col-lg-3">
                     <div class="form-group">
                       <label for="van_policy_num">Policy Number:</label>
                       <input type="text" class="form-control" name="van_policy_num" value="">
                       <span class="err"></span>
                     </div>
                   </div>
-                  <div class="col-3">
+                  <div class="col-lg-3">
                     <div class="form-group">
                       <label for="van_renewal_date">Renewal Date:</label>
                       <input type="text" id="datepicker" class="form-control datepicker" name="van_renewal_date" value="">
                       <span class="err"></span>
                     </div>
                   </div>
-                  <div class="col-3">
+                  <div class="col-lg-3">
                     <div class="form-group">
                       <label for="van_exp_date">Expiration Date:</label>
                       <input type="text" id="datepicker" class="form-control datepicker" name="van_exp_date" value="">
