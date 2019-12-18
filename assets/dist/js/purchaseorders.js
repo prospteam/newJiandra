@@ -24,6 +24,7 @@ $(document).ready(function(){
                           str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
                         }else if(row.status == 2 && row.delivery_status != 4){
                           str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"> <i class="fas fa-eye text-info"></i></a>';
+                          str += '<a href="javascript:;" class="remarks" data-id="'+row.purchase_code+'"><i class="fa fa-comment" aria-hidden="true"></i></a>';
                           str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'"><i class="fas fa-pen text-warning"></i></a>';
                           str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><i class="fa fa-trash" aria-hidden="true"</i></a>';
                         }else if(row.status == 3 && row.delivery_status != 4){
@@ -32,6 +33,7 @@ $(document).ready(function(){
                           str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'"><i class="fas fa-pen text-warning"></i></a>';
                           str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
                         }else if(row.delivery_status == 4){
+                          str += '<a href="javascript:;" class="remarks" data-id="'+row.purchase_code+'"><i class="fa fa-comment" aria-hidden="true"></i></a>';
                           str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"> <i class="fas fa-eye text-info"></i></a>';
                         }
                         str += '</div>';
@@ -44,7 +46,11 @@ $(document).ready(function(){
                    if(row.status == 1){
                      str += '<a href="javascript:;" class="btn btn-block btn-sm btn-primary status" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">pending</a>';
                    }else if(row.status == 2){
-                     str += '<a href="javascript:;" class="inactive btn btn-block btn-sm btn-success status" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">approved</a>';
+                     if(row.delivery_status == 4){
+                       str += '<a href="javascript:;" class="inactive btn btn-block btn-sm btn-success" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'" disabled>approved</a>';
+                     }else{
+                       str += '<a href="javascript:;" class="inactive btn btn-block btn-sm btn-success status" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">approved</a>';
+                     }
                    }else if(row.status == 3){
                      str += '<a href="javascript:;" class="active btn btn-block btn-sm btn-danger status" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">cancelled</a>';
                    }
@@ -53,14 +59,20 @@ $(document).ready(function(){
             },
             {"data":"delivery_status","render": function(data, type, row,meta){
                 var str = '';
+
                  if(row.delivery_status == 1){
-                   str += '<a href="javascript:;" class="btn btn-block btn-sm btn-primary deliveryStat" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">pending</a>';
+                    if(row.status != 2){
+                      str += '<a href="javascript:;" class="btn btn-block btn-sm btn-primary" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'" disabled>waiting for approval</a>';
+                    }else{
+                      str += '<a href="javascript:;" class="btn btn-block btn-sm btn-primary deliveryStat" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">waiting for approval</a>';
+                    }
                  }else if(row.delivery_status == 2){
                    str += '<a href="javascript:;" class="inactive btn btn-block btn-sm btn-danger deliveryStat" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">on hold</a>';
                  }else if(row.delivery_status == 3){
                    str += '<a href="javascript:;" class="btn btn-block btn-sm btn-warning deliveryStat" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">on process</a>';
                  }else if(row.delivery_status == 4){
-                   str += '<a href="javascript:;" class="btn btn-block btn-sm btn-success" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'" disabled>delivered</a>';
+
+                   str += '<a href="javascript:;" class="btn btn-block btn-sm btn-success deliveryStat" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">delivered</a>';
                  }
                  return str;
             }
@@ -83,9 +95,18 @@ $(document).ready(function(){
       });
   //end display purchase_tbl
 
-  //add remarkd if cancelled Status
+  //add remarks on delivery status if on process, on hold and delivered Status
+  $('#delivery_status').on('change', function(){
+    if( $(this).val()!=="1"){
+      $("#remarks_delivery").show();
+    }else{
+      $("#remarks_delivery").hide();
+    }
+  });
+
+  //add remarkd if cancelled and approved Status
   $('#status').on('change', function(){
-    if( $(this).val()==="3"){
+    if( $(this).val()!=="1"){
       $("#remarks").show();
     }else{
       $("#remarks").hide();
@@ -114,6 +135,7 @@ $(document).ready(function(){
         console.log(data);
         $('#viewRemarks').modal('show');
          $('.viewremarks').text(data.remarks.remarks);
+         $('.view_deliv_remarks').text(data.remarks.delivery_remarks);
         // $('#change_Stat select[name=status]').val(data.status.status);
         //   $('input[name="purchase_code_status"]').val(data.status.purchase_code);
     }
@@ -514,8 +536,8 @@ $(document).ready(function(){
               str += '<td class="purch_td">';
               str += '<input type="hidden" class="form-control" name="edit_purchase_id_select[]" value='+element.purchase_id+'>';
               str += '<select class="form-control edit_new_code select2_edit" data-prod="'+element.purchase_id+'" style="width: 100%;" name="prod_code[]" data-id="'+element.product_id+'" value="'+element.code+'">';
-                  str += '<option value="'+element.id+'" selected hidden>'+element.code+'</option>';
-                   str += get_products();
+                  // str += '<option value="'+element.id+'" selected hidden>'+element.code+'</option>';
+                   str += get_edit_products(element.id);
                 str += '</select>';
                    // str += '<input type="text" class="form-control" name="prod_name[]" value='+element.product+'>';
                    str += '<span class="err"></span>';
@@ -543,7 +565,9 @@ $(document).ready(function(){
           $('.total_quantity').val(total_quantity);
           $('.total_cost').val(total_cost.toFixed(2));
           $('#edit_purch tbody').html(str);
-          $('.select2_edit').select2();
+          $('.select2_edit').select2({
+            hideSelected: true
+          });
           $('.grand_total').val(grand_total.toFixed(2));
           // $('#editpurchaseorder select[name="prod_name[]"]').trigger('change');
         }
@@ -705,7 +729,7 @@ $(document).ready(function(){
     if(x){
       x++;
       $('#edit_purch').append(str);
-      $('.select2_edit').select2();
+      $('.edit_code').select2();
     }
     // get_supplier();
   });
@@ -828,19 +852,18 @@ function get_products(){
   return data_return;
 }
 
-function get_edit_products(){
-    var id = $('.editPurchase').attr('data-id');
-  var data_return = '';
+function get_edit_products(selected_product = ''){
+  //   var id = $('.editPurchase').attr('data-id');
+  // var data_return = '';
   $.ajax({
     url: base_url + '/purchaseorders/get_edit_products/',
     type:'post',
-    data: {id:id},
     dataType:'json',
     async:false,
     success:function(data){
       var str = '';
       $.each(data.products,function(index,element){
-        str += '<option value="'+element.id+'">'+element.product_name+'</option>';
+        str += '<option value="'+element.id+'" '+(selected_product == element.id ? 'selected' : '')+'>'+element.code+'</option>';
       });
       data_return = str;
     }

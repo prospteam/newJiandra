@@ -657,22 +657,19 @@ $(document).ready(function(){
      confirmButtonText: 'Yes, Deactivate Vehicle!',
      preConfirm: function () {
     return new Promise((resolve, reject) => {
-
             resolve({
                 Remarks: $('textarea[placeholder="Add Remarks"]').val()
             });
-
-
         });
     },
     allowOutsideClick: false
   }).then(function(result){
-       // if (result.value) {
-         // Swal.fire(
-         //   'Success!',
-         //   'Vehicle has been deactivated!',
-         //   'success'
-         // )
+       if (result.value) {
+         Swal.fire(
+           'Success!',
+           'Vehicle has been deactivated!',
+           'success'
+         )
          $.ajax({
          type: 'POST',
            url:base_url + 'vehicle/disablevehicle',
@@ -686,7 +683,7 @@ $(document).ready(function(){
            }
          })
 
-       // }
+       }
      })
    });
 

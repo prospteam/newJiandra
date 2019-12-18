@@ -437,12 +437,21 @@
                       <div class="form-group">
                           <input type="hidden" class="form-control" name="purchase_code_delivery" value="">
                           <!-- <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Status</label> -->
-                          <select class="form-control" class="delivery_status" name="delivery_status" value="">
+                          <select class="form-control" class="delivery_status" name="delivery_status" id="delivery_status" value="">
                             <option value="1" selected>Pending</option>
                             <option value="2">On Hold</option>
                             <option value="3">On Process</option>
                             <option value="4">Delivered</option>
                           </select>
+                          <br>
+                          <div class = "row" id="remarks_delivery" style="display:none">
+                            <div class="col-12">
+                              <div class="form-group">
+                                <label for="remarks">Remarks:</label>
+                                  <textarea rows="4" cols="50" class="form-control" name="remarks_deliv" value=""></textarea>
+                              </div>
+                            </div>
+                          </div>
                       </div>
                     </div>
                     <button type="submit" class="btn btn-sm btn-primary add">Submit</button>
@@ -520,8 +529,15 @@
                       <div class = "row">
                         <div class="col-12">
                           <div class="form-group">
-                            <label for="remarks">Remarks:</label>
+                            <label for="remarks">Status Remarks:</label>
                               <p class="viewremarks"></p>
+                          </div>
+                          <hr>
+                        </div>
+                        <div class="col-12">
+                          <div class="form-group">
+                            <label for="remarks">Delivery Remarks:</label>
+                              <p class="view_deliv_remarks"></p>
                           </div>
                         </div>
                       </div>
