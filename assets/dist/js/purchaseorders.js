@@ -543,7 +543,9 @@ $(document).ready(function(){
           $('.total_quantity').val(total_quantity);
           $('.total_cost').val(total_cost.toFixed(2));
           $('#edit_purch tbody').html(str);
-          $('.select2_edit').select2();
+          $('.select2_edit').select2({
+            hideSelected: true
+          });
           $('.grand_total').val(grand_total.toFixed(2));
           // $('#editpurchaseorder select[name="prod_name[]"]').trigger('change');
         }
@@ -705,7 +707,7 @@ $(document).ready(function(){
     if(x){
       x++;
       $('#edit_purch').append(str);
-      $('.select2_edit').select2();
+      $('.edit_code').select2();
     }
     // get_supplier();
   });
