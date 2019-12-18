@@ -76,3 +76,7 @@ span#addnewCP {
     float: right !important;
     margin-bottom: 9px !important;
 }
+th.header-title.supp {
+    text-align: center;
+    font-size: 18px !important;
+}

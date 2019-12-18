@@ -239,22 +239,42 @@ $(document).ready(function(){
        dataType: "json",
        success: function(data){
          console.log(data);
+
+         var str = '';
          $('#viewSupplier').modal('show');
          // $.each(data.supplier, function(key,val){
            // console.log(data);
-           $('.supplier_name').text(data.supplier.supplier_name);
-           $('.supplier_contact_person').text(data.supplier.supplier_contact_person);
+
+          $('.supplier_name').text(data.supplier.supplier_name);
+
+          str += '<tr>';
+            str +=  '<td class = "supp_td">';
+              str +=  data.supplier.contact_name;
+            str +=  '</td>';
+          str +=  '<td class = "supp_td">';
+            str +=  data.supplier.mobile_number;
+          str +=  '</td>';
+          str +=' <td class="supp_td">';
+            str +=  data.supplier.contact_email;
+          str +=  '</td>';
+          str +=' <td class="supp_td">';
+            str +=  data.supplier.supp_position;
+          str +=  '</td>';
+        str += '</tr>';
+
+          $('#view_supplier_contact_details').find('tbody').html(str);
+
            $('.email').text(data.supplier.email);
            $('.address').text(data.supplier.address);
            $('.office_number').text(data.supplier.office_number);
-           $('.tin').text(data.supplier.tin_number);
+           $('.tin_number').text(data.supplier.tin_number);
            $('.fax_number').text(data.supplier.fax_number);
            var company_list = [];
 
            $.each(data.company, function(key,val){
              company_list.push(val.company_name);
-             // console.log(val);
            });
+
            $('.company').text(company_list.join(', '));
 
        }

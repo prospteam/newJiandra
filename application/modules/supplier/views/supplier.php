@@ -36,13 +36,13 @@
 								<hr>
 										<span class="btn btn-sm btn-primary" id="addnewCP"><i class="fa fa-plus"></i> Supplier Contact Person</span>
 									<br>
-									<div class="table-responsive view_purchase_orders_details">
+									<div class="table-responsive view_supplier_contact_details">
 												<table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_contact_person">
 													<thead>
-															<th class="header-title supp">Name <span class="required">*</span></th>
-															<th class="header-title supp">Mobile Number <span class="required">*</span></th>
-															<th class="header-title supp">Email <span class="required">*</span></th>
-															<th class="header-title supp">Position <span class="required">*</span></th>
+															<th class="header-title supp">Name</th>
+															<th class="header-title supp">Mobile Number</th>
+															<th class="header-title supp">Email </th>
+															<th class="header-title supp">Position </th>
 													</thead>
 													<tbody>
 
@@ -169,12 +169,22 @@
 												<p class="supplier_name"> </p>
 											</div>
 										</div>
-										<div class="col-6">
-											<div class="form-group">
-												<label for="supplier_contact_person">Supplier Contact Person:</label>
-												<p class="supplier_contact_person"> </p>
-											</div>
-										</div>
+									</div>
+									<div class="table-responsive purch_prod">
+												<table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="view_supplier_contact_details">
+													<thead>
+														<th class="header-title supp">Name</th>
+														<th class="header-title supp">Mobile Number </span></th>
+														<th class="header-title supp">Email </span></th>
+														<th class="header-title supp">Position </span></th>
+
+													</thead>
+													<tbody>
+														<tr>
+
+														</tr>
+													</tbody>
+												</table>
 									</div>
 								<div class = "row">
 											<div class="col-6">
@@ -210,7 +220,7 @@
 									</div>
 								</div>
 							</div>
-						</div> 
+						</div>
 					</div>
 			</div>
 				</div>
@@ -241,13 +251,13 @@
 									<hr>
 											<span class="btn btn-sm btn-primary" id="addnewCP"><i class="fa fa-plus"></i> Supplier Contact Person</span>
 										<br>
-										<div class="table-responsive view_purchase_orders_details">
+										<div class="table-responsive view_supplier_contact_details">
 													<table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_contact_person">
 														<thead>
-																<th class="header-title supp">Name <span class="required">*</span></th>
-																<th class="header-title supp">Mobile Number <span class="required">*</span></th>
-																<th class="header-title supp">Email <span class="required">*</span></th>
-																<th class="header-title supp">Position <span class="required">*</span></th>
+																<th class="header-title supp">Name</th>
+																<th class="header-title supp">Mobile Number</span></th>
+																<th class="header-title supp">Email </th>
+																<th class="header-title supp">Position </th>
 														</thead>
 														<tbody>
 
