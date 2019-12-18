@@ -312,8 +312,16 @@ class Purchaseorders extends MY_Controller {
 	//change delivery Status
 	public function change_deliv_status(){
 		$post = $this->input->post();
-
-		$data = array('delivery_status' => $post['delivery_status']);
+		if($post['delivery_status'] == 2){
+			$remarks = empty($post['remarks_deliv']) ? "None" : $post['remarks_deliv'];
+		}else if($post['delivery_status'] == 3){
+			$remarks = empty($post['remarks_deliv']) ? "None" : $post['remarks_deliv'];
+		}else if($post['delivery_status'] == 4){
+			$remarks = empty($post['remarks_deliv']) ? "None" : $post['remarks_deliv'];
+		}else{
+			$remarks = empty($post['remarks_deliv']) ? "None" : $post['remarks_deliv'];
+		}
+		$data = array('delivery_status' => $post['delivery_status'], 'delivery_remarks' => $remarks);
 		$data['delivStat'] = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['purchase_code_delivery']));
 		json($data);
 	}
@@ -333,8 +341,14 @@ class Purchaseorders extends MY_Controller {
 	//change  Status
 	public function change_status(){
 		$post = $this->input->post();
+		if($post['status'] == 2){
 
-		$remarks = empty($post['remarks']) ? "None" : $post['remarks'];
+			$remarks = empty($post['remarks']) ? "None" : $post['remarks'];
+		}else if($post['status'] == 3){
+			$remarks = empty($post['remarks']) ? "None" : $post['remarks'];
+		}else{
+			$remarks = empty($post['remarks']) ? "None" : $post['remarks'];
+		}
 
 		$data = array('status' => $post['status'], 'remarks' => $remarks);
 
