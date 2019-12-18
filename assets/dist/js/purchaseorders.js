@@ -514,8 +514,8 @@ $(document).ready(function(){
               str += '<td class="purch_td">';
               str += '<input type="hidden" class="form-control" name="edit_purchase_id_select[]" value='+element.purchase_id+'>';
               str += '<select class="form-control edit_new_code select2_edit" data-prod="'+element.purchase_id+'" style="width: 100%;" name="prod_code[]" data-id="'+element.product_id+'" value="'+element.code+'">';
-                  str += '<option value="'+element.id+'" selected hidden>'+element.code+'</option>';
-                   str += get_products();
+                  // str += '<option value="'+element.id+'" selected hidden>'+element.code+'</option>';
+                   str += get_edit_products(element.id);
                 str += '</select>';
                    // str += '<input type="text" class="form-control" name="prod_name[]" value='+element.product+'>';
                    str += '<span class="err"></span>';
@@ -830,19 +830,18 @@ function get_products(){
   return data_return;
 }
 
-function get_edit_products(){
-    var id = $('.editPurchase').attr('data-id');
-  var data_return = '';
+function get_edit_products(selected_product = ''){
+  //   var id = $('.editPurchase').attr('data-id');
+  // var data_return = '';
   $.ajax({
     url: base_url + '/purchaseorders/get_edit_products/',
     type:'post',
-    data: {id:id},
     dataType:'json',
     async:false,
     success:function(data){
       var str = '';
       $.each(data.products,function(index,element){
-        str += '<option value="'+element.id+'">'+element.product_name+'</option>';
+        str += '<option value="'+element.id+'" '+(selected_product == element.id ? 'selected' : '')+'>'+element.code+'</option>';
       });
       data_return = str;
     }

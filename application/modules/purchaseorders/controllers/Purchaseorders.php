@@ -69,8 +69,7 @@ class Purchaseorders extends MY_Controller {
 	}
 
 	public function get_edit_products(){
-		$parameters['where'] = array('id' => $this->input->post('id'));
-		$data['products'] = $this->MY_Model->getRows('products',$parameters);
+		$data['products'] = $this->MY_Model->getRows('products');
 		json($data);
 	}
 
