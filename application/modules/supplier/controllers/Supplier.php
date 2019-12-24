@@ -55,8 +55,6 @@ class Supplier extends MY_Controller
 
 							if(count($company_name) >= 1){
 									foreach ($company_name as $key => $value) {
-
-
 										$data = array(
 											'supplier_logo' 						=> $uploadData['file_name'],
 											'supplier_name' 						=> $this->input->post('supplier_name'),
@@ -333,13 +331,29 @@ class Supplier extends MY_Controller
 		// echo $this->db->last_query();
 		echo json_encode($datas);
 	}
-
-
-
+	//Permanently Delete user
+// 	public function deleteSupplier()
+// 	{
+// 		$supplier_id = $this->input->post('id');
+// 		$supplier_status = 3;
+// 		$data = array(
+// 			'status' => $supplier_status
+// 		);
+// 		$datas['delete'] = $this->MY_Model->update('supplier',$data,array('id' => $supplier_id));
+// 		echo json_encode($datas);
+// 	}
+// }
+	//view details for edit
 	public function supplier_details(){
-
+		// $supplier_id = $this->input->post('id');
+		// $parameters['where'] = array('id' => $supplier_id);
+		// $data['view_edit'] = $this->MY_Model->getRows('supplier',$parameters,'row');
+		// // echo $this->db->last_query();
+		// echo json_encode($data);
 		$supplier_id = $this->input->post('id');
+
 		$data_array = array();
+
 		$parameters['join'] = array(
 			'company' => 'company.company_id = supplier.company'
 		);

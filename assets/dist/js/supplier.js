@@ -372,7 +372,6 @@ $(document).ready(function(){
    str += ' <input type="text" class="form-control supp_position" name="position" value="">';
    str += '	<form-control supp_position" name="position" value="">';
 str += '</td>';
-   str += '</tr>'
    str += '<td class="supp_td">';
        str += '<button id="removeSupplier" class="btn btn-md btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>';
    str += '</td>';

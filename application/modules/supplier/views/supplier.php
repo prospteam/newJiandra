@@ -36,7 +36,7 @@
 								<hr>
 										<span class="btn btn-sm btn-primary" id="addnewCP"><i class="fa fa-plus"></i> Supplier Contact Person</span>
 									<br>
-									<div class="table-responsive view_supplier_contact_details">
+									<div class="table-responsive view_purchase_orders_details">
 												<table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_contact_person">
 													<thead>
 															<th class="header-title supp">Name</th>
@@ -181,7 +181,22 @@
 													</thead>
 													<tbody>
 														<tr>
-
+															<!-- <td class="purch_td">
+																<input type="text" class="form-control" name="prod_name[]" value="">
+																<span class="err"></span>
+															</td>
+															<td class="purch_td">
+																<input type="number" class="form-control purchase_quantity" name="quantity[]" value="">
+																<span class="err"></span>
+															</td>
+															<td class="purch_td">
+																<input type="number" class="form-control purchase_price" name="unit_price[]" value="">
+																<span class="err"></span>
+															</td>
+															<td class="purch_td">
+																<input type="number" class="form-control purchase_total" name="total[]" value="" readonly>
+																<span class="err"></span>
+															</td> -->
 														</tr>
 													</tbody>
 												</table>
@@ -251,7 +266,7 @@
 									<hr>
 											<span class="btn btn-sm btn-primary" id="addnewCP"><i class="fa fa-plus"></i> Supplier Contact Person</span>
 										<br>
-										<div class="table-responsive view_supplier_contact_details">
+										<div class="table-responsive view_purchase_orders_details">
 													<table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_contact_person">
 														<thead>
 																<th class="header-title supp">Name</th>
