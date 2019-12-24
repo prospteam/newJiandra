@@ -36,7 +36,7 @@
 								<hr>
 										<span class="btn btn-sm btn-primary" id="addnewCP"><i class="fa fa-plus"></i> Supplier Contact Person</span>
 									<br>
-									<div class="table-responsive view_purchase_orders_details">
+									<div class="table-responsive view_supplier_contact_details">
 												<table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_contact_person">
 													<thead>
 															<th class="header-title supp">Name</th>
@@ -48,19 +48,19 @@
 
 															<tr>
 																<td class="supp_td">
-																	<input type="text" class="form-control contact_person" name="contact_name" value="">
+																	<input type="text" class="form-control contact_person" name="contact_name[]" value="">
 																	<span class="err"></span>
 																</td>
 																<td class="supp_td">
-																	<input type="number" class="form-control contact_mobileno" name="mobile_number" value="">
+																	<input type="number" class="form-control contact_mobileno" name="mobile_number[]" value="">
 																	<span class="err"></span>
 																</td>
 																<td class="supp_td">
-																	<input type="text" class="form-control contact_email" name="contact_email" value="">
+																	<input type="text" class="form-control contact_email" name="contact_email[]" value="">
 																	<span class="err"></span>
 																</td>
 																<td class="supp_td">
-																	<input type="text" class="form-control supp_position" name="supp_position" value="">
+																	<input type="text" class="form-control supp_position" name="supp_position[]" value="">
 																	<span class="err"></span>
 																</td>
 															</tr>
@@ -266,7 +266,7 @@
 									<hr>
 											<span class="btn btn-sm btn-primary" id="addnewCP"><i class="fa fa-plus"></i> Supplier Contact Person</span>
 										<br>
-										<div class="table-responsive view_purchase_orders_details">
+										<div class="table-responsive view_supplier_contact_details">
 													<table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_contact_person">
 														<thead>
 																<th class="header-title supp">Name</th>
@@ -278,19 +278,19 @@
 
 																<tr>
 																	<td class="supp_td">
-																		<input type="text" class="form-control contact_person" name="contact_name" value="">
+																		<input type="text" class="form-control contact_person" name="contact_name[]" value="">
 																		<span class="err"></span>
 																	</td>
 																	<td class="supp_td">
-																		<input type="number" class="form-control contact_mobileno" name="mobile_number" value="">
+																		<input type="number" class="form-control contact_mobileno" name="mobile_number[]" value="">
 																		<span class="err"></span>
 																	</td>
 																	<td class="supp_td">
-																		<input type="text" class="form-control contact_email" name="contact_email" value="">
+																		<input type="text" class="form-control contact_email" name="contact_email[]" value="">
 																		<span class="err"></span>
 																	</td>
 																	<td class="supp_td">
-																		<input type="text" class="form-control supp_position" name="supp_position" value="">
+																		<input type="text" class="form-control supp_position" name="supp_position[]" value="">
 																		<span class="err"></span>
 																	</td>
 																</tr>

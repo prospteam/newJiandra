@@ -18,7 +18,6 @@ class Supplier extends MY_Controller
 			if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 				$company_name = $this->input->post('company');
-
 				$upload_path = 'assets/images/supplierLogo/';
 				$time = date('ymdhis');
 				if(!empty($_FILES['logo']['name'])){
@@ -54,20 +53,27 @@ class Supplier extends MY_Controller
 					if ($this->form_validation->run() !== FALSE) {
 
 							if(count($company_name) >= 1){
+
+								$array = array();
+								for ($i=0; $i < count($this->input->post('contact_name')) ; $i++) {
+									$array[] = array(
+										"contact_name" => $this->input->post('contact_name')[$i],
+										"mobile_number" => $this->input->post('mobile_number')[$i],
+										"contact_email" => $this->input->post('contact_email')[$i],
+										"supp_position" => $this->input->post('supp_position')[$i],
+									);
+								}
 									foreach ($company_name as $key => $value) {
 										$data = array(
 											'supplier_logo' 						=> $uploadData['file_name'],
 											'supplier_name' 						=> $this->input->post('supplier_name'),
-											'contact_name'              => $this->input->post('contact_name'),
-											'mobile_number'             => $this->input->post('mobile_number'),
-											'contact_email'             => $this->input->post('contact_email'),
-											'supp_position'             => $this->input->post('supp_position'),
 											'company' 									=> $value,
 											'email'                     => $this->input->post('email'),
 											'address'                   => $this->input->post('address'),
 											'office_number' 						=> $this->input->post('office_number'),
 											'fax_number' 								=> $this->input->post('fax_number'),
 											'tin_number' 								=> $this->input->post('tin_number'),
+											'contact_info'							=> json_encode($array),
 											'status' 										=> 1
 										);
 
@@ -80,19 +86,25 @@ class Supplier extends MY_Controller
 									}
 								}
 						}else{
+							$array = array();
+							for ($i=0; $i < count($this->input->post('contact_name')) ; $i++) {
+								$array[] = array(
+									"contact_name" => $this->input->post('contact_name')[$i],
+									"mobile_number" => $this->input->post('mobile_number')[$i],
+									"contact_email" => $this->input->post('contact_email')[$i],
+									"supp_position" => $this->input->post('supp_position')[$i],
+								);
+							}
 								$data = array(
 									'supplier_logo' 						=> $uploadData['file_name'],
 									'supplier_name' 						=> $this->input->post('supplier_name'),
-									'contact_name'              => $this->input->post('contact_name'),
-									'mobile_number'             => $this->input->post('mobile_number'),
-									'contact_email'             => $this->input->post('contact_email'),
-									'supp_position'             => $this->input->post('supp_position'),
 									'company' 									=> $this->input->post('company'),
 									'email'                     => $this->input->post('email'),
 									'address'                   => $this->input->post('address'),
 									'office_number' 						=> $this->input->post('office_number'),
 									'fax_number' 								=> $this->input->post('fax_number'),
 									'tin_number' 								=> $this->input->post('tin_number'),
+									'contact_info'							=> json_encode($array),
 									'status' 										=> 1
 									// 'vendor' => $this->input->post('vendor'),
 									// 'company' => implode(',',$this->input->post('company')),
@@ -107,6 +119,7 @@ class Supplier extends MY_Controller
 							}
 
 				}else{
+
 
 					$this->load->library("form_validation");
 					$this->form_validation->set_rules('supplier_name', 'Supplier Name', 'required');
@@ -126,21 +139,27 @@ class Supplier extends MY_Controller
 					if ($this->form_validation->run() !== FALSE) {
 
 									if(count($company_name) >= 1){
+										$array = array();
+										for ($i=0; $i < count($this->input->post('contact_name')) ; $i++) {
+											$array[] = array(
+												"contact_name" => $this->input->post('contact_name')[$i],
+												"mobile_number" => $this->input->post('mobile_number')[$i],
+												"contact_email" => $this->input->post('contact_email')[$i],
+												"supp_position" => $this->input->post('supp_position')[$i],
+											);
+										}
 										foreach ($company_name as $key => $value) {
 
 											 $data = array(
  												'supplier_logo' 							=> 1,
  												'supplier_name' 							=> $this->input->post('supplier_name'),
- 												'contact_name' 						  	=> $this->input->post('contact_name'),
- 												'mobile_number' 							=> $this->input->post('mobile_number'),
-												'contact_email'               =>$this->input->post('contact_email'),
-												'supp_position'               =>$this->input->post('supp_position'),
  												'company' 										=> $value,
  												'email' 						        	=> $this->input->post('email'),
  												'address' 										=> $this->input->post('address'),
  												'office_number' 							=> $this->input->post('office_number'),
  												'fax_number' 									=> $this->input->post('fax_number'),
  												'tin_number' 									=> $this->input->post('tin_number'),
+												'contact_info'						  	=> json_encode($array),
  												'status' 											=> 1
 												// 'vendor' => $this->input->post('vendor'),
  											);
@@ -154,21 +173,26 @@ class Supplier extends MY_Controller
 										}
 
 									}else{
-
+										$array = array();
+										for ($i=0; $i < count($this->input->post('contact_name')) ; $i++) {
+											$array[] = array(
+												"contact_name" => $this->input->post('contact_name')[$i],
+												"mobile_number" => $this->input->post('mobile_number')[$i],
+												"contact_email" => $this->input->post('contact_email')[$i],
+												"supp_position" => $this->input->post('supp_position')[$i],
+											);
+										}
 										 $data = array(
-											 'supplier_logo' 							=> 1,
-											 'supplier_name' 							=> $this->input->post('supplier_name'),
-											 'contact_name' 						  	=> $this->input->post('contact_name'),
-											 'mobile_number' 							=> $this->input->post('mobile_number'),
-											 'contact_email'               =>$this->input->post('contact_email'),
-											 'supp_position'               =>$this->input->post('supp_position'),
-											 'company' 										=> $value,
-											 'email' 						        	=> $this->input->post('email'),
-											 'address' 										=> $this->input->post('address'),
-											 'office_number' 							=> $this->input->post('office_number'),
+											 'supplier_logo' 								=> 1,
+											 'supplier_name' 								=> $this->input->post('supplier_name'),
+											 'company' 									  	=> $value,
+											 'email' 						          	=> $this->input->post('email'),
+											 'address' 									  	=> $this->input->post('address'),
+											 'office_number' 						  	=> $this->input->post('office_number'),
 											 'fax_number' 									=> $this->input->post('fax_number'),
 											 'tin_number' 									=> $this->input->post('tin_number'),
-											 'status' 										=> 1
+											 'contact_info'						    	=> json_encode($array),
+											 'status' 									  	=> 1
 											 // 'vendor' => $this->input->post('vendor'),
 										 );
 
@@ -194,11 +218,6 @@ class Supplier extends MY_Controller
 	//display all suppliers
 	public function display_suppliers($id){
 
-	// 	$parameters['select'] = '*';
-	// 	$data['supplier'] = $this->MY_Model->getRows('supplier',$parameters);
-	// 	echo '<pre>';
-	// 	print_r($data);
-	// }
 		$limit = $this->input->post('length');
 		$offset = $this->input->post('start');
 		$search = $this->input->post('search');
@@ -227,34 +246,6 @@ class Supplier extends MY_Controller
 
 		echo json_encode($output);
 	}
-	// display all suppliers
-
-	// public function display_allVehicles(){
-	// 	$limit = $this->input->post('length');
-	// 	$offset = $this->input->post('start');
-	// 	$search = $this->input->post('search');
-	// 	$order = $this->input->post('order');
-	// 	$draw = $this->input->post('draw');
-	//
-	//
-	// 	$column_order = array('supplier_logo','supplier_name');
-	// 	// $where = array('status !=' => 3);
-	// 	$join = array();
-	//
-	// 	$select = "id,supplier_logo, supplier_name, vehicle_brand, status";
-	// 	$list = $this->MY_Model->get_datatables1('supplier',$column_order, $select, $join, $limit, $offset ,$search, $order);
-	//
-	//
-	// 	$output = array(
-	// 			"draw" => $draw,
-	// 			"recordsTotal" => $list['count_all'],
-	// 			"recordsFiltered" => $list['count'],
-	// 			"data" => $list['data']
-	// 	);
-	// 	// $this->load_page('users',$output);
-	// 	echo json_encode($output);
-	// }
-	// end display all users
 
 	//view supplier Details
 	public function view_supplier_details(){
@@ -275,6 +266,7 @@ class Supplier extends MY_Controller
 		$data_company = $this->MY_Model->getRows('company',$company_parameters);
 
 		$data_array['supplier'] = $data;
+		$data_array['contact_info'] = json_decode($data->contact_info);
 		$data_array['company'] = $data_company;
 		json($data_array);
 	}
@@ -367,6 +359,7 @@ class Supplier extends MY_Controller
 		$data_company = $this->MY_Model->getRows('company',$company_parameters);
 
 		$data_array['supplier'] = $data;
+		$data_array['contact_info'] = json_decode($data->contact_info);
 		$data_array['company'] = $data_company;
 
 		json($data_array);
@@ -415,20 +408,24 @@ class Supplier extends MY_Controller
 		$result = false;
 
 		if(!empty($post)) {
-
+			$array = array();
+			for ($i=0; $i < count($this->input->post('contact_name')) ; $i++) {
+				$array[] = array(
+					"contact_name" => $this->input->post('contact_name')[$i],
+					"mobile_number" => $this->input->post('mobile_number')[$i],
+					"contact_email" => $this->input->post('contact_email')[$i],
+					"supp_position" => $this->input->post('supp_position')[$i],
+				);
+			}
 			$data = array(
 				// 'supplier_logo' => $uploadData['file_name'],
 				'supplier_name' 				  => $post['supplier_name'],
-				'contact_name'    			  =>$post['contact_name'],
-				'mobile_number'    			  =>$post['mobile_number'],
-				'contact_email'    			  =>$post['contact_email'],
-				'supp_position'    			  =>$post['supp_position'],
 				'email'    						    =>$post['email'],
 				'address'     					  =>$post['address'],
-				// 'company'=> 1,
 				'office_number' 					=>$post['office_number'],
 				'fax_number' 							=> $post['fax_number'],
 				'tin_number' 							=> $post['tin_number'],
+				'contact_info'						=> json_encode($array),
 				// 'company' => implode(',',$this->input->post('company')),
 				// 'status' => 1
 			);
