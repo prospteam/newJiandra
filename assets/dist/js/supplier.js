@@ -246,21 +246,23 @@ $(document).ready(function(){
            // console.log(data);
 
           $('.supplier_name').text(data.supplier.supplier_name);
-
-          str += '<tr>';
+          $.each(data.contact_info, function (key,val){
+            console.log(val);
+            str += '<tr>';
             str +=  '<td class = "supp_td">';
-              str +=  data.supplier.contact_name;
+            str +=  val.contact_name;
             str +=  '</td>';
-          str +=  '<td class = "supp_td">';
-            str +=  data.supplier.mobile_number;
-          str +=  '</td>';
-          str +=' <td class="supp_td">';
-            str +=  data.supplier.contact_email;
-          str +=  '</td>';
-          str +=' <td class="supp_td">';
-            str +=  data.supplier.supp_position;
-          str +=  '</td>';
-        str += '</tr>';
+            str +=  '<td class = "supp_td">';
+            str +=   val.mobile_number;
+            str +=  '</td>';
+            str +=' <td class="supp_td">';
+            str +=   val.contact_email;
+            str +=  '</td>';
+            str +=' <td class="supp_td">';
+            str +=   val.supp_position;
+            str +=  '</td>';
+            str += '</tr>';
+          })
 
           $('#view_supplier_contact_details').find('tbody').html(str);
 
@@ -291,6 +293,27 @@ $(document).ready(function(){
          type: 'post',
          dataType: 'json',
          success: function(data){
+
+           var str = "";
+           $.each(data.contact_info, function (key,val){
+             console.log(val);
+             str += '<tr>';
+             str +=  '<td class = "supp_td">';
+             str +=  '<input type = "text" class="form-control contact_person" name="contact_name[]" value="'+val.contact_name+'" >';
+             str +=  '</td>';
+             str +=  '<td class = "supp_td">';
+             str +=   '<input type="number" class="form-control contact_mobileno" name="mobile_number[]" value="'+val.mobile_number+'">';
+             str +=  '</td>';
+             str +=' <td class="supp_td">';
+             str +=   '<input type="text" class="form-control contact_email" name="contact_email[]" value="'+val.contact_email+'">';
+             str +=  '</td>';
+             str +=' <td class="supp_td">';
+             str +=   '<input type="text" class="form-control supp_position" name="supp_position[]" value="'+val.supp_position+'">';
+             str +=  '</td>';
+             str += '</tr>';
+           })
+
+            $('#add_contact_person tbody').html(str);
 
              $('#editSupplier').modal('show');
              $('#editSupplier input[name=supplier_id]').val(data.supplier.id);
@@ -357,22 +380,21 @@ $(document).ready(function(){
 
     str += '<tr>'
     str += '<td class = "supp_td">';
-      str += '<input type="text" class="form-control contact_person" name="contact_name" value="">';
+      str += '<input type="text" class="form-control contact_person" name="contact_name[]" value="">';
       str += '<span class="err"></span>';
       str += '</td>';
     str += '<td class="supp_td">';
-        str += '<input type="number" class="form-control contact_mobileno" name="mobile_number" value="">';
+        str += '<input type="number" class="form-control contact_mobileno" name="mobile_number[]" value="">';
       str += '<span class="err"></span>';
       str += '</td>'
     str += '<td class="supp_td">';
-      str += ' <input type="text" class="form-control contact_email" name="contact_email" value="">';
+      str += ' <input type="text" class="form-control contact_email" name="contact_email[]" value="">';
       str += '<form-control contact_email" name="contact_email" value="">';
    str += '</td>';
  str += '<td class="supp_td">';
-   str += ' <input type="text" class="form-control supp_position" name="position" value="">';
-   str += '	<form-control supp_position" name="position" value="">';
+   str += ' <input type="text" class="form-control supp_position" name="supp_position[]" value="">';
+   str += '	<form-control supp_position" name="supp_position" value="">';
 str += '</td>';
-   str += '</tr>'
    str += '<td class="supp_td">';
        str += '<button id="removeSupplier" class="btn btn-md btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>';
    str += '</td>';

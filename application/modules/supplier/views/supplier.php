@@ -48,19 +48,19 @@
 
 															<tr>
 																<td class="supp_td">
-																	<input type="text" class="form-control contact_person" name="contact_name" value="">
+																	<input type="text" class="form-control contact_person" name="contact_name[]" value="">
 																	<span class="err"></span>
 																</td>
 																<td class="supp_td">
-																	<input type="number" class="form-control contact_mobileno" name="mobile_number" value="">
+																	<input type="number" class="form-control contact_mobileno" name="mobile_number[]" value="">
 																	<span class="err"></span>
 																</td>
 																<td class="supp_td">
-																	<input type="text" class="form-control contact_email" name="contact_email" value="">
+																	<input type="text" class="form-control contact_email" name="contact_email[]" value="">
 																	<span class="err"></span>
 																</td>
 																<td class="supp_td">
-																	<input type="text" class="form-control supp_position" name="supp_position" value="">
+																	<input type="text" class="form-control supp_position" name="supp_position[]" value="">
 																	<span class="err"></span>
 																</td>
 															</tr>
@@ -181,7 +181,22 @@
 													</thead>
 													<tbody>
 														<tr>
-
+															<!-- <td class="purch_td">
+																<input type="text" class="form-control" name="prod_name[]" value="">
+																<span class="err"></span>
+															</td>
+															<td class="purch_td">
+																<input type="number" class="form-control purchase_quantity" name="quantity[]" value="">
+																<span class="err"></span>
+															</td>
+															<td class="purch_td">
+																<input type="number" class="form-control purchase_price" name="unit_price[]" value="">
+																<span class="err"></span>
+															</td>
+															<td class="purch_td">
+																<input type="number" class="form-control purchase_total" name="total[]" value="" readonly>
+																<span class="err"></span>
+															</td> -->
 														</tr>
 													</tbody>
 												</table>
@@ -263,19 +278,19 @@
 
 																<tr>
 																	<td class="supp_td">
-																		<input type="text" class="form-control contact_person" name="contact_name" value="">
+																		<input type="text" class="form-control contact_person" name="contact_name[]" value="">
 																		<span class="err"></span>
 																	</td>
 																	<td class="supp_td">
-																		<input type="number" class="form-control contact_mobileno" name="mobile_number" value="">
+																		<input type="number" class="form-control contact_mobileno" name="mobile_number[]" value="">
 																		<span class="err"></span>
 																	</td>
 																	<td class="supp_td">
-																		<input type="text" class="form-control contact_email" name="contact_email" value="">
+																		<input type="text" class="form-control contact_email" name="contact_email[]" value="">
 																		<span class="err"></span>
 																	</td>
 																	<td class="supp_td">
-																		<input type="text" class="form-control supp_position" name="supp_position" value="">
+																		<input type="text" class="form-control supp_position" name="supp_position[]" value="">
 																		<span class="err"></span>
 																	</td>
 																</tr>
