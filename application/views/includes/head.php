@@ -214,7 +214,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../UI/buttons.html" class="nav-link">
+                <a href="<?php echo base_url('stocksmanagement'); ?>" class="nav-link">
                   <p>Stock Management</p>
                 </a>
               </li>

@@ -26,6 +26,8 @@
 <script src="<?php echo base_url('assets/dist/js/purchaseorders.js'); ?>"></script>
 <!-- products js -->
 <script src="<?php echo base_url('assets/dist/js/products.js'); ?>"></script>
+<!-- stocksmanagement js -->
+<script src="<?php echo base_url('assets/dist/js/stocksmanagement.js'); ?>"></script>
 
 
 </body>
