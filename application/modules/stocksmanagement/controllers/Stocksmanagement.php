@@ -35,15 +35,18 @@ class Stocksmanagement extends MY_Controller {
 		$draw = $this->input->post('draw');
 
 
-		$column_order = array('products.code','products.product_name','delivered');
+		$column_order = array('products.code','products.product_name','purchase_orders.delivered');
 		$where = array('purchase_orders.delivery_status' => 4);
 		$group = array('purchase_orders.product');
+		// $count = array('purchase_orders.delivered');
 		$join = array(
 			'products' => 'products.id = purchase_orders.product'
 		);
-		$select = "purchase_orders.product, purchase_orders.delivered, products.code, products.product_name";
+		$select = "purchase_orders.product, SUM(purchase_orders.delivered) as system_count, products.code, products.product_name";
 		$list = $this->MY_Model->get_datatables('purchase_orders',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
-
+		// echo "<pre>";
+		// print_r($list);
+		// exit;
 		// foreach($list['data'] as $key => $value){
 		// 	echo "<pre>";
 		// 	print_r($value);
@@ -66,6 +69,19 @@ class Stocksmanagement extends MY_Controller {
 		// exit;
 
 		echo json_encode($output);
+	}
+
+	//add physical count
+	public function add_physicalcount(){
+		$post = $this->input->post();
+		echo "<pre>";
+		print_r($post);
+		exit;
+		if(!empty($post['qty'])){
+				$data = array('qty' => $post['qty']);
+			$data['delivered_qty'] = $this->MY_Model->update('purchase_orders', $data, array('id' => $post['id']));
+			json($data);
+		}
 	}
 }
 
