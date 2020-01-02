@@ -175,7 +175,7 @@ th.header-title {
 
 .table th, .table td {
     padding: 0.75rem!important;
-    /* vertical-align: top; */
+    vertical-align: middle!important;
     border-top: 1px solid #dee2e6!important;
 }
 
@@ -329,6 +329,9 @@ td.purch_td.hide {
   margin: 0 auto;
 }
 
+textarea.notes_stocks {
+    width: 100%;
+}
 
 @media only screen and (max-width: 1056px){
   .actions {

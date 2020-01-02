@@ -8,40 +8,36 @@ $(document).ready(function(){
          "order": [[0,'desc']], //Initial no order.
          "columns":[
               {"data":"code"},
+              {"data":"supplier_name"},
+              {"data":"brand"},
               {"data":"product_name"},
+              {"data":"packing","render": function(data, type, row,meta){
+                var str = '';
+                  str += '<div>';
+                    str += '<span class="variance">0</span>';
+                  str += '</div>';
+                return str;
+              }
+            },
+            {"data":"date_delivered"},
               {"data":"system_count"},
 
               // {"data":"type"},
               {"data":"physical_count","render": function(data, type, row,meta){
                         var str = '';
-                        // str += '<div class="actions">';
-                        // if(row.status == 1 && row.delivery_status != 4){
                          str += '<div>';
                         str += '<span class="physical_count">0</span>';
-                        str +=  '<input type="number" class="add_physcount" name="physical_count[]" value="0" disabled hidden>';
-                        str += '<span class="physcount">';
-                          str += '<a href="javascript:;" class="btn btn-xs btn-primary add_physicalcount"><i class="fa fa-edit"></i></a>';
-                          str += '<a href="javascript:;" class="btn btn-xs btn-success submit_physicalcount" hidden><input name="code" value='+row.code+' hidden><input name="product_name" value='+row.product_name+' hidden><input name="system_count" value='+row.system_count+' hidden><i class="fa fa-check"></i></a>';
-                        str += '</span>';
                         str += '</div>';
                         return str;
                    }
               },
 
               {"data":"variance","render": function(data, type, row,meta){
-                  // var str = '';
-                  //  if(row.status == 1){
-                  //    str += '<a href="javascript:;" class="btn btn-block btn-sm btn-primary status" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">pending</a>';
-                  //  }else if(row.status == 2){
-                  //    if(row.delivery_status == 4){
-                  //      str += '<a href="javascript:;" class="inactive btn btn-block btn-sm btn-success" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'" disabled>approved</a>';
-                  //    }else{
-                  //      str += '<a href="javascript:;" class="inactive btn btn-block btn-sm btn-success status" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">approved</a>';
-                  //    }
-                  //  }else if(row.status == 3){
-                  //    str += '<a href="javascript:;" class="active btn btn-block btn-sm btn-danger status" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">cancelled</a>';
-                  //  }
-                  //  return str;
+                var str = '';
+                  str += '<div>';
+                    str += '<span class="variance">0</span>';
+                  str += '</div>';
+                return str;
               }
             }
 
@@ -63,36 +59,117 @@ $(document).ready(function(){
   //end display purchase_tbl
 
   //show edit delivered input on view purchase order
-  $(document).on('click','.add_physicalcount', function(){
-    var pTr = $(this).parents('tr');
+  // $(document).on('click','.add_physicalcount', function(){
+  //   var pTr = $(this).parents('tr');
+  //
+  //   pTr.find('.add_physcount').show().prop('disabled', false).prop('hidden', false);
+  //   pTr.find('.physical_count').hide();
+  //
+  //   pTr.find('.submit_physicalcount').show().prop('hidden', false);
+  //   pTr.find('.add_physicalcount').hide().prop('hidden', true);
+  //
+  //
+  //   $('.submit_physicalcount').unbind('click').click(function(e) {
+  //     var code = pTr.find('input[name="code"]').val();
+  //     var product_name = pTr.find('input[name="product_name"]').val();
+  //     var system_count = pTr.find('input[name="system_count"]').val();
+  //     var physical_count = pTr.find('input[name="physical_count[]"]').val();
+  //
+  //     $.ajax({
+  //       url: base_url+'stocksmanagement/add_physicalcount',
+  //       data: {code:code,product_name:product_name,system_count:system_count,physical_count:physical_count},
+  //       type: 'post',
+  //       dataType: 'json',
+  //       success: function(data){
+  //         console.log(data);
+  //           pTr.find('.physical_count').text(physical_count).show();
+  //           pTr.find('.add_physcount').hide().prop('hidden', true);
+  //           pTr.find('.add_physicalcount').show().prop('hidden', false);
+  //           pTr.find('.submit_physicalcount').hide().prop('hidden', true);
+  //       }
+  //     });
+  //   });
+  //
+  // });
 
-    pTr.find('.add_physcount').show().prop('disabled', false).prop('hidden', false);
-    pTr.find('.physical_count').hide();
+  //view list of Orders
+  $(document).on('click', '.generatereport', function(){
+      $('#GenerateReport').modal('show');
+     $.ajax({
+       method: 'POST',
+       url: base_url + 'stocksmanagement/view_reports',
+       // data: {id:id},
+       dataType: "json",
+       success: function(data){
+         $('#GenerateReport').modal('show');
+         var str = '';
+           $.each(data.stocks,function(index,element){
+             console.log(element);
+              str += '<tr>';
+                str +=     '<td class="purch_td hide">';
+                  str +=   '<input type="hidden" class="prod_code" name="view_prod_code[]" value='+element.code+'>';
+                str += '</td>';
+                str +=     '<td class="purch_td code">';
+                    str +=   '<input type="number" class="edit_deliv form-control form-control-sm" value='+element.code+' name="code[]" hidden>';
+                    str +=   element.code;
+                   str += '</td>';
+               str +=     '<td class="purch_td product_name">';
+                    str +=   '<input type="text" class="edit_deliv form-control form-control-sm" value='+element.product_name+' name="product_name[]" hidden>';
+                   str +=   element.product_name;
+                  str += '</td>';
+                 str += ' <td class="purch_td system_count">';
+                    str +=   '<input type="number" class="edit_deliv form-control form-control-sm" value='+element.system_count+' name="system_count[]" hidden>';
+                     str += element.system_count;
+                 str += '</td>';
+               str +=  '<td class="purch_td physical_count">';
+                  str +=   '<input type="number" class="edit_deliv form-control form-control-sm" name="physical_count[]">';
+                  str += '<span class="err"></span>';
+                str += '</td>';
+                str +=  '<td class="note">';
+                  str +=   '<textarea class="notes_stocks form-control form-control-sm" name="note[]"></textarea>';
+                str += '</td>';
+               str += '</tr>';
+               $('#view_stocks_products tbody').html(str);
+         });
 
-    pTr.find('.submit_physicalcount').show().prop('hidden', false);
-    pTr.find('.add_physicalcount').hide().prop('hidden', true);
-
-
-    $('.submit_physicalcount').unbind('click').click(function(e) {
-      var code = $('input[name="code"]').val();
-      var product_name = $('input[name="product_name"]').val();
-      var system_count = $('input[name="system_count"]').val();
-      var physical_count = $('input[name="physical_count[]"]').val();
-
-      $.ajax({
-        url: base_url+'stocksmanagement/add_physicalcount',
-        data: {code:code,product_name:product_name,system_count:system_count,physical_count:physical_count},
-        type: 'post',
-        dataType: 'json',
-        success: function(data){
-            pTr.find('.physical_count').text(qty).show();
-            pTr.find('.add_physcount').hide().prop('hidden', true);
-            pTr.find('.add_physicalcount').show().prop('hidden', false);
-            pTr.find('.submit_physicalcount').hide().prop('hidden', true);
-        }
-      });
-    });
-
+   }
   });
+
+  $(document).on('submit','form#generateReport',function(e){
+    e.preventDefault();
+    let formData = $(this).serialize();
+    // formData.append('purchase_id',$("input[name='purchase_id']").attr('data-id'));
+    //
+    // console.log(formData);
+    $.ajax({
+        method: 'POST',
+        url : base_url + 'stocksmanagement/add_reports',
+        data : formData,
+        success : function(response) {
+            let data = JSON.parse(response);
+            console.log(data);
+            if(data.form_error){
+                clearError();
+                let keyNames = Object.keys(data.form_error);
+                $(keyNames).each(function(index , value) {
+                  console.log(value);
+                    $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
+                    // $("select[name='"+value+"']").parents('.form-group').next('.err').text(data.form_error[value]);
+                });
+            }else if (data.error) {
+                Swal.fire("Error",data.error, "error");
+            }else {
+                blankVal_purchase();
+                $('#GenerateReport').modal('hide');
+                Swal.fire("Successfully generated a report!",data.success, "success");
+                // $(".purchase_tbl").DataTable().ajax.reload();
+                // setTimeout(function(){
+                //    location.reload();
+                //  }, 1000);
+            }
+        }
+    })
+  });
+});
 
 });
