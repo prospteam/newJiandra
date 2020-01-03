@@ -41,6 +41,7 @@ class Stocksmanagement extends MY_Controller {
 		$join = array(
 			'products' => 'products.id = purchase_orders.product',
 			'supplier' => 'supplier.id = purchase_orders.supplier'
+
 		);
 		$select = "purchase_orders.product, SUM(purchase_orders.delivered) as system_count, products.code, products.product_name, products.brand, supplier.supplier_name, purchase_orders.supplier, purchase_orders.date_delivered";
 		$list = $this->MY_Model->get_datatables('purchase_orders',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
@@ -72,23 +73,27 @@ class Stocksmanagement extends MY_Controller {
 	//add reports
 	public function add_reports(){
 		$post = $this->input->post();
+		// echo "<pre>";
+		// print_r($post);
+		// exit;
 		$date_report_generated = date("F d, Y");
 		$this->load->library("form_validation");
 		$this->form_validation->set_rules('physical_count[]', 'Physical Count', 'required');
 
 		$error = array();
 
-
 		foreach($post['view_prod_code'] as $pkey => $pVal){
+			$variance = $post['system_count'][$pkey] - $post['physical_count'][$pkey];
 		if ($this->form_validation->run() !== FALSE) {
 
 				$data = array(
+					'code' => $post['code'][$pkey],
 					'product' => $pVal,
 					'physical_count' => $post['physical_count'][$pkey],
 					'system_count' => $post['system_count'][$pkey],
 					'date_report_generated' => $date_report_generated,
 					'note' => $post['note'][$pkey],
-					'variance' => 0
+					'variance' => $variance
 				);
 
 				$insert = $this->MY_Model->insert('stocks', $data);

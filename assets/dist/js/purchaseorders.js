@@ -360,6 +360,7 @@ $(document).ready(function(){
          var grand_total = 0;
 
            $.each(data.purchase,function(index,element){
+             console.log(element);
              total_quantity = parseFloat(total_quantity) + parseFloat(element.quantity);
              total_cost = parseFloat(total_cost) + parseFloat(element.unit_price);
              var total = parseFloat(element.quantity) * parseFloat(element.unit_price);
@@ -379,6 +380,16 @@ $(document).ready(function(){
              str +=     '<td class="purch_td hide">';
                  str +=   '<input type="hidden" class="edit_purchID" name="view_purchase_id[]" value='+element.purchase_id+'>';
                 str += '</td>';
+                str +=     '<td class="purch_td hide">';
+                    str +=   '<input type="hidden" class="edit_product" name="view_prod[]" value='+element.product+'>';
+                   str += '</td>';
+                   str +=     '<td class="purch_td hide">';
+                       str +=   '<input type="hidden" class="edit_prod_code" name="view_prod_code[]" value='+element.code+'>';
+                      str += '</td>';
+                      str +=     '<td class="purch_td hide">';
+                          str +=   '<input type="hidden" class="edit_delivery_status" name="view_delivery_status[]" value='+element.delivery_status+'>';
+                         str += '</td>';
+
                 str +=     '<td class="purch_td">';
                     str +=   element.code;
                    str += '</td>';
@@ -398,10 +409,18 @@ $(document).ready(function(){
                     str += '<span class="deliv">'+deliv+'</span>';
                     str +=   '<input type="number" class="edit_deliv" name="delivered[]" value='+deliv+' disabled hidden>';
                   str += '</td>';
-                 str += '<td class="purch_td submit_delivered">';
-                 str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_delivered"><i class="fa fa-edit"></i></a>';
-                 str += '<a href="javascript:;" class="btn btn-xs btn-success submit_delivered_qty" hidden><i class="fa fa-check"></i></a>';
-                str += '</td>';
+                  if(element.delivery_status == 4){
+
+                    str += '<td class="purch_td submit_delivered">';
+                    str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_delivered"><i class="fa fa-edit"></i></a>';
+                    str += '<a href="javascript:;" class="btn btn-xs btn-success submit_delivered_qty" hidden><i class="fa fa-check"></i></a>';
+                    str += '</td>';
+                  }else{
+                    str += '<td class="purch_td submit_delivered">';
+                    str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_delivered disabled"><i class="fa fa-edit"></i></a>';
+                    str += '<a href="javascript:;" class="btn btn-xs btn-success submit_delivered_qty" hidden><i class="fa fa-check"></i></a>';
+                    str += '</td>';
+                  }
                str += '</tr>';
 
 
@@ -432,10 +451,12 @@ $(document).ready(function(){
     $('.submit_delivered_qty').unbind('click').click(function(e) {
       var id = pTr.find('.edit_purchID').val();
       var qty = pTr.find('.edit_deliv').val();
-
+      var code = pTr.find('.edit_prod_code').val();
+      var product = pTr.find('.edit_product').val();
+      var delivery_status = pTr.find('.edit_delivery_status').val();
       $.ajax({
         url: base_url+'purchaseorders/change_delivered_qty',
-        data: {id:id,delivered:qty},
+        data: {id:id,delivered:qty,code:code,product:product,delivery_status:delivery_status},
         type: 'post',
         dataType: 'json',
         success: function(data){

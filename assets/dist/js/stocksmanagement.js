@@ -26,7 +26,10 @@ $(document).ready(function(){
               {"data":"physical_count","render": function(data, type, row,meta){
                         var str = '';
                          str += '<div>';
-                        str += '<span class="physical_count">0</span>';
+                         str += '<span class="physical_count">';
+                           str += 0;
+
+                         str += '</span>';
                         str += '</div>';
                         return str;
                    }
@@ -107,7 +110,7 @@ $(document).ready(function(){
              console.log(element);
               str += '<tr>';
                 str +=     '<td class="purch_td hide">';
-                  str +=   '<input type="hidden" class="prod_code" name="view_prod_code[]" value='+element.code+'>';
+                  str +=   '<input type="hidden" class="prod_code" name="view_prod_code[]" value='+element.product+'>';
                 str += '</td>';
                 str +=     '<td class="purch_td code">';
                     str +=   '<input type="number" class="edit_deliv form-control form-control-sm" value='+element.code+' name="code[]" hidden>';
@@ -162,7 +165,7 @@ $(document).ready(function(){
                 blankVal_purchase();
                 $('#GenerateReport').modal('hide');
                 Swal.fire("Successfully generated a report!",data.success, "success");
-                // $(".purchase_tbl").DataTable().ajax.reload();
+                $(".stocks_tbl").DataTable().ajax.reload();
                 // setTimeout(function(){
                 //    location.reload();
                 //  }, 1000);
