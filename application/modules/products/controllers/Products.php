@@ -55,6 +55,8 @@ class Products extends MY_Controller {
         }
         echo json_encode($response);
   }
+
+
 	 function display_products(){
 			$limit = $this->input->post('length');
 			$offset = $this->input->post('start');

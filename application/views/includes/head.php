@@ -209,7 +209,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../UI/icons.html" class="nav-link">
+                <a href="<?php echo base_url('warehouse_management') ?>" class="nav-link">
                   <p>Warehouse Management</p>
                 </a>
               </li>

@@ -28,7 +28,8 @@
 <script src="<?php echo base_url('assets/dist/js/products.js'); ?>"></script>
 <!-- stocksmanagement js -->
 <script src="<?php echo base_url('assets/dist/js/stocksmanagement.js'); ?>"></script>
-
+<!-- warehouse management -->
+<script src="<?php echo base_url('assets/dist/js/warehouse_management.js'); ?>"></script>
 
 </body>
 </html>

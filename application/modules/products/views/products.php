@@ -11,7 +11,7 @@
         <div class="col-sm-6">
             <button class="users button1 float-sm-right" data-toggle="modal" data-target="#AddProducts"><i class="fas fa-plus-circle" aria-hidden="true"></i>  Add Products </button>
 
-            <!--Add User Modal -->
+            <!--Add Products Modal -->
             <!-- Modal -->
     				<div class="modal fade" id="AddProducts" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
     					<form id="addproducts" method="post">
@@ -110,7 +110,7 @@
     						</div>
     					</form>
     				</div>
-          <!-- End Add user Modal -->
+          <!-- End Add Products Modal -->
 
           <!--View Products Modal -->
           <!-- Modal -->
