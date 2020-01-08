@@ -129,13 +129,9 @@ class Products extends MY_Controller {
 							'status' => 'invalid'
 					);
 				}
-
-					$result = json_encode($response);
-
+					$result = json_encode($response)
 				}
-
 				die($result);
-
 			}
 
 			public function enable_products(){

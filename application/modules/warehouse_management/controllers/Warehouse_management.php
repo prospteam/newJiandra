@@ -48,7 +48,7 @@ public function addwh_management(){
 
 
 		 $column_order = array('wh_name','wh_type','wh_assigned','status');
-		 $where = array('status !=' => 2);
+		 $where = array('status !=' => 3);
 		 $join = array(
 			 // 'company' => 'company.company_id = users.company',
 			 // 'position' => 'position.id = users.position'
@@ -76,9 +76,72 @@ public function addwh_management(){
 
 	 $data = $this->MY_Model->getrows('warehouse_management',$parameters,'row');
 
-	 $data_array['warehouse-management'] = $data;
+	 $data_array['warehouse_management'] = $data;
 	 json($data_array);
+
 	 }
 
+	 public function edit_warehouse(){
+
+			 $warehouse_id = $this->input->post('id');
+			 $post = $this->input->post();
+			 $result = false;
+
+			 if (!empty($post)) {
+				 $data = array(
+					 'wh_name'  	   				  => $post['wh_name'],
+					 'wh_type'  	   			    => $post['wh_type'],
+					 'wh_assigned'  	   			=> $post['wh_assigned'],
+				 );
+
+			 $update = $this->MY_Model->update('warehouse_management',$data, array('id' => $warehouse_id));
+			 if ($update) {
+				 $response = array(
+					 'status' => 'ok'
+				 );
+			 }else {
+					 $response = array(
+						 'status' => 'invalid'
+				 );
+			 }
+				 $result = json_encode($response);
+			 }
+			 die($result);
+		 }
+
+		 public function enable_warehouse(){
+			 	echo "<pre>";
+			 	 print_r(	$warehouse_id);
+			 	 exit;
+				$warehouse_id = $this->input->post('id');
+				$warehouse_status = 1;
+				$data = array(
+					'status' => $warehouse_status
+				);
+				$datas['delete'] = $this->MY_Model->update('warehouse_management',$data,array('id' => $warehouse_status));
+				echo json_encode($datas);
+		}
+
+		 public function disable_warehouse(){
+
+				 $warehouse_id = $this->input->post('id');
+				 $warehouse_status = 2;
+				 $data = array(
+					 'status' => $warehouse_status
+				 );
+				 $datas['delete'] = $this->MY_Model->update('warehouse_management',$data,array('id' => $warehouse_status));
+				 echo json_encode($datas);
+		 }
+
+		 public function delete_warehouse(){
+
+				 $warehouse_id = $this->input->post('id');
+				 $warehouse_status = 3;
+				 $data = array(
+					 'status' => $warehouse_status
+				 );
+				 $datas['delete'] = $this->MY_Model->update('warehouse_management',$data,array('id' => $warehouse_status));
+				 echo json_encode($datas);
+		 }
 }
 ?>

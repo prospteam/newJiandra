@@ -36,7 +36,6 @@ $(document).ready(function(){
   //end add warehouse
 
   //Edit Warehouse
-  // edit Products
   $(document).on("click",".editWarehouse", function(){
     var id = $(this).attr('data-id');
 
@@ -47,7 +46,7 @@ $(document).ready(function(){
         dataType: "json",
         success: function(data){
           $('#Editwarehouse').modal('show');
-          $('#Editwarehouse input[name="warehouse_id"]').val(data.warehouse_management.id);
+          $('#Editwarehouse input[name="editwarehouse_id"]').val(data.warehouse_management.id);
           $('#Editwarehouse input[name="wh_name"]').val(data.warehouse_management.wh_name);
           $('#Editwarehouse input[name="wh_type"]').val(data.warehouse_management.wh_type);
           $('#Editwarehouse input[name="wh_assigned"]').val(data.warehouse_management.wh_assigned);
@@ -57,6 +56,134 @@ $(document).ready(function(){
   });
   // end Edit Warehouse
 
+  // successfully edit suplier
+    $(document).on('submit','#editWarehouseM',function(e){
+      e.preventDefault();
+
+      let formData = new FormData($(this)[0]);
+      var id = $('.editwarehouse_id').val();
+      formData.append("id",id);
+      $.ajax({
+          method: 'POST',
+          url: base_url+'warehouse_management/edit_warehouse',
+          data: formData,
+          processData: false,
+          contentType:false,
+          cache: false,
+          dataType: 'json',
+          success: function(data){
+              if (data.status == "ok"){
+                $('#Editwarehouse').modal('hide');
+                Swal.fire("Warehouse ---- has been updated!", data.success, "success");
+                $(".warehouse_tbl").DataTable().ajax.reload();
+            }else if(data.status == 'invalid'){
+                 Swal.fire("Error",data.status, "invalid");
+              }
+          }
+      })
+    });
+  // end successfully edit suplier
+  // DISABLED warehouse
+    $(document).on("click",".enableWarehouse",function(e){
+        e.preventDefault();
+        var id = $(this).attr('data-id');
+        console.log(id);
+
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You want to enable this Warehouse!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#068101',
+        confirmButtonText: 'Yes, Enable Warehouse!'
+        }).then((result) => {
+          if (result.value) {
+            Swal.fire(
+              'Enabled!',
+              'Successfully Enabled Warehouse!',
+              'success'
+            )
+              $.ajax({
+              type: 'POST',
+                url:base_url + 'warehouse_management/enable_warehouse',
+                data: {id: id},
+                success:function(data) {
+                  $(".warehouse_tbl").DataTable().ajax.reload();
+                }
+              })
+          }
+        });
+    });
+  // DISABLED warehouse
+
+  // DISABLED warehouse
+    $(document).on("click",".disableWarehouse",function(e){
+        e.preventDefault();
+        var id = $(this).attr('data-id');
+        console.log(id);
+
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You want to disable this Warehouse!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#068101',
+        confirmButtonText: 'Yes, Disable Warehouse!'
+        }).then((result) => {
+          if (result.value) {
+            Swal.fire(
+              'Disabled!',
+              'Successfully Disabled Warehouse!',
+              'success'
+            )
+              $.ajax({
+              type: 'POST',
+                url:base_url + 'warehouse_management/disable_warehouse',
+                data: {id: id},
+                success:function(data) {
+                  $(".warehouse_tbl").DataTable().ajax.reload();
+                }
+              })
+          }
+        });
+    });
+  // DISABLED warehouse
+
+  // DISABLED warehouse
+    $(document).on("click",".deleteWarehouse",function(e){
+        e.preventDefault();
+        var id = $(this).attr('data-id');
+        console.log(id);
+
+        Swal.fire({
+        title: 'Are you sure?',
+        text: "You want to delete this Warehouse!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#068101',
+        confirmButtonText: 'Yes, Delete Warehouse!'
+        }).then((result) => {
+          if (result.value) {
+            Swal.fire(
+              'Deleted!',
+              'Successfully Delete Warehouse!',
+              'success'
+            )
+              $.ajax({
+              type: 'POST',
+                url:base_url + 'warehouse_management/delete_warehouse',
+                data: {id: id},
+                success:function(data) {
+                  $(".warehouse_tbl").DataTable().ajax.reload();
+                }
+              })
+          }
+        });
+    });
+  // DISABLED warehouse
 
   function display_whmanagement($warehouse_id){
     $('.warehouse_tbl').DataTable({

@@ -67,7 +67,8 @@
                 <div class="modal-content">
                   <div class="modal-header bg-info1">
                     <h5 class="modal-title" id="exampleModalLabel">Edit Warehouse</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    	<input type="hidden" class="form-control editwarehouse_id" name="editwarehouse_id" value="">
+                    <button type="button" class="close warehouseID" name="warehouseID" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
