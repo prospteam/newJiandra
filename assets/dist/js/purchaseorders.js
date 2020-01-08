@@ -200,6 +200,8 @@ $(document).ready(function(){
          $('#DeliveryStatus').modal('show');
          $('#change_deliveryStat select[name=delivery_status]').val(data.delivery.delivery_status);
            $('input[name="purchase_code_delivery"]').val(data.delivery.purchase_code);
+           $('input[name="product"]').val(data.delivery.product);
+           $('input[name="code"]').val(data.delivery.code);
      }
     });
   });
@@ -207,9 +209,11 @@ $(document).ready(function(){
   $(document).on('submit','form#change_deliveryStat',function(e){
     e.preventDefault();
     let formData =  new FormData($(this)[0]);
-    var id = $('input[name="purchase_code_delivery"]').val();
+    var id = $('input[name="product"]').val();
+    var code = $('input[name="code"]').val();
     // alert(id);
     formData.append("id",id);
+    formData.append("code",code);
     $.ajax({
         method: 'POST',
         url : base_url + 'purchaseorders/change_deliv_status',

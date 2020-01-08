@@ -436,6 +436,8 @@
                     <div class="col-12">
                       <div class="form-group">
                           <input type="hidden" class="form-control" name="purchase_code_delivery" value="">
+                          <input type="hidden" class="form-control" name="product" value="">
+                          <input type="hidden" class="form-control" name="code" value="">
                           <!-- <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Status</label> -->
                           <select class="form-control" class="delivery_status" name="delivery_status" id="delivery_status" value="">
                             <option value="1" selected>Pending</option>

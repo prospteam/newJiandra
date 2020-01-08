@@ -309,7 +309,8 @@ class Purchaseorders extends MY_Controller {
 		$post = $this->input->post();
 
 		$parameters['where'] = array('purchase_code' => $post['id']);
-		$parameters['select'] = '*';
+		$parameters['join'] = array('products' => 'products.id = purchase_orders.product');
+		$parameters['select'] = 'purchase_orders.*, products.code';
 
 		$data['delivery'] = $this->MY_Model->getRows('purchase_orders',$parameters,'row');
 
@@ -329,7 +330,9 @@ class Purchaseorders extends MY_Controller {
 			$remarks = empty($post['remarks_deliv']) ? "None" : $post['remarks_deliv'];
 		}
 		$data = array('delivery_status' => $post['delivery_status'], 'delivery_remarks' => $remarks);
+		$data_stocks = array('product' => $post['product'], 'code' => $post['code']);
 		$data['delivStat'] = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['purchase_code_delivery']));
+		$data['prodToStocks'] = $this->MY_Model->insert('stocks',$data_stocks);
 		json($data);
 	}
 

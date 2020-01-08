@@ -27,7 +27,7 @@ $(document).ready(function(){
                         var str = '';
                          str += '<div>';
                          str += '<span class="physical_count">';
-                           str += 0;
+                           str += row.physical_count;
 
                          str += '</span>';
                         str += '</div>';
@@ -36,9 +36,15 @@ $(document).ready(function(){
               },
 
               {"data":"variance","render": function(data, type, row,meta){
+                var variance = row.system_count - row.physical_count;
                 var str = '';
                   str += '<div>';
+                  if(row.physical_count == 0){
                     str += '<span class="variance">0</span>';
+                  }else{
+
+                    str += '<span class="variance">'+variance+'</span>';
+                  }
                   str += '</div>';
                 return str;
               }
@@ -109,6 +115,9 @@ $(document).ready(function(){
            $.each(data.stocks,function(index,element){
              console.log(element);
               str += '<tr>';
+                  str +=     '<td class="purch_td hide">';
+                    str +=   '<input type="hidden" class="prod_code" name="view_stock_id[]" value='+element.stock_id+'>';
+                  str += '</td>';
                 str +=     '<td class="purch_td hide">';
                   str +=   '<input type="hidden" class="prod_code" name="view_prod_code[]" value='+element.product+'>';
                 str += '</td>';
@@ -125,11 +134,16 @@ $(document).ready(function(){
                      str += element.system_count;
                  str += '</td>';
                str +=  '<td class="purch_td physical_count">';
-                  str +=   '<input type="number" class="edit_deliv form-control form-control-sm" name="physical_count[]">';
+                  str +=   '<input type="number" class="edit_deliv form-control form-control-sm" value='+element.physical_count+' name="physical_count[]">';
                   str += '<span class="err"></span>';
                 str += '</td>';
                 str +=  '<td class="note">';
-                  str +=   '<textarea class="notes_stocks form-control form-control-sm" name="note[]"></textarea>';
+                  if(element.note_stocks != null){
+
+                    str +=   '<textarea class="notes_stocks form-control form-control-sm" value='+element.note_stocks+' name="note[]">'+element.note_stocks+'</textarea>';
+                  }else{
+                    str +=   '<textarea class="notes_stocks form-control form-control-sm" name="note[]"></textarea>';
+                  }
                 str += '</td>';
                str += '</tr>';
                $('#view_stocks_products tbody').html(str);
