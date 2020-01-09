@@ -26,7 +26,11 @@ class Purchaseorders extends MY_Controller {
     $this->load_page('purchaseorders', @$data);
 	}
 
+	//get suppliers and warehouse by company
 	public function get_suppliers_by_companies(){
+		$parameters['where'] = array('company' => $this->input->post('company_id'));
+		$data['warehouse'] = $this->MY_Model->getRows('warehouse_management',$parameters);
+
 			$parameters['where'] = array('company' => $this->input->post('company_id'));
 			$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
 			json($data);
@@ -60,6 +64,11 @@ class Purchaseorders extends MY_Controller {
 
 	public function get_suppliers(){
 			$data['suppliers'] = $this->MY_Model->getRows('supplier');
+			json($data);
+	}
+
+	public function get_warehouse(){
+			$data['warehouse'] = $this->MY_Model->getRows('warehouse_management');
 			json($data);
 	}
 
@@ -121,6 +130,11 @@ class Purchaseorders extends MY_Controller {
 
 	public function addPurchaseOrder(){
 		$post = $this->input->post();
+
+		$warehouse = explode('|', $post['warehouse']);
+		$warehouse_id = $warehouse[0];
+		$warehouse_name = isset($warehouse[1]);
+
 		$date_ordered = date("F d, Y");
 		$id = $this->input->post('purchase_id');
 		$purchase_id = $id + 1;
@@ -131,6 +145,7 @@ class Purchaseorders extends MY_Controller {
 		$this->form_validation->set_rules('prod_name[]', 'Product Name', 'required');
 		$this->form_validation->set_rules('quantity[]', 'Quantity', 'required');
 		$this->form_validation->set_rules('supplier', 'Supplier', 'required');
+		$this->form_validation->set_rules('warehouse', 'Warehouse', 'required');
 		$this->form_validation->set_rules('company', 'Company', 'required');
 		$this->form_validation->set_rules('unit_price[]', 'Unit Price', 'required');
 		$this->form_validation->set_rules('total[]', 'Total', 'required');
@@ -151,6 +166,8 @@ class Purchaseorders extends MY_Controller {
 					'quantity' => $post['quantity'][$pkey],
 					'unit_price' => $post['unit_price'][$pkey],
 					'supplier' => $post['supplier'],
+					'warehouse_id' => $warehouse[0],
+					'warehouse_name' => $warehouse[1],
 					'company' => $post['company'],
 					'note' => $post['purchase_note'],
 					'status' => 1,
@@ -177,10 +194,11 @@ class Purchaseorders extends MY_Controller {
 	public function edit_purchase_orders(){
 		$post = $this->input->post();
 		$date_ordered = date("F d, Y");
-		// if(!empty($post)) {
-		// echo "<pre>";
-		// print_r($post);
-		// exit;
+
+		$warehouse = explode('|', $post['warehouse_edit']);
+		$warehouse_id = $warehouse[0];
+		$warehouse_name = isset($warehouse[1]);
+
 		$this->load->library("form_validation");
 
 		$this->form_validation->set_rules('edit_prod_code[]', 'SKU', 'required');
@@ -202,7 +220,9 @@ class Purchaseorders extends MY_Controller {
 										'quantity' => $post['edit_quantity'][$pkey],
 										'unit_price' => $post['edit_unit_price'][$pkey],
 										'company' => $post['company_edit'],
-										'supplier' => $post['supplier'],
+										'supplier' => $post['supplier_edit'],
+										'warehouse_id' => $warehouse[0],
+										'warehouse_name' => $warehouse[1],
 										'status' => 1,
 										'delivery_status' => 1
 									);
@@ -224,7 +244,9 @@ class Purchaseorders extends MY_Controller {
 
 				$data = array(
 					'company' => $post['company_edit'],
-					'supplier' => $post['supplier'],
+					'supplier' => $post['supplier_edit'],
+					'warehouse_id' => $warehouse[0],
+					'warehouse_name' => $warehouse[1],
 					'note' => $post['purchase_note'],
 				);
 				$update1 = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['edit_purchase_code']));

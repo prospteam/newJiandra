@@ -380,6 +380,7 @@ $(document).ready(function(){
              $('.date').text(element.date_ordered);
              $('.company').text(element.company_name);
              $('.supplier').text(element.supplier_name);
+             $('.warehouse').text(element.warehouse_name);
              str += '<tr>';
              str +=     '<td class="purch_td hide">';
                  str +=   '<input type="hidden" class="edit_purchID" name="view_purchase_id[]" value='+element.purchase_id+'>';
@@ -482,9 +483,10 @@ $(document).ready(function(){
         type: 'post',
         dataType: 'json',
         success: function(data){
+          console.log(data);
           var str = '';
           str += '<label for="supplier">Supplier: <span class="required">*</span></label>';
-          str += '<select class="form-control" class="supplier" id="supplier" name="supplier" >';
+          str += '<select class="form-control" class="supplier" name="supplier" >';
               str += '<option value="" selected hidden>Select Supplier</option>';
                 $.each(data.suppliers,function(index,element){
                       str += '<option value="'+element.id+'">'+element.supplier_name+'</option>';
@@ -492,8 +494,21 @@ $(document).ready(function(){
           str += '</select>';
           str += '<span class="err"></span>';
 
-            $('#show_supplier').html(str);
 
+          $('#show_supplier').html(str);
+
+            var str1 = '';
+            str1 += '<label for="warehouse">Warehouse: <span class="required">*</span></label>';
+            str1 += '<select class="form-control" class="warehouse" name="warehouse" >';
+                str1 += '<option value="" selected hidden>Select Warehouse</option>';
+                  $.each(data.warehouse,function(index,element){
+                        // str1 += '<input type="hidden" name="wh_name" value="'+element.wh_name+'">';
+                        str1 += '<option value="'+element.id+'|'+element.wh_name+'">'+element.wh_name+'</option>';
+                  });
+            str1 += '</select>';
+            str1 += '<span class="err"></span>';
+
+            $('#show_warehouse').html(str1);
         }
     });
   });
@@ -506,9 +521,10 @@ $(document).ready(function(){
         type: 'post',
         dataType: 'json',
         success: function(data){
+
           var str = '';
           str += '<label for="supplier">Supplier: <span class="required">*</span></label>';
-          str += '<select class="form-control" class="supplier" id="supplier" name="supplier" >';
+          str += '<select class="form-control" class="supplier" name="supplier_edit" value="" >';
               // str += '<option value="" selected hidden>Select Supplier</option>';
                 $.each(data.suppliers,function(index,element){
                       str += '<option value="'+element.id+'">'+element.supplier_name+'</option>';
@@ -517,6 +533,19 @@ $(document).ready(function(){
           str += '<span class="err"></span>';
 
             $('#edit_show_supplier').html(str);
+
+            var str1 = '';
+            str1 += '<label for="warehouse">Warehouse: <span class="required">*</span></label>';
+            str1 += '<select class="form-control" class="warehouse" name="warehouse_edit" value="" >';
+                // str1 += '<option value="" selected>Select Warehouse</option>';
+
+                  $.each(data.warehouse,function(index,element){
+                        str1 += '<option value="'+element.id+'|'+element.wh_name+'">'+element.wh_name+'</option>';
+                  });
+            str1 += '</select>';
+            str1 += '<span class="err"></span>';
+
+            $('#edit_show_warehouse').html(str1);
 
         }
     });
@@ -539,7 +568,7 @@ $(document).ready(function(){
           var grand_total = 0;
 
           $.each(data.purch_details,function(index,element){
-            console.log(element);
+            console.log(element.warehouse_id);
             total = parseFloat(element.quantity) + parseFloat(element.unit_price)
             total_quantity = parseFloat(total_quantity) + parseFloat(element.quantity);
             total_cost = parseFloat(total_cost) + parseFloat(element.unit_price);
@@ -551,7 +580,13 @@ $(document).ready(function(){
             $('#editpurchaseorder textarea[name=purchase_note]').val(element.note);
             $('#editpurchaseorder select[name=company_edit]').val(element.company_id);
             $('#editpurchaseorder select[name="company_edit"]').trigger('change');
-            $('#editpurchaseorder select[name="supplier"]').val(element.supplier_id);
+
+            setTimeout(function(){
+              $('#editpurchaseorder select[name="supplier_edit"]').val(element.supplier_id);
+              $('#editpurchaseorder select[name="warehouse_edit"]').val(element.warehouse_id+'|'+element.warehouse_name);
+            }, 0100);
+
+
 
             // str += '<input type="hidden" name="purchase_id" value='+element.purchase_id+'>';
             str += '<tr>';
@@ -857,6 +892,24 @@ function get_supplier(){
   return data_return;
 }
 
+function get_warehouse(){
+  var data_return = '';
+  $.ajax({
+    url: base_url + '/purchaseorders/get_warehouse/',
+    type:'post',
+    dataType:'json',
+    async:false,
+    success:function(data){
+      var str = '';
+      $.each(data.suppliers,function(index,element){
+        str += '<option value="'+element.id+'">'+element.supplier_name+'</option>';
+      });
+      data_return = str;
+    }
+  });
+  return data_return;
+}
+
 function get_products(){
   // var id = $('.select2_edit').attr('data-id');
   // alert(id);
@@ -900,7 +953,10 @@ function get_edit_products(selected_product = ''){
 function blankVal_purchase(){
   $('#AddPurchaseOrder select[name="company"]').val('');
   $('#AddPurchaseOrder select[name="supplier"]').val('');
+  $('#AddPurchaseOrder select[name="warehouse"]').val('');
   $('#AddPurchaseOrder input[name="prod_name[]"]').val('');
+  $('#AddPurchaseOrder select[name="prod_code[]"]').val('');
+
   $('.err').text('');
   $('#AddPurchaseOrder input[name="quantity[]"]').val('');
   $('#AddPurchaseOrder input[name="unit_price[]"]').val('');

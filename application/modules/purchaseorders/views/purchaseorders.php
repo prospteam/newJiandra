@@ -42,8 +42,15 @@
                             <span class="err"></span>
                           </div>
                         </div>
+
+                      </div>
+                      <div class="row">
                         <div class="col-6">
                           <div class="form-group" id="show_supplier">
+    											</div>
+    										</div>
+                        <div class="col-6">
+                          <div class="form-group" id="show_warehouse">
     											</div>
     										</div>
                       </div>
@@ -173,16 +180,20 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-6">
+                      <div class="col-4">
                         <div class="form-group">
                           <label for="company">Company:</label>
                             <p class="company"></p> <br>
                         </div>
                       </div>
-                      <div class="col-6">
+                      <div class="col-4">
                         <label for="supplier">Supplier:</label>
                           <p class="supplier"></p> <br>
                         </div>
+                        <div class="col-4">
+                          <label for="supplier">Warehouse:</label>
+                            <p class="warehouse"></p> <br>
+                          </div>
                       </div>
                     </div>
 
@@ -301,8 +312,14 @@
                         <span class="err"></span>
                       </div>
                     </div>
+                  </div>
+                  <div class="row">
                     <div class="col-6">
                       <div class="form-group" id="edit_show_supplier">
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <div class="form-group" id="edit_show_warehouse">
                       </div>
                     </div>
                   </div>
