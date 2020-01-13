@@ -211,7 +211,7 @@ $(document).ready(function(){
      }
    });
 
-   $(document).on('change','select[name="company_warehouse"]', function(){
+   $(document).on('change','select[name="company"]', function(){
      $.ajax({
        url: base_url+'warehouse_management/get_warehouse_by_companies',
        data: {company_id:$(this).val()},
@@ -220,7 +220,7 @@ $(document).ready(function(){
        success: function(data){
          var str = '';
          str += '<label for="wh_assigned">WH Assigned: <span class="required">*</span></label>';
-         str += '<select class="form-control" class="wh_assigned" id="wh_assigned" name="wh_assigned" >';
+         str += '<select class="form-control" id="wh_assigned" name="wh_assigned" >';
 
                $.each(data.users,function(index,element){
                      str += '<option value="'+element.id+'">'+element.fullname+'</option>';
@@ -234,29 +234,19 @@ $(document).ready(function(){
      });
    });
 
-   //display Companies for add wh_type
-    $('.js-example-basic-multiple-addwh_type').select2({
-      allowClear: true,
-      placeholder: "Select Warehouse Type",
-      dropdownParent: $('#Addwarehouse_management'),
-      tags: true,
-      ajax: {
-        url: base_url+'warehouse_management/add_warehouse_type',
-        dataType: "json",
-        data: function (params) {
-       },processResults: function (data) {
-
-             return {
-                 results: $.map(data.warehouse_type, function (item) {
-                     return {
-                         text:(item.vehicle_type == 1)?"Ex Truck":"Delivery Truck",
-                         id: item.id
-                     }
-                 })
-             };
-         }
+   $(document).on('change','select[name="wh_type"]', function(){
+      // alert($(this).val());
+      var str = '';
+         str += '<div class="form-group">';
+      if ($(this).val() == 1) {
+         str += '<input type="text" name="wh_address" class="form-control" id="wh_address" placeholder="Enter Address">';
+      }else {
+         str += '<input type="text" name="wh_plate_number" class="form-control" id="wh_plate_number" placeholder="Enter Plate Number">';
       }
-    });
+      str += '</div>';
+      $('.input_add').html(str);
+
+   });
 
   function display_whmanagement($warehouse_id){
     $('.warehouse_tbl').DataTable({
@@ -266,12 +256,15 @@ $(document).ready(function(){
           "order": [[0,'desc']], //Initial no order.
           "columns":[
                {"data":"wh_name"},
-               {"data":"wh_type"},
-               {"data":"wh_assigned"},
+               {"data":"wh_type","render": function(data, type, row,meta){
+                  return (row.wh_type == 1 )? "Ex Truck" : "Warehouse";
+               }},
+               {"data":"fullname"},
                {"data":"action","render": function(data, type, row,meta){
                          var str = '';
                          str += '<div class="actions">';
                          if(row.status == 1){
+                           str += '<a href="javascript:;" class="viewWarehouse" data-id="'+row.id+'"><i class="fas fa-eye text-info"></i></i></a>';
                            str += '<a href="javascript:;" class="editWarehouse" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
                            str += '<a href="javascript:;" class="disableWarehouse" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
                            str += '<a href="javascript:;" class="deleteWarehouse" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
