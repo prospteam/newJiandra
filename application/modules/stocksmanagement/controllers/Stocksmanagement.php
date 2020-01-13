@@ -12,8 +12,9 @@ class Stocksmanagement extends MY_Controller {
 		// $parameters['select'] = '*';
 		// $data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
     //
-		// $parameters['select'] = '*';
-		// $data['company'] = $this->MY_Model->getRows('company',$parameters);
+		$parameters['group'] = array('warehouse_id');
+		$parameters['select'] = '*';
+		$data['warehouse'] = $this->MY_Model->getRows('stocks',$parameters);
     //
 		// $param['select'] = '*';
 		// $data['products'] = $this->MY_Model->getRows('products', $parameters);
@@ -23,7 +24,7 @@ class Stocksmanagement extends MY_Controller {
 		// $parameters1['order'] = 'purchase_code DESC';
 		// $data['purchase'] = $this->MY_Model->getRows('purchase_orders',$parameters1);
 
-    $this->load_page('stocksmanagement');
+    $this->load_page('stocksmanagement', $data);
 	}
 
   //display delivered products
@@ -34,7 +35,7 @@ class Stocksmanagement extends MY_Controller {
 		$order = $this->input->post('order');
 		$draw = $this->input->post('draw');
 
-		$column_order = array('products.code','supplier.supplier_name','products.brand','products.product_name','purchase_orders.delivered', 'purchase_orders.date_delivered', 'stocks.physical_count', 'stocks.variance');
+		$column_order = array('stocks.warehouse_name','products.code','supplier.supplier_name','products.brand','products.product_name','purchase_orders.delivered', 'purchase_orders.date_delivered', 'stocks.physical_count', 'stocks.variance');
 		$where = array('purchase_orders.delivery_status' => 4);
 		$group = array('purchase_orders.product');
 		// $count = array('purchase_orders.delivered');
@@ -43,7 +44,7 @@ class Stocksmanagement extends MY_Controller {
 			'supplier' => 'supplier.id = purchase_orders.supplier',
 			'stocks' => 'stocks.product = purchase_orders.product'
 		);
-		$select = "purchase_orders.product, SUM(purchase_orders.delivered) as system_count, products.code, products.product_name, products.brand, supplier.supplier_name, purchase_orders.supplier, purchase_orders.date_delivered, stocks.physical_count, stocks.variance ";
+		$select = "purchase_orders.product, SUM(purchase_orders.delivered) as system_count, products.code, products.product_name, products.brand, supplier.supplier_name, purchase_orders.supplier, purchase_orders.date_delivered, stocks.physical_count, stocks.variance, stocks.warehouse_name ";
 		$list = $this->MY_Model->get_datatables('purchase_orders',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
 
 		$output = array(
