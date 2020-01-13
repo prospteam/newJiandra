@@ -7,6 +7,7 @@ $(document).ready(function(){
          "serverSide": true, //Feature control DataTables' server-side processing mode.
          "order": [[0,'desc']], //Initial no order.
          "columns":[
+              {"data":"warehouse_name"},
               {"data":"code"},
               {"data":"supplier_name"},
               {"data":"brand"},
@@ -67,39 +68,6 @@ $(document).ready(function(){
       });
   //end display purchase_tbl
 
-  //show edit delivered input on view purchase order
-  // $(document).on('click','.add_physicalcount', function(){
-  //   var pTr = $(this).parents('tr');
-  //
-  //   pTr.find('.add_physcount').show().prop('disabled', false).prop('hidden', false);
-  //   pTr.find('.physical_count').hide();
-  //
-  //   pTr.find('.submit_physicalcount').show().prop('hidden', false);
-  //   pTr.find('.add_physicalcount').hide().prop('hidden', true);
-  //
-  //
-  //   $('.submit_physicalcount').unbind('click').click(function(e) {
-  //     var code = pTr.find('input[name="code"]').val();
-  //     var product_name = pTr.find('input[name="product_name"]').val();
-  //     var system_count = pTr.find('input[name="system_count"]').val();
-  //     var physical_count = pTr.find('input[name="physical_count[]"]').val();
-  //
-  //     $.ajax({
-  //       url: base_url+'stocksmanagement/add_physicalcount',
-  //       data: {code:code,product_name:product_name,system_count:system_count,physical_count:physical_count},
-  //       type: 'post',
-  //       dataType: 'json',
-  //       success: function(data){
-  //         console.log(data);
-  //           pTr.find('.physical_count').text(physical_count).show();
-  //           pTr.find('.add_physcount').hide().prop('hidden', true);
-  //           pTr.find('.add_physicalcount').show().prop('hidden', false);
-  //           pTr.find('.submit_physicalcount').hide().prop('hidden', true);
-  //       }
-  //     });
-  //   });
-  //
-  // });
 
   //view list of Orders
   $(document).on('click', '.generatereport', function(){
@@ -188,5 +156,10 @@ $(document).ready(function(){
     })
   });
 });
+
+
+  $(document).on('click', '.stockout', function(){
+    $('#StockOut').modal('show');
+  })
 
 });

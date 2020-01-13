@@ -63,22 +63,26 @@ class Purchaseorders extends MY_Controller {
 	}
 
 	public function get_suppliers(){
-			$data['suppliers'] = $this->MY_Model->getRows('supplier');
+		$params['where'] = array('status' => 1);
+			$data['suppliers'] = $this->MY_Model->getRows('supplier', $params);
 			json($data);
 	}
 
 	public function get_warehouse(){
-			$data['warehouse'] = $this->MY_Model->getRows('warehouse_management');
+			$params['where'] = array('status' => 1);
+			$data['warehouse'] = $this->MY_Model->getRows('warehouse_management', $params);
 			json($data);
 	}
 
 	public function get_products(){
-			$data['products'] = $this->MY_Model->getRows('products');
+			$params['where'] = array('status' => 1);
+			$data['products'] = $this->MY_Model->getRows('products', $params);
 			json($data);
 	}
 
 	public function get_edit_products(){
-		$data['products'] = $this->MY_Model->getRows('products');
+		$params['where'] = array('status' => 1);
+		$data['products'] = $this->MY_Model->getRows('products', $params);
 		json($data);
 	}
 
@@ -316,10 +320,10 @@ class Purchaseorders extends MY_Controller {
 		// exit;
 		$delivered_date = date("F d, Y");
 
-		if($post['delivery_status'] == 4){
-			$data = array('code' => $post['code'], 'product' => $post['product']);
-			$data['addStocks'] = $this->MY_Model->insert('stocks',$data);
-		}
+		// if($post['delivery_status'] == 4){
+		// 	$data = array('code' => $post['code'], 'product' => $post['product']);
+		// 	$data['addStocks'] = $this->MY_Model->insert('stocks',$data);
+		// }
 		$data = array('delivered' => $post['delivered'], 'date_delivered' => $delivered_date);
 		$data['delivered_qty'] = $this->MY_Model->update('purchase_orders', $data, array('id' => $post['id']));
 		json($data);
@@ -351,10 +355,23 @@ class Purchaseorders extends MY_Controller {
 		}else{
 			$remarks = empty($post['remarks_deliv']) ? "None" : $post['remarks_deliv'];
 		}
+
 		$data = array('delivery_status' => $post['delivery_status'], 'delivery_remarks' => $remarks);
-		$data_stocks = array('product' => $post['product'], 'code' => $post['code']);
+
 		$data['delivStat'] = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['purchase_code_delivery']));
-		$data['prodToStocks'] = $this->MY_Model->insert('stocks',$data_stocks);
+		$params['where'] = array('product' => $post['product'], 'warehouse_id' => $post['warehouse_id']);
+		$params['select'] = '*';
+		$res = $this->MY_Model->getRows('stocks', $params,'row');
+		$last = $this->db->last_query();
+// echo "<pre>";
+// print_r($last);
+// exit;
+		if ($res == '') {
+			$data_stocks = array('product' => $post['product'], 'code' => $post['code'], 'warehouse_id' => $post['warehouse_id'], 'warehouse_name' => $post['warehouse_name']);
+				$data['prodToStocks'] = $this->MY_Model->insert('stocks',$data_stocks);
+		}
+
+
 		json($data);
 	}
 
