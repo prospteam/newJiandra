@@ -370,8 +370,8 @@ $(document).ready(function(){
               }
          }
      })
-   });
 
+   });
 });
   $(document).on('click','#addnewCP',function(){
 

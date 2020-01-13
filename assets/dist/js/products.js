@@ -130,7 +130,7 @@ $(document).on("click",'.deleteproducts', function(e) {
   showCancelButton: true,
   confirmButtonColor: '#d33',
   cancelButtonColor: '#068101',
-  confirmButtonText: 'Yes, Permanently Delete Product!'
+  confirmButtonText: 'Yes, Permanently Delete Product!',
   }).then((result) => {
     if (result.value) {
       Swal.fire(
@@ -326,6 +326,7 @@ $(document).on("click",'.deleteproducts', function(e) {
                       search_type: $(this).attr('data-type')
                   };
        },processResults: function (data) {
+
              return {
                  results: $.map(data.items, function (item) {
                      return {

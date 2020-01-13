@@ -20,6 +20,7 @@ $(document).ready(function(){
                   $(keyNames).each(function(index , value) {
                     console.log(value);
                       $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
+                      $("select[name='"+value+"']").next().next().text(data.form_error[value]);
                   });
               }else if (data.error) {
                   Swal.fire("Error",data.error, "error");
@@ -47,7 +48,7 @@ $(document).ready(function(){
         success: function(data){
           $('#Editwarehouse').modal('show');
           $('#Editwarehouse input[name="editwarehouse_id"]').val(data.warehouse_management.id);
-          $('#Editwarehouse input[name="wh_name"]').val(data.warehouse_management.wh_name);
+          $('#Editwarehouse select[name="wh_name"]').val(data.warehouse_management.wh_name);
           $('#Editwarehouse input[name="wh_type"]').val(data.warehouse_management.wh_type);
           $('#Editwarehouse input[name="wh_assigned"]').val(data.warehouse_management.wh_assigned);
           }
@@ -185,6 +186,78 @@ $(document).ready(function(){
     });
   // DISABLED warehouse
 
+  //display Companies for add warehouse
+   $('.js-example-basic-multiple-wh_assigned').select2({
+     allowClear: true,
+     placeholder: "Select Company",
+     dropdownParent: $('#Addwarehouse_management'),
+     tags: true,
+     ajax: {
+       url: base_url+'warehouse_management/add_warehouse_users',
+       dataType: "json",
+       data: function (params) {
+
+      },processResults: function (data) {
+
+            return {
+                results: $.map(data.warehouse_users, function (item) {
+                    return {
+                        text: item.company_name,
+                        id: item.company_id
+                    }
+                })
+            };
+        }
+     }
+   });
+
+   $(document).on('change','select[name="company_warehouse"]', function(){
+     $.ajax({
+       url: base_url+'warehouse_management/get_warehouse_by_companies',
+       data: {company_id:$(this).val()},
+       type:'post',
+       dataType:"json",
+       success: function(data){
+         var str = '';
+         str += '<label for="wh_assigned">WH Assigned: <span class="required">*</span></label>';
+         str += '<select class="form-control" class="wh_assigned" id="wh_assigned" name="wh_assigned" >';
+
+               $.each(data.users,function(index,element){
+                     str += '<option value="'+element.id+'">'+element.fullname+'</option>';
+               });
+         str += '</select>';
+         str += '<span class="err"></span>';
+
+           $('#wh_assigned_show').html(str);
+
+       }
+     });
+   });
+
+   //display Companies for add wh_type
+    $('.js-example-basic-multiple-addwh_type').select2({
+      allowClear: true,
+      placeholder: "Select Warehouse Type",
+      dropdownParent: $('#Addwarehouse_management'),
+      tags: true,
+      ajax: {
+        url: base_url+'warehouse_management/add_warehouse_type',
+        dataType: "json",
+        data: function (params) {
+       },processResults: function (data) {
+
+             return {
+                 results: $.map(data.warehouse_type, function (item) {
+                     return {
+                         text:(item.vehicle_type == 1)?"Ex Truck":"Delivery Truck",
+                         id: item.id
+                     }
+                 })
+             };
+         }
+      }
+    });
+
   function display_whmanagement($warehouse_id){
     $('.warehouse_tbl').DataTable({
           "destroy"   : true,
@@ -211,6 +284,7 @@ $(document).ready(function(){
                     }
                },
                {"data":"status","render": function(data, type, row,meta){
+
                    var str = '';
                     if(row.status == 1){
                       str += '<span class="active btn btn-block btn-sm btn-success">active</button>';

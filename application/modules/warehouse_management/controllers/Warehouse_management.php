@@ -15,7 +15,7 @@ public function addwh_management(){
 	$this->load->library("form_validation");
 	$this->form_validation->set_rules('wh_name','WH Name','required');
 	$this->form_validation->set_rules('wh_type','WH Type', 'required');
-	$this->form_validation->set_rules('wh_assigned','WH Assigned','required');
+	$this->form_validation->set_rules('users[]','WH Assigned','required');
 	$error = array();
 
 	if ($this->form_validation->run() !== FALSE) {
@@ -36,6 +36,22 @@ public function addwh_management(){
 			$response = array('form_error'=> array_merge($this->form_validation->error_array(),$error) );
 		}
 			echo json_encode($response);
+	}
+
+	//display companies for adding supplier
+	public function add_warehouse_users(){
+		$parameters['select'] = '*';
+		$data['warehouse_users'] = $this->MY_Model->getRows('company',$parameters);
+		echo json_encode($data);
+		// print_r($data);
+	}
+
+	//display WAREHOUSE TYPE
+	public function add_warehouse_type(){
+		$parameters['select'] = '*';
+		$data['warehouse_type'] = $this->MY_Model->getRows('vehicles',$parameters);
+		echo json_encode($data);
+		// print_r($data);
 	}
 
 	//display all warehouse
@@ -81,6 +97,12 @@ public function addwh_management(){
 
 	 }
 
+	 public function get_warehouse_by_companies(){
+			 $parameters['where'] = array('company' => $this->input->post('company_id'));
+			 $data['users'] = $this->MY_Model->getRows('users',$parameters);
+			 json($data);
+	 }
+
 	 public function edit_warehouse(){
 
 			 $warehouse_id = $this->input->post('id');
@@ -110,15 +132,13 @@ public function addwh_management(){
 		 }
 
 		 public function enable_warehouse(){
-			 	echo "<pre>";
-			 	 print_r(	$warehouse_id);
-			 	 exit;
+
 				$warehouse_id = $this->input->post('id');
 				$warehouse_status = 1;
 				$data = array(
 					'status' => $warehouse_status
 				);
-				$datas['delete'] = $this->MY_Model->update('warehouse_management',$data,array('id' => $warehouse_status));
+				$datas['delete'] = $this->MY_Model->update('warehouse_management',$data,array('id' => $warehouse_id));
 				echo json_encode($datas);
 		}
 
@@ -129,7 +149,7 @@ public function addwh_management(){
 				 $data = array(
 					 'status' => $warehouse_status
 				 );
-				 $datas['delete'] = $this->MY_Model->update('warehouse_management',$data,array('id' => $warehouse_status));
+				 $datas['delete'] = $this->MY_Model->update('warehouse_management',$data,array('id' => $warehouse_id));
 				 echo json_encode($datas);
 		 }
 
@@ -140,7 +160,7 @@ public function addwh_management(){
 				 $data = array(
 					 'status' => $warehouse_status
 				 );
-				 $datas['delete'] = $this->MY_Model->update('warehouse_management',$data,array('id' => $warehouse_status));
+				 $datas['delete'] = $this->MY_Model->update('warehouse_management',$data,array('id' => $warehouse_id));
 				 echo json_encode($datas);
 		 }
 }

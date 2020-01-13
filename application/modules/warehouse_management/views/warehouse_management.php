@@ -11,8 +11,8 @@
         <div class="col-sm-6">
             <button class="users button1 float-sm-right" data-toggle="modal" data-target="#Addwarehouse_management"><i class="fas fa-plus-circle" aria-hidden="true"></i>  Add Warehouse </button>
 
-            <!--Add WArehouse Modal -->
-            <!-- Modal -->
+               <!--Add WArehouse Modal -->
+               <!-- Modal -->
     				<div class="modal fade" id="Addwarehouse_management" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
     					<form id="addwarehouse1_management" method="post">
     						<div class="modal-dialog modal-lg" role="document">
@@ -24,31 +24,28 @@
     									</button>
     								</div>
     								<div class="modal-body">
-    									<div class="row">
-    										<div class="col-6">
-    											<div class="form-group">
-    												<label for="wh_name">WH Name: <span class="required">*</span></label>
-    												<input type="text" class="form-control" name="wh_name" id="wh_name" data-type="wh_name" value="">
-                            <span class="err"></span>
-    											</div>
-    										</div>
-                        <div class="col-6">
-    											<div class="form-group">
-    												<label for="wh_type">WH Type: <span class="required">*</span></label>
-    												<input type="text" class="form-control" name="wh_type" id="wh_type" data-type="wh_type" value="">
-                            <span class="err"></span>
-    											</div>
-    										</div>
-    									</div>
-    									<div class="row">
-                        <div class="col-6">
-    											<div class="form-group">
-    												<label for="wh_assigned">WH Assigned: <span class="required">*</span></label>
-    												<input type="text" class="form-control" name="wh_assigned" id="wh_assigned" data-type="wh_assigned" value="">
-                            <span class="err"></span>
-    											</div>
-    										</div>
-    									</div>
+    									<div class="form-group">
+    										<label for="wh_name">WH Name: <span class="required">*</span></label>
+    										<input type="text" class="form-control" name="wh_name" id="wh_name" data-type="wh_name" value="">
+                                 <span class="err"></span>
+    								   </div>
+    							          <div class="form-group">
+    									      <label for="wh_type">WH Type: <span class="required">*</span></label>
+                                    <div class="select2-purple">
+                                      <select class="form-control js-example-basic-multiple-addwh_type" name="vehicle_type[]" multiple="multiple"></select>
+                                    </div>
+                                    <span class="err"></span>
+    							          </div>
+    							   	<div class="form-group">
+    								   	<label for="company">Company: <span class="required">*</span></label>
+                                   <div class="select2-purple">
+                                      <select class="form-control js-example-basic-multiple-wh_assigned" name="company_warehouse" multiple="multiple"></select>
+                                  </div>
+                                  <span class="err"></span>
+    							   	</div>
+                                 <div class="col-6">
+                                    <div class="form-group" id="wh_assigned_show"></div>
+                                 </div>
     								</div>
     								<div class="modal-footer">
     									<button type="submit" class="btn btn-primary add">Submit</button>
@@ -93,7 +90,10 @@
                       <div class="col-6">
                         <div class="form-group">
                           <label for="wh_assigned">WH Assigned: <span class="required">*</span></label>
-                          <input type="text" class="form-control" name="wh_assigned" id="wh_assigned" data-type="wh_assigned" value="">
+                          <!-- <input type="text" class="form-control" name="wh_assigned" id="wh_assigned" data-type="wh_assigned" value=""> -->
+                          <div class="select2-purple">
+                            <select class="form-control js-example-basic-multiple" name="users[]" multiple="multiple"></select>
+                          </div
                           <span class="err"></span>
                         </div>
                       </div>
