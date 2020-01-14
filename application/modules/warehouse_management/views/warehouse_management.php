@@ -25,24 +25,33 @@
     								</div>
     								<div class="modal-body">
     									<div class="form-group">
-    										<label for="wh_name">WH Name: <span class="required">*</span></label>
+    										<label for="wh_name">Warehouse Name: <span class="required">*</span></label>
     										<input type="text" class="form-control" name="wh_name" id="wh_name" data-type="wh_name" value="">
                                  <span class="err"></span>
     								   </div>
     							          <div class="form-group">
-    									      <label for="wh_type">WH Type: <span class="required">*</span></label>
-                                    <div class="select2-purple">
-                                      <select class="form-control js-example-basic-multiple-addwh_type" name="vehicle_type[]" multiple="multiple"></select>
-                                    </div>
+    									      <label for="wh_type">Warehouse Type: <span class="required">*</span></label>
+                                    <select class="form-control" name="wh_type" >
+                                      <option value="" selected hidden>Select Warehouse Type</option>
+                                       <?php foreach($vehicles as $k => $value) : ?>
+                                       <option value = "<?php echo $value['vehicle_type'] ?>"> <?php echo ($value['vehicle_type']== 1)?"Ex Truck":"Warehouse" ?></option>
+                                       <?php  endforeach; ?>
+                                   </select>
                                     <span class="err"></span>
     							          </div>
-    							   	<div class="form-group">
-    								   	<label for="company">Company: <span class="required">*</span></label>
-                                   <div class="select2-purple">
-                                      <select class="form-control js-example-basic-multiple-wh_assigned" name="company_warehouse" multiple="multiple"></select>
+                                  <div class="col-6 input_add" >
+                                      <!-- <div class="form-group" id="wh_address_show"></div> -->
                                   </div>
-                                  <span class="err"></span>
-    							   	</div>
+                                  <div class="form-group">
+                                   <label for="company">Company: <span class="required">*</span></label>
+                                    <select class="form-control" class="company" name="company" >
+                                      <option value="" selected hidden>Select Company</option>
+                                       <?php foreach($company as $k => $value) : ?>
+                                       <option value = "<?php echo $value['company_id'] ?>"><?php echo $value['company_name'] ?></option>
+                                       <?php  endforeach; ?>
+                                   </select>
+                                   <span class="err"></span>
+                                 </div>
                                  <div class="col-6">
                                     <div class="form-group" id="wh_assigned_show"></div>
                                  </div>
@@ -73,14 +82,14 @@
                     <div class="row">
                       <div class="col-6">
                         <div class="form-group">
-                          <label for="wh_name">WH Name: <span class="required">*</span></label>
+                          <label for="wh_name">Warehouse Name: <span class="required">*</span></label>
                           <input type="text" class="form-control" name="wh_name" id="wh_name" data-type="wh_name" value="">
                           <span class="err"></span>
                         </div>
                       </div>
                       <div class="col-6">
                         <div class="form-group">
-                          <label for="wh_type">WH Type: <span class="required">*</span></label>
+                          <label for="wh_type">Warehouse Type: <span class="required">*</span></label>
                           <input type="text" class="form-control" name="wh_type" id="wh_type" data-type="wh_type" value="">
                           <span class="err"></span>
                         </div>
@@ -139,9 +148,9 @@
                   <div class="col-sm-12">
                     <table class="table table-bordered table-striped dataTable warehouse_tbl" role="grid" aria-describedby="example1_info">
                   <thead>
-                      <th class="header-title">WH Name</th>
-                      <th class="header-title">WH Type</th>
-                      <th class="header-title">WH Assigned</th>
+                      <th class="header-title">Warehouse Name</th>
+                      <th class="header-title">Warehouse Type</th>
+                      <th class="header-title">Warehouse Assigned</th>
                       <th class="header-title">Action</th>
                       <th class="header-title">Status</th>
                   </thead>
