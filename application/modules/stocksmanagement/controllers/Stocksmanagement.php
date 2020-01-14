@@ -12,7 +12,8 @@ class Stocksmanagement extends MY_Controller {
 		// $parameters['select'] = '*';
 		// $data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
     //
-		$parameters['group'] = array('warehouse_id');
+		$parameters['group'] = array('stocks.warehouse_id');
+		$parameters['join'] = array('warehouse_management' => 'warehouse_management.id = stocks.warehouse_id');
 		$parameters['select'] = '*';
 		$data['warehouse'] = $this->MY_Model->getRows('stocks',$parameters);
     //
@@ -35,18 +36,18 @@ class Stocksmanagement extends MY_Controller {
 		$order = $this->input->post('order');
 		$draw = $this->input->post('draw');
 
-		$column_order = array('stocks.warehouse_name','products.code','supplier.supplier_name','products.brand','products.product_name','purchase_orders.delivered', 'purchase_orders.date_delivered', 'stocks.physical_count', 'stocks.variance');
-		$where = array('purchase_orders.delivery_status' => 4);
-		$group = array('purchase_orders.product');
-		// $count = array('purchase_orders.delivered');
+		$column_order = array('p.code','sup.supplier_name','p.brand','p.product_name','po.delivered', 'po.date_delivered', 's.physical_count', 's.variance', 'po.supplier', 'po.date_delivered', 's.physical_count', 's.warehouse_id', 'w.wh_name');
+		$where = array('po.delivery_status' => 4);
+		$group = array('po.product', 'po.warehouse_id');
+		// $count = array('po.delivered');
 		$join = array(
-			'products' => 'products.id = purchase_orders.product',
-			'supplier' => 'supplier.id = purchase_orders.supplier',
-			'stocks' => 'stocks.product = purchase_orders.product'
+			'products as p' => 'p.id = po.product:left',
+			'supplier as sup' => 'sup.id = po.supplier:left',
+			'stocks as s' => 's.product = po.product:left',
+			'warehouse_management as w' => 'w.id = po.warehouse_id:left'
 		);
-		$select = "purchase_orders.product, SUM(purchase_orders.delivered) as system_count, products.code, products.product_name, products.brand, supplier.supplier_name, purchase_orders.supplier, purchase_orders.date_delivered, stocks.physical_count, stocks.variance, stocks.warehouse_name ";
-		$list = $this->MY_Model->get_datatables('purchase_orders',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
-
+		$select = "po.product, (SELECT SUM(delivered) FROM purchase_orders WHERE warehouse_id = po.warehouse_id AND product = p.id) AS system_count, p.code, p.product_name, p.brand, sup.supplier_name, po.supplier, po.date_delivered, s.physical_count, s.variance, s.warehouse_id, w.wh_name";
+		$list = $this->MY_Model->get_datatables('purchase_orders as po',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
 		$output = array(
 				"draw" => $draw,
 				"recordsTotal" => $list['count_all'],
@@ -63,16 +64,29 @@ class Stocksmanagement extends MY_Controller {
 
 	//add view reports
 	public function view_reports(){
-		$param['where'] = array('purchase_orders.delivery_status' => 4);
-		$param['group'] = array('purchase_orders.product');
-		$param['join'] = array('products' => 'products.id = purchase_orders.product', 'stocks' => 'stocks.product = purchase_orders.product');
-		$param['select'] = "purchase_orders.product, SUM(purchase_orders.delivered) as system_count, products.code, products.product_name, stocks.*";
-		$data['stocks'] =  $this->MY_Model->getRows('purchase_orders', $param);
+		$param['where'] = array('po.delivery_status' => 4);
+		$param['group'] = array('po.product', 'po.warehouse_id');
+		$param['join'] = array('products as p' => 'p.id = po.product:left', 'stocks as s' => 's.product = po.product:left', 'warehouse_management as w' => 'w.id = po.warehouse_id:left');
+		$param['select'] = "po.product, (SELECT SUM(delivered) FROM purchase_orders WHERE warehouse_id = po.warehouse_id AND product = p.id) AS system_count, p.code, p.product_name, s.warehouse_id, w.wh_name";
+		$data['stocks'] =  $this->MY_Model->getRows('purchase_orders as po', $param);
 		// echo "<pre>";
 		// print_r($this->db->last_query());
 		// exit;
 		echo json_encode($data);
 	}
+
+	// SELECT
+	//   po.product,
+	//   p.product_name,
+	//   p.code,
+	//   s.warehouse_id,
+	//   (SELECT SUM(delivered) FROM purchase_orders WHERE warehouse_id = po.warehouse_id AND product = p.id) AS system_count
+	// FROM purchase_orders AS po
+	//   LEFT JOIN products AS p ON p.id = po.product
+	//   LEFT JOIN stocks AS s ON s.product = po.product
+	//   LEFT JOIN warehouse_management AS w ON w.id = po.warehouse_id
+	// WHERE po.delivery_status = 4
+	// GROUP BY po.product, po.warehouse_id
 
 	//add reports
 	public function add_reports(){

@@ -7,7 +7,7 @@ $(document).ready(function(){
          "serverSide": true, //Feature control DataTables' server-side processing mode.
          "order": [[0,'desc']], //Initial no order.
          "columns":[
-              {"data":"warehouse_name"},
+              {"data":"wh_name"},
               {"data":"code"},
               {"data":"supplier_name"},
               {"data":"brand"},
