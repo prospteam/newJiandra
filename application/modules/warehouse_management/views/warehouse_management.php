@@ -44,16 +44,21 @@
                                   </div>
                                   <div class="form-group">
                                    <label for="company">Company: <span class="required">*</span></label>
-                                    <select class="form-control" class="company" name="company" >
-                                      <option value="" selected hidden>Select Company</option>
-                                       <?php foreach($company as $k => $value) : ?>
-                                       <option value = "<?php echo $value['company_id'] ?>"><?php echo $value['company_name'] ?></option>
-                                       <?php  endforeach; ?>
-                                   </select>
+                                      <div class="select2-purple">
+                                        <select class="form-control js-example-basic-multiple-disp-comp" name="company[]" multiple="multiple"></select>
+                                     </div>
                                    <span class="err"></span>
                                  </div>
-                                 <div class="col-6">
-                                    <div class="form-group" id="wh_assigned_show"></div>
+                                 <div class="form-group">
+                                    <label for="wh_assigned">Warehouse Assigned: <span class="required">*</span></label>
+                                    <!-- <input type="text" class="form-control" name="wh_assigned" id="wh_assigned" data-type="wh_assigned" value=""> -->
+                                    <select class="form-control" class="wh_assigned" name="wh_assigned" >
+                                      <option value="" selected hidden>Select Warehouse Assigned</option>
+                                    <?php foreach($users as $key => $value) : ?>
+                                        <option value="<?php echo $value['id'] ?>"><?php echo $value['fullname'] ?></option>
+                                  <?php  endforeach; ?>
+                                 </select>
+                                    <span class="err"></span>
                                  </div>
     								</div>
     								<div class="modal-footer">
@@ -79,34 +84,39 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <div class="row">
-                      <div class="col-6">
                         <div class="form-group">
                           <label for="wh_name">Warehouse Name: <span class="required">*</span></label>
                           <input type="text" class="form-control" name="wh_name" id="wh_name" data-type="wh_name" value="">
                           <span class="err"></span>
                         </div>
-                      </div>
-                      <div class="col-6">
                         <div class="form-group">
-                          <label for="wh_type">Warehouse Type: <span class="required">*</span></label>
-                          <input type="text" class="form-control" name="wh_type" id="wh_type" data-type="wh_type" value="">
-                          <span class="err"></span>
-                        </div>
+                         <label for="wh_type">Warehouse Type: <span class="required">*</span></label>
+                         <select class="form-control" name="wh_type" >
+                           <option value="" selected hidden>Select Warehouse Type</option>
+                            <?php foreach($vehicles as $k => $value) : ?>
+                            <option value = "<?php echo $value['vehicle_type'] ?>"> <?php echo ($value['vehicle_type']== 1)?"Ex Truck":"Warehouse" ?></option>
+                            <?php  endforeach; ?>
+                        </select>
+                         <span class="err"></span>
+                       </div>
+                       <div class="form-group">
+                       <label for="company">Company: <span class="required">*</span></label>
+                           <div class="select2-purple">
+                             <select class="form-control js-example-basic-multiple-edit-comp" name="company[]" multiple="multiple"></select>
+                          </div>
+                       <span class="err"></span>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-6">
-                        <div class="form-group">
-                          <label for="wh_assigned">WH Assigned: <span class="required">*</span></label>
-                          <!-- <input type="text" class="form-control" name="wh_assigned" id="wh_assigned" data-type="wh_assigned" value=""> -->
-                          <div class="select2-purple">
-                            <select class="form-control js-example-basic-multiple" name="users[]" multiple="multiple"></select>
-                          </div
-                          <span class="err"></span>
-                        </div>
-                      </div>
-                    </div>
+                      <div class="form-group">
+                        <label for="wh_assigned">Warehouse Assigned: <span class="required">*</span></label>
+                        <!-- <input type="text" class="form-control" name="wh_assigned" id="wh_assigned" data-type="wh_assigned" value=""> -->
+                        <select class="form-control" class="wh_assigned" name="wh_assigned" >
+                          <option value="" selected hidden>Select Warehouse Assigned</option>
+                        <?php foreach($users as $key => $value) : ?>
+                            <option value="<?php echo $value['id'] ?>"><?php echo $value['fullname'] ?></option>
+                      <?php  endforeach; ?>
+                     </select>
+                        <span class="err"></span>
+                     </div>
                   </div>
                   <div class="modal-footer">
                     <button type="submit" class="btn btn-primary add">Submit</button>
@@ -133,7 +143,7 @@
                   <div class="table-responsive">
                     <div class="middle">
                       <div class="">
-                          <a href="javascript:;" class="btn-newj t_btn" data-id="3">All Warehouse</a>
+                          <a href="javascript:;" class="btn-newj t_btn" data-id="0">All Warehouse</a>
                       </div>
                       <div class="">
                           <a href="javascript:;" class="btn-newj f_btn" data-id="1">New Jiandra</a>
@@ -169,6 +179,29 @@
 
 
   </section>
-  <!-- /.content -->
+  <!-- /.content
+           <!-- Modal -->
+            <div class="modal fade" id="viewWarehouseType" tabindex="-1" role="dialog" aria-	labelledby="exampleModalLabel" aria-hidden="true">
+               <div class="modal-dialog modal-lg" role="document">
+               <div class="modal-content">
+                 <div class="modal-header bg-info1">
+                    <h5 class="modal-title" id="exampleModalLabel" > View Warehouse Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                 </div>
+                 <div class="modal-body">
+                    <div class="row">
+                      <div class="col-6">
+                         <div class="form-group">
+                          <label for="viewWH" class="viewWH">Warehouse Type Details: </label>
+                          <p class="wh_type"> </p>
+                         </div>
+                      </div>
+                    </div>
+                 </div>
+               </div>
+               </div>
+          </div>
 </div>
 <!-- /.content-wrapper -->

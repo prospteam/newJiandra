@@ -202,8 +202,6 @@ $(document).ready(function(){
            $('input[name="purchase_code_delivery"]').val(data.delivery.purchase_code);
            $('input[name="product"]').val(data.delivery.product);
            $('input[name="code"]').val(data.delivery.code);
-           $('input[name="warehouse_id"]').val(data.delivery.warehouse_id);
-           $('input[name="warehouse_name"]').val(data.delivery.warehouse_name);
      }
     });
   });
@@ -213,13 +211,9 @@ $(document).ready(function(){
     let formData =  new FormData($(this)[0]);
     var id = $('input[name="product"]').val();
     var code = $('input[name="code"]').val();
-    var warehouse_id = $('input[name="warehouse_id"]').val();
-    var warehouse_name = $('input[name="warehouse_name"]').val();
     // alert(id);
     formData.append("id",id);
     formData.append("code",code);
-    formData.append("warehouse_id",warehouse_id);
-    formData.append("warehouse_name",warehouse_name);
     $.ajax({
         method: 'POST',
         url : base_url + 'purchaseorders/change_deliv_status',

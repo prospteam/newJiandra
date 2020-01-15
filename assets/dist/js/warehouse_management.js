@@ -1,6 +1,32 @@
 var base_url = $('input[name="base_url"]').val();
 $(document).ready(function(){
-  display_whmanagement();
+
+  display_whmanagement(0);
+
+  function savesubcat(){
+    return null
+ }
+  $('.f_btn').on('click', function(e){
+        e.preventDefault();
+        $('.btn-newj').removeClass('active-click');
+        $(this).addClass('active-click');
+        display_whmanagement('1');
+ }) ;
+ $('.s_btn').on('click', function(e){
+        e.preventDefault();
+        $('.btn-newj').removeClass('active-click');
+        $(this).addClass('active-click');
+        display_whmanagement('2');
+ }) ;
+ $('.t_btn').on('click', function(e){
+        e.preventDefault();
+        $('.btn-newj').removeClass('active-click');
+        $(this).addClass('active-click');
+        display_whmanagement('0');
+ }) ;
+
+ $('.t_btn').trigger('click');
+
   // add supplier
   $(document).on('submit','#addwarehouse1_management',function(e){
       e.preventDefault();
@@ -35,7 +61,82 @@ $(document).ready(function(){
       });
   });
   //end add warehouse
+  //display Companies for add supplier js-example-basic-multiple-edit-comp
+   $('.js-example-basic-multiple-disp-comp').select2({
+     allowClear: true,
+     placeholder: "Select Company",
+     dropdownParent: $('#addwarehouse1_management'),
+     tags: true,
+     ajax: {
+       url: base_url+'warehouse_management/add_warehouse_comp',
+       dataType: "json",
+       data: function (params) {
 
+      },processResults: function (data) {
+
+            return {
+                results: $.map(data.companies, function (item) {
+                    return {
+                        text: item.company_name,
+                        id: item.company_id
+                    }
+                })
+            };
+        }
+     }
+   });
+  // view all products
+  //display companies foe edit supplier
+  $('.js-example-basic-multiple-edit-comp').select2({
+    allowClear: true,
+    placeholder: "Select Company",
+    dropdownParent: $('#editWarehouseM'),
+    tags: true,
+    ajax: {
+      url: base_url+'warehouse_management/edit_warehouse_comp',
+      dataType: "json",
+      data: function (params) {
+
+     },processResults: function (data) {
+
+           return {
+               results: $.map(data.companies, function (item) {
+                   return {
+                       text: item.company_name,
+                       id: item.company_id
+                   }
+               })
+           };
+      }
+    }
+  });
+
+      $(document).on("click",".viewWarehouse",function(){
+        var id =  $(this).attr('data-id');
+        $.ajax({
+            method: 'POST',
+            url: base_url+'warehouse_management/view_warehouse_type',
+            data: {id:id},
+            dataType:"json",
+            success: function(data){
+              console.log(data);
+              ;
+              $('#viewWarehouseType').modal('show');
+              if (data.warehouse_management.wh_type == 1) {
+                 $('.viewWH').html("Warehouse Location:");
+                 var str = "<p>"
+                 str += data.warehouse_management.wh_plate_number;
+                 str += "</p>"
+              } else {
+                 $('.viewWH').html("Plate Number:");
+                 var str = "<p>"
+                 str += data.warehouse_management.wh_address;
+                 str += "</p>"
+              }
+              $('.wh_type').html(str);
+            }
+        });
+      });
   //Edit Warehouse
   $(document).on("click",".editWarehouse", function(){
     var id = $(this).attr('data-id');
@@ -48,9 +149,20 @@ $(document).ready(function(){
         success: function(data){
           $('#Editwarehouse').modal('show');
           $('#Editwarehouse input[name="editwarehouse_id"]').val(data.warehouse_management.id);
-          $('#Editwarehouse select[name="wh_name"]').val(data.warehouse_management.wh_name);
-          $('#Editwarehouse input[name="wh_type"]').val(data.warehouse_management.wh_type);
-          $('#Editwarehouse input[name="wh_assigned"]').val(data.warehouse_management.wh_assigned);
+          $('#Editwarehouse input[name="wh_name"]').val(data.warehouse_management.wh_name);
+          $('#Editwarehouse select[name="wh_type"]').val(data.warehouse_management.wh_type);
+          if (data.warehouse_management.wh_type == 1) {
+             $('#Editwarehouse input[name="wh_plate_number"]').val(data.warehouse_management.wh_plate_number);
+          }else {
+             $('#Editwarehouse input[name="wh_address"]').val(data.warehouse_management.wh_address);
+          }
+          $('#Editwarehouse select[name="wh_assigned"]').val(data.warehouse_management.wh_assigned);
+          // $('#Editwarehouse select[name="company[]"]').val(data.warehouse_management.company);
+          $.each(data.company, function(key,val){
+            // company_list.push(val.company_name);
+            // console.log(val);
+            $('#Editwarehouse .js-example-basic-multiple-edit-comp').append( '<option value='+val.company_id+' selected>'+val.company_name+'</option>' );
+        });
           }
     });
 
@@ -186,67 +298,46 @@ $(document).ready(function(){
     });
   // DISABLED warehouse
 
-  //display Companies for add warehouse
-   $('.js-example-basic-multiple-wh_assigned').select2({
-     allowClear: true,
-     placeholder: "Select Company",
-     dropdownParent: $('#Addwarehouse_management'),
-     tags: true,
-     ajax: {
-       url: base_url+'warehouse_management/add_warehouse_users',
-       dataType: "json",
-       data: function (params) {
-
-      },processResults: function (data) {
-
-            return {
-                results: $.map(data.warehouse_users, function (item) {
-                    return {
-                        text: item.company_name,
-                        id: item.company_id
-                    }
-                })
-            };
-        }
-     }
-   });
-
-   $(document).on('change','select[name="company"]', function(){
-     $.ajax({
-       url: base_url+'warehouse_management/get_warehouse_by_companies',
-       data: {company_id:$(this).val()},
-       type:'post',
-       dataType:"json",
-       success: function(data){
-         var str = '';
-         str += '<label for="wh_assigned">WH Assigned: <span class="required">*</span></label>';
-         str += '<select class="form-control" id="wh_assigned" name="wh_assigned" >';
-
-               $.each(data.users,function(index,element){
-                     str += '<option value="'+element.id+'">'+element.fullname+'</option>';
-               });
-         str += '</select>';
-         str += '<span class="err"></span>';
-
-           $('#wh_assigned_show').html(str);
-
-       }
-     });
-   });
+   // $(document).on('change','select[name="company"]', function(){
+   //   $.ajax({
+   //     url: base_url+'warehouse_management/get_warehouse_by_companies',
+   //     data: {company_id:$(this).val()},
+   //     type:'post',
+   //     dataType:"json",
+   //     success: function(data){
+   //       var str = '';
+   //       str += '<label for="wh_assigned">WH Assigned: <span class="required">*</span></label>';
+   //       str += '<select class="form-control" id="wh_assigned" name="wh_assigned" >';
+   //
+   //             $.each(data.users,function(index,element){
+   //                   str += '<option value="'+element.id+'">'+element.fullname+'</option>';
+   //             });
+   //       str += '</select>';
+   //       str += '<span class="err"></span>';
+   //
+   //         $('#wh_assigned_show').html(str);
+   //
+   //     }
+   //   });
+   // });
 
    $(document).on('change','select[name="wh_type"]', function(){
       // alert($(this).val());
       var str = '';
          str += '<div class="form-group">';
       if ($(this).val() == 1) {
-         str += '<input type="text" name="wh_address" class="form-control" id="wh_address" placeholder="Enter Address">';
+         str+='<labe for="wh_plate_number"><b>Plate Number:</b><span class="required">*</span></label>'
+         str+= '<input type="text" name="wh_plate_number" class="form-control" id="wh_plate_number" placeholder="Enter Plate Number">';
+
       }else {
-         str += '<input type="text" name="wh_plate_number" class="form-control" id="wh_plate_number" placeholder="Enter Plate Number">';
+         str+='<labe for="wh_address"><b>Address:</b><span class="required">*</span></label>'
+         str += '<input type="text" name="wh_address" class="form-control" id="wh_address" placeholder="Enter Address">';
       }
       str += '</div>';
       $('.input_add').html(str);
 
    });
+
 
   function display_whmanagement($warehouse_id){
     $('.warehouse_tbl').DataTable({
