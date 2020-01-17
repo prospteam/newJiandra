@@ -10,11 +10,16 @@ class Warehouse_management extends MY_Controller {
 		// json($data,false);
 
 		$data['company'] = $this->MY_Model->getrows('company');
+		$data['users'] = $this->MY_Model->getrows('users');
 		$data['vehicles'] = $this->MY_Model->getrows('vehicles');
 		$this->load_page('warehouse_management',$data);
 	}
 
 public function addwh_management(){
+	// $company_name = $this->input->post('company');
+
+
+	$post = $this->input->post();
 	$this->load->library("form_validation");
 	$this->form_validation->set_rules('wh_name','WH Name','required');
 	$this->form_validation->set_rules('wh_type','WH Type', 'required');
@@ -22,36 +27,37 @@ public function addwh_management(){
 	$this->form_validation->set_rules('wh_assigned','WH Assigned','required');
 
 	if ($this->input->post('wh_type') == 1) {
-		$this->form_validation->set_rules('wh_address','WH Address','required');
-	}else {
 		$this->form_validation->set_rules('wh_plate_number','WH Plate Number', 'required');
+	}else {
+		$this->form_validation->set_rules('wh_address','WH Address','required');
 	}
-
 	$error = array();
 
 	if ($this->form_validation->run() !== FALSE) {
-		$data = array(
-			'wh_name' => $this->input->post('wh_name'),
-			'wh_type' => $this->input->post('wh_type'),
-			'company' => $this->input->post('company'),
-			'wh_plate_number' => ($this->input->post('wh_plate_number')!= null)?$this->input->post('wh_plate_number'):" ",
-			'wh_address' =>($this->input->post('wh_address')!= null)?$this->input->post('wh_address'):" ",
-			'wh_assigned' => $this->input->post('wh_assigned'),
-			'status' => 1
-		);
 
-		$insert = $this->MY_Model->insert('warehouse_management',$data);
-		if ($insert) {
-			$response = array(
-				'status'=>'ok'
+		foreach ($post['company'] as $key => $value) {
+
+			$data = array(
+				'wh_name' => $this->input->post('wh_name'),
+				'wh_type' => $this->input->post('wh_type'),
+				'company' => $value,
+				'wh_plate_number' => ($this->input->post('wh_plate_number')!= null)?$this->input->post('wh_plate_number'):" ",
+				'wh_address' =>($this->input->post('wh_address')!= null)?$this->input->post('wh_address'):" ",
+				'wh_assigned' => $this->input->post('wh_assigned'),
+				'status' => 1
 			);
+			$insert = $this->MY_Model->insert('warehouse_management',$data);
+			if ($insert) {
+				$response = array(
+					'status'=>'ok'
+				);
+			}
 		}
-	}	else {
+	}else {
 			$response = array('form_error'=> array_merge($this->form_validation->error_array(),$error) );
 		}
 			echo json_encode($response);
 	}
-
 	//display companies for adding supplier
 	public function add_warehouse_users(){
 		$parameters['select'] = '*';
@@ -60,6 +66,18 @@ public function addwh_management(){
 		// print_r($data);
 	}
 
+	public function view_warehouse_type(){
+		$warehouse_id = $this->input->post('id');
+
+	$data_array = array();
+	$parameters['where'] = array('warehouse_management.id'=>$warehouse_id);
+	$parameters['select'] = '*';
+	$data = $this->MY_Model->getrows('warehouse_management',$parameters,'row');
+
+	$data_array['warehouse_management'] = $data;
+	json($data_array);
+
+	}
 	//display WAREHOUSE TYPE
 	public function add_warehouse_type(){
 		$parameters['select'] = '*';
@@ -78,7 +96,13 @@ public function addwh_management(){
 
 
 		 $column_order = array('wh_name','wh_type','wh_assigned','warehouse_management.status');
-		 $where = array('warehouse_management.status !=' => 3);
+		 if ($id == 0) {
+			 $where = array('warehouse_management.status !=' => 3);
+
+		 }else {
+			 $where = array('warehouse_management.status !=' => 3,
+			 'warehouse_management.company' => $id);
+		 }
 		 $join = array(
 			 // 'company' => 'company.company_id = users.company',
 			 'users' => 'users.id = warehouse_management.wh_assigned'
@@ -96,19 +120,30 @@ public function addwh_management(){
 		 echo json_encode($output);
 	 }
 
+
+	 //view details for edit
 	 public function editWarehouseManagement(){
 		 $warehouse_id = $this->input->post('id');
 
-	 $data_array = array();
+		 $parameters['join'] = array(
+			 'company' => 'company.company_id = warehouse_management.company',
+		 );
+		 $parameters['where'] = array('warehouse_management.id' => $warehouse_id);
+		 $parameters['select'] = '*';
 
-	 $parameters['where'] = array('warehouse_management.id'=>$warehouse_id);
-	 $parameters['select'] = '*';
+		 $data = $this->MY_Model->getRows('warehouse_management',$parameters,'row');
 
-	 $data = $this->MY_Model->getrows('warehouse_management',$parameters,'row');
+		 $company_id = explode(',',$data->company);
+		 $company_parameters['where_in'] = array('col' => 'company_id', 'value' => $company_id);
+		 $data_company = $this->MY_Model->getRows('company',$company_parameters);
 
-	 $data_array['warehouse_management'] = $data;
-	  echo json_encode($data_array);
+		 $data_array['warehouse_management'] = $data;
+		 $data_array['company'] = $data_company;
 
+		 // $parameters['where'] = array('id' => $user_id);
+		 // $data['view_edit'] = $this->MY_Model->getRows('users',$parameters,'row');
+		 // echo $this->db->last_query();
+		 echo json_encode($data_array);
 	 }
 
 	 public function get_warehouse_by_companies(){
@@ -160,6 +195,21 @@ public function addwh_management(){
 				echo json_encode($datas);
 		}
 
+			//display companies for adding supplier
+			public function add_warehouse_comp(){
+				$parameters['where'] = array('company_id !=' => 0);
+				$parameters['select'] = '*';
+				$data['companies'] = $this->MY_Model->getRows('company',$parameters);
+				echo json_encode($data);
+				// print_r($data);
+			}
+			public function edit_warehouse_comp(){
+				$parameters['where'] = array('company_id !=' => 0);
+				$parameters['select'] = '*';
+				$data['companies'] = $this->MY_Model->getRows('company',$parameters);
+				echo json_encode($data);
+				// print_r($data);
+			}
 		 public function disable_warehouse(){
 
 				 $warehouse_id = $this->input->post('id');

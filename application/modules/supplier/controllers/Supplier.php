@@ -84,7 +84,9 @@ class Supplier extends MY_Controller
 											);
 										}
 									}
-								}
+								}	// if Company 1
+
+
 						}else{
 							$array = array();
 							for ($i=0; $i < count($this->input->post('contact_name')) ; $i++) {
@@ -119,8 +121,6 @@ class Supplier extends MY_Controller
 							}
 
 				}else{
-
-
 					$this->load->library("form_validation");
 					$this->form_validation->set_rules('supplier_name', 'Supplier Name', 'required');
 					$this->form_validation->set_rules('contact_name', 'Name');

@@ -37,7 +37,7 @@ $(document).ready(function(){
               e.preventDefault();
               $('.btn-newj').removeClass('active-click');
               $(this).addClass('active-click');
-              display_suppliers('0');
+              display_suppliers('3');
         }) ;
 
         $('.t_btn').trigger('click');
