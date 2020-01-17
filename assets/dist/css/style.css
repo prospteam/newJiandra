@@ -80,3 +80,8 @@ th.header-title.supp {
     text-align: center;
     font-size: 18px !important;
 }
+.active.btn.btn-block.btn-sm.btn-danger {
+color: white;
+background:#dc3545 !important;
+border-color:#dc3545 !important;
+}

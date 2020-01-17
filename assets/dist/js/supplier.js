@@ -37,7 +37,7 @@ $(document).ready(function(){
               e.preventDefault();
               $('.btn-newj').removeClass('active-click');
               $(this).addClass('active-click');
-              display_suppliers('3');
+              display_suppliers('0');
         }) ;
 
         $('.t_btn').trigger('click');
@@ -478,7 +478,7 @@ function blankVal(){
   $('#addSupplier input[name="mobile_number"]').val('');
   $('#addSupplier input[name="contact_email"]').val('');
   $('#addSupplier input[name="supp_position"]').val('');
-  $('#addSupplier input[name="company[]"]').val('');
+  $('#addSupplier select[name="company[]"]').val('');
   $('#addSupplier select[name="email"]').val('');
   $('#addSupplier input[name="address"]').val('');
   $('#addSupplier input[name="office_number"]').val('');

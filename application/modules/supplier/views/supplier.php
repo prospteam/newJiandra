@@ -390,7 +390,7 @@
 				<div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
 					<div class="middle">
 						<div class="">
-								<a href="javascript:;" class="btn-newj t_btn" data-id="3">All Suppliers</a>
+								<a href="javascript:;" class="btn-newj t_btn" data-id="0">All Suppliers</a>
 						</div>
 						<div class="">
 								<a href="javascript:;" class="btn-newj f_btn" data-id="1">New Jiandra</a>

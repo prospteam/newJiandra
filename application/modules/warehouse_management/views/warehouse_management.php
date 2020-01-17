@@ -99,6 +99,14 @@
                         </select>
                          <span class="err"></span>
                        </div>
+                       <div class="form-group plate_num">
+                          <label for="wh_plate_number"><b>Plate Number:</b><span class="required">*</span></label>
+                          <input type="text" name="wh_plate_number" class="form-control" id="wh_plate_number" placeholder="Enter Plate Number">
+                       </div>
+                       <div class="group wh1_address">
+                          <label for="wh_address"><b>Address:</b><span class="required">*</span></label>
+                          <input type="text" name="wh_address" class="form-control" id="wh_address" placeholder="Enter Address">
+                       </div>
                        <div class="form-group">
                        <label for="company">Company: <span class="required">*</span></label>
                            <div class="select2-purple">
@@ -117,6 +125,7 @@
                      </select>
                         <span class="err"></span>
                      </div>
+
                   </div>
                   <div class="modal-footer">
                     <button type="submit" class="btn btn-primary add">Submit</button>
@@ -185,7 +194,7 @@
                <div class="modal-dialog modal-lg" role="document">
                <div class="modal-content">
                  <div class="modal-header bg-info1">
-                    <h5 class="modal-title" id="exampleModalLabel" > View Warehouse Details</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" >View Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -194,11 +203,40 @@
                     <div class="row">
                       <div class="col-6">
                          <div class="form-group">
-                          <label for="viewWH" class="viewWH">Warehouse Type Details: </label>
+                          <label for="viewWH" class="viewWH">Warehouse Type Details:  </label>
                           <p class="wh_type"> </p>
                          </div>
                       </div>
+                      <div class="col-6">
+                         <div class="form-group">
+                          <label for="wh_name" class="name_wh">Name: </label>
+                          <p class="wh_name"> </p>
+                         </div>
+                      </div>
                     </div>
+                    <div class="row">
+                      <div class="col-6">
+                         <div class="form-group">
+                          <label for="wh_assigned" class="assign">Assigned: </label>
+                          <p class="wh_assigned"> </p>
+                         </div>
+                      </div>
+                      <div class="col-6">
+                         <div class="form-group">
+                          <label for="wh_type" class="type">Type: </label>
+                          <p class="wh_type1"> </p>
+                         </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                       <div class="col-6">
+                          <div class="form-group">
+                             <label for="company">Company: </label>
+                             <p class="company"> </p>
+                          </div>
+                       </div>
+                    </div>
+
                  </div>
                </div>
                </div>

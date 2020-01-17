@@ -72,12 +72,17 @@ public function addwh_management(){
 	$data_array = array();
 	$parameters['where'] = array('warehouse_management.id'=>$warehouse_id);
 	$parameters['select'] = '*';
+	$parameters['join'] = array(
+		'users' => 'users.id = warehouse_management.wh_assigned',
+		'company' => 'company.company_id = warehouse_management.company'
+	);
 	$data = $this->MY_Model->getrows('warehouse_management',$parameters,'row');
 
 	$data_array['warehouse_management'] = $data;
 	json($data_array);
 
 	}
+
 	//display WAREHOUSE TYPE
 	public function add_warehouse_type(){
 		$parameters['select'] = '*';
@@ -120,31 +125,30 @@ public function addwh_management(){
 		 echo json_encode($output);
 	 }
 
-
 	 //view details for edit
-	 public function editWarehouseManagement(){
-		 $warehouse_id = $this->input->post('id');
+ 	public function editWarehouseManagement(){
+ 		$warehouse_id = $this->input->post('id');
 
-		 $parameters['join'] = array(
-			 'company' => 'company.company_id = warehouse_management.company',
-		 );
-		 $parameters['where'] = array('warehouse_management.id' => $warehouse_id);
-		 $parameters['select'] = '*';
+ 		$parameters['join'] = array(
+ 			'company' => 'company.company_id = warehouse_management.company',
+ 		);
+ 		$parameters['where'] = array('warehouse_management.id' => $warehouse_id);
+ 		$parameters['select'] = '*';
 
-		 $data = $this->MY_Model->getRows('warehouse_management',$parameters,'row');
+ 		$data = $this->MY_Model->getRows('warehouse_management',$parameters,'row');
 
-		 $company_id = explode(',',$data->company);
-		 $company_parameters['where_in'] = array('col' => 'company_id', 'value' => $company_id);
-		 $data_company = $this->MY_Model->getRows('company',$company_parameters);
+ 		$company_id = explode(',',$data->company);
+ 		$company_parameters['where_in'] = array('col' => 'company_id', 'value' => $company_id);
+ 		$data_company = $this->MY_Model->getRows('company',$company_parameters);
 
-		 $data_array['warehouse_management'] = $data;
-		 $data_array['company'] = $data_company;
+ 		$data_array['warehouse_management'] = $data;
+ 		$data_array['company'] = $data_company;
 
-		 // $parameters['where'] = array('id' => $user_id);
-		 // $data['view_edit'] = $this->MY_Model->getRows('users',$parameters,'row');
-		 // echo $this->db->last_query();
-		 echo json_encode($data_array);
-	 }
+ 		// $parameters['where'] = array('id' => $user_id);
+ 		// $data['view_edit'] = $this->MY_Model->getRows('users',$parameters,'row');
+ 		// echo $this->db->last_query();
+ 		echo json_encode($data_array);
+ 	}
 
 	 public function get_warehouse_by_companies(){
 			 $parameters['where'] = array('company' => $this->input->post('company_id'));
@@ -167,9 +171,15 @@ public function addwh_management(){
 					 'wh_name'  	   				  => $post['wh_name'],
 					 'wh_type'  	   			    => $post['wh_type'],
 					 'wh_assigned'  	   			=> $post['wh_assigned'],
-				 );
+					 'wh_address'						=>$post['wh_address'],
+					 'wh_plate_number'				=>$post['wh_plate_number'],
 
-			 $update = $this->MY_Model->update('warehouse_management',$data, array('id' => $warehouse_id));
+				 );
+				 if(!empty($post['company'])) {
+ 	 				$data['company'] = implode(',',$post['company']);
+ 	 			}
+
+			 	$update = $this->MY_Model->update('warehouse_management',$data, array('id' => $warehouse_id));
 			 if ($update) {
 				 $response = array(
 					 'status' => 'ok'

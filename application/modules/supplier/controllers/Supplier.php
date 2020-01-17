@@ -52,7 +52,7 @@ class Supplier extends MY_Controller
 
 					if ($this->form_validation->run() !== FALSE) {
 
-							if(count($company_name) >= 1){
+							if(count($company_name) == 1){
 
 								$array = array();
 								for ($i=0; $i < count($this->input->post('contact_name')) ; $i++) {
