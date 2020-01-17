@@ -1,6 +1,13 @@
 var base_url = $('input[name="base_url"]').val();
 $(document).ready(function(){
 
+  // for numbers only
+    $(document).on('keypress', '.number_only', function (event) {
+        if (((event.which != 46 || (event.which == 46 && $(this).val() == '')) ||
+            $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    })
 
   //display purchase_tbl
     var purchase_tbl = $('.purchase_tbl').DataTable({
@@ -234,7 +241,9 @@ $(document).ready(function(){
   //End of Update delivery status
 
   //choose from product name
-    $('select[name="prod_code[]"]').select2();
+    $('select[name="prod_code[]"]').select2({
+      placeholder: "Select SKU"
+    });
 
   //autocomplete product name after choosing sku Code
   $(document).on('change','.code',function(){
@@ -254,6 +263,7 @@ $(document).ready(function(){
 
   //autocomplete product name after choosing sku Code if add new product
   $(document).on('change','.add_code',function(){
+    let that = $(this);
     $.ajax({
         url: base_url+'purchaseorders/get_productName_by_code',
         data: {prod_id:$(this).val()},
@@ -261,7 +271,7 @@ $(document).ready(function(){
         dataType: 'json',
         success: function(data){
                 $.each(data.products,function(index,element){
-                      $('.add_prod').val(element.product_name);
+                      $(that).parent().next().find('.add_prod').val(element.product_name);
                 });
 
         }
@@ -292,6 +302,7 @@ $(document).ready(function(){
 
   //autocomplete product name after choosing sku Code if edit new product
   $(document).on('change','.edit_code',function(){
+    let that = $(this);
     $.ajax({
         url: base_url+'purchaseorders/get_productName_by_code',
         data: {prod_id:$(this).val()},
@@ -299,8 +310,8 @@ $(document).ready(function(){
         dataType: 'json',
         success: function(data){
                 $.each(data.products,function(index,element){
-                      $('.edit_name').val(element.product_name);
-
+                      // $('.edit_name').val(element.product_name);
+                      $(that).parent().next().find('.edit_name').val(element.product_name);
                 });
 
         }
@@ -380,7 +391,7 @@ $(document).ready(function(){
              $('.date').text(element.date_ordered);
              $('.company').text(element.company_name);
              $('.supplier').text(element.supplier_name);
-             $('.warehouse').text(element.warehouse_name);
+             $('.warehouse').text(element.wh_name);
              str += '<tr>';
              str +=     '<td class="purch_td hide">';
                  str +=   '<input type="hidden" class="edit_purchID" name="view_purchase_id[]" value='+element.purchase_id+'>';
@@ -412,7 +423,7 @@ $(document).ready(function(){
                  str += '</td>';
                  str +=  '<td class="purch_td delivered">';
                     str += '<span class="deliv">'+deliv+'</span>';
-                    str +=   '<input type="number" class="edit_deliv" name="delivered[]" value='+deliv+' disabled hidden>';
+                    str +=   '<input type="text" class="edit_deliv number_only" name="delivered[]" value='+deliv+' disabled hidden>';
                   str += '</td>';
                   if(element.delivery_status == 4){
 
@@ -540,7 +551,7 @@ $(document).ready(function(){
                 // str1 += '<option value="" selected>Select Warehouse</option>';
 
                   $.each(data.warehouse,function(index,element){
-                        str1 += '<option value="'+element.id+'|'+element.wh_name+'">'+element.wh_name+'</option>';
+                        str1 += '<option value="'+element.id+'">'+element.wh_name+'</option>';
                   });
             str1 += '</select>';
             str1 += '<span class="err"></span>';
@@ -583,7 +594,7 @@ $(document).ready(function(){
 
             setTimeout(function(){
               $('#editpurchaseorder select[name="supplier_edit"]').val(element.supplier_id);
-              $('#editpurchaseorder select[name="warehouse_edit"]').val(element.warehouse_id+'|'+element.warehouse_name);
+              $('#editpurchaseorder select[name="warehouse_edit"]').val(element.warehouse_id);
             }, 0100);
 
 
@@ -603,19 +614,19 @@ $(document).ready(function(){
                    str += '<span class="err"></span>';
               str += '</td>';
               str += '<td class="purch_td">';
-                   str += '<input type="text" data-price="'+element.product_name+'" class="form-control edit_new_name" name="prod_name[]" value="'+element.product_name+'">';
+                   str += '<input type="text" data-price="'+element.product_name+'" class="form-control edit_new_name" name="prod_name[]" value="'+element.product_name+'" readonly>';
                    str += '<span class="err"></span>';
               str += '</td>';
               str += '<td class="purch_td">';
-                   str += '<input type="number" class="form-control purchase_quantity" name="quantity[]" value='+element.quantity+'>';
+                   str += '<input type="text" class="form-control purchase_quantity number_only" name="quantity[]" value='+element.quantity+'>';
                    str += '<span class="err"></span>';
               str += '</td>';
               str += '<td class="purch_td">';
-                  str += '<input type="text" class="form-control purchase_price" name="unit_price[]" value='+element.unit_price+'>';
+                  str += '<input type="text" class="form-control purchase_price number_only" name="unit_price[]" value='+element.unit_price+'>';
                   str += '<span class="err"></span>';
               str += '</td>';
               str += '<td class="purch_td">';
-                  str += '<input type="number" class="form-control purchase_total" name="total[]" value='+prod_total+' readonly>';
+                  str += '<input type="text" class="form-control purchase_total" name="total[]" value='+prod_total+' readonly>';
                   str += '<span class="err"></span>';
               str += '</td>';
             str += '</tr>';
@@ -709,28 +720,28 @@ $(document).ready(function(){
     var x = 1;
     var str = '';
 
-    str += '<tr>';
+    str += '<tr class="add_purch">';
       str += '<td class="purch_td">';
            str += '<select class="form-control add_code select2_add" style="width: 100%;" name="prod_code[]">';
-              str += '<option value="">Select SKU</option>';
+              str += '<option value="" selected="true" disabled="disabled">Select SKU</option>';
               str += get_products();
            str += '</select>';
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
-           str += '<input type="text" class="form-control add_prod" name="prod_name[]" value="">';
+           str += '<input type="text" class="form-control add_prod" name="prod_name[]" value="" readonly>';
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
-           str += '<input type="number" class="form-control purchase_quantity" name="quantity[]" value="">';
+           str += '<input type="text" class="form-control purchase_quantity number_only" name="quantity[]" value="">';
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
-          str += '<input type="number" class="form-control purchase_price" name="unit_price[]" value="">';
+          str += '<input type="text" class="form-control purchase_price number_only" name="unit_price[]" value="">';
           str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
-          str += '<input type="number" class="form-control purchase_total" name="total[]" value="" readonly>';
+          str += '<input type="text" class="form-control purchase_total" name="total[]" value="" readonly>';
           str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
@@ -760,25 +771,25 @@ $(document).ready(function(){
     str += '<tr>';
       str += '<td class="purch_td">';
         str += '<select class="form-control edit_code select2_edit" style="width: 100%;" name="edit_prod_code[]">';
-         str += '<option value="">Select SKU</option>';
+         str += '<option value="" selected="true" disabled="disabled">Select SKU</option>';
          str += get_products();
         str += '</select>';
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
-           str += '<input type="text" class="form-control edit_name" name="edit_prod_name[]" value="">';
+           str += '<input type="text" class="form-control edit_name" name="edit_prod_name[]" value="" readonly>';
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
-           str += '<input type="number" class="form-control purchase_quantity" name="edit_quantity[]" value="">';
+           str += '<input type="text" class="form-control purchase_quantity number_only" name="edit_quantity[]" value="">';
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
-          str += '<input type="number" class="form-control purchase_price" name="edit_unit_price[]" value="">';
+          str += '<input type="text" class="form-control purchase_price number_only" name="edit_unit_price[]" value="">';
           str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
-          str += '<input type="number" class="form-control purchase_total" name="edit_total[]" value="" readonly>';
+          str += '<input type="text" class="form-control purchase_total" name="edit_total[]" value="" readonly>';
           str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
@@ -956,7 +967,9 @@ function blankVal_purchase(){
   $('#AddPurchaseOrder select[name="warehouse"]').val('');
   $('#AddPurchaseOrder input[name="prod_name[]"]').val('');
   $('#AddPurchaseOrder select[name="prod_code[]"]').val('');
-
+  $('#AddPurchaseOrder .code ').val('').trigger('change');
+  $('#AddPurchaseOrder .add_code ').val('').trigger('change');
+  $('#AddPurchaseOrder .add_purch ').remove();
   $('.err').text('');
   $('#AddPurchaseOrder input[name="quantity[]"]').val('');
   $('#AddPurchaseOrder input[name="unit_price[]"]').val('');

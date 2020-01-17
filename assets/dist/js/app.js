@@ -1,6 +1,15 @@
 var base_url = $('input[name="base_url"]').val();
 $(document).ready(function(){
 
+  //remove company field when warehouse personnel
+  $('#position').on('change', function(){
+    if($(this).val() == "5"){
+      $('.company').css('display', 'none');
+    }else{
+      $('.company').css('display', 'block');
+    }
+  });
+
   //display_users
 
   //display companies for add user
@@ -799,8 +808,11 @@ var users_tbl = $('.users_tbl').DataTable({
                 str += 'New Jiandra Enterprises';
               }else if(row.company == 2){
                 str += 'Mrs.P Mktg';
+              }else if(row.company == 0){
+                str += '-';
               }else if(row.company == 1,2){
                 str += 'New Jiandra Enterprises, Mrs.P Mktg';
+
               }
               return str;
             }

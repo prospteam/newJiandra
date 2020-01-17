@@ -55,7 +55,7 @@
     										</div>
                       </div>
                       <hr>
-                          <span class="btn btn-sm btn-primary" id="addNewPO"><i class="fa fa-plus"></i> Add Product</span>
+
                         <br>
 
                       <div class="table-responsive view_purchase_orders_details">
@@ -84,20 +84,20 @@
                                       <span class="err"></span>
                                     </td>
                                     <td class="purch_td">
-                                        <input type="text" class="form-control prod_name" name="prod_name[]" value="">
+                                        <input type="text" class="form-control prod_name" name="prod_name[]" value="" readonly>
                                       <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
                                       <span class="err"></span>
                                     </td>
                                     <td class="purch_td">
-                                      <input type="number" class="form-control purchase_quantity" name="quantity[]" value="">
+                                      <input type="text" class="form-control purchase_quantity number_only" name="quantity[]" value="">
                                       <span class="err"></span>
                                     </td>
                                     <td class="purch_td">
-                                      <input type="text" class="form-control purchase_price" name="unit_price[]" value="">
+                                      <input type="text" class="form-control purchase_price number_only" name="unit_price[]" value="">
                                       <span class="err"></span>
                                     </td>
                                     <td class="purch_td">
-                                      <input type="number" class="form-control purchase_total" name="total[]" value="" readonly>
+                                      <input type="text" class="form-control purchase_total" name="total[]" value="" readonly>
                                       <span class="err"></span>
                                     </td>
                                   </tr>
@@ -105,6 +105,8 @@
                               </tbody>
                             </table>
                       </div>
+                        <span class="btn btn-sm btn-primary" id="addNewPO"><i class="fa fa-plus"></i> Add Product</span>
+                        <br>
                       <hr>
                       <div class="row">
                         <div class="col-6">
@@ -324,7 +326,7 @@
                     </div>
                   </div>
                   <hr>
-                      <span class="btn btn-sm btn-primary" id="addNewPO_edit"><i class="fa fa-plus"></i> Add Product</span>
+
                     <br>
 
                   <div class="table-responsive view_purchase_orders_details">
@@ -361,6 +363,8 @@
                           </tbody>
                         </table>
                   </div>
+                  <span class="btn btn-sm btn-primary" id="addNewPO_edit"><i class="fa fa-plus"></i> Add Product</span>
+                <br>
                   <hr>
                   <div class="row">
                     <div class="col-6">

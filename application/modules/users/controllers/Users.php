@@ -80,6 +80,7 @@ class Users extends MY_Controller {
 
 	//display companies
 	public function add_companies(){
+		$parameters['where'] = array('company_id !=' => 0);
 		$parameters['select'] = '*';
 		$data['companies'] = $this->MY_Model->getRows('company',$parameters);
 		echo json_encode($data);
@@ -88,6 +89,7 @@ class Users extends MY_Controller {
 
 	//display companies for edit
 	public function edit_companies(){
+		$parameters['where'] = array('company_id !=' => 0);
 		$parameters['select'] = '*';
 		$data['companies'] = $this->MY_Model->getRows('company',$parameters);
 		echo json_encode($data);
@@ -108,19 +110,31 @@ class Users extends MY_Controller {
 	//Add User
 	public function adduser()
 	{
+		// echo "<pre>";
+		// print_r($this->input->post());
+		// exit;
 		$this->load->library("form_validation");
 
 		$this->form_validation->set_rules('fullname', 'Fullname', 'required');
 		$this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
 		$this->form_validation->set_rules('password', 'Password', 'required');
 		$this->form_validation->set_rules('position', 'Position', 'required');
-		$this->form_validation->set_rules('company[]', 'Company', 'required');
+		if($this->input->post('position') != 5){
+
+			$this->form_validation->set_rules('company[]', 'Company', 'required');
+		}
 		$error = array();
 
 
 		// if(empty($this->input->post('company[]'))){
 		// 	$error['company'] = 'The Companies field is required.';
 		// }
+		if($this->input->post('position') != 5){
+
+			$company = implode(',',$this->input->post('company'));
+		}else{
+			$company = 0;
+		}
 
 		if ($this->form_validation->run() !== FALSE) {
 			$data = array(
@@ -128,7 +142,7 @@ class Users extends MY_Controller {
 				'username' => $this->input->post('username'),
 				'password	' => password_hash($this->input->post('password'),PASSWORD_DEFAULT),
 				'position' => $this->input->post('position'),
-				'company' => implode(',',$this->input->post('company')),
+				'company' => $company,
 				'status' => 1
 			);
 

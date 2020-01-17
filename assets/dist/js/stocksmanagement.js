@@ -102,7 +102,7 @@ $(document).ready(function(){
                      str += element.system_count;
                  str += '</td>';
                str +=  '<td class="purch_td physical_count">';
-                  str +=   '<input type="number" class="edit_deliv form-control form-control-sm" value='+element.physical_count+' name="physical_count[]">';
+                  str +=   '<input type="number" class="edit_deliv form-control form-control-sm number_only" value='+element.physical_count+' name="physical_count[]">';
                   str += '<span class="err"></span>';
                 str += '</td>';
                 str +=  '<td class="note">';
