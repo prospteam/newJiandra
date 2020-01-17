@@ -12,11 +12,12 @@ class Purchaseorders extends MY_Controller {
 		$parameters['select'] = '*';
 		$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
 
+		$parameters['where'] = array('company_id !=' => 0);
 		$parameters['select'] = '*';
 		$data['company'] = $this->MY_Model->getRows('company',$parameters);
 
 		$param['select'] = '*';
-		$data['products'] = $this->MY_Model->getRows('products', $parameters);
+		$data['products'] = $this->MY_Model->getRows('products', $param);
 
 		$parameters1['select'] = '*';
 		$parameters1['limit'] = array(1,0);;
@@ -171,7 +172,6 @@ class Purchaseorders extends MY_Controller {
 					'unit_price' => $post['unit_price'][$pkey],
 					'supplier' => $post['supplier'],
 					'warehouse_id' => $warehouse[0],
-					'warehouse_name' => $warehouse[1],
 					'company' => $post['company'],
 					'note' => $post['purchase_note'],
 					'status' => 1,
@@ -226,7 +226,6 @@ class Purchaseorders extends MY_Controller {
 										'company' => $post['company_edit'],
 										'supplier' => $post['supplier_edit'],
 										'warehouse_id' => $warehouse[0],
-										'warehouse_name' => $warehouse[1],
 										'status' => 1,
 										'delivery_status' => 1
 									);
@@ -250,7 +249,6 @@ class Purchaseorders extends MY_Controller {
 					'company' => $post['company_edit'],
 					'supplier' => $post['supplier_edit'],
 					'warehouse_id' => $warehouse[0],
-					'warehouse_name' => $warehouse[1],
 					'note' => $post['purchase_note'],
 				);
 				$update1 = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['edit_purchase_code']));
@@ -301,8 +299,8 @@ class Purchaseorders extends MY_Controller {
 
 		$parameters['where'] = array('purchase_code' => $purchase_id);
 		// $parameters['group'] = array('purchase_code');
-		$parameters['join'] = array('company' => 'company.company_id = purchase_orders.company','supplier' => 'supplier.id = purchase_orders.supplier', 'products' => 'products.id = purchase_orders.product' );
-		$parameters['select'] = 'purchase_orders.*, purchase_orders.id AS purchase_id, supplier.id AS supplier_id, supplier.*, company.*, products.id AS product_id, products.*';
+		$parameters['join'] = array('company' => 'company.company_id = purchase_orders.company','supplier' => 'supplier.id = purchase_orders.supplier', 'products' => 'products.id = purchase_orders.product', 'warehouse_management' => 'warehouse_management.id = purchase_orders.warehouse_id'  );
+		$parameters['select'] = 'purchase_orders.*, purchase_orders.id AS purchase_id, supplier.id AS supplier_id, supplier.*, company.*, products.id AS product_id, products.*, warehouse_management.wh_name';
 
 		$data = $this->MY_Model->getRows('purchase_orders',$parameters);
 
@@ -367,7 +365,7 @@ class Purchaseorders extends MY_Controller {
 // print_r($last);
 // exit;
 		if ($res == '') {
-			$data_stocks = array('product' => $post['product'], 'code' => $post['code'], 'warehouse_id' => $post['warehouse_id'], 'warehouse_name' => $post['warehouse_name']);
+			$data_stocks = array('product' => $post['product'], 'code' => $post['code'], 'warehouse_id' => $post['warehouse_id']);
 				$data['prodToStocks'] = $this->MY_Model->insert('stocks',$data_stocks);
 		}
 

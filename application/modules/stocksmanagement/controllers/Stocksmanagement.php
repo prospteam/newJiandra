@@ -67,7 +67,7 @@ class Stocksmanagement extends MY_Controller {
 		$param['where'] = array('po.delivery_status' => 4);
 		$param['group'] = array('po.product', 'po.warehouse_id');
 		$param['join'] = array('products as p' => 'p.id = po.product:left', 'stocks as s' => 's.product = po.product:left', 'warehouse_management as w' => 'w.id = po.warehouse_id:left');
-		$param['select'] = "po.product, (SELECT SUM(delivered) FROM purchase_orders WHERE warehouse_id = po.warehouse_id AND product = p.id) AS system_count, p.code, p.product_name, s.warehouse_id, w.wh_name";
+		$param['select'] = "po.product, (SELECT SUM(delivered) FROM purchase_orders WHERE warehouse_id = po.warehouse_id AND product = p.id) AS system_count, p.code, p.product_name, s.stock_id, s.physical_count, s.note_stocks, s.warehouse_id, w.wh_name";
 		$data['stocks'] =  $this->MY_Model->getRows('purchase_orders as po', $param);
 		// echo "<pre>";
 		// print_r($this->db->last_query());

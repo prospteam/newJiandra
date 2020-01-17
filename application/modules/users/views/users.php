@@ -52,7 +52,7 @@
     											<div class="form-group">
     												<label for="position">Position: <span class="required">*</span></label>
     												<!-- <input type="text" class="form-control" name="position" value=""> -->
-                            <select class="form-control" class="position" name="position" >
+                            <select class="form-control" class="position" id="position" name="position" >
                               <option value="" selected hidden>Select Position</option>
                             <?php foreach($position as $k => $value) : ?>
                                 <option value="<?php echo $value['id'] ?>"><?php echo $value['position_name'] ?></option>
@@ -62,7 +62,8 @@
     											</div>
     										</div>
     									</div>
-    								<div class = "row">
+
+    								<div class = "row company">
     								   <div class="col-12">
     									<div class="form-group">
                         <div class="select2-purple">
