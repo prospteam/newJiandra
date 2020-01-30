@@ -313,9 +313,6 @@ class Purchaseorders extends MY_Controller {
 	//change delivered quantity on purchase Orders
 	public function change_delivered_qty(){
 		$post = $this->input->post();
-		// echo "<pre>";
-		// print_r($post);
-		// exit;
 		$delivered_date = date("F d, Y");
 
 		// if($post['delivery_status'] == 4){
