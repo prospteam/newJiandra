@@ -71,18 +71,6 @@
                         <select class="form-control js-example-basic-multiple-addU" name="company[]" multiple="multiple"></select>
                         <span class="err"></span>
                       </div>
-                    <!-- <span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="8" style="width: 100%;"><span class="selection">
-                      <span class="select2-selection select2-selection--multiple" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="-1" aria-disabled="false">
-                        <ul class="select2-selection__rendered">
-                          <li class="select2-search select2-search--inline">
-                            <input class="select2-search__field form-control" type="search" tabindex="0" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" role="searchbox" aria-autocomplete="list" placeholder="Select Company">
-                          </li>
-                        </ul>
-                      </span>
-                    </span>
-                    <span class="dropdown-wrapper" aria-hidden="true"></span>
-                  </span> -->
-
     									</div>
     									</div>
                   </div>
@@ -186,7 +174,7 @@
                       <div class="form-group">
                         <label for="position">Position: <span class="required">*</span></label>
                         <!-- <input type="text" class="form-control" name="position" value=""> -->
-                        <select class="form-control" class="position" name="position" placeholder="Select Position">
+                        <select class="form-control" class="position" name="position" id="edit_position" placeholder="Select Position">
                           <!-- <option value="">Select Position</option> -->
                         <?php foreach($position as $k => $value) : ?>
                             <option value="<?php echo $value['id'] ?>"><?php echo $value['position_name'] ?></option>
@@ -196,7 +184,7 @@
                       </div>
                     </div>
                   </div>
-                <div class = "row">
+                <div class = "row company">
                    <div class="col-12">
                   <div class="form-group">
                     <div class="select2-purple">
