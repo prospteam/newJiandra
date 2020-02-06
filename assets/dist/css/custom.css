@@ -78,7 +78,7 @@ button.close {
     background-color: rgba(96, 97, 209, 0.35);
 }
 
-[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:hover {
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link:hover,[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active {
       background-color: rgba(96, 97, 209, 0.35);
 }
 

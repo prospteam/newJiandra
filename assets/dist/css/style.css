@@ -85,3 +85,6 @@ color: white;
 background:#dc3545 !important;
 border-color:#dc3545 !important;
 }
+li.nav-item.active2 {
+    background-color: #050506;
+}

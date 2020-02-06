@@ -96,9 +96,7 @@
                         <div class="col-lg-6">
                           <div class="form-group">
                             <label for="description">Description:</label>
-                            <textarea rows="2" cols="50" name="description" class="form-control" >
-
-                            </textarea>
+                            <textarea rows="2" cols="50" name="description" class="form-control"> </textarea>
                           </div>
                         </div>
                       </div>
@@ -276,8 +274,7 @@
                   <div class="col-6">
                         <div class="form-group">
                           <label for="description">Description:</label>
-                            <textarea rows="2" cols="50" name="description" class="form-control" >
-                          </textarea>
+                            <textarea rows="2" cols="50" name="description" class="form-control" ></textarea>
                         </div>
                     </div>
                   </div>

@@ -30,6 +30,8 @@
 <script src="<?php echo base_url('assets/dist/js/stocksmanagement.js'); ?>"></script>
 <!-- warehouse management -->
 <script src="<?php echo base_url('assets/dist/js/warehouse_management.js'); ?>"></script>
+<!-- dashboard -->
+<script src="<?php echo base_url('assets/dist/js/dashboard.js'); ?>"></script>
 
 
 </body>

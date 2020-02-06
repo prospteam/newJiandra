@@ -396,3 +396,17 @@
     return $block
   }
 })(jQuery)
+
+// nav active button
+    $(".sidebar nav ul.nav li a").filter(function () {
+        return this.href == location.href.replace(/#.*/, "");
+    }).addClass('active');
+
+    // for sub navigation
+    $(".sidebar nav ul.nav li a").filter(function () {
+        return this.href == location.href.replace(/#.*/, "");
+    }).parents('.nav .nav-treeview').show();
+
+    $(".sidebar nav ul.nav li a").filter(function () {
+        return this.href == location.href.replace(/#.*/, "");
+    }).parents('.has-treeview').addClass('menu-open');

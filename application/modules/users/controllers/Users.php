@@ -6,15 +6,17 @@ class Users extends MY_Controller {
 	public function __construct(){
 		parent::__construct();
 
+
 	}
 
 	public function index(){
 		// $parameters['select'] = '*';
 		// $data['users'] = $this->MY_Model->getRows('users',$parameters);
+		$data['upresent'] = 1;
 		$parameters['where'] = array('id !=' => 1);
 		$parameters['select'] = '*';
 		$data['position'] = $this->MY_Model->getRows('position',$parameters);
-    $this->load_page('users', @$data);
+    $this->load_page('users', @$data );
 	}
 
 	public function display_users(){

@@ -67,8 +67,9 @@ $(document).ready(function(){
               }else if (data.error) {
                   Swal.fire("Error",data.error, "error");
               }else {
-                 blankVal();
+                 blankVal_supplier();
                   $('#addSupplier').modal('hide');
+
                   Swal.fire("Supplier has been added!", data.success, "success");
                   display_suppliers();
                   // $(".suppliers_tbl").DataTable().ajax.reload();
@@ -471,16 +472,18 @@ function display_suppliers($supplier_id){
 function clearError(){
     $('.err').text('');
 }
-function blankVal(){
+function blankVal_supplier(){
+
   $('#addSupplier input[name="supplier_name"]').val('');
   $('.err').text('');
-  $('#addSupplier input[name="contact_name"]').val('');
-  $('#addSupplier input[name="mobile_number"]').val('');
-  $('#addSupplier input[name="contact_email"]').val('');
-  $('#addSupplier input[name="supp_position"]').val('');
-  $('#addSupplier select[name="company[]"]').val('');
-  $('#addSupplier select[name="email"]').val('');
-  $('#addSupplier input[name="address"]').val('');
+  $('#addSupplier input[name="contact_name[]"]').val('');
+  $('#addSupplier input[name="mobile_number[]"]').val('');
+  $('#addSupplier input[name="contact_email[]"]').val('');
+  $('#addSupplier input[name="supp_position[]"').val('');
+  $('#addSupplier .js-example-basic-multiple ').val('').trigger('change');
+  // $('#addSupplier select[name="company[]"]').val('');
+  $('#addSupplier input[name="email"').val('');
+  $('#addSupplier input[name="address"').val('');
   $('#addSupplier input[name="office_number"]').val('');
   $('#addSupplier input[name="fax_number"]').val('');
   $('#addSupplier input[name="tin_number"]').val('');

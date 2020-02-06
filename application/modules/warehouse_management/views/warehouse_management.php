@@ -90,8 +90,8 @@
                           <span class="err"></span>
                         </div>
                         <div class="form-group">
-                         <label for="wh_type">Warehouse Type: <span class="required">*</span></label>
-                         <select class="form-control" name="wh_type" >
+                         <label for="wh_type2">Warehouse Type: <span class="required">*</span></label>
+                         <select class="form-control edit_plate_number" name="wh_type2" >
                            <option value="" selected hidden>Select Warehouse Type</option>
                             <?php foreach($vehicles as $k => $value) : ?>
                             <option value = "<?php echo $value['vehicle_type'] ?>"> <?php echo ($value['vehicle_type']== 1)?"Ex Truck":"Warehouse" ?></option>
@@ -99,9 +99,18 @@
                         </select>
                          <span class="err"></span>
                        </div>
+                       <div class="col-6 input_edit" >
+                          <!-- <div class="form-group" id="wh_address_show"></div> -->
+                       </div>
                        <div class="form-group plate_num">
                           <label for="wh_plate_number"><b>Plate Number:</b><span class="required">*</span></label>
-                          <input type="text" name="wh_plate_number" class="form-control" id="wh_plate_number" placeholder="Enter Plate Number">
+                          <!-- <input type="text" name="wh_plate_number" class="form-control" id="wh_plate_number" placeholder="Enter Plate Number"> -->
+                          <select class="form-control js-example-basic-multiple-edit-platenum" class="wh_plate_number" name="wh_plate_number" >
+                           <option value="" selected hidden>Select Plate Number</option>
+                         <?php foreach($vehicles as $key => $value) : ?>
+                             <option value="<?php echo $value['plate_number'] ?>"><?php echo $value['plate_number'] ?></option>
+                       <?php  endforeach; ?>
+                      </select>
                        </div>
                        <div class="group wh1_address">
                           <label for="wh_address"><b>Address:</b><span class="required">*</span></label>

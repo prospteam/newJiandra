@@ -348,7 +348,7 @@ $('#AddProducts input[name="code"]').val('');
   $('#AddProducts .js-example-basic-multiple-addproducts').val('').trigger('change');
 // $('#AddProducts input[name="brand"]').val('');
 // $('#AddProducts input[name="category"]').val('');
-// $('#AddProducts input[name="variant"]').val('');
+$('#AddProducts input[name="variant"]').val('');
 $('#AddProducts input[name="volume"]').val('');
 // $('#AddProducts input[name="unit"]').val('');
 $('#AddProducts textarea[name="description"]').val('');

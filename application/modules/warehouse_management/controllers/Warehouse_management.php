@@ -14,50 +14,54 @@ class Warehouse_management extends MY_Controller {
 		$data['vehicles'] = $this->MY_Model->getrows('vehicles');
 		$this->load_page('warehouse_management',$data);
 	}
-
-public function addwh_management(){
-	// $company_name = $this->input->post('company');
-
-
-	$post = $this->input->post();
-	$this->load->library("form_validation");
-	$this->form_validation->set_rules('wh_name','WH Name','required');
-	$this->form_validation->set_rules('wh_type','WH Type', 'required');
-	$this->form_validation->set_rules('company[]','Company','required');
-	$this->form_validation->set_rules('wh_assigned','WH Assigned','required');
-
-	if ($this->input->post('wh_type') == 1) {
-		$this->form_validation->set_rules('wh_plate_number','WH Plate Number', 'required');
-	}else {
-		$this->form_validation->set_rules('wh_address','WH Address','required');
+	public function display_plate_number()
+	{
+			$vehicles = $this->MY_Model->getrows('vehicles');
+			echo json_encode($vehicles);
 	}
-	$error = array();
 
-	if ($this->form_validation->run() !== FALSE) {
 
-		foreach ($post['company'] as $key => $value) {
+	public function addwh_management(){
+		// $company_name = $this->input->post('company');
+		$post = $this->input->post();
+		$this->load->library("form_validation");
+		$this->form_validation->set_rules('wh_name','WH Name','required');
+		$this->form_validation->set_rules('wh_type','WH Type', 'required');
+		$this->form_validation->set_rules('company[]','Company','required');
+		$this->form_validation->set_rules('wh_assigned','WH Assigned','required');
 
-			$data = array(
-				'wh_name' => $this->input->post('wh_name'),
-				'wh_type' => $this->input->post('wh_type'),
-				'company' => $value,
-				'wh_plate_number' => ($this->input->post('wh_plate_number')!= null)?$this->input->post('wh_plate_number'):" ",
-				'wh_address' =>($this->input->post('wh_address')!= null)?$this->input->post('wh_address'):" ",
-				'wh_assigned' => $this->input->post('wh_assigned'),
-				'status' => 1
-			);
-			$insert = $this->MY_Model->insert('warehouse_management',$data);
-			if ($insert) {
-				$response = array(
-					'status'=>'ok'
+		if ($this->input->post('wh_type') == 1) {
+			$this->form_validation->set_rules('wh_plate_number','WH Plate Number', 'required');
+		}else {
+			$this->form_validation->set_rules('wh_address','WH Address','required');
+		}
+		$error = array();
+
+		if ($this->form_validation->run() !== FALSE) {
+
+			foreach ($post['company'] as $key => $value) {
+
+				$data = array(
+					'wh_name' => $this->input->post('wh_name'),
+					'wh_type' => $this->input->post('wh_type'),
+					'company' => $value,
+					'wh_plate_number' => ($this->input->post('wh_plate_number')!= null)?$this->input->post('wh_plate_number'):" ",
+					'wh_address' =>($this->input->post('wh_address')!= null)?$this->input->post('wh_address'):" ",
+					'wh_assigned' => $this->input->post('wh_assigned'),
+					'status' => 1
 				);
+				$insert = $this->MY_Model->insert('warehouse_management',$data);
+				if ($insert) {
+					$response = array(
+						'status'=>'ok'
+					);
+				}
 			}
+		}else {
+				$response = array('form_error'=> array_merge($this->form_validation->error_array(),$error) );
+			}
+				echo json_encode($response);
 		}
-	}else {
-			$response = array('form_error'=> array_merge($this->form_validation->error_array(),$error) );
-		}
-			echo json_encode($response);
-	}
 	//display companies for adding supplier
 	public function add_warehouse_users(){
 		$parameters['select'] = '*';
@@ -169,7 +173,7 @@ public function addwh_management(){
 			 if (!empty($post)) {
 				 $data = array(
 					 'wh_name'  	   				  => $post['wh_name'],
-					 'wh_type'  	   			    => $post['wh_type'],
+					 'wh_type'  	   			    => $post['wh_type2'],
 					 'wh_assigned'  	   			=> $post['wh_assigned'],
 					 'wh_address'						=>$post['wh_address'],
 					 'wh_plate_number'				=>$post['wh_plate_number'],
@@ -217,6 +221,13 @@ public function addwh_management(){
 				$parameters['where'] = array('company_id !=' => 0);
 				$parameters['select'] = '*';
 				$data['companies'] = $this->MY_Model->getRows('company',$parameters);
+				echo json_encode($data);
+				// print_r($data);
+			}
+			public function edit_warehouse_plate_num(){
+				$parameters['where'] = array('id !=' => 0);
+				$parameters['select'] = '*';
+				$data['platenumber'] = $this->MY_Model->getRows('vehicles',$parameters);
 				echo json_encode($data);
 				// print_r($data);
 			}
