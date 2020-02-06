@@ -1,6 +1,14 @@
 var base_url = $('input[name="base_url"]').val();
 $(document).ready(function(){
 
+  $('#so_type').on('change', function(){
+    if($(this).val() == "2"){
+      $('.warehouse').css('display', 'block');
+    }else{
+      $('.warehouse').css('display', 'none');
+    }
+  });
+
   //display purchase_tbl
     var purchase_tbl = $('.stocks_tbl').DataTable({
          "processing": true, //Feature control the processing indicator.
@@ -162,4 +170,69 @@ $(document).ready(function(){
     $('#StockOut').modal('show');
   })
 
+  //add multiple product in add purchase order
+  $(document).on('click', '#addNewSO', function(){
+    var x = 1;
+    var str = '';
+
+    str += '<tr class="add_purch">';
+      str += '<td class="purch_td">';
+           str += '<select class="form-control add_code select2_add" style="width: 100%;" name="prod_code[]">';
+              str += '<option value="" selected="true" disabled="disabled">Select SKU</option>';
+              str += get_productsSO();
+           str += '</select>';
+           str += '<span class="err"></span>';
+      str += '</td>';
+      str += '<td class="purch_td">';
+           str += '<input type="text" class="form-control add_prod" name="prod_name[]" value="" readonly>';
+           str += '<span class="err"></span>';
+      str += '</td>';
+      str += '<td class="purch_td">';
+           str += '<input type="text" class="form-control purchase_quantity number_only" name="quantity[]" value="">';
+           str += '<span class="err"></span>';
+      str += '</td>';
+      str += '<td class="purch_td">';
+          str += '<input type="text" class="form-control purchase_price number_only" name="unit_price[]" value="">';
+          str += '<span class="err"></span>';
+      str += '</td>';
+      str += '<td class="purch_td">';
+          str += '<input type="text" class="form-control purchase_total" name="total[]" value="" readonly>';
+          str += '<span class="err"></span>';
+      str += '</td>';
+      str += '<td class="purch_td">';
+          str += '<button id="removeNewPO" class="btn btn-md btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>';
+      str += '</td>';
+    str += '</tr>';
+
+
+    if(x){
+      x++;
+      $('#add_new_product tbody').append(str);
+      $('.select2_add').select2();
+    }
+    // get_supplier();
+    });
+
+
 });
+
+function get_productsSO(){
+  // var id = $('.select2_edit').attr('data-id');
+  // alert(id);
+  var data_return = '';
+  $.ajax({
+    url: base_url + 'stocksmanagement/get_productsSO/',
+    type:'post',
+    dataType:'json',
+    async:false,
+    success:function(data){
+      console.log(data);
+      var str = '';
+      $.each(data.products,function(index,element){
+        str += '<option value="'+element.product+'">'+element.code+'</option>';
+      });
+      data_return = str;
+    }
+  });
+  return data_return;
+}

@@ -68,18 +68,33 @@
                         <div class="modal-body">
                           <div class="form-horizontal">
                               <div class="form-group row m-b-10">
-                              <label for="sodate" class="col-md-12 col-lg-4 col-form-label">Stock Out Date: <span class="text-red">*</span></label>
+                              <label for="sodate" class="col-md-12 col-lg-4 col-form-label"> Date: <span class="text-red">*</span></label>
                               <div class="col-lg-8 col-md-12">
                                   <div class="input-group m-b-0">
                                       <div class="input-group-prepend">
                                           <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                       </div>
-                                      <input type="text" class="form-control disabled-normal total_cost" name="sodate" value="<?php echo date('F d, Y'); ?>" readonly="" disabled="">
+                                      <input type="text" class="form-control datepicker" name="sodate" value="<?php echo date('F d, Y'); ?>">
                                   </div>
                               </div>
                             </div>
                           </div>
                           <div class="form-horizontal">
+                              <div class="form-group row m-b-10">
+                              <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Type: <span class="text-red">*</span></label>
+                              <div class="col-lg-8 col-md-12">
+                                  <div class="input-group m-b-0">
+                                      <select class="form-control" id="so_type" class="so_type" name="so_type" >
+                                        <option value="" selected hidden>Select Type</option>
+                                        <option value="1">Stock Out</option>
+                                        <option value="2">Stock Transfer</option>
+                                  </select>
+                                      <span class="err"></span>
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-horizontal warehouse" style="display:none">
                               <div class="form-group row m-b-10">
                               <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Warehouse: <span class="text-red">*</span></label>
                               <div class="col-lg-8 col-md-12">
@@ -87,7 +102,7 @@
                                       <select class="form-control" class="warehouse" name="warehouse" >
                                         <option value="" selected hidden>Select Warehouse</option>
                                       <?php foreach($warehouse as $k => $value) : ?>
-                                          <option value="<?php echo $value['warehouse_id'] ?>"><?php echo $value['wh_name'] ?></option>
+                                          <option value="<?php echo $value['id'] ?>"><?php echo $value['wh_name'] ?></option>
                                     <?php  endforeach; ?>
                                   </select>
                                       <span class="err"></span>
@@ -113,13 +128,13 @@
                                       <div class="input-group-prepend">
                                           <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                       </div>
-                                      <input type="text" class="form-control disabled-normal total_cost" name="so_datedelivered" value="<?php echo date('F d, Y'); ?>" readonly="" disabled="">
+                                      <input type="text" class="form-control datepicker" name="so_datedelivered" value="<?php echo date('F d, Y'); ?>">
                                   </div>
                               </div>
                             </div>
                           </div>
                           <hr>
-                              <span class="btn btn-sm btn-primary" id="addNewPO"><i class="fa fa-plus"></i> Add Product</span>
+                              <span class="btn btn-sm btn-primary" id="addNewSO"><i class="fa fa-plus"></i> Add Product</span>
                             <br>
 
                           <div class="table-responsive view_purchase_orders_details">
@@ -140,7 +155,7 @@
                                             <option value="">Select SKU</option>
                                             <?php
                                                 foreach($products as $key => $value){
-                                                    echo '<option value="'.$value['id'].'">'.$value['code'].'</option>';
+                                                    echo '<option value="'.$value['product'].'">'.$value['code'].'</option>';
                                                 }
                                             ?>
                                           </select>
@@ -148,7 +163,7 @@
                                           <span class="err"></span>
                                         </td>
                                         <td class="purch_td">
-                                            <input type="text" class="form-control prod_name" name="prod_name[]" value="">
+                                            <input type="text" class="form-control prod_name" name="prod_name[]" value="" readonly>
                                           <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
                                           <span class="err"></span>
                                         </td>

@@ -12,11 +12,13 @@ class Stocksmanagement extends MY_Controller {
 		// $parameters['select'] = '*';
 		// $data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
     //
-		$parameters['group'] = array('stocks.warehouse_id');
-		$parameters['join'] = array('warehouse_management' => 'warehouse_management.id = stocks.warehouse_id');
+		// $parameters['group'] = array('stocks.warehouse_id');
+		// $parameters['join'] = array('warehouse_management' => 'warehouse_management.id = stocks.warehouse_id');
 		$parameters['select'] = '*';
-		$data['warehouse'] = $this->MY_Model->getRows('stocks',$parameters);
+		$data['warehouse'] = $this->MY_Model->getRows('warehouse_management',$parameters);
     //
+		$param['select'] = '*';
+		$data['products'] = $this->MY_Model->getRows('stocks', $param);
 		// $param['select'] = '*';
 		// $data['products'] = $this->MY_Model->getRows('products', $parameters);
     //
@@ -133,6 +135,12 @@ class Stocksmanagement extends MY_Controller {
 		echo json_encode($response);
 	}
 
+	public function get_productsSO(){
+			$data['products'] = $this->MY_Model->getRows('stocks');
+
+			json($data);
+
+	}
 }
 
 ?>

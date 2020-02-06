@@ -10,6 +10,14 @@ $(document).ready(function(){
     }
   });
 
+  $('#edit_position').on('change', function(){
+    if($(this).val() == "5"){
+      $('.company').css('display', 'none');
+    }else{
+      $('.company').css('display', 'block');
+    }
+  });
+
   //display_users
 
   //display companies for add user
@@ -268,13 +276,17 @@ $(document).ready(function(){
              $('#edituser input[name=username]').val(data.users.username);
              // $('#edituser input[name=password]').val(data.users.password);
              $('#edituser select[name=position]').val(data.users.position);
-             var company_list = [];
-             $('#edituser .js-example-basic-multiple-editU').html('');
-             $.each(data.company, function(key,val){
-               // company_list.push(val.company_name);
-               // console.log(val);
-               $('#edituser .js-example-basic-multiple-editU').append( '<option value='+val.company_id+' selected>'+val.company_name+'</option>' );
-           });
+             $('.company').css('display', 'none');
+             if(data.users.position != 5){
+               $('.company').css('display', 'block');
+               var company_list = [];
+               $('#edituser .js-example-basic-multiple-editU').html('');
+               $.each(data.company, function(key,val){
+                 // company_list.push(val.company_name);
+                 // console.log(val);
+                 $('#edituser .js-example-basic-multiple-editU').append( '<option value='+val.company_id+' selected>'+val.company_name+'</option>' );
+               });
+             }
            // $('.comp').text(company_list.join(', '));
          }
      });
