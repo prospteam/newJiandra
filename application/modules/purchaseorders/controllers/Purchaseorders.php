@@ -9,6 +9,7 @@ class Purchaseorders extends MY_Controller {
 	}
 
 	public function index(){
+		$data['popresent'] = 1;
 		$parameters['select'] = '*';
 		$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
 

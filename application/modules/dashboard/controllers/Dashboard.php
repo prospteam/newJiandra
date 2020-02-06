@@ -8,7 +8,8 @@ class Dashboard extends MY_Controller {
 		// $parameters['column_order'] = array('fullname','username');
 		// $data = getrow('users',$parameters,'array',true);
 		// json($data,false);
-		$this->load_page('dashboard');
+		$data['dbpresent'] = 1;
+		$this->load_page('dashboard', $data);
 	}
 }
 ?>

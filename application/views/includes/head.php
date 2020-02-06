@@ -138,7 +138,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview <?php if(isset($dbpresent)) {echo "menu-open";} ?>">
             <a href="<?= base_url('dashboard'); ?>" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -178,7 +178,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item has-treeview">
+          <li class="nav-item has-treeview  <?php if(isset($popresent)) {echo "menu-open";} ?>">
             <a href="<?php echo base_url('purchaseorders'); ?>" class="nav-link">
               <!-- <i class="nav-icon fas fa-chart-pie"></i> -->
               <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -246,7 +246,21 @@
               </li>
             </ul>
           </li>
+          <!-- <script type="text/javascript">
+             $(".sidebar nav ul.nav li a").filter(function () {
+                return this.href == location.href.replace(/#.*/, "");
+             }).addClass('active');
 
+             // for sub navigation
+             $(".sidebar nav ul.nav li a").filter(function () {
+                return this.href == location.href.replace(/#.*/, "");
+             }).parents('.nav .nav-treeview').show();
+
+             $(".sidebar nav ul.nav li a").filter(function () {
+                return this.href == location.href.replace(/#.*/, "");
+             }).parents('.has-treeview').addClass('menu-open');
+       })
+          </script> -->
 
 
         </ul>

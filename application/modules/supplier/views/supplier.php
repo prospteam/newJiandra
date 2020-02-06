@@ -77,8 +77,8 @@
 												<!-- <input type="text" name="companytitle" value="" required> -->
 												<div class="select2-purple">
 													<select class="form-control js-example-basic-multiple" name="company[]" multiple="multiple"></select>
+													<span class="err"></span>
 												</div>
-												<span class="err"></span>
 									</div>
 									</div>
 									<div class="col-lg-6">
