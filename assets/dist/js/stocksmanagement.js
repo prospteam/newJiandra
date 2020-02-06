@@ -166,9 +166,58 @@ $(document).ready(function(){
 });
 
 
-  $(document).on('click', '.stockout', function(){
-    $('#StockOut').modal('show');
+  $(document).on('click', '.stockmovement', function(){
+    $('#StockMovement').modal('show');
   })
+
+  //quantity must not exceed to the current qty of the product
+  // $(document).on('change','.sm_quantity',function(){
+  //   $.ajax({
+  //     method: 'POST',
+  //     url: base_url + 'stocksmanagement/checkQuantity',
+  //     data: formData,
+  //   })
+  // })
+
+  //successfully added stock movement
+  $(document).on('submit','form#stockmovement',function(e){
+    e.preventDefault();
+    let formData = $(this).serialize();
+    // formData.append('purchase_id',$("input[name='purchase_id']").attr('data-id'));
+    //
+    // console.log(formData);
+    $.ajax({
+        method: 'POST',
+        url : base_url + 'stocksmanagement/addStockMovement',
+        data : formData,
+        success : function(response) {
+            let data = JSON.parse(response);
+            console.log(data);
+            if(data.form_error){
+                clearError();
+                let keyNames = Object.keys(data.form_error);
+                $(keyNames).each(function(index , value) {
+                  console.log(value);
+                    $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
+                    $("select[name='"+value+"']").next('.err').text(data.form_error[value]);
+                    $("select[name='"+value+"']").next('.err').text(data.form_error[value]);
+                    $("select[name='"+value+"']").next().next().text(data.form_error[value]);
+                    // $("select[name='"+value+"']").parents('.form-group').next('.err').text(data.form_error[value]);
+                });
+            }else if (data.error) {
+                Swal.fire("Error",data.error, "error");
+            }else {
+                blankVal_purchase();
+                $('#AddPurchaseOrder').modal('hide');
+                Swal.fire("Successfully added purchase order!",data.success, "success");
+                $(".purchase_tbl").DataTable().ajax.reload();
+                // setTimeout(function(){
+                //    location.reload();
+                //  }, 1000);
+            }
+        }
+    })
+  });
 
   //add multiple product in add purchase order
   $(document).on('click', '#addNewSO', function(){
@@ -191,14 +240,7 @@ $(document).ready(function(){
            str += '<input type="text" class="form-control purchase_quantity number_only" name="quantity[]" value="">';
            str += '<span class="err"></span>';
       str += '</td>';
-      str += '<td class="purch_td">';
-          str += '<input type="text" class="form-control purchase_price number_only" name="unit_price[]" value="">';
-          str += '<span class="err"></span>';
-      str += '</td>';
-      str += '<td class="purch_td">';
-          str += '<input type="text" class="form-control purchase_total" name="total[]" value="" readonly>';
-          str += '<span class="err"></span>';
-      str += '</td>';
+
       str += '<td class="purch_td">';
           str += '<button id="removeNewPO" class="btn btn-md btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>';
       str += '</td>';

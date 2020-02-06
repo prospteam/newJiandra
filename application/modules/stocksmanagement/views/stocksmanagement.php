@@ -9,7 +9,7 @@
           INVENTORY MANAGEMENT > <span class="active1"> STOCK MANAGEMENT </p>
         </div>
         <div class="col-sm-6">
-            <button class="users stockout button1 float-sm-right" data-toggle="modal"><i class="fas fa-truck-loading" aria-hidden="true"></i> Stock Out </button>
+            <button class="users stockmovement button1 float-sm-right" data-toggle="modal"><i class="fas fa-truck-loading" aria-hidden="true"></i> Stock Movement </button>
             <button class="users generatereport button1 float-sm-right" data-toggle="modal"><i class="fas fa-file" aria-hidden="true"></i> Generate Report </button>
 
             <!-- Modal for View Products-->
@@ -55,12 +55,12 @@
 
                 <!-- Modal for Stock Out-->
 
-                <div class="modal fade" id="StockOut" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <form id="stockout" method="post">
+                <div class="modal fade" id="StockMovement" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <form id="stockmovement" method="post">
                     <div class="modal-dialog modal-xl" role="document">
                       <div class="modal-content">
                         <div class="modal-header bg-info1">
-                          <h5 class="modal-title" id="exampleModalLabel">Stock Out</h5>
+                          <h5 class="modal-title" id="exampleModalLabel">Stock Movement</h5>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                           </button>
@@ -134,8 +134,7 @@
                             </div>
                           </div>
                           <hr>
-                              <span class="btn btn-sm btn-primary" id="addNewSO"><i class="fa fa-plus"></i> Add Product</span>
-                            <br>
+
 
                           <div class="table-responsive view_purchase_orders_details">
                                 <table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_new_product">
@@ -143,8 +142,7 @@
                                       <th class="header-title purch">SKU <span class="required">*</span></th>
                                       <th class="header-title purch">Product <span class="required">*</span></th>
                                       <th class="header-title purch">Quantity <span class="required">*</span></th>
-                                      <th class="header-title purch">Unit Price <span class="required">*</span></th>
-                                      <th class="header-title purch">Total <span class="required">*</span></th>
+
 
                                   </thead>
                                   <tbody>
@@ -168,15 +166,7 @@
                                           <span class="err"></span>
                                         </td>
                                         <td class="purch_td">
-                                          <input type="number" class="form-control purchase_quantity" name="quantity[]" value="">
-                                          <span class="err"></span>
-                                        </td>
-                                        <td class="purch_td">
-                                          <input type="text" class="form-control purchase_price" name="unit_price[]" value="">
-                                          <span class="err"></span>
-                                        </td>
-                                        <td class="purch_td">
-                                          <input type="number" class="form-control purchase_total" name="total[]" value="" readonly>
+                                          <input type="text" class="form-control purchase_quantity sm_quantity number_only" name="quantity[]" value="">
                                           <span class="err"></span>
                                         </td>
                                       </tr>
@@ -184,49 +174,23 @@
                                   </tbody>
                                 </table>
                           </div>
+                          <span class="btn btn-sm btn-primary" id="addNewSO"><i class="fa fa-plus"></i> Add Product</span>
+                        <br>
                           <hr>
                           <div class="row">
                             <div class="col-6">
                                   <label for="note">Note: </label>
-                                  <textarea rows="4" cols="50" class="form-control" name="purchase_note" value=""></textarea>
+                                  <textarea rows="4" cols="50" class="form-control" name="stockmovement_note" value=""></textarea>
                             </div>
-                            <div class="col-md-12 col-lg-6 order-md-2">
-                                            <div class="form-horizontal">
-                                                <div class="form-group row m-b-10">
-                                                    <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Quantity <span class="text-red">*</span></label>
-                                                    <div class="col-lg-8 col-md-12">
-                                                        <input type="text" class="form-control disabled-normal total_quantity" name="total_quantity" readonly="" disabled="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-horizontal">
-                                                <div class="form-group row m-b-10">
-                                                    <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Cost <span class="text-red">*</span></label>
-                                                    <div class="col-lg-8 col-md-12">
-                                                        <div class="input-group m-b-0">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">₱</span>
-                                                            </div>
-                                                            <input type="text" class="form-control disabled-normal total_cost" name="total_cost" readonly="" disabled="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-horizontal">
-                                                <div class="form-group row m-b-10">
-                                                    <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Grand Total <span class="text-red">*</span></label>
-                                                    <div class="col-lg-8 col-md-12">
-                                                        <div class="input-group m-b-0">
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text">₱</span>
-                                                            </div>
-                                                            <input type="text" class="form-control disabled-normal grand_total" name="grand_total" readonly="" disabled="">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="col-6">
+                              <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Total Quantity <span class="text-red">*</span></label>
+
+                                  <input type="text" class="form-control disabled-normal total_quantity" name="total_quantity" readonly="" disabled="">
+
+                            </div>
+
         								</div>
+                        <br>
         								<div class="modal-footer">
         									<button type="submit" class="btn btn-primary add">Submit</button>
         								</div>
