@@ -8,7 +8,7 @@ class Stockout extends MY_Controller {
 		// $parameters['column_order'] = array('fullname','username');
 		// $data = getrow('users',$parameters,'array',true);
 		// json($data,false);
-
+		$data['products'] = $this->MY_Model->getrows('products');
 		$this->load_page('stockout');
 	}
 
@@ -23,14 +23,14 @@ class Stockout extends MY_Controller {
 
       $column_order = array('stockmovement_date','date_delivered','product','quantity','stockmovemenent_note','status');
       $where = array(
-			'status !=' => 3,
+			'stock_movement.status !=' => 3,
 			'type' => 1
 		);
       $join = array(
          // 'company' => 'company.company_id = users.company',
-         // 'position' => 'position.id = users.position'
+         'products' => 'products.id = stock_movement.product'
       );
-      $select = "stock_movement.stockmovement_tid,stock_movement.stockmovement_date,stock_movement.date_delivered,stock_movement.product,stock_movement.quantity,stock_movement.stockmovement_note,stock_movement.status";
+      $select = "stock_movement.stockmovement_tid,stock_movement.stockmovement_date,stock_movement.date_delivered,stock_movement.product,stock_movement.quantity,stock_movement.stockmovement_note,stock_movement.status, products.product_name";
 
       $list = $this->MY_Model->get_datatables('stock_movement',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 

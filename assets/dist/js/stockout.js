@@ -42,7 +42,7 @@ $(document).ready(function(){
     "columns"     :[
            {"data":"stockmovement_date"},
            {"data":"date_delivered"},
-           {"data":"product"},
+           {"data":"product_name"},
            {"data":"quantity"},
            {"data":"stockmovement_note"},
 
