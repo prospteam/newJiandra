@@ -192,7 +192,10 @@ $(document).ready(function(){
         data : formData,
         success : function(response) {
             let data = JSON.parse(response);
-            console.log(data.status);
+            console.log(data);
+              // $(data.true).each(function(index , value) {
+              //   console.log(value);
+              // });
             if(data.form_error){
                 clearError();
                 let keyNames = Object.keys(data.form_error);
@@ -206,19 +209,63 @@ $(document).ready(function(){
                 });
             }else if (data.error) {
                 Swal.fire("Error",data.error, "error");
-              }else if (data.status == "more") {
+              }else if (data == true) {
                   Swal.fire("Warning", "Enter quantity less than or equal to current stock","warning");
             }else {
-                blankVal_purchase();
-                $('#AddPurchaseOrder').modal('hide');
-                Swal.fire("Successfully added purchase order!",data.success, "success");
-                $(".purchase_tbl").DataTable().ajax.reload();
-                // setTimeout(function(){
-                //    location.reload();
-                //  }, 1000);
+              $.ajax({
+                  method: 'POST',
+                  url : base_url + 'stocksmanagement/update_qty',
+                  data : formData,
+                  success : function(response) {
+                    blankVal_purchase();
+                    $('#StockMovement').modal('hide');
+                    Swal.fire("Successfully added stock movement!",data.success, "success");
+                    $(".stocks_tbl").DataTable().ajax.reload();
+                  }
+              });
             }
         }
     })
+  });
+
+  //autocomplete product name after choosing sku Code
+  $(document).on('change','.stock_prod_code',function(){
+    $.ajax({
+        url: base_url+'stocksmanagement/get_productName_by_code',
+        data: {prod_id:$(this).val()},
+        type: 'post',
+        dataType: 'json',
+        success: function(data){
+            console.log(data);
+                $.each(data.products,function(index,element){
+                      $('.prod_name').val(element.product_name);
+                });
+                $.each(data.physical_count,function(index,element){
+                      $('.remaining_stocks').val(element.physical_count);
+                });
+
+        }
+    });
+  });
+
+  //autocomplete product name after choosing sku Code if add new product
+  $(document).on('change','.stock_add_code',function(){
+    let that = $(this);
+    $.ajax({
+        url: base_url+'stocksmanagement/get_productName_by_code',
+        data: {prod_id:$(this).val()},
+        type: 'post',
+        dataType: 'json',
+        success: function(data){
+                $.each(data.products,function(index,element){
+                      $(that).parent().next().find('.add_prod').val(element.product_name);
+                });
+                $.each(data.physical_count,function(index,element){
+                      $(that).parent().next().next().find('.add_stocks_qty').val(element.physical_count);
+                });
+
+        }
+    });
   });
 
   //add multiple product in add purchase order
@@ -228,7 +275,7 @@ $(document).ready(function(){
 
     str += '<tr class="add_purch">';
       str += '<td class="purch_td">';
-           str += '<select class="form-control add_code select2_add" style="width: 100%;" name="prod_code[]">';
+           str += '<select class="form-control stock_add_code select2_add" style="width: 100%;" name="prod_code[]">';
               str += '<option value="" selected="true" disabled="disabled">Select SKU</option>';
               str += get_productsSO();
            str += '</select>';
@@ -236,6 +283,10 @@ $(document).ready(function(){
       str += '</td>';
       str += '<td class="purch_td">';
            str += '<input type="text" class="form-control add_prod" name="prod_name[]" value="" readonly>';
+           str += '<span class="err"></span>';
+      str += '</td>';
+      str += '<td class="purch_td">';
+           str += '<input type="text" class="form-control add_stocks_qty" name="remaining_stocks[]" value="" readonly>';
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';

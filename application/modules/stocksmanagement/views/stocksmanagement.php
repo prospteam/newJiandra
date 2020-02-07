@@ -131,6 +131,7 @@
                                   <thead>
                                       <th class="header-title purch">SKU <span class="required">*</span></th>
                                       <th class="header-title purch">Product <span class="required">*</span></th>
+                                      <th class="header-title purch">Remaining Stocks <span class="required">*</span></th>
                                       <th class="header-title purch">Quantity <span class="required">*</span></th>
 
 
@@ -139,7 +140,7 @@
 
                                       <tr>
                                         <td class="purch_td">
-                                          <select class="form-control code select2" style="width: 100%;" name="prod_code[]">
+                                          <select class="form-control stock_prod_code select2" style="width: 100%;" name="prod_code[]">
                                             <option value="">Select SKU</option>
                                             <?php
                                                 foreach($products as $key => $value){
@@ -152,6 +153,11 @@
                                         </td>
                                         <td class="purch_td">
                                             <input type="text" class="form-control prod_name" name="prod_name[]" value="" readonly>
+                                          <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
+                                          <span class="err"></span>
+                                        </td>
+                                        <td class="purch_td">
+                                            <input type="text" class="form-control remaining_stocks" name="remaining_stocks[]" value="" readonly>
                                           <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
                                           <span class="err"></span>
                                         </td>

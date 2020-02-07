@@ -28,6 +28,16 @@ class MY_Model extends CI_Model {
         }
     }
 
+    public function getRow($field = '*', $table, $where = '')
+    {
+        $this->db->select($field);
+        $this->db->from($table);
+        if (!empty($where))
+            $this->db->where($where);
+
+        return $this->db->get()->row_array();
+    }
+    
     public function getRowByQuery($query, $result = '')
     {
         $query = $this->db->query($query);

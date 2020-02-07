@@ -130,6 +130,15 @@ class Stocksmanagement extends MY_Controller {
 
 	}
 
+	public function get_productName_by_code(){
+		$parameters['where'] = array('id' => $this->input->post('prod_id'));
+		$data['products'] = $this->MY_Model->getRows('products',$parameters);
+
+		$param['where'] = array('product' => $this->input->post('prod_id'));
+		$data['physical_count'] = $this->MY_Model->getRows('stocks',$param);
+		json($data);
+	}
+
 	public function addStockMovement(){
 		$post = $this->input->post();
 
@@ -153,46 +162,65 @@ class Stocksmanagement extends MY_Controller {
 		// if(empty($this->input->post('company[]'))){
 		// 	$error['company'] = 'The Companies field is required.';
 		// }
-
+		$errormsg = false;
 		foreach($post['prod_code'] as $pkey => $pVal){
-			$params['select'] = 'product, quantity';
-			$data_prod['qty'] = $this->MY_Model->getRows('purchase_orders', $params);
-			foreach($data_prod['qty'] as $key => $val){
-				if($post['quantity'][$pkey] > $val['quantity']){
-
-					$response = array('status' => 'more');
-					// print_r();
-				}else{
-				 $qty = $post['quantity'][$pkey];
-				 if ($this->form_validation->run() !== FALSE) {
-
-					 $data = array(
-						 'stockmovement_date' => $post['sodate'],
-						 'type' => $post['so_type'],
-						 'transferred_warehouse' => $warehouse,
-						 'date_delivered' => $post['so_datedelivered'],
-						 'product' => $pVal,
-						 'quantity' => $qty,
-						 'stockmovement_note' => $post['stockmovement_note'],
-						 'status' => 1
-					 );
-
-					 $insert = $this->MY_Model->insert('stock_movement', $data);
-					 if ($insert) {
-						 $response = array(
-							 'status' => 'ok'
-						 );
-					 }
-				 }else{
-					 $response = array('form_error' =>  array_merge($this->form_validation->error_array(), $error) );
-				 }
+			$params['select'] = 'physical_count';
+			$data_prod_qty = $this->MY_Model->getRow($params,'stocks');
+				if($post['quantity'][$pkey] > $data_prod_qty['physical_count']){
+					// $subra = true;
+					$errormsg= true;
+					// $response = array($this->form_validation->set_rules($subra, 'Enter quantity less than or equal to current stock', 'required'));
 				}
-			}
-
+				// exit;
 		}
-		// exit;
+		//
+		if(!empty($errormsg)){
+			$response = $errormsg;
+		}else{
+
+			foreach($post['prod_code'] as $pkey => $pVal){
+				$params['select'] = 'product, quantity';
+				$data_prod['qty'] = $this->MY_Model->getRows('purchase_orders', $params);
+
+				$qty = $post['quantity'][$pkey];
+				if ($this->form_validation->run() !== FALSE) {
+
+					$data = array(
+						'stockmovement_date' => $post['sodate'],
+						'type' => $post['so_type'],
+						'transferred_warehouse' => $warehouse,
+						'date_delivered' => $post['so_datedelivered'],
+						'product' => $pVal,
+						'quantity' => $qty,
+						'stockmovement_note' => $post['stockmovement_note'],
+						'status' => 1
+					);
+
+					$insert = $this->MY_Model->insert('stock_movement', $data);
+					if ($insert) {
+						$response = array(
+							'status' => 'ok'
+						);
+					}
+				}else{
+					$response = array('form_error' =>  array_merge($this->form_validation->error_array(), $error) );
+				}
+
+			}
+		}
 
 		echo json_encode($response);
+	}
+
+	//deduct system count and physical after submitting stock out and stock transfer
+	public function update_qty(){
+		$post = $this->input->post();
+
+		foreach($post['prod_code'] as $pkey => $pVal){
+			echo "<pre>";
+			print_r($post);
+			exit;
+		}
 	}
 }
 
