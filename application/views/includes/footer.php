@@ -32,6 +32,10 @@
 <script src="<?php echo base_url('assets/dist/js/warehouse_management.js'); ?>"></script>
 <!-- dashboard -->
 <script src="<?php echo base_url('assets/dist/js/dashboard.js'); ?>"></script>
+<!-- stock transfer -->
+<script src="<?php echo base_url('assets/dist/js/stocktransfer.js'); ?>"></script>
+<!-- STOCK OUT -->
+<script src="<?php echo base_url('assets/dist/js/stockout.js'); ?>"></script>
 
 
 </body>

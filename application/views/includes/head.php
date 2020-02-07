@@ -195,7 +195,6 @@
                  <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                    <path d="M0.166992 8.08331H3.33366V4.91665H0.166992V8.08331ZM0.166992 12.0416H3.33366V8.87498H0.166992V12.0416ZM0.166992 4.12498H3.33366V0.958313H0.166992V4.12498ZM4.12533 8.08331H13.6253V4.91665H4.12533V8.08331ZM4.12533 12.0416H13.6253V8.87498H4.12533V12.0416ZM4.12533 0.958313V4.12498H13.6253V0.958313H4.12533Z" fill="#545454"/>
                  </svg>
-
               <p>
                 Inventory <span class="manage">Management</span>
                 <span class="badge badge-info right">3</span>
@@ -213,10 +212,23 @@
                   <p>Warehouse Management</p>
                 </a>
               </li>
-              <li class="nav-item">
+               <li class="nav-item has-treeview">
                 <a href="<?php echo base_url('stocksmanagement'); ?>" class="nav-link">
-                  <p>Stock Management</p>
+                  <p>Stock <span class="manage">Management</span></p>
                 </a>
+                   <!-- <ul class="nav nav-treeview"> -->
+                   <ul>
+                   <li class="nav-item">
+                    <a href="<?php echo base_url('stocktransfer'); ?>" class="nav-link">
+                       <p>Stock Transfer</p>
+                    </a>
+                   </li>
+                   <li class="nav-item">
+                   <a href="<?php echo base_url('stockout'); ?>" class="nav-link">
+                      <p>Stock Out</p>
+                   </a>
+                  </li>
+                </ul>
               </li>
             </ul>
           </li>

@@ -431,10 +431,8 @@ function blankVal(){
   $('#addwarehouse1_management input[name="wh_name"]').val('');
   $('.err').text('');
   $('#addwarehouse1_management select[name="wh_type"]').val('');
-
  $('#addwarehouse1_management .js-example-basic-multiple-disp-comp ').val('').trigger('change');
  $('#addwarehouse1_management .js-example-basic-multiple-plate-num ').val('').trigger('change');
   $('#addwarehouse1_management input[name="wh_address"]').val('');
   $('#addwarehouse1_management select[name="wh_assigned"]').val('');
 }
-js-example-basic-multiple-disp-comp

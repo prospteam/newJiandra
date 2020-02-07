@@ -4167,7 +4167,7 @@ input[type="button"].btn-block {
 .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   color: #ffffff;
-  background-color: #007bff;
+  background-color: #c8c8ef;
 }
 
 .nav-fill .nav-item {
@@ -28267,5 +28267,6 @@ a.text-muted:hover {
   background-color: #ffffff;
   border-color: #dee2e6;
 }
+
 
 /*# sourceMappingURL=adminlte.css.map */
