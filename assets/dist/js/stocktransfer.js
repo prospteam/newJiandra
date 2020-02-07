@@ -5,8 +5,8 @@ $(document).ready(function(){
 
    $(document).on("click",'.deletestockTransfer', function(e) {
      e.preventDefault();
-     var id = $(this).attr('data-id');
-     console.log(id);
+     var stockmovement_tid = $(this).attr('data-id');
+     console.log(stockmovement_tid);
 
      Swal.fire({
      title: 'Are you sure?',
@@ -26,7 +26,7 @@ $(document).ready(function(){
            $.ajax({
            type: 'POST',
              url:base_url + 'Stocktransfer/deleteTransfer',
-             data: {id: id},
+             data: {stockmovement_tid: stockmovement_tid},
              success:function(data) {
                $(".stocksmov_tbl").DataTable().ajax.reload();
              }
@@ -58,7 +58,7 @@ $(document).ready(function(){
                            str += '<div class="actions">';
                            if(row.status == 1) {
                              str += '<a href="javascript:;" class="editproducts" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
-                             str += '<a href="javascript:;" class="deletestockTransfer" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                             str += '<a href="javascript:;" class="deletestockTransfer" data-id="'+row.stockmovement_tid+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                            }
                            str += '</div>';
                            return str;

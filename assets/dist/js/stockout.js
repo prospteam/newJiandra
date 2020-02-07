@@ -3,6 +3,38 @@ var base_url = $('input[name="base_url"]').val();
 
 $(document).ready(function(){
 
+   $(document).on("click",'.deletestockOut', function(e) {
+     e.preventDefault();
+     var stockmovement_tid = $(this).attr('data-id');
+     console.log(stockmovement_tid);
+
+     Swal.fire({
+     title: 'Are you sure?',
+     text: "You want to permanently delete this Stock Out!",
+     type: 'warning',
+     showCancelButton: true,
+     confirmButtonColor: '#d33',
+     cancelButtonColor: '#068101',
+     confirmButtonText: 'Yes, Permanently Delete Stock Out!',
+     }).then((result) => {
+       if (result.value) {
+         Swal.fire(
+           'Deleted!',
+           'Successfully Deleted Stock Out!',
+           'success'
+         )
+           $.ajax({
+           type: 'POST',
+             url:base_url + 'Stockout/deletestockout',
+             data: {stockmovement_tid: stockmovement_tid},
+             success:function(data) {
+               $(".stockout_tbl").DataTable().ajax.reload();
+             }
+           })
+       }
+     });
+
+     });
      var stockout_tbl = $('.stockout_tbl').DataTable({
     "processing"  : true,
     "serverside"  : true,
@@ -19,7 +51,7 @@ $(document).ready(function(){
                              str += '<div class="actions">';
                              if(row.status == 1) {
                                str += '<a href="javascript:;" class="editproducts" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
-                               str += '<a href="javascript:;" class="deleteproducts" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                               str += '<a href="javascript:;" class="deletestockOut" data-id="'+row.stockmovement_tid+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                              }
                              str += '</div>';
                              return str;

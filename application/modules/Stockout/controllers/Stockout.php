@@ -42,7 +42,17 @@ class Stockout extends MY_Controller {
             "data" => $list['data']
       );
       echo json_encode($output);
-
    }
+
+	public function deletestockOut(){
+
+		   $stockout = $this->input->post('stockmovement_tid');
+		   $stockout_status = 3;
+		   $data = array(
+			   'status' => $stockout_status
+		   );
+		   $datas['delete'] = $this->MY_Model->update('stock_movement',$data,array('stockmovement_tid' => $stockout));
+		   echo json_encode($datas);
+	}
 }
 ?>

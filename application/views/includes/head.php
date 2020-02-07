@@ -213,11 +213,15 @@
                 </a>
               </li>
                <li class="nav-item has-treeview">
-                <a href="<?php echo base_url('stocksmanagement'); ?>" class="nav-link">
-                  <p>Stock <span class="manage">Management</span></p>
+                  <a href="<?php echo base_url('stocksmanagement'); ?>" class="nav-link">
+                   <p>
+                     Stock <span class="manage">Management</span>
+                     <span class="badge badge-info right">2</span>
+                     <i class="fas fa-angle-left right"></i>
+                   </p>
                 </a>
                    <!-- <ul class="nav nav-treeview"> -->
-                   <ul>
+                   <ul style="list-style-type:none;">
                    <li class="nav-item">
                     <a href="<?php echo base_url('stocktransfer'); ?>" class="nav-link">
                        <p>Stock Transfer</p>
