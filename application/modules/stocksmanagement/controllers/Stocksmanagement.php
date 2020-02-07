@@ -136,43 +136,61 @@ class Stocksmanagement extends MY_Controller {
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('sodate', 'Date', 'required');
 		$this->form_validation->set_rules('so_type', 'Type', 'required');
-		$this->form_validation->set_rules('warehouse', 'Warehouse', 'required');
+		// if(!empty($post['warehouse'])){
+		// 	$this->form_validation->set_rules('warehouse', 'Warehouse', 'required');
+		// }
 		$this->form_validation->set_rules('so_datedelivered', 'Date Delivered', 'required');
 		$this->form_validation->set_rules('prod_code[]', 'code', 'required');
 		$this->form_validation->set_rules('prod_name[]', 'Product Name', 'required');
 		$this->form_validation->set_rules('quantity[]', 'Quantity', 'required');
 		$error = array();
 
-
+		if(!empty($post['warehouse'])){
+			$warehouse = $post['warehouse'];
+		}else{
+			$warehouse = NULL;
+		}
 		// if(empty($this->input->post('company[]'))){
 		// 	$error['company'] = 'The Companies field is required.';
 		// }
 
 		foreach($post['prod_code'] as $pkey => $pVal){
-		if ($this->form_validation->run() !== FALSE) {
+			$params['select'] = 'product, quantity';
+			$data_prod['qty'] = $this->MY_Model->getRows('purchase_orders', $params);
+			foreach($data_prod['qty'] as $key => $val){
+				if($post['quantity'][$pkey] > $val['quantity']){
 
-				$data = array(
-					'stockmovement_date' => $post['sodate'],
-					'type' => $post['so_type'],
-					'transferred_warehouse' => $post['warehouse'],
-					'date_delivered' => $post['so_datedelivered'],
-					'product' => $pVal,
-					'quantity' => $post['quantity'][$pkey],
-					'stockmovement_note' => $post['stockmovement_note'],
-					'status' => 1
-				);
+					$response = array('status' => 'more');
+					// print_r();
+				}else{
+				 $qty = $post['quantity'][$pkey];
+				 if ($this->form_validation->run() !== FALSE) {
 
-				$insert = $this->MY_Model->insert('stock_movement', $data);
-				if ($insert) {
-					$response = array(
-						'status' => 'ok'
-					);
+					 $data = array(
+						 'stockmovement_date' => $post['sodate'],
+						 'type' => $post['so_type'],
+						 'transferred_warehouse' => $warehouse,
+						 'date_delivered' => $post['so_datedelivered'],
+						 'product' => $pVal,
+						 'quantity' => $qty,
+						 'stockmovement_note' => $post['stockmovement_note'],
+						 'status' => 1
+					 );
+
+					 $insert = $this->MY_Model->insert('stock_movement', $data);
+					 if ($insert) {
+						 $response = array(
+							 'status' => 'ok'
+						 );
+					 }
+				 }else{
+					 $response = array('form_error' =>  array_merge($this->form_validation->error_array(), $error) );
+				 }
 				}
-			}else{
-				$response = array('form_error' =>  array_merge($this->form_validation->error_array(), $error) );
 			}
-		}
 
+		}
+		// exit;
 
 		echo json_encode($response);
 	}

@@ -192,7 +192,7 @@ $(document).ready(function(){
         data : formData,
         success : function(response) {
             let data = JSON.parse(response);
-            console.log(data);
+            console.log(data.status);
             if(data.form_error){
                 clearError();
                 let keyNames = Object.keys(data.form_error);
@@ -206,6 +206,8 @@ $(document).ready(function(){
                 });
             }else if (data.error) {
                 Swal.fire("Error",data.error, "error");
+              }else if (data.status == "more") {
+                  Swal.fire("Warning", "Enter quantity less than or equal to current stock","warning");
             }else {
                 blankVal_purchase();
                 $('#AddPurchaseOrder').modal('hide');

@@ -89,7 +89,7 @@
                                         <option value="1">Stock Out</option>
                                         <option value="2">Stock Transfer</option>
                                   </select>
-                                      <span class="err"></span>
+                                  <span class="err"></span>
                                   </div>
                               </div>
                             </div>
@@ -109,16 +109,6 @@
                                   </div>
                               </div>
                             </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-6">
-                              <div class="form-group" id="show_supplier">
-        											</div>
-        										</div>
-                            <div class="col-6">
-                              <div class="form-group" id="show_warehouse">
-        											</div>
-        										</div>
                           </div>
                           <div class="form-horizontal">
                               <div class="form-group row m-b-10">
