@@ -8,7 +8,8 @@ class Stocktransfer extends MY_Controller {
 		// $parameters['column_order'] = array('fullname','username');
 		// $data = getrow('users',$parameters,'array',true);
 		// json($data,false);
-
+		$data['warehouse_management'] = $this->MY_Model->getrows('warehouse_management');
+		$data['products'] = $this->MY_Model->getrows('products');
 		$this->load_page('stocktransfer');
 	}
 	// echo "<pre>";
@@ -28,14 +29,15 @@ class Stocktransfer extends MY_Controller {
 
 
 		$where = array(
-			'status !=' => 3,
+			'stock_movement.status !=' => 3,
 			'type' => 2
 		);
 		$join = array(
-			// 'company' => 'company.company_id = users.company',
-			// 'position' => 'position.id = users.position'
+			'warehouse_management' => 'warehouse_management.id = stock_movement.transferred_warehouse',
+			'products' => 'products.id = stock_movement.product'
 		);
-		$select = "stock_movement.stockmovement_tid,stock_movement.stockmovement_date,stock_movement.transferred_warehouse,stock_movement.date_delivered,stock_movement.product,stock_movement.quantity,stock_movement.stockmovement_note,stock_movement.status";
+		$select = "stock_movement.stockmovement_tid,stock_movement.stockmovement_date,stock_movement.transferred_warehouse,stock_movement.date_delivered,stock_movement.product,stock_movement.quantity,
+		stock_movement.stockmovement_note,stock_movement.status, warehouse_management.wh_name, products.product_name";
 
 		$list = $this->MY_Model->get_datatables('stock_movement',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 

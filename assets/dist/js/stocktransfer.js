@@ -43,9 +43,9 @@ $(document).ready(function(){
   "order"       : [[0,'desc']],
   "columns"     :[
          {"data":"stockmovement_date"},
-         {"data":"transferred_warehouse"},
+         {"data":"wh_name"},
          {"data":"date_delivered"},
-         {"data":"product"},
+         {"data":"product_name"},
          {"data":"quantity"},
          {"data":"stockmovement_note"},
          // {"data":"variant"},
