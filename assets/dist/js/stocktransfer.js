@@ -2,7 +2,7 @@
 var base_url = $('input[name="base_url"]').val();
 
 $(document).ready(function(){
-
+// DELETE STOCK TRANSFER
    $(document).on("click",'.deletestockTransfer', function(e) {
      e.preventDefault();
      var stockmovement_tid = $(this).attr('data-id');
@@ -35,8 +35,37 @@ $(document).ready(function(){
      });
 
      });
+     // END DELETE STOCK TRANSFER
 
+     // EDIT STOCK TRANSFER
 
+     $(document).on("click",".editstocktransfer", function(){
+      var stockmovement_tid = $(this).attr('data-id');
+
+      $.ajax({
+          method: 'POST',
+          url: base_url+'stocktransfer/editStockTransfer',
+          data: {stockmovement_tid:stockmovement_tid},
+          dataType: "json",
+          success: function(data){
+             console.log(data);
+               $('#editStockTransfer').modal('show');
+               $('#editstocktransfer .stocktransfer_id').val(data.stock_movement.stockmovement_tid);
+               $('#editstocktransfer input[name="sodate"]').val(data.stock_movement.stockmovement_date);
+               $('#editstocktransfer select[name="so_type"]').val(data.stock_movement.type);
+               $('#editstocktransfer select[name="so_datedelivered"]').val(data.stock_movement.transferred_warehouse);
+               $('#editstocktransfer input[name="prod_code[]"]').val(data.stock_movement.date_delivered);
+               $('#editstocktransfer input[name="prod_name[]"]').val(data.stock_movement.product);
+               $('#editstocktransfer input[name="remaining_stocks[]"]').val(data.stocks.physical_count);
+               $('#editstocktransfer input[name="quantity[]"]').val(data.stock_movement.quantity);
+               $('#editstocktransfer input[name="stockmovement_note"]').val(data.stock_movement.stockmovement_note);
+               $('#editstocktransfer input[name="total_quantity"]').val(data.products.code);
+             }
+      });
+
+     });
+
+     // EDIT STOCK TRANSFER
    var stocksmov_tbl = $('.stocksmov_tbl').DataTable({
   "processing"  : true,
   "serverside"  : true,
@@ -57,7 +86,7 @@ $(document).ready(function(){
                            var str = '';
                            str += '<div class="actions">';
                            if(row.status == 1) {
-                             str += '<a href="javascript:;" class="editproducts" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
+                             str += '<a href="javascript:;" class="editstocktransfer" data-id="'+row.stockmovement_tid+'"><i class="fas fa-pen text-warning"></i></a>';
                              str += '<a href="javascript:;" class="deletestockTransfer" data-id="'+row.stockmovement_tid+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                            }
                            str += '</div>';

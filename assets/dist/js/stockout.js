@@ -35,6 +35,32 @@ $(document).ready(function(){
      });
 
      });
+
+          $(document).on("click",".editstockout", function(){
+           var stockmovement_tid = $(this).attr('data-id');
+
+           $.ajax({
+               method: 'POST',
+               url: base_url+'stockout/editstockout',
+               data: {stockmovement_tid:stockmovement_tid},
+               dataType: "json",
+               success: function(data){
+                  console.log(data);
+                    $('#editStockOut').modal('show');
+                    $('#editstockout .stockout_id').val(data.stock_movement.stockmovement_tid);
+                    $('#editstockout input[name="sodate"]').val(data.stock_movement.stockmovement_date);
+                    $('#editstockout select[name="so_type"]').val(data.stock_movement.type);
+                    $('#editstockout select[name="so_datedelivered"]').val(data.stock_movement.transferred_warehouse);
+                    $('#editstockout input[name="prod_code[]"]').val(data.stock_movement.date_delivered);
+                    $('#editstockout input[name="prod_name[]"]').val(data.stock_movement.product);
+                    $('#editstockout input[name="remaining_stocks[]"]').val(data.stocks.physical_count);
+                    $('#editstockout input[name="quantity[]"]').val(data.stock_movement.quantity);
+                    $('#editstockout input[name="stockmovement_note"]').val(data.stock_movement.stockmovement_note);
+                    $('#editstockout input[name="total_quantity"]').val(data.products.code);
+                  }
+           });
+
+          });
      var stockout_tbl = $('.stockout_tbl').DataTable({
     "processing"  : true,
     "serverside"  : true,
@@ -50,7 +76,7 @@ $(document).ready(function(){
                              var str = '';
                              str += '<div class="actions">';
                              if(row.status == 1) {
-                               str += '<a href="javascript:;" class="editproducts" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
+                               str += '<a href="javascript:;" class="editstockout" data-id="'+row.stockmovement_tid+'"><i class="fas fa-pen text-warning"></i></a>';
                                str += '<a href="javascript:;" class="deletestockOut" data-id="'+row.stockmovement_tid+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                              }
                              str += '</div>';

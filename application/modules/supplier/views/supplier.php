@@ -374,10 +374,6 @@
 						</div>
 					</form>
 				</div>
-
-
-
-
 			</div>
 		</div><!-- /.container-fluid -->
 	</section>

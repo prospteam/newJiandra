@@ -54,5 +54,19 @@ class Stockout extends MY_Controller {
 		   $datas['delete'] = $this->MY_Model->update('stock_movement',$data,array('stockmovement_tid' => $stockout));
 		   echo json_encode($datas);
 	}
+	public function editstockout(){
+		$stockout_id = $this->input->post('stockmovement_tid');
+
+		$data_array = array();
+
+		$parameters['where'] = array('stock_movement.stockmovement_tid'=>$stockout_id);
+		$parameters['select'] = '*';
+
+		$data = $this->MY_Model->getrows('stock_movement',$parameters,'row');
+
+		$data_array['stock_movement'] = $data;
+		json($data_array);
+
+	}
 }
 ?>
