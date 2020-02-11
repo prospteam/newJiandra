@@ -43,7 +43,7 @@ $(document).ready(function(){
                         return str;
                    }
               },
-
+              {"data":"stock_out"},
               {"data":"variance","render": function(data, type, row,meta){
                 var variance = row.system_count - row.physical_count;
                 var str = '';

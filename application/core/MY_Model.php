@@ -37,7 +37,7 @@ class MY_Model extends CI_Model {
 
         return $this->db->get()->row_array();
     }
-    
+
     public function getRowByQuery($query, $result = '')
     {
         $query = $this->db->query($query);
@@ -204,6 +204,14 @@ class MY_Model extends CI_Model {
     public function update($table,$set,$where = array()){
         $this->db->where($where);
         $this->db->update($table,$set);
+        return true;
+    }
+
+    public function update_1($table, $set, $where = array(), $options = array()){
+        $this->db->where($where);
+        (!empty($options['order'])) ? $this->db->order_by($options['order']) : null;
+        (!empty($options['limit'])) ? $this->db->limit($options['limit'][0],$options['limit'][1]) : null;
+        $this->db->update($table, $set);
         return true;
     }
 

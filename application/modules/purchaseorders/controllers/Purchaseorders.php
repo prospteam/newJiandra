@@ -21,7 +21,7 @@ class Purchaseorders extends MY_Controller {
 		$data['products'] = $this->MY_Model->getRows('products', $param);
 
 		$parameters1['select'] = '*';
-		$parameters1['limit'] = array(1,0);;
+		$parameters1['limit'] = array(1,0);
 		$parameters1['order'] = 'purchase_code DESC';
 		$data['purchase'] = $this->MY_Model->getRows('purchase_orders',$parameters1);
 

@@ -38,7 +38,7 @@ class Stocksmanagement extends MY_Controller {
 		$order = $this->input->post('order');
 		$draw = $this->input->post('draw');
 
-		$column_order = array('p.code','sup.supplier_name','p.brand','p.product_name','po.delivered', 'po.date_delivered', 's.physical_count', 's.variance', 'po.supplier', 'po.date_delivered', 's.physical_count', 's.warehouse_id', 'w.wh_name');
+		$column_order = array('p.code','sup.supplier_name','p.brand','p.product_name','po.delivered', 'po.date_delivered', 's.physical_count', 's.stock_out', 's.variance', 'po.supplier', 'po.date_delivered', 's.physical_count', 's.warehouse_id', 'w.wh_name');
 		$where = array('po.delivery_status' => 4);
 		$group = array('po.product', 'po.warehouse_id');
 		// $count = array('po.delivered');
@@ -48,7 +48,7 @@ class Stocksmanagement extends MY_Controller {
 			'stocks as s' => 's.product = po.product:left',
 			'warehouse_management as w' => 'w.id = po.warehouse_id:left'
 		);
-		$select = "po.product, (SELECT SUM(delivered) FROM purchase_orders WHERE warehouse_id = po.warehouse_id AND product = p.id) AS system_count, p.code, p.product_name, p.brand, sup.supplier_name, po.supplier, po.date_delivered, s.physical_count, s.variance, s.warehouse_id, w.wh_name";
+		$select = "po.product, (SELECT SUM(delivered) FROM purchase_orders WHERE warehouse_id = po.warehouse_id AND product = p.id) AS system_count, p.code, p.product_name, p.brand, sup.supplier_name, po.supplier, po.date_delivered, s.physical_count, s.stock_out,s.variance, s.warehouse_id, w.wh_name";
 		$list = $this->MY_Model->get_datatables('purchase_orders as po',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
 		$output = array(
 				"draw" => $draw,
@@ -215,11 +215,54 @@ class Stocksmanagement extends MY_Controller {
 	//deduct system count and physical after submitting stock out and stock transfer
 	public function update_qty(){
 		$post = $this->input->post();
-
+		// echo "<pre>";
+		// print_r($post);
+		// exit;
 		foreach($post['prod_code'] as $pkey => $pVal){
-			echo "<pre>";
-			print_r($post);
-			exit;
+			// $parameters['where'] = array('product' => $pVal);
+			// $parameters['select'] = 'product,delivered';
+			// $datas = $this->MY_Model->getRows('purchase_orders', $parameters, 'row');
+
+			$param['where'] = array('po.product' => $pVal);
+			$param['limit'] = array(1,0);
+			$param['order'] = 'po.date_ordered DESC';
+			$param['join'] = array('products as p' => 'p.id = po.product:left', 'stocks as s' => 's.product = po.product:left', 'warehouse_management as w' => 'w.id = po.warehouse_id:left');
+			$param['select'] = "po.product, po.delivered";
+			$datas=  $this->MY_Model->getRows('purchase_orders as po', $param);
+			foreach($datas as $key => $val){
+
+				$total_remaining_purch = $val['delivered'] - $post['quantity'][$pkey];
+			}
+			// echo "<pre>";
+			// print_r($total_remaining_purch);
+			// exit;
+
+			$total_remaining = $post['remaining_stocks'][$pkey] - $post['quantity'][$pkey];
+
+			//minus physical count
+			$data = array(
+				'physical_count' => $total_remaining
+			);
+
+			//minus system count
+			$data1 = array(
+				'delivered' => $total_remaining_purch
+			);
+
+			$parameters['order'] = 'date_delivered DESC';
+			$parameters['limit'] = array(1,0);
+			$update = $this->MY_Model->update_1('purchase_orders', $data1,array('product' => $pVal, 'delivered !=' => 0),$parameters );
+			// echo "<pre>";
+			// print_r($this->db->last_query());
+			// exit;
+			$update = $this->MY_Model->update('stocks', $data, array('product' => $pVal), '', '');
+			if ($update) {
+				$response = array(
+					'status' => 'ok'
+				);
+			}	else {
+				$response = array('form_error' =>  array_merge($this->form_validation->error_array(), $error) );
+			}
 		}
 	}
 }

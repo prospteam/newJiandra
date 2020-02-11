@@ -221,6 +221,7 @@
                     <th class="header-title">Inventory Date</th>
                     <th class="header-title">Quantity On hand</th>
                     <th class="header-title">Physical Count</th>
+                    <th class="header-title">Stock Out</th>
                     <th class="header-title">Variance</th>
                     <!-- <tr class="table-header" role="row">
                       <th class="header-title sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 283px;">Name</th>

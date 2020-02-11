@@ -1014,6 +1014,6 @@ function blankVal_vehicle(){
 $( function() {
   $('.datepicker').datepicker({
     autoclose: true,
-    format: 'yyyy/mm/dd',
+    format: 'MM d, yyyy',
     })
  });
