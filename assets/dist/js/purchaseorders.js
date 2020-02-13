@@ -957,7 +957,7 @@ function get_edit_products(selected_product = ''){
     success:function(data){
       var str = '';
       $.each(data.products,function(index,element){
-        str += '<option value="'+element.id+'" '+(selected_product == element.id ? 'selected' : '')+'>'+element.code+'</option>';
+        str += '<option value="'+element.id+'" '+( selected_product == element.id ? 'selected' : '')+'>'+element.code+'</option>';
       });
       data_return = str;
     }

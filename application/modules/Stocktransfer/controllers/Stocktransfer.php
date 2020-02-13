@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Stocktransfer extends MY_Controller {
+class  Stocktransfer extends MY_Controller {
 	public function index(){
 		// $parameters['select'] = 'fullname,username';
 		// $parameters['search_like'] = 'da';
@@ -9,6 +9,7 @@ class Stocktransfer extends MY_Controller {
 		// $data = getrow('users',$parameters,'array',true);
 		// json($data,false);
 		$data['warehouse_management'] = $this->MY_Model->getrows('warehouse_management');
+		$data['stocks'] = $this->MY_Model->getrows('stocks');
 		$data['products'] = $this->MY_Model->getrows('products');
 		$this->load_page('stocktransfer');
 	}
@@ -23,9 +24,7 @@ class Stocktransfer extends MY_Controller {
 		$order = $this->input->post('order');
 		$draw = $this->input->post('draw');
 
-
 		$column_order = array('stockmovement_date','transferred_warehouse','date_delivered','product','quantity','stockmovemenent_note','status');
-
 
 
 		$where = array(
@@ -53,42 +52,60 @@ class Stocktransfer extends MY_Controller {
 
 
 	 public function deleteTransfer(){
+		 $stockmov = $this->input->post('stockmovement_tid');
+		 $stockmov_status = 3;
+		 $data = array(
+			 'status' => $stockmov_status
+		 );
+		 $datas['delete'] = $this->MY_Model->update('stock_movement',$data,array('stockmovement_tid' => $stockmov));
+		 echo json_encode($datas);
+	 }
 
-			 $stockmov = $this->input->post('stockmovement_tid');
-			 $stockmov_status = 3;
-			 $data = array(
-				 'status' => $stockmov_status
-			 );
-			 $datas['delete'] = $this->MY_Model->update('stock_movement',$data,array('stockmovement_tid' => $stockmov));
-			 echo json_encode($datas);
-		 }
+	 public function editstocktransfer(){
+		 $stocktrans_id = $this->input->post('stockmovement_tid');
 
-		 public function editstocktransfer(){
-			 $stocktrans_id = $this->input->post('stockmovement_tid');
+		 $data_array = array();
 
-			 $data_array = array();
+		 $parameters['where'] = array('stock_movement.stockmovement_tid'=>$stocktrans_id);
+		 $parameters['select'] = 'stockmovement_date, type, date_delivered, products.id, products.code, product_name, physical_count, quantity, stockmovement_note,  ';
+		 // $parameters['select'] = 'products.code, stocks.physical_count, stockmovement_date, transferred_warehouse, date_delivered, products.status';
+		 $parameters['join'] =  array(
+			 'products' => 'products.id = stock_movement.product',
+			 'stocks' => 'stocks.code = products.code'
+		 );
+		 $data = $this->MY_Model->getrows('stock_movement',$parameters);
+		 // echo "<pre>";
+		 //  print_r($data);
+		 //  exit;
+		 // echo $this->db->last_query();
 
-			 $parameters['where'] = array('stock_movement.stockmovement_tid'=>$stocktrans_id);
-			 $parameters['select'] = '*';
+		 $data_array['stock_movement'] = $data;
+		 json($data_array);
 
-			 $data = $this->MY_Model->getrows('stock_movement',$parameters,'row');
+	 }
+	 // public function get_stock_transfer(){
+		//  $params['where'] = array('status' => 1);
+		//  $data['products'] = $this->MY_Model->getRows('products', $params);
+		//  json($data);
+	 // }
 
-			 $data_array['stock_movement'] = $data;
-			 json($data_array);
+	 public function get_product_Name_by_code_edit(){
+		 $parameters['where'] = array('id' => $this->input->post('prod_id'));
+		 $data['products'] = $this->MY_Model->getRows('products',$parameters, 'rows');
+		 // echo "<pre>";
+		 // print_r($this->input->post());
+		 // exit;
+		 // $prod_id = $this->input->post('prod_id');
+		 // $parameters['select'] = 'id,(SELECT * FROM products WHERE id = '.$prod_id.' ) as product';
+		 // $parameters['where'] = array('id' => $this->input->post('purchase_id'));
+		 // $data['products'] = $this->MY_Model->getRows('purchase_orders',$parameters);
+		 // echo "<pre>";
+		 // print_r($datas);
+		 // exit;
+		 // $data['edit_purch_prod'] = $this->MY_Model->getRows('purchase_orders',$parameters);
 
-		 }
-
-
-
-
-
-
-
-
-
-
-
-
+		 json($data);
+	 }
 
 
 

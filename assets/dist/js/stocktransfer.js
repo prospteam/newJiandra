@@ -37,11 +37,110 @@ $(document).ready(function(){
      });
      // END DELETE STOCK TRANSFER
 
-     // EDIT STOCK TRANSFER
+     $(document).on('submit','#editstocktransfer',function(e){
+      e.preventDefault();
+      let formData =  new FormData($(this)[0]);
+      var stockmovement_tid = $('input[name="edit_stocktransfer_id"]').val();
+      // alert(id);
+      formData.append("stockmovement_tid",stockmovement_tid);
+      $.ajax({
+          method: 'POST',
+          url : base_url + 'stocktransfer/edit_stocktransfer',
+          data : formData,
+          processData: false,
+          contentType: false,
+          cache: false,
+          dataType: 'json',
+          success : function(data) {
+               console.log(data);
+               // if(data.status == "ok"){
+               //   $('#EditPurchaseOrder').modal('hide');
+               //       Swal.fire("Successfully updated purchase order!",data.success, "success");
+               //       $(".purchase_tbl").DataTable().ajax.reload();
+               //       // setTimeout(function(){
+               //       //    location.reload();
+               //       //  }, 1000);
+               //  }else if(data.status == 'invalid'){
+               //     Swal.fire("Error",data.status, "invalid");
+               //  }
+               if(data.form_error){
+                   clearError();
+                   let keyNames = Object.keys(data.form_error);
+                   $(keyNames).each(function(index , value) {
+                       $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
+                       $("select[name='"+value+"']").next().next().text(data.form_error[value]);
+                   });
+               }else if (data.error) {
+                   Swal.fire("Error",data.error, "error");
+               }else {
+                  // blankVal();
+                   $('#editStockTransfer').modal('hide');
+                   Swal.fire("Successfully updated Stock Transfer!",data.success, "success");
+                   $(".stocksmov_tbl").DataTable().ajax.reload();
+               }
+          }
+      })
+     });
 
+
+     $(document).on('click', '#addNewSTransfer_edit', function(){
+      var x = 1;
+      var str = '';
+
+      str+= '<tr>';
+       str+= ' <td class="purch_td">';
+       str += '<select class="form-control js-example-basic-multiple-editStockTransfer select2_edit edit_new_code" style="width: 100%;" name="prod_code[]" data-id="" value="">';
+         str += '<option value="" selected="true" disabled="disabled">Select SKU</option>';
+          str += get_edit_products();
+       str+= ' </select>';
+         str+= ' <span class="err"></span>';
+        str+= '</td>';
+          str+= ' <td class="purch_td">';
+          str+= '<input type="text" class="form-control prod_name" name="prod_name[]" value="" readonly>';
+          str+= ' <span class="err"></span>';
+        str+= '</td>';
+        str+= '<td class="purch_td">';
+           str+= '<input type="text" class="form-control remaining_stocks" name="remaining_stocks[]" value="" readonly>';
+           str+= ' <span class="err"></span>';
+       str+= ' </td>';
+       str+= ' <td class="purch_td">';
+         str+= '    <input type="text" class="form-control purchase_quantity sm_quantity number_only" name="quantity[]" value="">';
+         str+= '    <span class="err"></span>';
+       str+= ' </td>';
+       str += '<td class="purch_td">';
+           str += '<button id="removeNewPO_edit" class="btn btn-md btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>';
+       str += '</td>';
+      str+= '</tr>';
+
+      if(x){
+         x++;
+         $('#view_stock_transfer').append(str);
+         $('.select2_edit').select2();
+      }
+      // get_supplier();
+     });
+
+// EDIT SELECT SKU
+$(document).on('change','.edit_new_code',function(){
+  var el = $(this);
+  var id = $(this).attr('data-id');
+  // alert(id);
+  $.ajax({
+      url: base_url+'stocktransfer/get_product_Name_by_code_edit',
+      data: {prod_id:$(this).val(),purchase_id:id},
+      type: 'post',
+      dataType: 'json',
+      success: function(data){
+              $.each(data.products,function(index,element){
+                el.parents('tr').find('input[name="prod_name[]"]').val(element.product_name);
+              });
+      }
+  });
+});
+
+     // EDIT STOCK TRANSFER
      $(document).on("click",".editstocktransfer", function(){
       var stockmovement_tid = $(this).attr('data-id');
-
       $.ajax({
           method: 'POST',
           url: base_url+'stocktransfer/editStockTransfer',
@@ -49,23 +148,98 @@ $(document).ready(function(){
           dataType: "json",
           success: function(data){
              console.log(data);
+               // console.log("data");
                $('#editStockTransfer').modal('show');
-               $('#editstocktransfer .stocktransfer_id').val(data.stock_movement.stockmovement_tid);
-               $('#editstocktransfer input[name="sodate"]').val(data.stock_movement.stockmovement_date);
-               $('#editstocktransfer select[name="so_type"]').val(data.stock_movement.type);
-               $('#editstocktransfer select[name="so_datedelivered"]').val(data.stock_movement.transferred_warehouse);
-               $('#editstocktransfer input[name="prod_code[]"]').val(data.stock_movement.date_delivered);
-               $('#editstocktransfer input[name="prod_name[]"]').val(data.stock_movement.product);
-               $('#editstocktransfer input[name="remaining_stocks[]"]').val(data.stocks.physical_count);
-               $('#editstocktransfer input[name="quantity[]"]').val(data.stock_movement.quantity);
-               $('#editstocktransfer input[name="stockmovement_note"]').val(data.stock_movement.stockmovement_note);
-               $('#editstocktransfer input[name="total_quantity"]').val(data.products.code);
+                     var str = '';
+                     $.each(data.stock_movement,function(index,element){
+                       console.log(element.stockmovement_date);
+               // var datax = {
+               //    id: "hujhjhjh",
+               //    text: "hjhjhj"
+               // };
+               //
+               // var newOption = new Option(datax.text, datax.id, false, false);
+               // $('#editstocktransfer .stocktransfer_id').val(data.stock_movement.stockmovement_tid);
+               // $('.js-example-basic-multiple-editStockTransfer').append(newOption).trigger('change');
+               $('#editstocktransfer input[name="sodate"]').val(element.stockmovement_date);
+               $('#editstocktransfer select[name="so_type"]').val(element.type);
+               $('#editstocktransfer input[name="so_datedelivered"]').val(element.date_delivered);
+               //
+               // $('#editstocktransfer select[name="prod_code"]').val(data.stocks.code);
+               //
+               // $('#editstocktransfer input[name="prod_name"]').val(data.stock_movement.product_name);
+               // $('#editstocktransfer input[name="remaining_stocks"]').val(data.stocks.physical_count);
+               // $('#editstocktransfer input[name="quantity"]').val(data.stock_movement.quantity);
+               // $('#editstocktransfer textarea[name="stockmovement_note"]').val(data.stock_movement.stockmovement_note);
+               // $('#editstocktransfer select[name="prod_code"]').val(data.stocks.code);
+               str+= '<tr>';
+               str += '<td class="purch_td hide">';
+               str += '<input type="hidden" class="form-control edit_stocktransfer_id" name="edit_purchase_id[]" value='+element.id+'>';
+               str += '</td>';
+                str+= ' <td class="purch_td">';
+                str += '<select class="form-control js-example-basic-multiple-editStockTransfer select2_edit edit_new_code" style="width: 100%;" name="prod_code[]" data-id="'+element.id+'" value="'+element.code+'">';
+                  // str+= ' <select class="form-control js-example-basic-multiple-editStockTransfer select2" style="width: 100%;" name="prod_code[]">';
+                  // str+= '  <option value="">Select SKU</option>';
+                  // str+= '   <option value="'.$value['product'].'">'.$value['code'].'</option>';
+                   str += get_edit_products(element.id);
+                  str+= ' </select>';
+
+                  str+= ' <span class="err"></span>';
+                 str+= '</td>';
+                str+= ' <td class="purch_td">';
+                   str+= '<input type="text" class="form-control prod_name" name="prod_name[]" value="'+element.product_name+'" readonly>';
+                   str+= ' <span class="err"></span>';
+                 str+= '</td>';
+                 str+= '<td class="purch_td">';
+                    str+= '<input type="text" class="form-control remaining_stocks" name="remaining_stocks[]" value="'+element.physical_count+'" readonly>';
+                  str+= ' <span class="err"></span>';
+                str+= ' </td>';
+                str+= ' <td class="purch_td">';
+               str+= '    <input type="text" class="form-control purchase_quantity sm_quantity number_only" name="quantity[]" value="'+element.quantity+'">';
+               str+= '    <span class="err"></span>';
+                str+= ' </td>';
+               str+= '</tr>';
+
+               });
+               $('#view_stock_transfer tbody').html(str);
+               $('.select2_edit').select2({
+                 hideSelected: true
+               });
              }
       });
 
      });
-
      // EDIT STOCK TRANSFER
+
+     //select SKU
+     $('.js-example-basic-multiple-editStockTransfer').select2({
+      placeholder: "Select SKU",
+      tags: [],
+      ajax: {
+         url: base_url+'Stocktransfer/skuList_edit',
+         dataType: "json",
+         type: "POST",
+         quietMillis: 50,
+         data: function (text) {
+          return {
+                       searchfor: text,
+                       search_type: $(this).attr('data-type')
+                   };
+        },processResults: function (data) {
+
+             return {
+                  results: $.map(data.items, function (item) {
+                      return {
+                          text: item.code,
+                          id: item.product_id
+                      }
+                  })
+             };
+          }
+      }
+     });
+
+     //end select SKU
    var stocksmov_tbl = $('.stocksmov_tbl').DataTable({
   "processing"  : true,
   "serverside"  : true,
