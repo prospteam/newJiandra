@@ -248,14 +248,18 @@ $(document).on('change','.edit_new_code',function(){
          {"data":"stockmovement_date"},
          {"data":"wh_name"},
          {"data":"date_delivered"},
-         {"data":"product_name"},
-         {"data":"quantity"},
-         {"data":"stockmovement_note"},
-         // {"data":"variant"},
-         // // {"data":"description"},
-         // {"data":{'volume'}},
-
-         // {"data":"unit"},
+         {"data":"stockmovement_code"},
+         // {"data":"quantity"},
+         {"data":"stockmovement_note","render": function(data, type, row,meta){
+              var str = '';
+              if(row.stockmovement_note == '') {
+                str += 'None';
+              }else{
+                str += row.stockmovement_note;
+              }
+              return str;
+            }
+          },
          {"data":"action","render": function(data, type, row,meta){
                            var str = '';
                            str += '<div class="actions">';
@@ -287,7 +291,7 @@ $(document).on('change','.edit_new_code',function(){
         //Set column definition initialisation properties.
         "columnDefs": [
              {
-                  "targets": [6,7], //first column / numbering column
+                  "targets": [4,5,6], //first column / numbering column
                   "orderable": false, //set not orderable
 
               },
