@@ -43,7 +43,6 @@ $(document).ready(function(){
                         return str;
                    }
               },
-              {"data":"stock_out"},
               {"data":"variance","render": function(data, type, row,meta){
                 var variance = row.system_count - row.physical_count;
                 var str = '';
@@ -217,7 +216,7 @@ $(document).ready(function(){
                   url : base_url + 'stocksmanagement/update_qty',
                   data : formData,
                   success : function(response) {
-                    blankVal_purchase();
+                    blankVal_stock();
                     $('#StockMovement').modal('hide');
                     Swal.fire("Successfully added stock movement!",data.success, "success");
                     $(".stocks_tbl").DataTable().ajax.reload();
@@ -330,4 +329,18 @@ function get_productsSO(){
     }
   });
   return data_return;
+}
+
+function blankVal_stock(){
+  // $('#StockMovement input[name="sodate"]').val('');
+  $('#StockMovement select[name="so_type"]').val('');
+  // $('#StockMovement input[name="so_datedelivered"]').val('');
+  $('#StockMovement .stock_prod_code ').val('').trigger('change');
+  $('.err').text('');
+  $('#StockMovement .add_purch ').remove();
+  $('#StockMovement input[name="prod_name[]"]').val('');
+  $('#StockMovement input[name="remaining_stocks[]"]').val('');
+  $('#StockMovement input[name="quantity[]"]').val('');
+  $('#StockMovement textarea[name="stockmovement_note"]').val('');
+  $('#StockMovement input[name="total_quantity"]').val('');
 }

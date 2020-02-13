@@ -21,18 +21,19 @@ class Stockout extends MY_Controller {
       $draw = $this->input->post('draw');
 
 
-      $column_order = array('stockmovement_date','date_delivered','product','quantity','stockmovemenent_note','status');
+      $column_order = array('stockmovement_date','date_delivered','stockmovement_code','quantity','stockmovemenent_note','status');
       $where = array(
 			'stock_movement.status !=' => 3,
 			'type' => 1
 		);
+			$group = array('stock_movement.stockmovement_code');
       $join = array(
          // 'company' => 'company.company_id = users.company',
          'products' => 'products.id = stock_movement.product'
       );
-      $select = "stock_movement.stockmovement_tid,stock_movement.stockmovement_date,stock_movement.date_delivered,stock_movement.product,stock_movement.quantity,stock_movement.stockmovement_note,stock_movement.status, products.product_name";
+      $select = "stock_movement.stockmovement_id,stock_movement.stockmovement_date,stock_movement.date_delivered,stock_movement.product,stock_movement.quantity,stock_movement.stockmovement_note,stock_movement.status, products.product_name,stock_movement.stockmovement_code, (SELECT COUNT(stock_movement.stockmovement_code) FROM stock_movement WHERE stock_movement.stockmovement_code = stock_movement.stockmovement_code ) as stockmovement_qty";
 
-      $list = $this->MY_Model->get_datatables('stock_movement',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
+      $list = $this->MY_Model->get_datatables('stock_movement',$column_order, $select, $where, $join, $limit, $offset ,$search, $order,$group);
 
 
       $output = array(
@@ -46,20 +47,20 @@ class Stockout extends MY_Controller {
 
 	public function deletestockOut(){
 
-		   $stockout = $this->input->post('stockmovement_tid');
+		   $stockout = $this->input->post('stockmovement_id');
 		   $stockout_status = 3;
 		   $data = array(
 			   'status' => $stockout_status
 		   );
-		   $datas['delete'] = $this->MY_Model->update('stock_movement',$data,array('stockmovement_tid' => $stockout));
+		   $datas['delete'] = $this->MY_Model->update('stock_movement',$data,array('stockmovement_id' => $stockout));
 		   echo json_encode($datas);
 	}
 	public function editstockout(){
-		$stockout_id = $this->input->post('stockmovement_tid');
+		$stockout_id = $this->input->post('stockmovement_id');
 
 		$data_array = array();
 
-		$parameters['where'] = array('stock_movement.stockmovement_tid'=>$stockout_id);
+		$parameters['where'] = array('stock_movement.stockmovement_id'=>$stockout_id);
 		$parameters['select'] = '*';
 
 		$data = $this->MY_Model->getrows('stock_movement',$parameters,'row');

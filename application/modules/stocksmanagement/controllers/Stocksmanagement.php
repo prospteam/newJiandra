@@ -26,6 +26,10 @@ class Stocksmanagement extends MY_Controller {
 		// $parameters1['limit'] = array(1,0);;
 		// $parameters1['order'] = 'purchase_code DESC';
 		// $data['purchase'] = $this->MY_Model->getRows('purchase_orders',$parameters1);
+		$parameters1['select'] = '*';
+		$parameters1['limit'] = array(1,0);
+		$parameters1['order'] = 'stockmovement_code DESC';
+		$data['stockmovement'] = $this->MY_Model->getRows('stock_movement',$parameters1);
 
     $this->load_page('stocksmanagement', $data);
 	}
@@ -38,7 +42,7 @@ class Stocksmanagement extends MY_Controller {
 		$order = $this->input->post('order');
 		$draw = $this->input->post('draw');
 
-		$column_order = array('p.code','sup.supplier_name','p.brand','p.product_name','po.delivered', 'po.date_delivered', 's.physical_count', 's.stock_out', 's.variance', 'po.supplier', 'po.date_delivered', 's.physical_count', 's.warehouse_id', 'w.wh_name');
+		$column_order = array('p.code','sup.supplier_name','p.brand','p.product_name','po.delivered', 'po.date_delivered', 's.physical_count', 's.variance', 'po.supplier', 'po.date_delivered', 's.physical_count', 's.warehouse_id', 'w.wh_name');
 		$where = array('po.delivery_status' => 4);
 		$group = array('po.product', 'po.warehouse_id');
 		// $count = array('po.delivered');
@@ -48,7 +52,7 @@ class Stocksmanagement extends MY_Controller {
 			'stocks as s' => 's.product = po.product:left',
 			'warehouse_management as w' => 'w.id = po.warehouse_id:left'
 		);
-		$select = "po.product, (SELECT SUM(delivered) FROM purchase_orders WHERE warehouse_id = po.warehouse_id AND product = p.id) AS system_count, p.code, p.product_name, p.brand, sup.supplier_name, po.supplier, po.date_delivered, s.physical_count, s.stock_out,s.variance, s.warehouse_id, w.wh_name";
+		$select = "po.product, (SELECT SUM(delivered) FROM purchase_orders WHERE warehouse_id = po.warehouse_id AND product = p.id) AS system_count, p.code, p.product_name, p.brand, sup.supplier_name, po.supplier, po.date_delivered, s.physical_count, s.variance, s.warehouse_id, w.wh_name";
 		$list = $this->MY_Model->get_datatables('purchase_orders as po',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
 		$output = array(
 				"draw" => $draw,
@@ -141,7 +145,9 @@ class Stocksmanagement extends MY_Controller {
 
 	public function addStockMovement(){
 		$post = $this->input->post();
-
+		$id = $this->input->post('stockmovement_id');
+		$stockmovement_id = $id + 1;
+		$code = sprintf('%04d',$stockmovement_id);
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('sodate', 'Date', 'required');
 		$this->form_validation->set_rules('so_type', 'Type', 'required');
@@ -162,17 +168,26 @@ class Stocksmanagement extends MY_Controller {
 		// if(empty($this->input->post('company[]'))){
 		// 	$error['company'] = 'The Companies field is required.';
 		// }
-		$errormsg = false;
 		foreach($post['prod_code'] as $pkey => $pVal){
-			$params['select'] = 'physical_count';
-			$data_prod_qty = $this->MY_Model->getRow($params,'stocks');
-				if($post['quantity'][$pkey] > $data_prod_qty['physical_count']){
+			$params['where'] = array('product' => $pVal);
+			$params['select'] = 'physical_count, product';
+			$data_prod_qty = $this->MY_Model->getRows('stocks',$params);
+			$errormsg = false;
+
+			foreach($data_prod_qty as $pkey => $pVal){
+				// echo "<pre>";
+				// print_r($pVal['physical_count']);
+				if($post['quantity'][$pkey] > $pVal['physical_count'] ){
 					// $subra = true;
 					$errormsg= true;
 					// $response = array($this->form_validation->set_rules($subra, 'Enter quantity less than or equal to current stock', 'required'));
 				}
+			}
 				// exit;
 		}
+		// echo "<pre>";
+		// print_r($errormsg);
+		// exit;
 		//
 		if(!empty($errormsg)){
 			$response = $errormsg;
@@ -186,6 +201,7 @@ class Stocksmanagement extends MY_Controller {
 				if ($this->form_validation->run() !== FALSE) {
 
 					$data = array(
+						'stockmovement_code' => $code,
 						'stockmovement_date' => $post['sodate'],
 						'type' => $post['so_type'],
 						'transferred_warehouse' => $warehouse,
@@ -223,12 +239,15 @@ class Stocksmanagement extends MY_Controller {
 			// $parameters['select'] = 'product,delivered';
 			// $datas = $this->MY_Model->getRows('purchase_orders', $parameters, 'row');
 
-			$param['where'] = array('po.product' => $pVal);
+			$param['where'] = array('po.product' => $pVal, 'po.delivered !=' => 0);
 			$param['limit'] = array(1,0);
 			$param['order'] = 'po.date_ordered DESC';
 			$param['join'] = array('products as p' => 'p.id = po.product:left', 'stocks as s' => 's.product = po.product:left', 'warehouse_management as w' => 'w.id = po.warehouse_id:left');
 			$param['select'] = "po.product, po.delivered";
 			$datas=  $this->MY_Model->getRows('purchase_orders as po', $param);
+				// echo "<pre>";
+				// print_r($this->db->last_query());
+				// exit;
 			foreach($datas as $key => $val){
 
 				$total_remaining_purch = $val['delivered'] - $post['quantity'][$pkey];

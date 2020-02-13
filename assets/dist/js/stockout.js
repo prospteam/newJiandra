@@ -68,8 +68,8 @@ $(document).ready(function(){
     "columns"     :[
            {"data":"stockmovement_date"},
            {"data":"date_delivered"},
-           {"data":"product_name"},
-           {"data":"quantity"},
+           {"data":"stockmovement_code"},
+           {"data":"stockmovement_qty"},
            {"data":"stockmovement_note"},
 
            {"data":"action","render": function(data, type, row,meta){
