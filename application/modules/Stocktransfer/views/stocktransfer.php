@@ -174,7 +174,7 @@
                     <th class="header-title">Transferred Warehouse</th>
                     <th class="header-title">Date Delivered</th>
                     <th class="header-title">Product</th>
-                    <th class="header-title">Quantity</th>
+                    <!-- <th class="header-title">Quantity</th> -->
                     <th class="header-title">Note</th>
                     <th class="header-title">Actions</th>
                     <th class="header-title">Status</th>

@@ -21,7 +21,7 @@ class Stockout extends MY_Controller {
       $draw = $this->input->post('draw');
 
 
-      $column_order = array('stockmovement_date','date_delivered','stockmovement_code','quantity','stockmovemenent_note','status');
+      $column_order = array('stockmovement_date','date_delivered','stockmovement_code','stockmovemenent_note','status');
       $where = array(
 			'stock_movement.status !=' => 3,
 			'type' => 1
@@ -31,7 +31,7 @@ class Stockout extends MY_Controller {
          // 'company' => 'company.company_id = users.company',
          'products' => 'products.id = stock_movement.product'
       );
-      $select = "stock_movement.stockmovement_id,stock_movement.stockmovement_date,stock_movement.date_delivered,stock_movement.product,stock_movement.quantity,stock_movement.stockmovement_note,stock_movement.status, products.product_name,stock_movement.stockmovement_code, (SELECT COUNT(stock_movement.stockmovement_code) FROM stock_movement WHERE stock_movement.stockmovement_code = stock_movement.stockmovement_code ) as stockmovement_qty";
+      $select = "stock_movement.stockmovement_id,stock_movement.stockmovement_date,stock_movement.date_delivered,stock_movement.product,stock_movement.stockmovement_note,stock_movement.status, products.product_name,stock_movement.stockmovement_code, (SELECT COUNT(stock_movement.stockmovement_code) FROM stock_movement WHERE stock_movement.stockmovement_code = stock_movement.stockmovement_code ) as stockmovement_qty";
 
       $list = $this->MY_Model->get_datatables('stock_movement',$column_order, $select, $where, $join, $limit, $offset ,$search, $order,$group);
 
@@ -69,5 +69,25 @@ class Stockout extends MY_Controller {
 		json($data_array);
 
 	}
+
+	//view list of orders
+	public function view_stockouts(){
+		$stockmovement_id = $this->input->post('id');
+		// echo "<pre>";
+		// print_r($this->input->post());
+		// exit;
+		$parameters['where'] = array('stockmovement_id' => $stockmovement_id, 'type' => 1);
+		// $parameters['group'] = array('purchase_code');
+		$parameters['join'] = array('products' => 'products.id = stock_movement.product');
+		$parameters['select'] = 'stock_movement.*, products.id AS product_id, products.*';
+
+		$data = $this->MY_Model->getRows('stock_movement',$parameters);
+
+		$data_array['stockout'] = $data;
+		// exit;
+
+		json($data_array);
+	}
+
 }
 ?>
