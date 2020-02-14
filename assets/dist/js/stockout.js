@@ -85,9 +85,9 @@ $(document).ready(function(){
                              var str = '';
                              str += '<div class="actions">';
                              if(row.status == 1) {
-                               str += '<a href="javascript:;" class="viewstockout" data-id="'+row.stockmovement_id+'"> <i class="fas fa-eye text-info"></i></a>';
-                               str += '<a href="javascript:;" class="editstockout" data-id="'+row.stockmovement_id+'"><i class="fas fa-pen text-warning"></i></a>';
-                               str += '<a href="javascript:;" class="deletestockOut" data-id="'+row.stockmovement_id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                               str += '<a href="javascript:;" class="viewstockout" data-id="'+row.stockmovement_code+'"> <i class="fas fa-eye text-info"></i></a>';
+                               str += '<a href="javascript:;" class="editstockout" data-id="'+row.stockmovement_code+'"><i class="fas fa-pen text-warning"></i></a>';
+                               str += '<a href="javascript:;" class="deletestockOut" data-id="'+row.stockmovement_code+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                              }
                              str += '</div>';
                              return str;

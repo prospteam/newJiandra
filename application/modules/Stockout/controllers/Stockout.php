@@ -76,14 +76,17 @@ class Stockout extends MY_Controller {
 		// echo "<pre>";
 		// print_r($this->input->post());
 		// exit;
-		$parameters['where'] = array('stockmovement_id' => $stockmovement_id, 'type' => 1);
-		// $parameters['group'] = array('purchase_code');
+		$parameters['where'] = array('stock_movement.stockmovement_code' => $stockmovement_id, 'type' => 1);
+		// $parameters['group'] = array('stock_movement.stockmovement_code');
 		$parameters['join'] = array('products' => 'products.id = stock_movement.product');
 		$parameters['select'] = 'stock_movement.*, products.id AS product_id, products.*';
 
 		$data = $this->MY_Model->getRows('stock_movement',$parameters);
 
 		$data_array['stockout'] = $data;
+		// exit;
+		// echo "<pre>";
+		// print_r($data_array);
 		// exit;
 
 		json($data_array);
