@@ -68,16 +68,26 @@ $(document).ready(function(){
     "columns"     :[
            {"data":"stockmovement_date"},
            {"data":"date_delivered"},
-           {"data":"product_name"},
-           {"data":"quantity"},
-           {"data":"stockmovement_note"},
-
+           {"data":"stockmovement_code"},
+           // {"data":"stockmovement_qty"},
+           // {"data":"stockmovement_note"},
+           {"data":"stockmovement_note","render": function(data, type, row,meta){
+                var str = '';
+                if(row.stockmovement_note == '') {
+                  str += 'None';
+                }else{
+                  str += row.stockmovement_note;
+                }
+                return str;
+              }
+            },
            {"data":"action","render": function(data, type, row,meta){
                              var str = '';
                              str += '<div class="actions">';
                              if(row.status == 1) {
-                               str += '<a href="javascript:;" class="editstockout" data-id="'+row.stockmovement_tid+'"><i class="fas fa-pen text-warning"></i></a>';
-                               str += '<a href="javascript:;" class="deletestockOut" data-id="'+row.stockmovement_tid+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                               str += '<a href="javascript:;" class="viewstockout" data-id="'+row.stockmovement_id+'"> <i class="fas fa-eye text-info"></i></a>';
+                               str += '<a href="javascript:;" class="editstockout" data-id="'+row.stockmovement_id+'"><i class="fas fa-pen text-warning"></i></a>';
+                               str += '<a href="javascript:;" class="deletestockOut" data-id="'+row.stockmovement_id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                              }
                              str += '</div>';
                              return str;
@@ -103,10 +113,52 @@ $(document).ready(function(){
           //Set column definition initialisation properties.
           "columnDefs": [
                {
-                    "targets": [5,6], //first column / numbering column
+                    "targets": [3,4,5], //first column / numbering column
                     "orderable": false, //set not orderable
 
                 },
            ],
        });
+
+
+       //view list of Orders
+       $(document).on('click', '.viewstockout', function(){
+          var id = $(this).attr('data-id');
+          $.ajax({
+            method: 'POST',
+            url: base_url + 'stockout/view_stockouts',
+            data: {id:id},
+            dataType: "json",
+            success: function(data){
+              console.log(data);
+              $('#ViewStockout').modal('show');
+              var str = '';
+              var total_quantity = 0;
+               $.each(data.stockout,function(index,element){
+                 total_quantity = parseFloat(total_quantity) + parseFloat(element.quantity);
+                 $('.code').text(element.stockmovement_code);
+                 $('.date_ordered').text(element.stockmovement_date);
+                 $('.date_delivered').text(element.date_delivered);
+
+                 str += '<tr>';
+                    str +=     '<td class="purch_td">';
+                      str +=   element.code;
+                    str += '</td>';
+                    str +=  '<td class="purch_td">';
+                      str +=   element.product_name;
+                    str += '</td>';
+                    str += ' <td class="purch_td qty">';
+                      str += element.quantity;
+                      str += '</td>';
+                  str += '</tr>';
+
+                  $('.note').text(element.stockmovement_note);
+               });
+               $('.qty').val(total_quantity);
+               $('#view_stockouts tbody').html(str);
+            }
+
+       });
+     });
+
 });

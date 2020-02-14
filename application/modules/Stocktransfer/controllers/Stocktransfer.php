@@ -24,19 +24,20 @@ class  Stocktransfer extends MY_Controller {
 		$order = $this->input->post('order');
 		$draw = $this->input->post('draw');
 
-		$column_order = array('stockmovement_date','transferred_warehouse','date_delivered','product','quantity','stockmovemenent_note','status');
+		$column_order = array('stockmovement_date','transferred_warehouse','date_delivered','stockmovement_code','stockmovemenent_note','status');
 
 
 		$where = array(
 			'stock_movement.status !=' => 3,
 			'type' => 2
 		);
+		$group = array('stock_movement.stockmovement_code');
 		$join = array(
 			'warehouse_management' => 'warehouse_management.id = stock_movement.transferred_warehouse',
 			'products' => 'products.id = stock_movement.product'
 		);
-		$select = "stock_movement.stockmovement_tid,stock_movement.stockmovement_date,stock_movement.transferred_warehouse,stock_movement.date_delivered,stock_movement.product,stock_movement.quantity,
-		stock_movement.stockmovement_note,stock_movement.status, warehouse_management.wh_name, products.product_name";
+		$select = "stock_movement.stockmovement_id,stock_movement.stockmovement_date,stock_movement.transferred_warehouse,stock_movement.date_delivered,stock_movement.product,
+		stock_movement.stockmovement_note,stock_movement.status, warehouse_management.wh_name, products.product_name, stock_movement.stockmovement_code";
 
 		$list = $this->MY_Model->get_datatables('stock_movement',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 
@@ -52,21 +53,21 @@ class  Stocktransfer extends MY_Controller {
 
 
 	 public function deleteTransfer(){
-		 $stockmov = $this->input->post('stockmovement_tid');
+		 $stockmov = $this->input->post('stockmovement_id');
 		 $stockmov_status = 3;
 		 $data = array(
 			 'status' => $stockmov_status
 		 );
-		 $datas['delete'] = $this->MY_Model->update('stock_movement',$data,array('stockmovement_tid' => $stockmov));
+		 $datas['delete'] = $this->MY_Model->update('stock_movement',$data,array('stockmovement_id' => $stockmov));
 		 echo json_encode($datas);
 	 }
 
 	 public function editstocktransfer(){
-		 $stocktrans_id = $this->input->post('stockmovement_tid');
+		 $stocktrans_id = $this->input->post('stockmovement_id');
 
 		 $data_array = array();
 
-		 $parameters['where'] = array('stock_movement.stockmovement_tid'=>$stocktrans_id);
+		 $parameters['where'] = array('stock_movement.stockmovement_id'=>$stocktrans_id);
 		 $parameters['select'] = 'stockmovement_date, type, date_delivered, products.id, products.code, product_name, physical_count, quantity, stockmovement_note,  ';
 		 // $parameters['select'] = 'products.code, stocks.physical_count, stockmovement_date, transferred_warehouse, date_delivered, products.status';
 		 $parameters['join'] =  array(
