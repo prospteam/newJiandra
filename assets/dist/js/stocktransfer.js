@@ -149,6 +149,7 @@ $(document).on('change','.edit_new_code',function(){
           success: function(data){
              console.log(data);
                // console.log("data");
+               // alert("hi");
                $('#editStockTransfer').modal('show');
                      var str = '';
                      $.each(data.stock_movement,function(index,element){
