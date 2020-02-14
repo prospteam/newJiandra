@@ -13,6 +13,7 @@
             <form id="editstocktransfer" method="post">
               <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
+                <div class="modal-content"> 
                   <div class="modal-header bg-info1">
                     <h5 class="modal-title" id="exampleModalLabel"> Edit Stock Transfer</h5>
                     <input type="hidden" class="form-control stockout_id" name="stockout_id" value="">
