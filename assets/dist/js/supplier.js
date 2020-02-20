@@ -272,6 +272,7 @@ $(document).ready(function(){
            $('.office_number').text(data.supplier.office_number);
            $('.tin_number').text(data.supplier.tin_number);
            $('.fax_number').text(data.supplier.fax_number);
+           $('.supplier_note').text(data.supplier.notes);
            var company_list = [];
 
            $.each(data.company, function(key,val){
@@ -295,9 +296,9 @@ $(document).ready(function(){
          dataType: 'json',
          success: function(data){
 
+           console.log(data);
            var str = "";
            $.each(data.contact_info, function (key,val){
-             console.log(val);
              str += '<tr>';
              str +=  '<td class = "supp_td">';
              str +=  '<input type = "text" class="form-control contact_person" name="contact_name[]" value="'+val.contact_name+'" >';
@@ -336,6 +337,7 @@ $(document).ready(function(){
              $('#editSupplier input[name=office_number]').val(data.supplier.office_number);
              $('#editSupplier input[name=tin_number]').val(data.supplier.tin_number);
              $('#editSupplier input[name=fax_number]').val(data.supplier.fax_number);
+             $('#editSupplier textarea[name=edit_supplier_note]').val(data.supplier.notes);
              $('#editSupplier .filechosen').text(data.supplier.supplier_logo);
 
          }
@@ -449,7 +451,7 @@ function display_suppliers($supplier_id){
                   if(row.status == 1){
                     str += '<span class="active btn btn-block btn-sm btn-success">active</button>';
                   }else if(row.status == 2){
-                    str += '<span class="active btn btn-block btn-sm btn-danger">active</button>';
+                    str += '<span class="active btn btn-block btn-sm btn-danger">inactive</button>';
                   }
                   return str;
              }

@@ -235,7 +235,7 @@ class Purchaseorders extends MY_Controller {
 										$response = array(
 											'status' => 'ok'
 										);
-									}(())
+									}
 
 					// }
 				}else{

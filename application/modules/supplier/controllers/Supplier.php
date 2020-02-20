@@ -44,7 +44,7 @@ class Supplier extends MY_Controller
 					$this->form_validation->set_rules('contact_email','Email');
 					$this->form_validation->set_rules('supp_position','Position');
 					$this->form_validation->set_rules('company[]', 'Company', 'required');
-					$this->form_validation->set_rules('email','Email','required');
+					// $this->form_validation->set_rules('email','Email','required');
 					$this->form_validation->set_rules('address','Address','required');
 					$this->form_validation->set_rules('office_number', 'Office Number', 'required');
 					$this->form_validation->set_rules('fax_number', 'Fax Number', 'required');
@@ -72,6 +72,7 @@ class Supplier extends MY_Controller
 											'address'                   => $this->input->post('address'),
 											'office_number' 						=> $this->input->post('office_number'),
 											'fax_number' 								=> $this->input->post('fax_number'),
+											'notes'											=> $this->input->post('add_supplier_note'),
 											'tin_number' 								=> $this->input->post('tin_number'),
 											'contact_info'							=> json_encode($array),
 											'status' 										=> 1
@@ -105,6 +106,7 @@ class Supplier extends MY_Controller
 									'address'                   => $this->input->post('address'),
 									'office_number' 						=> $this->input->post('office_number'),
 									'fax_number' 								=> $this->input->post('fax_number'),
+									'notes'											=> $this->input->post('add_supplier_note'),
 									'tin_number' 								=> $this->input->post('tin_number'),
 									'contact_info'							=> json_encode($array),
 									'status' 										=> 1
@@ -128,7 +130,7 @@ class Supplier extends MY_Controller
 					$this->form_validation->set_rules('contact_email', 'Email');
 					$this->form_validation->set_rules('supp_position', 'Position');
 					$this->form_validation->set_rules('company[]', 'Company', 'required');
-					$this->form_validation->set_rules('email','Email','required');
+					// $this->form_validation->set_rules('email','Email','required');
 					$this->form_validation->set_rules('address','Address','required');
 					$this->form_validation->set_rules('office_number', 'Office Number', 'required');
 					$this->form_validation->set_rules('fax_number', 'Fax Number', 'required');
@@ -158,6 +160,7 @@ class Supplier extends MY_Controller
  												'address' 										=> $this->input->post('address'),
  												'office_number' 							=> $this->input->post('office_number'),
  												'fax_number' 									=> $this->input->post('fax_number'),
+												'notes'											=> $this->input->post('add_supplier_note'),
  												'tin_number' 									=> $this->input->post('tin_number'),
 												'contact_info'						  	=> json_encode($array),
  												'status' 											=> 1
@@ -190,6 +193,7 @@ class Supplier extends MY_Controller
 											 'address' 									  	=> $this->input->post('address'),
 											 'office_number' 						  	=> $this->input->post('office_number'),
 											 'fax_number' 									=> $this->input->post('fax_number'),
+											 'notes'											=> $this->input->post('add_supplier_note'),
 											 'tin_number' 									=> $this->input->post('tin_number'),
 											 'contact_info'						    	=> json_encode($array),
 											 'status' 									  	=> 1

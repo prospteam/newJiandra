@@ -817,13 +817,13 @@ var users_tbl = $('.users_tbl').DataTable({
           {"data":"company","render": function(data, type, row,meta){
               var str = '';
               if(row.company == 1){
-                str += 'New Jiandra Enterprises';
+                str += row.company_name;
               }else if(row.company == 2){
-                str += 'Mrs.P Mktg';
+                str += row.company_name;
               }else if(row.company == 0){
                 str += '-';
-              }else if(row.company == 1,2){
-                str += 'New Jiandra Enterprises, Mrs.P Mktg';
+              }else if(row.company == 1,2 || row.company == 2,1){
+                str += 'New Jiandra Enterprises, Mrs.P Marketing';
 
               }
               return str;
