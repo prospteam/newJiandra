@@ -107,6 +107,37 @@ class  Stocktransfer extends MY_Controller {
 
 		 json($data);
 	 }
+	 public function view_stocktransfer(){
+		 $stockmovement_id = $this->input->post('stockmovement_id');
+		 //
+		 // echo "<pre>";
+		 // print_r($this->input->post());
+		 // exit;
+		 $parameters['where'] = array('stock_movement.stockmovement_id' => $stockmovement_id, 'type' => 2);
+		 // $parameters['group'] = array('stock_movement.stockmovement_code');
+		 $parameters['join'] = array(
+			 'warehouse_management' => 'warehouse_management.id = stock_movement.transferred_warehouse',
+			 'products' => 'products.id = stock_movement.product',
+	 		);
+		 $parameters['select'] = 'stock_movement.*, products.id AS product_id, products.*, warehouse_management.id AS warehouse_id, warehouse_management.*';
+
+		 $data = $this->MY_Model->getRows('stock_movement',$parameters);
+		 // echo "<pre>";
+		 //  print_r($this->db->last_query());
+		 //  exit;
+		 // echo "<pre>";
+		 //  print_r($data);
+		 //  exit;
+
+
+		 $data_array['stock_movement'] = $data;
+		 // exit;
+		 // echo "<pre>";
+		 // print_r($data_array);
+		 // exit;
+
+		 json($data_array);
+	 }
 
 
 

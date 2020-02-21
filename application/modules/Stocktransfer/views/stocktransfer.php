@@ -13,7 +13,7 @@
             <form id="editstocktransfer" method="post">
               <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
-                <div class="modal-content"> 
+                <div class="modal-content">
                   <div class="modal-header bg-info1">
                     <h5 class="modal-title" id="exampleModalLabel"> Edit Stock Transfer</h5>
                     <input type="hidden" class="form-control stockout_id" name="stockout_id" value="">
@@ -79,9 +79,6 @@
                         </div>
                       </div>
                     </div>
-                    <hr>
-
-
                     <div class="table-responsive view_stock_transfer1">
                           <table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="view_stock_transfer">
                             <thead>
@@ -89,40 +86,8 @@
                                 <th class="header-title purch">Product <span class="required">*</span></th>
                                 <th class="header-title purch">Remaining Stocks <span class="required">*</span></th>
                                 <th class="header-title purch">Quantity <span class="required">*</span></th>
-
-
                             </thead>
                             <tbody>
-
-                                <!-- <tr>
-                                  <td class="purch_td">
-                                    <select class="form-control js-example-basic-multiple-editStockTransfer select2" style="width: 100%;" name="prod_code[]">
-                                      <option value="">Select SKU</option> -->
-                                      <?php
-                                          //foreach($products as $key => $value){
-                                             // echo '<option value="'.$value['product'].'">'.$value['code'].'</option>';
-                                          // }
-                                      ?>
-                                    <!-- </select>
-
-                                    <span class="err"></span>
-                                  </td>
-                                  <td class="purch_td">
-                                      <input type="text" class="form-control prod_name" name="prod_name[]" value="" readonly>
-
-                                    <span class="err"></span>
-                                  </td>
-                                  <td class="purch_td">
-                                      <input type="text" class="form-control remaining_stocks" name="remaining_stocks[]" value="" readonly>
-
-                                    <span class="err"></span>
-                                  </td>
-                                  <td class="purch_td">
-                                    <input type="text" class="form-control purchase_quantity sm_quantity number_only" name="quantity[]" value="">
-                                    <span class="err"></span>
-                                  </td>
-                                </tr> -->
-
                             </tbody>
                           </table>
                     </div>
@@ -151,13 +116,75 @@
                 </div>
               </form>
               </div>
-
-                <!-- Modal for Stock Out-->
-
-                    <!-- end of Stock out-->
         </div>
+        <!-- Modal for View Stock transfer-->
+          <div class="modal fade" id="ViewStocktransfer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           <form id="viewtransfer" method="post">
+           <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                   <div class="modal-header bg-info1">
+                      <h5 class="modal-title" id="exampleModalLabel">View Stock Transfer</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                   </div>
+                   <div class="modal-body" id="stockTransferProducts">
+                      <div class="row">
+                        <div class="col-6">
+                           <h1 class="inp_head">#<span class="code"></span> </h1> <br>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-4">
+                           <div class="form-group">
+                              <label for="date_ordered">Date:</label>
+                              <p class="date_ordered"></p> <br>
+                           </div>
+                        </div>
+                        <div class="col-4">
+                           <label for="date_delivered">Transferred Warehouse:</label>
+                           <p class="transferred_warehouse"></p> <br>
+                        </div>
+                        <div class="col-4">
+                           <label for="date_delivered">Date Delivered:</label>
+                           <p class="date_delivered"></p> <br>
+                        </div>
+                      </div>
+                   </div>
 
-
+                   <div class="table-responsive stocktrasfer_tbl">
+                      <table class="table table-bordered table-striped stocktransfer" role="grid" aria-describedby="example1_info" id="view_stocktransfer">
+                        <thead>
+                           <th class="header-title purch">SKU</th>
+                           <th class="header-title purch">Product</th>
+                           <th class="header-title purch">Quantity </th>
+                        </thead>
+                        <tbody>
+                           <tr>
+                           </tr>
+                        </tbody>
+                      </table>
+                   </div>
+                   <hr>
+                   <div class="row summary">
+                      <div class="col-6">
+                        <label for="note">Note: </label>
+                        <p class="note"></p> <br>
+                      </div>
+                      <div class="col-md-12 col-lg-6 order-md-2">
+                        <div class="form-horizontal">
+                           <div class="form-group row m-b-10">
+                              <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Total Quantity</label>
+                              <div class="col-lg-8 col-md-12">
+                                  <input type="text" class="form-control disabled-normal qty" readonly="" disabled="" value="">
+                              </div>
+                           </div>
+                        </div>
+                      </div>
+                   </div>
+                </div>
+           </div>
+           </div>
     </section>
 
   <!-- Main content -->

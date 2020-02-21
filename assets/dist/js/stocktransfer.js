@@ -5,8 +5,8 @@ $(document).ready(function(){
 // DELETE STOCK TRANSFER
    $(document).on("click",'.deletestockTransfer', function(e) {
      e.preventDefault();
-     var stockmovement_tid = $(this).attr('data-id');
-     console.log(stockmovement_tid);
+     var stockmovement_id = $(this).attr('data-id');
+     console.log(stockmovement_id);
 
      Swal.fire({
      title: 'Are you sure?',
@@ -26,7 +26,7 @@ $(document).ready(function(){
            $.ajax({
            type: 'POST',
              url:base_url + 'Stocktransfer/deleteTransfer',
-             data: {stockmovement_tid: stockmovement_tid},
+             data: {stockmovement_id: stockmovement_id},
              success:function(data) {
                $(".stocksmov_tbl").DataTable().ajax.reload();
              }
@@ -40,9 +40,9 @@ $(document).ready(function(){
      $(document).on('submit','#editstocktransfer',function(e){
       e.preventDefault();
       let formData =  new FormData($(this)[0]);
-      var stockmovement_tid = $('input[name="edit_stocktransfer_id"]').val();
+      var stockmovement_id = $('input[name="edit_stocktransfer_id"]').val();
       // alert(id);
-      formData.append("stockmovement_tid",stockmovement_tid);
+      formData.append("stockmovement_id",stockmovement_id);
       $.ajax({
           method: 'POST',
           url : base_url + 'stocktransfer/edit_stocktransfer',
@@ -140,11 +140,11 @@ $(document).on('change','.edit_new_code',function(){
 
      // EDIT STOCK TRANSFER
      $(document).on("click",".editstocktransfer", function(){
-      var stockmovement_tid = $(this).attr('data-id');
+      var stockmovement_id = $(this).attr('data-id');
       $.ajax({
           method: 'POST',
           url: base_url+'stocktransfer/editStockTransfer',
-          data: {stockmovement_tid:stockmovement_tid},
+          data: {stockmovement_id:stockmovement_id},
           dataType: "json",
           success: function(data){
              console.log(data);
@@ -160,12 +160,12 @@ $(document).on('change','.edit_new_code',function(){
                // };
                //
                // var newOption = new Option(datax.text, datax.id, false, false);
-               // $('#editstocktransfer .stocktransfer_id').val(data.stock_movement.stockmovement_tid);
+               // $('#editstocktransfer .stocktransfer_id').val(data.stock_movement.stockmovement_id);
                // $('.js-example-basic-multiple-editStockTransfer').append(newOption).trigger('change');
                $('#editstocktransfer input[name="sodate"]').val(element.stockmovement_date);
                $('#editstocktransfer select[name="so_type"]').val(element.type);
                $('#editstocktransfer input[name="so_datedelivered"]').val(element.date_delivered);
-               //
+               // 
                // $('#editstocktransfer select[name="prod_code"]').val(data.stocks.code);
                //
                // $('#editstocktransfer input[name="prod_name"]').val(data.stock_movement.product_name);
@@ -211,6 +211,51 @@ $(document).on('change','.edit_new_code',function(){
 
      });
      // EDIT STOCK TRANSFER
+     // VIEW Stocktransfer
+     $(document).on('click', '.viewstocktransfer', function(){
+        var stockmovement_id = $(this).attr('data-id');
+        // alert('hi');
+        $.ajax({
+          method: 'POST',
+          url: base_url + 'stocktransfer/view_stocktransfer',
+          data: {stockmovement_id:stockmovement_id},
+          dataType: "json",
+          success: function(data){
+            console.log(data);
+            $('#ViewStocktransfer').modal('show');
+            var str = '';
+            var total_quantity = 0;
+             console.log('how');
+
+             $.each(data.stock_movement,function(index,element){
+                console.log('hakhak');
+               total_quantity = parseFloat(total_quantity) + parseFloat(element.quantity);
+               $('.code').text(element.stockmovement_id);
+               $('.date_ordered').text(element.stockmovement_date);
+               $('.transferred_warehouse').text(element.wh_name);
+               $('.date_delivered').text(element.date_delivered);
+
+               str += '<tr>';
+                  str +=     '<td class="purch_td">';
+                    str +=   element.stockmovement_id;
+                  str += '</td>';
+                  str +=  '<td class="purch_td">';
+                    str +=   element.product_name;
+                  str += '</td>';
+                  str += ' <td class="purch_td qty">';
+                    str += element.quantity;
+                    str += '</td>';
+                str += '</tr>';
+
+                $('.note').text(element.stockmovement_note);
+             });
+             $('.qty').val(total_quantity);
+             $('#view_stocktransfer tbody').html(str);
+          }
+
+     });
+   });
+     // END VIEW Stocktransfer
 
      //select SKU
      $('.js-example-basic-multiple-editStockTransfer').select2({
@@ -251,7 +296,7 @@ $(document).on('change','.edit_new_code',function(){
          {"data":"date_delivered"},
          {"data":"stockmovement_code"},
          // {"data":"quantity"},
-         {"data":"stockmovement_note","render": function(data, type, row,meta){
+         {"data":"stockmovement_note","render": function(data, type, row,meta, element){
               var str = '';
               if(row.stockmovement_note == '') {
                 str += 'None';
@@ -261,12 +306,13 @@ $(document).on('change','.edit_new_code',function(){
               return str;
             }
           },
-         {"data":"action","render": function(data, type, row,meta){
+         {"data":"action","render": function(data, type, row,meta, element){
                            var str = '';
                            str += '<div class="actions">';
                            if(row.status == 1) {
-                             str += '<a href="javascript:;" class="editstocktransfer" data-id="'+row.stockmovement_tid+'"><i class="fas fa-pen text-warning"></i></a>';
-                             str += '<a href="javascript:;" class="deletestockTransfer" data-id="'+row.stockmovement_tid+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                            str += '<a href="javascript:;" class="viewstocktransfer" data-id="'+row.stockmovement_id+'"> <i class="fas fa-eye text-info"></i></a>';
+                             str += '<a href="javascript:;" class="editstocktransfer" data-id="'+row.stockmovement_id+'"><i class="fas fa-pen text-warning"></i></a>';
+                             str += '<a href="javascript:;" class="deletestockTransfer" data-id="'+row.stockmovement_id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
                            }
                            str += '</div>';
                            return str;
