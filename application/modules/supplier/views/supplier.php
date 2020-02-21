@@ -27,63 +27,30 @@
 									<div class="row">
 										<div class="col-lg-6">
 											<div class="form-group">
-												<label for="supplier_name">Supplier Name: <span class="required">*</span></label>
-												<input type="text" class="form-control" name="supplier_name" value="">
-												<span class="err"></span>
-											</div>
-										</div>
-								</div>
-								<hr>
-										<span class="btn btn-sm btn-primary" id="addnewCP"><i class="fa fa-plus"></i> Supplier Contact Person</span>
-									<br>
-									<div class="table-responsive view_supplier_contact_details">
-												<table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_contact_person">
-													<thead>
-															<th class="header-title supp">Name</th>
-															<th class="header-title supp">Mobile Number</th>
-															<th class="header-title supp">Email </th>
-															<th class="header-title supp">Position </th>
-													</thead>
-													<tbody>
-
-															<tr>
-																<td class="supp_td">
-																	<input type="text" class="form-control contact_person" name="contact_name[]" value="">
-																	<span class="err"></span>
-																</td>
-																<td class="supp_td">
-																	<input type="number" class="form-control contact_mobileno" name="mobile_number[]" value="">
-																	<span class="err"></span>
-																</td>
-																<td class="supp_td">
-																	<input type="text" class="form-control contact_email" name="contact_email[]" value="">
-																	<span class="err"></span>
-																</td>
-																<td class="supp_td">
-																	<input type="text" class="form-control supp_position" name="supp_position[]" value="">
-																	<span class="err"></span>
-																</td>
-															</tr>
-
-													</tbody>
-												</table>
-									</div>
-									<hr>
-
-									<div class="row">
-										<div class="col-lg-6">
-											<div class="form-group">
 												<label for="companytitle">Company: <span class="required">*</span> </label>
 												<!-- <input type="text" name="companytitle" value="" required> -->
 												<div class="select2-purple">
 													<select class="form-control js-example-basic-multiple" name="company[]" multiple="multiple"></select>
 													<span class="err"></span>
 												</div>
+											</div>
+										</div>
+								</div>
+
+									<hr>
+
+									<div class="row">
+										<div class="col-lg-6">
+											<div class="form-group">
+												<label for="supplier_name">Supplier Name: <span class="required">*</span></label>
+												<input type="text" class="form-control" name="supplier_name" value="">
+												<span class="err"></span>
+
 									</div>
 									</div>
 									<div class="col-lg-6">
 										<div class="form-group">
-											<label for="email">Email: <span class="required">*</span> </label>
+											<label for="email">Email (Optional):</label>
 											<input type="email" class="form-control" name="email" value="">
 											<span class="err"></span>
 										</div>
@@ -141,7 +108,49 @@
 									</div>
 								</div>
 							</div>
+							<div class="col-lg-6">
+								<div class="form-group">
+											<label for="note">Note: </label>
+											<textarea rows="4" cols="50" class="form-control" name="add_supplier_note" value=""></textarea>
+								</div>
+							</div>
 						</div>
+
+						<hr>
+								<span class="btn btn-sm btn-primary" id="addnewCP"><i class="fa fa-plus"></i> Supplier Contact Person</span>
+							<br>
+							<div class="table-responsive view_supplier_contact_details">
+										<table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_contact_person">
+											<thead>
+													<th class="header-title supp">Name</th>
+													<th class="header-title supp">Mobile Number</th>
+													<th class="header-title supp">Email </th>
+													<th class="header-title supp">Position </th>
+											</thead>
+											<tbody>
+
+													<tr>
+														<td class="supp_td">
+															<input type="text" class="form-control contact_person" name="contact_name[]" value="">
+															<span class="err"></span>
+														</td>
+														<td class="supp_td">
+															<input type="number" class="form-control contact_mobileno" name="mobile_number[]" value="">
+															<span class="err"></span>
+														</td>
+														<td class="supp_td">
+															<input type="text" class="form-control contact_email" name="contact_email[]" value="">
+															<span class="err"></span>
+														</td>
+														<td class="supp_td">
+															<input type="text" class="form-control supp_position" name="supp_position[]" value="">
+															<span class="err"></span>
+														</td>
+													</tr>
+
+											</tbody>
+										</table>
+							</div>
 					</div>
 				<div class="modal-footer">
 					<button type="submit" class="btn btn-primary add">Submit</button>
@@ -165,46 +174,17 @@
 									<div class="row">
 										<div class="col-6">
 											<div class="form-group">
-												<label for="supplier_name">Supplier Name:</label>
-												<p class="supplier_name"> </p>
+												<label for="company">Company: </label>
+												<p class="company"> </p>
+
 											</div>
 										</div>
 									</div>
-									<div class="table-responsive purch_prod">
-												<table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="view_supplier_contact_details">
-													<thead>
-														<th class="header-title supp">Name</th>
-														<th class="header-title supp">Mobile Number </span></th>
-														<th class="header-title supp">Email </span></th>
-														<th class="header-title supp">Position </span></th>
-
-													</thead>
-													<tbody>
-														<tr>
-															<!-- <td class="purch_td">
-																<input type="text" class="form-control" name="prod_name[]" value="">
-																<span class="err"></span>
-															</td>
-															<td class="purch_td">
-																<input type="number" class="form-control purchase_quantity" name="quantity[]" value="">
-																<span class="err"></span>
-															</td>
-															<td class="purch_td">
-																<input type="number" class="form-control purchase_price" name="unit_price[]" value="">
-																<span class="err"></span>
-															</td>
-															<td class="purch_td">
-																<input type="number" class="form-control purchase_total" name="total[]" value="" readonly>
-																<span class="err"></span>
-															</td> -->
-														</tr>
-													</tbody>
-												</table>
-									</div>
+									<hr>
 								<div class = "row">
 											<div class="col-6">
-													<label for="company">Company: </label>
-													<p class="company"> </p>
+												<label for="supplier_name">Supplier Name:</label>
+												<p class="supplier_name"> </p>
 										</div>
 										<div class="col-6">
 											<div class="form-group">
@@ -234,6 +214,27 @@
 										<p class="fax_number"> </p>
 									</div>
 								</div>
+								<div class="col-6">
+									<div class="form-group">
+										<label for="supplier_note">Notes:</label>
+										<p class="supplier_note"> </p>
+									</div>
+								</div>
+							</div>
+							<div class="table-responsive purch_prod">
+										<table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="view_supplier_contact_details">
+											<thead>
+												<th class="header-title supp">Name</th>
+												<th class="header-title supp">Mobile Number </span></th>
+												<th class="header-title supp">Email </span></th>
+												<th class="header-title supp">Position </span></th>
+
+											</thead>
+											<tbody>
+												<tr>
+												</tr>
+											</tbody>
+										</table>
 							</div>
 						</div>
 					</div>
@@ -257,57 +258,24 @@
 									<div class="row">
 										<div class="col-6">
 											<div class="form-group">
-												<label for="supplier_name">Supplier Name:</label>
-												<input type="text" class="form-control" name="supplier_name" value="">
-												<span class="err"></span>
+												<label for="companytitle">Company</label>
+													<div class="select2-purple">
+														<select class="form-control js-example-basic-multiple-edit" name="company[]" multiple="multiple">
+														</select>
+													</div>
+													<span class="err"></span>
 											</div>
 										</div>
 									</div>
-									<hr>
-											<span class="btn btn-sm btn-primary" id="addnewCP"><i class="fa fa-plus"></i> Supplier Contact Person</span>
-										<br>
-										<div class="table-responsive view_supplier_contact_details">
-													<table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_contact_person">
-														<thead>
-																<th class="header-title supp">Name</th>
-																<th class="header-title supp">Mobile Number</span></th>
-																<th class="header-title supp">Email </th>
-																<th class="header-title supp">Position </th>
-														</thead>
-														<tbody>
 
-																<tr>
-																	<td class="supp_td">
-																		<input type="text" class="form-control contact_person" name="contact_name[]" value="">
-																		<span class="err"></span>
-																	</td>
-																	<td class="supp_td">
-																		<input type="number" class="form-control contact_mobileno" name="mobile_number[]" value="">
-																		<span class="err"></span>
-																	</td>
-																	<td class="supp_td">
-																		<input type="text" class="form-control contact_email" name="contact_email[]" value="">
-																		<span class="err"></span>
-																	</td>
-																	<td class="supp_td">
-																		<input type="text" class="form-control supp_position" name="supp_position[]" value="">
-																		<span class="err"></span>
-																	</td>
-																</tr>
-
-														</tbody>
-													</table>
-										</div>
 										<hr>
 									<div class="row">
 										<div class="col-6">
 												<div class="form-group">
-														<label for="companytitle">Company</label>
-															<div class="select2-purple">
-																<select class="form-control js-example-basic-multiple-edit" name="company[]" multiple="multiple">
-												 				</select>
-															</div>
-															<span class="err"></span>
+													<label for="supplier_name">Supplier Name:</label>
+													<input type="text" class="form-control" name="supplier_name" value="">
+													<span class="err"></span>
+
 											</div>
 									</div>
 									<div class="col-6">
@@ -346,8 +314,9 @@
 										<input type="number" class="form-control" name="tin_number" value="">
 									</div>
 								</div>
+								</div>
 								<div class="row">
-									<div class="col-sm-6">
+									<div class="col-6">
 										<div class="form-group filecontent">
 											<label for=""><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
 											<div class="uploadfile-container2">
@@ -363,10 +332,50 @@
 												<p class="file-return"></p>
 											</div>
 										</div>
+
+									</div>
+									<div class="col-6">
+										<div class="form-group">
+											<label for="note">Note: </label>
+											<textarea rows="4" cols="50" class="form-control" name="edit_supplier_note" value=""></textarea>
+										</div>
 									</div>
 								</div>
-								</div>
+								<hr>
+										<span class="btn btn-sm btn-primary" id="addnewCP"><i class="fa fa-plus"></i> Supplier Contact Person</span>
+									<br>
+									<div class="table-responsive view_supplier_contact_details">
+												<table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_contact_person">
+													<thead>
+															<th class="header-title supp">Name</th>
+															<th class="header-title supp">Mobile Number</span></th>
+															<th class="header-title supp">Email </th>
+															<th class="header-title supp">Position </th>
+													</thead>
+													<tbody>
 
+															<tr>
+																<td class="supp_td">
+																	<input type="text" class="form-control contact_person" name="contact_name[]" value="">
+																	<span class="err"></span>
+																</td>
+																<td class="supp_td">
+																	<input type="number" class="form-control contact_mobileno" name="mobile_number[]" value="">
+																	<span class="err"></span>
+																</td>
+																<td class="supp_td">
+																	<input type="text" class="form-control contact_email" name="contact_email[]" value="">
+																	<span class="err"></span>
+																</td>
+																<td class="supp_td">
+																	<input type="text" class="form-control supp_position" name="supp_position[]" value="">
+																	<span class="err"></span>
+																</td>
+															</tr>
+
+													</tbody>
+												</table>
+									</div>
 								<div class="modal-footer">
 									<button type="submit" class="btn btn-primary add">Submit</button>
 								</div>

@@ -40,22 +40,47 @@ class Vehicle extends MY_Controller {
 	}
 
 
+	//display companies for adding vehicle
+	public function add_vehicle_companies(){
+		$parameters['where'] = array('company_id !=' => 0);
+		$parameters['select'] = '*';
+		$data['companies'] = $this->MY_Model->getRows('company',$parameters);
+		echo json_encode($data);
+		// print_r($data);
+	}
+
+	//display companies for editing  vehicle
+	public function edit_vehicle_companies(){
+		$parameters['where'] = array('company_id !=' => 0);
+		$parameters['select'] = '*';
+		$data['companies'] = $this->MY_Model->getRows('company',$parameters);
+		echo json_encode($data);
+		// print_r($data);
+	}
+
+
 	//view vehicle Details
 	public function view_vehicle_details(){
 		$vehicle_id = $this->input->post('id');
-		// $data_array = array();
+		$data_array = array();
 		//
-		// $parameters['join'] = array(
-		// 	'company' => 'company.company_id = users.company',
-		// 	'position' => 'position.id = users.position'
-		// );
+		$parameters['join'] = array(
+			'company' => 'company.company_id = vehicles.company'
+		);
 		$parameters['where'] = array('id' => $vehicle_id);
 		$parameters['select'] = '*';
 
-		$data['vehicle'] = $this->MY_Model->getRows('vehicles',$parameters,'row');
+		$data = $this->MY_Model->getRows('vehicles',$parameters,'row');
+		$company_id = explode(',',$data->company);
 
-		json($data);
+		$company_parameters['where_in'] = array('col' => 'company_id', 'value' => $company_id);
+		$data_company = $this->MY_Model->getRows('company',$company_parameters);
+
+		$data_array['view_vehicles'] = $data;
+		$data_array['company'] = $data_company;
+		json($data_array);
 	}
+
 
 	//Add User
 	public function addvehicle()
@@ -72,13 +97,16 @@ class Vehicle extends MY_Controller {
 		$this->form_validation->set_rules('or_no', 'OR No.', 'required');
 		$this->form_validation->set_rules('cr_no', 'CR No.', 'required');
 		$this->form_validation->set_rules('owner', 'Complete Owners Name', 'required');
+		$this->form_validation->set_rules('company[]', 'Company', 'required');
 
 		if ($this->form_validation->run() !== FALSE) {
+			$company = implode(',',$this->input->post('company'));
 			$data_array = array();
 			foreach($this->input->post() as $key => $value){
 
 					$data_array[$key] = $value;
 			}
+			$data_array['company'] = $company;
 			$data_array['status'] = 1;
 			// $data = array(
 			// 	'plate_number' => $this->input->post('plate_number'),
@@ -189,11 +217,12 @@ class Vehicle extends MY_Controller {
 		$vehicle_id = $this->input->post('id');
 			$result = false;
 		if(!empty($this->input->post())){
+			$company = implode(',',$this->input->post('company'));
 			$data_array = array();
 			foreach($this->input->post() as $key => $value){
 					$data_array[$key] = $value;
 			}
-			// $data_array['status'] = 1;
+			$data_array['company'] = $company;
 			// $data = array(
 			// 	'plate_number' => $this->input->post('plate_number'),
 			// 	'vehicle_brand' => $this->input->post('vehicle_brand'),
@@ -239,11 +268,33 @@ class Vehicle extends MY_Controller {
 
 	//view details for edit(Vehicle)
 	public function vehicle_details(){
+		// $vehicle_id = $this->input->post('id');
 		$vehicle_id = $this->input->post('id');
+		// echo "<pre>";
+		// print_r($vehicle_id);
+		// exit;
+		$data_array = array();
+		//
+		$parameters['join'] = array(
+			'company' => 'company.company_id = vehicles.company'
+		);
 		$parameters['where'] = array('id' => $vehicle_id);
-		$data['view_edit'] = $this->MY_Model->getRows('vehicles',$parameters,'row');
-		// echo $this->db->last_query();
-		echo json_encode($data);
+		$parameters['select'] = '*';
+
+		$data = $this->MY_Model->getRows('vehicles',$parameters,'row');
+		$company_id = explode(',',$data->company);
+
+		$company_parameters['where_in'] = array('col' => 'company_id', 'value' => $company_id);
+		$data_company = $this->MY_Model->getRows('company',$company_parameters);
+
+		$data_array['vehicles'] = $data;
+		$data_array['company'] = $data_company;
+		json($data_array);
+
+		// $parameters['where'] = array('id' => $vehicle_id);
+		// $data['view_edit'] = $this->MY_Model->getRows('vehicles',$parameters,'row');
+		// // echo $this->db->last_query();
+		// echo json_encode($data);
 	}
 
 	public function listvehiclebrands_add()

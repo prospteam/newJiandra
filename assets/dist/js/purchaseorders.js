@@ -243,6 +243,7 @@ $(document).ready(function(){
 
   //choose from product name
     $('select[name="prod_code[]"]').select2({
+    maximumSelectionSize: 1,
       placeholder: "Select SKU"
     });
 

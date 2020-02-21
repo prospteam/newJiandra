@@ -24,6 +24,21 @@
                       </button>
                     </div>
                     <div class="modal-body">
+                      <div class="row">
+    										<div class="col-lg-6">
+    											<div class="form-group">
+    												<label for="companytitle">Company: <span class="required">*</span> </label>
+    												<!-- <input type="text" name="companytitle" value="" required> -->
+    												<div class="select2-purple">
+    													<select class="form-control add-company-vehicle" name="company[]" multiple="multiple"></select>
+    													<span class="err"></span>
+    												</div>
+    											</div>
+    										</div>
+    								</div>
+
+    									<hr>
+
                       <h1 class="inp_head"> GENERAL INFORMATION </h1>
                       <div class="row">
                         <div class="col-lg-6">
@@ -398,6 +413,16 @@
                     </button>
                   </div>
                   <div class="modal-body">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label for="companytitle">Company:</label>
+                        <p class="company"> </p>
+                        </div>
+                      </div>
+                  </div>
+
+                    <hr>
                     <h1 class="inp_head"> GENERAL INFORMATION </h1>
                     <div class="row">
                       <div class="col-lg-6">
@@ -714,6 +739,20 @@
                   </button>
                 </div>
                 <div class="modal-body">
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label for="companytitle">Company: <span class="required">*</span> </label>
+                        <!-- <input type="text" name="companytitle" value="" required> -->
+                        <div class="select2-purple">
+                          <select class="form-control edit-company-vehicle" name="company[]" multiple="multiple"></select>
+                          <span class="err"></span>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
+                  <hr>
                   <h1 class="inp_head"> GENERAL INFORMATION </h1>
                   <input type="hidden" class="form-control vehicleID" name="id" value="">
 
