@@ -235,11 +235,8 @@ class Purchaseorders extends MY_Controller {
 										$response = array(
 											'status' => 'ok'
 										);
-<<<<<<< HEAD
 									}
 
-=======
->>>>>>> f49205425142a5235ddf61cb9ba8c8782362855a
 					// }
 				}else{
 					$response = array('form_error' =>  array_merge($this->form_validation->error_array(), $error) );

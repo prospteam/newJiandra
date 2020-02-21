@@ -314,6 +314,7 @@
 										<input type="number" class="form-control" name="tin_number" value="">
 									</div>
 								</div>
+								</div>
 								<div class="row">
 									<div class="col-6">
 										<div class="form-group filecontent">
@@ -335,11 +336,10 @@
 									</div>
 									<div class="col-6">
 										<div class="form-group">
-													<label for="note">Note: </label>
-													<textarea rows="4" cols="50" class="form-control" name="edit_supplier_note" value=""></textarea>
+											<label for="note">Note: </label>
+											<textarea rows="4" cols="50" class="form-control" name="edit_supplier_note" value=""></textarea>
 										</div>
 									</div>
-								</div>
 								</div>
 								<hr>
 										<span class="btn btn-sm btn-primary" id="addnewCP"><i class="fa fa-plus"></i> Supplier Contact Person</span>

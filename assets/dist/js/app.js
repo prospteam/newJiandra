@@ -185,6 +185,55 @@ $(document).ready(function(){
           }
         });
 
+      //select2 for add company each vehicles
+       $('.add-company-vehicle').select2({
+         allowClear: true,
+         placeholder: "Select Company",
+         dropdownParent: $('#AddVehicle'),
+         tags: true,
+         ajax: {
+           url: base_url+'vehicle/add_vehicle_companies',
+           dataType: "json",
+           data: function (params) {
+
+          },processResults: function (data) {
+
+                return {
+                    results: $.map(data.companies, function (item) {
+                        return {
+                            text: item.company_name,
+                            id: item.company_id
+                        }
+                    })
+                };
+            }
+         }
+       });
+
+       //select2 for add company each vehicles
+        $('.edit-company-vehicle').select2({
+          allowClear: true,
+          placeholder: "Select Company",
+          dropdownParent: $('#editVehicle'),
+          tags: true,
+          ajax: {
+            url: base_url+'vehicle/edit_vehicle_companies',
+            dataType: "json",
+            data: function (params) {
+
+           },processResults: function (data) {
+
+                 return {
+                     results: $.map(data.companies, function (item) {
+                         return {
+                             text: item.company_name,
+                             id: item.company_id
+                         }
+                     })
+                 };
+             }
+          }
+        });
 
    //display position
     $('.position').change(function(){
@@ -485,58 +534,66 @@ $(document).ready(function(){
         success: function(data){
           console.log(data);
           $('#ViewVehicle').modal('show');
+            var company_list = [];
+
+            $.each(data.company, function(key,val){
+              company_list.push(val.company_name);
+            });
+
+            $('.company').text(company_list.join(', '));
+
             //general information
-            if(data.vehicle.vehicle_type == 1){
+            if(data.view_vehicles.vehicle_type == 1){
               $('.vehicle_type').text('EX Truck');
             }else{
               $('.vehicle_type').text('Delivery Truck');
             }
-            $('.cr_no').text(data.vehicle.cr_no);
-            $('.owner').text(data.vehicle.owner);
-            $('.or_no').text(data.vehicle.or_no);
-            $('.or_date').text(data.vehicle.or_date);
-            $('.mv_file_no').text(data.vehicle.mv_file_no);
-            $('.plate_number').text(data.vehicle.plate_number);
-            $('.engine_no').text(data.vehicle.engine_no);
-            $('.chassis_no').text(data.vehicle.chassis_no);
-            $('.denomination').text(data.vehicle.denomination);
-            $('.piston_displacement').text(data.vehicle.piston_displacement);
-            $('.num_of_tires').text(data.vehicle.num_of_tires);
-            $('.fuel_type').text(data.vehicle.fuel_type);
-            $('.vehicle_brand').text(data.vehicle.vehicle_brand);
-            $('.series').text(data.vehicle.series);
-            $('.body_type').text(data.vehicle.body_type);
-            $('.body_no').text(data.vehicle.body_no);
-            $('.year_model').text(data.vehicle.year_model);
-            $('.gross').text(data.vehicle.gross);
-            $('.net').text(data.vehicle.net);
-            $('.shipping_wt').text(data.vehicle.shipping_wt);
-            $('.net_capacity').text(data.vehicle.net_capacity);
+            $('.cr_no').text(data.view_vehicles.cr_no);
+            $('.owner').text(data.view_vehicles.owner);
+            $('.or_no').text(data.view_vehicles.or_no);
+            $('.or_date').text(data.view_vehicles.or_date);
+            $('.mv_file_no').text(data.view_vehicles.mv_file_no);
+            $('.plate_number').text(data.view_vehicles.plate_number);
+            $('.engine_no').text(data.view_vehicles.engine_no);
+            $('.chassis_no').text(data.view_vehicles.chassis_no);
+            $('.denomination').text(data.view_vehicles.denomination);
+            $('.piston_displacement').text(data.view_vehicles.piston_displacement);
+            $('.num_of_tires').text(data.view_vehicles.num_of_tires);
+            $('.fuel_type').text(data.view_vehicles.fuel_type);
+            $('.vehicle_brand').text(data.view_vehicles.vehicle_brand);
+            $('.series').text(data.view_vehicles.series);
+            $('.body_type').text(data.view_vehicles.body_type);
+            $('.body_no').text(data.view_vehicles.body_no);
+            $('.year_model').text(data.view_vehicles.year_model);
+            $('.gross').text(data.view_vehicles.gross);
+            $('.net').text(data.view_vehicles.net);
+            $('.shipping_wt').text(data.view_vehicles.shipping_wt);
+            $('.net_capacity').text(data.view_vehicles.net_capacity);
 
             //accounting information
-            $('.accounting_date_acquired').text(data.vehicle.accounting_date_acquired);
-            $('.accounting_acqui_amount').text(data.vehicle.accounting_acqui_amount);
-            $('.accounting_full_dep_date').text(data.vehicle.accounting_full_dep_date);
-            $('.accounting_monthly_dep').text(data.vehicle.accounting_monthly_dep);
-            $('.accounting_accum_dep').text(data.vehicle.accounting_accum_dep);
-            $('.accounting_book_val').text(data.vehicle.accounting_book_val);
-            $('.approx_length').text(data.vehicle.approx_length);
-            $('.approx_width').text(data.vehicle.approx_width);
-            $('.approx_height').text(data.vehicle.approx_height);
-            $('.approx_volume').text(data.vehicle.approx_volume);
-            $('.approx_weight').text(data.vehicle.approx_weight);
+            $('.accounting_date_acquired').text(data.view_vehicles.accounting_date_acquired);
+            $('.accounting_acqui_amount').text(data.view_vehicles.accounting_acqui_amount);
+            $('.accounting_full_dep_date').text(data.view_vehicles.accounting_full_dep_date);
+            $('.accounting_monthly_dep').text(data.view_vehicles.accounting_monthly_dep);
+            $('.accounting_accum_dep').text(data.view_vehicles.accounting_accum_dep);
+            $('.accounting_book_val').text(data.view_vehicles.accounting_book_val);
+            $('.approx_length').text(data.view_vehicles.approx_length);
+            $('.approx_width').text(data.view_vehicles.approx_width);
+            $('.approx_height').text(data.view_vehicles.approx_height);
+            $('.approx_volume').text(data.view_vehicles.approx_volume);
+            $('.approx_weight').text(data.view_vehicles.approx_weight);
 
             //van insurance details
-            $('.van_reg_date').text(data.vehicle.van_reg_date);
-            $('.van_policy_num').text(data.vehicle.van_policy_num);
-            $('.van_renewal_date').text(data.vehicle.van_renewal_date);
-            $('.van_exp_date').text(data.vehicle.van_exp_date);
+            $('.van_reg_date').text(data.view_vehicles.van_reg_date);
+            $('.van_policy_num').text(data.view_vehicles.van_policy_num);
+            $('.van_renewal_date').text(data.view_vehicles.van_renewal_date);
+            $('.van_exp_date').text(data.view_vehicles.van_exp_date);
 
             //land transportation details
-            $('.land_reg_date').text(data.vehicle.land_reg_date);
-            $('.land_renewal_date').text(data.vehicle.land_renewal_date);
-            $('.land_exp_date').text(data.vehicle.land_exp_date);
-            $('.material_desc').text(data.vehicle.material_desc);
+            $('.land_reg_date').text(data.view_vehicles.land_reg_date);
+            $('.land_renewal_date').text(data.view_vehicles.land_renewal_date);
+            $('.land_exp_date').text(data.view_vehicles.land_exp_date);
+            $('.material_desc').text(data.view_vehicles.material_desc);
 
         }
       })
@@ -546,6 +603,7 @@ $(document).ready(function(){
    //edit Vehicle
    $(document).on('click', '.editVehicles', function(){
      var id = $(this).attr('data-id');
+
      $.ajax({
          url: base_url+'vehicle/vehicle_details',
          data: {id:id},
@@ -554,55 +612,65 @@ $(document).ready(function(){
          success: function(data){
            console.log(data);
              $('#editVehicle').modal('show');
-             $('#editVehicle input[name=id]').val(data.view_edit.id);
+             var company_list = [];
+             $('#editVehicle .edit-company-vehicle').html('');
+
+             $.each(data.company, function(key,val){
+               company_list.push(val.company_name);
+               $('#editVehicle .edit-company-vehicle').append( '<option value='+val.company_id+' selected>'+val.company_name+'</option>' );
+             });
+
+             $('#editVehicle input[name=id]').val(data.vehicles.id);
              //general information
-             $('#editVehicle input[name=vehicle_type').val(data.view_edit.vehicle_type);
-             $('#editVehicle input[name=cr_no]').val(data.view_edit.cr_no);
-             $('#editVehicle input[name=owner]').val(data.view_edit.owner);
-             $('#editVehicle input[name=or_no]').val(data.view_edit.or_no);
-             $('#editVehicle input[name=or_date]').val(data.view_edit.or_date);
-             $('#editVehicle input[name=mv_file_no]').val(data.view_edit.mv_file_no);
-             $('#editVehicle input[name=plate_number]').val(data.view_edit.plate_number);
-             $('#editVehicle input[name=engine_no]').val(data.view_edit.engine_no);
-             $('#editVehicle input[name=chassis_no]').val(data.view_edit.chassis_no);
-             $('#editVehicle input[name=denomination]').val(data.view_edit.denomination);
-             $('#editVehicle input[name=piston_displacement]').val(data.view_edit.piston_displacement);
-             $('#editVehicle input[name=num_of_tires]').val(data.view_edit.num_of_tires);
-             $('#editVehicle #fuel_type1').append( '<option value='+data.view_edit.fuel_type+' selected>'+data.view_edit.fuel_type+'</option>' )
-             $('#editVehicle #vehicle_brand1').append( '<option value='+data.view_edit.vehicle_brand+' selected>'+data.view_edit.vehicle_brand+'</option>' )
-             $('#editVehicle input[name=series]').val(data.view_edit.series);
-             $('#editVehicle #body_type1').append( '<option value='+data.view_edit.body_type+' selected>'+data.view_edit.body_type+'</option>' )
-             $('#editVehicle input[name=body_no]').val(data.view_edit.body_no);
-             $('#editVehicle input[name=year_model]').val(data.view_edit.year_model);
-             $('#editVehicle input[name=gross]').val(data.view_edit.gross);
-             $('#editVehicle input[name=net]').val(data.view_edit.net);
-             $('#editVehicle input[name=shipping_wt]').val(data.view_edit.shipping_wt);
-             $('#editVehicle input[name=net_capacity]').val(data.view_edit.net_capacity);
+             $('#editVehicle input[name=vehicle_type').val(data.vehicles.vehicle_type);
+             $('#editVehicle input[name=cr_no]').val(data.vehicles.cr_no);
+             $('#editVehicle input[name=owner]').val(data.vehicles.owner);
+             $('#editVehicle input[name=or_no]').val(data.vehicles.or_no);
+             $('#editVehicle input[name=or_date]').val(data.vehicles.or_date);
+             $('#editVehicle input[name=mv_file_no]').val(data.vehicles.mv_file_no);
+             $('#editVehicle input[name=plate_number]').val(data.vehicles.plate_number);
+             $('#editVehicle input[name=engine_no]').val(data.vehicles.engine_no);
+             $('#editVehicle input[name=chassis_no]').val(data.vehicles.chassis_no);
+             $('#editVehicle input[name=denomination]').val(data.vehicles.denomination);
+             $('#editVehicle input[name=piston_displacement]').val(data.vehicles.piston_displacement);
+             $('#editVehicle input[name=num_of_tires]').val(data.vehicles.num_of_tires);
+             $('#editVehicle #fuel_type1').append( '<option value='+data.vehicles.fuel_type+' selected>'+data.vehicles.fuel_type+'</option>' )
+             $('#editVehicle #vehicle_brand1').append( '<option value='+data.vehicles.vehicle_brand+' selected>'+data.vehicles.vehicle_brand+'</option>' )
+             $('#editVehicle input[name=series]').val(data.vehicles.series);
+             $('#editVehicle #body_type1').append( '<option value='+data.vehicles.body_type+' selected>'+data.vehicles.body_type+'</option>' )
+             $('#editVehicle input[name=body_no]').val(data.vehicles.body_no);
+             $('#editVehicle input[name=year_model]').val(data.vehicles.year_model);
+             $('#editVehicle input[name=gross]').val(data.vehicles.gross);
+             $('#editVehicle input[name=net]').val(data.vehicles.net);
+             $('#editVehicle input[name=shipping_wt]').val(data.vehicles.shipping_wt);
+             $('#editVehicle input[name=net_capacity]').val(data.vehicles.net_capacity);
 
              //accounting information
-             $('#editVehicle input[name=accounting_date_acquired]').val(data.view_edit.accounting_date_acquired);
-             $('#editVehicle input[name=accounting_acqui_amount]').val(data.view_edit.accounting_acqui_amount);
-             $('#editVehicle input[name=accounting_full_dep_date]').val(data.view_edit.accounting_full_dep_date);
-             $('#editVehicle input[name=accounting_monthly_dep]').val(data.view_edit.accounting_monthly_dep);
-             $('#editVehicle input[name=accounting_accum_dep]').val(data.view_edit.accounting_accum_dep);
-             $('#editVehicle input[name=accounting_book_val]').val(data.view_edit.accounting_book_val);
-             $('#editVehicle input[name=approx_length]').val(data.view_edit.approx_length);
-             $('#editVehicle input[name=approx_width]').val(data.view_edit.approx_width);
-             $('#editVehicle input[name=approx_height]').val(data.view_edit.approx_height);
-             $('#editVehicle input[name=approx_volume]').val(data.view_edit.approx_volume);
-             $('#editVehicle input[name=approx_weight]').val(data.view_edit.approx_weight);
+             $('#editVehicle input[name=accounting_date_acquired]').val(data.vehicles.accounting_date_acquired);
+             $('#editVehicle input[name=accounting_acqui_amount]').val(data.vehicles.accounting_acqui_amount);
+             $('#editVehicle input[name=accounting_full_dep_date]').val(data.vehicles.accounting_full_dep_date);
+             $('#editVehicle input[name=accounting_monthly_dep]').val(data.vehicles.accounting_monthly_dep);
+             $('#editVehicle input[name=accounting_accum_dep]').val(data.vehicles.accounting_accum_dep);
+             $('#editVehicle input[name=accounting_book_val]').val(data.vehicles.accounting_book_val);
+             $('#editVehicle input[name=approx_length]').val(data.vehicles.approx_length);
+             $('#editVehicle input[name=approx_width]').val(data.vehicles.approx_width);
+             $('#editVehicle input[name=approx_height]').val(data.vehicles.approx_height);
+             $('#editVehicle input[name=approx_volume]').val(data.vehicles.approx_volume);
+             $('#editVehicle input[name=approx_weight]').val(data.vehicles.approx_weight);
 
              //van insurance details
-             $('#editVehicle input[name=van_reg_date]').val(data.view_edit.van_reg_date);
-             $('#editVehicle input[name=van_policy_num]').val(data.view_edit.van_policy_num);
-             $('#editVehicle input[name=van_renewal_date]').val(data.view_edit.van_renewal_date);
-             $('#editVehicle input[name=van_exp_date]').val(data.view_edit.van_exp_date);
+             $('#editVehicle input[name=van_reg_date]').val(data.vehicles.van_reg_date);
+             $('#editVehicle input[name=van_policy_num]').val(data.vehicles.van_policy_num);
+             $('#editVehicle input[name=van_renewal_date]').val(data.vehicles.van_renewal_date);
+             $('#editVehicle input[name=van_exp_date]').val(data.vehicles.van_exp_date);
 
              //land insurance details
-             $('#editVehicle input[name=land_reg_date]').val(data.view_edit.land_reg_date);
-             $('#editVehicle input[name=land_renewal_date]').val(data.view_edit.land_renewal_date);
-             $('#editVehicle input[name=land_exp_date]').val(data.view_edit.land_exp_date);
-             $('#editVehicle textarea[name=material_desc]').val(data.view_edit.material_desc);
+             $('#editVehicle input[name=land_reg_date]').val(data.vehicles.land_reg_date);
+             $('#editVehicle input[name=land_renewal_date]').val(data.vehicles.land_renewal_date);
+             $('#editVehicle input[name=land_exp_date]').val(data.vehicles.land_exp_date);
+             $('#editVehicle textarea[name=material_desc]').val(data.vehicles.material_desc);
+
+
          }
      });
 

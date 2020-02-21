@@ -296,7 +296,7 @@ $(document).ready(function(){
          dataType: 'json',
          success: function(data){
 
-           console.log(data);
+           console.log(data.supplier.notes);
            var str = "";
            $.each(data.contact_info, function (key,val){
              str += '<tr>';
@@ -429,7 +429,17 @@ function display_suppliers($supplier_id){
                  }
              },
              {"data":"supplier_name"},
-             {"data":"email"},
+             {"data":"email","render": function(data, type, row,meta){
+               var str = '';
+                   if(row.email != ''){
+                     str += row.email;
+                   }else{
+                     str += 'None';
+                   }
+                   return str;
+                }
+              },
+             // {"data":"email"},
              {"data":"action","render": function(data, type, row,meta){
                        var str = '';
                        str += '<div class="actions">';

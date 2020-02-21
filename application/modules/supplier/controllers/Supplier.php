@@ -277,6 +277,7 @@ class Supplier extends MY_Controller
 
 	//display companies for adding supplier
 	public function add_supplier_companies(){
+		$parameters['where'] = array('company_id !=' => 0);
 		$parameters['select'] = '*';
 		$data['companies'] = $this->MY_Model->getRows('company',$parameters);
 		echo json_encode($data);
@@ -285,6 +286,7 @@ class Supplier extends MY_Controller
 
 	//display companies
 	public function edit_supplier_companies(){
+		$parameters['where'] = array('company_id !=' => 0);
 		$parameters['select'] = '*';
 		$data['companies'] = $this->MY_Model->getRows('company',$parameters);
 		echo json_encode($data);
@@ -395,7 +397,7 @@ class Supplier extends MY_Controller
 				$this->form_validation->set_rules('mobile_number', 'Mobile Number');
 				$this->form_validation->set_rules('contact_email', 'Email');
 				$this->form_validation->set_rules('supp_position', 'Position');
-				$this->form_validation->set_rules('email', 'Email', 'required');
+				// $this->form_validation->set_rules('email', 'Email', 'required');
 				$this->form_validation->set_rules('address', 'Address', 'required');
 				$this->form_validation->set_rules('office_number', 'Office Number', 'required');
 				$this->form_validation->set_rules('fax_number', 'Fax Number', 'required');
@@ -429,6 +431,7 @@ class Supplier extends MY_Controller
 				'office_number' 					=>$post['office_number'],
 				'fax_number' 							=> $post['fax_number'],
 				'tin_number' 							=> $post['tin_number'],
+				'notes'											=> $post['edit_supplier_note'],
 				'contact_info'						=> json_encode($array),
 				// 'company' => implode(',',$this->input->post('company')),
 				// 'status' => 1
