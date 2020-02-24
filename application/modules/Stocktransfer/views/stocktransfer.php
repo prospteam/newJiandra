@@ -22,7 +22,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <div class="form-horizontal">
+                    <div class="form-horizontal"> 
                         <div class="form-group row m-b-10">
                         <label for="sodate" class="col-md-12 col-lg-4 col-form-label"> Date: <span class="text-red">*</span></label>
                         <div class="col-lg-8 col-md-12">
