@@ -50,7 +50,90 @@ class  Stocktransfer extends MY_Controller {
 		);
 		echo json_encode($output);
 	}
+	// edit purchase Orders
+	public function edit_stocktransfer(){
 
+		$post = $this->input->post();
+		echo "<pre>";
+		 print_r($post); 
+		 exit;
+		// foreach($post['isEdit'] as $key => $value){
+		// 	print_r($post['prod_code'][$key]);
+		// 	if($value == 1){
+		// 		echo $post['prod_code'][$key].' = '.$post['prod_name'][$key].' is for Edit<br>';
+		// 	} else {
+		// 		echo $post['prod_code'][$key].' = '.$post['prod_name'][$key].' is for Add<br>';
+		// 	}
+		// }
+		// exit;
+		$this->load->library("form_validation");
+
+		$this->form_validation->set_rules('edit_prod_code[]', 'SKU', 'required');
+		$this->form_validation->set_rules('edit_prod_name[]', 'Product Name', 'required');
+		$this->form_validation->set_rules('edit_remaining_stocks[]', 'Remaining Stocks', 'required');
+		$this->form_validation->set_rules('edit_quantity[]', 'Quantity', 'required');
+		$error = array();
+
+			if(!empty($post['prod_code'])){
+					foreach($post['prod_code'] as $pkey => $pVal){
+						// if($value['isEdit'] == 1){
+						//
+						// } else {
+						//
+						// }
+						if ($this->form_validation->run() !== FALSE) {
+								$data = array(
+										'stockmovement_date' => $post['sodate'],
+										'type' => $post['so_type'],
+										'date_delivered' => $post['so_datedelivered'],
+										'product' => $pVal,
+										'stockmovement_code' => $post['edit_prod_code'][$pkey],
+										'physical_count' => $post['edit_remaining_stocks'][$pkey],
+										'quanity' => $post['edit_quantity'],
+										'status' => 1,
+										'delivery_status' => 1
+									);
+									$add = $this->MY_Model->insert('stock_movement', $data,array('stockmovement_id' => $post['stocktransfer_id'][$pkey]));
+									if ($add) {
+										$response = array(
+											'status' => 'ok'
+										);
+									}
+						}else{
+							$response = array('form_error' =>  array_merge($this->form_validation->error_array(), $error) );
+						}
+				}
+			}
+				$data = array(
+					'stockmovement_date' => $post['sodate'],
+					'type' => $post['so_type'],
+					'date_delivered' => $post['so_datedelivered'],
+
+				);
+				$update1 = $this->MY_Model->update('stock_movement', $data, array('stockmovement_id' => $post['stocktransfer_id']));
+
+				foreach($post['stocktransfer_id'] as $pkey => $pVal){
+					$data = array(
+						// 'stockmovement_id' => $post['stockmovement_id'],
+						'product' => $post['prod_code'][$pkey],
+						'remaining_stocks' => $post['remaining_stocks'][$pkey],
+						'quantity' => $post['quantity'][$pkey],
+					);
+					$update = $this->MY_Model->update('stock_movement', $data, array('id' => $post['stocktransfer_id'][$pkey]));
+					if ($update) {
+						$response = array(
+							'status' => 'ok'
+						);
+					}	else if ($update1) {
+						$response = array(
+							'status' => 'ok'
+						);
+					}
+
+			}
+		echo json_encode($response);
+
+	}
 
 	 public function deleteTransfer(){
 		 $stockmov = $this->input->post('stockmovement_id');
@@ -69,52 +152,32 @@ class  Stocktransfer extends MY_Controller {
 
 		 $parameters['where'] = array('stock_movement.stockmovement_id'=>$stocktrans_id);
 		 $parameters['select'] = 'stockmovement_date, type, date_delivered, products.id, products.code, product_name, physical_count, quantity, stockmovement_note,  ';
-		 // $parameters['select'] = 'products.code, stocks.physical_count, stockmovement_date, transferred_warehouse, date_delivered, products.status';
 		 $parameters['join'] =  array(
 			 'products' => 'products.id = stock_movement.product',
 			 'stocks' => 'stocks.code = products.code'
 		 );
 		 $data = $this->MY_Model->getrows('stock_movement',$parameters);
-		 // echo "<pre>";
-		 //  print_r($data);
-		 //  exit;
-		 // echo $this->db->last_query();
 
 		 $data_array['stock_movement'] = $data;
 		 json($data_array);
 
 	 }
-	 // public function get_stock_transfer(){
-		//  $params['where'] = array('status' => 1);
-		//  $data['products'] = $this->MY_Model->getRows('products', $params);
-		//  json($data);
-	 // }
+
 
 	 public function get_product_Name_by_code_edit(){
+
 		 $parameters['where'] = array('id' => $this->input->post('prod_id'));
 		 $data['products'] = $this->MY_Model->getRows('products',$parameters, 'rows');
-		 // echo "<pre>";
-		 // print_r($this->input->post());
-		 // exit;
-		 // $prod_id = $this->input->post('prod_id');
-		 // $parameters['select'] = 'id,(SELECT * FROM products WHERE id = '.$prod_id.' ) as product';
-		 // $parameters['where'] = array('id' => $this->input->post('purchase_id'));
-		 // $data['products'] = $this->MY_Model->getRows('purchase_orders',$parameters);
-		 // echo "<pre>";
-		 // print_r($datas);
-		 // exit;
-		 // $data['edit_purch_prod'] = $this->MY_Model->getRows('purchase_orders',$parameters);
+
+		 $param['where'] = array('product' => $this->input->post('prod_id'));
+		 $data['physical_count'] = $this->MY_Model->getRows('stocks',$param);
 
 		 json($data);
 	 }
+
 	 public function view_stocktransfer(){
 		 $stockmovement_id = $this->input->post('stockmovement_id');
-		 //
-		 // echo "<pre>";
-		 // print_r($this->input->post());
-		 // exit;
 		 $parameters['where'] = array('stock_movement.stockmovement_id' => $stockmovement_id, 'type' => 2);
-		 // $parameters['group'] = array('stock_movement.stockmovement_code');
 		 $parameters['join'] = array(
 			 'warehouse_management' => 'warehouse_management.id = stock_movement.transferred_warehouse',
 			 'products' => 'products.id = stock_movement.product',
@@ -122,19 +185,9 @@ class  Stocktransfer extends MY_Controller {
 		 $parameters['select'] = 'stock_movement.*, products.id AS product_id, products.*, warehouse_management.id AS warehouse_id, warehouse_management.*';
 
 		 $data = $this->MY_Model->getRows('stock_movement',$parameters);
-		 // echo "<pre>";
-		 //  print_r($this->db->last_query());
-		 //  exit;
-		 // echo "<pre>";
-		 //  print_r($data);
-		 //  exit;
 
 
 		 $data_array['stock_movement'] = $data;
-		 // exit;
-		 // echo "<pre>";
-		 // print_r($data_array);
-		 // exit;
 
 		 json($data_array);
 	 }

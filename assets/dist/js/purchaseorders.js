@@ -766,7 +766,16 @@ $(document).ready(function(){
 
 
   $(document).on('click', '#removeNewPO', function(){
-    $(this).parent().parent().remove(); x--;
+    $(this).parent().parent().remove();
+    // $(this).parent().parent().remove(); x--;
+
+    //  total quantity
+    var total_quantity = 0;
+    $(".purchase_quantity").each(function() {
+      total_quantity += +$(this).val();
+   });
+   $(".total_quantity").val(total_quantity);
+
   });
 
   //add multiple product in add purchase order
@@ -812,7 +821,14 @@ $(document).ready(function(){
   });
 
   $(document).on('click', '#removeNewPO_edit', function(){
-    $(this).parent().parent().remove(); x--;
+    $(this).parent().parent().remove();
+    //  total quantity
+   var total_quantity = 0;
+   $(".purchase_quantity").each(function() {
+       total_quantity += +$(this).val();
+   });
+   $(".total_quantity").val(total_quantity);
+
   });
 
   //compute total for qunatity * unit Price
@@ -849,9 +865,7 @@ $(document).ready(function(){
           $(".purchase_price").each(function() {
               total_cost += +$(this).val();
           });
-          $(".total_cost").val(total_cost.toFixed(2));
-
-
+          $(".total_cost").val(total_cost.toFixed(2))
 
       });
 

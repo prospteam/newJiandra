@@ -16,13 +16,13 @@
                 <div class="modal-content">
                   <div class="modal-header bg-info1">
                     <h5 class="modal-title" id="exampleModalLabel"> Edit Stock Transfer</h5>
-                    <input type="hidden" class="form-control stockout_id" name="stockout_id" value="">
+                    <input type="hidden" class="form-control stockout_id" name="stocktransfer_id" value="">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
-                    <div class="form-horizontal"> 
+                    <div class="form-horizontal">
                         <div class="form-group row m-b-10">
                         <label for="sodate" class="col-md-12 col-lg-4 col-form-label"> Date: <span class="text-red">*</span></label>
                         <div class="col-lg-8 col-md-12">

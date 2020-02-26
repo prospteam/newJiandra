@@ -44,6 +44,30 @@ class Stockout extends MY_Controller {
       );
       echo json_encode($output);
    }
+		// Edit Stock Out
+		public function stockout_edit(){
+			$stocktrans_id = $this->input->post('stockmovement_id');
+
+			$data_array = array();
+
+			$parameters['where'] = array('stock_movement.stockmovement_id'=>$stocktrans_id);
+			$parameters['select'] = 'stockmovement_date, type, date_delivered, products.id, products.code, product_name, physical_count, quantity, stockmovement_note,  ';
+			// $parameters['select'] = 'products.code, stocks.physical_count, stockmovement_date, transferred_warehouse, date_delivered, products.status';
+			$parameters['join'] =  array(
+			   'products' => 'products.id = stock_movement.product',
+			   'stocks' => 'stocks.code = products.code'
+			);
+			$data = $this->MY_Model->getrows('stock_movement',$parameters);
+			// echo "<pre>";
+			//  print_r($data);
+			//  exit;
+			// echo $this->db->last_query();
+
+			$data_array['stock_movement'] = $data;
+			json($data_array);
+
+		}
+		// End Edit Stock Out
 
 	public function deletestockOut(){
 
@@ -54,20 +78,6 @@ class Stockout extends MY_Controller {
 		   );
 		   $datas['delete'] = $this->MY_Model->update('stock_movement',$data,array('stockmovement_id' => $stockout));
 		   echo json_encode($datas);
-	}
-	public function editstockout(){
-		$stockout_id = $this->input->post('stockmovement_id');
-
-		$data_array = array();
-
-		$parameters['where'] = array('stock_movement.stockmovement_id'=>$stockout_id);
-		$parameters['select'] = '*';
-
-		$data = $this->MY_Model->getrows('stock_movement',$parameters,'row');
-
-		$data_array['stock_movement'] = $data;
-		json($data_array);
-
 	}
 
 	//view list of orders
