@@ -1,11 +1,19 @@
 var base_url = $('input[name="base_url"]').val();
 $(document).ready(function(){
 
+  //show warehouse when type is stock transfer
   $('#so_type').on('change', function(){
     if($(this).val() == "2"){
-      $('.warehouse').css('display', 'block');
+      $('.to_warehouse').css('display', 'block');
+      $('.from_warehouse').css('display', 'block');
+      $('div#stock_transfer_movement').css('display', 'block');
+      $('div#stock_movement').css('display', 'none');
+      $("#wh_stock_code").prop("disabled", true);
     }else{
-      $('.warehouse').css('display', 'none');
+      $('.from_warehouse').css('display', 'none');
+      $('.to_warehouse').css('display', 'none');
+      $('div#stock_movement').css('display', 'block');
+      $('div#stock_transfer_movement').css('display', 'none');
     }
   });
 
@@ -76,13 +84,12 @@ $(document).ready(function(){
   //end display purchase_tbl
 
 
-  //view list of Orders
-  $(document).on('click', '.generatereport', function(){
-      $('#GenerateReport').modal('show');
+//view list of stocks
+$(document).on('click', '.generatereport', function(){
+    $('#GenerateReport').modal('show');
      $.ajax({
        method: 'POST',
        url: base_url + 'stocksmanagement/view_reports',
-       // data: {id:id},
        dataType: "json",
        success: function(data){
          $('#GenerateReport').modal('show');
@@ -92,6 +99,9 @@ $(document).ready(function(){
               str += '<tr>';
                   str +=     '<td class="purch_td hide">';
                     str +=   '<input type="hidden" class="prod_code" name="view_stock_id[]" value='+element.stock_id+'>';
+                  str += '</td>';
+                  str +=     '<td class="purch_td hide">';
+                    str +=   '<input type="hidden" class="warehouse_id" name="view_warehouse_id[]" value='+element.warehouse_id+'>';
                   str += '</td>';
                 str +=     '<td class="purch_td hide">';
                   str +=   '<input type="hidden" class="prod_code" name="view_prod_code[]" value='+element.product+'>';
@@ -130,9 +140,6 @@ $(document).ready(function(){
   $(document).on('submit','form#generateReport',function(e){
     e.preventDefault();
     let formData = $(this).serialize();
-    // formData.append('purchase_id',$("input[name='purchase_id']").attr('data-id'));
-    //
-    // console.log(formData);
     $.ajax({
         method: 'POST',
         url : base_url + 'stocksmanagement/add_reports',
@@ -146,7 +153,6 @@ $(document).ready(function(){
                 $(keyNames).each(function(index , value) {
                   console.log(value);
                     $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
-                    // $("select[name='"+value+"']").parents('.form-group').next('.err').text(data.form_error[value]);
                 });
             }else if (data.error) {
                 Swal.fire("Error",data.error, "error");
@@ -155,36 +161,21 @@ $(document).ready(function(){
                 $('#GenerateReport').modal('hide');
                 Swal.fire("Successfully generated a report!",data.success, "success");
                 $(".stocks_tbl").DataTable().ajax.reload();
-                // setTimeout(function(){
-                //    location.reload();
-                //  }, 1000);
             }
         }
     })
   });
 });
 
-
+  //show modal for stock movement
   $(document).on('click', '.stockmovement', function(){
     $('#StockMovement').modal('show');
   })
-
-  //quantity must not exceed to the current qty of the product
-  // $(document).on('change','.sm_quantity',function(){
-  //   $.ajax({
-  //     method: 'POST',
-  //     url: base_url + 'stocksmanagement/checkQuantity',
-  //     data: formData,
-  //   })
-  // })
 
   //successfully added stock movement
   $(document).on('submit','form#stockmovement',function(e){
     e.preventDefault();
     let formData = $(this).serialize();
-    // formData.append('purchase_id',$("input[name='purchase_id']").attr('data-id'));
-    //
-    // console.log(formData);
     $.ajax({
         method: 'POST',
         url : base_url + 'stocksmanagement/addStockMovement',
@@ -267,7 +258,36 @@ $(document).ready(function(){
     });
   });
 
-  //add multiple product in add purchase order
+  //show products on the specific warehouse chosen
+  $('#from_warehouse').on('change', function(){
+    var from_warehouse_id = $(this).val();
+    $("#wh_stock_code").prop("disabled", false);
+    //select2 for choose products based on warehouse chosen
+    $('select[name="wh_prod_code[]').select2({
+        maximumSelectionSize: 1,
+        placeholder: "Select SKU",
+        ajax: {
+            url: base_url+'stocksmanagement/get_products_by_warehouse',
+            type: 'post',
+            dataType: "json",
+            data:{from_warehouse_id:from_warehouse_id},
+            processResults: function (data) {
+
+                return {
+                    results: $.map(data.wh_product, function (item) {
+                        return {
+                            text: item.code,
+                            id: item.id
+                        }
+                    })
+                };
+            }
+        }
+    });
+  });
+
+
+  //add multiple product in add stock movement
   $(document).on('click', '#addNewSO', function(){
     var x = 1;
     var str = '';
