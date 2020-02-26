@@ -88,3 +88,22 @@ border-color:#dc3545 !important;
 li.nav-item.active2 {
     background-color: #050506;
 }
+.costprice {
+    margin: 13px;
+    color: #399d50
+}
+.costprice:hover {
+    color: #048600cc;
+}
+.table-responsive.view_purchase_orders_details {
+    padding: 22px;
+}
+.cost.cost_btn.float-sm-right {
+    margin: 17px;
+    background-color: #6b6ca5;
+    border: 0;
+    border-radius: 7px;
+    color:  #fff;
+    height: 37px;
+    width: 121px;
+}

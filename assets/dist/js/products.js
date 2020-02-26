@@ -86,6 +86,39 @@ $(document).on("click",".editproducts", function(){
 
 });
 // end edit Products
+// display cost price
+   $(document).on("click",".costprice", function(){
+      var id = $(this).attr("data-id");
+     $('#disp_cost_price').modal('show')
+
+      $.ajax({
+         methos: 'POST',
+         url: base_url+'products/add_costprice',
+         data:{id:id},
+         dataType: "json",
+         success: function(data){
+         }
+      });
+
+   });
+//end diplay cost price
+// add cost price
+$(document).on("click",".add_new_cost_btn", function(){
+
+   var id = $(this).attr("data-id");
+   $('#add_cost_price').modal('show')
+
+   $.ajax({
+      methos: 'POST',
+      url: base_url+'products/add_costprice',
+      data:{id:id},
+      dataType: "json",
+      success: function(data){
+      }
+   });
+
+});
+ // end add cost price
 
 // successfully edit user
   $(document).on('submit','#editProducts',function(e){
@@ -244,6 +277,7 @@ $(document).on("click",'.deleteproducts', function(e) {
                             var str = '';
                             str += '<div class="actions">';
                             if(row.status == 1) {
+                              str += '<a href="javascript:;" class="costprice" data-id="'+row.id+'"> <i class="fas fa-coins"></i></a>';
                               str += '<a href="javascript:;" class="viewproducts" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
                               str += '<a href="javascript:;" class="editproducts" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
                               str += '<a href="javascript:;" class="disableproducts" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
