@@ -66,9 +66,8 @@
                           </button>
                         </div>
                         <?php foreach($stockmovement as $k => $value) :  ?>
-
                             <input type="hidden" class="form-control" name="stockmovement_id" value="<?php echo $value['stockmovement_code']?>">
-                      <?php  endforeach; ?>
+                        <?php  endforeach; ?>
                         <div class="modal-body">
                           <div class="form-horizontal">
                               <div class="form-group row m-b-10">
@@ -84,28 +83,44 @@
                             </div>
                           </div>
                           <div class="form-horizontal">
-                              <div class="form-group row m-b-10">
+                            <div class="form-group row m-b-10">
                               <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Type: <span class="text-red">*</span></label>
+                                  <div class="col-lg-8 col-md-12">
+                                      <div class="input-group m-b-0">
+                                            <select class="form-control" id="so_type" class="so_type" name="so_type" >
+                                                <option value="" selected hidden>Select Type</option>
+                                                <option value="1">Stock Out</option>
+                                                <option value="2">Stock Transfer</option>
+                                            </select>
+                                      <span class="err"></span>
+                                      </div>
+                                  </div>
+                            </div>
+                          </div>
+                          <div class="form-horizontal from_warehouse" style="display:none">
+                              <div class="form-group row m-b-10">
+                              <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">From Warehouse: <span class="text-red">*</span></label>
                               <div class="col-lg-8 col-md-12">
                                   <div class="input-group m-b-0">
-                                      <select class="form-control" id="so_type" class="so_type" name="so_type" >
-                                        <option value="" selected hidden>Select Type</option>
-                                        <option value="1">Stock Out</option>
-                                        <option value="2">Stock Transfer</option>
+                                      <select class="form-control" id="from_warehouse" class="from_warehouse" name="from_warehouse" >
+                                        <option value="" selected hidden>Select From Warehouse</option>
+                                      <?php foreach($from_warehouse as $k => $value) : ?>
+                                          <option class="from_warehouse_opt" value="<?php echo $value['warehouse_id'] ?>"><?php echo $value['wh_name'] ?></option>
+                                    <?php  endforeach; ?>
                                   </select>
-                                  <span class="err"></span>
+                                      <span class="err"></span>
                                   </div>
                               </div>
                             </div>
                           </div>
-                          <div class="form-horizontal warehouse" style="display:none">
+                          <div class="form-horizontal to_warehouse" style="display:none">
                               <div class="form-group row m-b-10">
-                              <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Warehouse: <span class="text-red">*</span></label>
+                              <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Transfer to Warehouse: <span class="text-red">*</span></label>
                               <div class="col-lg-8 col-md-12">
                                   <div class="input-group m-b-0">
                                       <select class="form-control" class="warehouse" name="warehouse" >
-                                        <option value="" selected hidden>Select Warehouse</option>
-                                      <?php foreach($warehouse as $k => $value) : ?>
+                                        <option value="" selected hidden>Select To Warehouse</option>
+                                      <?php foreach($to_warehouse as $k => $value) : ?>
                                           <option value="<?php echo $value['id'] ?>"><?php echo $value['wh_name'] ?></option>
                                     <?php  endforeach; ?>
                                   </select>
@@ -130,7 +145,7 @@
                           <hr>
 
 
-                          <div class="table-responsive view_purchase_orders_details">
+                          <div class="table-responsive view_purchase_orders_details" id="stock_movement">
                                 <table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_new_product">
                                   <thead>
                                       <th class="header-title purch">SKU <span class="required">*</span></th>
@@ -152,17 +167,14 @@
                                                 }
                                             ?>
                                           </select>
-                                          <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
                                           <span class="err"></span>
                                         </td>
                                         <td class="purch_td">
                                             <input type="text" class="form-control prod_name" name="prod_name[]" value="" readonly>
-                                          <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
                                           <span class="err"></span>
                                         </td>
                                         <td class="purch_td">
                                             <input type="text" class="form-control remaining_stocks" name="remaining_stocks[]" value="" readonly>
-                                          <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
                                           <span class="err"></span>
                                         </td>
                                         <td class="purch_td">
@@ -174,6 +186,52 @@
                                   </tbody>
                                 </table>
                           </div>
+                          <!--when stock movement type is stock transfer -->
+                          <div class="table-responsive view_purchase_orders_details" id="stock_transfer_movement" style="display:none">
+                                <table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_new_product">
+                                  <thead>
+                                      <th class="header-title purch">SKU <span class="required">*</span></th>
+                                      <th class="header-title purch">Product <span class="required">*</span></th>
+                                      <th class="header-title purch">Remaining Stocks <span class="required">*</span></th>
+                                      <th class="header-title purch">Quantity <span class="required">*</span></th>
+
+
+                                  </thead>
+                                  <tbody>
+
+                                      <tr>
+                                        <!-- <td class="purch_td">
+                                            <input type="hidden" class="stock_id_prod" name="stock_id_prod" value="">
+                                        </td> -->
+                                        <td class="purch_td" >
+                                          <select class="form-control stock_prod_code select2" id="wh_stock_code" style="width: 100%;" name="wh_prod_code[]">
+                                            <option value="">Select SKU</option>
+                                            <?php
+                                                foreach($products as $key => $value){
+                                                    echo '<option value="'.$value['product'].'">'.$value['code'].'</option>';
+                                                }
+                                            ?>
+                                          </select>
+                                          <span class="err"></span>
+                                        </td>
+                                        <td class="purch_td">
+                                            <input type="text" class="form-control prod_name" name="prod_name[]" value="" readonly>
+                                          <span class="err"></span>
+                                        </td>
+                                        <td class="purch_td">
+                                            <input type="text" class="form-control remaining_stocks" name="remaining_stocks[]" value="" readonly>
+                                          <span class="err"></span>
+                                        </td>
+                                        <td class="purch_td">
+                                          <input type="text" class="form-control purchase_quantity sm_quantity number_only" name="quantity[]" value="">
+                                          <span class="err"></span>
+                                        </td>
+                                      </tr>
+
+                                  </tbody>
+                                </table>
+                          </div>
+                          <!--end -->
                           <span class="btn btn-sm btn-primary" id="addNewSO"><i class="fa fa-plus"></i> Add Product</span>
                         <br>
                           <hr>
