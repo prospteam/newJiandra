@@ -31,8 +31,39 @@ $(document).on('submit','form#addproducts',function(e){
             $(".products_tbl").DataTable().ajax.reload();
       }
   });
+  alert(1);
 });
 // END ADD PRODUCTS
+
+// ADD COST PRICE
+// $(document).on('submit', 'form#add_costPrice',function(e){
+//     alert(2);
+//     e.preventdefault();
+//     let formData = $(this).serialize();
+//
+//     $.ajax({
+//         method: 'POST',
+//         url: base_url('products/add_cost_price'),
+//         data: formDate,
+//         success: function(response){
+//             let data = JSON.parse(response);
+//             console.log(data);
+//             if (data.form_error) {
+//                 clearError();
+//                 let keyNames = Object.keys(data.form.error);
+//                 $(keyNames).each(function(index,value){
+//                     $("input[name=''"+value+"]").next('.err').text(data.form_error[value]);
+//                 });
+//             }else if (data.error) {
+//                 Swal.fire("Error", data.error, "ërror");
+//             }else {
+//                 Swal.fire("Successfully added cost price", data.success, "success" );
+//             }
+//             $(".cost_price_tbl").DataTable().ajax.reload();
+//         }
+//     });
+// });
+// END ADD COST PRICE
 
 // view all products
     $(document).on("click",".viewproducts",function(){
@@ -91,30 +122,42 @@ $(document).on("click",".editproducts", function(){
       var id = $(this).attr("data-id");
      $('#disp_cost_price').modal('show')
 
-      $.ajax({
-         methos: 'POST',
-         url: base_url+'products/add_costprice',
-         data:{id:id},
-         dataType: "json",
-         success: function(data){
-         }
-      });
+      // $.ajax({
+      //    methos: 'POST',
+      //    url: base_url+'products/add_costprice',
+      //    data:{id:id},
+      //    dataType: "json",
+      //    success: function(data){
+      //    }
+      // });
 
    });
 //end diplay cost price
 // add cost price
 $(document).on("click",".add_new_cost_btn", function(){
-
    var id = $(this).attr("data-id");
    $('#add_cost_price').modal('show')
 
    $.ajax({
-      methos: 'POST',
-      url: base_url+'products/add_costprice',
-      data:{id:id},
-      dataType: "json",
-      success: function(data){
-      }
+       method: 'POST',
+       url: base_url('products/addproducts'),
+       data: formDate,
+       success: function(response){
+           let data = JSON.parse(response);
+           console.log(data);
+           if (data.form_error) {
+               clearError();
+               let keyNames = Object.keys(data.form.error);
+               $(keyNames).each(function(index,value){
+                   $("input[name=''"+value+"]").next('.err').text(data.form_error[value]);
+               });
+           }else if (data.error) {
+               Swal.fire("Error", data.error, "ërror");
+           }else {
+               Swal.fire("Successfully added cost price", data.success, "success" );
+           }
+           $(".cost_price_tbl").DataTable().ajax.reload();
+       }
    });
 
 });

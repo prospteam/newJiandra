@@ -189,7 +189,7 @@
                                 </div>
                         </form>
                     </div>
-                </div>
+                </div> 
                 <!-- End Add user Modal -->
 
                 <!--View User Modal -->

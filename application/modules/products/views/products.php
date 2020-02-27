@@ -124,7 +124,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header bg-info1">
                                         <h5 class="modal-title" id="exampleModalLabel"> Cost Price</h5>
-                                        <input type="hidden" class="form-control editproducts_id" name="editproducts_id"  value="">
+                                        <input type="hidden" class="form-control cost_price_id" name="cost_price_id"  value="">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -136,12 +136,12 @@
                                         </div>
                                     <div class="table-responsive view_purchase_orders_details">
                                         <div class="modal_header_margin">
-                                            <input type="hidden" class="form-control" name="editproducts_id" value="">
+                                            <input type="hidden" class="form-control" name="cost_price_id" value="">
                                         </div>
                                         <button type="button" class="cost cost_btn add_new_cost_btn float-sm-right" data-toggle="modal" data-target="#add_cost">
                                             <i class="fas fa-plus-circle" aria-hidden="true"></i> Add New
                                         </button>
-                                        <table class="table table-bordered table-striped purchase" role="grid"
+                                        <table class="table table-bordered table-striped purchase cost_price_tbl" role="grid"
                                             aria-describedby="example1_info" id="add_new_product">
                                             <thead>
                                                 <th class="header-title purch">Cost Price  </th>
@@ -151,7 +151,7 @@
                                                 </th>
                                             </thead>
                                             <tbody>
-                                                <tr>
+                                                <!-- <tr>
                                                     <td class="purch_td">
                                                         <input type="text" class="form-control price_cost" name="cost_price[]" value="" readonly>
                                                         <span class="err"></span>
@@ -168,7 +168,7 @@
                                                         <a href="javascript:;" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
                                                         <a href="javascript:;" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
                                                     </td>
-                                                </tr>
+                                                </tr> -->
                                             </tbody>
 
                                         </table>
@@ -198,14 +198,14 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="cost">Cost: <span class="required">*</span></label>
-                                                        <input type="text" class="form-control" name="cost" value="">
+                                                        <input type="text" class="form-control" name="cost_price" value="">
                                                         <span class="err"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label for="sell">Sell: <span  class="required">*</span></label>
-                                                        <input type="text" class="form-control" name="sell" value="">
+                                                        <input type="text" class="form-control" name="sell_price" value="">
                                                         <span class="err"></span>
                                                     </div>
                                                 </div>

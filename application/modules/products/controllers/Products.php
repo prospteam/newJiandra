@@ -20,7 +20,6 @@ class Products extends MY_Controller {
   public function addproducts()
   {
     $this->load->library("form_validation");
-
     $this->form_validation->set_rules('code','Code','required');
     $this->form_validation->set_rules('product_name','Name','required');
     $this->form_validation->set_rules('brand','Brand','required');
@@ -28,8 +27,13 @@ class Products extends MY_Controller {
     $this->form_validation->set_rules('variant','Variant','required');
     $this->form_validation->set_rules('volume','Volume','required');
     $this->form_validation->set_rules('unit','Unit','required');
-		$this->form_validation->set_rules('description','Description','required');
-		$error = array();
+	$this->form_validation->set_rules('description','Description','required');
+	// $this->form_validate->set_rules('cost_price','Cost Price','required');
+	// $this->form_validation->set_rules('sell_price','Selling Price','required');
+	// $error = array();
+	// echo "<pre>";
+	// print_r($this->input->post('cost_price') );
+	// exit;
 
     if ($this->form_validation->run() !== FALSE) {
       $data = array(
@@ -40,7 +44,9 @@ class Products extends MY_Controller {
         'variant' => $this->input->post('variant'),
         'volume'=> $this->input->post('volume'),
         'unit'=> $this->input->post('unit'),
-				'description' => $this->input->post('description'),
+		'description' => $this->input->post('description'),
+		// 'cost_price'  => $this->input->post('cost_price'),
+		// 'sell_price'  => $this->input->post('sell_price'),
         'status' => 1
       );
 
@@ -48,13 +54,40 @@ class Products extends MY_Controller {
           if ($insert) {
               $response = array(
                 'status'=>'ok'
-              );
+			);
             }
         }   else {
           $response = array('form_error'=> array_merge($this->form_validation->error_array(),$error) );
         }
         echo json_encode($response);
   }
+
+	public function add_cost_price(){
+
+		$this->load->library("form_validation");
+
+		$this->form_validate->set_rules('cost_price','Cost Price','required');
+		$this->form_validation->set_rules('sell_price','Selling Price','required');
+		// echo "<pre>";
+		//  print_r($data);
+		//  exit;
+		if ($this->form_validation->run() ==! FALSE) {
+			$data =  array(
+				'cost_price'  => $this->input->post('cost_price'),
+				'sell_price'  => $this->input->post('sell_price')
+			);
+		}
+
+		$insert = $this->MY_Model->update('products',$data);
+		if ($insert) {
+			$response = array(
+				'status' =>'ok'
+			);
+		}else {
+			$response = array('form_error' => array_merge($this->form_validation->error_array(),$error) );
+		}
+		echo json_encode($response);
+	}
 
 
 	 function display_products(){
