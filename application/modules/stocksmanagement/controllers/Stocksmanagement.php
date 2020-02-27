@@ -21,7 +21,7 @@ class Stocksmanagement extends MY_Controller {
 
 		// get all products
 		$parameters['group']	= array('stocks.warehouse_id');
-		$param['select'] 		= '*';
+		$param['select'] 		= 'product,stock_id,physical_count,warehouse_id,code';
 		$data['products'] 		= $this->MY_Model->getRows('stocks', $param);
 		// $param['select'] = '*';
 		// $data['products'] = $this->MY_Model->getRows('products', $parameters);
@@ -125,11 +125,13 @@ class Stocksmanagement extends MY_Controller {
 	}
 
 	public function get_productName_by_code(){
-		$parameters['where'] = array('id' => $this->input->post('prod_id'));
-		$data['products'] = $this->MY_Model->getRows('products',$parameters);
-
-		$param['where'] = array('product' => $this->input->post('prod_id'));
-		$data['physical_count'] = $this->MY_Model->getRows('stocks',$param);
+		// echo "<pre>";
+		// print_r($this->input->post());
+		// exit;
+		$param['where'] 		= array('s.stock_id' => $this->input->post('stock_id'));
+		$param['join']			= array('products as p' => 'p.id = s.product');
+		$param['select']		= "p.product_name, p.code, s.stock_id, s.product, s.physical_count, s.warehouse_id";
+		$data['physical_count'] = $this->MY_Model->getRows('stocks as s',$param);
 
 		json($data);
 	}
@@ -148,6 +150,9 @@ class Stocksmanagement extends MY_Controller {
 
 	public function addStockMovement(){
 		$post = $this->input->post();
+		// echo "<pre>";
+		// print_r($post);
+		// exit;
 		$id = $this->input->post('stockmovement_id');
 		$stockmovement_id = $id + 1;
 		$code = sprintf('%04d',$stockmovement_id);
@@ -157,7 +162,7 @@ class Stocksmanagement extends MY_Controller {
 		$this->form_validation->set_rules('sodate', 'Date', 'required');
 		$this->form_validation->set_rules('so_type', 'Type', 'required');
 		$this->form_validation->set_rules('so_datedelivered', 'Date Delivered', 'required');
-		$this->form_validation->set_rules('prod_code[]', 'code', 'required');
+		$this->form_validation->set_rules('wh_prod_code[]', 'code', 'required');
 		$this->form_validation->set_rules('prod_name[]', 'Product Name', 'required');
 		$this->form_validation->set_rules('quantity[]', 'Quantity', 'required');
 
@@ -169,23 +174,26 @@ class Stocksmanagement extends MY_Controller {
 			$warehouse = NULL;
 		}
 
-		foreach($post['prod_code'] as $pkey => $pVal){
-			$params['where'] = array('product' => $pVal);
-			$params['select'] = 'physical_count, product';
-			$data_prod_qty = $this->MY_Model->getRows('stocks',$params);
+		foreach($post['stock_id'] as $sKey => $sVal){
+			$parameters['where'] = array('stock_id' => $sVal);
+			$parameters['select'] = 'physical_count, product';
+			$data_prod_qty = $this->MY_Model->getRows('stocks',$parameters);
 			$errormsg = false;
 
-			foreach($data_prod_qty as $pkey => $pVal){
-				if($post['quantity'][$pkey] > $pVal['physical_count'] ){
+			foreach($data_prod_qty as $sKey => $sVal){
+				if($post['quantity'][$sKey] > $sVal['physical_count'] ){
 					$errormsg= true;
 				}
 			}
 		}
-
+		// echo "<pre>";
+		// print_r($errormsg);
+		// exit;
 		if(!empty($errormsg)){
 			$response = $errormsg;
 		}else{
-			foreach($post['prod_code'] as $pkey => $pVal){
+			//adds to stock movement
+			foreach($post['wh_prod_code'] as $pkey => $pVal){
 				$params['select'] = 'product, quantity';
 				$data_prod['qty'] = $this->MY_Model->getRows('purchase_orders', $params);
 				$qty = $post['quantity'][$pkey];
@@ -223,8 +231,12 @@ class Stocksmanagement extends MY_Controller {
 	//deduct system count and physical after submitting stock out and stock transfer
 	public function update_qty(){
 		$post = $this->input->post();
-		foreach($post['prod_code'] as $pkey => $pVal){
-			$param['where'] = array('po.product' => $pVal, 'po.delivered !=' => 0);
+		// echo "<pre>";
+		// print_r($post);
+		// exit;
+		foreach($post['wh_prod_code'] as $pkey => $pVal){
+
+			$param['where'] = array('po.product' => $pVal, 'po.delivered !=' => 0, 'po.warehouse_id' => $post['from_warehouse'][$pkey]);
 			$param['limit'] = array(1,0);
 			$param['order'] = 'po.date_ordered DESC';
 			$param['join'] = array('products as p' => 'p.id = po.product:left', 'stocks as s' => 's.product = po.product:left', 'warehouse_management as w' => 'w.id = po.warehouse_id:left');
@@ -234,10 +246,11 @@ class Stocksmanagement extends MY_Controller {
 			foreach($datas as $key => $val){
 
 				$total_remaining_purch = $val['delivered'] - $post['quantity'][$pkey];
+
 			}
+	
 
 			$total_remaining = $post['remaining_stocks'][$pkey] - $post['quantity'][$pkey];
-
 			//minus physical count
 			$data = array(
 				'physical_count' => $total_remaining
@@ -250,9 +263,9 @@ class Stocksmanagement extends MY_Controller {
 
 			$parameters['order'] = 'date_delivered DESC';
 			$parameters['limit'] = array(1,0);
-			$update = $this->MY_Model->update_1('purchase_orders', $data1,array('product' => $pVal, 'delivered !=' => 0),$parameters );
+			$update = $this->MY_Model->update_1('purchase_orders', $data1,array('product' => $pVal, 'delivered !=' => 0, 'warehouse_id' => $post['from_warehouse'][$pkey]),$parameters );
 
-			$update = $this->MY_Model->update('stocks', $data, array('product' => $pVal), '', '');
+			$update = $this->MY_Model->update('stocks', $data, array('stock_id' => $post['stock_id'][$pkey]), '', '');
 			if ($update) {
 				$response = array(
 					'status' => 'ok'

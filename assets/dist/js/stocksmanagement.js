@@ -6,14 +6,17 @@ $(document).ready(function(){
     if($(this).val() == "2"){
       $('.to_warehouse').css('display', 'block');
       $('.from_warehouse').css('display', 'block');
-      $('div#stock_transfer_movement').css('display', 'block');
-      $('div#stock_movement').css('display', 'none');
+      // $('div#stock_transfer_movement').css('display', 'block');
+      // $('.from_warehouse_so').css('display', 'none');
+      // $('div#stock_movement').css('display', 'none');
       $("#wh_stock_code").prop("disabled", true);
     }else{
-      $('.from_warehouse').css('display', 'none');
+    $("#wh_stock_code").prop("disabled", true);
+      // $('.from_warehouse_so').css('display', 'block');
+      $('.from_warehouse').css('display', 'block');
       $('.to_warehouse').css('display', 'none');
-      $('div#stock_movement').css('display', 'block');
-      $('div#stock_transfer_movement').css('display', 'none');
+      // $('div#stock_movement').css('display', 'block');
+      // $('div#stock_transfer_movement').css('display', 'none');
     }
   });
 
@@ -219,19 +222,26 @@ $(document).on('click', '.generatereport', function(){
   });
 
   //autocomplete product name after choosing sku Code
-  $(document).on('change','.stock_prod_code',function(){
+  $(document).on('select2:select','.stock_prod_code',function(e){
+      var data = e.params.data;
+     $(this).children('[value="'+data['id']+'"]').attr(
+        {
+         'data-value':data["data-value"], //dynamic value from data array
+         'key':'val', // fixed value
+        }
+     );
+     var stock_id = $(this).find(':selected').attr('data-value');
     $.ajax({
         url: base_url+'stocksmanagement/get_productName_by_code',
-        data: {prod_id:$(this).val()},
+        data: {prod_id:$(this).val(), stock_id:stock_id},
         type: 'post',
         dataType: 'json',
         success: function(data){
             console.log(data);
-                $.each(data.products,function(index,element){
-                      $('.prod_name').val(element.product_name);
-                });
                 $.each(data.physical_count,function(index,element){
-                      $('.remaining_stocks').val(element.physical_count);
+                    $('.stock_id').val(element.stock_id);
+                    $('.prod_name').val(element.product_name);
+                    $('.remaining_stocks').val(element.physical_count);
                 });
 
         }
@@ -272,12 +282,13 @@ $(document).on('click', '.generatereport', function(){
             dataType: "json",
             data:{from_warehouse_id:from_warehouse_id},
             processResults: function (data) {
-
+                console.log(data.wh_product);
                 return {
                     results: $.map(data.wh_product, function (item) {
                         return {
                             text: item.code,
-                            id: item.id
+                            id: item.product,
+                            'data-value': item.stock_id
                         }
                     })
                 };
@@ -286,6 +297,11 @@ $(document).on('click', '.generatereport', function(){
     });
   });
 
+  //show products when type is stock out
+    $('select[name="prod_code[]"]').select2({
+        maximumSelectionSize: 1,
+        placeholder: "Select SKU"
+    });
 
   //add multiple product in add stock movement
   $(document).on('click', '#addNewSO', function(){

@@ -97,6 +97,7 @@
                                   </div>
                             </div>
                           </div>
+
                           <div class="form-horizontal from_warehouse" style="display:none">
                               <div class="form-group row m-b-10">
                               <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">From Warehouse: <span class="text-red">*</span></label>
@@ -145,49 +146,9 @@
                           <hr>
 
 
-                          <div class="table-responsive view_purchase_orders_details" id="stock_movement">
-                                <table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_new_product">
-                                  <thead>
-                                      <th class="header-title purch">SKU <span class="required">*</span></th>
-                                      <th class="header-title purch">Product <span class="required">*</span></th>
-                                      <th class="header-title purch">Remaining Stocks <span class="required">*</span></th>
-                                      <th class="header-title purch">Quantity <span class="required">*</span></th>
 
-
-                                  </thead>
-                                  <tbody>
-
-                                      <tr>
-                                        <td class="purch_td">
-                                          <select class="form-control stock_prod_code select2" style="width: 100%;" name="prod_code[]">
-                                            <option value="">Select SKU</option>
-                                            <?php
-                                                foreach($products as $key => $value){
-                                                    echo '<option value="'.$value['product'].'">'.$value['code'].'</option>';
-                                                }
-                                            ?>
-                                          </select>
-                                          <span class="err"></span>
-                                        </td>
-                                        <td class="purch_td">
-                                            <input type="text" class="form-control prod_name" name="prod_name[]" value="" readonly>
-                                          <span class="err"></span>
-                                        </td>
-                                        <td class="purch_td">
-                                            <input type="text" class="form-control remaining_stocks" name="remaining_stocks[]" value="" readonly>
-                                          <span class="err"></span>
-                                        </td>
-                                        <td class="purch_td">
-                                          <input type="text" class="form-control purchase_quantity sm_quantity number_only" name="quantity[]" value="">
-                                          <span class="err"></span>
-                                        </td>
-                                      </tr>
-
-                                  </tbody>
-                                </table>
-                          </div>
                           <!--when stock movement type is stock transfer -->
-                          <div class="table-responsive view_purchase_orders_details" id="stock_transfer_movement" style="display:none">
+                          <div class="table-responsive view_purchase_orders_details" id="stock_transfer_movement">
                                 <table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_new_product">
                                   <thead>
                                       <th class="header-title purch">SKU <span class="required">*</span></th>
@@ -200,18 +161,20 @@
                                   <tbody>
 
                                       <tr>
-                                        <!-- <td class="purch_td">
-                                            <input type="hidden" class="stock_id_prod" name="stock_id_prod" value="">
-                                        </td> -->
                                         <td class="purch_td" >
-                                          <select class="form-control stock_prod_code select2" id="wh_stock_code" style="width: 100%;" name="wh_prod_code[]">
-                                            <option value="">Select SKU</option>
+                                          <select class="form-control stock_prod_code select2" id="wh_stock_code" style="width: 100%;" name="wh_prod_code[]" disabled>
+                                            <!-- <option value="">Select SKU</option> -->
                                             <?php
-                                                foreach($products as $key => $value){
-                                                    echo '<option value="'.$value['product'].'">'.$value['code'].'</option>';
-                                                }
+                                                // foreach($products as $key => $value){
+                                                //     echo '<option value="'.$value['product'].'" data-stock="'.$value['stock_id'].'">'.$value['code'].'</option>';
+                                                // }
+
                                             ?>
                                           </select>
+                                          <span class="err"></span>
+                                        </td>
+                                        <td class="purch_td" style="display:none">
+                                            <input type="text" class="form-control stock_id" name="stock_id[]" value="" readonly>
                                           <span class="err"></span>
                                         </td>
                                         <td class="purch_td">
