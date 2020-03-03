@@ -163,7 +163,7 @@
                                       <tr>
                                         <td class="purch_td" >
                                           <select class="form-control stock_prod_code select2" id="wh_stock_code" style="width: 100%;" name="wh_prod_code[]" disabled>
-                                            <!-- <option value="">Select SKU</option> -->
+                                            <option value="" disabled selected hidden>Select SKU</option>
                                             <?php
                                                 // foreach($products as $key => $value){
                                                 //     echo '<option value="'.$value['product'].'" data-stock="'.$value['stock_id'].'">'.$value['code'].'</option>';

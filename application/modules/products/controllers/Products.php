@@ -19,23 +19,26 @@ class Products extends MY_Controller {
 
   public function addproducts()
   {
-    $this->load->library("form_validation");
-    $this->form_validation->set_rules('code','Code','required');
-    $this->form_validation->set_rules('product_name','Name','required');
-    $this->form_validation->set_rules('brand','Brand','required');
-    $this->form_validation->set_rules('category','Category','required');
-    $this->form_validation->set_rules('variant','Variant','required');
-    $this->form_validation->set_rules('volume','Volume','required');
-    $this->form_validation->set_rules('unit','Unit','required');
-	$this->form_validation->set_rules('description','Description','required');
-	// $this->form_validate->set_rules('cost_price','Cost Price','required');
-	// $this->form_validation->set_rules('sell_price','Selling Price','required');
-	// $error = array();
-	// echo "<pre>";
-	// print_r($this->input->post('cost_price') );
-	// exit;
+    // $this->load->library("form_validation");
+    // $this->form_validation->set_rules('code','Code','required');
+    // $this->form_validation->set_rules('product_name','Name','required');
+    // $this->form_validation->set_rules('brand','Brand','required');
+    // $this->form_validation->set_rules('category','Category','required');
+    // $this->form_validation->set_rules('variant','Variant','required');
+    // $this->form_validation->set_rules('volume','Volume','required');
+    // $this->form_validation->set_rules('unit','Unit','required');
+	// $this->form_validation->set_rules('description','Description','required');
+	// // $this->form_validate->set_rules('cost_price','Cost Price','required');
+	// // $this->form_validation->set_rules('sell_price','Selling Price','required');
+	// // $error = array();
+	// // echo "<pre>";
+	// // print_r($this->input->post('cost_price') );
+	// // exit;
+	//
+    // if ($this->form_validation->run() !== FALSE) {
 
-    if ($this->form_validation->run() !== FALSE) {
+
+	$this->validate_fields();
       $data = array(
         'code' => $this->input->post('code'),
         'product_name' => $this->input->post('product_name'),
@@ -50,47 +53,49 @@ class Products extends MY_Controller {
         'status' => 1
       );
 
-        $insert = $this->MY_Model->insert('products',$data);
-          if ($insert) {
-              $response = array(
-                'status'=>'ok'
-			);
-            }
-        }   else {
-          $response = array('form_error'=> array_merge($this->form_validation->error_array(),$error) );
-        }
-        echo json_encode($response);
+	        $insert = $this->MY_Model->insert('products',$data);
+	          if ($insert) {
+	                 echo json_encode( array('status'=>true));
+			}
+        // }  else {
+        //   // $response = array('form_error'=> array_merge($this->form_validation->error_array(),$error) );
+		//       echo json_encode( array('status'=>false));
+        // }
+
   }
 
-	public function add_cost_price(){
+	  public function add_cost_price(){
 
-		$this->load->library("form_validation");
-
-		$this->form_validate->set_rules('cost_price','Cost Price','required');
-		$this->form_validation->set_rules('sell_price','Selling Price','required');
-		// echo "<pre>";
-		//  print_r($data);
-		//  exit;
-		if ($this->form_validation->run() ==! FALSE) {
-			$data =  array(
-				'cost_price'  => $this->input->post('cost_price'),
-				'sell_price'  => $this->input->post('sell_price')
+	  $this->load->library("form_validation");
+	  $this->form_validation->set_rules('cost_price','Cost Price','required');
+	  $this->form_validation->set_rules('sell_price','Selling Price', 'required');
+	  $this->form_validation->set_rules('effective_date','Effective Date', 'required');
+	  	// echo "<pre>";
+	  	//  print_r($this->input->post());
+	  	//  exit;
+	  	if ($this->form_validation->run() !== FALSE) {
+	  		$data = array(
+				'cost_price'  					=> $this->input->post('cost_price', 'Cost Price', 'required'),
+				'sell_price' 					=> $this->input->post('sell_price','Selling Price', 'required'),
+				'effective_date'				=> $this->input->post('effective_date','Effective Date', 'required'),
+				'fk_product_id'					=> $this->input->post('product_id')
+				// 'added_by'						=> $this->id
 			);
-		}
 
-		$insert = $this->MY_Model->update('products',$data);
-		if ($insert) {
-			$response = array(
-				'status' =>'ok'
-			);
-		}else {
-			$response = array('form_error' => array_merge($this->form_validation->error_array(),$error) );
-		}
+			$insert = $this->MY_Model->insert('products_cost_price', $data);
+			if ($insert) {
+				$response = array(
+					'status'  => 'ok',
+					'id' => $insert,
+				);
+			}
+	  	}else {
+	  		$response = array('form_error' => array_merge($this->form_validation->error_array(), $error) );
+	  	}
 		echo json_encode($response);
 	}
 
-
-	 function display_products(){
+    function display_products(){
 			$limit = $this->input->post('length');
 			$offset = $this->input->post('start');
 			$search = $this->input->post('search');
@@ -133,6 +138,25 @@ class Products extends MY_Controller {
 
 		}
 
+		public function view_cost_sell_price(){
+		$product_id = $this->input->post('id');
+		$data_array = array();
+
+		$parameters['select'] = '*';
+		$parameters['where'] = array('fk_product_id'=>$product_id);
+		$parameters['join']   = array('products' => 'products.id = products_cost_price.fk_product_id');
+
+		$data = $this->MY_Model->getrows('products_cost_price',$parameters);
+		// echo "<pre>";
+		//  print_r($data);
+		//  exit;
+
+		$data_array['cost_price'] = $data;
+		json($data_array);
+
+		}
+
+
 		public function edit_products(){
 
 				$products_id = $this->input->post('id');
@@ -143,9 +167,9 @@ class Products extends MY_Controller {
 				if (!empty($post)) {
 					$data = array(
 						'code'  	   				  => $post['code'],
-						'product_name'  	    => $post['product_name'],
+						'product_name'  	   		  => $post['product_name'],
 						'brand'  	   				  => $post['brand'],
-						'category'    			  => $post['category'],
+						'category'    				  => $post['category'],
 						'variant'    				  => $post['variant'],
 						'volume'    				  => $post['volume'],
 						'unit'       				  => $post['unit'],

@@ -118,20 +118,20 @@
                     </div>
                     <!-- End Add Products Modal -->
                     <!-- add cost Price -->
-                    <div class="modal fade" id="disp_cost_price" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLabel" aria-hidden="true">\
-                        <form id="disp_costPrice" method="post">
+                    <div class="modal fade" id="view_cost_price" tabindex="-1" role="dialog"  aria-labelledby="exampleModalLabel" aria-hidden="true">\
+                        <form id="view_costPrice" method="post">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header bg-info1">
                                         <h5 class="modal-title" id="exampleModalLabel"> Cost Price</h5>
-                                        <input type="hidden" class="form-control cost_price_id" name="cost_price_id"  value="">
+                                        <!-- <input type="" class="form-control cost_price_id" name="cost_price_id"  value=""> -->
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                         <div class="row">
                                             <div class="col-6">
-                                                <h1 class="disp_prod_name">#<span class="prod_name"></span> </h1> <br>
+                                                <h1 class="disp_prod_cost_name"><span class="prod_cost_name"></span> </h1> <br>
                                             </div>
                                         </div>
                                     <div class="table-responsive view_purchase_orders_details">
@@ -141,55 +141,52 @@
                                         <button type="button" class="cost cost_btn add_new_cost_btn float-sm-right" data-toggle="modal" data-target="#add_cost">
                                             <i class="fas fa-plus-circle" aria-hidden="true"></i> Add New
                                         </button>
-                                        <table class="table table-bordered table-striped purchase cost_price_tbl" role="grid"
-                                            aria-describedby="example1_info" id="add_new_product">
-                                            <thead>
-                                                <th class="header-title purch">Cost Price  </th>
-                                                <th class="header-title purch">Selling Price </th>
-                                                <th class="header-title purch">Date Updated</th>
-                                                <th class="header-title purch">Actions</th>
+                                        <div class="table-responsive purch_prod">
+                                            <table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="add_new_cost_price">
+                                                <thead>
+                                                    <th class="header-title purch_td">Cost Price  </th>
+                                                    <th class="header-title purch">Selling Price </th>
+                                                    <th class="header-title purch">Effective Date</th>
+                                                    <th class="header-title purch">Actions</th>
                                                 </th>
                                             </thead>
                                             <tbody>
-                                                <!-- <tr>
-                                                    <td class="purch_td">
-                                                        <input type="text" class="form-control price_cost" name="cost_price[]" value="" readonly>
-                                                        <span class="err"></span>
-                                                    </td>
-                                                    <td class="purch_td">
-                                                        <input type="text" class="form-control sell_price" name="selling_price[]" value="" readonly>
-                                                        <span class="err"></span>
-                                                    </td>
-                                                    <td class="purch_td">
-                                                        <input type="text" class="form-control date_up" name="date_updated[]" value="" readonly>
-                                                        <span class="err"></span>
-                                                    </td>
-                                                    <td class="purch_td">
-                                                        <a href="javascript:;" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
-                                                        <a href="javascript:;" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
-                                                    </td>
-                                                </tr> -->
+                                                <tr>
+                                                    <!-- <td class="purch_td">
+                                                    <span class="err"></span>
+                                                </td>
+                                                <td class="purch_td">
+                                                <span class="err"></span>
+                                            </td>
+                                            <td class="purch_td">
+                                            <span class="err"></span>
+                                        </td>
+                                        <td class="purch_td">
+                                        <a href="javascript:;" class="btn btn-xs btn-primary"><i class="fa fa-edit"></i></a>
+                                        <a href="javascript:;" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>
+                                                    </td> -->
+                                                </tr>
                                             </tbody>
-
                                         </table>
+                                        <div class="no_products_found">
+                                            <span>No Products Found....</span>
+                                        </div>
+                                        </div>
+                                    </div>
 
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary add">Submit</button>
-                                    </div>
                                 </div>
                             </div>
                         </form>
                     </div>
                     <!-- end add cost price -->
                     <!-- Add another cost price modal -->
-                    <div class="modal fade" id="add_cost_price"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
+                    <div class="modal fade" id="add_cost_price" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
                         <form id="add_costPrice" method="post">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header bg-info1">
                                         <h5 class="modal-title" id="exampleModalLabel">Add New Cost Price</h5>
-                                        <input type="hidden" class="form-control editproducts_id" name="editproducts_id"  value="">
+                                        <input type="hidden" class="form-control product_id" name="product_id"  value="">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -197,15 +194,30 @@
                                         <div class="modal-body">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="cost">Cost: <span class="required">*</span></label>
-                                                        <input type="text" class="form-control" name="cost_price" value="">
+                                                        <label for="cost_price">Cost: <span class="required">*</span></label>
+                                                        <input type="number" class="form-control" name="cost_price" value="">
                                                         <span class="err"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="sell">Sell: <span  class="required">*</span></label>
-                                                        <input type="text" class="form-control" name="sell_price" value="">
+                                                        <label for="sell_price">Sell: <span  class="required">*</span></label>
+                                                        <input type="number" class="form-control" name="sell_price" value="">
+                                                        <span class="err"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="effective_date">Effective Date<span  class="required">*</span></label>
+                                                        <div class="form-group">
+                                                            <div class="input-group m-b-0">
+                                                                <div class="input-group-prepend">
+                                                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                                                                </div>
+                                                                <!-- <input type="input" class="form-control datepicker" name="effective_date" value=""> -->
+                                                                <input type="type" class="form-control datepicker" name="effective_date" value="<?php echo date('F d, Y'); ?>">
+                                                            </div>
+                                                        </div>
                                                         <span class="err"></span>
                                                     </div>
                                                 </div>
@@ -300,8 +312,7 @@
                         <div class="modal-content">
                             <div class="modal-header bg-info1">
                                 <h5 class="modal-title" id="exampleModalLabel">Edit Products</h5>
-                                <input type="hidden" class="form-control editproducts_id" name="editproducts_id"
-                                    value="">
+                                <input type="hidden" class="form-control editproducts_id" name="editproducts_id" value="">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>

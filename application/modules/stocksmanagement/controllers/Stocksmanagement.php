@@ -248,7 +248,7 @@ class Stocksmanagement extends MY_Controller {
 				$total_remaining_purch = $val['delivered'] - $post['quantity'][$pkey];
 
 			}
-	
+
 
 			$total_remaining = $post['remaining_stocks'][$pkey] - $post['quantity'][$pkey];
 			//minus physical count
