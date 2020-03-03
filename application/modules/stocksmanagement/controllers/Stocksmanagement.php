@@ -148,6 +148,9 @@ class Stocksmanagement extends MY_Controller {
 
 	//get products by warehouse
 	public function get_products_by_warehouse(){
+		// echo "<pre>";
+		// print_r($this->input->post());
+		// exit;
 		$from_wh_id = $this->input->post('from_warehouse_id');
 
 		$param['where']		= array('s.warehouse_id' => $from_wh_id);
@@ -160,6 +163,9 @@ class Stocksmanagement extends MY_Controller {
 
 	public function addStockMovement(){
 		$post = $this->input->post();
+		// echo "<pre>";
+		// print_r($post);
+		// exit;
 		$id = $this->input->post('stockmovement_id');
 		$stockmovement_id = $id + 1;
 		$code = sprintf('%04d',$stockmovement_id);
@@ -222,7 +228,6 @@ class Stocksmanagement extends MY_Controller {
 						'transfer_status'		=> $transfer_status,
 						'status' 				=> 1
 					);
-
 					$insert = $this->MY_Model->insert('stock_movement', $data);
 					if ($insert) {
 						$response = array(
@@ -242,12 +247,9 @@ class Stocksmanagement extends MY_Controller {
 	//deduct system count and physical after submitting stock out and stock transfer
 	public function update_qty(){
 		$post = $this->input->post();
-		// echo "<pre>";
-		// print_r($post);
-		// exit;
-		foreach($post['wh_prod_code'] as $pkey => $pVal){
-
-			$param['where'] = array('po.product' => $pVal, 'po.delivered !=' => 0, 'po.warehouse_id' => $post['from_warehouse'][$pkey]);
+		
+		foreach($post['wh_prod_code'] as $pKey => $pVal){
+			$param['where'] = array('po.product' => $pVal, 'po.delivered !=' => 0, 'po.warehouse_id' => $post['from_warehouse']);
 			$param['limit'] = array(1,0);
 			$param['order'] = 'po.date_ordered DESC';
 			$param['join'] = array('products as p' => 'p.id = po.product:left', 'stocks as s' => 's.product = po.product:left', 'warehouse_management as w' => 'w.id = po.warehouse_id:left');
@@ -256,12 +258,11 @@ class Stocksmanagement extends MY_Controller {
 
 			foreach($datas as $key => $val){
 
-				$total_remaining_purch = $val['delivered'] - $post['quantity'][$pkey];
+				$total_remaining_purch = $val['delivered'] - $post['quantity'][$pKey];
 
 			}
 
-
-			$total_remaining = $post['remaining_stocks'][$pkey] - $post['quantity'][$pkey];
+			$total_remaining = $post['remaining_stocks'][$pKey] - $post['quantity'][$pKey];
 			//minus physical count
 			$data = array(
 				'physical_count' => $total_remaining
@@ -271,12 +272,11 @@ class Stocksmanagement extends MY_Controller {
 			$data1 = array(
 				'delivered' => $total_remaining_purch
 			);
-
 			$parameters['order'] = 'date_delivered DESC';
 			$parameters['limit'] = array(1,0);
-			$update = $this->MY_Model->update_1('purchase_orders', $data1,array('product' => $pVal, 'delivered !=' => 0, 'warehouse_id' => $post['from_warehouse'][$pkey]),$parameters );
+			$update = $this->MY_Model->update_1('purchase_orders', $data1,array('product' => $pVal, 'delivered !=' => 0, 'warehouse_id' => $post['from_warehouse']),$parameters );
 
-			$update = $this->MY_Model->update('stocks', $data, array('stock_id' => $post['stock_id'][$pkey]), '', '');
+			$update = $this->MY_Model->update('stocks', $data, array('stock_id' => $post['stock_id'][$pKey]), '', '');
 			if ($update) {
 				$response = array(
 					'status' => 'ok'
