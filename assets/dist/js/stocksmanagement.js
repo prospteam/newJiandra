@@ -3,20 +3,16 @@ $(document).ready(function(){
 
   //show warehouse when type is stock transfer
   $('#so_type').on('change', function(){
+      blankVal_onchange_stockType();
+
     if($(this).val() == "2"){
       $('.to_warehouse').css('display', 'block');
       $('.from_warehouse').css('display', 'block');
-      // $('div#stock_transfer_movement').css('display', 'block');
-      // $('.from_warehouse_so').css('display', 'none');
-      // $('div#stock_movement').css('display', 'none');
       $("#wh_stock_code").prop("disabled", true);
     }else{
     $("#wh_stock_code").prop("disabled", true);
-      // $('.from_warehouse_so').css('display', 'block');
       $('.from_warehouse').css('display', 'block');
       $('.to_warehouse').css('display', 'none');
-      // $('div#stock_movement').css('display', 'block');
-      // $('div#stock_transfer_movement').css('display', 'none');
     }
   });
 
@@ -268,10 +264,57 @@ $(document).on('click', '.generatereport', function(){
     });
   });
 
+  //autocomplete product name after choosing sku Code if MULTIPLE add new product
+  $(document).on('change','.multiple_prod_stock',function(){
+    let that = $(this);
+    $.ajax({
+        url: base_url+'stocksmanagement/get_productName_by_code',
+        data: {prod_id:$(this).val()},
+        type: 'post',
+        dataType: 'json',
+        success: function(data){
+            console.log(data);
+            console.log(that);
+                $.each(data.products,function(index,element){
+                      $(that).parent().next().find('.add_prod1').val(element.product_name);
+                });
+                $.each(data.physical_count,function(index,element){
+                      $(that).parent().next().next().find('.add_stocks_qty1').val(element.physical_count);
+                });
+
+        }
+    });
+  });
+
   //show products on the specific warehouse chosen
   $('#from_warehouse').on('change', function(){
     var from_warehouse_id = $(this).val();
+    get_productsSO(from_warehouse_id);
     $("#wh_stock_code").prop("disabled", false);
+    $('#to_warehouse').empty();
+    $('#StockMovement .multiple_prod_stock ').val('').trigger('change');
+    $('#StockMovement .stock_prod_code ').val('').trigger('change');
+    $('#StockMovement input[name="prod_name[]"]').val('');
+    $('#StockMovement input[name="remaining_stocks[]"]').val('');
+    $('#StockMovement input[name="quantity[]"]').val('');
+    $('#StockMovement input[name="total_quantity"]').val('');
+
+    //display all warehouse excluding the chosen from warehouse
+    $.ajax({
+      url: base_url + 'stocksmanagement/get_warehouse',
+      type:'post',
+      data: {from_warehouse_id:from_warehouse_id},
+      dataType:'json',
+      async:false,
+      success:function(data){
+        // console.log(data);
+        $('#to_warehouse').append('<option value="" name="from_warehouse" selected hidden>Select To Warehouse</option>');
+        $.each(data.warehouse,function(index,element){
+          $('#to_warehouse').append('<option value="'+element.id+'" name="from_warehouse">'+element.wh_name+'</option>');
+        });
+      }
+    });
+
     //select2 for choose products based on warehouse chosen
     $('select[name="wh_prod_code[]').select2({
         maximumSelectionSize: 1,
@@ -282,7 +325,7 @@ $(document).on('click', '.generatereport', function(){
             dataType: "json",
             data:{from_warehouse_id:from_warehouse_id},
             processResults: function (data) {
-                console.log(data.wh_product);
+                // console.log(data.wh_product);
                 return {
                     results: $.map(data.wh_product, function (item) {
                         return {
@@ -297,31 +340,26 @@ $(document).on('click', '.generatereport', function(){
     });
   });
 
-  //show products when type is stock out
-    $('select[name="prod_code[]"]').select2({
-        maximumSelectionSize: 1,
-        placeholder: "Select SKU"
-    });
 
   //add multiple product in add stock movement
   $(document).on('click', '#addNewSO', function(){
     var x = 1;
     var str = '';
 
-    str += '<tr class="add_purch">';
+    str += '<tr class="add_prod_stocks">';
       str += '<td class="purch_td">';
-           str += '<select class="form-control stock_add_code select2_add" style="width: 100%;" name="prod_code[]">';
+           str += '<select class="form-control multiple_prod_stock select2_add" id="multiple_prod_stock" style="width: 100%;" name="prod_code[]">';
               str += '<option value="" selected="true" disabled="disabled">Select SKU</option>';
               str += get_productsSO();
            str += '</select>';
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
-           str += '<input type="text" class="form-control add_prod" name="prod_name[]" value="" readonly>';
+           str += '<input type="text" class="form-control add_prod1" name="prod_name[]" value="" readonly>';
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
-           str += '<input type="text" class="form-control add_stocks_qty" name="remaining_stocks[]" value="" readonly>';
+           str += '<input type="text" class="form-control add_stocks_qty1" name="remaining_stocks[]" value="" readonly>';
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
@@ -346,37 +384,80 @@ $(document).on('click', '.generatereport', function(){
 
 });
 
-function get_productsSO(){
+
+function get_productsSO(from_warehouse_id = ''){
   // var id = $('.select2_edit').attr('data-id');
-  // alert(id);
-  var data_return = '';
-  $.ajax({
-    url: base_url + 'stocksmanagement/get_productsSO/',
-    type:'post',
-    dataType:'json',
-    async:false,
-    success:function(data){
-      console.log(data);
-      var str = '';
-      $.each(data.products,function(index,element){
-        str += '<option value="'+element.product+'">'+element.code+'</option>';
-      });
-      data_return = str;
-    }
+  $('select[name="prod_code[]').select2({
+      maximumSelectionSize: 1,
+      placeholder: "Select SKU",
+      ajax: {
+          url: base_url+'stocksmanagement/get_products_by_warehouse',
+          type: 'post',
+          dataType: "json",
+          data:{from_warehouse_id:from_warehouse_id},
+          processResults: function (data) {
+              // console.log(data.wh_product);
+              return {
+                  results: $.map(data.wh_product, function (item) {
+                      return {
+                          text: item.code,
+                          id: item.product,
+                          'data-value': item.stock_id
+                      }
+                  })
+              };
+          }
+      }
   });
-  return data_return;
+
+  // console.log(from_warehouse_id)
+  // var data_return = '';
+  // $.ajax({
+  //   url: base_url + 'stocksmanagement/get_products_by_warehouse/',
+  //   type:'post',
+  //   data: {from_warehouse_id:from_warehouse_id},
+  //   dataType:'json',
+  //   async:false,
+  //   success:function(data){
+  //     console.log(data);
+  //     var str = '';
+  //     $.each(data.wh_product,function(index,element){
+  //         str += $('#multiple_prod_stock').append('<option value="'+element.product+'">'+element.code+'</option>');
+  //       // str += '<option value="'+element.product+'">'+element.code+'</option>';
+  //     });
+  //     data_return = str;
+  //   }
+  // });
+  // return data_return;
 }
 
+//empty fields after changing stock movement type
+function blankVal_onchange_stockType(){
+    $('#StockMovement select[name="from_warehouse"]').val('');
+    $('#StockMovement select[name="to_warehouse"]').val('');
+    $('#StockMovement .stock_prod_code ').val('').trigger('change');
+    $('.err').text('');
+    $('#StockMovement .add_prod_stocks ').remove();
+    $('#StockMovement input[name="prod_name[]"]').val('');
+    $('#StockMovement input[name="remaining_stocks[]"]').val('');
+    $('#StockMovement input[name="quantity[]"]').val('');
+    $('#StockMovement input[name="total_quantity"]').val('');
+}
+
+//empty fields after submit in stock movement
 function blankVal_stock(){
   // $('#StockMovement input[name="sodate"]').val('');
   $('#StockMovement select[name="so_type"]').val('');
-  // $('#StockMovement input[name="so_datedelivered"]').val('');
+  $('#StockMovement select[name="from_warehouse"]').val('');
+  $('#StockMovement select[name="to_warehouse"]').val('');
   $('#StockMovement .stock_prod_code ').val('').trigger('change');
   $('.err').text('');
-  $('#StockMovement .add_purch ').remove();
+  $('#StockMovement .from_warehouse ').remove();
+  $('#StockMovement .to_warehouse ').remove();
+  $('#StockMovement .add_prod_stocks ').remove();
   $('#StockMovement input[name="prod_name[]"]').val('');
   $('#StockMovement input[name="remaining_stocks[]"]').val('');
   $('#StockMovement input[name="quantity[]"]').val('');
-  $('#StockMovement textarea[name="stockmovement_note"]').val('');
   $('#StockMovement input[name="total_quantity"]').val('');
+  $('#StockMovement textarea[name="stockmovement_note"]').val('');
 }

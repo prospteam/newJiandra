@@ -119,11 +119,11 @@
                               <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Transfer to Warehouse: <span class="text-red">*</span></label>
                               <div class="col-lg-8 col-md-12">
                                   <div class="input-group m-b-0">
-                                      <select class="form-control" class="warehouse" name="warehouse" >
+                                      <select class="form-control" class="warehouse" name="warehouse" id="to_warehouse">
                                         <option value="" selected hidden>Select To Warehouse</option>
-                                      <?php foreach($to_warehouse as $k => $value) : ?>
-                                          <option value="<?php echo $value['id'] ?>"><?php echo $value['wh_name'] ?></option>
-                                    <?php  endforeach; ?>
+                                      <?php //foreach($to_warehouse as $k => $value) : ?>
+                                          <!-- <option value="<?php //echo $value['id'] ?>"><?php //echo $value['wh_name'] ?></option> -->
+                                    <?php  //endforeach; ?>
                                   </select>
                                       <span class="err"></span>
                                   </div>
@@ -163,7 +163,7 @@
                                       <tr>
                                         <td class="purch_td" >
                                           <select class="form-control stock_prod_code select2" id="wh_stock_code" style="width: 100%;" name="wh_prod_code[]" disabled>
-                                            <!-- <option value="">Select SKU</option> -->
+                                            <option value="">Select SKU</option>
                                             <?php
                                                 // foreach($products as $key => $value){
                                                 //     echo '<option value="'.$value['product'].'" data-stock="'.$value['stock_id'].'">'.$value['code'].'</option>';
