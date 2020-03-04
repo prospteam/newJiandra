@@ -195,9 +195,9 @@ class Stocksmanagement extends MY_Controller {
 			$data_prod_qty = $this->MY_Model->getRows('stocks',$parameters);
 			$errormsg = false;
 
-			foreach($data_prod_qty as $sKey => $sVal){
+			foreach($data_prod_qty as $sqKey => $sVal){
 				if($post['quantity'][$sKey] > $sVal['physical_count'] ){
-					$errormsg= true;
+					$errormsg = true;
 				}
 			}
 		}
@@ -247,7 +247,7 @@ class Stocksmanagement extends MY_Controller {
 	//deduct system count and physical after submitting stock out and stock transfer
 	public function update_qty(){
 		$post = $this->input->post();
-		
+
 		foreach($post['wh_prod_code'] as $pKey => $pVal){
 			$param['where'] = array('po.product' => $pVal, 'po.delivered !=' => 0, 'po.warehouse_id' => $post['from_warehouse']);
 			$param['limit'] = array(1,0);

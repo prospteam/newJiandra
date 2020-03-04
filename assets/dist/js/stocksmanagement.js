@@ -369,7 +369,7 @@ $(document).on('click', '.generatereport', function(){
                str += '<span class="err"></span>';
           str += '</td>';
           str += '<td class="purch_td">';
-               str += '<input type="text" class="form-control purchase_quantity number_only" name="quantity[]" value="">';
+               str += '<input type="text" class="form-control purchase_quantity sm_quantity  number_only" name="quantity[]" value="">';
                str += '<span class="err"></span>';
           str += '</td>';
 
