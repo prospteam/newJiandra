@@ -23,24 +23,9 @@ $(document).ready(function () {
                 for (var i = 0; i < response.return.input_name.length; i++) {
                     console.log( response.return.input_name[i], response.return.input_error[i]);
                     $("input[name="+response.return.input_name[i]+"]").css('border-color', 'red');
+                    // $("select[name="+response.return.input_name[i]+"]").css('border-color', 'red');
                 }
           }
-            // let data = JSON.parse(response);
-            // console.log(data);
-            // if (data.form_error) {
-            //    clearError();
-            //    let keyNames = Object.keys(data.form_error);
-            //    $(keyNames).each(function (index, value) {
-            //       console.log(value);
-            //       $("input[name='" + value + "']").next('.err').text(data.form_error[value]);
-            //    });
-            // } else if (data.error) {
-            //    Swal.fire("Error", data.error, "error");
-            // } else {
-            //    blankVal_products();
-            //    // $('#AddProducts').modal('hide');
-            //    Swal.fire("Successfully added products!", data.success, "success");
-            // }
             $(".products_tbl").DataTable().ajax.reload();
          }
       });
@@ -50,7 +35,7 @@ $(document).ready(function () {
        e.preventDefault();
 
        var product_id = $('.add_new_cost_btn').attr('data-id');
-       // alert(product_id);
+
        var formData =  new FormData($(this)[0]);
         formData.append('product_id', product_id);
        $.ajax({
@@ -61,72 +46,18 @@ $(document).ready(function () {
           contentType: false,
           dataType: 'json',
           success: function (response) {
-
               console.log(response);
               if (response.status == 'ok') {
                   blankVal_products();
                   Swal.fire("Successfully added New Cost Price!",'Success', "success");
                   $('#add_cost_price').modal('hide');
-                  $('#add_new_cost_price tbody').html(str);
-
+                  $(`.costprice[data-id='${product_id}']`).trigger('click');
               }else {
                   console.log(response);
               }
           }
       });
    });
-
-
-
-   $(document).on("click", ".costprice", function () {
-      var id = $(this).attr("data-id");
-       $('.add_new_cost_btn').attr('data-id', id);
-      // product_id
-      $('#view_cost_price').modal('show')
-      var str = '';
-
-      $.ajax({
-         method: 'POST',
-         url: base_url + 'products/view_cost_sell_price',
-         data: { id: id },
-         dataType: "json",
-         success: function (data) {
-            console.log(data);
-
-
-                $.each(data.cost_price,function(index,element){
-                    if (data.cost_price.length == 0) {
-                        $('.no_products_found').show();
-                    }else {
-
-                    // $('.prod_cost_name').text(element.product_name);
-                    console.log(data);
-                    $('.no_products_found').hide();
-                    str += '<tr>';
-                        str+= '<td class= "purch_td">';
-                            str+='<span class="peso_sign" style="color:#9f8e8e;">₱</span>'+' '+element.cost_price;
-                        str+= '</td>';
-                        str+= '<td class="purch_td">';
-                            str+= '<span class="peso_sign" style="color:#9f8e8e;">₱</span>'+' '+element.sell_price;
-                        str+= '</td>';
-                        str+= '<td class="purch td">';
-                            str+= element.effective_date;
-                        str+= '</td>';
-                        str+= '<td class="purch_td">'
-                            str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_cost"><i class="fa fa-edit"></i></a>';
-                            str += '<a href="javascript:;" class="btn btn-xs btn-danger del_cost"><i class="fa fa-trash"></i></a>';
-                        str+= '</td>'
-                    str+= '</tr>';
-
-                    $('#add_new_cost_price tbody').html(str);
-                }
-                });
-         }
-
-     });
-     // alert(2);
-   });
-
    // view all products
    $(document).on("click", ".viewproducts", function () {
       var id = $(this).attr('data-id');
@@ -179,6 +110,77 @@ $(document).ready(function () {
 
    });
    // end edit Products
+   // Edit Cost Price
+       $(document).on('click', '.edit_cost', function() {
+           var id = $(this).attr('data-id');
+
+           $.ajax({
+               method: 'POST',
+               url: base_url+'products/edit_cost_price',
+               data: {id:id},
+               dataType: 'json',
+               success: function(data){
+                    console.log(data);
+                   $('#edit_cost_price').modal('show');
+                   $('#edit_cost_price .edit_cost_sell_price_id').val(data.products_cost_price.id);
+                   $('#edit_cost_price input[name="cost_price"]').val(data.products_cost_price.cost_price);
+                   $('#edit_cost_price input[name="sell_price"]').val(data.products_cost_price.sell_price);
+                   $('#edit_cost_price input[name="effective_date"]').val(data.products_cost_price.effective_date);
+               }
+           });
+       });
+   // END Edit Cost Price
+
+      $(document).on("click", ".costprice", function () {
+         var id = $(this).attr("data-id");
+          $('.add_new_cost_btn').attr('data-id', id);
+         // product_id
+         $('#view_cost_price').modal('show')
+         var str = '';
+         // alert(id);
+         $.ajax({
+            method: 'POST',
+            url: base_url + 'products/view_cost_sell_price',
+            data: { id: id },
+            dataType: "json",
+            success: function (data) {
+               console.log(data);
+                   $.each(data.cost_price,function(index,element){
+
+                          console.log(element);
+                       if (data.cost_price.length == 0) {
+                           $('.no_products_found').show();
+
+                       }else {
+                       $('.prod_cost_name').text(element.product_name);
+                       console.log(data);
+                       $('.no_products_found').hide();
+                       str += '<tr>';
+                           str+= '<td class= "purch_td">';
+                               str+='<span class="peso_sign" style="color:#9f8e8e;">₱</span>'+' '+element.cost_price;
+                           str+= '</td>';
+                           str+= '<td class="purch_td">';
+                               str+= '<span class="peso_sign" style="color:#9f8e8e;">₱</span>'+' '+element.sell_price;
+                           str+= '</td>';
+                           str+= '<td class="purch td">';
+                               str+= element.effective_date;
+                           str+= '</td>';
+                           str+= '<td class="purch_td">'
+                               str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_cost" data-id="'+ element.id +'"><i class="fa fa-edit"></i></a>';
+                               str += '<a href="javascript:;" class="btn btn-xs btn-danger delete_cost" data-id="'+element.id +'"><i class="fa fa-trash"></i></a>';
+                           str+= '</td>'
+                       str+= '</tr>';
+
+                   }
+                   $('#add_new_cost_price tbody').html(str);
+                   });
+            }
+
+        });
+        // alert(2);
+      });
+
+
 
    // add cost price
    $(document).on("click", ".add_new_cost_btn", function () {
@@ -187,7 +189,37 @@ $(document).ready(function () {
       console.log($(this).data());
       $('#add_cost_price').modal('show')
    });
+
    // end add cost price
+   $(document).on('submit', '#edit_costPrice', function(e){
+       e.preventDefault();
+
+       let formData = new FormData($(this)[0]);
+       var id = $('.edit_cost_sell_price_id').val();
+       formData.append("id", id);
+       $.ajax({
+           method: 'POST',
+           url: base_url+'products/edit_cost_sell_price',
+           data: formData,
+           processData: false,
+           contentType: false,
+           cache: false,
+           dataType: 'json',
+           success: function(data){
+
+               console.log(data);
+               if (data.status == 'ok') {
+                   $('#edit_cost_price').modal('hide');
+                   console.log(data.success);
+                   Swal.fire("Cost Price has been Updated!", data.success, 'success');
+                    // $(`.costprice[data-id='${product_id}']`).trigger('click');
+               }else {
+                   Swal.fire("Error!", data.status, 'invalid');
+               }
+               // $('#add_new_cost_price tbody').html(str);
+           }
+       })
+   });
 
    // successfully edit user
    $(document).on('submit', '#editProducts', function (e) {
@@ -205,6 +237,7 @@ $(document).ready(function () {
          cache: false,
          dataType: 'json',
          success: function (data) {
+             // console.log(formData);
             if (data.status == "ok") {
                $('#editProducts').modal('hide');
                console.log(data.success);
@@ -219,6 +252,37 @@ $(document).ready(function () {
 
 });
 // end successfully edit user
+    $(document).on("click", '.delete_cost', function(e){
+        e.preventDefault();
+        var id = $(this).attr('data-id');
+        // alert(id);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You want to permanently delete this Price!",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#068101',
+            confirmButtonText: 'Yes, Permanently Delete Price!',
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                   'Deleted!',
+                   'Successfully Deleted Product!',
+                   'success'
+                )
+                $.ajax({
+                   type: 'POST',
+                   url: base_url + 'products/delete_price',
+                   data: { id: id },
+                   success: function (data) {
+                      $(".add_new_cost_price_tbl").DataTable().ajax.reload();
+                   }
+                })
+            }
+        });
+
+    });
 
 // delete Products
 $(document).on("click", '.deleteproducts', function (e) {
@@ -325,25 +389,27 @@ $(document).on("click", ".enableproducts", function (e) {
 // DISPLAY Products
 
 var products_tbl = $('.products_tbl').DataTable({
+
    "processing": true,
    "serverside": true,
    "order": [[0, 'desc']],
    "columns": [
       { "data": "code" },
-      { "data": "product_name" },
-      { "data": "brand" },
-      { "data": "category" },
+      { "data": "supplier_name" },
+      // { "data": "brand" },
+      // { "data": "category" },
       // {"data":"variant"},
       // // {"data":"description"},
       // {"data":{'volume'}},
       {
-         "data": "volume", "render": function (data, type, row, meta) {
+         "data": "description", "render": function (data, type, row, meta) {
             var str = '';
-            str = row.volume + ' ' + row.unit;
+            str = row.volume +''+ row.unit + '/'+ row.packing +'/'+ row.brand +'/'+row.product_name;
             return str;
          }
       },
-      // {"data":"unit"},
+      // {"data":"unit"},;
+      // console.log(row);
       {
          "data": "action", "render": function (data, type, row, meta) {
             var str = '';
@@ -383,7 +449,7 @@ var products_tbl = $('.products_tbl').DataTable({
    //Set column definition initialisation properties.
    "columnDefs": [
       {
-         "targets": [5, 6], //first column / numbering column
+         "targets": [3, 4], //first column / numbering column
          "orderable": false, //set not orderable
 
       },
@@ -392,59 +458,59 @@ var products_tbl = $('.products_tbl').DataTable({
 // END DISPLAY PRODUCTS
 // End delete Products
 
-$('.js-example-basic-multiple-addproducts').select2({
-   placeholder: "Enter Value",
-   tags: [],
-   ajax: {
-      url: base_url + 'products/listofproducts_add',
-      dataType: "json",
-      type: "POST",
-      quietMillis: 50,
-      data: function (text) {
-         return {
-            searchfor: text,
-            search_type: $(this).attr('data-type')
-         };
-      }, processResults: function (data) {
+    $('.js-example-basic-multiple-addproducts').select2({
+       placeholder: "Enter Value",
+       tags: [],
+       ajax: {
+          url: base_url + 'products/listofproducts_add',
+          dataType: "json",
+          type: "POST",
+          quietMillis: 50,
+          data: function (text) {
+             return {
+                searchfor: text,
+                search_type: $(this).attr('data-type')
+             };
+          }, processResults: function (data) {
 
-         return {
-            results: $.map(data.items, function (item) {
-               return {
-                  text: item.product_name,
-                  id: item.product_id
-               }
-            })
-         };
-      }
-   }
-});
+             return {
+                results: $.map(data.items, function (item) {
+                   return {
+                      text: item.product_name,
+                      id: item.product_id
+                   }
+                })
+             };
+          }
+       }
+    });
 
-$('.js-example-basic-multiple-editproducts').select2({
-   placeholder: "Enter Value",
-   tags: [],
-   ajax: {
-      url: base_url + 'products/listofproducts_edit',
-      dataType: "json",
-      type: "POST",
-      quietMillis: 50,
-      data: function (text) {
-         return {
-            searchfor: text,
-            search_type: $(this).attr('data-type')
-         };
-      }, processResults: function (data) {
+    $('.js-example-basic-multiple-editproducts').select2({
+       placeholder: "Enter Value",
+       tags: [],
+       ajax: {
+          url: base_url + 'products/listofproducts_edit',
+          dataType: "json",
+          type: "POST",
+          quietMillis: 50,
+          data: function (text) {
+             return {
+                searchfor: text,
+                search_type: $(this).attr('data-type')
+             };
+          }, processResults: function (data) {
 
-         return {
-            results: $.map(data.items, function (item) {
-               return {
-                  text: item.product_name,
-                  id: item.product_id
-               }
-            })
-         };
-      }
-   }
-});
+             return {
+                results: $.map(data.items, function (item) {
+                   return {
+                      text: item.product_name,
+                      id: item.product_id
+                   }
+                })
+             };
+          }
+       }
+    });
 
 function clearError() {
    $('.err').text('');
@@ -456,6 +522,7 @@ function blankVal_products() {
    // $('#AddProducts input[name="brand"]').val('');
    // $('#AddProducts input[name="category"]').val('');
    $('#AddProducts input[name="variant"]').val('');
+   $('#AddProducts select[name="supplier"]').val('');
    $('#AddProducts input[name="volume"]').val('');
    // $('#AddProducts input[name="unit"]').val('');
    $('#AddProducts textarea[name="description"]').val('');
