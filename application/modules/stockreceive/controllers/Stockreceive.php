@@ -62,15 +62,59 @@ class Stockreceive extends MY_Controller {
 		json($data_array);
 	}
 
-    //change delivered actual qty on stock receive
-	public function change_actual_qty(){
+    //add actual qty received
+	public function add_actual_qty(){
 		$post = $this->input->post();
 
-		$data = array('actual_received' => $post['delivered']);
-		$data['actual_qty'] = $this->MY_Model->update('stock_movement', $data, array('stockmovement_id' => $post['id']));
+		foreach($post['sm_id'] as $key => $value){
+			$data = array(
+						'actual_received' => $post['actual_receive_qty'][$key],
+						'transfer_status' => 2
+					);
+			$update = $this->MY_Model->update('stock_movement', $data, array('stockmovement_id' => $value));
+			if ($update) {
+				$response = array(
+					'status' => 'ok'
+				);
+			}
+		}
 
-		json($data);
+		echo json_encode($response);
 
+	}
+
+	//decline transaction for transfer stocks
+	public function decline_transfer(){
+		$post = $this->input->post();
+
+		$param['where'] = array('stockmovement_code' => $post['id'], 'purchase_orders.status' => 4);
+		$param['group'] = array('purchase_orders.warehouse_id', 'purchase_orders.product');
+		$param['join'] = array('purchase_orders' => 'purchase_orders.product = stock_movement.product');
+		$param['select'] = "stock_movement.quantity, stock_movement.product, from_warehouse, purchase_orders.id";
+		$data1['prod_transfer'] = $this->MY_Model->getRows('stock_movement', $param);
+
+
+		echo "<pre>";
+		print_r($this->db->last_query());
+		exit;
+		foreach($post['Remarks'] as $key => $value){
+
+			$data = array(
+						'cancel_transfer_note' => $value,
+						'transfer_status' => 3
+					);
+			$update = $this->MY_Model->update('stock_movement', $data, array('stockmovement_code' => $post['id']));
+			if ($update) {
+				$response = array(
+					'status' => 'ok'
+				);
+			}
+		}
+		// echo "<pre>";
+		// print_r($response);
+		// exit;
+		json($data1);
+		echo json_encode($response);
 	}
 }
 ?>

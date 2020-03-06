@@ -206,6 +206,7 @@ $(document).ready(function(){
          console.log(data);
          $('#DeliveryStatus').modal('show');
          $('#change_deliveryStat select[name=delivery_status]').val(data.delivery.delivery_status);
+            $('input[name="warehouse_id"]').val(data.delivery.warehouse_id);
            $('input[name="purchase_code_delivery"]').val(data.delivery.purchase_code);
            $('input[name="product"]').val(data.delivery.product);
            $('input[name="code"]').val(data.delivery.code);
@@ -218,7 +219,9 @@ $(document).ready(function(){
     let formData =  new FormData($(this)[0]);
     var id = $('input[name="product"]').val();
     var code = $('input[name="code"]').val();
+    var warehouse_id = $('input[name="warehouse_id"]').val();
     // alert(id);
+    formData.append("warehouse_id",warehouse_id);
     formData.append("id",id);
     formData.append("code",code);
     $.ajax({

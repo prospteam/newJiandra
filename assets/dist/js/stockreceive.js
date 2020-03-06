@@ -41,7 +41,7 @@ $(document).ready(function(){
         //Set column definition initialisation properties.
         "columnDefs": [
              {
-                  "targets": [4,5,6], //first column / numbering column
+                  "targets": [5,6], //first column / numbering column
                   "orderable": false, //set not orderable
 
               },
@@ -137,5 +137,75 @@ $(document).ready(function(){
 
    });
 
+   //submit actual qty received
+   $(document).on('submit','form#add_transfer_qty',function(e){
+     e.preventDefault();
+     let formData =  new FormData($(this)[0]);
+     // var id = $('input[name="purchase_code_status"]').val();
+     // // alert(id);
+     // formData.append("id",id);
+     $.ajax({
+         method: 'POST',
+         url : base_url + 'stockreceive/add_actual_qty',
+         data : formData,
+         processData: false,
+        contentType: false,
+        cache: false,
+         dataType: 'json',
+         success : function(data) {
+             console.log(data);
+             $('#ViewStockReceive').modal('hide');
+             Swal.fire("Successfully Approved Transfer Stocks!",data.success, "success");
+             $(".stocksreceive_tbl").DataTable().ajax.reload();
+
+         }
+     })
+   });
+
+   //decline transfer stock transaction
+   $(document).on("click",'.decline_transfer', function(e) {
+     e.preventDefault();
+     var id = $(this).attr('data-id');
+     // console.log(id);
+
+     Swal.fire({
+     title: 'Are you sure?',
+     text: "This transaction will be cancelled!",
+     input: 'textarea',
+     inputPlaceholder: "Reasons or Comments",
+     type: 'warning',
+     showCancelButton: true,
+     confirmButtonColor: '#d33',
+     cancelButtonColor: '#068101',
+     confirmButtonText: 'Yes, Cancel Transaction!',
+     preConfirm: function () {
+    return new Promise((resolve, reject) => {
+            resolve({
+                Remarks: $('textarea[placeholder="Reasons or Comments"]').val()
+            });
+        });
+    },
+    allowOutsideClick: false
+  }).then(function(result){
+       if (result.value) {
+         Swal.fire(
+           'Success!',
+           'Transaction has been cancelled!',
+           'success'
+         )
+         $.ajax({
+         type: 'POST',
+           url:base_url + 'stockreceive/decline_transfer',
+           data: {id: id, Remarks:result.value},
+           cache: false,
+           success:function(data) {
+               console.log(data);
+               $(".stocksreceive_tbl").DataTable().ajax.reload();
+           }
+         })
+
+       }
+     })
+   });
 
 });
