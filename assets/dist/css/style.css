@@ -96,7 +96,7 @@ li.nav-item.active2 {
     color: #048600cc;
 }
 .table-responsive.view_purchase_orders_details {
-    padding: 22px;
+    /* padding: 7px; */
 }
 .cost.cost_btn.float-sm-right {
     margin: 17px;
@@ -106,4 +106,18 @@ li.nav-item.active2 {
     color:  #fff;
     height: 37px;
     width: 121px;
+}
+.btn.btn-xs.btn-primary.edit_cost {
+    margin: 5px;
+}
+.no_products_found {
+    background-color: #6b6ca521;
+    font-size: 18px;
+    font-style: italic;
+    text-align: center;
+    color: #800;
+}
+.prod_cost_name {
+    font-size: 24px;
+    margin-left: 15px;
 }

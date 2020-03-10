@@ -222,16 +222,21 @@
                 </a>
                    <!-- <ul class="nav nav-treeview"> -->
                    <ul style="list-style-type:none;">
-                   <li class="nav-item">
-                    <a href="<?php echo base_url('stocktransfer'); ?>" class="nav-link">
-                       <p>Stock Transfer</p>
-                    </a>
-                   </li>
-                   <li class="nav-item">
-                   <a href="<?php echo base_url('stockout'); ?>" class="nav-link">
-                      <p>Stock Out</p>
-                   </a>
-                  </li>
+                       <li class="nav-item">
+                        <a href="<?php echo base_url('stockreceive'); ?>" class="nav-link">
+                           <p>Stock Receive</p>
+                        </a>
+                       </li>
+                       <li class="nav-item">
+                        <a href="<?php echo base_url('stocktransfer'); ?>" class="nav-link">
+                           <p>Stock Transfer</p>
+                        </a>
+                       </li>
+                       <li class="nav-item">
+                       <a href="<?php echo base_url('stockout'); ?>" class="nav-link">
+                          <p>Stock Out</p>
+                       </a>
+                      </li>
                 </ul>
               </li>
             </ul>

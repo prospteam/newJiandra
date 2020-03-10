@@ -36,7 +36,8 @@
 <script src="<?php echo base_url('assets/dist/js/stocktransfer.js'); ?>"></script>
 <!-- STOCK OUT -->
 <script src="<?php echo base_url('assets/dist/js/stockout.js'); ?>"></script>
-
+<!-- STOCK RECEIVE -->
+<script src="<?php echo base_url('assets/dist/js/stockreceive.js'); ?>"></script>
 
 </body>
 </html>
