@@ -206,10 +206,10 @@ $(document).ready(function(){
          console.log(data);
          $('#DeliveryStatus').modal('show');
          $('#change_deliveryStat select[name=delivery_status]').val(data.delivery.delivery_status);
+            $('input[name="warehouse_id"]').val(data.delivery.warehouse_id);
            $('input[name="purchase_code_delivery"]').val(data.delivery.purchase_code);
            $('input[name="product"]').val(data.delivery.product);
            $('input[name="code"]').val(data.delivery.code);
-            $('input[name="warehouse_id"]').val(data.delivery.warehouse_id);
      }
     });
   });
@@ -219,7 +219,9 @@ $(document).ready(function(){
     let formData =  new FormData($(this)[0]);
     var id = $('input[name="product"]').val();
     var code = $('input[name="code"]').val();
+    var warehouse_id = $('input[name="warehouse_id"]').val();
     // alert(id);
+    formData.append("warehouse_id",warehouse_id);
     formData.append("id",id);
     formData.append("code",code);
     $.ajax({
@@ -243,7 +245,6 @@ $(document).ready(function(){
 
   //choose from product name
     $('select[name="prod_code[]"]').select2({
-    maximumSelectionSize: 1,
       placeholder: "Select SKU"
     });
 
@@ -510,8 +511,8 @@ $(document).ready(function(){
           console.log(data);
           var str = '';
           str += '<label for="supplier">Supplier: <span class="required">*</span></label>';
-          str += '<select class="form-control supplier add_supplier_select" name="supplier" >';
-              str += '<option value="" selected="true" disabled="disabled">Select Supplier</option>';
+          str += '<select class="form-control" class="supplier" name="supplier" >';
+              str += '<option value="" selected hidden>Select Supplier</option>';
                 $.each(data.suppliers,function(index,element){
                       str += '<option value="'+element.id+'">'+element.supplier_name+'</option>';
                 });
@@ -520,12 +521,11 @@ $(document).ready(function(){
 
 
           $('#show_supplier').html(str);
-          $('.add_supplier_select').select2();
 
             var str1 = '';
             str1 += '<label for="warehouse">Warehouse: <span class="required">*</span></label>';
-            str1 += '<select class="form-control warehouse add_warehouse_select" name="warehouse" >';
-                str1 += '<option value="" selected="true" disabled="disabled">Select Warehouse</option>';
+            str1 += '<select class="form-control" class="warehouse" name="warehouse" >';
+                str1 += '<option value="" selected hidden>Select Warehouse</option>';
                   $.each(data.warehouse,function(index,element){
                         // str1 += '<input type="hidden" name="wh_name" value="'+element.wh_name+'">';
                         str1 += '<option value="'+element.id+'|'+element.wh_name+'">'+element.wh_name+'</option>';
@@ -534,7 +534,6 @@ $(document).ready(function(){
             str1 += '<span class="err"></span>';
 
             $('#show_warehouse').html(str1);
-            $('.add_warehouse_select').select2();
         }
     });
   });
@@ -550,7 +549,7 @@ $(document).ready(function(){
 
           var str = '';
           str += '<label for="supplier">Supplier: <span class="required">*</span></label>';
-          str += '<select class="form-control supplier edit_supplier_select" name="supplier_edit" value="" >';
+          str += '<select class="form-control" class="supplier" name="supplier_edit" value="" >';
               // str += '<option value="" selected hidden>Select Supplier</option>';
                 $.each(data.suppliers,function(index,element){
                       str += '<option value="'+element.id+'">'+element.supplier_name+'</option>';
@@ -559,11 +558,10 @@ $(document).ready(function(){
           str += '<span class="err"></span>';
 
             $('#edit_show_supplier').html(str);
-            $('.edit_supplier_select').select2();
 
             var str1 = '';
             str1 += '<label for="warehouse">Warehouse: <span class="required">*</span></label>';
-            str1 += '<select class="form-control warehouse edit_warehouse_select" name="warehouse_edit" value="" >';
+            str1 += '<select class="form-control" class="warehouse" name="warehouse_edit" value="" >';
                 // str1 += '<option value="" selected>Select Warehouse</option>';
 
                   $.each(data.warehouse,function(index,element){
@@ -573,7 +571,6 @@ $(document).ready(function(){
             str1 += '<span class="err"></span>';
 
             $('#edit_show_warehouse').html(str1);
-            $('.edit_warehouse_select').select2();
 
         }
     });
@@ -777,16 +774,7 @@ $(document).ready(function(){
 
 
   $(document).on('click', '#removeNewPO', function(){
-    $(this).parent().parent().remove();
-    // $(this).parent().parent().remove(); x--;
-
-    //  total quantity
-    var total_quantity = 0;
-    $(".purchase_quantity").each(function() {
-      total_quantity += +$(this).val();
-   });
-   $(".total_quantity").val(total_quantity);
-
+    $(this).parent().parent().remove(); x--;
   });
 
   //add multiple product in add purchase order
@@ -832,14 +820,7 @@ $(document).ready(function(){
   });
 
   $(document).on('click', '#removeNewPO_edit', function(){
-    $(this).parent().parent().remove();
-    //  total quantity
-   var total_quantity = 0;
-   $(".purchase_quantity").each(function() {
-       total_quantity += +$(this).val();
-   });
-   $(".total_quantity").val(total_quantity);
-
+    $(this).parent().parent().remove(); x--;
   });
 
   //compute total for qunatity * unit Price
@@ -876,7 +857,9 @@ $(document).ready(function(){
           $(".purchase_price").each(function() {
               total_cost += +$(this).val();
           });
-          $(".total_cost").val(total_cost.toFixed(2))
+          $(".total_cost").val(total_cost.toFixed(2));
+
+
 
       });
 
@@ -1015,7 +998,7 @@ function get_edit_products(selected_product = ''){
     success:function(data){
       var str = '';
       $.each(data.products,function(index,element){
-        str += '<option value="'+element.id+'" '+( selected_product == element.id ? 'selected' : '')+'>'+element.code+'</option>';
+        str += '<option value="'+element.id+'" '+(selected_product == element.id ? 'selected' : '')+'>'+element.code+'</option>';
       });
       data_return = str;
     }

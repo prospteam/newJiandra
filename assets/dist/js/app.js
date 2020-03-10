@@ -736,8 +736,7 @@ $(document).ready(function(){
      Swal.fire({
      title: 'Are you sure?',
      text: "This vehicle will be deactivated!",
-     html:
-    '<span>This vehicle will be deactivated!</span><br><br><textarea  rows="4" cols="50" class="form-control" name="remarks" id="swal-input1" placeholder="Add Remarks" class="form-control mb-1" type="text"></textarea>',
+     html: '<span>This vehicle will be deactivated!</span><br><br><textarea  rows="4" cols="50" class="form-control" name="remarks" id="swal-input1" placeholder="Add Remarks" class="form-control mb-1" type="text"></textarea>',
      inputPlaceholder: "Add remarks",
      type: 'warning',
      showCancelButton: true,
