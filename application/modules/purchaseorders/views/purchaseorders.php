@@ -9,7 +9,7 @@
                     HOME > <span class="active1"> PURCHASE ORDER </p>
                 </div>
                 <div class="col-sm-6">
-                    <button class="users button1 float-sm-right" data-toggle="modal" data-target="#AddPurchaseOrder"><i
+                    <button class="users button1 float-sm-right purchase-order-btn" data-toggle="modal" data-target="#AddPurchaseOrder"><i
                             class="fas fa-plus-circle" aria-hidden="true"></i> Purchase Order </button>
 
                     <!--Add User Modal -->
@@ -87,13 +87,13 @@
                                                                 style="width: 100%;" name="prod_code[]">
                                                                 <option value="">Select SKU</option>
                                                                 <?php
-                                              foreach($products as $key => $value){
-                                                  echo '<option value="'.$value['id'].'">'.$value['code'].'</option>';
-                                              }
-                                          ?>
-                                                            </select>
-                                                            <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
-                                                            <span class="err"></span>
+                                                                  foreach($products as $key => $value){
+                                                                      echo '<option value="'.$value['id'].'">'.$value['code'].'</option>';
+                                                                  }
+                                                              ?>
+                                                                                </select>
+                                                                                <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
+                                                                                <span class="err"></span>
                                                         </td>
                                                         <td class="purch_td">
                                                             <input type="text" class="form-control prod_name"
@@ -122,6 +122,7 @@
 
                                                 </tbody>
                                             </table>
+                                            <ul class="list-group" id="result"></ul>
                                         </div>
                                         <span class="btn btn-sm btn-primary" id="addNewPO"><i class="fa fa-plus"></i>
                                             Add Product</span>
@@ -189,7 +190,7 @@
                                 </div>
                         </form>
                     </div>
-                </div> 
+                </div>
                 <!-- End Add user Modal -->
 
                 <!--View User Modal -->
@@ -242,6 +243,7 @@
                                         <th class="header-title purch">Unit Price</th>
                                         <th class="header-title purch">Total </th>
                                         <th class="header-title purch">Delivered </th>
+                                        <th class="header-title purch">Variance</th>
                                         <th class="header-title purch"></th>
 
                                     </thead>
