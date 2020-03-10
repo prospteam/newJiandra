@@ -9,7 +9,6 @@ class Purchaseorders extends MY_Controller {
 	}
 
 	public function index(){
-		$data['popresent'] = 1;
 		$parameters['select'] = '*';
 		$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
 
@@ -17,11 +16,12 @@ class Purchaseorders extends MY_Controller {
 		$parameters['select'] = '*';
 		$data['company'] = $this->MY_Model->getRows('company',$parameters);
 
+		$param['where'] = array('status' => 1);
 		$param['select'] = '*';
 		$data['products'] = $this->MY_Model->getRows('products', $param);
 
 		$parameters1['select'] = '*';
-		$parameters1['limit'] = array(1,0);
+		$parameters1['limit'] = array(1,0);;
 		$parameters1['order'] = 'purchase_code DESC';
 		$data['purchase'] = $this->MY_Model->getRows('purchase_orders',$parameters1);
 
@@ -30,10 +30,10 @@ class Purchaseorders extends MY_Controller {
 
 	//get suppliers and warehouse by company
 	public function get_suppliers_by_companies(){
-		$parameters['where'] = array('company' => $this->input->post('company_id'));
+		$parameters['where'] = array('company' => $this->input->post('company_id'), 'status' => 1);
 		$data['warehouse'] = $this->MY_Model->getRows('warehouse_management',$parameters);
 
-			$parameters['where'] = array('company' => $this->input->post('company_id'));
+			$parameters['where'] = array('company' => $this->input->post('company_id'), 'status' => 1);
 			$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
 			json($data);
 	}
@@ -244,6 +244,8 @@ class Purchaseorders extends MY_Controller {
 				}
 			}
 
+
+
 				$data = array(
 					'company' => $post['company_edit'],
 					'supplier' => $post['supplier_edit'],
@@ -315,7 +317,6 @@ class Purchaseorders extends MY_Controller {
 	//change delivered quantity on purchase Orders
 	public function change_delivered_qty(){
 		$post = $this->input->post();
-
 		$delivered_date = date("F d, Y");
 
 		// if($post['delivery_status'] == 4){
@@ -344,6 +345,9 @@ class Purchaseorders extends MY_Controller {
 	//change delivery Status
 	public function change_deliv_status(){
 		$post = $this->input->post();
+		// echo "<pre>";
+		// print_r($post);
+		// exit;
 		if($post['delivery_status'] == 2){
 			$remarks = empty($post['remarks_deliv']) ? "None" : $post['remarks_deliv'];
 		}else if($post['delivery_status'] == 3){
