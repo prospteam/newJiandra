@@ -49,7 +49,7 @@ class Login extends MY_Controller {
 
 	}
 
-	public function setSession($data,$result){
+	public function setSession($data){
 		$data_session = array(
 			'logged_in' => true,
 			'id' => $data->id,

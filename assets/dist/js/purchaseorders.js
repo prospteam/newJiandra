@@ -390,6 +390,8 @@ $(document).ready(function(){
              }else{
                 var deliv = element.delivered;
              }
+             console.log('elemt');
+             console.log(element);
              $('.code').text(element.purchase_code);
              $('.date').text(element.date_ordered);
              $('.company').text(element.company_name);
@@ -428,6 +430,15 @@ $(document).ready(function(){
                     str += '<span class="deliv">'+deliv+'</span>';
                     str +=   '<input type="text" class="edit_deliv number_only" name="delivered[]" value='+deliv+' disabled hidden>';
                   str += '</td>';
+                  str +=  '<td class="purch_td variance">';
+                    var variance = element.quantity - element.delivered;
+                        if(variance > 0){
+                            $(".variance").css("background-color","green");
+                            str += variance;
+                        }else{
+                            str += variance
+                        }
+                   str += '</td>';
                   if(element.delivery_status == 4){
 
                     str += '<td class="purch_td submit_delivered">';
@@ -885,7 +896,39 @@ $(document).ready(function(){
             }
           });
       });
-});
+
+      $(document).on('click', '.purchase-order-btn', function(){
+          $.ajax({
+             type   : 'POST',
+             url    : base_url + 'purchaseorders/get_sku',
+          });
+      });
+
+      $.ajaxSetup({ cache: false });
+         $('#sku').keyup(function(){
+          $('#result').html('');
+          var searchField = $('#sku').val();
+
+          var url = base_url + 'purchaseorders/get_sku';
+          var expression = new RegExp(searchField, "i");
+
+          $.getJSON(url, function(data) {
+           $.each(data, function(key, value){
+            if (value.code.search(expression) != -1)
+            {
+                 $('#result').append('<li class="list-group-item link-class">'+value.code+'</span></li>');
+            }
+           });
+          });
+         });
+
+         $('#result').on('click', 'li', function() {
+          var click_text = $(this).text().split('|');
+           console.log(click_text);
+           $('#sku').val($.trim(click_text[0]));
+           $("#result").html('');
+         });
+    });
 
 
 function get_supplier(){

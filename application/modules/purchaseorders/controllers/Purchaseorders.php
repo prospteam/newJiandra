@@ -300,7 +300,10 @@ class Purchaseorders extends MY_Controller {
 
 		$parameters['where'] = array('purchase_code' => $purchase_id);
 		// $parameters['group'] = array('purchase_code');
-		$parameters['join'] = array('company' => 'company.company_id = purchase_orders.company','supplier' => 'supplier.id = purchase_orders.supplier', 'products' => 'products.id = purchase_orders.product', 'warehouse_management' => 'warehouse_management.id = purchase_orders.warehouse_id'  );
+		$parameters['join'] = array('company' => 'company.company_id = purchase_orders.company',
+								'supplier' => 'supplier.id = purchase_orders.supplier',
+								'products' => 'products.id = purchase_orders.product',
+								'warehouse_management' => 'warehouse_management.id = purchase_orders.warehouse_id'  );
 		$parameters['select'] = 'purchase_orders.*, purchase_orders.id AS purchase_id, supplier.id AS supplier_id, supplier.*, company.*, products.id AS product_id, products.*, warehouse_management.wh_name';
 
 		$data = $this->MY_Model->getRows('purchase_orders',$parameters);
@@ -314,9 +317,6 @@ class Purchaseorders extends MY_Controller {
 	//change delivered quantity on purchase Orders
 	public function change_delivered_qty(){
 		$post = $this->input->post();
-		// echo "<pre>";
-		// print_r($post);
-		// exit;
 		$delivered_date = date("F d, Y");
 
 		// if($post['delivery_status'] == 4){
@@ -432,5 +432,11 @@ class Purchaseorders extends MY_Controller {
 	  $datas['delete'] = $this->MY_Model->update('purchase_orders',$data,array('purchase_code' => $purchase_code));
 	  echo json_encode($datas);
 
+	}
+
+	public function get_sku(){
+		$data = $this->MY_Model->getRows('products');
+
+		echo json_encode($data);
 	}
 }
