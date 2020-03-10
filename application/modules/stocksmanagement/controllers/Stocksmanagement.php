@@ -55,14 +55,20 @@ class Stocksmanagement extends MY_Controller {
 							'stocks as s' => 's.product = po.product AND s.warehouse_id = po.warehouse_id:left',
 							'warehouse_management as w' => 'w.id = po.warehouse_id:left'
 						);
-		$select 		= "po.product, (SELECT SUM(delivered) FROM purchase_orders WHERE warehouse_id = po.warehouse_id AND product = p.id) AS system_count, p.code, p.product_name, p.brand, sup.supplier_name, po.supplier, po.date_delivered, s.physical_count, s.variance, po.warehouse_id, w.wh_name";
-		$list 			= $this->MY_Model->get_datatables('purchase_orders as po',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
-		$output 		= array(
-							"draw" => $draw,
-							"recordsTotal" => $list['count_all'],
-							"recordsFiltered" => $list['count'],
-							"data" => $list['data']
-						);
+						$select 		= "po.product, (SELECT SUM(delivered) FROM purchase_orders WHERE warehouse_id = po.warehouse_id AND product = p.id) AS system_count, p.code, p.product_name, p.brand, sup.supplier_name, po.supplier, po.date_delivered, s.physical_count, s.variance, po.warehouse_id, w.wh_name";
+							$list 		= $this->MY_Model->get_datatables('purchase_orders as po',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
+							$output 	= array(
+								"draw" => $draw,
+								"recordsTotal" => $list['count_all'],
+								"recordsFiltered" => $list['count'],
+								"data" => $list['data']
+							);
+
+							foreach ($output['data'] as $key => $value) {
+								if ($output['data'][$key]->system_count == 0) {
+									unset($output['data'][$key]);
+								}
+							}
 
 		echo json_encode($output);
 	}

@@ -67,6 +67,7 @@ $(document).ready(function(){
 
          ],
          // Load data for the table's content from an Ajax source
+
          "ajax": {
               "url":base_url+"stocksmanagement/display_delivered_products/",
               "type": "POST"
