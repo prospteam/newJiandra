@@ -109,7 +109,7 @@
                         </div>
                   <br>
                         <div class="modal-footer">
-                           <button type="submit" class="btn btn-primary add">Submit</button>
+                           <button type="submit" class="btn btn-primary add" id="edit_submit">Submit</button>
                         </div>
                   </div>
                   </div>
