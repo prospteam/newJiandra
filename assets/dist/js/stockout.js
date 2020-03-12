@@ -148,7 +148,16 @@ $(document).ready(function(){
              data: {quantity:quantity,stockmovement_id:stockmovement_id},
              dataType: "json",
              success: function(data){
-                 console.log(data);
+                 $("#edit_submit").on("click", function(){
+                     Swal.fire({
+                     title: 'Successfully Updated',
+                     text: "",
+                     type: 'success',
+                     confirmButtonText: 'Ok',
+                 }).then(function(){
+                     location.reload();
+                    })
+                 })
              }
 
          });

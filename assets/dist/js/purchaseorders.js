@@ -417,7 +417,7 @@ $(document).ready(function(){
                str +=     '<td class="purch_td">';
                    str +=   element.product_name;
                   str += '</td>';
-                 str += ' <td class="purch_td qty">';
+                 str += ' <td class="purch_td td_qty">';
                      str += element.quantity;
                  str += '</td>';
                str +=  '<td class="purch_td price">';
@@ -430,14 +430,9 @@ $(document).ready(function(){
                     str += '<span class="deliv">'+deliv+'</span>';
                     str +=   '<input type="text" class="edit_deliv number_only" name="delivered[]" value='+deliv+' disabled hidden>';
                   str += '</td>';
-                  str +=  '<td class="purch_td variance">';
+                  str +=  '<td class="purch_td edit_variance">';
                     var variance = element.quantity - element.delivered;
-                        if(variance > 0){
-                            $(".variance").css("background-color","green");
-                            str += variance;
-                        }else{
-                            str += variance
-                        }
+                        str += variance;
                    str += '</td>';
                   if(element.delivery_status == 4){
 
@@ -481,9 +476,12 @@ $(document).ready(function(){
     $('.submit_delivered_qty').unbind('click').click(function(e) {
       var id = pTr.find('.edit_purchID').val();
       var qty = pTr.find('.edit_deliv').val();
+      var edit_qty = pTr.find('.td_qty').val();
       var code = pTr.find('.edit_prod_code').val();
       var product = pTr.find('.edit_product').val();
       var delivery_status = pTr.find('.edit_delivery_status').val();
+      var variance = pTr.find('.edit_variance').val();
+
       $.ajax({
         url: base_url+'purchaseorders/change_delivered_qty',
         data: {id:id,delivered:qty,code:code,product:product,delivery_status:delivery_status},
@@ -494,6 +492,8 @@ $(document).ready(function(){
             pTr.find('.edit_deliv').hide().prop('hidden', true);
             pTr.find('.edit_delivered').show().prop('hidden', false);
             pTr.find('.submit_delivered_qty').hide().prop('hidden', true);
+
+            location.reload();
         }
       });
     });
