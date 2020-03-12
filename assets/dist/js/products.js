@@ -70,12 +70,14 @@ $(document).ready(function () {
             console.log(data);
             $('#viewproducts').modal('show');
             $('.code').text(data.products.code);
-            $('.product_name').text(data.products.product_name);
-            $('.brand').text(data.products.brand);
-            $('.category').text(data.products.category);
-            $('.variant').text(data.products.variant);
             $('.volume').text(data.products.volume);
             $('.unit').text(data.products.unit);
+            $('.packing').text(data.products.packing);
+            $('.brand').text(data.products.brand);
+            $('.product_name').text(data.products.product_name);
+            $('.category').text(data.products.category);
+            $('.variant').text(data.products.variant);
+            $('.supplier').text(data.products.supplier_name);
             $('.description').text(data.products.description);
          }
       })
@@ -86,23 +88,26 @@ $(document).ready(function () {
    // edit Products
    $(document).on("click", ".editproducts", function () {
       var id = $(this).attr('data-id');
-
+      // alert('rererer');
       $.ajax({
          method: 'POST',
          url: base_url + 'products/view_all_products',
          data: { id: id },
          dataType: "json",
          success: function (data) {
+             console.log(data);
             $('#editProducts').modal('show');
             $('#editProducts input[name="products_id"]').val(data.products.id);
             $('#editProducts #product_name1').append('<option value=' + data.products.product_name + ' selected>' + data.products.product_name + '</option>')
             $('#editProducts #brand1').append('<option value=' + data.products.brand + ' selected>' + data.products.brand + '</option>')
             $('#editProducts .editproducts_id').val(data.products.id);
             $('#editProducts input[name="code"]').val(data.products.code);
-            $('#editProducts input[name="product_name"]').val(data.products.product_name);
+            // $('#editProducts .supplier]').val(data.products.code);
+            $('#editProducts select[name=supplier]').val(data.supplier_name);
             $('#editProducts #category1').append('<option value=' + data.products.category + ' selected>' + data.products.category + '</option>')
             $('#editProducts #variant1').append('<option value=' + data.products.variant + ' selected>' + data.products.variant + '</option>')
-            $('#editProducts input[name="volume"]').val(data.products.volume);
+            $('#editProducts #volume1').append('<option value=' + data.products.volume + ' selected>' + data.products.volume + '</option>')
+            $('#editProducts #packing1').append('<option value=' + data.products.packing + ' selected>' + data.products.packing + '</option>')
             $('#editProducts #unit1').append('<option value=' + data.products.unit + ' selected>' + data.products.unit + '</option>')
             $('#editProducts textarea[name="description"]').val(data.products.description);
          }
@@ -146,13 +151,11 @@ $(document).ready(function () {
             success: function (data) {
                console.log(data);
                    $.each(data.cost_price,function(index,element){
-
                           console.log(element);
                        if (data.cost_price.length == 0) {
                            $('.no_products_found').show();
-
                        }else {
-                       $('.prod_cost_name').text(element.product_name);
+                       $('.prod_cost_name').text(element.volume +''+ element.unit + '/'+ element.packing +'/'+ element.brand +'/'+element.product_name);
                        console.log(data);
                        $('.no_products_found').hide();
                        str += '<tr>';
@@ -170,7 +173,6 @@ $(document).ready(function () {
                                str += '<a href="javascript:;" class="btn btn-xs btn-danger delete_cost" data-id="'+element.id +'"><i class="fa fa-trash"></i></a>';
                            str+= '</td>'
                        str+= '</tr>';
-
                    }
                    $('#add_new_cost_price tbody').html(str);
                    });

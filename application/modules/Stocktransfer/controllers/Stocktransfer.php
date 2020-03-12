@@ -186,15 +186,9 @@ class  Stocktransfer extends MY_Controller {
 
 		 $data = $this->MY_Model->getRows('stock_movement',$parameters);
 
-
 		 $data_array['stock_movement'] = $data;
-
 		 json($data_array);
 	 }
-
-
-
-
 }
 
 ?>

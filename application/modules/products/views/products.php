@@ -146,7 +146,7 @@
                                                 <h1 class="disp_prod_cost_name"><span class="prod_cost_name">#</span> </h1> <br>
                                             </div>
                                         </div>
-                                    <div class="table-responsive view_purchase_orders_details">
+                                    <div class="table-responsive view_purchase_orders_details cost_modal_table">
                                         <div class="modal_header_margin">
                                             <input type="hidden" class="form-control" name="cost_price_id" value="">
                                         </div>
@@ -314,32 +314,6 @@
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <label for="product_name">Name:</label>
-                                                <p class="product_name"> </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <label for="brand">Brand: </label>
-                                            <p class="brand"> </p>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="category">Category: </label>
-                                                <p class="category"> </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="variant">Variant:</label>
-                                                <p class="variant"> </p>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="form-group">
                                                 <label for="volume">Volume:</label>
                                                 <p class="volume"> </p>
                                             </div>
@@ -347,14 +321,54 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
+                                            <label for="unit">Units: </label>
+                                            <p class="unit"> </p>
+                                        </div>
+                                        <div class="col-6">
                                             <div class="form-group">
-                                                <label for="unit">Unit:</label>
-                                                <p class="unit"> </p>
+                                                <label for="packing">Packing: </label>
+                                                <p class="packing"> </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="brand">Brand:</label>
+                                                <p class="brand"> </p>
                                             </div>
                                         </div>
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <label for="description">Desription:</label>
+                                                <label for="product_name">Name:</label>
+                                                <p class="product_name"> </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="category">Category:</label>
+                                                <p class="category"> </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="variant">Variants:</label>
+                                                <p class="variant"> </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="supplier">Supplier:</label>
+                                                <p class="supplier"> </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="description">Description:</label>
                                                 <p class="description"> </p>
                                             </div>
                                         </div>
@@ -390,74 +404,88 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="product_name1">Name: <span
-                                                    class="required">*</span></label>
-                                            <select class="form-control js-example-basic-multiple-editproducts"
-                                                name="product_name" id="product_name1" data-type="product_name">
-                                                <option></option>
-                                            </select>
-                                            <span class="err"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="brand1">Brand: <span class="required">*</span></label>
-                                            <select class="form-control js-example-basic-multiple-editproducts"
-                                                name="brand" id="brand1" data-type="brand">
-                                                <option></option>
-                                            </select>
-                                            <span class="err"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="category1">Category: <span
-                                                    class="required">*</span></label>
-                                            <select class="form-control js-example-basic-multiple-editproducts"
-                                                name="category" id="category1" data-type="category">
-                                                <option></option>
-                                            </select>
-                                            <span class="err"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="variant1">Variant: <span
-                                                    class="required">*</span></label>
-                                            <select class="form-control js-example-basic-multiple-editproducts"
-                                                name="variant" id="variant1" data-type="variant">
-                                                <option></option>
-                                            </select>
-                                            <span class="err"></span>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
                                             <label for="volume">Volume: <span class="required">*</span></label>
-                                            <input type="text" class="form-control" name="volume" value="">
+                                            <select class="form-control js-example-basic-multiple-editproducts" name="volume" id="volume1" data-type="volume">
+                                                <option></option>
+                                            </select>
                                             <span class="err"></span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-6">
                                         <div class="form-group">
-                                            <label for="unit1">Unit: <span class="required">*</span></label>
-                                            <select class="form-control js-example-basic-multiple-editproducts"
-                                                name="unit" id="unit1" data-type="unit">
+                                            <label for="unit">Unit: <span class="required">*</span></label>
+                                            <select class="form-control js-example-basic-multiple-editproducts" name="unit" id="unit1" data-type="unit">
                                                 <option></option>
                                             </select>
+                                            <span class="err"></span>
                                         </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="packing">Packing: <span class="required">*</span></label>
+                                            <select class="form-control js-example-basic-multiple-editproducts" name="packing" id="packing1" data-type="packing">
+                                                <option></option>
+                                            </select>
+                                            <span class="err"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="brand">Brand: <span class="required">*</span></label>
+                                            <select class="form-control js-example-basic-multiple-editproducts" name="brand" id="brand1" data-type="brand">
+                                                <option></option>
+                                            </select>
+                                            <span class="err"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="product_name">Name: <span class="required">*</span></label>
+                                            <select class="form-control js-example-basic-multiple-editproducts" name="product_name" id="product_name1" data-type="product_name">
+                                                <option></option>
+                                            </select>
+                                            <span class="err"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="category">Category: <span class="required">*</span></label>
+                                            <select class="form-control js-example-basic-multiple-editproducts" name="category" id="category1" data-type="category">
+                                                <option></option>
+                                            </select>
+                                            <span class="err"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label for="variant">Variant: <span class="required">*</span></label>
+                                            <select class="form-control js-example-basic-multiple-editproducts" name="variant" id="variant1" data-type="variant">
+                                                <option></option>
+                                            </select>
+                                            <span class="err"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="supplier">Supplier:</label>
+                                            <select class="form-control" class="supplier" name="supplier">
+                                                <option value="" selected hidden>Select Supplier</option>
+                                                <?php foreach($supplier as $k => $value) : ?>
+                                                    <option value="<?php echo $value['id'] ?>"><?php echo $value['supplier_name'] ?></option>
+                                                <?php  endforeach; ?>
+                                            </select>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label for="description">Description:</label>
-                                            <textarea rows="2" cols="50" name="description"
-                                                class="form-control"></textarea>
+                                            <textarea rows="1" cols="50" name="description" class="form-control"> </textarea>
                                         </div>
                                     </div>
                                 </div>
