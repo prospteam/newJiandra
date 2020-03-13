@@ -69,6 +69,21 @@ class Stockout extends MY_Controller {
 		}
 		// End Edit Stock Out
 
+		//submit edit
+		public function stockout_submit_edit(){
+			$stocktrans_id = $this->input->post('stockmovement_id');
+			$quantity = $this->input->post('quantity');
+
+			$parameters = array('stockmovement_id'=>$stocktrans_id);
+
+			$set = array('quantity' => $quantity);
+
+			$data = $this->MY_Model->update('stock_movement',$set,$parameters);
+
+			json($data);
+		}
+		//End of submit edit
+
 	public function deletestockOut(){
 
 		   $stockout = $this->input->post('stockmovement_id');

@@ -81,6 +81,7 @@ $(document).ready(function(){
           data: {stockmovement_id:stockmovement_id},
           dataType: "json",
           success: function(data){
+              console.log('data');
              console.log(data);
                // console.log("data");
                // alert("hi");
@@ -97,6 +98,7 @@ $(document).ready(function(){
                str+= '<tr>';
                str += '<td class="purch_td hide">';
                str += '<input type="hidden" class="form-control" name="edit_purchase_id[]" value='+element.id+'>';
+               str += '<input type="hidden" class="form-control" name="stockmovement_id" value='+stockmovement_id+'>';
                str += '</td>';
                 str+= ' <td class="purch_td">';
                 str += '<select class="form-control js-example-basic-multiple-editStockTransfer select2_edit edit_new_code" style="width: 100%;" name="prod_code[]" data-id="'+element.id+'" value="'+element.code+'">';
@@ -121,14 +123,45 @@ $(document).ready(function(){
                str+= '</tr>';
 
                });
+
                $('#view_stock_out tbody').html(str);
                $('.select2_edit').select2({
                  hideSelected: true
                });
+               console.log('asdfsadf');
+               console.log(stockmovement_id);
              }
      });
 
      });
+
+     $("#editStockOut").on("click", function(e){
+         e.preventDefault();
+         var stockmovement_id = $('input[name="stockmovement_id"]').val();
+         var quantity = $('input[name="quantity[]"]').val();
+
+         console.log(quantity);
+
+         $.ajax({
+             method: 'POST',
+             url: base_url+'stockout/stockout_submit_edit',
+             data: {quantity:quantity,stockmovement_id:stockmovement_id},
+             dataType: "json",
+             success: function(data){
+                 $("#edit_submit").on("click", function(){
+                     Swal.fire({
+                     title: 'Successfully Updated',
+                     text: "",
+                     type: 'success',
+                     confirmButtonText: 'Ok',
+                 }).then(function(){
+                     location.reload();
+                    })
+                 })
+             }
+
+         });
+     })
      var stockout_tbl = $('.stockout_tbl').DataTable({
     "processing"  : true,
     "serverside"  : true,
