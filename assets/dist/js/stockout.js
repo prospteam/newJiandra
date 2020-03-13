@@ -105,7 +105,7 @@ $(document).ready(function(){
                   str+= ' <span class="err"></span>';
                  str+= '</td>';
                 str+= ' <td class="purch_td">';
-                   str+= '<input type="text" class="form-control prod_name" name="prod_name[]" value="'+element.product_name+'" readonly>';                   
+                   str+= '<input type="text" class="form-control prod_name" name="prod_name[]" value="'+element.product_name+'" readonly>';
                    str+= ' <span class="err"></span>';
                  str+= '</td>';
                  str+= '<td class="purch_td">';
