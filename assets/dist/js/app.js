@@ -363,28 +363,10 @@ $(document).ready(function(){
                $('#EditUser').modal('hide');
                    Swal.fire("Successfully updated user!",data.success, "success");
                    $(".users_tbl").DataTable().ajax.reload();
-                   // setTimeout(function(){
-                   //    location.reload();
-                   //  }, 1000);
               }else if(data.status == 'invalid'){
                  Swal.fire("Error",data.status, "invalid");
               }
-             // if(data.form_error){
-             //     clearError();
-             //     let keyNames = Object.keys(data.form_error);
-             //     $(keyNames).each(function(index , value) {
-             //         $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
-             //     });
-             // }else if (data.error) {
-             //     Swal.fire("Error",data.error, "error");
-             // }else {
-             //    // blankVal();
-             //     $('#EditUser').modal('hide');
-             //     Swal.fire("Successfully updated user!",data.success, "success");
-             //     setTimeout(function(){
-             //        location.reload();
-             //      }, 1000);
-             // }
+
          }
      })
    });

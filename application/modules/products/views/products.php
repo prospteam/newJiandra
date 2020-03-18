@@ -381,14 +381,13 @@
 
                     <!--View Edit Modal -->
                     <!-- Modal -->
-            <div class="modal fade" id="editProducts" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">\
-                <form id="editProducts" method="post">
+            <div class="modal fade" id="editProducts" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
+                <form id="editproducts_form" method="post">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header bg-info1">
                                 <h5 class="modal-title" id="exampleModalLabel">Edit Products</h5>
-                                <input type="hidden" class="form-control editproducts_id" name="editproducts_id" value="">
+                                <input type="hidden" class="form-control editproducts_id" name="products_edit_id" value="">
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -475,10 +474,11 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <label for="supplier">Supplier:</label>
-                                            <select class="form-control" class="supplier" name="supplier">
-                                                <option value="" selected hidden>Select Supplier</option>
+                                            <select class="form-control" class="supplier" name="supplier_edit" value="" data-type="supplier">
+                                                <!-- <option value="" selected hidden>Select Supplier</option> -->
                                                 <?php foreach($supplier as $k => $value) : ?>
-                                                    <option value="<?php echo $value['id'] ?>"><?php echo $value['supplier_name'] ?></option>
+                                                    <option value="<?php echo $value['id'] ?>">
+                                                    <?php echo $value['supplier_name'] ?></option>
                                                 <?php  endforeach; ?>
                                             </select>
                                     </div>

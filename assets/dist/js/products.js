@@ -88,22 +88,22 @@ $(document).ready(function () {
    // edit Products
    $(document).on("click", ".editproducts", function () {
       var id = $(this).attr('data-id');
-      // alert('rererer');
       $.ajax({
          method: 'POST',
          url: base_url + 'products/view_all_products',
          data: { id: id },
          dataType: "json",
          success: function (data) {
-             console.log(data);
+             console.log(id);
             $('#editProducts').modal('show');
             $('#editProducts input[name="products_id"]').val(data.products.id);
             $('#editProducts #product_name1').append('<option value=' + data.products.product_name + ' selected>' + data.products.product_name + '</option>')
             $('#editProducts #brand1').append('<option value=' + data.products.brand + ' selected>' + data.products.brand + '</option>')
-            $('#editProducts .editproducts_id').val(data.products.id);
+            $('#editProducts .editproducts_id').val(id);
             $('#editProducts input[name="code"]').val(data.products.code);
             // $('#editProducts .supplier]').val(data.products.code);
-            $('#editProducts select[name=supplier]').val(data.supplier_name);
+            $('#editProducts select[name="supplier_edit"]').val(data.products.supplier);
+            // $('#editProducts select[name="supplier_edit"]').trigger('change');
             $('#editProducts #category1').append('<option value=' + data.products.category + ' selected>' + data.products.category + '</option>')
             $('#editProducts #variant1').append('<option value=' + data.products.variant + ' selected>' + data.products.variant + '</option>')
             $('#editProducts #volume1').append('<option value=' + data.products.volume + ' selected>' + data.products.volume + '</option>')
@@ -115,10 +115,10 @@ $(document).ready(function () {
 
    });
    // end edit Products
+
    // Edit Cost Price
        $(document).on('click', '.edit_cost', function() {
            var id = $(this).attr('data-id');
-
            $.ajax({
                method: 'POST',
                url: base_url+'products/edit_cost_price',
@@ -196,7 +196,7 @@ $(document).ready(function () {
    $(document).on('submit', '#edit_costPrice', function(e){
        e.preventDefault();
 
-       let formData = new FormData($(this)[0]);
+       var formData = new FormData($(this)[0]);
        var id = $('.edit_cost_sell_price_id').val();
        formData.append("id", id);
        $.ajax({
@@ -208,7 +208,6 @@ $(document).ready(function () {
            cache: false,
            dataType: 'json',
            success: function(data){
-
                console.log(data);
                if (data.status == 'ok') {
                    $('#edit_cost_price').modal('hide');
@@ -224,12 +223,13 @@ $(document).ready(function () {
    });
 
    // successfully edit user
-   $(document).on('submit', '#editProducts', function (e) {
+   $(document).on('submit', '#editproducts_form', function (e) {
       e.preventDefault();
 
       let formData = new FormData($(this)[0]);
-      var id = $('.editproducts_id').val();
+      var id = $('input[name="products_edit_id"]').val();
       formData.append("id", id);
+
       $.ajax({
          method: 'POST',
          url: base_url + 'products/edit_products',
@@ -239,10 +239,9 @@ $(document).ready(function () {
          cache: false,
          dataType: 'json',
          success: function (data) {
-             // console.log(formData);
+             console.log(id);
             if (data.status == "ok") {
                $('#editProducts').modal('hide');
-               console.log(data.success);
                Swal.fire("Product has been updated!", data.success, "success");
                $(".products_tbl").DataTable().ajax.reload();
             } else if (data.status == 'invalid') {
@@ -257,7 +256,7 @@ $(document).ready(function () {
     $(document).on("click", '.delete_cost', function(e){
         e.preventDefault();
         var id = $(this).attr('data-id');
-        // alert(id);
+
         Swal.fire({
             title: 'Are you sure?',
             text: "You want to permanently delete this Price!",

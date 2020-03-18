@@ -21,9 +21,7 @@ class Products extends MY_Controller {
 	}
 
   public function addproducts() {
-	  // echo "<pre>";
-	  //  print_r($this->validate_fields());
-	  //  exit;
+
 	$this->validate_fields();
       $data = array(
         'code' => $this->input->post('code'),
@@ -50,9 +48,7 @@ class Products extends MY_Controller {
 		  $this->form_validation->set_rules('cost_price','Cost Price','required');
 		  $this->form_validation->set_rules('sell_price','Selling Price', 'required');
 		  $this->form_validation->set_rules('effective_date','Effective Date', 'required');
-		  	// echo "<pre>";
-		  	//  print_r($this->input->post());
-		  	//  exit;
+
 		  	if ($this->form_validation->run() !== FALSE) {
 		  		$data = array(
 					'cost_price'  					=> $this->input->post('cost_price', 'Cost Price', 'required'),
@@ -112,9 +108,7 @@ class Products extends MY_Controller {
 			$parameters['where'] = array('products.id'=>$product_id);
 			$parameters['join'] = array('supplier as s' => 's.id = products.supplier');
 			$data = $this->MY_Model->getrows('products',$parameters,'row');
-			// echo "<pre>";
-			//  print_r($data);
-			//  exit;
+
 			$data_array['products'] = $data;
 			json($data_array);
 
@@ -128,9 +122,7 @@ class Products extends MY_Controller {
 			$parameters['join']   = array('products' => 'products.id = products_cost_price.fk_product_id');
 
 			$data = $this->MY_Model->getrows('products_cost_price',$parameters);
-			// echo "<pre>";
-			// print_r($data);
-			// exit;
+
 
 
 			$data_array['cost_price'] = $data;
@@ -168,10 +160,8 @@ class Products extends MY_Controller {
 
 				$products_id = $this->input->post('id');
 				$post = $this->input->post();
-				// echo "<pre>";
-				//  print_r($post);
-				//  exit;
 				$result = false;
+
 				if (!empty($post)) {
 					$data = array(
 						'code'  	   				  => $post['code'],
@@ -182,10 +172,11 @@ class Products extends MY_Controller {
 						'variant'    				  => $post['variant'],
 						'volume'    				  => $post['volume'],
 						'unit'       				  => $post['unit'],
-						'supplier'					  => $post['supplier'],
+						'supplier'					  => $post['supplier_edit'],
 						'description'				  => $post['description']
 					);
-				$update = $this->MY_Model->update('products',$data, array('id' => $products_id));
+				$update = $this->MY_Model->update('products', $data, array('id' => $products_id));
+
 				if ($update) {
 					$response = array('status' => 'ok');
 				}else {
@@ -204,10 +195,8 @@ class Products extends MY_Controller {
 			$parameters['select'] = '*';
 			$parameters['where'] = array('id'=>$cost_id);
 
-			$data = $this->MY_Model->getrows('products_cost_price',$parameters,'row');
-				// echo "<pre>";
-				//  print_r($data);
-				//  exit;
+			$data = $this->MY_Model->getrows('products_cost_price',$parameters);
+
 			$data_array['products_cost_price'] = $data;
 
 			json($data_array);
