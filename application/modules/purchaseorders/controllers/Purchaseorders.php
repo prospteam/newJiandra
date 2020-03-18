@@ -345,9 +345,7 @@ class Purchaseorders extends MY_Controller {
 	//change delivery Status
 	public function change_deliv_status(){
 		$post = $this->input->post();
-		// echo "<pre>";
-		// print_r($post);
-		// exit;
+
 		if($post['delivery_status'] == 2){
 			$remarks = empty($post['remarks_deliv']) ? "None" : $post['remarks_deliv'];
 		}else if($post['delivery_status'] == 3){
@@ -369,7 +367,7 @@ class Purchaseorders extends MY_Controller {
 // print_r($last);
 // exit;
 		if ($res == '') {
-			$data_stocks = array('product' => $post['product'], 'code' => $post['code'], 'warehouse_id' => $post['warehouse_id']);
+			$data_stocks = array('product' => $post['product'], 'code' => $post['code'], 'warehouse_id' => $post['warehouse_id'], 'stock_out' => $post['quantity']);
 				$data['prodToStocks'] = $this->MY_Model->insert('stocks',$data_stocks);
 		}
 

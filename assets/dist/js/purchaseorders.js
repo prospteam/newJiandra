@@ -210,6 +210,7 @@ $(document).ready(function(){
            $('input[name="purchase_code_delivery"]').val(data.delivery.purchase_code);
            $('input[name="product"]').val(data.delivery.product);
            $('input[name="code"]').val(data.delivery.code);
+           $('input[name="quantity"]').val(data.delivery.quantity);
      }
     });
   });

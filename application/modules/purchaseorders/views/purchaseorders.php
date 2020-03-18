@@ -530,6 +530,7 @@
                                             <input type="hidden" class="form-control" name="code" value="">
                                             <input type="hidden" class="form-control" name="warehouse_id" value="">
                                             <input type="hidden" class="form-control" name="warehouse_name" value="">
+                                            <input type="hidden" class="form-control" name="quantity" value="">
                                             <!-- <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Status</label> -->
                                             <select class="form-control" class="delivery_status" name="delivery_status"
                                                 id="delivery_status" value="">

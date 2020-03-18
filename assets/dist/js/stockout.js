@@ -111,7 +111,7 @@ $(document).ready(function(){
                    str+= ' <span class="err"></span>';
                  str+= '</td>';
                  str+= '<td class="purch_td">';
-                    str+= '<input type="text" class="form-control remaining_stocks" name="remaining_stocks[]" value="'+element.physical_count+'" readonly>';
+                    str+= '<input type="text" class="form-control remaining_stocks" name="remaining_stocks[]" value="'+element.stock_out+'" readonly>';
                   str+= ' <span class="err"></span>';
                 str+= ' </td>';
                 str+= ' <td class="purch_td">';
@@ -135,11 +135,14 @@ $(document).ready(function(){
 
      });
 
-     $("#editStockOut").on("click", function(e){
+     $("#editStockOut").on("submit", function(e){
          e.preventDefault();
          var stockmovement_id = $('input[name="stockmovement_id"]').val();
          var quantity = $('input[name="quantity[]"]').val();
 
+         console.log('buang');
+
+         console.log(stockmovement_id);
          console.log(quantity);
 
          $.ajax({
@@ -161,7 +164,8 @@ $(document).ready(function(){
              }
 
          });
-     })
+     });
+
      var stockout_tbl = $('.stockout_tbl').DataTable({
     "processing"  : true,
     "serverside"  : true,
