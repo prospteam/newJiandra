@@ -29,7 +29,8 @@ class  Stocktransfer extends MY_Controller {
 
 		$where = array(
 			'stock_movement.status !=' => 3,
-			'type' => 2
+			'transfer_status' => 2,
+			// 'type' => 2
 		);
 		$group = array('stock_movement.stockmovement_code');
 		$join = array(

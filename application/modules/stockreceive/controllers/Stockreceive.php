@@ -23,7 +23,6 @@ class Stockreceive extends MY_Controller {
 
 		$column_order = array('stockmovement_code','stockmovement_date','from_warehouse','transferred_warehouse','date_delivered','stockmovemenent_note','status');
 
-
 		$where = array(
 			'sm.status !=' => 3,
             'transfer_status' => 1,
@@ -37,7 +36,6 @@ class Stockreceive extends MY_Controller {
 		sm.stockmovement_note,sm.status, sm.transfer_status, products.product_name, sm.stockmovement_code, (SELECT wh_name FROM warehouse_management WHERE id = sm.from_warehouse ) AS sm_from_warehouse, (SELECT wh_name FROM warehouse_management WHERE id = sm.transferred_warehouse ) AS sm_transferred_warehouse";
 
 		$list = $this->MY_Model->get_datatables('stock_movement as sm',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
-
 
 		$output = array(
 				"draw" => $draw,
@@ -57,7 +55,9 @@ class Stockreceive extends MY_Controller {
 		$parameters['select'] = 'stock_movement.*, products.id AS product_id, products.*';
 
 		$data = $this->MY_Model->getRows('stock_movement',$parameters);
-
+		// echo "<pre>";
+		//  print_r($data);
+		//  exit;
 		$data_array['stockout'] = $data;
 		json($data_array);
 	}
@@ -89,20 +89,21 @@ class Stockreceive extends MY_Controller {
 
 		$param['where'] = array('stockmovement_code' => $post['id'], 'purchase_orders.status' => 4);
 		$param['group'] = array('purchase_orders.warehouse_id', 'purchase_orders.product');
-		$param['join'] = array('purchase_orders' => 'purchase_orders.product = stock_movement.product');
+		$param['join'] = array(
+			'purchase_orders' => 'purchase_orders.product = stock_movement.product',
+			'stocks'          => 'stocks.physical_count = stockmovement.transfer_status'
+		);
 		$param['select'] = "stock_movement.quantity, stock_movement.product, from_warehouse, purchase_orders.id";
 		$data1['prod_transfer'] = $this->MY_Model->getRows('stock_movement', $param);
 
-
-		echo "<pre>";
-		print_r($this->db->last_query());
-		exit;
 		foreach($post['Remarks'] as $key => $value){
 
 			$data = array(
 						'cancel_transfer_note' => $value,
 						'transfer_status' => 3
 					);
+
+
 			$update = $this->MY_Model->update('stock_movement', $data, array('stockmovement_code' => $post['id']));
 			if ($update) {
 				$response = array(

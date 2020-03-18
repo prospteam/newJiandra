@@ -50,6 +50,7 @@ $(document).ready(function(){
 
      //view list of products to be transferred
      $(document).on('click', '.viewstockreceieve', function(){
+
         var id = $(this).attr('data-id');
         $.ajax({
           method: 'POST',

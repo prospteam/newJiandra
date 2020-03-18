@@ -154,9 +154,7 @@ class Stocksmanagement extends MY_Controller {
 
 	//get products by warehouse
 	public function get_products_by_warehouse(){
-		// echo "<pre>";
-		// print_r($this->input->post());
-		// exit;
+
 		$from_wh_id = $this->input->post('from_warehouse_id');
 
 		$param['where']		= array('s.warehouse_id' => $from_wh_id);
@@ -169,9 +167,7 @@ class Stocksmanagement extends MY_Controller {
 
 	public function addStockMovement(){
 		$post = $this->input->post();
-		// echo "<pre>";
-		// print_r($post);
-		// exit;
+
 		$id = $this->input->post('stockmovement_id');
 		$stockmovement_id = $id + 1;
 		$code = sprintf('%04d',$stockmovement_id);
@@ -194,7 +190,6 @@ class Stocksmanagement extends MY_Controller {
 			$warehouse 			= NULL;
 			$transfer_status 	= NULL;
 		}
-
 		foreach($post['stock_id'] as $sKey => $sVal){
 			$parameters['where'] = array('stock_id' => $sVal);
 			$parameters['select'] = 'physical_count, product';
@@ -207,9 +202,7 @@ class Stocksmanagement extends MY_Controller {
 				}
 			}
 		}
-		// echo "<pre>";
-		// print_r($errormsg);
-		// exit;
+
 		if(!empty($errormsg)){
 			$response = $errormsg;
 		}else{

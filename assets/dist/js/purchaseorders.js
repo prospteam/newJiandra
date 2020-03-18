@@ -435,7 +435,6 @@ $(document).ready(function(){
                         str += variance;
                    str += '</td>';
                   if(element.delivery_status == 4){
-
                     str += '<td class="purch_td submit_delivered">';
                     str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_delivered"><i class="fa fa-edit"></i></a>';
                     str += '<a href="javascript:;" class="btn btn-xs btn-success submit_delivered_qty" hidden><i class="fa fa-check"></i></a>';

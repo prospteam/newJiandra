@@ -16,6 +16,8 @@ $(document).ready(function(){
     }
   });
 
+
+
   //display purchase_tbl
     var purchase_tbl = $('.stocks_tbl').DataTable({
          "processing": true, //Feature control the processing indicator.
@@ -334,12 +336,10 @@ $(document).on('click', '.generatereport', function(){
         let proceed = 0;
 
         $(document).find('.stock_prod_code').each(function(){
-
             if ($(this).val() == '' || $(this).val() == null) {
                 proceed = 1;
             }
         })
-
         if (proceed) {
             Swal.fire("Warning", "Please select an item first","warning");
             return false;

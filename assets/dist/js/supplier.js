@@ -288,6 +288,7 @@ $(document).ready(function(){
    //edit supplier
    $(document).on('click', '.editSupplier', function(){
      var id = $(this).attr('data-id');
+     
      $('.editcompany').attr('data-comp_id', $(this).data('comp'));
      $.ajax({
          url: base_url+'supplier/supplier_details',

@@ -274,6 +274,31 @@ class Supplier extends MY_Controller
 		$data_array['company'] = $data_company;
 		json($data_array);
 	}
+	//view details for edit
+	public function supplier_details(){
+
+		$supplier_id = $this->input->post('id');
+
+		$data_array = array();
+
+		$parameters['join'] = array(
+			'company' => 'company.company_id = supplier.company'
+		);
+		$parameters['where'] = array('supplier.id' => $supplier_id);
+		$parameters['select'] = '*';
+
+		$data = $this->MY_Model->getRows('supplier',$parameters,'row');
+		$company_id = explode(',',$data->company);
+
+		$company_parameters['where_in'] = array('col' => 'company_id', 'value' => $company_id);
+		$data_company = $this->MY_Model->getRows('company',$company_parameters);
+
+		$data_array['supplier'] = $data;
+		$data_array['contact_info'] = json_decode($data->contact_info);
+		$data_array['company'] = $data_company;
+
+		json($data_array);
+	}
 
 	//display companies for adding supplier
 	public function add_supplier_companies(){
@@ -328,47 +353,6 @@ class Supplier extends MY_Controller
 		$datas['delete'] = $this->MY_Model->update('supplier',$data,array('id' => $supplier_id));
 		// echo $this->db->last_query();
 		echo json_encode($datas);
-	}
-	//Permanently Delete user
-// 	public function deleteSupplier()
-// 	{
-// 		$supplier_id = $this->input->post('id');
-// 		$supplier_status = 3;
-// 		$data = array(
-// 			'status' => $supplier_status
-// 		);
-// 		$datas['delete'] = $this->MY_Model->update('supplier',$data,array('id' => $supplier_id));
-// 		echo json_encode($datas);
-// 	}
-// }
-	//view details for edit
-	public function supplier_details(){
-		// $supplier_id = $this->input->post('id');
-		// $parameters['where'] = array('id' => $supplier_id);
-		// $data['view_edit'] = $this->MY_Model->getRows('supplier',$parameters,'row');
-		// // echo $this->db->last_query();
-		// echo json_encode($data);
-		$supplier_id = $this->input->post('id');
-
-		$data_array = array();
-
-		$parameters['join'] = array(
-			'company' => 'company.company_id = supplier.company'
-		);
-		$parameters['where'] = array('supplier.id' => $supplier_id);
-		$parameters['select'] = '*';
-
-		$data = $this->MY_Model->getRows('supplier',$parameters,'row');
-		$company_id = explode(',',$data->company);
-
-		$company_parameters['where_in'] = array('col' => 'company_id', 'value' => $company_id);
-		$data_company = $this->MY_Model->getRows('company',$company_parameters);
-
-		$data_array['supplier'] = $data;
-		$data_array['contact_info'] = json_decode($data->contact_info);
-		$data_array['company'] = $data_company;
-
-		json($data_array);
 	}
 
 	// Edit Supplier

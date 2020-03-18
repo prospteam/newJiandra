@@ -39,9 +39,6 @@
                             <p class="date_delivered"></p> <br>
                           </div>
                         </div>
-
-
-
                             <div class="table-responsive view_purchase_orders_details" id="view_stockreceive">
                                   <table class="table table-bordered table-striped stocks purchase" role="grid" aria-describedby="example1_info" id="add_new_product">
                                     <thead>
@@ -49,31 +46,28 @@
                                         <th class="header-title purch">Product </th>
                                         <th class="header-title purch">Remaining Stocks </th>
                                         <th class="header-title purch">Quantity </th>
-
-
                                     </thead>
                                     <tbody>
 
                                     </tbody>
                                   </table>
                             </div>
-
-                      <hr>
+                            <hr>
                       <div class="row summary">
                         <div class="col-6">
                               <label for="note">Note: </label>
                               <p class="note"></p> <br>
                         </div>
                         <div class="col-md-12 col-lg-6 order-md-2">
-                                        <div class="form-horizontal">
-                                            <div class="form-group row m-b-10">
-                                                <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Total Quantity</label>
-                                                <div class="col-lg-8 col-md-12">
-                                                    <input type="text" class="form-control disabled-normal qty" readonly="" disabled="" value="">
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="form-horizontal">
+                                <div class="form-group row m-b-10">
+                                    <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Total Quantity</label>
+                                    <div class="col-lg-8 col-md-12">
+                                        <input type="text" class="form-control disabled-normal qty" readonly="" disabled="" value="">
                                     </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary add">Submit</button>
@@ -82,11 +76,8 @@
                     </div>
                   </div>
               </form>
-                </div>
-
+            </div>
           <!-- End View stock receive Modal -->
-
-
         </div>
     </section>
 

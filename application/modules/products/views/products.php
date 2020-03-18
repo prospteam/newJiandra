@@ -249,7 +249,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header bg-info1">
                                         <h5 class="modal-title" id="exampleModalLabel">Edit New Cost Price</h5>
-                                        <input type="hidden" class="form-control edit_cost_sell_price_id" name="edit_cost_sell_price_id"  value="">
+                                        <input type="hidden" class="form-control edit_cost_sell_price_id" name="cost_sell_price_id_edit"  value="">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>

@@ -17,13 +17,10 @@ $(document).ready(function () {
              if (response.status==true) {
               Swal.fire("Successfully added products!", 'Success', "success");
               blankVal_products();
-              // $('form#addproducts').reset();
           }else {
-                // Swal.fire("Error", 'Please fill out required fields', "error");
                 for (var i = 0; i < response.return.input_name.length; i++) {
                     console.log( response.return.input_name[i], response.return.input_error[i]);
                     $("input[name="+response.return.input_name[i]+"]").css('border-color', 'red');
-                    // $("select[name="+response.return.input_name[i]+"]").css('border-color', 'red');
                 }
           }
             $(".products_tbl").DataTable().ajax.reload();
@@ -31,6 +28,7 @@ $(document).ready(function () {
       });
    });
    // END ADD PRODUCTS
+
    $(document).on('submit','#add_costPrice', function (e){
        e.preventDefault();
 
@@ -115,48 +113,50 @@ $(document).ready(function () {
 
    });
    // end edit Products
-
-   // Edit Cost Price
-       $(document).on('click', '.edit_cost', function() {
-           var id = $(this).attr('data-id');
-           $.ajax({
-               method: 'POST',
-               url: base_url+'products/edit_cost_price',
-               data: {id:id},
-               dataType: 'json',
-               success: function(data){
-                    console.log(data);
-                   $('#edit_cost_price').modal('show');
-                   $('#edit_cost_price .edit_cost_sell_price_id').val(data.products_cost_price.id);
-                   $('#edit_cost_price input[name="cost_price"]').val(data.products_cost_price.cost_price);
-                   $('#edit_cost_price input[name="sell_price"]').val(data.products_cost_price.sell_price);
-                   $('#edit_cost_price input[name="effective_date"]').val(data.products_cost_price.effective_date);
-               }
-           });
+   $(document).on('click', '.edit_cost', function() {
+       var id = $(this).attr("data-id");
+       $.ajax({
+           method: 'POST',
+           url: base_url+'products/cost_sell_edit',
+           data: {id:id},
+           dataType: 'json',
+           success: function(data){
+                console.log(data);
+               $('#edit_cost_price').modal('show');
+               $('#edit_cost_price .edit_cost_sell_price_id').val(data.cost_id);
+               $('#edit_cost_price input[name="cost_price"]').val(data.cost_price.cost_price);
+               $('#edit_cost_price input[name="sell_price"]').val(data.cost_price.sell_price);
+               $('#edit_cost_price input[name="effective_date"]').val(data.cost_price.effective_date);
+           }
        });
-   // END Edit Cost Price
+   });
+   // Edit Cost Price
 
+   // END Edit Cost Price
       $(document).on("click", ".costprice", function () {
          var id = $(this).attr("data-id");
           $('.add_new_cost_btn').attr('data-id', id);
          // product_id
          $('#view_cost_price').modal('show')
          var str = '';
-         // alert(id);
          $.ajax({
             method: 'POST',
-            url: base_url + 'products/view_cost_sell_price',
+            url: base_url + 'products/cost_sell_edit',
             data: { id: id },
             dataType: "json",
             success: function (data) {
                console.log(data);
+
+               if (data.cost_price.length == 0) {
+                      str += '<tr>';
+                      $('.no_products_found').show();
+                      str+= '<td class= "purch_td">';
+                      str = " ";
+                      str += '</td>';
+                      str += '</tr>';
+               }else{
                    $.each(data.cost_price,function(index,element){
-                          console.log(element);
-                       if (data.cost_price.length == 0) {
-                           $('.no_products_found').show();
-                       }else {
                        $('.prod_cost_name').text(element.volume +''+ element.unit + '/'+ element.packing +'/'+ element.brand +'/'+element.product_name);
-                       console.log(data);
                        $('.no_products_found').hide();
                        str += '<tr>';
                            str+= '<td class= "purch_td">';
@@ -169,20 +169,17 @@ $(document).ready(function () {
                                str+= element.effective_date;
                            str+= '</td>';
                            str+= '<td class="purch_td">'
-                               str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_cost" data-id="'+ element.id +'"><i class="fa fa-edit"></i></a>';
-                               str += '<a href="javascript:;" class="btn btn-xs btn-danger delete_cost" data-id="'+element.id +'"><i class="fa fa-trash"></i></a>';
+                               str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_cost" data-id="'+ element.cost_id +'"><i class="fa fa-edit"></i></a>';
+                               str += '<a href="javascript:;" class="btn btn-xs btn-danger delete_cost" data-id="'+element.cost_id +'"><i class="fa fa-trash"></i></a>';
                            str+= '</td>'
                        str+= '</tr>';
-                   }
-                   $('#add_new_cost_price tbody').html(str);
                    });
+               }
+               $('#add_new_cost_price tbody').html(str);
             }
 
         });
-        // alert(2);
       });
-
-
 
    // add cost price
    $(document).on("click", ".add_new_cost_btn", function () {
@@ -196,7 +193,7 @@ $(document).ready(function () {
    $(document).on('submit', '#edit_costPrice', function(e){
        e.preventDefault();
 
-       var formData = new FormData($(this)[0]);
+       let formData = new FormData($(this)[0]);
        var id = $('.edit_cost_sell_price_id').val();
        formData.append("id", id);
        $.ajax({
@@ -213,11 +210,9 @@ $(document).ready(function () {
                    $('#edit_cost_price').modal('hide');
                    console.log(data.success);
                    Swal.fire("Cost Price has been Updated!", data.success, 'success');
-                    // $(`.costprice[data-id='${product_id}']`).trigger('click');
                }else {
                    Swal.fire("Error!", data.status, 'invalid');
                }
-               // $('#add_new_cost_price tbody').html(str);
            }
        })
    });

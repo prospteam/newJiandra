@@ -103,7 +103,6 @@ class Products extends MY_Controller {
 			$product_id = $this->input->post('id');
 
 			$data_array = array();
-
 			$parameters['select'] = '*';
 			$parameters['where'] = array('products.id'=>$product_id);
 			$parameters['join'] = array('supplier as s' => 's.id = products.supplier');
@@ -113,18 +112,21 @@ class Products extends MY_Controller {
 			json($data_array);
 
 		}
-
-		public function view_cost_sell_price(){
+		public function cost_sell_edit(){
 			$product_id = $this->input->post('id');
 			$data_array = array();
-			$parameters['select'] = '*';
+			// $parameters['select'] = '*';
+			$parameters['select'] = 'products_cost_price.id as cost_id, , products_cost_price.cost_price, products_cost_price.sell_price, products_cost_price.added_by,
+			 products_cost_price.effective_date,products_cost_price.date_updated, products_cost_price.status, products_cost_price.fk_product_id, products.volume, products.packing, products.unit, products.brand, products.product_name';
+
 			$parameters['where'] = array('fk_product_id'=>$product_id);
 			$parameters['join']   = array('products' => 'products.id = products_cost_price.fk_product_id');
 
 			$data = $this->MY_Model->getrows('products_cost_price',$parameters);
-
-
-
+			// echo $this->db->last_query();
+			// echo "<pre>";
+			//  print_r($data);
+			//  exit;
 			$data_array['cost_price'] = $data;
 			json($data_array);
 
@@ -132,7 +134,6 @@ class Products extends MY_Controller {
 		public function edit_cost_sell_price(){
 			$cost_id = $this->input->post('id');
 			$post = $this->input->post();
-
 			$result = false;
 
 			if (!empty($post)) {
