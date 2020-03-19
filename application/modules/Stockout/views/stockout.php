@@ -15,14 +15,14 @@
                 <div class="modal-content">
                 <div class="modal-content">
                   <div class="modal-header bg-info1">
-                    <h5 class="modal-title" id="exampleModalLabel"> Edit Stock Transfer</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"> Edit Stock Out</h5>
                     <input type="hidden" class="form-control stockout_id" name="stockout_id" value="">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
                   <div class="modal-body">
-                    <div class="form-horizontal">
+                    <!-- <div class="form-horizontal">
                         <div class="form-group row m-b-10">
                         <label for="sodate" class="col-md-12 col-lg-4 col-form-label"> Date: <span class="text-red">*</span></label>
                         <div class="col-lg-8 col-md-12">
@@ -34,8 +34,8 @@
                             </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="form-horizontal">
+                    </div> -->
+                    <!-- <div class="form-horizontal">
                         <div class="form-group row m-b-10">
                         <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Type: <span class="text-red">*</span></label>
                         <div class="col-lg-8 col-md-12">
@@ -49,8 +49,8 @@
                             </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="form-horizontal warehouse" style="display:none">
+                    </div> -->
+                    <!-- <div class="form-horizontal warehouse" style="display:none">
                         <div class="form-group row m-b-10">
                         <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Warehouse: <span class="text-red">*</span></label>
                         <div class="col-lg-8 col-md-12">
@@ -65,8 +65,8 @@
                             </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="form-horizontal">
+                    </div> -->
+                    <!-- <div class="form-horizontal">
                         <div class="form-group row m-b-10">
                         <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Date Delivered: <span class="text-red">*</span></label>
                         <div class="col-lg-8 col-md-12">
@@ -78,7 +78,7 @@
                             </div>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                     <div class="table-responsive view_stock_transfer1">
                           <table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="view_stock_out">
                             <thead>
