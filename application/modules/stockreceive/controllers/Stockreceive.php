@@ -86,7 +86,9 @@ class Stockreceive extends MY_Controller {
 	//decline transaction for transfer stocks
 	public function decline_transfer(){
 		$post = $this->input->post();
-
+		// echo "<pre>";
+		// print_r($post);
+		// exit;
 		$param['where'] = array('stockmovement_code' => $post['id'], 'purchase_orders.status' => 4);
 		$param['group'] = array('purchase_orders.warehouse_id', 'purchase_orders.product');
 		$param['join'] = array(
@@ -97,13 +99,10 @@ class Stockreceive extends MY_Controller {
 		$data1['prod_transfer'] = $this->MY_Model->getRows('stock_movement', $param);
 
 		foreach($post['Remarks'] as $key => $value){
-
 			$data = array(
-						'cancel_transfer_note' => $value,
-						'transfer_status' => 3
+					'cancel_transfer_note' => $value,
+					'transfer_status' => 3
 					);
-
-
 			$update = $this->MY_Model->update('stock_movement', $data, array('stockmovement_code' => $post['id']));
 			if ($update) {
 				$response = array(
@@ -111,9 +110,6 @@ class Stockreceive extends MY_Controller {
 				);
 			}
 		}
-		// echo "<pre>";
-		// print_r($response);
-		// exit;
 		json($data1);
 		echo json_encode($response);
 	}

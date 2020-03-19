@@ -157,12 +157,7 @@ $(document).ready(function(){
                var str = '';
                var total_quantity = 0;
                $.each(data.stock_movement,function(index,element){
-                 console.log(element.stockmovement_date);
-
-               $('#editstocktransfer input[name="sodate"]').val(element.stockmovement_date);
-               $('#editstocktransfer select[name="so_type"]').val(element.type);
-               $('#editstocktransfer input[name="so_datedelivered"]').val(element.date_delivered);
-
+                 console.log(element);
                str+= '<tr>';
                str += '<td class="purch_td hide">';
                str += '<input type="hidden" class="form-control stocktransfer_id" name="stocktransfer_id[]" value='+element.id+'>';
@@ -240,13 +235,11 @@ $(document).ready(function(){
                     str += element.quantity;
                     str += '</td>';
                 str += '</tr>';
-
                 $('.note').text(element.stockmovement_note);
              });
              $('.qty').val(total_quantity);
              $('#view_stocktransfer tbody').html(str);
           }
-
      });
    });
      // END VIEW Stocktransfer

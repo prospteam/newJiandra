@@ -44,8 +44,8 @@
                                     <thead>
                                         <th class="header-title purch">SKU </th>
                                         <th class="header-title purch">Product </th>
-                                        <th class="header-title purch">Remaining Stocks </th>
-                                        <th class="header-title purch">Quantity </th>
+                                        <th class="header-title purch">Transferred Stocks </th>
+                                        <th class="header-title purch">Actual Quantity </th>
                                     </thead>
                                     <tbody>
 

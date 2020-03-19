@@ -257,28 +257,28 @@
                                         <div class="modal-body">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="cost_price">Cost: <span class="required">*</span></label>
-                                                        <input type="text" class="form-control number_only" name="cost_price" value="">
+                                                        <label for="cost_price_edit">Cost: <span class="required">*</span></label>
+                                                        <input type="text" class="form-control number_only" name="cost_price_edit" value="">
                                                         <span class="err"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="sell_price">Sell: <span  class="required">*</span></label>
-                                                        <input type="text" class="form-control number_only" name="sell_price" value="">
+                                                        <label for="sell_price_edit">Sell: <span  class="required">*</span></label>
+                                                        <input type="text" class="form-control number_only" name="sell_price_edit" value="">
                                                         <span class="err"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="effective_date">Effective Date<span  class="required">*</span></label>
+                                                        <label for="effective_date_edit">Effective Date<span  class="required">*</span></label>
                                                         <div class="form-group">
                                                             <div class="input-group m-b-0">
                                                                 <div class="input-group-prepend">
                                                                     <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                                                 </div>
                                                                 <!-- <input type="input" class="form-control datepicker" name="effective_date" value=""> -->
-                                                                <input type="type" class="form-control datepicker" name="effective_date" value="<?php echo date('F d, Y'); ?>">
+                                                                <input type="type" class="form-control datepicker" name="effective_date_edit" value="<?php echo date('F d, Y'); ?>">
                                                             </div>
                                                         </div>
                                                         <span class="err"></span>

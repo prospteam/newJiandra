@@ -16,8 +16,6 @@ $(document).ready(function(){
     }
   });
 
-
-
   //display purchase_tbl
     var purchase_tbl = $('.stocks_tbl').DataTable({
          "processing": true, //Feature control the processing indicator.

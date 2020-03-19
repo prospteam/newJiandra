@@ -579,6 +579,7 @@ $(document).ready(function(){
   //view edit Orders
   $(document).on('click', '.editPurchase', function(){
     var id = $(this).attr('data-id');
+
     $.ajax({
         url: base_url+'purchaseorders/purchase_details',
         data: {id:id},

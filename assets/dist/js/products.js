@@ -115,18 +115,20 @@ $(document).ready(function () {
    // end edit Products
    $(document).on('click', '.edit_cost', function() {
        var id = $(this).attr("data-id");
+       // alert('hih');
        $.ajax({
            method: 'POST',
            url: base_url+'products/cost_sell_edit',
            data: {id:id},
            dataType: 'json',
            success: function(data){
+               console.log('asdf');
                 console.log(data);
                $('#edit_cost_price').modal('show');
-               $('#edit_cost_price .edit_cost_sell_price_id').val(data.cost_id);
-               $('#edit_cost_price input[name="cost_price"]').val(data.cost_price.cost_price);
-               $('#edit_cost_price input[name="sell_price"]').val(data.cost_price.sell_price);
-               $('#edit_cost_price input[name="effective_date"]').val(data.cost_price.effective_date);
+               $('#edit_cost_price .edit_cost_sell_price_id').val(data.cost_price[0].cost_id);
+               $('#edit_cost_price input[name="cost_price_edit"]').val(data.cost_price[0].cost_price);
+               $('#edit_cost_price input[name="sell_price_edit"]').val(data.cost_price[0].sell_price);
+               $('#edit_cost_price input[name="effective_date_edit"]').val(data.cost_price[0].effective_date);
            }
        });
    });
@@ -141,15 +143,16 @@ $(document).ready(function () {
          var str = '';
          $.ajax({
             method: 'POST',
-            url: base_url + 'products/cost_sell_edit',
+            url: base_url + 'products/cost_sell_tbl',
             data: { id: id },
             dataType: "json",
             success: function (data) {
                console.log(data);
 
-               if (data.cost_price.length == 0) {
+               if (data.cost_price.length === 0) {
                       str += '<tr>';
                       $('.no_products_found').show();
+                         $('.prod_cost_name').text('No Price Available');
                       str+= '<td class= "purch_td">';
                       str = " ";
                       str += '</td>';
@@ -194,8 +197,9 @@ $(document).ready(function () {
        e.preventDefault();
 
        let formData = new FormData($(this)[0]);
-       var id = $('.edit_cost_sell_price_id').val();
+       var id = $('input[name="cost_sell_price_id_edit"]').val();
        formData.append("id", id);
+
        $.ajax({
            method: 'POST',
            url: base_url+'products/edit_cost_sell_price',
@@ -205,11 +209,12 @@ $(document).ready(function () {
            cache: false,
            dataType: 'json',
            success: function(data){
-               console.log(data);
+               console.log(id);
                if (data.status == 'ok') {
-                   $('#edit_cost_price').modal('hide');
                    console.log(data.success);
                    Swal.fire("Cost Price has been Updated!", data.success, 'success');
+                    location.reload();
+
                }else {
                    Swal.fire("Error!", data.status, 'invalid');
                }
@@ -224,7 +229,6 @@ $(document).ready(function () {
       let formData = new FormData($(this)[0]);
       var id = $('input[name="products_edit_id"]').val();
       formData.append("id", id);
-
       $.ajax({
          method: 'POST',
          url: base_url + 'products/edit_products',
@@ -251,7 +255,6 @@ $(document).ready(function () {
     $(document).on("click", '.delete_cost', function(e){
         e.preventDefault();
         var id = $(this).attr('data-id');
-
         Swal.fire({
             title: 'Are you sure?',
             text: "You want to permanently delete this Price!",
@@ -267,12 +270,13 @@ $(document).ready(function () {
                    'Successfully Deleted Product!',
                    'success'
                 )
+                location.reload();
                 $.ajax({
                    type: 'POST',
                    url: base_url + 'products/delete_price',
                    data: { id: id },
-                   success: function (data) {
-                      $(".add_new_cost_price_tbl").DataTable().ajax.reload();
+                   success:
+                   function (data) {
                    }
                 })
             }
