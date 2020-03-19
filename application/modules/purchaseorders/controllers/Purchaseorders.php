@@ -359,6 +359,7 @@ class Purchaseorders extends MY_Controller {
 		$data = array('delivery_status' => $post['delivery_status'], 'delivery_remarks' => $remarks);
 
 		$data['delivStat'] = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['purchase_code_delivery']));
+
 		$params['where'] = array('product' => $post['product'], 'warehouse_id' => $post['warehouse_id']);
 		$params['select'] = '*';
 		$res = $this->MY_Model->getRows('stocks', $params,'row');

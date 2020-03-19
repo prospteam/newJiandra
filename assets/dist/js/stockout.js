@@ -81,15 +81,14 @@ $(document).ready(function(){
           data: {stockmovement_id:stockmovement_id},
           dataType: "json",
           success: function(data){
-              console.log('data');
-             console.log(data);
                // console.log("data");
                // alert("hi");
                // alert('hi');
                $('#editStockOut').modal('show');
                     var str = '';
                     $.each(data.stock_movement,function(index,element){
-                       console.log(element.stockmovement_date);
+
+                    var total_quantity  =  parseInt(element.quantity) + parseInt(element.physical_count);
 
                $('#editstockout input[name="sodate"]').val(element.stockmovement_date);
                $('#editstockout select[name="so_type"]').val(element.type);
@@ -111,7 +110,7 @@ $(document).ready(function(){
                    str+= ' <span class="err"></span>';
                  str+= '</td>';
                  str+= '<td class="purch_td">';
-                    str+= '<input type="text" class="form-control remaining_stocks" name="remaining_stocks[]" value="'+element.stock_out+'" readonly>';
+                    str+= '<input type="text" class="form-control remaining_stocks" name="remaining_stocks[]" value="'+total_quantity+'" readonly>';
                   str+= ' <span class="err"></span>';
                 str+= ' </td>';
                 str+= ' <td class="purch_td">';
