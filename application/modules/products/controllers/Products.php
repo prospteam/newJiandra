@@ -112,18 +112,36 @@ class Products extends MY_Controller {
 			json($data_array);
 
 		}
-		public function cost_sell_edit(){
+		public function cost_sell_tbl(){
 			$product_id = $this->input->post('id');
 			$data_array = array();
-			// $parameters['select'] = '*';
+
 			$parameters['select'] = 'products_cost_price.id as cost_id, , products_cost_price.cost_price, products_cost_price.sell_price, products_cost_price.added_by,
 			 products_cost_price.effective_date,products_cost_price.date_updated, products_cost_price.status, products_cost_price.fk_product_id, products.volume, products.packing, products.unit, products.brand, products.product_name';
 
-			$parameters['where'] = array('fk_product_id'=>$product_id);
+			$parameters['where'] = array(
+				'fk_product_id'=>$product_id,
+				'products_cost_price.status'=>0
+			);
 			$parameters['join']   = array('products' => 'products.id = products_cost_price.fk_product_id');
 
 			$data = $this->MY_Model->getrows('products_cost_price',$parameters);
-			// echo $this->db->last_query();
+
+			$data_array['cost_price'] = $data;
+			json($data_array);
+		}
+
+		public function cost_sell_edit(){
+			$product_id = $this->input->post('id');
+			$data_array = array();
+
+			$parameters['select'] = 'products_cost_price.id as cost_id , products_cost_price.cost_price, products_cost_price.sell_price, products_cost_price.added_by,
+			 products_cost_price.effective_date,products_cost_price.date_updated, products_cost_price.status, products_cost_price.fk_product_id, products.volume, products.packing, products.unit, products.brand, products.product_name';
+
+			$parameters['where'] = array('products_cost_price.id'=>$product_id);
+			$parameters['join']   = array('products' => 'products.id = products_cost_price.fk_product_id');
+
+			$data = $this->MY_Model->getrows('products_cost_price',$parameters);
 			// echo "<pre>";
 			//  print_r($data);
 			//  exit;
@@ -135,16 +153,13 @@ class Products extends MY_Controller {
 			$cost_id = $this->input->post('id');
 			$post = $this->input->post();
 			$result = false;
-
 			if (!empty($post)) {
 				$data = array(
-						// 'id'
-						'cost_price'     => $post['cost_price'],
-						'sell_price'	 => $post['sell_price'],
-						'effective_date' => $post['effective_date'],
+						'cost_price'     => $post['cost_price_edit'],
+						'sell_price'	 => $post['sell_price_edit'],
+						'effective_date' => $post['effective_date_edit'],
 
 				);
-
 				$update = $this->MY_Model->update('products_cost_price', $data, array('id' => $cost_id) );
 
 				if ($update) {
@@ -188,21 +203,6 @@ class Products extends MY_Controller {
 				die($result);
 			}
 
-		public function edit_cost_price(){
-
-			$cost_id = $this->input->post('id');
-			$data_array = array();
-
-			$parameters['select'] = '*';
-			$parameters['where'] = array('id'=>$cost_id);
-
-			$data = $this->MY_Model->getrows('products_cost_price',$parameters);
-
-			$data_array['products_cost_price'] = $data;
-
-			json($data_array);
-		}
-
 		public function enable_products(){
 
 				$product_id = $this->input->post('id');
@@ -243,7 +243,7 @@ class Products extends MY_Controller {
 					'status' => $cost_status
 				);
 				$datas['delete'] = $this->MY_Model->update('products_cost_price',$data,array('id' => $cost_id));
-				// echo $this->db->last_query();
+
 				echo json_encode($datas);
 		}
 		// }

@@ -365,6 +365,7 @@ $(document).ready(function(){
   //view list of Orders
   $(document).on('click', '.viewPurchase', function(){
      var id = $(this).attr('data-id');
+     // alert('hi');
      $.ajax({
        method: 'POST',
        url: base_url + 'purchaseorders/view_purchase_orders',
@@ -433,6 +434,11 @@ $(document).ready(function(){
                   str += '</td>';
                   str +=  '<td class="purch_td edit_variance">';
                     var variance = element.quantity - element.delivered;
+                        if (variance>=0) {
+                            $('.edit_variance').css({'color':'green'});
+                        } else {
+                            $('.edit_variance').css({'color':'red'});
+                        }
                         str += variance;
                    str += '</td>';
                   if(element.delivery_status == 4){
@@ -579,6 +585,7 @@ $(document).ready(function(){
   //view edit Orders
   $(document).on('click', '.editPurchase', function(){
     var id = $(this).attr('data-id');
+
     $.ajax({
         url: base_url+'purchaseorders/purchase_details',
         data: {id:id},

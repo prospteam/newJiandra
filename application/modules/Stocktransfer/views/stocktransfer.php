@@ -21,64 +21,7 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body">
-                    <div class="form-horizontal">
-                        <div class="form-group row m-b-10">
-                        <label for="sodate" class="col-md-12 col-lg-4 col-form-label"> Date: <span class="text-red">*</span></label>
-                        <div class="col-lg-8 col-md-12">
-                            <div class="input-group m-b-0">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                </div>
-                                <input type="text" class="form-control datepicker" name="sodate" value="<?php echo date('F d, Y'); ?>">
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-horizontal">
-                        <div class="form-group row m-b-10">
-                        <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Type: <span class="text-red">*</span></label>
-                        <div class="col-lg-8 col-md-12">
-                            <div class="input-group m-b-0">
-                                <select class="form-control" id="so_type" class="so_type" name="so_type" >
-                                  <option value="" selected hidden>Select Type</option>
-                                  <option value="1">Stock Out</option>
-                                  <option value="2">Stock Transfer</option>
-                            </select>
-                            <span class="err"></span>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-horizontal warehouse" style="display:none">
-                        <div class="form-group row m-b-10">
-                        <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Warehouse: <span class="text-red">*</span></label>
-                        <div class="col-lg-8 col-md-12">
-                            <div class="input-group m-b-0">
-                                <select class="form-control" class="warehouse" name="warehouse" >
-                                  <option value="" selected hidden>Select Warehouse</option>
-                                <?php foreach($warehouse as $k => $value) : ?>
-                                    <option value="<?php echo $value['id'] ?>"><?php echo $value['wh_name'] ?></option>
-                              <?php  endforeach; ?>
-                            </select>
-                                <span class="err"></span>
-                            </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="form-horizontal">
-                        <div class="form-group row m-b-10">
-                        <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Date Delivered: <span class="text-red">*</span></label>
-                        <div class="col-lg-8 col-md-12">
-                            <div class="input-group m-b-0">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"><i class="fa fa-calendar"></i></span>
-                                </div>
-                                <input type="text" class="form-control datepicker" name="so_datedelivered" value="<?php echo date('F d, Y'); ?>">
-                            </div>
-                        </div>
-                      </div>
-                    </div>
+                  <div class="modal-body ">
                     <div class="table-responsive view_stock_transfer1">
                           <table class="table table-bordered table-striped purchase" role="grid" aria-describedby="example1_info" id="view_stock_transfer">
                             <thead>
@@ -101,16 +44,13 @@
                       </div>
                       <div class="col-6">
                         <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Total Quantity <span class="text-red">*</span></label>
-
                             <input type="text" class="form-control disabled-normal total_quantity" name="total_quantity" readonly="" disabled="">
-
                       </div>
-
-                        </div>
+                    </div>
                   <br>
-                        <div class="modal-footer">
-                           <button type="submit" class="btn btn-primary add">Submit</button>
-                        </div>
+                    <div class="modal-footer">
+                       <button type="submit" class="btn btn-primary add">Submit</button>
+                    </div>
                   </div>
                   </div>
                 </div>

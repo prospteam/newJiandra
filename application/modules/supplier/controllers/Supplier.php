@@ -140,81 +140,77 @@ class Supplier extends MY_Controller
 
 					if ($this->form_validation->run() !== FALSE) {
 
-									if(count($company_name) >= 1){
-										$array = array();
-										for ($i=0; $i < count($this->input->post('contact_name')) ; $i++) {
-											$array[] = array(
-												"contact_name" => $this->input->post('contact_name')[$i],
-												"mobile_number" => $this->input->post('mobile_number')[$i],
-												"contact_email" => $this->input->post('contact_email')[$i],
-												"supp_position" => $this->input->post('supp_position')[$i],
+							if(count($company_name) >= 1){
+								$array = array();
+								for ($i=0; $i < count($this->input->post('contact_name')) ; $i++) {
+									$array[] = array(
+										"contact_name" => $this->input->post('contact_name')[$i],
+										"mobile_number" => $this->input->post('mobile_number')[$i],
+										"contact_email" => $this->input->post('contact_email')[$i],
+										"supp_position" => $this->input->post('supp_position')[$i],
+									);
+								}
+								foreach ($company_name as $key => $value) {
+
+									 $data = array(
+											'supplier_logo' 							=> 1,
+											'supplier_name' 							=> $this->input->post('supplier_name'),
+											'company' 										=> $value,
+											'email' 						        	=> $this->input->post('email'),
+											'address' 										=> $this->input->post('address'),
+											'office_number' 							=> $this->input->post('office_number'),
+											'fax_number' 									=> $this->input->post('fax_number'),
+										'notes'											=> $this->input->post('add_supplier_note'),
+											'tin_number' 									=> $this->input->post('tin_number'),
+										'contact_info'						  	=> json_encode($array),
+											'status' 											=> 1
+										// 'vendor' => $this->input->post('vendor'),
+										);
+
+										$insert = $this->MY_Model->insert('supplier', $data);
+										if ($insert) {
+											$response = array(
+												'status' => 'ok'
 											);
 										}
-										foreach ($company_name as $key => $value) {
+								}
+							}else{
+								$array = array();
+								for ($i=0; $i < count($this->input->post('contact_name')) ; $i++) {
+									$array[] = array(
+										"contact_name" => $this->input->post('contact_name')[$i],
+										"mobile_number" => $this->input->post('mobile_number')[$i],
+										"contact_email" => $this->input->post('contact_email')[$i],
+										"supp_position" => $this->input->post('supp_position')[$i],
+									);
+								}
+								 $data = array(
+									 'supplier_logo' 								=> 1,
+									 'supplier_name' 								=> $this->input->post('supplier_name'),
+									 'company' 									  	=> $value,
+									 'email' 						          	=> $this->input->post('email'),
+									 'address' 									  	=> $this->input->post('address'),
+									 'office_number' 						  	=> $this->input->post('office_number'),
+									 'fax_number' 									=> $this->input->post('fax_number'),
+									 'notes'											=> $this->input->post('add_supplier_note'),
+									 'tin_number' 									=> $this->input->post('tin_number'),
+									 'contact_info'						    	=> json_encode($array),
+									 'status' 									  	=> 1
+									 // 'vendor' => $this->input->post('vendor'),
+								 );
 
-											 $data = array(
- 												'supplier_logo' 							=> 1,
- 												'supplier_name' 							=> $this->input->post('supplier_name'),
- 												'company' 										=> $value,
- 												'email' 						        	=> $this->input->post('email'),
- 												'address' 										=> $this->input->post('address'),
- 												'office_number' 							=> $this->input->post('office_number'),
- 												'fax_number' 									=> $this->input->post('fax_number'),
-												'notes'											=> $this->input->post('add_supplier_note'),
- 												'tin_number' 									=> $this->input->post('tin_number'),
-												'contact_info'						  	=> json_encode($array),
- 												'status' 											=> 1
-												// 'vendor' => $this->input->post('vendor'),
- 											);
-
- 											$insert = $this->MY_Model->insert('supplier', $data);
- 											if ($insert) {
- 												$response = array(
- 													'status' => 'ok'
- 												);
- 											}
-										}
-
-									}else{
-										$array = array();
-										for ($i=0; $i < count($this->input->post('contact_name')) ; $i++) {
-											$array[] = array(
-												"contact_name" => $this->input->post('contact_name')[$i],
-												"mobile_number" => $this->input->post('mobile_number')[$i],
-												"contact_email" => $this->input->post('contact_email')[$i],
-												"supp_position" => $this->input->post('supp_position')[$i],
-											);
-										}
-										 $data = array(
-											 'supplier_logo' 								=> 1,
-											 'supplier_name' 								=> $this->input->post('supplier_name'),
-											 'company' 									  	=> $value,
-											 'email' 						          	=> $this->input->post('email'),
-											 'address' 									  	=> $this->input->post('address'),
-											 'office_number' 						  	=> $this->input->post('office_number'),
-											 'fax_number' 									=> $this->input->post('fax_number'),
-											 'notes'											=> $this->input->post('add_supplier_note'),
-											 'tin_number' 									=> $this->input->post('tin_number'),
-											 'contact_info'						    	=> json_encode($array),
-											 'status' 									  	=> 1
-											 // 'vendor' => $this->input->post('vendor'),
-										 );
-
-										 $insert = $this->MY_Model->insert('supplier', $data);
-										 if ($insert) {
-											 $response = array(
-												 'status' => 'ok'
-											 );
-										 }
-									}
-
-
+								 $insert = $this->MY_Model->insert('supplier', $data);
+								 if ($insert) {
+									 $response = array(
+										 'status' => 'ok'
+									 );
+								 }
+							}
 					}else{
 						$response = array('form_error' => $this->form_validation->error_array());
 					}
 				}
-
-					echo json_encode($response);
+				echo json_encode($response);
 			}
 		}
 

@@ -275,7 +275,7 @@ class Stocksmanagement extends MY_Controller {
 			);
 			$parameters['order'] = 'date_delivered DESC';
 			$parameters['limit'] = array(1,0);
-			$update = $this->MY_Model->update_1('purchase_orders', $data1,array('product' => $pVal, 'delivered !=' => 0, 'warehouse_id' => $post['from_warehouse']),$parameters );
+			// $update = $this->MY_Model->update_1('purchase_orders', $data1,array('product' => $pVal, 'delivered !=' => 0, 'warehouse_id' => $post['from_warehouse']),$parameters );
 
 			$update = $this->MY_Model->update('stocks', $data, array('stock_id' => $post['stock_id'][$pKey]), '', '');
 			if ($update) {
