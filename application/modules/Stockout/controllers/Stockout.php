@@ -50,7 +50,7 @@ class Stockout extends MY_Controller {
 
 			$data_array = array();
 
-			$parameters['where'] = array('stock_movement.stockmovement_id'=>$stocktrans_id);
+			//$parameters['where'] = array('stock_movement.stockmovement_id'=>$stocktrans_id);
 			$parameters['select'] = 'stockmovement_date, type, date_delivered, products.id, products.code, product_name, physical_count, quantity, stockmovement_note,stock_out';
 			// $parameters['select'] = 'products.code, stocks.physical_count, stockmovement_date, transferred_warehouse, date_delivered, products.status';
 			$parameters['join'] =  array(
@@ -58,10 +58,10 @@ class Stockout extends MY_Controller {
 			   'stocks' => 'stocks.code = products.code'
 			);
 			$data = $this->MY_Model->getrows('stock_movement',$parameters);
-			// echo "<pre>";
-			//  print_r($data);
-			//  exit;
-			// echo $this->db->last_query();
+			echo "<pre>";
+			 print_r($data);
+			 exit;
+			echo $this->db->last_query();
 
 			$data_array['stock_movement'] = $data;
 			json($data_array);
