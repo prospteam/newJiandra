@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '192.168.1.20',
-	'username' => 'spdb',
-	'password' => 'prospteam',
+	'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => '',
 	'database' => 'newjiandra_db',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',

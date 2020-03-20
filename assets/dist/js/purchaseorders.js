@@ -365,6 +365,7 @@ $(document).ready(function(){
   //view list of Orders
   $(document).on('click', '.viewPurchase', function(){
      var id = $(this).attr('data-id');
+     // alert('hi');
      $.ajax({
        method: 'POST',
        url: base_url + 'purchaseorders/view_purchase_orders',
