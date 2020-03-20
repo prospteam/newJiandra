@@ -433,6 +433,11 @@ $(document).ready(function(){
                   str += '</td>';
                   str +=  '<td class="purch_td edit_variance">';
                     var variance = element.quantity - element.delivered;
+                        if (variance>=0) {
+                            $('.edit_variance').css({'color':'green'});
+                        } else {
+                            $('.edit_variance').css({'color':'red'});
+                        }
                         str += variance;
                    str += '</td>';
                   if(element.delivery_status == 4){

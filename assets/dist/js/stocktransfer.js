@@ -319,7 +319,7 @@ $(document).ready(function(){
          ],
 
          "ajax": {
-             "url":base_url+"Stocktransfer/disp_stocktransfer/",
+             "url":base_url+"stocktransfer/disp_stocktransfer/",
              "type": "POST"
         },
         //Set column definition initialisation properties.

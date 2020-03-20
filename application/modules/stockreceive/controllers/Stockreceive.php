@@ -86,9 +86,9 @@ class Stockreceive extends MY_Controller {
 	//decline transaction for transfer stocks
 	public function decline_transfer(){
 		$post = $this->input->post();
-		// echo "<pre>";
-		// print_r($post);
-		// exit;
+		echo "<pre>";
+		print_r($post);
+		exit;
 		$param['where'] = array('stockmovement_code' => $post['id'], 'purchase_orders.status' => 4);
 		$param['group'] = array('purchase_orders.warehouse_id', 'purchase_orders.product');
 		$param['join'] = array(
