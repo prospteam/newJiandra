@@ -50,6 +50,7 @@ class Stockout extends MY_Controller {
 
 			$data_array = array();
 
+
 			//$parameters['where'] = array('stock_movement.stockmovement_id'=>$stocktrans_id);
 			$parameters['where'] = array('stock_movement.stockmovement_id'=>$stocktrans_id);
 			$parameters['select'] = 'stockmovement_date, type, date_delivered, products.id, products.code, product_name, physical_count, SUM(quantity) as quantity, stockmovement_note,stock_out';
@@ -59,9 +60,9 @@ class Stockout extends MY_Controller {
 			   'stocks' => 'stocks.code = products.code'
 			);
 			$data = $this->MY_Model->getrows('stock_movement',$parameters);
-			echo "<pre>";
-			 print_r($data);
-			 exit;
+			// echo "<pre>";
+			//  print_r($data);
+			//  exit;
 			// echo $this->db->last_query();
 
 			$data_array['stock_movement'] = $data;
@@ -75,13 +76,33 @@ class Stockout extends MY_Controller {
 			$stocktrans_id = $this->input->post('stockmovement_id');
 			$quantity = $this->input->post('quantity');
 
-			$parameters = array('stockmovement_id'=>$stocktrans_id);
+			//$parameters = array('stockmovement_id'=>$stocktrans_id);
 
-			$set = array('quantity' => $quantity);
+			//$set = array('quantity' => $quantity);
 
-			$data = $this->MY_Model->update('stock_movement',$set,$parameters);
+			//$data = $this->MY_Model->update('stock_movement',$set,$parameters);
 
-			json($data);
+			$parameters['where'] = array('stock_movement.stockmovement_id'=>$stocktrans_id);
+			$parameters['join'] = array('stocks' => 'stocks.product = stock_movement.product');
+			$parameters['select'] = array('quantity','physical_count','stock_id');
+
+			$datas = $this->MY_Model->getRows('stock_movement',$parameters);
+
+			foreach ($datas as $key => $value) {
+				$stock_out_quantity =  $value['physical_count'] - $value['quantity'];
+			}
+
+			$set = array(
+				'physical_count' => $stock_out_quantity
+			);
+
+			$stock_id = $datas[0]['stock_id'];
+
+			$params = array('stocks.stock_id'=>$stock_id);
+
+			$update = $this->MY_Model->update('stocks',$set,$params);
+
+			echo json_encode($update);
 		}
 		//End of submit edit
 
