@@ -157,10 +157,10 @@ class Purchaseorders extends MY_Controller {
 		$this->form_validation->set_rules('total[]', 'Total', 'required');
 		$error = array();
 
-		echo "<pre>";
-		 print_r($post);
-		 exit;
-		// if(empty($this->input->post('company[]'))){
+		// echo "<pre>";
+		//  print_r($post);
+		//  exit;
+		// // if(empty($this->input->post('company[]'))){
 		// 	$error['company'] = 'The Companies field is required.';
 		// }
 

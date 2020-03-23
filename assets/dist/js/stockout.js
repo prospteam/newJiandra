@@ -150,19 +150,16 @@ $(document).ready(function(){
              url: base_url+'stockout/stockout_submit_edit',
              data: {quantity:quantity,stockmovement_id:stockmovement_id},
              dataType: "json",
-             success: function(data){
-                 $("#edit_submit").on("click", function(){
-                     Swal.fire({
+             success: function(update){
+                 Swal.fire({
                      title: 'Successfully Updated',
                      text: "",
                      type: 'success',
                      confirmButtonText: 'Ok',
-                 }).then(function(){
+                }).then(function(){
                      location.reload();
                     })
-                 })
              }
-
          });
      });
 

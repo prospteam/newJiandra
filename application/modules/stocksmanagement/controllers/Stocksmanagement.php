@@ -253,7 +253,9 @@ class Stocksmanagement extends MY_Controller {
 			$param['where'] = array('po.product' => $pVal, 'po.delivered !=' => 0, 'po.warehouse_id' => $post['from_warehouse']);
 			$param['limit'] = array(1,0);
 			$param['order'] = 'po.date_ordered DESC';
-			$param['join'] = array('products as p' => 'p.id = po.product:left', 'stocks as s' => 's.product = po.product:left', 'warehouse_management as w' => 'w.id = po.warehouse_id:left');
+			$param['join'] = array('products as p' => 'p.id = po.product:left',
+			 						'stocks as s' => 's.product = po.product:left',
+									'warehouse_management as w' => 'w.id = po.warehouse_id:left');
 			$param['select'] = "po.product, po.delivered";
 			$datas=  $this->MY_Model->getRows('purchase_orders as po', $param);
 
