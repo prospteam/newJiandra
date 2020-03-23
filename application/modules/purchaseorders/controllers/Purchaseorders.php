@@ -107,27 +107,12 @@ class Purchaseorders extends MY_Controller {
 		$select = "purchase_orders.id AS purchase_id, purchase_orders.date_ordered,purchase_orders.purchase_code,company.company_id, company.company_name, supplier.id,supplier.supplier_name,purchase_orders.status,purchase_orders.delivery_status,purchase_orders.order_status";
 		$list = $this->MY_Model->get_datatables('purchase_orders',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
 
-
-		// foreach($list['data'] as $key => $value){
-		// 	echo "<pre>";
-		// 	print_r($value);
-		//
-		// }
-		// if(!empty($list)) {
-		// 	foreach ($list as $key => $value) {
-		// 		$list[$key]['position'] = userType($value['position']);
-		// 	}
-		// }
 		$output = array(
 				"draw" => $draw,
 				"recordsTotal" => $list['count_all'],
 				"recordsFiltered" => $list['count'],
 				"data" => $list['data']
 		);
-		// $this->load_page('users',$output);
-		// echo "<pre>";
-		// print_r($output);
-		// exit;
 
 		echo json_encode($output);
 	}
@@ -157,13 +142,6 @@ class Purchaseorders extends MY_Controller {
 		$this->form_validation->set_rules('total[]', 'Total', 'required');
 		$error = array();
 
-		echo "<pre>";
-		 print_r($post);
-		 exit;
-		// if(empty($this->input->post('company[]'))){
-		// 	$error['company'] = 'The Companies field is required.';
-		// }
-
 		foreach($post['prod_code'] as $pkey => $pVal){
 		if ($this->form_validation->run() !== FALSE) {
 
@@ -192,8 +170,6 @@ class Purchaseorders extends MY_Controller {
 				$response = array('form_error' =>  array_merge($this->form_validation->error_array(), $error) );
 			}
 		}
-
-
 		echo json_encode($response);
 	}
 
@@ -220,34 +196,29 @@ class Purchaseorders extends MY_Controller {
 					foreach($post['edit_prod_code'] as $pkey => $pVal){
 						if ($this->form_validation->run() !== FALSE) {
 								$data = array(
-										'date_ordered' => $date_ordered,
-										'purchase_code' => $post['edit_purchase_code'],
-										'note' => $post['purchase_note'],
-										'product' => $pVal,
-										'quantity' => $post['edit_quantity'][$pkey],
-										'unit_price' => $post['edit_unit_price'][$pkey],
-										'company' => $post['company_edit'],
-										'supplier' => $post['supplier_edit'],
-										'warehouse_id' => $warehouse[0],
-										'status' => 1,
-										'delivery_status' => 1
-									);
-									$add = $this->MY_Model->insert('purchase_orders', $data,array('purchase_code' => $post['edit_purchase_code']));
-									if ($add) {
-										$response = array(
-											'status' => 'ok'
-										);
-									}
-
-					// }
+								'date_ordered' => $date_ordered,
+								'purchase_code' => $post['edit_purchase_code'],
+								'note' => $post['purchase_note'],
+								'product' => $pVal,
+								'quantity' => $post['edit_quantity'][$pkey],
+								'unit_price' => $post['edit_unit_price'][$pkey],
+								'company' => $post['company_edit'],
+								'supplier' => $post['supplier_edit'],
+								'warehouse_id' => $warehouse[0],
+								'status' => 1,
+								'delivery_status' => 1
+							);
+							$add = $this->MY_Model->insert('purchase_orders', $data,array('purchase_code' => $post['edit_purchase_code']));
+							if ($add) {
+								$response = array(
+									'status' => 'ok'
+								);
+							}
 				}else{
 					$response = array('form_error' =>  array_merge($this->form_validation->error_array(), $error) );
 				}
 				}
 			}
-
-
-
 				$data = array(
 					'company' => $post['company_edit'],
 					'supplier' => $post['supplier_edit'],
@@ -273,9 +244,6 @@ class Purchaseorders extends MY_Controller {
 							'status' => 'ok'
 						);
 					}
-
-
-					// }
 
 			}
 		echo json_encode($response);

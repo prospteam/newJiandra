@@ -167,6 +167,7 @@ $(document).ready(function(){
    $(document).on("click",'.decline_transfer', function(e) {
      e.preventDefault();
      var id = $(this).attr('data-id');
+
      // console.log(id);
 
      Swal.fire({

@@ -522,6 +522,7 @@ function blankVal_products() {
    // $('#AddProducts input[name="brand"]').val('');
    // $('#AddProducts input[name="category"]').val('');
    $('#AddProducts input[name="variant"]').val('');
+   $('#AddProducts input[name="packing"]').val('');
    $('#AddProducts select[name="supplier"]').val('');
    $('#AddProducts input[name="volume"]').val('');
    // $('#AddProducts input[name="unit"]').val('');
