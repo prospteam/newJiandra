@@ -43,15 +43,14 @@
                             </table>
                       </div>
                       <div class="modal-footer">
-      									<button type="submit" class="btn btn-primary add">Submit</button>
-      								</div>
+						<button type="submit" class="btn btn-primary add">Submit</button>
+					</div>
                     </div>
                     </div>
                   </div>
                 </form>
                 </div>
                 <!-- end of view products-->
-
 
                 <!-- Modal for Stock Out-->
 
@@ -144,9 +143,6 @@
                             </div>
                           </div>
                           <hr>
-
-
-
                           <!--when stock movement type is stock transfer -->
                           <div class="table-responsive view_purchase_orders_details" id="stock_transfer_movement">
                                 <table class="table table-bordered table-striped stocks purchase" role="grid" aria-describedby="example1_info" id="add_new_product">
@@ -155,16 +151,12 @@
                                       <th class="header-title purch">Product <span class="required">*</span></th>
                                       <th class="header-title purch">Remaining Stocks <span class="required">*</span></th>
                                       <th class="header-title purch">Quantity <span class="required">*</span></th>
-
-
                                   </thead>
                                   <tbody>
-
                                       <tr>
                                         <td class="purch_td" >
                                           <select class="form-control stock_prod_code select2" id="wh_stock_code" style="width: 100%;" name="wh_prod_code[]" disabled>
                                               <option value="" disabled selected hidden>Select SKU</option>
-
                                             <?php
                                                 // foreach($products as $key => $value){
                                                 //     echo '<option value="'.$value['product'].'" data-stock="'.$value['stock_id'].'">'.$value['code'].'</option>';
@@ -191,7 +183,6 @@
                                           <span class="err"></span>
                                         </td>
                                       </tr>
-
                                   </tbody>
                                 </table>
                           </div>
@@ -206,16 +197,13 @@
                             </div>
                             <div class="col-6">
                               <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Total Quantity <span class="text-red">*</span></label>
-
                                   <input type="text" class="form-control disabled-normal total_quantity" name="total_quantity" readonly="" disabled="">
-
                             </div>
-
-        								</div>
-                        <br>
-        								<div class="modal-footer">
-        									<button type="submit" class="btn btn-primary add">Submit</button>
-        								</div>
+							</div>
+                            <br>
+							<div class="modal-footer">
+								<button type="submit" class="btn btn-primary add">Submit</button>
+							</div>
                         </div>
                         </div>
                       </div>
@@ -247,14 +235,8 @@
                     <th class="header-title">Inventory Date</th>
                     <th class="header-title">Quantity On hand</th>
                     <th class="header-title">Physical Count</th>
-                    <th class="header-title">Variance</th>
-                    <!-- <tr class="table-header" role="row">
-                      <th class="header-title sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 283px;">Name</th>
-                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 359px;">Company</th>
-                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 320px;">Type</th>
-                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 176px;">Action</th>
-                      <th class="header-title sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 176px;">Status</th>
-                    </tr> -->
+                    <th class="header-title">Out/Transfer</th>
+                    <!-- <th class="header-title">Out/Transfer</th> -->
                   </thead>
                   <tbody>
 

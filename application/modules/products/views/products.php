@@ -57,9 +57,10 @@
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="packing">Packing: <span class="required">*</span></label>
-                                                    <select class="form-control js-example-basic-multiple-addproducts" name="packing" id="packing" data-type="packing">
-                                                        <option></option>
-                                                    </select>
+                                                    <!-- <select class="form-control js-example-basic-multiple-addproducts" name="packing" id="packing" data-type="packing"> -->
+                                                        <input type="text" class="form-control" name="packing" value="">
+                                                        <!-- <option></option>
+                                                    </select> -->
                                                     <span class="err"></span>
                                                 </div>
                                             </div>
