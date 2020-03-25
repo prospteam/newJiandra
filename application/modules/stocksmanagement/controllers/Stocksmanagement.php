@@ -169,9 +169,9 @@ class Stocksmanagement extends MY_Controller {
 
 	public function addStockMovement(){
 		$post = $this->input->post();
-		echo "<pre>";
-		 print_r($post); 
-		 exit;
+		// echo "<pre>";
+		//  print_r($post);
+		//  exit;
 
 		$id = $this->input->post('stockmovement_id');
 		$stockmovement_id = $id + 1;
