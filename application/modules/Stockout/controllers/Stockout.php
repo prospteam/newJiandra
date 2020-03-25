@@ -84,7 +84,7 @@ class Stockout extends MY_Controller {
 
 			$parameters['where'] = array('stock_movement.stockmovement_id'=>$stocktrans_id);
 			$parameters['join'] = array('stocks' => 'stocks.product = stock_movement.product');
-			$parameters['select'] = array('quantity','physical_count','stock_id');
+			$parameters['select'] = array('quantity','physical_count','stock_id','stockmovement_id');
 
 			$datas = $this->MY_Model->getRows('stock_movement',$parameters);
 
@@ -95,12 +95,18 @@ class Stockout extends MY_Controller {
 			$set = array(
 				'physical_count' => $stock_out_quantity
 			);
+			$movement_quant = array(
+				'quantity' => $quantity
+			);
 
 			$stock_id = $datas[0]['stock_id'];
+			$stockmovement_id = $datas[0]['stockmovement_id'];
 
 			$params = array('stocks.stock_id'=>$stock_id);
+			$quantity_params = array('stockmovement_id' => $stockmovement_id);
 
-			$update = $this->MY_Model->update('stocks',$set,$params);
+		 	$update = $this->MY_Model->update('stocks',$set,$params);
+			$update = $this->MY_Model->update('stock_movement',$movement_quant,$quantity_params);
 
 			echo json_encode($update);
 		}
