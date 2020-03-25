@@ -443,13 +443,13 @@ $(document).ready(function(){
                    str += '</td>';
                   if(element.delivery_status == 4){
                     str += '<td class="purch_td submit_delivered">';
-                    str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_delivered"><i class="fa fa-edit"></i></a>';
-                    str += '<a href="javascript:;" class="btn btn-xs btn-success submit_delivered_qty" hidden><i class="fa fa-check"></i></a>';
+                    str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_delivered" data-id="'+element.id+'"><i class="fa fa-edit"></i></a>';
+                    str += '<a href="javascript:;" class="btn btn-xs btn-success submit_delivered_qty" data-id="'+element.id+'"hidden><i class="fa fa-check"></i></a>';
                     str += '</td>';
                   }else{
                     str += '<td class="purch_td submit_delivered">';
-                    str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_delivered disabled"><i class="fa fa-edit"></i></a>';
-                    str += '<a href="javascript:;" class="btn btn-xs btn-success submit_delivered_qty" hidden><i class="fa fa-check"></i></a>';
+                    str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_delivered disabled" data-id="'+element.id+'"><i class="fa fa-edit"></i></a>';
+                    str += '<a href="javascript:;" class="btn btn-xs btn-success submit_delivered_qty" data-id="'+element.id+'" hidden><i class="fa fa-check"></i></a>';
                     str += '</td>';
                   }
                str += '</tr>';
@@ -470,6 +470,7 @@ $(document).ready(function(){
 
   //show edit delivered input on view purchase order
   $(document).on('click','.edit_delivered', function(){
+      // alert('rerer');
     var pTr = $(this).parents('tr');
 
     pTr.find('.edit_deliv').show().prop('disabled', false).prop('hidden', false);
@@ -494,6 +495,7 @@ $(document).ready(function(){
         type: 'post',
         dataType: 'json',
         success: function(data){
+            console.log(data);
             pTr.find('.deliv').text(qty).show();
             pTr.find('.edit_deliv').hide().prop('hidden', true);
             pTr.find('.edit_delivered').show().prop('hidden', false);

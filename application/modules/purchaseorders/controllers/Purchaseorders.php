@@ -275,7 +275,6 @@ class Purchaseorders extends MY_Controller {
 	public function view_purchase_orders(){
 		$purchase_id = $this->input->post('id');
 
-
 		$parameters['where'] = array('purchase_code' => $purchase_id);
 		// $parameters['group'] = array('purchase_code');
 		$parameters['join'] = array('company' => 'company.company_id = purchase_orders.company',
@@ -335,16 +334,16 @@ class Purchaseorders extends MY_Controller {
 		}
 
 		$data = array('delivery_status' => $post['delivery_status'], 'delivery_remarks' => $remarks);
-
+		echo "<pre>";
+		 print_r($data);
+		 exit;
 		$data['delivStat'] = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['purchase_code_delivery']));
 
 		$params['where'] = array('product' => $post['product'], 'warehouse_id' => $post['warehouse_id']);
 		$params['select'] = '*';
 		$res = $this->MY_Model->getRows('stocks', $params,'row');
 		$last = $this->db->last_query();
-// echo "<pre>";
-// print_r($last);
-// exit;
+
 		if ($res == '') {
 			$data_stocks = array('product' => $post['product'], 'code' => $post['code'], 'warehouse_id' => $post['warehouse_id'], 'stock_out' => $post['quantity']);
 				$data['prodToStocks'] = $this->MY_Model->insert('stocks',$data_stocks);

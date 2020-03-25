@@ -93,13 +93,15 @@ class Stocksmanagement extends MY_Controller {
 		$date_report_generated = date("F d, Y");
 		$this->load->library("form_validation");
 		$this->form_validation->set_rules('physical_count[]', 'Physical Count', 'required');
-
 		$error = array();
-
+		echo "<pre>"; 
+		 print_r($post);
+		 exit;
 		foreach($post['view_prod_code'] as $pkey => $pVal){
 			$variance = $post['system_count'][$pkey] - $post['physical_count'][$pkey];
 				if ($this->form_validation->run() !== FALSE) {
 					if(!empty($post['note'][$pkey])){
+						$note = $post['note'][$pkey];
 						$note = $post['note'][$pkey];
 					}else{
 						$note = NULL;
@@ -169,9 +171,9 @@ class Stocksmanagement extends MY_Controller {
 
 	public function addStockMovement(){
 		$post = $this->input->post();
-		echo "<pre>";
-		 print_r($post); 
-		 exit;
+		// echo "<pre>";
+		//  print_r($post);
+		//  exit;
 
 		$id = $this->input->post('stockmovement_id');
 		$stockmovement_id = $id + 1;
