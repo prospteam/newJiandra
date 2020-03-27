@@ -175,10 +175,6 @@ $(document).on('click', '.generatereport', function(){
   //successfully added stock movement
   $(document).on('submit','form#stockmovement',function(e){
     e.preventDefault();
-<<<<<<< HEAD
-    // alert('erer');
-=======
->>>>>>> 668bdc5083d8bcdcf3cfcee1fd5921e4606b0d80
     let formData = $(this).serialize();
     $.ajax({
         method: 'POST',
