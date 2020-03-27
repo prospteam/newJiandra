@@ -336,16 +336,20 @@ class Purchaseorders extends MY_Controller {
 		}else{
 			$remarks = empty($post['remarks_deliv']) ? "None" : $post['remarks_deliv'];
 		}
-
 		$data = array('delivery_status' => $post['delivery_status'], 'delivery_remarks' => $remarks);
 
 		$data['delivStat'] = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['purchase_code_delivery']));
 
-		$params['where'] = array('product' => $post['product'], 'warehouse_id' => $post['purchase_code_delivery']);
+		$params['where'] = array(
+			'product' => $post['product'],
+			'warehouse_id' => $post['purchase_code_delivery']
+		);
 		$params['select'] = '*';
-
 		$params_for_gettings_products_from_order['where']=array('purchase_code' => $post['purchase_code_delivery']);
-		$params_for_gettings_products_from_order['select']='*';
+		// $params_for_gettings_products_from_order['where']=array('purchase_code' => $post['purchase_code_delivery']);
+		// $params_for_gettings_products_from_order['join']= array('stocks as s'=>'s.stock_id = purchase_orders.stocks');
+
+		$params_for_gettings_products_from_order['select']='purchase_orders.product, purchase_orders.warehouse_id, purchase_orders.purchase_code, purchase_orders.quantity';
 		$res_products_from_order = $this->MY_Model->getRows('purchase_orders', $params_for_gettings_products_from_order);
 
 		$res = $this->MY_Model->getRows('stocks', $params,'row');
@@ -353,14 +357,11 @@ class Purchaseorders extends MY_Controller {
 
 		foreach ($res_products_from_order as $key => $value) {
 				$data_stocks = array(
-					'product' => $post['product'],
-					'code' => $post['code'],
-					'warehouse_id' => $post['warehouse_id'],
-					'stock_out' => $post['quantity']
+					'product' => $value['product'],
+					'code' => $value['purchase_code'],
+					'warehouse_id' => $value['warehouse_id'],
+					'stock_out' => $value['quantity']
 				);
-				// echo "<pre>";
-				// print_r($value);
-				// exit;
 		}
 		$data_insert = $this->MY_Model->insert('stocks',$data_stocks);
 		json($data);
@@ -389,7 +390,6 @@ class Purchaseorders extends MY_Controller {
 		}else{
 			$remarks = empty($post['remarks']) ? "None" : $post['remarks'];
 		}
-
 		$data = array('status' => $post['status'], 'remarks' => $remarks);
 
 		$data['change_status'] = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['purchase_code_status']));
