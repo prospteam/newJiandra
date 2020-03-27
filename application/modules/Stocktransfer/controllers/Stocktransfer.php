@@ -55,9 +55,7 @@ class  Stocktransfer extends MY_Controller {
 	public function edit_stocktransfer(){
 
 		$post = $this->input->post();
-		echo "<pre>";
-		 print_r($post);
-		 exit;
+
 		// foreach($post['isEdit'] as $key => $value){
 		// 	print_r($post['prod_code'][$key]);
 		// 	if($value == 1){
