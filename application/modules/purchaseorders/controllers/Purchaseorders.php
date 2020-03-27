@@ -295,12 +295,16 @@ class Purchaseorders extends MY_Controller {
 	public function change_delivered_qty(){
 		$post = $this->input->post();
 		$delivered_date = date("F d, Y");
-
+		// echo $this->db->last_query();
+		// echo "<pre>";
+		//  print_r($post);
+		//  exit;
 		// if($post['delivery_status'] == 4){
 		// 	$data = array('code' => $post['code'], 'product' => $post['product']);
 		// 	$data['addStocks'] = $this->MY_Model->insert('stocks',$data);
 		// }
 		$data = array('delivered' => $post['delivered'], 'date_delivered' => $delivered_date);
+		// $data['delivered_qty'] = $this->MY_Model->update('purchase_orders', $data, array('id' => $post['id']));
 		$data['delivered_qty'] = $this->MY_Model->update('purchase_orders', $data, array('id' => $post['id']));
 		json($data);
 
@@ -322,7 +326,10 @@ class Purchaseorders extends MY_Controller {
 	//change delivery Status
 	public function change_deliv_status(){
 		$post = $this->input->post();
-
+		// echo $this->db->last_query();
+		// echo "<pre>";
+		//  print_r($post);
+		//  exit;
 		if($post['delivery_status'] == 2){
 			$remarks = empty($post['remarks_deliv']) ? "None" : $post['remarks_deliv'];
 		}else if($post['delivery_status'] == 3){
@@ -333,21 +340,33 @@ class Purchaseorders extends MY_Controller {
 			$remarks = empty($post['remarks_deliv']) ? "None" : $post['remarks_deliv'];
 		}
 
-		$data = array('delivery_status' => $post['delivery_status'], 'delivery_remarks' => $remarks);
-		echo "<pre>";
-		 print_r($data);
-		 exit;
+		$data = array(
+			'delivery_status' => $post['delivery_status'],
+			'delivery_remarks' => $remarks
+		);
+
 		$data['delivStat'] = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['purchase_code_delivery']));
 
 		$params['where'] = array('product' => $post['product'], 'warehouse_id' => $post['warehouse_id']);
 		$params['select'] = '*';
+
 		$res = $this->MY_Model->getRows('stocks', $params,'row');
 		$last = $this->db->last_query();
 
+
 		if ($res == '') {
 			$data_stocks = array('product' => $post['product'], 'code' => $post['code'], 'warehouse_id' => $post['warehouse_id'], 'stock_out' => $post['quantity']);
-				$data['prodToStocks'] = $this->MY_Model->insert('stocks',$data_stocks);
 		}
+		 // foreach ($res as $key => $value) {
+			//  $data_stocks = array(
+			// 	 'product' => $post['product'],
+			// 	  'code' => $post['code'],
+			// 	  'warehouse_id' => $post['warehouse_id'],
+			// 	  'stock_out' => $post['quantity']
+			//   );
+		 //
+			  $data['prodToStocks'] = $this->MY_Model->insert('stocks',$data_stocks);
+		 // }
 
 
 		json($data);

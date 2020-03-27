@@ -95,7 +95,7 @@ $(document).on('click', '.generatereport', function(){
          $('#GenerateReport').modal('show');
          var str = '';
            $.each(data.stocks,function(index,element){
-             console.log(element);
+             console.log(element.stock_id);
               str += '<tr>';
                   str +=     '<td class="purch_td hide">';
                     str +=   '<input type="hidden" class="prod_code" name="view_stock_id[]" value='+element.stock_id+'>';

@@ -216,6 +216,7 @@ $(document).ready(function(){
   });
 
   $(document).on('submit','form#change_deliveryStat',function(e){
+    
     e.preventDefault();
     let formData =  new FormData($(this)[0]);
     var id = $('input[name="product"]').val();
