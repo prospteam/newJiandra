@@ -147,6 +147,10 @@ class  Stocktransfer extends MY_Controller {
 		);
 		$datas = $this->MY_Model->getrows('stock_movement',$parameters);
 
+		echo "<pre>";
+		print_r($datas);
+		 exit;
+
 		foreach ($datas as $key => $value) {
 			$stocktrans_quant = (int)$value['physical_count'] - $post_quant[0];
 		}

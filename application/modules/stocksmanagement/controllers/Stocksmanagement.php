@@ -94,9 +94,6 @@ class Stocksmanagement extends MY_Controller {
 		$this->load->library("form_validation");
 		$this->form_validation->set_rules('physical_count[]', 'Physical Count', 'required');
 		$error = array();
-		echo "<pre>"; 
-		 print_r($post);
-		 exit;
 		foreach($post['view_prod_code'] as $pkey => $pVal){
 			$variance = $post['system_count'][$pkey] - $post['physical_count'][$pkey];
 				if ($this->form_validation->run() !== FALSE) {
