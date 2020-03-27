@@ -86,44 +86,72 @@ class Stockreceive extends MY_Controller {
 	//decline transaction for transfer stocks
 	public function decline_transfer(){
 		$post = $this->input->post();
-		$param['where'] = array('stockmovement_code' => $post['id'], 'purchase_orders.status' => 4);
+
+		$param['where'] = array('stockmovement_code' => $post['id']);
 		$param['group'] = array('purchase_orders.warehouse_id', 'purchase_orders.product');
 		$param['join'] = array(
 			'purchase_orders' => 'purchase_orders.product = stock_movement.product',
-			'stocks'          => 'stocks.physical_count = stock_movement.transfer_status'
+			'stocks'          => 'stocks.product = stock_movement.product'
 		);
-		$param['select'] = "stock_movement.quantity, stock_movement.product, from_warehouse, purchase_orders.id";
-		$data1['prod_transfer'] = $this->MY_Model->getRows('stock_movement', $param);
+		$param['select'] = "stock_movement.quantity, stock_movement.product, from_warehouse, purchase_orders.id, stocks.physical_count, stocks.stock_id, stock_movement.stockmovement_id";
+		$data1 = $this->MY_Model->getRows('stock_movement', $param);
 
-		// echo $this->db->last_query();
-		// echo "<pre>";
-		// print_r($post);
-		// exit;
+		//echo $this->db->last_query();
 
-		foreach($post['Remarks'] as $key => $value){
-			$data = array(
-				'cancel_transfer_note' => $value,
-				'transfer_status' => 3
-			);
-			// foreach ($st as $s_transfer => $value1) {
-			// 	$data1 = array(
-			// 		'transfer_status' => 3
-			// 	);
-			// if ($st['transfer_status']) {
-			// 	$value1
-			// }
-			//
+		// foreach($post['Remarks'] as $key => $value){
+		// 	$data = array(
+		// 		'cancel_transfer_note' => $value,
+		// 		'transfer_status' => 3
+		// 	);
+		// 	// foreach ($st as $s_transfer => $value1) {
+		// 	// 	$data1 = array(
+		// 	// 		'transfer_status' => 3
+		// 	// 	);
+		// 	// if ($st['transfer_status']) {
+		// 	// 	$value1
+		// 	// }
+		// 	//
+		//
+		// 	$update = $this->MY_Model->update('stock_movement', $data, array('stockmovement_code' => $post['id']));
+		// 	if ($update) {
+		// 		$response = array(
+		// 			'status' => 'ok'
+		// 		);
+		// 	// }
+		// 	}
+		// }
 
-			$update = $this->MY_Model->update('stock_movement', $data, array('stockmovement_code' => $post['id']));
-			if ($update) {
-				$response = array(
-					'status' => 'ok'
-				);
-			// }
-			}
+		foreach ($data1 as $key => $value) {
+			$physical_count = $value['quantity'] + $value['physical_count'];
+			$stock_id = $value['stock_id'];
+			$stockmovement_id = $value['stockmovement_id'];
 		}
-		json($data1);
-		echo json_encode($response);
+
+		$set = array(
+			'physical_count' => $physical_count
+		);
+		$set1 = array(
+			'transfer_status' => 3
+		);
+
+		$where = array(
+			'stock_id' => $stock_id
+		);
+		$where1 = array(
+			'stockmovement_id' => $stockmovement_id
+		);
+
+		$update = $this->MY_Model->update('stocks',$set,$where);
+
+		$update = $this->MY_Model->update('stock_movement', $set1, $where1);
+
+		if ($update) {
+			$response = array(
+				'status' => 'ok'
+			);
+		}	else {
+			$response = array('form_error' =>  array_merge($this->form_validation->error_array(), $error) );
+		}
 	}
 }
 ?>
