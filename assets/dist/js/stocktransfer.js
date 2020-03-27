@@ -41,44 +41,27 @@ $(document).ready(function(){
       e.preventDefault();
 
       let formData =  new FormData($(this)[0]);
-      var stockmovement_id = $('input[name="stocktransfer_id"]').val();
+      var stockmovement_id = $('input[name="stockmovement_id[]"]').val();
+      var remaining_stocks = $('input[name="remaining_stocks[]"]').val();
+
       formData.append("stockmovement_id",stockmovement_id);
       $.ajax({
           method: 'POST',
-          url : base_url + 'stocktransfer/edit_stocktransfer',
+          url : base_url + 'stocktransfer/update_stock_transfer',
           data : formData,
           processData: false,
           contentType: false,
           cache: false,
           dataType: 'json',
-          success : function(data) {
-               // if(data.status == "ok"){
-               //   $('#EditPurchaseOrder').modal('hide');
-               //       Swal.fire("Successfully updated purchase order!",data.success, "success");
-               //       $(".purchase_tbl").DataTable().ajax.reload();
-               //       // setTimeout(function(){
-               //       //    location.reload();
-               //       //  }, 1000);
-               //  }else if(data.status == 'invalid'){
-               //     Swal.fire("Error",data.status, "invalid");
-               //  }
-
-
-               if(data.form_error){
-                   clearError();
-                   let keyNames = Object.keys(data.form_error);
-                   $(keyNames).each(function(index , value) {
-                       $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
-                       $("select[name='"+value+"']").next().next().text(data.form_error[value]);
-                   });
-               }else if (data.error) {
-                   Swal.fire("Error",data.error, "error");
-               }else {
-                  // blankVal();
-                   $('#editStockTransfer').modal('hide');
-                   Swal.fire("Successfully updated Stock Transfer!",data.success, "success");
-                   $(".stocksmov_tbl").DataTable().ajax.reload();
-               }
+          success: function(update){
+              Swal.fire({
+                  title: 'Successfully Updated',
+                  text: "",
+                  type: 'success',
+                  confirmButtonText: 'Ok',
+             }).then(function(){
+                  location.reload();
+                 })
           }
       })
      });
@@ -171,6 +154,7 @@ $(document).ready(function(){
                  str+= '</td>';
                 str+= ' <td class="purch_td">';
                    str+= '<input type="text" class="form-control prod_name" name="prod_name[]" value="'+element.product_name+'" readonly>';
+                     str += '<input type="hidden" class="form-control stockmovement_id" name="stockmovement_id[]" value='+element.stockmovement_id+'>';
                    str+= '<input type="hidden" class="form-control prod_name" name="isEdit[]" value="1">';
                    str+= ' <span class="err"></span>';
                  str+= '</td>';

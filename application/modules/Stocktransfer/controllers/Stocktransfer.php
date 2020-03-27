@@ -136,6 +136,36 @@ class  Stocktransfer extends MY_Controller {
 
 	}
 
+	public function update_stock_transfer(){
+		$post_quant = $this->input->post('quantity');
+		$stockmovement_id = $this->input->post('stockmovement_id');
+
+		$parameters['where'] = array('stock_movement.stockmovement_id'=>$stockmovement_id);
+		$parameters['select'] = 'stockmovement_id, quantity, physical_count,stock_id';
+		$parameters['join'] =  array(
+			'stocks' => 'stocks.product = stock_movement.product'
+		);
+		$datas = $this->MY_Model->getrows('stock_movement',$parameters);
+
+		foreach ($datas as $key => $value) {
+			$stocktrans_quant = (int)$value['physical_count'] - $post_quant[0];
+		}
+
+		$stock_id = $value['stock_id'];
+
+		$set = array(
+			'physical_count' => $stocktrans_quant
+		);
+
+		$where = array(
+			'stock_id' => $stock_id
+		);
+
+		$update = $this->MY_Model->update('stocks',$set,$where);
+
+		echo json_encode($update);
+	}
+
 	 public function deleteTransfer(){
 		 $stockmov = $this->input->post('stockmovement_id');
 		 $stockmov_status = 3;
@@ -152,7 +182,7 @@ class  Stocktransfer extends MY_Controller {
 		 $data_array = array();
 
 		 $parameters['where'] = array('stock_movement.stockmovement_id'=>$stocktrans_id);
-		 $parameters['select'] = 'stockmovement_date, type, date_delivered, products.id, products.code, product_name, physical_count, quantity, stockmovement_note,  ';
+		 $parameters['select'] = 'stockmovement_date, type, date_delivered, products.id, products.code, product_name, physical_count, quantity, stockmovement_note, stock_movement.stockmovement_id ';
 		 $parameters['join'] =  array(
 			 'products' => 'products.id = stock_movement.product',
 			 'stocks' => 'stocks.code = products.code'
