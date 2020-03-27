@@ -94,6 +94,10 @@ class Stocksmanagement extends MY_Controller {
 		$this->load->library("form_validation");
 		$this->form_validation->set_rules('physical_count[]', 'Physical Count', 'required');
 		$error = array();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6fbd3f02faac72a5bb0faa12f0b561bdd7b0a398
 		foreach($post['view_prod_code'] as $pkey => $pVal){
 			$variance = $post['system_count'][$pkey] - $post['physical_count'][$pkey];
 				if ($this->form_validation->run() !== FALSE) {
@@ -136,11 +140,7 @@ class Stocksmanagement extends MY_Controller {
 
 	//display prodducts in dropdown when adding another field for stock movement
 	public function get_productsSO(){
-		echo "<pre>";
-		print_r($this->input->post('from_warehouse_id'));
-		exit;
 			$data['products'] = $this->MY_Model->getRows('stocks');
-
 			json($data);
 	}
 

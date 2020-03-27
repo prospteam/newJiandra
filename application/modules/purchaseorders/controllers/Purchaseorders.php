@@ -326,10 +326,7 @@ class Purchaseorders extends MY_Controller {
 	//change delivery Status
 	public function change_deliv_status(){
 		$post = $this->input->post();
-		// echo $this->db->last_query();
-		// echo "<pre>";
-		//  print_r($post);
-		//  exit;
+
 		if($post['delivery_status'] == 2){
 			$remarks = empty($post['remarks_deliv']) ? "None" : $post['remarks_deliv'];
 		}else if($post['delivery_status'] == 3){
@@ -340,35 +337,32 @@ class Purchaseorders extends MY_Controller {
 			$remarks = empty($post['remarks_deliv']) ? "None" : $post['remarks_deliv'];
 		}
 
-		$data = array(
-			'delivery_status' => $post['delivery_status'],
-			'delivery_remarks' => $remarks
-		);
+		$data = array('delivery_status' => $post['delivery_status'], 'delivery_remarks' => $remarks);
 
 		$data['delivStat'] = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['purchase_code_delivery']));
 
-		$params['where'] = array('product' => $post['product'], 'warehouse_id' => $post['warehouse_id']);
+		$params['where'] = array('product' => $post['product'], 'warehouse_id' => $post['purchase_code_delivery']);
 		$params['select'] = '*';
+
+		$params_for_gettings_products_from_order['where']=array('purchase_code' => $post['purchase_code_delivery']);
+		$params_for_gettings_products_from_order['select']='*';
+		$res_products_from_order = $this->MY_Model->getRows('purchase_orders', $params_for_gettings_products_from_order);
 
 		$res = $this->MY_Model->getRows('stocks', $params,'row');
 		$last = $this->db->last_query();
 
-
-		if ($res == '') {
-			$data_stocks = array('product' => $post['product'], 'code' => $post['code'], 'warehouse_id' => $post['warehouse_id'], 'stock_out' => $post['quantity']);
+		foreach ($res_products_from_order as $key => $value) {
+				$data_stocks = array(
+					'product' => $post['product'],
+					'code' => $post['code'],
+					'warehouse_id' => $post['warehouse_id'],
+					'stock_out' => $post['quantity']
+				);
+				// echo "<pre>";
+				// print_r($value);
+				// exit;
 		}
-		 // foreach ($res as $key => $value) {
-			//  $data_stocks = array(
-			// 	 'product' => $post['product'],
-			// 	  'code' => $post['code'],
-			// 	  'warehouse_id' => $post['warehouse_id'],
-			// 	  'stock_out' => $post['quantity']
-			//   );
-		 //
-			  $data['prodToStocks'] = $this->MY_Model->insert('stocks',$data_stocks);
-		 // }
-
-
+		$data_insert = $this->MY_Model->insert('stocks',$data_stocks);
 		json($data);
 	}
 
@@ -399,9 +393,7 @@ class Purchaseorders extends MY_Controller {
 		$data = array('status' => $post['status'], 'remarks' => $remarks);
 
 		$data['change_status'] = $this->MY_Model->update('purchase_orders', $data, array('purchase_code' => $post['purchase_code_status']));
-		// echo "<pre>";
-		// print_r($data);
-		// exit;
+
 		json($data);
 	}
 
