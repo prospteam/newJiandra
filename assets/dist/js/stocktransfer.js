@@ -141,6 +141,9 @@ $(document).ready(function(){
                var total_quantity = 0;
                $.each(data.stock_movement,function(index,element){
                  console.log(element);
+
+                 var remaining_stocks = parseInt(element.physical_count) + parseInt(element.quantity);
+
                str+= '<tr>';
                str += '<td class="purch_td hide">';
                str += '<input type="hidden" class="form-control stocktransfer_id" name="stocktransfer_id[]" value='+element.id+'>';
@@ -159,7 +162,7 @@ $(document).ready(function(){
                    str+= ' <span class="err"></span>';
                  str+= '</td>';
                  str+= '<td class="purch_td">';
-                    str+= '<input type="text" class="form-control remaining_stocks" name="remaining_stocks[]" value="'+element.physical_count+'" readonly>';
+                    str+= '<input type="text" class="form-control remaining_stocks" name="remaining_stocks[]" value="'+remaining_stocks+'" readonly>';
                   str+= ' <span class="err"></span>';
                 str+= ' </td>';
                 str+= ' <td class="purch_td">';

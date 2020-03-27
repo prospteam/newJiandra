@@ -158,8 +158,12 @@ class  Stocktransfer extends MY_Controller {
 		$where = array(
 			'stock_id' => $stock_id
 		);
+		$where_quant = array(
+			'stockmovement_id' => $stockmovement_id
+		);
 
 		$update = $this->MY_Model->update('stocks',$set,$where);
+		$update = $this->MY_Model->update('stock_movement',array('quantity' => $post_quant[0]),$where_quant);
 
 		echo json_encode($update);
 	}
