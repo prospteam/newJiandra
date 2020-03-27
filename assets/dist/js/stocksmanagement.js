@@ -95,7 +95,7 @@ $(document).on('click', '.generatereport', function(){
          $('#GenerateReport').modal('show');
          var str = '';
            $.each(data.stocks,function(index,element){
-             console.log(element);
+             console.log(element.stock_id);
               str += '<tr>';
                   str +=     '<td class="purch_td hide">';
                     str +=   '<input type="hidden" class="prod_code" name="view_stock_id[]" value='+element.stock_id+'>';
@@ -175,6 +175,10 @@ $(document).on('click', '.generatereport', function(){
   //successfully added stock movement
   $(document).on('submit','form#stockmovement',function(e){
     e.preventDefault();
+<<<<<<< HEAD
+    // alert('erer');
+=======
+>>>>>>> 668bdc5083d8bcdcf3cfcee1fd5921e4606b0d80
     let formData = $(this).serialize();
     $.ajax({
         method: 'POST',
