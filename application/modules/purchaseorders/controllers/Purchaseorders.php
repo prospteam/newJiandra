@@ -354,7 +354,6 @@ class Purchaseorders extends MY_Controller {
 
 		$res = $this->MY_Model->getRows('stocks', $params,'row');
 		$last = $this->db->last_query();
-
 		foreach ($res_products_from_order as $key => $value) {
 				$data_stocks = array(
 					'product' => $value['product'],
@@ -362,8 +361,9 @@ class Purchaseorders extends MY_Controller {
 					'warehouse_id' => $value['warehouse_id'],
 					'stock_out' => $value['quantity']
 				);
-		}
-		$data_insert = $this->MY_Model->insert('stocks',$data_stocks);
+				$data_insert = $this->MY_Model->insert('stocks',$data_stocks);
+			}
+
 		json($data);
 	}
 

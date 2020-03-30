@@ -216,7 +216,7 @@ $(document).ready(function(){
   });
 
   $(document).on('submit','form#change_deliveryStat',function(e){
-    
+
     e.preventDefault();
     let formData =  new FormData($(this)[0]);
     var id = $('input[name="product"]').val();
@@ -501,8 +501,6 @@ $(document).ready(function(){
             pTr.find('.edit_deliv').hide().prop('hidden', true);
             pTr.find('.edit_delivered').show().prop('hidden', false);
             pTr.find('.submit_delivered_qty').hide().prop('hidden', true);
-
-            location.reload();
         }
       });
     });
@@ -527,10 +525,7 @@ $(document).ready(function(){
                 });
           str += '</select>';
           str += '<span class="err"></span>';
-
-
           $('#show_supplier').html(str);
-
             var str1 = '';
             str1 += '<label for="warehouse">Warehouse: <span class="required">*</span></label>';
             str1 += '<select class="form-control" class="warehouse" name="warehouse" >';
