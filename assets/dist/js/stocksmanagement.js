@@ -22,19 +22,22 @@ $(document).ready(function(){
          "serverSide": true, //Feature control DataTables' server-side processing mode.
          "order": [[0,'desc']], //Initial no order.
          "columns":[
+              {"data":"purchase_code"},
               {"data":"wh_name"},
               {"data":"code"},
               {"data":"supplier_name"},
               {"data":"brand"},
               {"data":"product_name"},
-              {"data":"packing","render": function(data, type, row,meta){
-                var str = '';
-                  str += '<div>';
-                    str += '<span class="variance">0</span>';
-                  str += '</div>';
-                return str;
-              }
-            },
+              {"data":"packing"},
+
+            //   {"data":"packing","render": function(data, type, row,meta){
+            //     var str = '';
+            //       str += '<div>';
+            //         str += '<span class="variance">0</span>';
+            //       str += '</div>';
+            //     return str;
+            //   }
+            // },
             {"data":"date_delivered"},
               {"data":"system_count"},
 

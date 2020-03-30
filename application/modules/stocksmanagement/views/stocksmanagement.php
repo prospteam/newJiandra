@@ -226,8 +226,9 @@
                   <div class="col-sm-12">
                     <table class="table table-bordered table-striped dataTable stocks_tbl" role="grid" aria-describedby="example1_info">
                   <thead>
+                    <th class="header-title">Purchase Code</th>
                     <th class="header-title">Warehouse</th>
-                    <th class="header-title">Item Code</th>
+                    <th class="header-title">Product Code</th>
                     <th class="header-title">Principal Name</th>
                     <th class="header-title">Brand</th>
                     <th class="header-title">Description</th>
