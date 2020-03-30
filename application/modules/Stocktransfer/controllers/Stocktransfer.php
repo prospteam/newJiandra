@@ -17,7 +17,7 @@ class  Stocktransfer extends MY_Controller {
 	//  print_r(params);
 	//  exit;
 	function disp_stocktransfer(){
-
+		 
 		$limit = $this->input->post('length');
 		$offset = $this->input->post('start');
 		$search = $this->input->post('search');
