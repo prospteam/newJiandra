@@ -17,7 +17,7 @@ class  Stocktransfer extends MY_Controller {
 	//  print_r(params);
 	//  exit;
 	function disp_stocktransfer(){
-		 
+
 		$limit = $this->input->post('length');
 		$offset = $this->input->post('start');
 		$search = $this->input->post('search');
@@ -184,12 +184,16 @@ class  Stocktransfer extends MY_Controller {
 		 $data_array = array();
 
 		 $parameters['where'] = array('stock_movement.stockmovement_id'=>$stocktrans_id);
-		 $parameters['select'] = 'stockmovement_date, type, date_delivered, products.id, products.code, product_name, physical_count, quantity, stockmovement_note, stock_movement.stockmovement_id ';
+		 $parameters['select'] = 'stockmovement_date, type, date_delivered, products.id, products.code, product_name, physical_count, SUM(quantity) as quantity, stockmovement_note, stock_movement.stockmovement_id ';
 		 $parameters['join'] =  array(
 			 'products' => 'products.id = stock_movement.product',
-			 'stocks' => 'stocks.code = products.code'
+			 'stocks' => 'stocks.product = stock_movement.product'
 		 );
 		 $data = $this->MY_Model->getrows('stock_movement',$parameters);
+
+		 // echo "<pre>";
+		 // print_r($data);
+		 //  exit;
 
 		 $data_array['stock_movement'] = $data;
 		 json($data_array);

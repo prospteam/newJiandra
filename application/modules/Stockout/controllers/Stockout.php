@@ -57,7 +57,7 @@ class Stockout extends MY_Controller {
 			// $parameters['select'] = 'products.code, stocks.physical_count, stockmovement_date, transferred_warehouse, date_delivered, products.status';
 			$parameters['join'] =  array(
 			   'products' => 'products.id = stock_movement.product',
-			   'stocks' => 'stocks.code = products.code'
+			   'stocks' => 'stocks.product = stock_movement.product'
 			);
 			$data = $this->MY_Model->getrows('stock_movement',$parameters);
 			// echo $this->db->last_query();
