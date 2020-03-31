@@ -437,4 +437,4 @@ function blankVal(){
   $('#addwarehouse1_management input[name="wh_address"]').val('');
   $('#addwarehouse1_management select[name="wh_assigned"]').val('');
 }
-js-example-basic-multiple-disp-comp
+// js-example-basic-multiple-disp-comp

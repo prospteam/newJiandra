@@ -60,10 +60,10 @@ class Stockout extends MY_Controller {
 			   'stocks' => 'stocks.code = products.code'
 			);
 			$data = $this->MY_Model->getrows('stock_movement',$parameters);
+			// echo $this->db->last_query();
 			// echo "<pre>";
 			//  print_r($data);
-			//  exit;
-			// echo $this->db->last_query();
+			 // exit;
 
 			$data_array['stock_movement'] = $data;
 			json($data_array);
