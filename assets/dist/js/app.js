@@ -1,6 +1,8 @@
 var base_url = $('input[name="base_url"]').val();
 $(document).ready(function(){
 
+    $('[data-toggle="tooltip"]').tooltip();
+
   //remove company field when warehouse personnel
   $('#position').on('change', function(){
     if($(this).val() == "5"){
@@ -885,13 +887,14 @@ var users_tbl = $('.users_tbl').DataTable({
                     str += '<div class="actions">';
                     if(row.status == 1){
 
-                      str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
-                      str += '<a href="javascript:;" class="editUser" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
-                      str += '<a href="javascript:;" class="disableUser" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
-                      str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                      str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'" data-toggle="tooltip" title="View User Details"> <i class="fas fa-eye text-info"></i></a>';
+                      str += '<a href="javascript:;" class="editUser" data-id="'+row.id+'" data-toggle="tooltip" title="Edit User"><i class="fas fa-pen text-warning"></i></a>';
+                      str += '<a href="javascript:;" class="disableUser" data-id="'+row.id+'" data-toggle="tooltip" title="Disable User"><i class="fa fa-window-close"></i></a>';
+                      str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'" data-toggle="tooltip" title="Delete User"><i class="fa fa-trash" aria-hidden="true"></a>';
                     }else if(row.status == 2){
-                      str += '<a href="javascript:;" class="enableUser" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
-                      str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                      str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'" data-toggle="tooltip" title="View Details"> <i class="fas fa-eye text-info"></i></a>';
+                      str += '<a href="javascript:;" class="enableUser" data-id="'+row.id+'" data-toggle="tooltip" title="Enable User"><i class="fa fa-check-square"></i></a>';
+                      str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'" data-toggle="tooltip" title="Delete User"><i class="fa fa-trash" aria-hidden="true"></a>';
                     }
                     str += '</div>';
                     return str;

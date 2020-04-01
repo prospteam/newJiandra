@@ -116,6 +116,12 @@
                     </div>
                     <div class="col-4">
                       <div class="form-group">
+                        <label for="username">Password:</label>
+                        <p class="password"> </p>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="form-group">
                         <label for="position">Position:</label>
                         <p class="position"> </p>
                       </div>
