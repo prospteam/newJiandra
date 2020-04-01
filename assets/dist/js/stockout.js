@@ -87,13 +87,11 @@ $(document).ready(function(){
                // alert('hi');
                $('#editStockOut').modal('show');
                     var str = '';
+                    var total_quantity = 0;
                     $.each(data.stock_movement,function(index,element){
+                    // var total_quantity  =  parseInt(element.quantity) + parseInt(element.physical_count);
+                     var remaining_stocks = parseInt(element.physical_count) + parseInt(element.quantity);
 
-                    var total_quantity  =  parseInt(element.quantity) + parseInt(element.physical_count);
-
-               $('#editstockout input[name="sodate"]').val(element.stockmovement_date);
-               $('#editstockout select[name="so_type"]').val(element.type);
-               $('#editstockout input[name="so_datedelivered"]').val(element.date_delivered);
 
                str+= '<tr>';
                str += '<td class="purch_td hide">';
@@ -122,14 +120,15 @@ $(document).ready(function(){
 
                str+= '</tr>';
 
+                total_quantity += +element.quantity;
+
                });
 
                $('#view_stock_out tbody').html(str);
-               $('.select2_edit').select2({
-                 hideSelected: true
-               });
-               console.log('asdfsadf');
-               console.log(stockmovement_id);
+               $('.select2_edit').select2({hideSelected: true});
+               $(".total_quantity").val(total_quantity);
+               // console.log('asdfsadf');
+               // console.log(stockmovement_id);
              }
      });
 

@@ -101,7 +101,6 @@
                       </div>
                       <div class="col-6">
                         <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Total Quantity <span class="text-red">*</span></label>
-
                             <input type="text" class="form-control disabled-normal total_quantity" name="total_quantity" readonly="" disabled="">
 
                       </div>

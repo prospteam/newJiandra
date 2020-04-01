@@ -63,7 +63,7 @@ class Stocksmanagement extends MY_Controller {
 				"recordsFiltered" => $list['count'],
 				"data" => $list['data']
 			);
-		
+
 			foreach ($output['data'] as $key => $value) {
 				if ($output['data'][$key]->system_count == 0) {
 					unset($output['data'][$key]);
@@ -164,9 +164,6 @@ class Stocksmanagement extends MY_Controller {
 
 	public function addStockMovement(){
 		$post = $this->input->post();
-		// echo "<pre>";
-		//  print_r($post);
-		//  exit;
 
 		$id = $this->input->post('stockmovement_id');
 		$stockmovement_id = $id + 1;
