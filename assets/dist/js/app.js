@@ -273,7 +273,10 @@ $(document).ready(function(){
                  });
              }else if (data.error) {
                  Swal.fire("Error",data.error, "error");
-             }else {
+             }else if (data.username_error) {
+                 Swal.fire("Error!",data.username_error, "error");
+             }
+             else {
                 blankVal_user();
                  $('#AddUser').modal('hide');
                  Swal.fire("Successfully added user!",data.success, "success");
