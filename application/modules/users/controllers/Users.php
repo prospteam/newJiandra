@@ -70,6 +70,7 @@ class Users extends MY_Controller {
 		$parameters['select'] = '*';
 
 		$data = $this->MY_Model->getRows('users',$parameters,'row');
+		$password = $data->password;
 
 		$company_id = explode(',',$data->company);
 		$company_parameters['where_in'] = array('col' => 'company_id', 'value' => $company_id);
@@ -138,6 +139,17 @@ class Users extends MY_Controller {
 			$company = 0;
 		}
 
+		$username = $this->input->post('username');
+		$parameters['where'] = array('username' => $username);
+		$parameters['select'] = 'username';
+		$username_exitst = $this->MY_Model->getRows('users',$parameters);
+
+		$count_username = count($username_exitst);
+		if($count_username){
+			$response = array('form_error' =>  'Username already exists!' );
+			echo json_encode($response);
+		}else{
+
 		if ($this->form_validation->run() !== FALSE) {
 			$data = array(
 				'fullname' => $this->input->post('fullname'),
@@ -153,13 +165,15 @@ class Users extends MY_Controller {
 				$response = array(
 					'status' => 'ok'
 				);
+				echo json_encode($response);
 			}
 		}else{
 			  $response = array('form_error' =>  array_merge($this->form_validation->error_array(), $error) );
+			  echo json_encode($response);
 		}
 
-		echo json_encode($response);
 	}
+}
 
 
 	//view details for edit
