@@ -288,7 +288,7 @@ $(document).ready(function(){
    //edit supplier
    $(document).on('click', '.editSupplier', function(){
      var id = $(this).attr('data-id');
-     
+
      $('.editcompany').attr('data-comp_id', $(this).data('comp'));
      $.ajax({
          url: base_url+'supplier/supplier_details',
@@ -445,13 +445,14 @@ function display_suppliers($supplier_id){
                        var str = '';
                        str += '<div class="actions">';
                        if(row.status == 1){
-                         str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
-                         str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
-                         str += '<a href="javascript:;" class="disableSupplier" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
-                         str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                         str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"><abbr title="View Supplier"><i class="fas fa-eye text-info"></i></abbr></a>';
+                         str += '<a href="javascript:;" class="editSupplier" data-id="'+row.id+'"><abbr title="Edit Supplier"><i class="fas fa-pen text-warning"></i></abbr></a>';
+                         str += '<a href="javascript:;" class="disableSupplier" data-id="'+row.id+'"><abbr title="Disable Supplier"><i class="fa fa-window-close"></abbr></i></a>';
+                         str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><abbr title="Delete Supplier"><i class="fa fa-trash" aria-hidden="true"></abbr></a>';
                        }else if(row.status == 2){
-                         str += '<a href="javascript:;" class="enableSupplier" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
-                         str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                         str += '<a href="javascript:;" class="viewSupplier" data-id="'+row.id+'"><abbr title="View Supplier"><i class="fas fa-eye text-info"></i></abbr></a>';
+                         str += '<a href="javascript:;" class="enableSupplier" data-id="'+row.id+'"><abbr title="Enable Supplier"><i class="fa fa-check-square"></abbr></i></a>';
+                         str += '<a href="javascript:;" class="deleteSupplier" data-id="'+row.id+'"><abbr title="Delete Supplier"><i class="fa fa-trash" aria-hidden="true"></abbr></a>';
                        }
                        str += '</div>';
                        return str;

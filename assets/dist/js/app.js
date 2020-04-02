@@ -884,14 +884,14 @@ var users_tbl = $('.users_tbl').DataTable({
                     var str = '';
                     str += '<div class="actions">';
                     if(row.status == 1){
-
-                      str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
-                      str += '<a href="javascript:;" class="editUser" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
-                      str += '<a href="javascript:;" class="disableUser" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
-                      str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                      str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'"><abbr title="View User"><i class="fas fa-eye text-info"></abbr></i></a>';
+                      str += '<a href="javascript:;" class="editUser" data-id="'+row.id+'"><abbr title="Edit User"><i class="fas fa-pen text-warning"></i></abbr></a>';
+                      str += '<a href="javascript:;" class="disableUser" data-id="'+row.id+'"><abbr title="Disable User"><i class="fa fa-window-close"></i></abbr></a>';
+                      str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><abbr title="Delete User"><i class="fa fa-trash" aria-hidden="true"></abbr></a>';
                     }else if(row.status == 2){
-                      str += '<a href="javascript:;" class="enableUser" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
-                      str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                      str += '<a href="javascript:;" class="viewUser" data-id="'+row.id+'"><abbr title="View User"><i class="fas fa-eye text-info"></i></abbr></a>';
+                      str += '<a href="javascript:;" class="enableUser" data-id="'+row.id+'"><abbr title=" Enable User"><i class="fa fa-check-square"></i></abbr></a>';
+                      str += '<a href="javascript:;" class="deleteUser" data-id="'+row.id+'"><abbr title="Delete User"><i class="fa fa-trash" aria-hidden="true"></abbr></a>';
                     }
                     str += '</div>';
                     return str;
@@ -951,14 +951,15 @@ var vehicle_tbl = $('.vehicle_tbl').DataTable({
                     var str = '';
                     str += '<div class="actions">';
                     if(row.status == 1){
-                      str += '<a href="javascript:;" class="viewVehicle" data-id="'+row.id+'"> <i class="fas fa-eye text-info"></i></a>';
-                      str += '<a href="javascript:;" class="editVehicles" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
-                      str += '<a href="javascript:;" class="disableVehicle" data-id="'+row.id+'" value="'+row.id+'"><i class="fa fa-window-close"></i></a>';
-                      str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                      str += '<a href="javascript:;" class="viewVehicle" data-id="'+row.id+'"><abbr title="View Vehicle"><i class="fas fa-eye text-info"></i></abbr></a>';
+                      str += '<a href="javascript:;" class="editVehicles" data-id="'+row.id+'"><abbr title="Edit Vehicle"><i class="fas fa-pen text-warning"></i></abbr></a>';
+                      str += '<a href="javascript:;" class="disableVehicle" data-id="'+row.id+'" value="'+row.id+'"><abbr title="Disable Vehicle"><i class="fa fa-window-close"></i></abbr></a>';
+                      str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><abbr title="Delete Vehicle"><i class="fa fa-trash" aria-hidden="true"></i></abbr></a>';
                     }else if(row.status == 2){
-                      str += '<a href="javascript:;" class="remarks_inactive" data-id="'+row.id+'" value="'+row.id+'"><i class="fa fa-comment" aria-hidden="true"></i></a>';
-                      str += '<a href="javascript:;" class="enableVehicle" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
-                      str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                      str += '<a href="javascript:;" class="viewVehicle" data-id="'+row.id+'"><abbr title="View Vehicle"><i class="fas fa-eye text-info"></i></abbr></a>';
+                      str += '<a href="javascript:;" class="remarks_inactive" data-id="'+row.id+'" value="'+row.id+'"><abbr title="Remarks"><i class="fa fa-comment" aria-hidden="true"></i></abbr></a>';
+                      str += '<a href="javascript:;" class="enableVehicle" data-id="'+row.id+'"><abbr title="Enable Vehicle"><i class="fa fa-check-square"></i></abbr></a>';
+                      str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><abbr title="Delete Vehicle"><i class="fa fa-trash" aria-hidden="true"></i></abbr></a>';
                     }
                     str += '</div>';
                     return str;

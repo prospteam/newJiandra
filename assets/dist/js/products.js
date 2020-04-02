@@ -415,14 +415,15 @@ var products_tbl = $('.products_tbl').DataTable({
             var str = '';
             str += '<div class="actions">';
             if (row.status == 1) {
-               str += '<a href="javascript:;" class="costprice" data-id="' + row.id + '"> <i class="fas fa-coins"></i></a>';
-               str += '<a href="javascript:;" class="viewproducts" data-id="' + row.id + '"> <i class="fas fa-eye text-info"></i></a>';
-               str += '<a href="javascript:;" class="editproducts" data-id="' + row.id + '"><i class="fas fa-pen text-warning"></i></a>';
-               str += '<a href="javascript:;" class="disableproducts" data-id="' + row.id + '"><i class="fa fa-window-close"></i></a>';
-               str += '<a href="javascript:;" class="deleteproducts" data-id="' + row.id + '"><i class="fa fa-trash" aria-hidden="true"></a>';
+               str += '<a href="javascript:;" class="costprice" data-id="' + row.id + '"><abbr title="Add Cost Price"><i class="fas fa-coins"></abbr></i></a>';
+               str += '<a href="javascript:;" class="viewproducts" data-id="' + row.id + '"><abbr title="View Products"><i class="fas fa-eye text-info"></i></abbr></a>';
+               str += '<a href="javascript:;" class="editproducts" data-id="' + row.id + '"><abbr title="Edit Products Supplier"><i class="fas fa-pen text-warning"></i></abbr></a>';
+               str += '<a href="javascript:;" class="disableproducts" data-id="' + row.id + '"><abbr title="Disable Products"><i class="fa fa-window-close"></i></abbr></a>';
+               str += '<a href="javascript:;" class="deleteproducts" data-id="' + row.id + '"><abbr title="Delete Products"><i class="fa fa-trash" aria-hidden="true"></abbr></a>';
             } else if (row.status == 2) {
-               str += '<a href="javascript:;" class="enableproducts" data-id="' + row.id + '"><i class="fa fa-check-square"></i></a>';
-               str += '<a href="javascript:;" class="deleteproducts" data-id="' + row.id + '"><i class="fa fa-trash" aria-hidden="true"></a>';
+               str += '<a href="javascript:;" class="viewproducts" data-id="' + row.id + '"><abbr title="View Products"><i class="fas fa-eye text-info"></i></abbr></a>';
+               str += '<a href="javascript:;" class="enableproducts" data-id="' + row.id + '"><abbr title="Enable Products"><i class="fa fa-check-square"></i></abbr></a>';
+               str += '<a href="javascript:;" class="deleteproducts" data-id="' + row.id + '"><abbr title="Delete Products"><i class="fa fa-trash" aria-hidden="true"></abbr></a>';
             }
             str += '</div>';
             return str;

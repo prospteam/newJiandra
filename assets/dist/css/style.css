@@ -134,3 +134,8 @@ input.form-control.form-control-sm.donation_textbox.my_gift {
 .cost_modal_table {
     margin-top: -34px;
 }
+input#my-file {
+    border: 0;
+    background-color: #e8e8f3;
+    border-radius: 3px;
+}

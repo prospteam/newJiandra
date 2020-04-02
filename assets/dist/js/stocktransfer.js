@@ -284,9 +284,9 @@ $(document).ready(function(){
                            var str = '';
                            str += '<div class="actions">';
                            if(row.status == 1) {
-                            str += '<a href="javascript:;" class="viewstocktransfer" data-id="'+row.stockmovement_id+'"> <i class="fas fa-eye text-info"></i></a>';
-                             str += '<a href="javascript:;" class="editstocktransfer" data-id="'+row.stockmovement_id+'"><i class="fas fa-pen text-warning"></i></a>';
-                             str += '<a href="javascript:;" class="deletestockTransfer" data-id="'+row.stockmovement_id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                            str += '<a href="javascript:;" class="viewstocktransfer" data-id="'+row.stockmovement_id+'"><abbr title="View Stock Transfer"><i class="fas fa-eye text-info"></i></abbr></a>';
+                             str += '<a href="javascript:;" class="editstocktransfer" data-id="'+row.stockmovement_id+'"><abbr title="Edit Stock Transfer"><i class="fas fa-pen text-warning"></i></abbr></a>';
+                             str += '<a href="javascript:;" class="deletestockTransfer" data-id="'+row.stockmovement_id+'"><abbr title="Delete Stock Transfer"><i class="fa fa-trash" aria-hidden="true"></abbr></a>';
                            }
                            str += '</div>';
                            return str;

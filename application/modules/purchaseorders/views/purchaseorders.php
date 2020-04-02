@@ -536,7 +536,7 @@
                                                 id="delivery_status" value="">
                                                 <option value="1" selected>Pending</option>
                                                 <option value="2">On Hold</option>
-                                                <option value="3">On Process</option>
+                                                <option value="3">Processing</option>
                                                 <option value="4">Delivered</option>
                                             </select>
                                             <br>
@@ -672,7 +672,7 @@
                                     <th class="header-title">Company</th>
                                     <th class="header-title">Supplier</th>
                                     <th class="header-title">Action</th>
-                                    <th class="header-title">Status</th>
+                                    <th class="header-title">P.O Status</th>
                                     <th class="header-title">Delivery Status</th>
                                     <!-- <tr class="table-header" role="row">
                         <th class="header-title sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 283px;">Name</th>

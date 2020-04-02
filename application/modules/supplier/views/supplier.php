@@ -50,8 +50,8 @@
 									</div>
 									<div class="col-lg-6">
 										<div class="form-group">
-											<label for="email">Email (Optional):</label>
-											<input type="email" class="form-control" name="email" value="">
+											<label for="Email Address">Email Address (Optional):</label>
+											<input type="Email Address" class="form-control" name="Email Address" value="">
 											<span class="err"></span>
 										</div>
 								</div>
@@ -124,7 +124,7 @@
 											<thead>
 													<th class="header-title supp">Name</th>
 													<th class="header-title supp">Mobile Number</th>
-													<th class="header-title supp">Email </th>
+													<th class="header-title supp">Email Address </th>
 													<th class="header-title supp">Position </th>
 											</thead>
 											<tbody>
@@ -139,7 +139,7 @@
 															<span class="err"></span>
 														</td>
 														<td class="supp_td">
-															<input type="text" class="form-control contact_email" name="contact_email[]" value="">
+															<input type="text" class="form-control contact_Email Address" name="contact_Email Address[]" value="">
 															<span class="err"></span>
 														</td>
 														<td class="supp_td">
@@ -188,8 +188,8 @@
 										</div>
 										<div class="col-6">
 											<div class="form-group">
-												<label for="email">Email: </label>
-												<p class="email"> </p>
+												<label for="Email Address">Email Address: </label>
+												<p class="Email Address"> </p>
 											</div>
 										</div>
 									</div>
@@ -226,7 +226,7 @@
 											<thead>
 												<th class="header-title supp">Name</th>
 												<th class="header-title supp">Mobile Number </span></th>
-												<th class="header-title supp">Email </span></th>
+												<th class="header-title supp">Email Address </span></th>
 												<th class="header-title supp">Position </span></th>
 
 											</thead>
@@ -280,8 +280,8 @@
 									</div>
 									<div class="col-6">
 										<div class="form-group">
-											<label for="email">Email:</label>
-											<input type="email" class="form-control" name="email" value="">
+											<label for="Email Address">Email Address:</label>
+											<input type="Email Address" class="form-control" name="Email Address" value="">
 											<span class="err"></span>
 										</div>
 									</div>
@@ -349,7 +349,7 @@
 													<thead>
 															<th class="header-title supp">Name</th>
 															<th class="header-title supp">Mobile Number</span></th>
-															<th class="header-title supp">Email </th>
+															<th class="header-title supp">Email Address </th>
 															<th class="header-title supp">Position </th>
 													</thead>
 													<tbody>
@@ -364,7 +364,7 @@
 																	<span class="err"></span>
 																</td>
 																<td class="supp_td">
-																	<input type="text" class="form-control contact_email" name="contact_email[]" value="">
+																	<input type="text" class="form-control contact_Email Address" name="contact_Email Address[]" value="">
 																	<span class="err"></span>
 																</td>
 																<td class="supp_td">
@@ -414,7 +414,7 @@
 								<thead>
 								<th class="header-title">Logo</th>
 								<th class="header-title">Name</th>
-								<th class="header-title">Email</th>
+								<th class="header-title">Email Address</th>
 								<th class="header-title">Action</th>
 								<th class="header-title">Status</th>
 							</thead>

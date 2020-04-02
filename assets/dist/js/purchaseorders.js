@@ -25,23 +25,27 @@ $(document).ready(function(){
                         var str = '';
                         str += '<div class="actions">';
                         if(row.status == 1 && row.delivery_status != 4){
-
-                          str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"> <i class="fas fa-eye text-info"></i></a>';
-                          str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'"><i class="fas fa-pen text-warning"></i></a>';
-                          str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
+                          str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"><abbr title="View Purchase Order"><i class="fas fa-eye text-info"></i></a>';
+                          str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'"><abbr title="Edit Purchase Order"><i class="fas fa-pen text-warning"></i></a>';
+                          str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><abbr title="Delete Purchase Order"><i class="fa fa-trash" aria-hidden="true"></i></a>';
                         }else if(row.status == 2 && row.delivery_status != 4){
-                          str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"> <i class="fas fa-eye text-info"></i></a>';
-                          str += '<a href="javascript:;" class="remarks" data-id="'+row.purchase_code+'"><i class="fa fa-comment" aria-hidden="true"></i></a>';
-                          str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'"><i class="fas fa-pen text-warning"></i></a>';
-                          str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><i class="fa fa-trash" aria-hidden="true"</i></a>';
+                          str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"><abbr title="View Purchase Order"><i class="fas fa-eye text-info"></i></abbr></a>';
+                          str += '<a href="javascript:;" class="remarks" data-id="'+row.purchase_code+'"<abbr title="Remarks">><i class="fa fa-comment" aria-hidden="true"></i></abbr></a>';
+                          str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'"><abbr title="Edit Purchase Order"><i class="fas fa-pen text-warning"></i></abbr></a>';
+                          str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><abbr title="Delete Purchase Order"><i class="fa fa-trash" aria-hidden="true"</i></abbr></a>';
                         }else if(row.status == 3 && row.delivery_status != 4){
-                          str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"> <i class="fas fa-eye text-info"></i></a>';
-                          str += '<a href="javascript:;" class="remarks" data-id="'+row.purchase_code+'"><i class="fa fa-comment" aria-hidden="true"></i></a>';
-                          str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'"><i class="fas fa-pen text-warning"></i></a>';
-                          str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><i class="fa fa-trash" aria-hidden="true"></i></a>';
+                            str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"><abbr title="View Purchase Order"><i class="fas fa-eye text-info"></i></abbr></a>';
+                            str += '<a href="javascript:;" class="remarks" data-id="'+row.purchase_code+'"<abbr title="Remarks"><i class="fa fa-comment" aria-hidden="true"></i></abbr></a>';
+                            str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'"><abbr title="Edit Purchase Order"><i class="fas fa-pen text-warning"></i></abbr></a>';
+                            str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><abbr title="Delete Purchase Order"><i class="fa fa-trash" aria-hidden="true"</i></abbr></a>';
+                            // str+= '<div class="form-group">';
+                            // str+='<label for="remarks">Remarks:</label>';
+                            // str+= '<textarea rows="4" cols="50" class="form-control" name="remarks" required>';
+                            // str+='value=""></textarea>';
+                            // str+='</div>';
                         }else if(row.delivery_status == 4){
-                          str += '<a href="javascript:;" class="remarks" data-id="'+row.purchase_code+'"><i class="fa fa-comment" aria-hidden="true"></i></a>';
-                          str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"> <i class="fas fa-eye text-info"></i></a>';
+                          str += '<a href="javascript:;" class="remarks" data-id="'+row.purchase_code+'"><abbr title="Remarks"><i class="fa fa-comment" aria-hidden="true"></i></abbr></a>';
+                          str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"><abbr title="View Purchase Order"><i class="fas fa-eye text-info"></i></abbr></a>';
                         }
                         str += '</div>';
                         return str;
