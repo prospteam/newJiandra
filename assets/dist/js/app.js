@@ -861,6 +861,7 @@ $(document).ready(function(){
 
 });
 var users_tbl = $('.users_tbl').DataTable({
+     "responsive": true,
      "processing": true, //Feature control the processing indicator.
      "serverSide": true, //Feature control DataTables' server-side processing mode.
      "order": [[0,'desc']], //Initial no order.
@@ -934,6 +935,7 @@ var users_tbl = $('.users_tbl').DataTable({
 
 //display vehicle_tbl
 var vehicle_tbl = $('.vehicle_tbl').DataTable({
+    "responsive": true,
      "processing": true, //Feature control the processing indicator.
      "serverSide": true, //Feature control DataTables' server-side processing mode.
      "order": [[0,'desc']], //Initial no order.

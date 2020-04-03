@@ -18,6 +18,7 @@ $(document).ready(function(){
 
   //display purchase_tbl
     var purchase_tbl = $('.stocks_tbl').DataTable({
+        "responsive": true,
          "processing": true, //Feature control the processing indicator.
          "serverSide": true, //Feature control DataTables' server-side processing mode.
          "order": [[0,'desc']], //Initial no order.

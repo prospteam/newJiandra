@@ -3,7 +3,14 @@
 <!-- Bootstrap 4 -->
 <script src="<?php echo base_url('assets/plugins/bootstrap/js/bootstrap.bundle.min.js'); ?>"></script>
 <!-- DataTables -->
-<script src="<?php echo base_url('assets/plugins/datatables/jquery.dataTables.js'); ?>"></script>
+<!-- <script src="<?php// echo base_url('assets/plugins/datatables/jquery.dataTables.js'); ?>"></script> -->
+
+<script src="<?php echo base_url('assets/dist/js/jquery.dataTables.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets/dist/js/dataTables.responsive.min.js'); ?>"></script>
+
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script> -->
+
 <script src="<?php echo base_url('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js'); ?>"></script>
 <!-- <script type="text/javascript" src="<?php //echo base_url('assets/plugins/alertify/alertify.min.js' ); ?>"></script> -->
 <!-- Sweet-Alert  -->
@@ -38,6 +45,8 @@
 <script src="<?php echo base_url('assets/dist/js/stockout.js'); ?>"></script>
 <!-- STOCK RECEIVE -->
 <script src="<?php echo base_url('assets/dist/js/stockreceive.js'); ?>"></script>
+
+
 
 </body>
 </html>

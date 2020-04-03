@@ -20,10 +20,17 @@
   <!-- DataTables -->
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css'); ?>">
 
+  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/jquery.dataTables.min.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/dist/css/responsive.dataTables.min.css'); ?>">
+
+  <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css"> -->
+
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@8/dist/sweetalert2.min.css" id="theme-styles">
   <!-- jQuery -->
   <script src="<?php echo base_url('assets/plugins/jquery/jquery.min.js'); ?>"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
   <!-- Select2 -->
   <link rel="stylesheet" href="<?php echo base_url('assets/plugins/select2/css/select2.min.css');?>">
     <!-- <link rel="stylesheet" href="<?php //secho base_url('assets/dist/css/_select2.scss'); ?>"> -->

@@ -163,6 +163,7 @@ $(document).ready(function(){
      });
 
      var stockout_tbl = $('.stockout_tbl').DataTable({
+    "responsive": true,
     "processing"  : true,
     "serverside"  : true,
     "order"       : [[0,'desc']],

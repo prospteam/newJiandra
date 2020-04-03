@@ -389,7 +389,7 @@ $(document).on("click", ".enableproducts", function (e) {
 // DISPLAY Products
 
 var products_tbl = $('.products_tbl').DataTable({
-
+    "responsive": true,
    "processing": true,
    "serverside": true,
    "order": [[0, 'desc']],
