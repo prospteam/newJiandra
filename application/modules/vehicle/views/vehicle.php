@@ -25,23 +25,21 @@
                     </div>
                     <div class="modal-body">
                       <div class="row">
-    										<div class="col-lg-6">
-    											<div class="form-group">
-    												<label for="companytitle">Company: <span class="required">*</span> </label>
-    												<!-- <input type="text" name="companytitle" value="" required> -->
-    												<div class="select2-purple">
-    													<select class="form-control add-company-vehicle" name="company[]" multiple="multiple"></select>
-    													<span class="err"></span>
-    												</div>
-    											</div>
-    										</div>
-    								</div>
-
-    									<hr>
-
+						<div class="col-lg-6">
+							<div class="form-group">
+								<label for="companytitle">Company: <span class="required">*</span> </label>
+								<!-- <input type="text" name="companytitle" value="" required> -->
+								<div class="select2-purple">
+									<select class="form-control add-company-vehicle" name="company[]" multiple="multiple"></select>
+									<span class="err"></span>
+								</div>
+							</div>
+						</div>
+				      </div>
+					<hr>
                       <h1 class="inp_head"> GENERAL INFORMATION </h1>
                       <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 gen_info">
                           <div class="form-group">
                             <label for="vehicle_type">Vehicle Type: <span class="required">*</span></label>
                             <select class="form-control" name="vehicle_type">
@@ -53,7 +51,7 @@
                             <span class="err"></span>
                           </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 gen_info">
                           <div class="form-group">
                             <label for="cr_no">CR No.: <span class="required">*</span></label>
                             <input type="text" class="form-control" name="cr_no" value="">

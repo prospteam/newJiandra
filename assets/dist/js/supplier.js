@@ -9,8 +9,8 @@ $(document).ready(function(){
           var myfile = this.value;
           var str = myfile.split("\\");
 
-          if(str[str.length-1]){
-            $('.filechosen').html(str[str.length-1]);
+          if(str[str.length[1]]){
+            $('.filechosen').html(str[str.length[1]]);
           }else{
             $('.filechosen').html('No file chosen');
           }
