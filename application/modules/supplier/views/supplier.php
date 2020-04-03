@@ -328,7 +328,7 @@
 										<div class="form-group uploadfile">
 											<label for="SupplierLogo"><i class="fa fa-upload" aria-hidden="true"></i> Supplier Logo </label>
 											<div class="uploadfile-container2">
-												<input class="input-file my-file edit_file_logo" name="logo" id="my-file" type="file" accept="image/*">
+												<input class="input-file my-file" name="logo" id="my-file" type="file" accept="image/*">
 												<p class="file-return"></p>
 											</div>
 										</div>

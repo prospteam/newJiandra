@@ -233,7 +233,7 @@
                                 </div>
                             </div>
 
-                            <div class="table-responsive purch_prod">
+                            <div class="table-responsive purch_prod po_tbl">
                                 <table class="table table-bordered table-striped purchase" role="grid"
                                     aria-describedby="example1_info" id="view_purchase_orders_details">
                                     <thead>

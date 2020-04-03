@@ -30,7 +30,7 @@ $(document).ready(function(){
                           str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><abbr title="Delete Purchase Order"><i class="fa fa-trash" aria-hidden="true"></i></a>';
                         }else if(row.status == 2 && row.delivery_status != 4){
                           str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"><abbr title="View Purchase Order"><i class="fas fa-eye text-info"></i></abbr></a>';
-                          str += '<a href="javascript:;" class="remarks" data-id="'+row.purchase_code+'"<abbr title="Remarks">><i class="fa fa-comment" aria-hidden="true"></i></abbr></a>';
+                          str += '<a href="javascript:;" class="remarks" data-id="'+row.purchase_code+'"<abbr title="Remarks"><i class="fa fa-comment" aria-hidden="true"></i></abbr></a>';
                           str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'"><abbr title="Edit Purchase Order"><i class="fas fa-pen text-warning"></i></abbr></a>';
                           str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><abbr title="Delete Purchase Order"><i class="fa fa-trash" aria-hidden="true"</i></abbr></a>';
                         }else if(row.status == 3 && row.delivery_status != 4){
@@ -439,11 +439,11 @@ $(document).ready(function(){
                   str += '</td>';
                   str +=  '<td class="purch_td edit_variance">';
                     var variance = element.quantity - element.delivered;
-                        if (variance>=0) {
-                            $('.edit_variance').css({'color':'green'});
-                        } else {
-                            $('.edit_variance').css({'color':'red'});
-                        }
+                        // if (variance>=0) {
+                        //     $('.edit_variance').css({'color':'green'});
+                        // } else {
+                        //     $('.edit_variance').css({'color':'red'});
+                        // }
                         str += variance;
                    str += '</td>';
                   if(element.delivery_status == 4){
@@ -474,7 +474,8 @@ $(document).ready(function(){
 });
 
   //show edit delivered input on view purchase order
-  $(document).on('click','.edit_delivered', function(){
+  $(document).on('click','.edit_delivered', function(e){
+      e.preventDefault();
       // alert('rerer');
     var pTr = $(this).parents('tr');
 
@@ -486,13 +487,15 @@ $(document).ready(function(){
 
 
     $('.submit_delivered_qty').unbind('click').click(function(e) {
+      var str='';
       var id = pTr.find('.edit_purchID').val();
       var qty = pTr.find('.edit_deliv').val();
       var edit_qty = pTr.find('.td_qty').val();
       var code = pTr.find('.edit_prod_code').val();
       var product = pTr.find('.edit_product').val();
       var delivery_status = pTr.find('.edit_delivery_status').val();
-      var variance = pTr.find('.edit_variance').val();
+      var variance= pTr.find('.edit_variance').val();
+      // var get_variance =
 
       $.ajax({
         url: base_url+'purchaseorders/change_delivered_qty',
@@ -505,6 +508,9 @@ $(document).ready(function(){
             pTr.find('.edit_deliv').hide().prop('hidden', true);
             pTr.find('.edit_delivered').show().prop('hidden', false);
             pTr.find('.submit_delivered_qty').hide().prop('hidden', true);
+            // $(`.submit_delivered[data-id='${id}']`).trigger('click');
+             // $("#view_purchase_orders_details").DataTable().ajax.reload();
+             pTr.find('.edit_variance').text('66');
         }
       });
     });

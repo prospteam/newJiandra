@@ -40,6 +40,7 @@ class Vehicle extends MY_Controller {
 	}
 
 
+
 	//display companies for adding vehicle
 	public function add_vehicle_companies(){
 		$parameters['where'] = array('company_id !=' => 0);
