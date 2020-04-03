@@ -254,10 +254,8 @@
           <div class="row">.
             <div class="table-responsive">
               <div class="col-sm-12">
-                <table class="table table-bordered table-striped dataTable users_tbl" role="grid"
-                  aria-describedby="example1_info">
+                <table class="table table-bordered table-striped dataTable users_tbl" role="grid" aria-describedby="example1_info">
                   <thead>
-
                     <th class="header-title">Name</th>
                     <th class="header-title">Username</th>
                     <th class="header-title">Position</th>

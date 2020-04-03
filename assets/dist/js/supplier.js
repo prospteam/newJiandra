@@ -416,6 +416,7 @@ str += '</td>';
 
 function display_suppliers($supplier_id){
   $('.suppliers_tbl').DataTable({
+         "responsive": true,
         "destroy"   : true,
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.

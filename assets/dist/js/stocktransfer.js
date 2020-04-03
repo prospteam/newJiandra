@@ -261,6 +261,7 @@ $(document).ready(function(){
 
      //end select SKU
    var stocksmov_tbl = $('.stocksmov_tbl').DataTable({
+  "responsive": true,
   "processing"  : true,
   "serverside"  : true,
   "order"       : [[0,'desc']],

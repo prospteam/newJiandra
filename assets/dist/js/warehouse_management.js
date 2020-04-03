@@ -369,6 +369,7 @@ $(document).ready(function(){
 
   function display_whmanagement($warehouse_id){
     $('.warehouse_tbl').DataTable({
+        "responsive": true,
           "destroy"   : true,
           "processing": true, //Feature control the processing indicator.
           "serverSide": true, //Feature control DataTables' server-side processing mode.

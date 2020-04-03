@@ -3,6 +3,7 @@ var base_url = $('input[name="base_url"]').val();
 
 $(document).ready(function(){
    var stocksreceive_tbl = $('.stocksreceive_tbl').DataTable({
+  "responsive": true,
   "processing"  : true,
   "serverside"  : true,
   "order"       : [[0,'desc']],
