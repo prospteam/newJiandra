@@ -383,13 +383,14 @@ $(document).ready(function(){
                          var str = '';
                          str += '<div class="actions">';
                          if(row.status == 1){
-                           str += '<a href="javascript:;" class="viewWarehouse" data-id="'+row.id+'"><i class="fas fa-eye text-info"></i></i></a>';
-                           str += '<a href="javascript:;" class="editWarehouse" data-id="'+row.id+'"><i class="fas fa-pen text-warning"></i></a>';
-                           str += '<a href="javascript:;" class="disableWarehouse" data-id="'+row.id+'"><i class="fa fa-window-close"></i></a>';
-                           str += '<a href="javascript:;" class="deleteWarehouse" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                           str += '<a href="javascript:;" class="viewWarehouse" data-id="'+row.id+'"><abbr title="View Warehouse"><i class="fas fa-eye text-info"></i></abbr></a>';
+                           str += '<a href="javascript:;" class="editWarehouse" data-id="'+row.id+'"><abbr title="Edit Warehouse"><i class="fas fa-pen text-warning"></i></abbr></a>';
+                           str += '<a href="javascript:;" class="disableWarehouse" data-id="'+row.id+'"><abbr title="Disable Warehouse"><i class="fa fa-window-close"></i></abbr></a>';
+                           str += '<a href="javascript:;" class="deleteWarehouse" data-id="'+row.id+'"><abbr title="Delete Warehouse"><i class="fa fa-trash" aria-hidden="true"></a>';
                          }else if(row.status == 2){
-                           str += '<a href="javascript:;" class="enableWarehouse" data-id="'+row.id+'"><i class="fa fa-check-square"></i></a>';
-                           str += '<a href="javascript:;" class="deleteWarehouse" data-id="'+row.id+'"><i class="fa fa-trash" aria-hidden="true"></a>';
+                             str += '<a href="javascript:;" class="viewWarehouse" data-id="'+row.id+'"><abbr title="View Warehouse"><i class="fas fa-eye text-info"></i></abbr></a>';
+                           str += '<a href="javascript:;" class="enableWarehouse" data-id="'+row.id+'"><abbr title="Enable Warehouse"><i class="fa fa-check-square"></i></abbr></a>';
+                           str += '<a href="javascript:;" class="deleteWarehouse" data-id="'+row.id+'"><abbr title="Delete Warehouse"><i class="fa fa-trash" aria-hidden="true"></a>';
                          }
                          str += '</div>';
                          return str;

@@ -720,19 +720,19 @@ $(document).ready(function(){
      Swal.fire({
      title: 'Are you sure?',
      text: "This vehicle will be deactivated!",
-     html: '<span>This vehicle will be deactivated!</span><br><br><textarea  rows="4" cols="50" class="form-control" name="remarks" id="swal-input1" placeholder="Add Remarks" class="form-control mb-1" type="text"></textarea>',
-     inputPlaceholder: "Add remarks",
+     // html: '<span>This vehicle will be deactivated!</span><br><br><textarea  rows="4" cols="50" class="form-control" name="remarks" id="swal-input1" placeholder="Add Remarks" class="form-control mb-1" type="text"></textarea>',
+     // inputPlaceholder: "Add remarks",
      type: 'warning',
      showCancelButton: true,
      confirmButtonColor: '#d33',
      cancelButtonColor: '#068101',
      confirmButtonText: 'Yes, Deactivate Vehicle!',
      preConfirm: function () {
-    return new Promise((resolve, reject) => {
-            resolve({
-                Remarks: $('textarea[placeholder="Add Remarks"]').val()
-            });
-        });
+    // return new Promise((resolve, reject) => {
+    //         resolve({
+    //             Remarks: $('textarea[placeholder="Add Remarks"]').val()
+    //         });
+    //     });
     },
     allowOutsideClick: false
   }).then(function(result){
@@ -745,7 +745,7 @@ $(document).ready(function(){
          $.ajax({
          type: 'POST',
            url:base_url + 'vehicle/disablevehicle',
-           data: {id: id, Remarks:$('textarea[placeholder="Add Remarks"]').val()},
+           // data: {id: id, Remarks:$('textarea[placeholder="Add Remarks"]').val()},
            cache: false,
            success:function(data) {
              // setTimeout(function(){$('#addRemarks').modal('show'); }, 1000);
@@ -959,7 +959,7 @@ var vehicle_tbl = $('.vehicle_tbl').DataTable({
                       str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><abbr title="Delete Vehicle"><i class="fa fa-trash" aria-hidden="true"></i></abbr></a>';
                     }else if(row.status == 2){
                       str += '<a href="javascript:;" class="viewVehicle" data-id="'+row.id+'"><abbr title="View Vehicle"><i class="fas fa-eye text-info"></i></abbr></a>';
-                      str += '<a href="javascript:;" class="remarks_inactive" data-id="'+row.id+'" value="'+row.id+'"><abbr title="Remarks"><i class="fa fa-comment" aria-hidden="true"></i></abbr></a>';
+                      // str += '<a href="javascript:;" class="remarks_inactive" data-id="'+row.id+'" value="'+row.id+'"><abbr title="Remarks"><i class="fa fa-comment" aria-hidden="true"></i></abbr></a>';
                       str += '<a href="javascript:;" class="enableVehicle" data-id="'+row.id+'"><abbr title="Enable Vehicle"><i class="fa fa-check-square"></i></abbr></a>';
                       str += '<a href="javascript:;" class="deleteVehicle" data-id="'+row.id+'"><abbr title="Delete Vehicle"><i class="fa fa-trash" aria-hidden="true"></i></abbr></a>';
                     }
