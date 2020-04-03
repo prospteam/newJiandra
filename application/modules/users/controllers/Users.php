@@ -146,7 +146,7 @@ class Users extends MY_Controller {
 
 		$count_username = count($username_exitst);
 		if($count_username){
-			$response = array('form_error' =>  'Username already exists!' );
+			$response = array('username_error' =>  'Username already exists!' );
 			echo json_encode($response);
 		}else{
 
