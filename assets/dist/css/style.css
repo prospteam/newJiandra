@@ -142,3 +142,6 @@ input#my-file {
 .gen_info{
     margin-top: 26px;
 }
+.prod_csv_btn.button1.float-sm-right {
+    background: #28a745;
+}

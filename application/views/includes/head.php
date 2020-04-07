@@ -274,6 +274,32 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <!-- <i class="nav-icon fas fa-file"></i> -->
+              <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1.66667 0.666748C0.75 0.666748 0.00833352 1.41675 0.00833352 2.33341L0 15.6667C0 16.5834 0.741666 17.3334 1.65833 17.3334H11.6667C12.5833 17.3334 13.3333 16.5834 13.3333 15.6667V5.66675L8.33333 0.666748H1.66667ZM7.5 6.50008V1.91675L12.0833 6.50008H7.5Z" fill="#545454"/>
+              </svg>
+
+              <p>
+                CSV Imports
+                <i class="fas fa-angle-left right"></i>
+                <span class="badge badge-info right">2</span>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="<?php echo base_url('productsimport'); ?>" class="nav-link">
+                  <p>Products Import</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="../forms/advanced.html" class="nav-link">
+                  <p>Purchase Order Imports</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <!-- <script type="text/javascript">
              $(".sidebar nav ul.nav li a").filter(function () {
                 return this.href == location.href.replace(/#.*/, "");
