@@ -25,7 +25,7 @@
                 <form id="submit_import">
                     <input name="import_type" hidden="" readonly="">
                     <div class="csvimport__file">
-                        <p class="csv_title"></p>
+                        <strong><p class="csv_title"></p></strong>
                         <p>Click here to upload (only accepts .csv file)</p>
                         <input type="file" name="csv_import" class="csv_file" accept=".csv">
                     </div>

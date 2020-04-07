@@ -179,6 +179,5 @@ input.csv_file {
     z-index: 1;
 }
 .csv_title {
-    font-size: italic;
-    color: red;
+    color: #2c8032;
 }

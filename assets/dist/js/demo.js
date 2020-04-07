@@ -410,3 +410,9 @@
     $(".sidebar nav ul.nav li a").filter(function () {
         return this.href == location.href.replace(/#.*/, "");
     }).parents('.has-treeview').addClass('menu-open');
+
+
+$('.csvimport__file .csv_file').change(function() {
+  var file_info = $(this)[0].files[0];
+  $('.csvimport__file .csv_title').text(file_info.name);
+});
