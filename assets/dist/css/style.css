@@ -145,3 +145,40 @@ input#my-file {
 .prod_csv_btn.button1.float-sm-right {
     background: #28a745;
 }
+input.csv_file {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+.csvimport__file {
+    display: block;
+    width: 100%;
+    border: 3px dashed #6061d1;
+    background: #c7c8ef;
+    position: relative;
+    z-index: 1;
+    padding: 20px 10px 25px;
+}
+.btn-info:hover {
+    color: #fff;
+    background-color: #138496;
+    border-color: #117a8b;
+}
+.m-t-15 {
+    margin-top: 15px!important;
+}
+.csvimport__file p {
+    margin: 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+.csv_title {
+    font-size: italic;
+    color: red;
+}

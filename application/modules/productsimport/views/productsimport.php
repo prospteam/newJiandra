@@ -9,9 +9,33 @@
                     HOME > <span class="active1"> CSV IMPORTS </p>
                 </div>
             </div>
-        </div><!-- /.container-fluid -->
+        </div>
     </section>
+    <div class="row p-y-15 p-x-10 m-x-0">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Product CSV Import</h3>
+                <div class="card-tools">
+                     <a href="<?php echo base_url('assets/uploads/templates/products_import.csv'); ?>" class="btn btn-success btn-sm " download>Download CSV Template</a>
+                </div>
+            </div>
+            <hr>
+            <div class="card-body table-responsive text-center">
+                <form id="submit_import">
+                    <input name="import_type" hidden="" readonly="">
+                    <div class="csvimport__file">
+                        <p class="csv_title"></p>
+                        <p>Click here to upload (only accepts .csv file)</p>
+                        <input type="file" name="csv_import" class="csv_file" accept=".csv">
+                    </div>
+                    <input type="submit" name="submit" class="btn btn-success btn-md m-t-15" value="Import">
+                </form>
+            </div>
 
+        </div>
+    </div>
+</div>
     <!-- Main content -->
     <section class="content">
         <div class="card">
@@ -25,14 +49,20 @@
                                     aria-describedby="example1_info">
                                     <thead>
                                         <th class="header-title">SKU</th>
-                                        <th class="header-title">Supplier</th>
-                                        <th class="header-title">Description</th>
-                                        <th class="header-title">Actions</th>
-                                        <th class="header-title">Status</th>
+                                        <th class="header-title">Descrition</th>
+                                        <th class="header-title">Packing</th>
+                                        <th class="header-title">Brand</th>
+                                        <th class="header-title">Category</th>
+                                        <th class="header-title">Variants</th>
+                                        <th class="header-title">Volume</th>
+                                        <th class="header-title">Units</th>
                                         <!-- <th class="header-title">Unit</th> -->
                                     </thead>
                                     <tbody>
                                         <tr>
+                                            <td>test</td>
+                                            <td>test</td>
+                                            <td>test</td>
                                             <td>test</td>
                                             <td>test</td>
                                             <td>test</td>
