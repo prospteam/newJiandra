@@ -11,7 +11,12 @@
                 <div class="col-sm-6">
                     <button class="users button1 float-sm-right purchase-order-btn" data-toggle="modal" data-target="#AddPurchaseOrder"><i
                             class="fas fa-plus-circle" aria-hidden="true"></i> Purchase Order </button>
-
+                            <form class="" id="import_cs_po" method="post">
+                                <div class=" form-group">
+                                    <input type="file" name="csv_file_po" value="">
+                                </div>
+                                <input class="" type="submit" id="import_csv_btn" name="csv_submit" value="Import CSV">
+                            </form>
                     <!--Add User Modal -->
                     <!-- Modal -->
                     <div class="modal fade" id="AddPurchaseOrder" tabindex="-1" role="dialog"

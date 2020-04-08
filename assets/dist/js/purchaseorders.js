@@ -944,6 +944,23 @@ $(document).ready(function(){
            $('#sku').val($.trim(click_text[0]));
            $("#result").html('');
          });
+         $('#import_cs_po').on('submit',function(e){
+             e.preventDefault();
+             $.ajax({
+                url: base_url + 'purchaseorders/import_csv',
+                method: 'POST',
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                beforeSend:function(){
+                    $('#import_csv_btn').html('Importing...');
+                },
+                success:function(data){
+                    console.log('yawaa');
+                }
+             });
+         })
     });
 
 

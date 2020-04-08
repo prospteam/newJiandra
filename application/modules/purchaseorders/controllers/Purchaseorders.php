@@ -5,7 +5,7 @@ class Purchaseorders extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-
+		$this->load->library('csvimport');
 	}
 
 	public function index(){
@@ -425,5 +425,38 @@ class Purchaseorders extends MY_Controller {
 		$data = $this->MY_Model->getRows('products');
 
 		echo json_encode($data);
+	}
+
+	public function import_csv(){
+		$file_data = $this->csvimport->get_array($_FILES["csv_file_po"]["tmp_name"]);
+
+		$new_array = array();
+
+		foreach ($file_data as $key => $value) {
+			foreach ($value as $key2 => $value2) {
+			}
+			$explode_key = explode(';', $key2);
+			$explode_value = explode(';',$value2);
+
+			$data = array(
+				'date_ordered' => $explode_value[0],
+				'purchase_code'  => '003',
+				'product'  => '1',
+				'quantity'  => $explode_value[3],
+				'unit_price'  => $explode_value[4],
+				'delivered'  => $explode_value[5],
+				'date_delivered'  => $explode_value[6],
+				'supplier'  => $explode_value[7],
+				'company'  => $explode_value[8],
+				'warehouse_id'  => '18',
+				'note'  => '',
+				'status'  => '1',
+				'delivery_status'  => '1',
+				'remarks'  => '',
+				'delivery_remarks'  => '',
+				'order_status'  => '1',
+			);
+			$insert = $this->MY_Model->insert('purchase_orders', $data);
+		}
 	}
 }
