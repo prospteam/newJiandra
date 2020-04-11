@@ -19,7 +19,7 @@ class Stockout extends MY_Controller {
       $search = $this->input->post('search');
       $order = $this->input->post('order');
       $draw = $this->input->post('draw');
-
+ 
 
       $column_order = array('stockmovement_date','date_delivered','stockmovement_code','stockmovemenent_note','status');
       $where = array(
