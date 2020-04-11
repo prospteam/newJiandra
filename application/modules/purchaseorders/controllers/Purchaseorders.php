@@ -458,5 +458,13 @@ class Purchaseorders extends MY_Controller {
 			);
 			$insert = $this->MY_Model->insert('purchase_orders', $data);
 		}
+
+		if($insert){
+			$response = "CSV file successfully imported";
+		}else{
+			$response = "Error!";
+		}
+
+		echo json_encode($response);
 	}
 }
