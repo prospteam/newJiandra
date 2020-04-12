@@ -191,7 +191,6 @@ $(document).ready(function(){
             $('#Status').modal('hide');
             Swal.fire("Successfully updated status!",data.success, "success");
             $(".purchase_tbl").DataTable().ajax.reload();
-
         }
     })
   });
@@ -957,7 +956,11 @@ $(document).ready(function(){
                     $('#import_csv_btn').html('Importing...');
                 },
                 success:function(data){
-                    console.log('yawaa');
+                    if($("[name='csv_file_po']").get(0).files.length === 0){
+                         Swal.fire("Please select CSV file",'', "error");
+                    }else{
+                        Swal.fire("CSV File Successfully imported!",'', "success");
+                    }
                 }
              });
          })
