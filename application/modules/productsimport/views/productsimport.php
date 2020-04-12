@@ -45,7 +45,8 @@
                     <div class="row">.
                         <div class="table-responsive">
                             <div class="col-sm-12">
-                                <table class="table table-bordered table-striped dataTable" role="grid"
+                                <div id="csv_file_data"></div>
+                                <!-- <table class="table table-bordered table-striped dataTable" role="grid"
                                     aria-describedby="example1_info">
                                     <thead>
                                         <th class="header-title">SKU</th>
@@ -56,21 +57,12 @@
                                         <th class="header-title">Variants</th>
                                         <th class="header-title">Volume</th>
                                         <th class="header-title">Units</th>
-                                        <!-- <th class="header-title">Unit</th> -->
+                                        <th class="header-title">Unit</th>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>test</td>
-                                            <td>test</td>
-                                            <td>test</td>
-                                            <td>test</td>
-                                            <td>test</td>
-                                            <td>test</td>
-                                            <td>test</td>
-                                            <td>test</td>
-                                        </tr>
+                                    <tbody class="to_duplicate_add">
+
                                     </tbody>
-                                </table>
+                                </table> -->
                             </div>
                         </div>
                     </div>
