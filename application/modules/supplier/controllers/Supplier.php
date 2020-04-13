@@ -155,15 +155,15 @@ class Supplier extends MY_Controller
 									 $data = array(
 											'supplier_logo' 							=> 1,
 											'supplier_name' 							=> $this->input->post('supplier_name'),
-											'company' 										=> $value,
+											'company' 									=> $value,
 											'email' 						        	=> $this->input->post('email'),
-											'address' 										=> $this->input->post('address'),
+											'address' 									=> $this->input->post('address'),
 											'office_number' 							=> $this->input->post('office_number'),
-											'fax_number' 									=> $this->input->post('fax_number'),
-										'notes'											=> $this->input->post('add_supplier_note'),
-											'tin_number' 									=> $this->input->post('tin_number'),
-										'contact_info'						  	=> json_encode($array),
-											'status' 											=> 1
+											'fax_number' 								=> $this->input->post('fax_number'),
+										    'notes'										=> $this->input->post('add_supplier_note'),
+											'tin_number' 								=> $this->input->post('tin_number'),
+										    'contact_info'						  		=> json_encode($array),
+											'status' 									=> 1
 										// 'vendor' => $this->input->post('vendor'),
 										);
 

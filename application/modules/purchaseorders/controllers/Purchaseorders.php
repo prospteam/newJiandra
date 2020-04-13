@@ -456,6 +456,9 @@ class Purchaseorders extends MY_Controller {
 				'delivery_remarks'  => '',
 				'order_status'  => '1',
 			);
+			echo "<pre>";
+			 print_r($data);
+			 exit;
 			$insert = $this->MY_Model->insert('purchase_orders', $data);
 		}
 

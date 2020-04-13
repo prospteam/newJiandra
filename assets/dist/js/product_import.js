@@ -3,16 +3,17 @@ var base_url = $('input[name="base_url"]').val();
 $(document).ready(function () {
     $('#submit_import').on('submit', function (event) {
         event.preventDefault();
+        var formData = new FormData($(this)[0]);
         $.ajax({
             url: base_url + 'ProductsImport/prod_import',
             method: "POST",
-            data: new FormData(this),
+            data: formData,
             dataType: 'json',
             contentType: false,
+            enctype: 'multipart/form-data',
             cache: false,
             processData: false,
             success: function (data) {
-                console.log(data);
                 var str = '<table class="table table-bordered table-striped dataTable">';
                 if (data.column) {
                     str += '<tr>';
@@ -21,6 +22,7 @@ $(document).ready(function () {
                     }
                     str += '</tr>';
                 }
+                console.log(data.row_data);
                 if (data.row_data) {
                     for (var count = 0; count < data.row_data.length; count++) {
                         str += '<tr>';
@@ -32,7 +34,7 @@ $(document).ready(function () {
                         str += '<td class="units" contenteditable>' + data.row_data[count].units + '</td></tr>';
                     }
                 }
-                str += '<table>';
+                str += '</table>';
                 str += '<div align="center"><button type="button" id="import_data" class="btn btn-success">Import</button></div>';
 
                 $('#csv_file_data').html(str);
