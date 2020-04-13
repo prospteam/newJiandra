@@ -29,13 +29,6 @@ class PoImport extends MY_Controller {
 					'date_delivered'  => $explode_value[6],
 					'supplier'  => $explode_value[7],
 					'company'  => $explode_value[8],
-					'warehouse_id'  => '18',
-					'note'  => '',
-					'status'  => '1',
-					'delivery_status'  => '1',
-					'remarks'  => '',
-					'delivery_remarks'  => '',
-					'order_status'  => '1',
 				);
 			}
 			$explode_key = explode(';', $key1);
@@ -44,10 +37,10 @@ class PoImport extends MY_Controller {
 				'column' => $explode_key,
 				'row_data' => $data,
 			);
-
-			echo "<pre>";
-			print_r($output);
 		}
+
+		echo json_encode($output);
+
 	}
 
 }

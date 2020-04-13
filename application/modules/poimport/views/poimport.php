@@ -33,6 +33,10 @@
                 </form>
             </div>
 
+            <div id="csv_file_data">
+
+            </div>
+
         </div>
     </div>
 </div>
@@ -40,12 +44,12 @@
     <section class="content">
         <div class="card">
             <!-- /.card-header -->
-            <div class="card-body1">
+            <!-- <div class="card-body1">
                 <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                     <div class="row">.
                         <div class="table-responsive">
                             <div class="col-sm-12">
-                                <div id="csv_file_data"></div>
+                                <div id="csv_file_data_po"></div>
                                 <!-- <table class="table table-bordered table-striped dataTable" role="grid"
                                     aria-describedby="example1_info">
                                     <thead>
@@ -68,7 +72,7 @@
                     </div>
 
                 </div>
-            </div>
+            </div> -->
             <!-- /.card-body -->
         </div>
 
