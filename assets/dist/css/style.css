@@ -155,6 +155,16 @@ input.csv_file {
     opacity: 0;
     cursor: pointer;
 }
+input.csv_po_import {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
 .csvimport__file {
     display: block;
     width: 100%;

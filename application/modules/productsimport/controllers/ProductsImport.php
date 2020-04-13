@@ -35,10 +35,9 @@ class ProductsImport extends MY_Controller {
 		   'units' 		=> $row[5],
 		  );
 		 }
-echo "<pre>";
- print_r($file_data);
- exit();
-
+		 echo "<pre>";
+		  print_r($file_data);
+		  exit();
 
 		 $output = array(
 		  'column'  => $column,

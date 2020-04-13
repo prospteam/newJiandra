@@ -294,7 +294,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../forms/advanced.html" class="nav-link">
+                <a href="<?php echo base_url('poimport') ?>" class="nav-link">
                   <p>Purchase Order Imports</p>
                 </a>
               </li>

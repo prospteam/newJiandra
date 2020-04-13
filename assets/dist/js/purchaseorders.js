@@ -943,6 +943,7 @@ $(document).ready(function(){
            $('#sku').val($.trim(click_text[0]));
            $("#result").html('');
          });
+
          $('#import_cs_po').on('submit',function(e){
              e.preventDefault();
              $.ajax({
