@@ -44,8 +44,10 @@
             <div class="card-body1">
                 <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
                     <div class="row">
-                         <div id="csv_file_data">
-
+                         <div class="table-responsive purch_prod" id="csv_file_data">
+                             <div class="table_status">
+                                 <p class="table_empty">Products Here...</p>
+                             </div>
                          </div>
                             </div>
                         </div>

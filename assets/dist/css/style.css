@@ -191,6 +191,13 @@ input.csv_po_import {
 .csv_title {
     color: #2c8032;
 }
-input.btn.btn-sm.btn-success.m-b-15.float-right {
-    margin: 5px;
+#import_data {
+    margin: 15px;
+    width: 107px;
+}
+.table_empty {
+    background-color: #c9dbc9;
+    font-style: italic;
+    font-size: 23px;
+    color: #bb4040;
 }

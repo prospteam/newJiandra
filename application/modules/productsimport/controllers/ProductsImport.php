@@ -5,14 +5,7 @@ class ProductsImport extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
-		// header('Access-Control-Allow-Origin: *');
-		// header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-		// header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-		//
-		// $this->load->library('CSVReader');
-		// $this->load->library('form_validation');
-		// $this->load->helper('file');
-		// $this->load->helper('security');
+
 	}
 
 	public function index(){
@@ -20,9 +13,7 @@ class ProductsImport extends MY_Controller {
 	}
 
 	public function prod_import(){
-		// $product_id = $this->input->post('id');
-		// $row = $this->input->post();
-		// $result = false;
+
 		$fileName = $_FILES["csv_import"]["tmp_name"];
 		$file = fopen($fileName, "r");
 		$data_product = array();
@@ -45,7 +36,31 @@ class ProductsImport extends MY_Controller {
 
 		echo json_encode($output);
 
+	 }
 
+	 public function addproducts() {
+
+	  $this->validate_fields();
+		 $data = array(
+		   'code' => $this->input->post('code'),
+		   'packing'=> $this->input->post('packing'),
+		   'brand' => $this->input->post('brand'),
+		   'variant' => $this->input->post('variant'),
+		  'volume'=> $this->input->post('volume'),
+		  'unit'=> $this->input->post('unit'),
+		   'product_name' => $this->input->post('product_name'),
+		   'category' => $this->input->post('category'),
+		  'supplier' => $this->input->post('supplier'),
+		  'description' => $this->input->post('description'),
+		  'status' => 1
+		 );
+		 echo "<pre>";
+		  print_r($data);
+		  exit;
+			  $insert = $this->MY_Model->insert('products',$data);
+				if ($insert) {
+					   echo json_encode( array('status'=>true));
+			  }
 	 }
 
 }

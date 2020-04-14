@@ -1,5 +1,6 @@
 var base_url = $('input[name="base_url"]').val();
 
+// import products
 $(document).ready(function () {
     $('#submit_import').on('submit', function (event) {
         // alert('hehe');
@@ -15,34 +16,37 @@ $(document).ready(function () {
             cache: false,
             processData: false,
             success: function (data) {
+                var str = '';
+                str += '<form id="addproducts" method="post">'
+                    str+= '<table class="table table-bordered table-striped dataTable">';
+                            if (data.column) {
+                                str += '<thead>';
+                                for (var count = 0; count < data.column.length; count++) {
+                                    str += '<th>' + data.column[count] + '</th>';
+                                }
+                                str += '</thead>';
+                            }
+                            if (data.row_data) {
+                                let row = data.row_data;
 
-                var str = '<table class="table table-bordered table-striped dataTable">';
-                if (data.column) {
-                    str += '<thead>';
-                    for (var count = 0; count < data.column.length; count++) {
-                        str += '<th>' + data.column[count] + '</th>';
-                    }
-                    str += '</thead>';
-                }
-                // console.log(data.column);
-                if (data.row_data) {
-                    str += '<tbody>'
-                    var length = Object.keys(data.row_data).length;
-                    for (var count = 0; count < data.row_data; count++) {
-                            str += '<tr>';
-                                str += '<td class="code" contenteditable>' + data.row_data[count].code + '</td>';
-                                str += '<td class="packing" contenteditable>' + data.row_data[count].Packing + '</td>';
-                                str += '<td class="brand" contenteditable>' + data.row_data[count].Brand + '</td>';
-                                str += '<td class="variance" contenteditable>' + data.row_data[count].Variance + '</td>';
-                                str += '<td class="volume" contenteditable>' + data.row_data[count].Volume + '</td>';
-                                str += '<td class="units" contenteditable>' + data.row_data[count].Units + '</td>';
-                            str+= '</tr>';
-                    }
-                    str+= '</tbody>'
-                    console.log(Object.keys(data.row_data).length);
-                }
-                str += '</table>';
-                str += '<div align="center"><button type="button" id="import_data" class="btn btn-success">Import</button></div>';
+                                $.each(row,function(key,value){
+                                    console.log(value);
+                                    str += '<tbody>'
+                                        str += '<tr>';
+                                            str += '<td class="code" contenteditable>' + value.code + '</td>';
+                                            str += '<td class="packing" contenteditable>' + value.Packing + '</td>';
+                                            str += '<td class="brand" contenteditable>' + value.Brand + '</td>';
+                                            str += '<td class="variant" contenteditable>' + value.Variance + '</td>';
+                                            str += '<td class="volume" contenteditable>' + value.Volume + '</td>';
+                                            str += '<td class="unit" contenteditable>' + value.Units + '</td>';
+                                        str+= '</tr>';
+                                    str+= '</tbody>'
+                            });
+                            str += '<div align="center"> <button type="submit" class="btn btn-primary add">Submit</button></div>';
+                        }
+                        str += '</table>';
+                        str+= '</form>'
+
 
                 $('#csv_file_data').html(str);
                 $('#submit_import')[0].reset();
@@ -50,4 +54,31 @@ $(document).ready(function () {
         })
     });
 
+});
+
+// submit products
+$(document).on('submit', 'form#addproducts', function (e) {
+    // alert("test");
+   e.preventDefault();
+   let formData = $(this).serialize();
+
+   $.ajax({
+      method: 'POST',
+      url: base_url + 'productsimport/addproducts',
+      data: formData,
+      dataType:'json',
+      success: function (response) {
+          console.log(response);
+          if (response.status==true) {
+           Swal.fire("Successfully added to products!", 'Success', "success");
+           blankVal_products();
+       }else {
+             for (var i = 0; i < response.return.input_name.length; i++) {
+                 console.log( response.return.input_name[i], response.return.input_error[i]);
+                 $("input[name="+response.return.input_name[i]+"]").css('border-color', 'red');
+             }
+       }
+         $(".products_tbl").DataTable().ajax.reload();
+      }
+   });
 });
