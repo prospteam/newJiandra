@@ -38,19 +38,13 @@ class ProductsImport extends MY_Controller {
 				$finish_product[$key][$columns[$k]] = $val;
 			}
 		}
-
 		 $output = array(
 		  'column'  => $columns,
 		  'row_data'  => $finish_product
 		 );
-		 // echo "<pre>";
-		 //  print_r($output);
-		 //  exit;
 
-		//
 		echo json_encode($output);
-		//
-		// }
+
 
 	 }
 

@@ -26,8 +26,8 @@ $(document).ready(function () {
                 }
                 // console.log(data.column);
                 if (data.row_data) {
-                    for (var count = 0; count < data.row_data.length; count++) {
-                        str += '<tbody>'
+                    str += '<tbody>'
+                    for (var count = 0; count < data.row_data; count++) {
                             str += '<tr>';
                                 str += '<td class="code" contenteditable>' + data.row_data[count].code + '</td>';
                                 str += '<td class="packing" contenteditable>' + data.row_data[count].Packing + '</td>';
@@ -36,9 +36,9 @@ $(document).ready(function () {
                                 str += '<td class="volume" contenteditable>' + data.row_data[count].Volume + '</td>';
                                 str += '<td class="units" contenteditable>' + data.row_data[count].Units + '</td>';
                             str+= '</tr>';
-                        str+= '</tbody>'
                     }
-                    console.log(data.row_data);
+                    str+= '</tbody>'
+                    console.log(Object.keys(data.row_data).length);
                 }
                 str += '</table>';
                 str += '<div align="center"><button type="button" id="import_data" class="btn btn-success">Import</button></div>';
