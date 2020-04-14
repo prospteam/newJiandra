@@ -27,6 +27,7 @@ $(document).ready(function () {
                 // console.log(data.column);
                 if (data.row_data) {
                     str += '<tbody>'
+                    var length = Object.keys(data.row_data).length;
                     for (var count = 0; count < data.row_data; count++) {
                             str += '<tr>';
                                 str += '<td class="code" contenteditable>' + data.row_data[count].code + '</td>';
