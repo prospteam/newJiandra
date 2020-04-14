@@ -32,6 +32,7 @@
                     <input type="submit" name="submit" class="btn btn-success btn-md m-t-15" value="Import">
                 </form>
             </div>
+            <div id="csv_data"></div>
 
         </div>
     </div>

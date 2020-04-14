@@ -25,25 +25,29 @@ $(document).ready(function () {
                     str += '</thead>';
                 }
                 // console.log(data.column);
+
+
                 if (data.row_data) {
-                    for (var count = 0; count < data.row_data.length; count++) {
+                    let row = data.row_data;
+
+                    $.each(row,function(key,value){
+                        console.log(value);
                         str += '<tbody>'
                             str += '<tr>';
-                                str += '<td class="code" contenteditable>' + data.row_data[count].code + '</td>';
-                                str += '<td class="packing" contenteditable>' + data.row_data[count].Packing + '</td>';
-                                str += '<td class="brand" contenteditable>' + data.row_data[count].Brand + '</td>';
-                                str += '<td class="variance" contenteditable>' + data.row_data[count].Variance + '</td>';
-                                str += '<td class="volume" contenteditable>' + data.row_data[count].Volume + '</td>';
-                                str += '<td class="units" contenteditable>' + data.row_data[count].Units + '</td>';
+                                str += '<td class="code" contenteditable>' + value.code + '</td>';
+                                str += '<td class="packing" contenteditable>' + value.Packing + '</td>';
+                                str += '<td class="brand" contenteditable>' + value.Brand + '</td>';
+                                str += '<td class="variance" contenteditable>' + value.Variance + '</td>';
+                                str += '<td class="volume" contenteditable>' + value.Volume + '</td>';
+                                str += '<td class="units" contenteditable>' + value.Units + '</td>';
                             str+= '</tr>';
                         str+= '</tbody>'
-                    }
-                    console.log(data.row_data);
+                    });
                 }
                 str += '</table>';
                 str += '<div align="center"><button type="button" id="import_data" class="btn btn-success">Import</button></div>';
 
-                $('#csv_file_data').html(str);
+                $('#csv_data').html(str);
                 $('#submit_import')[0].reset();
             }
         })
