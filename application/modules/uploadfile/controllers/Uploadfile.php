@@ -7,16 +7,18 @@ class Uploadfile extends MY_Controller
 	{
 		parent::__construct();
 
-		if ($this->_hasUsers == false) {
-			show_404();
-		}
+		// if ($this->_hasUsers == false) {
+		// 	show_404();
+		// }
 	}
 
 	public function index()
 	{
+		echo "test";
 		$data['notify'] = '';
 
-		$config['upload_path'] = './files/';
+		// $config['upload_path'] = './files/';
+		$config['upload_path'] = '..assets/uploads/uploadcsv';
 		$config['allowed_types'] = 'text/plain|text/csv|csv';
 		$this->load->library('upload', $config);
 
@@ -34,8 +36,11 @@ class Uploadfile extends MY_Controller
 				unlink($file_data['full_path']);
 			}
 		}
+		echo "<pre>";
+		 print_r($data); 
+		 exit;
 
-		if (!IS_AJAX) {
+		if ($this->input->is_ajax_request()) {
 			$data['content'] = 'uploadfile/index';
 			$this->main_template($data);
 		}
