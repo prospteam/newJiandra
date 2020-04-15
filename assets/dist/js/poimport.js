@@ -89,7 +89,10 @@ $(document).ready(function () {
                 if($("[name='csv_file_pos']").get(0).files.length === 0){
                      Swal.fire("Please select CSV file",'', "error");
                 }else{
-                    Swal.fire("CSV File Successfully imported!",'', "success");
+                    Swal.fire("CSV File Successfully imported!",'', "success")
+                    .then((result) => {
+                      location.reload();
+                    });
                 }
             }
         });
