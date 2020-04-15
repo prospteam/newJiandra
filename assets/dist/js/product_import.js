@@ -42,7 +42,7 @@ $(document).ready(function () {
                                 str += '<td class="units" contenteditable>' + value.Units + '</td>';
                             str+= '</tr>';
                         str+= '</tbody>'
-                    }); 
+                    });
                 }
                 str += '</table>';
                 str += '<div align="center"><button type="button" id="import_data" class="btn btn-success">Import</button></div>';

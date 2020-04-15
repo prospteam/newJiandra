@@ -47,7 +47,9 @@ class ProductsImport extends MY_Controller {
 		 //  print_r($output);
 		 //  exit;
 
-		//
+		echo "<pre>";
+		print_r($output);
+		 exit;
 		echo json_encode($output);
 		//
 		// }
