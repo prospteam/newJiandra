@@ -13,34 +13,66 @@ class PoImport extends MY_Controller {
 	}
 
 	public function po_import(){
-		$file_data = $this->csvimport->get_array($_FILES["csv_file_pos"]["tmp_name"]);
 
-		foreach ($file_data as $value) {
-			foreach ($value as $key1 => $value1) {
-				$explode_value = explode(';',$value1);
-
-				$data = array(
-					'date_ordered' => $explode_value[0],
-					'purchase_code'  => '003',
-					'product'  => '1',
-					'quantity'  => $explode_value[3],
-					'unit_price'  => $explode_value[4],
-					'delivered'  => $explode_value[5],
-					'date_delivered'  => $explode_value[6],
-					'supplier'  => $explode_value[7],
-					'company'  => $explode_value[8],
-				);
-			}
-			$explode_key = explode(';', $key1);
-
-			$output = array(
-				'column' => $explode_key,
-				'row_data' => $data,
-			);
+		$fileName = $_FILES["csv_file_pos"]["tmp_name"];
+		$file = fopen($fileName, "r");
+		$data_product = array();
+		while (($column = fgetcsv($file, 10000, ",")) !== FALSE) {
+			$data_product[] = $column;
 		}
 
+		$columns = array('Date Order','Purchase Code','Product','Quantity','Price');
+		$finish_product = array();
+		foreach($data_product as $key => $value){
+			if($key == 0) continue;
+			foreach($value as $k => $val){
+				$finish_product[$key][$columns[$k]] = $val;
+			}
+		}
+
+		 $output = array(
+		  'column'  => $columns,
+		  'row_data'  => $finish_product
+		 );
+		 // echo "<pre>";
+		 //  print_r($output);
+		 //  exit;
+
+		//
 		echo json_encode($output);
 
+	}
+
+	public function submit_import(){
+
+		//echo $_POST['date_ordered'][0];
+
+		// $data = array(
+		// 	'date_ordered' => $_POST['date_ordered'][0]
+		// );
+		//
+		// echo "<pre>";
+		// print_r($data);
+		//  exit;
+
+		$ctr = 0;
+		$data = array();
+		foreach ($_POST as $key => $value) {
+				foreach ($value as $key1 => $value1) {
+
+				}
+				$data[$key] = $value[$key1];
+		}
+
+		$insert = $this->MY_Model->insert('purchase_orders', $data);
+
+		if($insert){
+			$response = "CSV file successfully imported";
+		}else{
+			$response = "Error!";
+		}
+
+		echo json_encode($response);
 	}
 
 }

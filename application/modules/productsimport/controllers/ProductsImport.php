@@ -34,6 +34,12 @@ class ProductsImport extends MY_Controller {
 		  'row_data'  => $finish_product
 		 );
 
+<<<<<<< HEAD
+=======
+		echo "<pre>";
+		print_r($output);
+		 exit;
+>>>>>>> 518b3979056d5076ffddf844ccd43e09d8683a25
 		echo json_encode($output);
 
 	 }

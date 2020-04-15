@@ -13,7 +13,7 @@ $(document).ready(function () {
             cache:false,
             processData:false,
             success:function(data){
-                console.log(data)
+
                 let html = '<table class="table table-striped table-bordered">';
 
                 if(data.column){
@@ -24,17 +24,22 @@ $(document).ready(function () {
                     html += '</tr>';
                 }
 
-                if(data.row_data){
-                        const object = data.row_data;
-                        html += '<tr>';
-                            for (const property in object){
-                                html += '<td contenteditable>'+object[property]+'</td>';
-                            }
-                        html += '</tr>';
+                if (data.row_data) {
+                    let row = data.row_data;
+
+                    $.each(row,function(key,value){
+                        console.log(value);
+                        html += '<tbody>'
+                            html += '<tr>';
+                                html += '<td class="date_order" contenteditable>' + value['Date Order'] + '</td>';
+                                html += '<td class="puchase_order" contenteditable>' + value['Purchase Code'] + '</td>';
+                                html += '<td class="product" contenteditable>' + value['Product'] + '</td>';
+                                html += '<td class="quantity" contenteditable>' + value['Quantity'] + '</td>';
+                                html += '<td class="price" contenteditable>' + value['Price'] + '</td>';
+                            html+= '</tr>';
+                        html+= '</tbody>'
+                    });
                 }
-
-
-                html += '<h1>'+data.row_data.date_ordered+'</h1>';
 
                 html += '</table>';
                 html += '<div align="center"><button type="button" id="import_data" class="btn btn-success">Import</button></div>';
@@ -42,5 +47,52 @@ $(document).ready(function () {
                 $('#csv_file_data').html(html);
             }
         })
+    });
+
+    $(document).on('click', '#import_data', function(){
+        var date_order = [];
+        var puchase_order = [];
+        var product = [];
+        var quantity = [];
+        var price = [];
+
+        $('.date_order').each(function(){
+            date_order.push($(this).text());
+        });
+
+        $('.puchase_order').each(function(){
+            puchase_order.push($(this).text());
+        });
+
+        $('.product').each(function(){
+            product.push($(this).text());
+        });
+
+        $('.quantity').each(function(){
+            quantity.push($(this).text());
+        });
+
+        $('.price').each(function(){
+            price.push($(this).text());
+        });
+
+        $.ajax({
+            url: base_url + 'poimport/submit_import',
+            method: "POST",
+            data: {date_ordered:date_order,
+                    purchase_code:puchase_order,
+                    product: product,
+                    quantity: quantity,
+                    unit_price: price
+                },
+            success: function(data){
+                if($("[name='csv_file_pos']").get(0).files.length === 0){
+                     Swal.fire("Please select CSV file",'', "error");
+                }else{
+                    Swal.fire("CSV File Successfully imported!",'', "success");
+                }
+            }
+        });
+
     });
 });
