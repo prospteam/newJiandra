@@ -64,6 +64,7 @@ class PoImport extends MY_Controller {
 				$data[$key] = $value[$key1];
 		}
 
+
 		$insert = $this->MY_Model->insert('purchase_orders', $data);
 
 		if($insert){

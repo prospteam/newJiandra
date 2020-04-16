@@ -21,7 +21,7 @@ class ProductsImport extends MY_Controller {
 			$data_product[] = $column;
 		}
 
-		$columns = array('code','Packing','Brand','Variance','Volume','Units');
+		$columns = array('Code','Packing','Brand','Variance','Volume','Unit', 'Product_Name', 'Category', 'Supplier', 'Description', 'Status');
 		$finish_product = array();
 		foreach($data_product as $key => $value){
 			if($key == 0) continue;
@@ -34,39 +34,43 @@ class ProductsImport extends MY_Controller {
 		  'row_data'  => $finish_product
 		 );
 
-<<<<<<< HEAD
-=======
-		echo "<pre>";
-		print_r($output);
-		 exit;
->>>>>>> 518b3979056d5076ffddf844ccd43e09d8683a25
 		echo json_encode($output);
 
 	 }
 
-	 public function addproducts() {
+	 	public function addproducts(){
 
-	  $this->validate_fields();
-		 $data = array(
-		   'code' => $this->input->post('code'),
-		   'packing'=> $this->input->post('packing'),
-		   'brand' => $this->input->post('brand'),
-		   'variant' => $this->input->post('variant'),
-		  'volume'=> $this->input->post('volume'),
-		  'unit'=> $this->input->post('unit'),
-		   'product_name' => $this->input->post('product_name'),
-		   'category' => $this->input->post('category'),
-		  'supplier' => $this->input->post('supplier'),
-		  'description' => $this->input->post('description'),
-		  'status' => 1
-		 );
-		 echo "<pre>";
-		  print_r($data);
-		  exit;
-			  $insert = $this->MY_Model->insert('products',$data);
-				if ($insert) {
-					   echo json_encode( array('status'=>true));
-			  }
-	 }
+	 		//echo $_POST['date_ordered'][0];
+
+	 		// $data = array(
+	 		// 	'date_ordered' => $_POST['date_ordered'][0]
+	 		// );
+	 		//
+	 		// echo "<pre>";
+	 		// print_r($data);
+	 		//  exit;
+
+	 		$ctr = 0;
+			$data = array();
+	 		foreach ($_POST as $key => $value) {
+	 				foreach ($value as $key1 => $value1) {
+
+	 				}
+					$data[$key] = $value[$key1];
+	 		}
+			// echo "<pre>";
+			//  print_r($data);
+			//  exit;
+
+	 		$insert = $this->MY_Model->insert('products', $data, 'row');
+
+	 		if($insert){
+	 			$response = "Products Successfully Imported";
+	 		}else{
+	 			$response = "Error!";
+	 		}
+
+	 		echo json_encode($response);
+	 	}
 
 }
