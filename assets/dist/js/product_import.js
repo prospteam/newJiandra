@@ -88,7 +88,6 @@ $(document).ready(function () {
 //    });
 // });
 $(document).on('click', 'form#addproducts', function(){
-    alert("test");
     var code = [];
     var packing = [];
     var brand = [];

@@ -40,15 +40,16 @@ class ProductsImport extends MY_Controller {
 
 	 	public function addproducts(){
 
-	 		//echo $_POST['date_ordered'][0];
-
-	 		// $data = array(
-	 		// 	'date_ordered' => $_POST['date_ordered'][0]
-	 		// );
-	 		//
-	 		// echo "<pre>";
-	 		// print_r($data);
-	 		//  exit;
+			// $data = array();
+			// foreach ($_POST as $key => $value) {
+			// 	foreach ($value as $key1 => $value1) {
+			// 		$data[$key] = $value1;
+			// 	}
+			// echo "<pre>";
+			// print_r($data);
+			// }
+			//
+			// exit();
 
 	 		$ctr = 0;
 			$data = array();
@@ -56,13 +57,10 @@ class ProductsImport extends MY_Controller {
 	 				foreach ($value as $key1 => $value1) {
 
 	 				}
-					$data[$key] = $value[$key1];
 	 		}
-			// echo "<pre>";
-			//  print_r($data);
-			//  exit;
+			$data[$key] = $value[$key1];
 
-	 		$insert = $this->MY_Model->insert('products', $data, 'row');
+	 		$insert = $this->MY_Model->insert('products', $data);
 
 	 		if($insert){
 	 			$response = "Products Successfully Imported";
