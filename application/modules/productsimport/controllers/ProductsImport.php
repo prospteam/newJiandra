@@ -40,25 +40,17 @@ class ProductsImport extends MY_Controller {
 
 	 	public function addproducts(){
 
-			// $data = array();
-			// foreach ($_POST as $key => $value) {
-			// 	foreach ($value as $key1 => $value1) {
-			// 		$data[$key] = $value1;
-			// 	}
-			// echo "<pre>";
-			// print_r($data);
-			// }
-			//
-			// exit();
-
 	 		$ctr = 0;
 			$data = array();
 	 		foreach ($_POST as $key => $value) {
 	 				foreach ($value as $key1 => $value1) {
-
+						$data[$key] = $value[$key1];
 	 				}
 	 		}
-			$data[$key] = $value[$key1];
+
+			// echo "<pre>";
+			// print_r($data);
+			//  exit;
 
 	 		$insert = $this->MY_Model->insert('products', $data);
 
@@ -70,5 +62,6 @@ class ProductsImport extends MY_Controller {
 
 	 		echo json_encode($response);
 	 	}
+
 
 }
