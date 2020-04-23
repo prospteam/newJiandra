@@ -139,7 +139,7 @@ $(document).on('click', 'form#addproducts', function(){
     });
 
     $.ajax({
-        url: base_url + 'productsimport/addproducts',
+        url: base_url + 'ProductsImport/addproducts',
         method: "POST",
         data: { code:code,
                 packing:packing,
@@ -147,19 +147,19 @@ $(document).on('click', 'form#addproducts', function(){
                 variant: variant,
                 volume: volume,
                 unit: unit,
-                prod_name: prod_name,
+                product_name: prod_name,
                 category: category,
                 supplier: supplier,
                 description: description,
                 status: status,
             },
-        success: function(data){
-            if($("[name='csv_import']").get(0).files.length === 0){
-                 Swal.fire("Please select CSV file",'', "error");
-            }else{
-                Swal.fire("Products Successfully Imported!",'', "success");
-            }
-        }
+        // success: function(data){
+        //     if($("[name='csv_import']").get(0).files.length === 0){
+        //          Swal.fire("Please select CSV file",'', "error");
+        //     }else{
+        //         Swal.fire("Products Successfully Imported!",'', "success");
+        //     }
+        // }
     });
 
 });
