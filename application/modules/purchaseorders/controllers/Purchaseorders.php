@@ -121,7 +121,7 @@ class Purchaseorders extends MY_Controller {
 
 	public function addPurchaseOrder(){
 		$post = $this->input->post();
-
+		
 		$warehouse = explode('|', $post['warehouse']);
 		$warehouse_id = $warehouse[0];
 		$warehouse_name = isset($warehouse[1]);

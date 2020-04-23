@@ -38,29 +38,24 @@ class ProductsImport extends MY_Controller {
 
 	 }
 
-	 	public function addproducts(){
+	 	public function addproducts_csv(){
 
-	 		$ctr = 0;
 			$data = array();
 	 		foreach ($_POST as $key => $value) {
 	 				foreach ($value as $key1 => $value1) {
-						$data[$key] = $value[$key1];
+						$data[$key1][$key] = $value[$key1];
 	 				}
 	 		}
+			// $insert = $this->MY_Model->insert('products', $data);
+			$this->db->insert_batch('products',$data);
+			//
+	 		// if($insert){
+	 		// 	$response = "Products Successfully Imported";
+	 		// }else{
+	 		// 	$response = "Error!";
+	 		// }
 
-			// echo "<pre>";
-			// print_r($data);
-			//  exit;
-
-	 		$insert = $this->MY_Model->insert('products', $data);
-
-	 		if($insert){
-	 			$response = "Products Successfully Imported";
-	 		}else{
-	 			$response = "Error!";
-	 		}
-
-	 		echo json_encode($response);
+	 		// echo json_encode($response);
 	 	}
 
 

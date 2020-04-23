@@ -33,17 +33,17 @@ $(document).ready(function () {
                                     console.log(value);
                                     str += '<tbody>'
                                         str += '<tr>';
-                                            str += '<td class="code" contenteditable>' + value.Code + '</td>';
-                                            str += '<td class="packing" contenteditable>' + value.Packing + '</td>';
-                                            str += '<td class="brand" contenteditable>' + value.Brand + '</td>';
-                                            str += '<td class="variant" contenteditable>' + value.Variance + '</td>';
-                                            str += '<td class="volume" contenteditable>' + value.Volume + '</td>';
-                                            str += '<td class="unit" contenteditable>' + value.Unit + '</td>';
-                                            str += '<td class="prod_name" contenteditable>' + value.Product_Name + '</td>';
-                                            str += '<td class="category" contenteditable>' + value.Category + '</td>';
-                                            str += '<td class="supplier" contenteditable>' + value.Supplier + '</td>';
-                                            str += '<td class="description" contenteditable>' + value.Description + '</td>';
-                                            str += '<td class="status" contenteditable>' + value.Status + '</td>';
+                                            str += '<td class="code">' + value.Code + '</td>';
+                                            str += '<td class="packing">' + value.Packing + '</td>';
+                                            str += '<td class="brand">' + value.Brand + '</td>';
+                                            str += '<td class="variant">' + value.Variance + '</td>';
+                                            str += '<td class="volume">' + value.Volume + '</td>';
+                                            str += '<td class="unit">' + value.Unit + '</td>';
+                                            str += '<td class="prod_name">' + value.Product_Name + '</td>';
+                                            str += '<td class="category">' + value.Category + '</td>';
+                                            str += '<td class="supplier">' + value.Supplier + '</td>';
+                                            str += '<td class="description">' + value.Description + '</td>';
+                                            str += '<td class="status">' + value.Status + '</td>';
                                         str+= '</tr>';
                                     str+= '</tbody>'
                             });
@@ -139,7 +139,7 @@ $(document).on('click', 'form#addproducts', function(){
     });
 
     $.ajax({
-        url: base_url + 'ProductsImport/addproducts',
+        url: base_url + 'ProductsImport/addproducts_csv',
         method: "POST",
         data: { code:code,
                 packing:packing,
