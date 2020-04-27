@@ -55,19 +55,29 @@ class PoImport extends MY_Controller {
 		// print_r($data);
 		//  exit;
 
-		$ctr = 0;
+		// $ctr = 0;
+		// $data = array();
+		// foreach ($_POST as $key => $value) {
+		// 		foreach ($value as $key1 => $value1) {
+		//
+		// 		}
+		// 		$data[$key] = $value[$key1];
+		//
+		// }
+		// $data['delivery_status'] = 1;
+		// $data['status'] = 1;
+		// $data['supplier'] = 45;
+		// $data['company'] = 1;
+
 		$data = array();
 		foreach ($_POST as $key => $value) {
 				foreach ($value as $key1 => $value1) {
-
+					$data[$key1][$key] = $value[$key1];
 				}
-				$data[$key] = $value[$key1];
-
 		}
-		$data['delivery_status'] = 1;
-		$data['status'] = 1;
-		$data['supplier'] = 45;
-		$data['company'] = 1;
+
+		// $insert = $this->MY_Model->insert('products', $data);
+		$this->db->insert_batch('purchase_orders',$data);
 
 
 		$insert = $this->MY_Model->insert('purchase_orders', $data);

@@ -10,6 +10,11 @@
             <form id="addpurchaseorder" method="post">
             <div class="row">
                 <div class="col-6">
+                    <?php foreach($purchase as $k => $value) :  ?>
+
+                    <input type="hidden" class="form-control" name="purchase_id"
+                        value="<?php echo $value['purchase_code']?>">
+                    <?php  endforeach; ?>
                     <div class="form-group">
                         <label for="supplier">Company: <span
                                 class="required">*</span></label>
