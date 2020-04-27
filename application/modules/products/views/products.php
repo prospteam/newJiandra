@@ -16,7 +16,7 @@
                     <!-- Modal -->
                     <div class="modal fade" id="AddProducts" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">\
-                        <form id="addproducts" method="post">
+                        <form id="addproduct" method="post">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header bg-info1">
@@ -110,7 +110,7 @@
                                                     <select class="form-control" class="supplier" name="supplier">
                                                         <option value="" selected hidden>Select Supplier</option>
                                                         <?php foreach($supplier as $k => $value) : ?>
-                                                            <option value="<?php echo $value['id'] ?>"><?php echo $value['supplier_name'] ?></option>
+                                                            <option value="<?php echo $value['supplier_name'] ?>"><?php echo $value['supplier_name'] ?></option>
                                                         <?php  endforeach; ?>
                                                     </select>
                                             </div>
