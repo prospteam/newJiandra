@@ -75,10 +75,13 @@ class PoImport extends MY_Controller {
 					$data[$key1][$key] = $value[$key1];
 				}
 		}
-
-		// $insert = $this->MY_Model->insert('products', $data);
-		$this->db->insert_batch('purchase_orders',$data);
-
+		$data['delivery_status'] = 1;
+		$data['status'] = 1;
+		$data['supplier'] = 45;
+		$data['company'] = 1;
+		echo "<pre>";
+		 print_r($data);
+		 exit;
 
 		$insert = $this->MY_Model->insert('purchase_orders', $data);
 

@@ -47,15 +47,16 @@ class ProductsImport extends MY_Controller {
 	 				}
 	 		}
 			// $insert = $this->MY_Model->insert('products', $data);
-			$this->db->insert_batch('products',$data);
+			$insert = $this->db->insert_batch('products',$data);
 			//
-	 		// if($insert){
-	 		// 	$response = "Products Successfully Imported";
-	 		// }else{
-	 		// 	$response = "Error!";
-	 		// }
+	 		if($insert){
+	 			$response = "Products Successfully Imported";
+	 		}else{
+	 			$response = "Error!";
+				// $response = "Products Successfully Imported";
+	 		}
 
-	 		// echo json_encode($response);
+	 		echo json_encode($response);
 	 	}
 
 

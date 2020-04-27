@@ -190,6 +190,7 @@ class Purchaseorders extends MY_Controller {
 					'order_status' => 1
 				);
 
+
 				$insert = $this->MY_Model->insert('purchase_orders', $data);
 				if ($insert) {
 					$response = array(

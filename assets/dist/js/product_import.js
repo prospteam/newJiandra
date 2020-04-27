@@ -153,13 +153,11 @@ $(document).on('click', 'form#addproducts', function(){
                 description: description,
                 status: status,
             },
-        // success: function(data){
-        //     if($("[name='csv_import']").get(0).files.length === 0){
-        //          Swal.fire("Please select CSV file",'', "error");
-        //     }else{
-        //         Swal.fire("Products Successfully Imported!",'', "success");
-        //     }
-        // }
+        success: function(data){
+            if($("[name='csv_import']").get(0).files.length === 0){
+                Swal.fire("Products Successfully Imported!",'', "success");
+            }
+        }
     });
 
 });
