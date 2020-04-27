@@ -357,11 +357,10 @@ $(document).ready(function(){
             }else {
                 blankVal_purchase();
                 $('#AddPurchaseOrder').modal('hide');
-                Swal.fire("Successfully added purchase order!",data.success, "success");
-                $(".purchase_tbl").DataTable().ajax.reload();
-                // setTimeout(function(){
-                //    location.reload();
-                //  }, 1000);
+                Swal.fire("Successfully added purchase order!",data.success, "success")
+                .then((result) => {
+                  window.location = base_url + 'purchaseorders';
+                });
             }
         }
     })
