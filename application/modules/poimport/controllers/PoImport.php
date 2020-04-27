@@ -68,7 +68,9 @@ class PoImport extends MY_Controller {
 		$data['status'] = 1;
 		$data['supplier'] = 45;
 		$data['company'] = 1;
-
+		echo "<pre>";
+		 print_r($data);
+		 exit;
 
 		$insert = $this->MY_Model->insert('purchase_orders', $data);
 
