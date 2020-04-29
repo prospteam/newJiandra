@@ -33,21 +33,21 @@ $(document).ready(function () {
                                     console.log(value);
                                     str += '<tbody>'
                                         str += '<tr>';
-                                            str += '<td class="code">' + value.Code + '</td>';
-                                            str += '<td class="packing">' + value.Packing + '</td>';
-                                            str += '<td class="brand">' + value.Brand + '</td>';
-                                            str += '<td class="variant">' + value.Variance + '</td>';
-                                            str += '<td class="volume">' + value.Volume + '</td>';
-                                            str += '<td class="unit">' + value.Unit + '</td>';
-                                            str += '<td class="prod_name">' + value.Product_Name + '</td>';
-                                            str += '<td class="category">' + value.Category + '</td>';
-                                            str += '<td class="supplier">' + value.Supplier + '</td>';
-                                            str += '<td class="description">' + value.Description + '</td>';
-                                            str += '<td class="status">' + value.Status + '</td>';
+                                            str += '<td class="code" contenteditable>' + value.Code + '</td>';
+                                            str += '<td class="packing" contenteditable>' + value.Packing + '</td>';
+                                            str += '<td class="brand" contenteditable>' + value.Brand + '</td>';
+                                            str += '<td class="variant" contenteditable>' + value.Variance + '</td>';
+                                            str += '<td class="volume" contenteditable>' + value.Volume + '</td>';
+                                            str += '<td class="unit" contenteditable>' + value.Unit + '</td>';
+                                            str += '<td class="prod_name" contenteditable>' + value.Product_Name + '</td>';
+                                            str += '<td class="category" contenteditable>' + value.Category + '</td>';
+                                            str += '<td class="supplier" contenteditable>' + value.Supplier + '</td>';
+                                            str += '<td class="description" contenteditable>' + value.Description + '</td>';
+                                            str += '<td class="status" contenteditable>' + value.Status + '</td>';
                                         str+= '</tr>';
                                     str+= '</tbody>'
                             });
-                            str += '<div align="center"> <button type="submit" class="btn btn-primary add">Submit</button></div>';
+                            str += '<div align="center"> <button type="submit"  id="import_data" class="btn btn-primary add">Submit</button></div>';
                         }
                         str += '</table>';
                         str+= '</form>'
@@ -87,7 +87,7 @@ $(document).ready(function () {
 //       }
 //    });
 // });
-$(document).on('click', 'form#addproducts', function(){
+$(document).on('click', '#import_data', function(){
     var code = [];
     var packing = [];
     var brand = [];
@@ -155,7 +155,10 @@ $(document).on('click', 'form#addproducts', function(){
             },
         success: function(data){
             if($("[name='csv_import']").get(0).files.length === 0){
-                Swal.fire("Products Successfully Imported!",'', "success");
+                Swal.fire("Products Successfully Imported!",'', "success")
+                .then((result) => {
+                  location.reload();
+                });
             }
         }
     });
