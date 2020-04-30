@@ -3,7 +3,7 @@ $(document).ready(function () {
 
 
    // ADD PRODUCTS
-   $(document).on('submit', 'form#addproducts', function (e) {
+   $(document).on('submit', 'form#addproduct', function (e) {
       e.preventDefault();
       let formData = $(this).serialize();
 
@@ -15,13 +15,17 @@ $(document).ready(function () {
          success: function (response) {
              console.log(response);
              if (response.status==true) {
-              Swal.fire("Successfully added products!", 'Success', "success");
+              Swal.fire("Successfully added products!", 'Success', "success")
+              .then((result) => {
+                location.reload();
+              });
               blankVal_products();
           }else {
                 for (var i = 0; i < response.return.input_name.length; i++) {
                     console.log( response.return.input_name[i], response.return.input_error[i]);
                     $("input[name="+response.return.input_name[i]+"]").css('border-color', 'red');
                 }
+                Swal.fire("Pleaes fill out all fields", 'Error', "error");
           }
             $(".products_tbl").DataTable().ajax.reload();
          }

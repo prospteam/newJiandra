@@ -36,6 +36,7 @@ class Products extends MY_Controller {
 		'description' => $this->input->post('description'),
         'status' => 1
       );
+
 	        $insert = $this->MY_Model->insert('products',$data);
 	          if ($insert) {
 	                 echo json_encode( array('status'=>true));
@@ -82,7 +83,7 @@ class Products extends MY_Controller {
 			$column_order = array('p.code','p.product_name','s.supplier_name','p.brand','p.category','p.packing','p.volume','p.unit','p.status');
 		 	$where = array('p.status !=' => 3);
 			$join = array(
-				'supplier as s' => 's.id = p.supplier'
+				'supplier as s' => 's.supplier_name = p.supplier'
 				// 'position' => 'position.id = users.position'
 			);
 			$select = "p.id,p.code,p.packing,p.product_name,p.brand,p.category,p.volume,p.unit,p.status, s.supplier_name";

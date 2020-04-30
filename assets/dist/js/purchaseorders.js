@@ -357,11 +357,10 @@ $(document).ready(function(){
             }else {
                 blankVal_purchase();
                 $('#AddPurchaseOrder').modal('hide');
-                Swal.fire("Successfully added purchase order!",data.success, "success");
-                $(".purchase_tbl").DataTable().ajax.reload();
-                // setTimeout(function(){
-                //    location.reload();
-                //  }, 1000);
+                Swal.fire("Successfully added purchase order!",data.success, "success")
+                .then((result) => {
+                  window.location = base_url + 'purchaseorders';
+                });
             }
         }
     })
@@ -531,7 +530,7 @@ $(document).ready(function(){
           str += '<select class="form-control" class="supplier" name="supplier" >';
               str += '<option value="" selected hidden>Select Supplier</option>';
                 $.each(data.suppliers,function(index,element){
-                      str += '<option value="'+element.id+'">'+element.supplier_name+'</option>';
+                      str += '<option value="'+element.supplier_name+'">'+element.supplier_name+'</option>';
                 });
           str += '</select>';
           str += '<span class="err"></span>';

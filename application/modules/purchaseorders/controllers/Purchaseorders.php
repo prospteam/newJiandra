@@ -122,7 +122,7 @@ class Purchaseorders extends MY_Controller {
 		$where = array('purchase_orders.order_status !=' => 2);
 		$group = array('purchase_orders.purchase_code');
 		$join = array(
-			'supplier' => 'supplier.id = purchase_orders.supplier',
+			'supplier' => 'supplier.supplier_name = purchase_orders.supplier',
 			'company' => 'company.company_id = purchase_orders.company'
 		);
 		$select = "purchase_orders.id AS purchase_id, purchase_orders.date_ordered,purchase_orders.purchase_code,company.company_id, company.company_name, supplier.id,supplier.supplier_name,purchase_orders.status,purchase_orders.delivery_status,purchase_orders.order_status";
@@ -138,10 +138,12 @@ class Purchaseorders extends MY_Controller {
 		echo json_encode($output);
 	}
 
-
-
 	public function addPurchaseOrder(){
 		$post = $this->input->post();
+
+		$supplier = explode('|', $post['supplier']);
+		$supplier_id = $supplier[0];
+		$supplier_name = $supplier[1];
 
 		$warehouse = explode('|', $post['warehouse']);
 		$warehouse_id = $warehouse[0];
@@ -179,14 +181,15 @@ class Purchaseorders extends MY_Controller {
 					'product' => $pVal,
 					'quantity' => $post['quantity'][$pkey],
 					'unit_price' => $post['unit_price'][$pkey],
-					'supplier' => $post['supplier'],
-					'warehouse_id' => $warehouse[0],
+					'supplier' => $supplier_name,
+					'warehouse_id' => $warehouse[1],
 					'company' => $post['company'],
 					'note' => $post['purchase_note'],
 					'status' => 1,
 					'delivery_status' => 1,
 					'order_status' => 1
 				);
+
 
 				$insert = $this->MY_Model->insert('purchase_orders', $data);
 				if ($insert) {
