@@ -28,6 +28,27 @@ class Purchaseorders extends MY_Controller {
     $this->load_page('purchaseorders', @$data);
 	}
 
+	public function viewAddSupplier(){
+		$parameters['select'] = '*';
+		$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
+
+		$parameters['where'] = array('company_id !=' => 0);
+		$parameters['select'] = '*';
+		$data['company'] = $this->MY_Model->getRows('company',$parameters);
+
+		$param['where'] = array('status' => 1);
+		$param['select'] = '*';
+		$data['products'] = $this->MY_Model->getRows('products', $param);
+
+		$parameters1['select'] = '*';
+		$parameters1['limit'] = array(1,0);;
+		$parameters1['order'] = 'purchase_code DESC';
+		$data['purchase'] = $this->MY_Model->getRows('purchase_orders',$parameters1);
+
+
+		$this->load_page('addsupplier', @$data);
+	}
+
 	//get suppliers and warehouse by company
 	public function get_suppliers_by_companies(){
 		$parameters['where'] = array('company' => $this->input->post('company_id'), 'status' => 1);
@@ -121,7 +142,7 @@ class Purchaseorders extends MY_Controller {
 
 	public function addPurchaseOrder(){
 		$post = $this->input->post();
-		
+
 		$warehouse = explode('|', $post['warehouse']);
 		$warehouse_id = $warehouse[0];
 		$warehouse_name = isset($warehouse[1]);
@@ -470,4 +491,5 @@ class Purchaseorders extends MY_Controller {
 
 		echo json_encode($response);
 	}
+
 }
