@@ -47,7 +47,7 @@ $(document).ready(function () {
                                         str+= '</tr>';
                                     str+= '</tbody>'
                             });
-                            str += '<div align="center"> <button type="submit"  id="import_data" class="btn btn-primary add">Submit</button></div>';
+                            str += '<div align="center"> <button type="submit"  id="import_data_product" class="btn btn-primary add">Submit</button></div>';
                         }
                         str += '</table>';
                         str+= '</form>'
@@ -57,6 +57,84 @@ $(document).ready(function () {
                 $('#submit_import')[0].reset();
             }
         })
+    });
+
+    $(document).on('click', '#import_data_product', function(){
+        var code = [];
+        var packing = [];
+        var brand = [];
+        var variant = [];
+        var volume = [];
+        var unit = [];
+        var prod_name = [];
+        var category = [];
+        var supplier = [];
+        var description = [];
+        var status = [];
+
+        $('.code').each(function(){
+            code.push($(this).text());
+        });
+
+        $('.packing').each(function(){
+            packing.push($(this).text());
+        });
+
+        $('.brand').each(function(){
+            brand.push($(this).text());
+        });
+
+        $('.variant').each(function(){
+            variant.push($(this).text());
+        });
+
+        $('.volume').each(function(){
+            volume.push($(this).text());
+        });
+        $('.unit').each(function(){
+            unit.push($(this).text());
+        });
+        $('.prod_name').each(function(){
+            prod_name.push($(this).text());
+        });
+        $('.category').each(function(){
+            category.push($(this).text());
+        });
+        $('.supplier').each(function(){
+            supplier.push($(this).text());
+        });
+        $('.description').each(function(){
+            description.push($(this).text());
+        });
+        $('.status').each(function(){
+            status.push($(this).text());
+        });
+
+        $.ajax({
+            url: base_url + 'ProductsImport/addproducts_csv',
+            method: "POST",
+            data: { code:code,
+                    packing:packing,
+                    brand: brand,
+                    variant: variant,
+                    volume: volume,
+                    unit: unit,
+                    product_name: prod_name,
+                    category: category,
+                    supplier: supplier,
+                    description: description,
+                    status: status,
+                },
+            success: function(data){
+                if($("[name='csv_import']").get(0).files.length === 0){
+                    Swal.fire("Products Successfully Imported!",'', "success")
+                    .then((result) => {
+                      location.reload();
+                    });
+                }
+            }
+        });
+
     });
 
 });
@@ -87,80 +165,3 @@ $(document).ready(function () {
 //       }
 //    });
 // });
-$(document).on('click', '#import_data', function(){
-    var code = [];
-    var packing = [];
-    var brand = [];
-    var variant = [];
-    var volume = [];
-    var unit = [];
-    var prod_name = [];
-    var category = [];
-    var supplier = [];
-    var description = [];
-    var status = [];
-
-    $('.code').each(function(){
-        code.push($(this).text());
-    });
-
-    $('.packing').each(function(){
-        packing.push($(this).text());
-    });
-
-    $('.brand').each(function(){
-        brand.push($(this).text());
-    });
-
-    $('.variant').each(function(){
-        variant.push($(this).text());
-    });
-
-    $('.volume').each(function(){
-        volume.push($(this).text());
-    });
-    $('.unit').each(function(){
-        unit.push($(this).text());
-    });
-    $('.prod_name').each(function(){
-        prod_name.push($(this).text());
-    });
-    $('.category').each(function(){
-        category.push($(this).text());
-    });
-    $('.supplier').each(function(){
-        supplier.push($(this).text());
-    });
-    $('.description').each(function(){
-        description.push($(this).text());
-    });
-    $('.status').each(function(){
-        status.push($(this).text());
-    });
-
-    $.ajax({
-        url: base_url + 'ProductsImport/addproducts_csv',
-        method: "POST",
-        data: { code:code,
-                packing:packing,
-                brand: brand,
-                variant: variant,
-                volume: volume,
-                unit: unit,
-                product_name: prod_name,
-                category: category,
-                supplier: supplier,
-                description: description,
-                status: status,
-            },
-        success: function(data){
-            if($("[name='csv_import']").get(0).files.length === 0){
-                Swal.fire("Products Successfully Imported!",'', "success")
-                .then((result) => {
-                  location.reload();
-                });
-            }
-        }
-    });
-
-});
