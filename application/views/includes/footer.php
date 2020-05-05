@@ -46,7 +46,7 @@
 <!-- STOCK RECEIVE -->
 <script src="<?php echo base_url('assets/dist/js/stockreceive.js'); ?>"></script>
 <!-- PRODUCTS IMPORT -->
-<script src="<?php echo base_url('assets/dist/js/product_import.js'); ?>"></script>
+<script src="<?php echo base_url('assets/dist/js/productsimport.js'); ?>"></script>
 <script src="<?php echo base_url('assets/dist/js/poimport.js'); ?>"></script>
 
 
