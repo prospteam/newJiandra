@@ -163,16 +163,20 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            <?php  if($this->session->userdata('position') == 1){ ?>
               <li class="nav-item">
                 <a href="<?php echo base_url('users'); ?>" class="nav-link">
                   <p>Users</p>
                 </a>
               </li>
+          <?php } ?>
+          <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3){ ?>
               <li class="nav-item">
                 <a href="<?php echo base_url('supplier'); ?>" class="nav-link">
                   <p>Suppliers</p>
                 </a>
               </li>
+        <?php } ?>
               <!-- <li class="nav-item">
                 <a href="../layout/fixed-sidebar.html" class="nav-link">
                   <p>Accounts</p>
@@ -186,6 +190,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
+         <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3){ ?>
             <a href="#" class="nav-link">
               <!-- <i class="nav-icon fas fa-file"></i> -->
               <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -198,6 +203,7 @@
                 <span class="badge badge-info right">2</span>
               </p>
             </a>
+        <?php } ?>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="<?php echo base_url('purchaseorders'); ?>" class="nav-link">
@@ -212,6 +218,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
+          <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3){ ?>
             <a href="#" class="nav-link">
                  <!-- <i class="nav-icon fas fa-list-ul"></i> -->
                  <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -223,6 +230,7 @@
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+        <?php } ?>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="<?php echo base_url('products'); ?>" class="nav-link">
@@ -264,6 +272,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
+          <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3){ ?>
             <a href="#" class="nav-link">
               <!-- <i class="nav-icon fas fa-file"></i> -->
               <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -276,6 +285,7 @@
                 <span class="badge badge-info right">2</span>
               </p>
             </a>
+        <?php } ?>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="../forms/general.html" class="nav-link">
