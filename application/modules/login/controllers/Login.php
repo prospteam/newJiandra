@@ -51,9 +51,9 @@ class Login extends MY_Controller {
 	}
 
 	public function setSession($data){
-		echo "<pre>";
-		 print_r($data);
-		 exit;
+		// echo "<pre>";
+		//  print_r($data);
+		//  exit;
 		$data_session = array(
 			'logged_in' => true,
 			'id' => $data->id,
