@@ -165,6 +165,7 @@
                 <span class="badge badge-info right">3</span>
               </p>
             </a>
+            <?php } ?>
             <ul class="nav nav-treeview">
             <?php  if($this->session->userdata('position') == 1){ ?>
               <li class="nav-item">
@@ -194,7 +195,7 @@
             <?php } ?>
           </li>
           <li class="nav-item has-treeview">
-         <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3 || $this->session->userdata('position') == 4){ ?>
+         <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3 || $this->session->userdata('position') == 4 || $this->session->userdata('position') == 6){ ?>
             <a href="#" class="nav-link">
               <!-- <i class="nav-icon fas fa-file"></i> -->
               <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -214,6 +215,7 @@
                   <p>View Purchase Order</p>
                 </a>
               </li>
+          <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3){ ?>
               <li class="nav-item">
                  <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3){ ?>
                 <a href="<?php echo base_url('purchaseorders/viewAddSupplier'); ?>" class="nav-link">
@@ -221,6 +223,7 @@
                 </a>
             <?php } ?>
               </li>
+          <?php } ?>
             </ul>
           </li>
           <li class="nav-item has-treeview">

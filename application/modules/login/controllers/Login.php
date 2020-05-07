@@ -56,7 +56,7 @@ class Login extends MY_Controller {
 			'fullname' => $data->fullname,
 			'position' => $data->position
 		);
-		
+
 		$this->session->set_userdata($data_session);
 	}
 
