@@ -21,13 +21,14 @@ class Login extends MY_Controller {
 		// 	'password' => $password,
 		// );
 		// $data = array();
-
 		$this->form_validation->set_rules('username','Username','required');
 		$this->form_validation->set_rules('password','Password','required');
 		if($this->form_validation->run() === false){
-			$data['msg'] = 'Username or Password field is required';
+						$data['msg'] = 'Username or Password field is required';
+
 			$this->load_login_page('login',$data);
 		}else{
+
 			$parameters['where'] =  array('username' => $username, 'status' => 1);
 			// $parameters['select'] = 'id, fullname, position';
 			$result = $this->MY_Model->getRows('users',$parameters,'row');
@@ -44,24 +45,18 @@ class Login extends MY_Controller {
 				$this->load_login_page('login',$data);
 
 			}
-
 		}
-
 
 	}
 
 	public function setSession($data){
-		echo "<pre>";
-		 print_r($data);
-		 exit;
 		$data_session = array(
 			'logged_in' => true,
 			'id' => $data->id,
 			'fullname' => $data->fullname,
 			'position' => $data->position
 		);
-
-
+		
 		$this->session->set_userdata($data_session);
 	}
 
