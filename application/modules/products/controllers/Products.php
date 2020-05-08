@@ -31,11 +31,15 @@ class Products extends MY_Controller {
 		'brand' => $this->input->post('brand'),
         'product_name' => $this->input->post('product_name'),
         'category' => $this->input->post('category'),
+        'subvariant' => $this->input->post('subvariant'),
         'variant' => $this->input->post('variant'),
+        'weight' => $this->input->post('weight'),
+        'weightunit' => $this->input->post('weightunit'),
 		'supplier' => $this->input->post('supplier'),
 		'description' => $this->input->post('description'),
         'status' => 1
       );
+
 
 	        $insert = $this->MY_Model->insert('products',$data);
 	          if ($insert) {
@@ -277,7 +281,18 @@ class Products extends MY_Controller {
 				 	  } else if ($post['search_type'] == 'variant') {
 							$where = "variant LIKE '%" . $postLike . "%'";
 						 	$select = "variant AS product_id, variant AS product_name";
-				 	  }	else {
+
+				 	  }	else if ($post['search_type'] == 'subvariant') {
+							$where = "subvariant LIKE '%" . $postLike . "%'";
+						 	$select = "subvariant AS product_id, subvariant AS product_name";
+				 	  }else if ($post['search_type'] == 'weight') {
+							$where = "weight LIKE '%" . $postLike . "%'";
+						 	$select = "weight AS product_id, weight AS product_name";
+				 	  }else if ($post['search_type'] == 'weightunit') {
+							$where = "weightunit LIKE '%" . $postLike . "%'";
+						 	$select = "weightunit AS product_id, weightunit AS product_name";
+				 	  }
+					  else {
 					 		$where = "unit LIKE '%" . $postLike . "%'";
 					 		$select = "unit AS product_id, unit AS product_name";
 					  }

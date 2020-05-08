@@ -146,15 +146,17 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview <?php if(isset($dbpresent)) {echo "menu-open";} ?>">
+              <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3){ ?>
             <a href="<?= base_url('dashboard'); ?>" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
               </p>
             </a>
+        <?php } ?>
           </li>
           <li class="nav-item has-treeview">
-          <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3){ ?>
+               <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3){ ?>
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
@@ -190,9 +192,10 @@
                 </a>
               </li>
             </ul>
+            <?php } ?>
           </li>
           <li class="nav-item has-treeview">
-         <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3 || $this->session->userdata('position') == 6){ ?>
+         <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3 || $this->session->userdata('position') == 4 || $this->session->userdata('position') == 6){ ?>
             <a href="#" class="nav-link">
               <!-- <i class="nav-icon fas fa-file"></i> -->
               <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -214,15 +217,17 @@
               </li>
           <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3){ ?>
               <li class="nav-item">
+                 <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3){ ?>
                 <a href="<?php echo base_url('purchaseorders/viewAddSupplier'); ?>" class="nav-link">
                   <p>Add Purchase Order</p>
                 </a>
+            <?php } ?>
               </li>
           <?php } ?>
             </ul>
           </li>
           <li class="nav-item has-treeview">
-          <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3){ ?>
+          <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3 || $this->session->userdata('position') == 5){ ?>
             <a href="#" class="nav-link">
                  <!-- <i class="nav-icon fas fa-list-ul"></i> -->
                  <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -237,14 +242,18 @@
         <?php } ?>
             <ul class="nav nav-treeview">
               <li class="nav-item">
+                   <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 4){ ?>
                 <a href="<?php echo base_url('products'); ?>" class="nav-link">
                   <p>Products</p>
                 </a>
+                <?php } ?>
               </li>
               <li class="nav-item">
+                  <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 4){ ?>
                 <a href="<?php echo base_url('warehouse_management') ?>" class="nav-link">
                   <p>Warehouse Management</p>
                 </a>
+            <?php } ?>
               </li>
                <li class="nav-item has-treeview">
                   <a href="<?php echo base_url('stocksmanagement'); ?>" class="nav-link">
@@ -276,7 +285,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
-          <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3){ ?>
+          <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3 || $this->session->userdata('position') == 4){ ?>
             <a href="#" class="nav-link">
               <!-- <i class="nav-icon fas fa-file"></i> -->
               <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -304,6 +313,7 @@
             </ul>
           </li>
           <li class="nav-item has-treeview">
+               <?php if($this->session->userdata('position') == 1){ ?>
             <a href="#" class="nav-link">
               <!-- <i class="nav-icon fas fa-file"></i> -->
               <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -328,6 +338,7 @@
                 </a>
               </li>
             </ul>
+            <?php } ?>
           </li>
           <!-- <script type="text/javascript">
              $(".sidebar nav ul.nav li a").filter(function () {

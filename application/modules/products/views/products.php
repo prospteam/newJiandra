@@ -86,6 +86,43 @@
                                             </div>
                                         </div>
                                         <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="variant">Variants: <span class="required">*</span></label>
+                                                    <select class="form-control js-example-basic-multiple-addproducts" name="variant" id="variant" data-type="variant">
+                                                        <option></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="subvariant">Sub Variants: <span class="required">*</span></label>
+                                                    <select class="form-control js-example-basic-multiple-addproducts" name="subvariant" id="subvariant" data-type="subvariant">
+                                                        <option></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="weight">Weight: <span class="required">*</span></label>
+                                                    <select class="form-control js-example-basic-multiple-addproducts" name="weight" id="weight" data-type="weight">
+                                                        <option></option>
+                                                    </select>
+                                                    <span class="err"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="weightunit">Weight Unit: <span class="required">*</span></label>
+                                                    <select class="form-control js-example-basic-multiple-addproducts" name="weightunit" id="weightunit" data-type="weightunit">
+                                                        <option></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="category">Category: <span class="required">*</span></label>
@@ -95,16 +132,6 @@
                                                     <span class="err"></span>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="variant">Variants: <span class="required">*</span></label>
-                                                    <select class="form-control js-example-basic-multiple-addproducts" name="variant" id="variant" data-type="variant">
-                                                        <option></option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-6">
                                                 <label for="supplier">Supplier:</label>
                                                     <select class="form-control" class="supplier" name="supplier">
@@ -114,7 +141,9 @@
                                                         <?php  endforeach; ?>
                                                     </select>
                                             </div>
-                                            <div class="col-6">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="description">Description:</label>
                                                     <textarea rows="1" cols="50" name="description" class="form-control"> </textarea>
