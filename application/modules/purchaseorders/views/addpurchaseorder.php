@@ -91,7 +91,7 @@
                                 <td class="purch_td">
                                     <input type="text"
                                         class="form-control purchase_price number_only"
-                                        name="unit_price[]" value="">
+                                        name="unit_price[]" value="" readonly>
                                     <span class="err"></span>
                                 </td>
                                 <td class="purch_td">

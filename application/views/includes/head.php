@@ -192,7 +192,6 @@
                 </a>
               </li>
             </ul>
-            <?php } ?>
           </li>
           <li class="nav-item has-treeview">
          <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3 || $this->session->userdata('position') == 4 || $this->session->userdata('position') == 6){ ?>
@@ -218,7 +217,7 @@
           <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3){ ?>
               <li class="nav-item">
                  <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3){ ?>
-                <a href="<?php echo base_url('purchaseorders/viewAddSupplier'); ?>" class="nav-link">
+                <a href="<?php echo base_url('purchaseorders/viewaddpurchaseorder'); ?>" class="nav-link">
                   <p>Add Purchase Order</p>
                 </a>
             <?php } ?>

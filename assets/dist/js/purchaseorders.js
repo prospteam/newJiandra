@@ -264,9 +264,11 @@ $(document).ready(function(){
         success: function(data){
                 $.each(data.products,function(index,element){
                       $('.prod_name').val(element.product_name);
+                      $('.purchase_quantity ').val(1);
+                      $('.purchase_price  ').val(element.sell_price);
                 });
 
-        }
+        },
     });
   });
 
