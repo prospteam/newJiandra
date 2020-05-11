@@ -17,7 +17,7 @@ $(document).ready(function () {
             processData: false,
             success: function (data) {
                 var str = '';
-                str += '<form id="addproducts" method="post">'
+                str += '<form id="addproducts_csv" method="post">'
                     str+= '<table class="table table-bordered table-striped dataTable">';
                             if (data.column) {
                                 str += '<thead>';
@@ -43,23 +43,34 @@ $(document).ready(function () {
                                             str += '<td class="category" contenteditable>' + value.Category + '</td>';
                                             str += '<td class="supplier" contenteditable>' + value.Supplier + '</td>';
                                             str += '<td class="description" contenteditable>' + value.Description + '</td>';
+                                            str += '<td class="weight" contenteditable>' + value.Weight + '</td>';
+                                            str += '<td class="weight_unit" contenteditable>' + value.Weight_Unit + '</td>';
+                                            str += '<td class="sub_variant" contenteditable>' + value.Sub_Variant + '</td>';
                                             str += '<td class="status" contenteditable>' + value.Status + '</td>';
                                         str+= '</tr>';
                                     str+= '</tbody>'
                             });
-                            str += '<div align="center"> <button type="submit"  id="import_data_product" class="btn btn-primary add">Submit</button></div>';
                         }
                         str += '</table>';
+                        str += '<div align="center"><button type="button" id="import_product" class="btn btn-success">Import</button></div>';
                         str+= '</form>'
 
 
                 $('#csv_file_data').html(str);
                 $('#submit_import')[0].reset();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                Swal.fire("Please upload correct CSV format",'', "error")
+                .then((result) => {
+                  location.reload();
+                });
             }
         })
     });
 
-    $(document).on('click', '#import_data_product', function(){
+
+
+    $(document).on('click', '#import_product', function(){
         var code = [];
         var packing = [];
         var brand = [];
@@ -71,6 +82,9 @@ $(document).ready(function () {
         var supplier = [];
         var description = [];
         var status = [];
+        var weight = [];
+        var weight_unit = [];
+        var sub_variant = [];
 
         $('.code').each(function(){
             code.push($(this).text());
@@ -110,6 +124,18 @@ $(document).ready(function () {
             status.push($(this).text());
         });
 
+        $('.weight').each(function(){
+            weight.push($(this).text());
+        });
+
+        $('.weight_unit').each(function(){
+            weight_unit.push($(this).text());
+        });
+
+        $('.sub_variant').each(function(){
+            sub_variant.push($(this).text());
+        });
+
         $.ajax({
             url: base_url + 'ProductsImport/addproducts_csv',
             method: "POST",
@@ -124,6 +150,9 @@ $(document).ready(function () {
                     supplier: supplier,
                     description: description,
                     status: status,
+                    Weight: weight,
+                    weight_unit: weight_unit,
+                    sub_variant: sub_variant,
                 },
             success: function(data){
                 if($("[name='csv_import']").get(0).files.length === 0){

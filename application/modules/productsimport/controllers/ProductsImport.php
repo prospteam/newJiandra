@@ -21,7 +21,7 @@ class ProductsImport extends MY_Controller {
 			$data_product[] = $column;
 		}
 
-		$columns = array('Code','Packing','Brand','Variance','Volume','Unit', 'Product_Name', 'Category', 'Supplier', 'Description', 'Status');
+		$columns = array('Code','Packing','Brand','Variance','Volume','Unit', 'Product_Name', 'Category', 'Supplier', 'Description','Weight','Weight_Unit','Sub_Variant','Status');
 		$finish_product = array();
 		foreach($data_product as $key => $value){
 			if($key == 0) continue;

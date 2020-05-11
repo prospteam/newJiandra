@@ -45,6 +45,12 @@ $(document).ready(function () {
                 html += '<div align="center"><button type="button" id="import_data" class="btn btn-success">Import</button></div>';
 
                 $('#csv_file_data').html(html);
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+                Swal.fire("Please upload correct CSV format",'', "error")
+                .then((result) => {
+                  location.reload();
+                });
             }
         })
     });

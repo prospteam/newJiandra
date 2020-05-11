@@ -29,7 +29,7 @@
                         <p>Click here to upload (only accepts .csv file)</p>
                         <input type="file" name="csv_import" class="csv_file" accept=".csv">
                     </div>
-                    <input type="submit" name="submit" class="btn btn-success btn-md m-t-15" value="Import">
+                    <input type="submit" name="submit" class="btn btn-success btn-md m-t-15" value="Submit">
                 </form>
             </div>
             <div id="csv_data"></div>

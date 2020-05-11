@@ -28,7 +28,7 @@ class Purchaseorders extends MY_Controller {
     $this->load_page('purchaseorders', @$data);
 	}
 
-	public function viewAddSupplier(){
+	public function viewaddpurchaseorder(){
 		$parameters['select'] = '*';
 		$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
 
@@ -46,7 +46,7 @@ class Purchaseorders extends MY_Controller {
 		$data['purchase'] = $this->MY_Model->getRows('purchase_orders',$parameters1);
 
 
-		$this->load_page('addsupplier', @$data);
+		$this->load_page('addpurchaseorder', @$data);
 	}
 
 	//get suppliers and warehouse by company
@@ -60,7 +60,8 @@ class Purchaseorders extends MY_Controller {
 	}
 
 	public function get_productName_by_code(){
-		$parameters['where'] = array('id' => $this->input->post('prod_id'));
+		$parameters['where'] = array('products.id' => $this->input->post('prod_id'));
+		$parameters['join'] = $join = array('products_cost_price' => 'products_cost_price.fk_product_id = products.id');
 		$data['products'] = $this->MY_Model->getRows('products',$parameters);
 
 		json($data);
@@ -143,7 +144,7 @@ class Purchaseorders extends MY_Controller {
 
 		$supplier = explode('|', $post['supplier']);
 		$supplier_id = $supplier[0];
-		$supplier_name = $supplier[1];
+		$supplier_name = $supplier[0];
 
 		$warehouse = explode('|', $post['warehouse']);
 		$warehouse_id = $warehouse[0];
@@ -153,6 +154,7 @@ class Purchaseorders extends MY_Controller {
 		$id = $this->input->post('purchase_id');
 		$purchase_id = $id + 1;
 		$code = sprintf('%04d',$purchase_id);
+
 		$this->load->library("form_validation");
 
 		$this->form_validation->set_rules('prod_code[]', 'SKU', 'required');
@@ -189,7 +191,6 @@ class Purchaseorders extends MY_Controller {
 					'delivery_status' => 1,
 					'order_status' => 1
 				);
-
 
 				$insert = $this->MY_Model->insert('purchase_orders', $data);
 				if ($insert) {
@@ -286,7 +287,7 @@ class Purchaseorders extends MY_Controller {
 
 		$parameters['where'] = array('purchase_code' => $purchase_id);
 		// $parameters['group'] = array('purchase_code');
-		$parameters['join'] = array('company' => 'company.company_id = purchase_orders.company','supplier' => 'supplier.id = purchase_orders.supplier', 'products' => 'products.id = purchase_orders.product');
+		$parameters['join'] = array('company' => 'company.company_id = purchase_orders.company','supplier' => 'supplier.supplier_name = purchase_orders.supplier', 'products' => 'products.id = purchase_orders.product');
 		$parameters['select'] = 'purchase_orders.*, purchase_orders.id AS purchase_id, supplier.id AS supplier_id, supplier.*, company.*,products.id AS product_id, products.*';
 
 		$data['purch_details'] = $this->MY_Model->getRows('purchase_orders', $parameters);

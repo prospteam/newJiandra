@@ -60,7 +60,7 @@ class Products extends MY_Controller {
 					'sell_price' 					=> $this->input->post('sell_price','Selling Price', 'required'),
 					'effective_date'				=> $this->input->post('effective_date','Effective Date', 'required'),
 					'fk_product_id'					=> $this->input->post('product_id'),
-					'added_by'						=> $this->session->userdata('id')
+					'added_by'						=> $this->session->userdata('fullname')
 				);
 
 				$insert = $this->MY_Model->insert('products_cost_price', $data);
