@@ -180,7 +180,7 @@
                   <p>Suppliers</p>
                 </a>
               </li>
-        <?php } ?>
+          <?php } ?>
               <!-- <li class="nav-item">
                 <a href="../layout/fixed-sidebar.html" class="nav-link">
                   <p>Accounts</p>
@@ -192,7 +192,6 @@
                 </a>
               </li>
             </ul>
-            <?php } ?>
           </li>
           <li class="nav-item has-treeview">
          <?php if($this->session->userdata('position') == 1 || $this->session->userdata('position') == 3 || $this->session->userdata('position') == 4 || $this->session->userdata('position') == 6){ ?>

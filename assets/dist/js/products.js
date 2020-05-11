@@ -79,6 +79,9 @@ $(document).ready(function () {
             $('.product_name').text(data.products.product_name);
             $('.category').text(data.products.category);
             $('.variant').text(data.products.variant);
+            $('.subvariant').text(data.products.subvariant);
+            $('.weight').text(data.products.weight);
+            $('.weightunit').text(data.products.weightunit);
             $('.supplier').text(data.products.supplier_name);
             $('.description').text(data.products.description);
          }

@@ -110,7 +110,7 @@ class Products extends MY_Controller {
 			$data_array = array();
 			$parameters['select'] = '*';
 			$parameters['where'] = array('products.id'=>$product_id);
-			$parameters['join'] = array('supplier as s' => 's.id = products.supplier');
+			$parameters['join'] = array('supplier as s' => 's.supplier_name = products.supplier');
 			$data = $this->MY_Model->getrows('products',$parameters,'row');
 
 			$data_array['products'] = $data;
@@ -321,25 +321,36 @@ class Products extends MY_Controller {
 					if ($post['search_type'] == 'product_name') {
 						$where = "product_name LIKE '%" . $postLike . "%'";
 						$select = "product_name AS product_id, product_name";
-					} else if ($post['search_type'] == 'volume') {
-						$where = "volume LIKE '%" . $postLike . "%'";
-						$select = "volume AS product_id, volume AS product_name";
-					} else if ($post['search_type'] == 'unit') {
-						$where = "unit LIKE '%" . $postLike . "%'";
-						$select = "unit AS product_id, unit AS product_name";
-					} else if ($post['search_type'] == 'packing') {
-						$where = "packing LIKE '%" . $postLike . "%'";
-						$select = "packing AS product_id, packing AS product_name";
-					} else if ($post['search_type'] == 'brand') {
+					}else if ($post['search_type']== 'brand') {
 						$where = "brand LIKE '%" . $postLike . "%'";
 						$select = "brand AS product_id, brand AS product_name";
+					}else if($post['search_type']== 'volume') {
+						$where = "volume LIKE '%" . $postLike . "%'";
+						$select = "volume AS product_id, volume AS product_name";
+					} else if ($post['search_type']== 'packing') {
+						$where = "packing LIKE '%" . $postLike . "%'";
+						$select = "packing AS product_id, packing AS product_name";
 					} else if ($post['search_type'] == 'category') {
 						$where = "category LIKE '%" . $postLike . "%'";
 						$select = "category AS product_id, category AS product_name";
-					} else {
+				  } else if ($post['search_type'] == 'variant') {
 						$where = "variant LIKE '%" . $postLike . "%'";
 						$select = "variant AS product_id, variant AS product_name";
-					}
+				  }	else if ($post['search_type'] == 'subvariant') {
+						$where = "subvariant LIKE '%" . $postLike . "%'";
+						$select = "subvariant AS product_id, subvariant AS product_name";
+				  }else if ($post['search_type'] == 'weight') {
+						$where = "weight LIKE '%" . $postLike . "%'";
+						$select = "weight AS product_id, weight AS product_name";
+				  }else if ($post['search_type'] == 'weightunit') {
+						$where = "weightunit LIKE '%" . $postLike . "%'";
+						$select = "weightunit AS product_id, weightunit AS product_name";
+				  }
+				  else {
+						$where = "unit LIKE '%" . $postLike . "%'";
+						$select = "unit AS product_id, unit AS product_name";
+				  }
+
 					//  else {
 					// 	$where = "unit LIKE '%" . $postLike . "%'";
 					// 	$select = "unit AS product_id, variant AS product_name";
