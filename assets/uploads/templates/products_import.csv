@@ -1,3 +1,1 @@
-code,Packing,Brand,Variance ,Volume,Unit,Product_Name,Category,Supplier,Description,Status
-SPDSP1KL,7,Delicious,Spaghetti,1,24,test,test,Proweaver,test,1
-ABC001,6,test,test,2,22,test,test,Web2.ph,test,2
+code,Packing,Brand,Variance ,Volume,Unit,Product_Name,Category,Supplier,Description,Weight,Weight Unit,Sub Variant,Status
