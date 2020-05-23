@@ -68,8 +68,8 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label for="product_name">Name: <span class="required">*</span></label>
-                                                    <select class="form-control js-example-basic-multiple-addproducts" name="product_name" id="product_name" data-type="product_name">
+                                                    <label for="brand">Brand: <span class="required">*</span></label>
+                                                    <select class="form-control js-example-basic-multiple-addproducts" name="brand" id="brand" data-type="brand">
                                                         <option></option>
                                                     </select>
                                                     <span class="err"></span>
@@ -77,8 +77,8 @@
                                             </div>
                                             <div class="col-6">
                                                 <div class="form-group">
-                                                    <label for="brand">Brand: <span class="required">*</span></label>
-                                                    <select class="form-control js-example-basic-multiple-addproducts" name="brand" id="brand" data-type="brand">
+                                                    <label for="product_name">Name: <span class="required">*</span></label>
+                                                    <select class="form-control js-example-basic-multiple-addproducts" name="product_name" id="product_name" data-type="product_name">
                                                         <option></option>
                                                     </select>
                                                     <span class="err"></span>
@@ -562,8 +562,8 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="product_name">Name: <span class="required">*</span></label>
-                                            <select class="form-control js-example-basic-multiple-editproducts" name="product_name" id="product_name1" data-type="product_name">
+                                            <label for="brand">Brand: <span class="required">*</span></label>
+                                            <select class="form-control js-example-basic-multiple-editproducts" name="brand" id="brand1" data-type="brand">
                                                 <option></option>
                                             </select>
                                             <span class="err"></span>
@@ -571,8 +571,8 @@
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
-                                            <label for="brand">Brand: <span class="required">*</span></label>
-                                            <select class="form-control js-example-basic-multiple-editproducts" name="brand" id="brand1" data-type="brand">
+                                            <label for="product_name">Name: <span class="required">*</span></label>
+                                            <select class="form-control js-example-basic-multiple-editproducts" name="product_name" id="product_name1" data-type="product_name">
                                                 <option></option>
                                             </select>
                                             <span class="err"></span>

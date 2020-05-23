@@ -23,32 +23,33 @@ class Products extends MY_Controller {
   public function addproducts() {
 
 	$this->validate_fields();
-	$data = array(
-	  'code' => $this->input->post('code'),
-	 'volume'=> $this->input->post('volume'),
-	 'unit'=> $this->input->post('unit'),
-	 'packing'=> $this->input->post('packing'),
-	 'brand' => $this->input->post('brand'),
-	  'product_name' => $this->input->post('product_name'),
-	  'category' => $this->input->post('category'),
-	  'subvariant' => $this->input->post('subvariant'),
-	  'variant' => $this->input->post('variant'),
-	  'weight' => $this->input->post('weight'),
-	  'weightunit' => $this->input->post('weightunit'),
-	 'supplier' => $this->input->post('supplier'),
-	 'cbm_length' => $this->input->post('cbm_length'),
-	 'cbm_width' => $this->input->post('cbm_width'),
-	 'cbm_height' => $this->input->post('cbm_height'),
-	 'cbm_volume' => $this->input->post('cbm_volume'),
-	 'supplier' => $this->input->post('supplier'),
-	 'description' => $this->input->post('description'),
-	  'status' => 1
-	);
+      $data = array(
+        'code' => $this->input->post('code'),
+		'volume'=> $this->input->post('volume'),
+		'unit'=> $this->input->post('unit'),
+		'packing'=> $this->input->post('packing'),
+		'brand' => $this->input->post('brand'),
+        'product_name' => $this->input->post('product_name'),
+        'category' => $this->input->post('category'),
+        'subvariant' => $this->input->post('subvariant'),
+        'variant' => $this->input->post('variant'),
+        'weight' => $this->input->post('weight'),
+        'weightunit' => $this->input->post('weightunit'),
+		'supplier' => $this->input->post('supplier'),
+		'cbm_length' => $this->input->post('cbm_length'),
+		'cbm_width' => $this->input->post('cbm_width'),
+		'cbm_height' => $this->input->post('cbm_height'),
+		'cbm_volume' => $this->input->post('cbm_volume'),
+		'supplier' => $this->input->post('supplier'),
+		'description' => $this->input->post('description'),
+        'status' => 1
+      );
 
-        $insert = $this->MY_Model->insert('products',$data);
-          if ($insert) {
-                 echo json_encode( array('status'=>true));
-		}
+
+	        $insert = $this->MY_Model->insert('products',$data);
+	          if ($insert) {
+	                 echo json_encode( array('status'=>true));
+			}
   }
 
 	  public function add_cost_price(){
@@ -200,7 +201,7 @@ class Products extends MY_Controller {
 					  'variant' => $this->input->post('variant'),
 					  'weight' => $this->input->post('weight'),
 					  'weightunit' => $this->input->post('weightunit'),
-					  'supplier' => $this->input->post('supplier_edit'),
+					  'supplier' => $this->input->post('supplier'),
 					  'cbm_length' => $this->input->post('cbm_length'),
 					  'cbm_width' => $this->input->post('cbm_width'),
 					  'cbm_height' => $this->input->post('cbm_height'),
@@ -209,6 +210,8 @@ class Products extends MY_Controller {
 					  'description' => $this->input->post('description'),
 					  'status' => 1
 					);
+
+
 				$update = $this->MY_Model->update('products', $data, array('id' => $products_id));
 
 				if ($update) {
@@ -294,9 +297,11 @@ class Products extends MY_Controller {
 				 	  } else if ($post['search_type'] == 'variant') {
 							$where = "variant LIKE '%" . $postLike . "%'";
 						 	$select = "variant AS product_id, variant AS product_name";
+
 				 	  }	else if ($post['search_type'] == 'subvariant') {
 							$where = "subvariant LIKE '%" . $postLike . "%'";
 						 	$select = "subvariant AS product_id, subvariant AS product_name";
+
 				 	  }else if ($post['search_type'] == 'weight') {
 							$where = "weight LIKE '%" . $postLike . "%'";
 						 	$select = "weight AS product_id, weight AS product_name";
@@ -348,12 +353,15 @@ class Products extends MY_Controller {
 				  } else if ($post['search_type'] == 'variant') {
 						$where = "variant LIKE '%" . $postLike . "%'";
 						$select = "variant AS product_id, variant AS product_name";
+
 				  }	else if ($post['search_type'] == 'subvariant') {
 						$where = "subvariant LIKE '%" . $postLike . "%'";
 						$select = "subvariant AS product_id, subvariant AS product_name";
+
 				  }else if ($post['search_type'] == 'weight') {
 						$where = "weight LIKE '%" . $postLike . "%'";
 						$select = "weight AS product_id, weight AS product_name";
+
 				  }else if ($post['search_type'] == 'weightunit') {
 						$where = "weightunit LIKE '%" . $postLike . "%'";
 						$select = "weightunit AS product_id, weightunit AS product_name";

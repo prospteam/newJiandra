@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Productsimport extends MY_Controller {
+class ProductsImport extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -21,7 +21,7 @@ class Productsimport extends MY_Controller {
 			$data_product[] = $column;
 		}
 
-		$columns = array('Code','Volume','Unit','Packing','Brand','Variant', 'Sub_Variant', 'Product_Name', 'Category', 'Supplier','Description','Weight','Weight_Unit', 'CBM_Length','CBM_Width','CBM_Height','CBM_Volume','Status');
+		$columns = array('Code','Packing','Brand','Variance','Volume','Unit', 'Product_Name', 'Category', 'Supplier', 'Description','Weight','Weight_Unit','Sub_Variant','Status');
 		$finish_product = array();
 		foreach($data_product as $key => $value){
 			if($key == 0) continue;
@@ -29,7 +29,6 @@ class Productsimport extends MY_Controller {
 				$finish_product[$key][$columns[$k]] = $val;
 			}
 		}
-
 		 $output = array(
 		  'column'  => $columns,
 		  'row_data'  => $finish_product
@@ -47,10 +46,6 @@ class Productsimport extends MY_Controller {
 						$data[$key1][$key] = $value[$key1];
 	 				}
 	 		}
-			// echo "<pre>";
-			//  print_r($data);
-			//  exit;
-
 			// $insert = $this->MY_Model->insert('products', $data);
 			$insert = $this->db->insert_batch('products',$data);
 			//

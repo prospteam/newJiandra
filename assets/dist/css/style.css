@@ -201,3 +201,10 @@ input.csv_po_import {
     font-size: 23px;
     color: #bb4040;
 }
+p.prod_cbm {
+    font-size: 20px;
+    font-weight: 600;
+    background: #c6c6e4;
+    text-align: center;
+    border-radius: 4px;
+}
