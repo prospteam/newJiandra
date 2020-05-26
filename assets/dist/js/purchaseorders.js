@@ -264,8 +264,7 @@ $(document).ready(function(){
         success: function(data){
                 $.each(data.products,function(index,element){
                       $('.prod_name').val(element.product_name);
-                      $('.purchase_quantity ').val(1);
-                      $('.purchase_price  ').val(element.sell_price);
+                      $('.purchase_price  ').val(element.cost_price);
                 });
 
         },
@@ -283,6 +282,7 @@ $(document).ready(function(){
         success: function(data){
                 $.each(data.products,function(index,element){
                       $(that).parent().next().find('.add_prod').val(element.product_name);
+                      $(that).parent().next().next().next().find('.purchase_price').val(element.cost_price);
                 });
 
         }
@@ -767,7 +767,7 @@ $(document).ready(function(){
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
-          str += '<input type="text" class="form-control purchase_price number_only" name="unit_price[]" value="">';
+          str += '<input type="text" class="form-control purchase_price number_only" readonly name="unit_price[]" value="">';
           str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';

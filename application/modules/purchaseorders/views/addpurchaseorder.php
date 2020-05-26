@@ -54,7 +54,7 @@
                                     class="required">*</span></th>
                             <th class="header-title purch">Quantity <span
                                     class="required">*</span></th>
-                            <th class="header-title purch">Unit Price <span
+                            <th class="header-title purch">Cost Price <span
                                     class="required">*</span></th>
                             <th class="header-title purch">Total <span class="required">*</span>
                             </th>
