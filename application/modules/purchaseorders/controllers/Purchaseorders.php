@@ -51,19 +51,26 @@ class Purchaseorders extends MY_Controller {
 
 	//get suppliers and warehouse by company
 	public function get_suppliers_by_companies(){
-		$parameters['where'] = array('company' => $this->input->post('company_id'), 'status' => 1);
+		$parameters['where'] = array(
+			'company' => $this->input->post('company_id'),
+			'status' => 1
+		);
 		$data['warehouse'] = $this->MY_Model->getRows('warehouse_management',$parameters);
 
-			$parameters['where'] = array('company' => $this->input->post('company_id'), 'status' => 1);
-			$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
-			json($data);
+		$parameters['where'] = array(
+			'company' => $this->input->post('company_id'), 
+			'status' => 1
+		);
+		$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
+
+		json($data);
 	}
 
 	public function get_productName_by_code(){
+		// $parameters['where'] = array('supplier.id' => $this->input->post('id'));
 		$parameters['where'] = array('products.id' => $this->input->post('prod_id'));
 		$parameters['join'] = $join = array('products_cost_price' => 'products_cost_price.fk_product_id = products.id');
 		$data['products'] = $this->MY_Model->getRows('products',$parameters);
-
 		json($data);
 	}
 

@@ -264,7 +264,8 @@ $(document).ready(function(){
         success: function(data){
                 $.each(data.products,function(index,element){
                       $('.prod_name').val(element.product_name);
-                      $('.purchase_price  ').val(element.cost_price);
+                      $('.purchase_quantity ').val(1);
+                      $('.purchase_price  ').val(element.sell_price);
                 });
 
         },
@@ -282,7 +283,6 @@ $(document).ready(function(){
         success: function(data){
                 $.each(data.products,function(index,element){
                       $(that).parent().next().find('.add_prod').val(element.product_name);
-                      $(that).parent().next().next().next().find('.purchase_price').val(element.cost_price);
                 });
 
         }
@@ -553,6 +553,27 @@ $(document).ready(function(){
     });
   });
 
+  // $(document).on('change', 'select[name="prod_code[]"]', function(){
+  //    $.ajax({
+  //        url: base_url+'purchaseorders/get_code_by_supplier',
+  //        data: {id:$(thid.val())},
+  //        type: 'post',
+  //        dataType: 'json',
+  //        success: function(data){
+  //           console.log(data);
+  //               var str='';
+  //               str += '<select class="form-control code select2" style="width: 100%;" name="prod_code[]">'
+  //                   str += '<option value="" selected hidden>Select SKU</option>';
+  //                   $.each(data.supplier, function(index, element
+  //                   )){
+  //
+  //                   }
+  //
+  //        }
+  //
+  //
+  //
+
   //display suppliers according to company on edit
   $(document).on('change','select[name="company_edit"]',function(){
     $.ajax({
@@ -767,7 +788,7 @@ $(document).ready(function(){
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
-          str += '<input type="text" class="form-control purchase_price number_only" readonly name="unit_price[]" value="">';
+          str += '<input type="text" class="form-control purchase_price number_only" name="unit_price[]" value="">';
           str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';

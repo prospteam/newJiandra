@@ -64,17 +64,16 @@
 
                             <tr>
                                 <td class="purch_td">
-                                    <select class="form-control code select2"
-                                        style="width: 100%;" name="prod_code[]">
+                                    <select class="form-control code select2" style="width: 100%;" name="prod_code[]">
                                         <option value="">Select SKU</option>
                                         <?php
                                           foreach($products as $key => $value){
                                               echo '<option value="'.$value['id'].'">'.$value['code'].'</option>';
                                           }
                                       ?>
-                                                        </select>
-                                                        <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
-                                                        <span class="err"></span>
+                                    </select>
+                                    <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
+                                    <span class="err"></span>
                                 </td>
                                 <td class="purch_td">
                                     <input type="text" class="form-control prod_name"
