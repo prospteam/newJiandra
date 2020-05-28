@@ -7,7 +7,7 @@ $(document).ready(function () {
         event.preventDefault();
         var formData = new FormData($(this)[0]);
         $.ajax({
-            url: base_url + 'productsimport/prod_import',
+            url: base_url + 'ProductsImport/prod_import',
             method: "POST",
             data: formData,
             dataType: 'json',
@@ -44,8 +44,8 @@ $(document).ready(function () {
                                             str += '<td class="supplier" contenteditable>' + value.Supplier + '</td>';
                                             str += '<td class="description" contenteditable>' + value.Description + '</td>';
                                             str += '<td class="weight" contenteditable>' + value.Weight + '</td>';
-                                            str += '<td class="weightunit" contenteditable>' + value.Weight_Unit + '</td>';
-                                            str += '<td class="subvariant" contenteditable>' + value.Sub_Variant + '</td>';
+                                            str += '<td class="weight_unit" contenteditable>' + value.Weight_Unit + '</td>';
+                                            str += '<td class="sub_variant" contenteditable>' + value.Sub_Variant + '</td>';
                                             str += '<td class="status" contenteditable>' + value.Status + '</td>';
                                         str+= '</tr>';
                                     str+= '</tbody>'
@@ -69,6 +69,7 @@ $(document).ready(function () {
     });
 
 
+
     $(document).on('click', '#import_product', function(){
         var code = [];
         var packing = [];
@@ -82,8 +83,8 @@ $(document).ready(function () {
         var description = [];
         var status = [];
         var weight = [];
-        var weightunit = [];
-        var subvariant = [];
+        var weight_unit = [];
+        var sub_variant = [];
 
         $('.code').each(function(){
             code.push($(this).text());
@@ -127,16 +128,16 @@ $(document).ready(function () {
             weight.push($(this).text());
         });
 
-        $('.weightunit').each(function(){
-            weightunit.push($(this).text());
+        $('.weight_unit').each(function(){
+            weight_unit.push($(this).text());
         });
 
-        $('.subvariant').each(function(){
-            subvariant.push($(this).text());
+        $('.sub_variant').each(function(){
+            sub_variant.push($(this).text());
         });
 
         $.ajax({
-            url: base_url + 'productsimport/addproducts_csv',
+            url: base_url + 'ProductsImport/addproducts_csv',
             method: "POST",
             data: { code:code,
                     packing:packing,
@@ -149,9 +150,9 @@ $(document).ready(function () {
                     supplier: supplier,
                     description: description,
                     status: status,
-                    weight: weight,
-                    weightunit: weightunit,
-                    subvariant: subvariant,
+                    Weight: weight,
+                    weight_unit: weight_unit,
+                    sub_variant: sub_variant,
                 },
             success: function(data){
                 if($("[name='csv_import']").get(0).files.length === 0){

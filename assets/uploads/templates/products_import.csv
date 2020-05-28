@@ -1,1 +1,8 @@
 code,Packing,Brand,Variance ,Volume,Unit,Product_Name,Category,Supplier,Description,Weight,Weight Unit,Sub Variant,Status
+LCCHF,12,La Crema,Filling,1,kg,Choco Fudge,Baking,Proweaver,1kg x 12 La Crema Choco Fudge,10,kl,Filling,1
+LCDS1,12,La Crema,Filling,1,kg,Donut Sugar,Baking,F.Y. Sons Incorporated,1kg x 12 La Crema Donut Sugar,10,kl,Filling,1
+LCMBF,12,La Crema,Filling,1,kg,Mango Bavarian Filling,Baking,F.Y. Sons Incorporated,1kg x 12 La Crema Mango Bavarian Filling,10,kl,Filling,1
+LCSBGF,10,La Crema,Filling,2,kg, Strawberry Gel Filling,Baking,F.Y. Sons Incorporated,2kg x 10 La Crema Strawberry Gel Filling,10,kl,Filling,1
+LSQP25,1,La Crema,Skim Powder,25,kg,Queensland Skim Powder,Baking,F.Y. Sons Incorporated,25kg/1 La Crema Queensland Skim Powder,10,kl,Skim Powder,1
+MHLSP1L,12,Marca Hipon,Patis,1,litre,Hipon Light Soy Patis,Condiments & Spices,F.Y. Sons Incorporated,1ltr x 12 Marca Hipon Light Soy Patis,10,kl,Patis,1
+OBI1,12,O'brim,Baking powder,1,kg,O'brim Bread Improver,Condiments & Spices,F.Y. Sons Incorporated,1kg x 12 O'brim Bread Improver,10,kl,Baking powder,1

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Productsimport extends MY_Controller {
+class ProductsImport extends MY_Controller {
 
 	public function __construct(){
 		parent::__construct();
@@ -46,10 +46,6 @@ class Productsimport extends MY_Controller {
 						$data[$key1][$key] = $value[$key1];
 	 				}
 	 		}
-			// echo "<pre>";
-			//  print_r($data);
-			//  exit;
-
 			// $insert = $this->MY_Model->insert('products', $data);
 			$insert = $this->db->insert_batch('products',$data);
 			//
