@@ -142,11 +142,51 @@
                                                     </select>
                                             </div>
                                         </div>
+                                        <p class="prod_cbm">Products CBM</p>
+                                            <div class = "row">
+                                                <div class="col-lg-2">
+                                                    <div class="form-group cbm">
+                                                        <label for="cbm_length">Length:</label>
+                                                        <input type="number" class="form-control capacity" name="cbm_length" value="">
+                                                        <span class="err"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 multiply">
+                                                    <p>x</p>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="form-group cbm">
+                                                        <label for="cbm_width">Width:</label>
+                                                        <input type="number" class="form-control capacity" name="cbm_width" value="">
+                                                        <span class="err"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 multiply">
+                                                    <p>x</p>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="form-group cbm">
+                                                        <label for="cbm_height">Height:</label>
+                                                        <input type="number" class="form-control capacity" name="cbm_height" value="">
+                                                        <span class="err"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 multiply">
+                                                    <p>=</p>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="form-group cbm">
+                                                        <label for="cbm_volume">Volume:</label>
+                                                        <input type="number" class="form-control" id="volume_cbm" name="cbm_volume" value="">
+                                                        <span class="err"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="description">Description:</label>
-                                                    <textarea rows="1" cols="50" name="description" class="form-control"> </textarea>
+                                                    <textarea rows="5" cols="50" name="description" class="form-control"> </textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -417,6 +457,42 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <p class="prod_cbm">Products CBM</p>
+                                    <div class = "row">
+                                        <div class="col-lg-2">
+                                            <div class="form-group cbm">
+                                                <label for="cbm_length">Length:</label>
+                                                <p class="cbm_length"> </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 multiply">
+                                            <p>x</p>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group cbm">
+                                                <label for="cbm_width">Width:</label>
+                                                <p class="cbm_width"> </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 multiply">
+                                            <p>x</p>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group cbm">
+                                                <label for="cbm_height">Height:</label>
+                                                <p class="cbm_height"> </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 multiply">
+                                            <p>=</p>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group cbm">
+                                                <label for="cbm_volume">Volume:</label>
+                                                <p class="cbm_volume"> </p>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
@@ -564,6 +640,46 @@
                                             </select>
                                     </div>
                                 </div>
+                                <p class="prod_cbm">Products CBM</p>
+                                    <div class = "row">
+                                        <div class="col-lg-2">
+                                            <div class="form-group cbm">
+                                                <label for="cbm_length">Length:</label>
+                                                <input type="number" class="form-control capacity_edit" name="cbm_length" value="">
+                                                <span class="err"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 multiply">
+                                            <p>x</p>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group cbm">
+                                                <label for="cbm_width">Width:</label>
+                                                <input type="number" class="form-control capacity_edit" name="cbm_width" value="">
+                                                <span class="err"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 multiply">
+                                            <p>x</p>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group cbm">
+                                                <label for="cbm_height">Height:</label>
+                                                <input type="number" class="form-control capacity_edit" name="cbm_height" value="">
+                                                <span class="err"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6 multiply">
+                                            <p>=</p>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group cbm">
+                                                <label for="cbm_volume">Volume:</label>
+                                                <input type="number" class="form-control" id="volume_cbm_edit" name="cbm_volume" value="">
+                                                <span class="err"></span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="form-group">

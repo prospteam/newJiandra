@@ -1,8 +1,14 @@
-code,Packing,Brand,Variance ,Volume,Unit,Product_Name,Category,Supplier,Description,Weight,Weight Unit,Sub Variant,Status
-LCCHF,12,La Crema,Filling,1,kg,Choco Fudge,Baking,Proweaver,1kg x 12 La Crema Choco Fudge,10,kl,Filling,1
-LCDS1,12,La Crema,Filling,1,kg,Donut Sugar,Baking,F.Y. Sons Incorporated,1kg x 12 La Crema Donut Sugar,10,kl,Filling,1
-LCMBF,12,La Crema,Filling,1,kg,Mango Bavarian Filling,Baking,F.Y. Sons Incorporated,1kg x 12 La Crema Mango Bavarian Filling,10,kl,Filling,1
-LCSBGF,10,La Crema,Filling,2,kg, Strawberry Gel Filling,Baking,F.Y. Sons Incorporated,2kg x 10 La Crema Strawberry Gel Filling,10,kl,Filling,1
-LSQP25,1,La Crema,Skim Powder,25,kg,Queensland Skim Powder,Baking,F.Y. Sons Incorporated,25kg/1 La Crema Queensland Skim Powder,10,kl,Skim Powder,1
-MHLSP1L,12,Marca Hipon,Patis,1,litre,Hipon Light Soy Patis,Condiments & Spices,F.Y. Sons Incorporated,1ltr x 12 Marca Hipon Light Soy Patis,10,kl,Patis,1
-OBI1,12,O'brim,Baking powder,1,kg,O'brim Bread Improver,Condiments & Spices,F.Y. Sons Incorporated,1kg x 12 O'brim Bread Improver,10,kl,Baking powder,1
+code,Volume,Unit,Packing,Brand,Variant,Sub_Variant,Product_Name,Category,Supplier,Description,Weight,Weight_Unit,CBM_Length,CBM_Width,CBM_Height,CBM_Volume,Status
+ASCM20,20,grams,48,Aling Sosy,Powdered mix,Powdered mix,Chiz Me,Condiments & Spices,Alphapalooza Inc.,20g/10's/48 Aling Sosy Chiz Me,10,kl,4,4,4,64,1
+ASCM200,200,grams,25,Aling Sosy,Powdered mix,Powdered mix,Chiz Me,Condiments & Spices,Alphapalooza Inc.,200g/5's/25 Aling Sosy Chiz Me,10,kl,4,4,4,64,1
+ASHB20,20,grams,48,Aling Sosy,Powdered mix,Powdered mix,Honey Butter,Condiments & Spices,Alphapalooza Inc.,20g/10's/48 Aling Sosy Honey Butter,10,kl,4,4,4,64,1
+ASHB200,200,grams,25,Aling Sosy,Powdered mix,Powdered mix,Honey Butter,Condiments & Spices,Alphapalooza Inc.,200g/5's/25 Aling Sosy Honey Butter,10,kl,4,4,4,64,1
+BBQM200,200,grams,25,Aling Sosy,Powdered mix,Powdered mix, BBQ Me,Condiments & Spices,Alphapalooza Inc.,200g/5's/25 Aling Sosy BBQ Me,10,kl,4,4,4,64,1
+BBQME20,20,grams,48,Aling Sosy,Powdered mix,Powdered mix,BBQ Me,Condiments & Spices,Alphapalooza Inc.,20g/10's/48 Aling Sosy BBQ Me,10,kl,4,4,4,64,1
+KF62G,62,grams,30,Kusina King,Powdered mix,Powdered mix,Krunchy Fry,Condiments & Spices,Alphapalooza Inc.,62g/10's/30 Kusina King Krunchy Fry,10,kl,4,4,4,64,1
+KKBW1KG,1,grams,25,Kusina King,Baking mix,Baking mix,Belgian Waffle & Pancake Mix,Baking,Alphapalooza Inc.,1kg/25 Kusina King Belgian Waffle & Pancake Mix,10,kl,4,4,4,64,1
+MKLLEMIT500,500,grams,40,Mr. Kool,Powdered Juice,Powdered Juice,Palamig Lemon Ice Tea,Beverages,Alphapalooza Inc.,500g/40 Mr. Kool Palamig Lemon Ice Tea,10,kl,4,4,4,64,1
+MKPC500,500,grams,40,Mr. Kool,Powdered Juice,Powdered Juice, Palamig Chocolate,Beverages,Alphapalooza Inc.,500g/40 Mr. Kool Palamig Chocolate,10,kl,4,4,4,64,1
+MKPP500,500,grams,40,Mr. Kool,Powdered Juice,Powdered Juice,Palamig Pineapple,Beverages,Alphapalooza Inc.,500g/40 Mr. Kool Palamig Pineapple,10,kl,4,4,4,64,1
+MKPSG1KG,1,grams,25,Mr. Kool,Powdered Juice,Powdered Juice,Palamig Sago't Gulaman,Beverages,Alphapalooza Inc.,1Kg/25 Mr. Kool Palamig Sago't Gulaman,10,kl,4,4,4,64,1
+MKPSG500,500,grams,40,Mr. Kool,Powdered Juice,Powdered Juice,Palamig Sago't Gulaman,Beverages,Alphapalooza Inc.,500g/40 Mr. Kool Palamig Sago't Gulaman,10,l,4,4,4,64,1

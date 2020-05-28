@@ -54,7 +54,7 @@
                                     class="required">*</span></th>
                             <th class="header-title purch">Quantity <span
                                     class="required">*</span></th>
-                            <th class="header-title purch">Unit Price <span
+                            <th class="header-title purch">Cost Price <span
                                     class="required">*</span></th>
                             <th class="header-title purch">Total <span class="required">*</span>
                             </th>
@@ -64,17 +64,18 @@
 
                             <tr>
                                 <td class="purch_td">
-                                    <select class="form-control code select2"
-                                        style="width: 100%;" name="prod_code[]">
+                                    <!-- <select class="form-control code select2" style="width: 100%;" name="prod_code[]">
                                         <option value="">Select SKU</option>
+                                        <span id="prodOption"></span>
                                         <?php
-                                          foreach($products as $key => $value){
-                                              echo '<option value="'.$value['id'].'">'.$value['code'].'</option>';
-                                          }
+                                          // foreach($products as $key => $value){
+                                          //     echo '<option value="'.$value['id'].'">'.$value['code'].'</option>';
+                                          // }
                                       ?>
-                                                        </select>
-                                                        <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
-                                                        <span class="err"></span>
+                                    </select> -->
+                                    <div id="prodOption"></div>
+                                    <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
+                                    <span class="err"></span>
                                 </td>
                                 <td class="purch_td">
                                     <input type="text" class="form-control prod_name"
@@ -105,7 +106,7 @@
                     </table>
                     <ul class="list-group" id="result"></ul>
                 </div>
-                <span class="btn btn-sm btn-primary" id="addNewPO"><i class="fa fa-plus"></i>
+                <span class="btn btn-sm btn-primary" id="addNewPO" style="display:none"><i class="fa fa-plus"></i>
                     Add Product</span>
                 <br>
                 <hr>

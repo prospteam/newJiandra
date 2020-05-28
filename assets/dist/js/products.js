@@ -1,6 +1,37 @@
 var base_url = $('input[name="base_url"]').val();
 $(document).ready(function () {
 
+    // Add Products CBM
+    $('.capacity').change(function(){
+       var total = 1;
+       $('.capacity').each(function(){
+         var cbm_cap = $(this).val();
+         if(cbm_cap != ''){
+
+           total *= cbm_cap;
+         }
+       });
+
+       $('#volume_cbm').val(total);
+
+    });
+    // add end Products CBM
+
+    // edit products CBM
+    $('.capacity_edit').change(function(){
+       var total = 1;
+       $('.capacity_edit').each(function(){
+         var cur_cap = $(this).val();
+         if(cur_cap != ''){
+
+           total *= cur_cap;
+         }
+       });
+
+       $('#volume_cbm_edit').val(total);
+
+    });
+    // end edit products CBM
 
    // ADD PRODUCTS
    $(document).on('submit', 'form#addproduct', function (e) {
@@ -83,6 +114,10 @@ $(document).ready(function () {
             $('.weight').text(data.products.weight);
             $('.weightunit').text(data.products.weightunit);
             $('.supplier').text(data.products.supplier_name);
+            $('.cbm_width').text(data.products.cbm_width);
+            $('.cbm_length').text(data.products.cbm_length);
+            $('.cbm_height').text(data.products.cbm_height);
+            $('.cbm_volume').text(data.products.cbm_volume);
             $('.description').text(data.products.description);
          }
       })
@@ -100,21 +135,28 @@ $(document).ready(function () {
          dataType: "json",
          success: function (data) {
              console.log(id);
-            $('#editProducts').modal('show');
-            $('#editProducts input[name="products_id"]').val(data.products.id);
-            $('#editProducts #product_name1').append('<option value=' + data.products.product_name + ' selected>' + data.products.product_name + '</option>')
-            $('#editProducts #brand1').append('<option value=' + data.products.brand + ' selected>' + data.products.brand + '</option>')
-            $('#editProducts .editproducts_id').val(id);
-            $('#editProducts input[name="code"]').val(data.products.code);
-            // $('#editProducts .supplier]').val(data.products.code);
-            $('#editProducts select[name="supplier_edit"]').val(data.products.supplier);
-            // $('#editProducts select[name="supplier_edit"]').trigger('change');
-            $('#editProducts #category1').append('<option value=' + data.products.category + ' selected>' + data.products.category + '</option>')
-            $('#editProducts #variant1').append('<option value=' + data.products.variant + ' selected>' + data.products.variant + '</option>')
-            $('#editProducts #volume1').append('<option value=' + data.products.volume + ' selected>' + data.products.volume + '</option>')
-            $('#editProducts #packing1').append('<option value=' + data.products.packing + ' selected>' + data.products.packing + '</option>')
-            $('#editProducts #unit1').append('<option value=' + data.products.unit + ' selected>' + data.products.unit + '</option>')
-            $('#editProducts textarea[name="description"]').val(data.products.description);
+             $('#editProducts').modal('show');
+             $('#editProducts input[name="products_id"]').val(data.products.id);
+             $('#editProducts #product_name1').append('<option value=' + data.products.product_name + ' selected>' + data.products.product_name + '</option>')
+             $('#editProducts #brand1').append('<option value=' + data.products.brand + ' selected>' + data.products.brand + '</option>')
+             $('#editProducts .editproducts_id').val(id);
+             $('#editProducts input[name="code"]').val(data.products.code);
+             // $('#editProducts .supplier]').val(data.products.code);
+             $('#editProducts select[name="supplier_edit"]').val(data.products.supplier);
+             // $('#editProducts select[name="supplier_edit"]').trigger('change');
+             $('#editProducts #category1').append('<option value=' + data.products.category + ' selected>' + data.products.category + '</option>')
+             $('#editProducts #variant1').append('<option value=' + data.products.variant + ' selected>' + data.products.variant + '</option>')
+             $('#editProducts #volume1').append('<option value=' + data.products.volume + ' selected>' + data.products.volume + '</option>')
+             $('#editProducts #packing1').append('<option value=' + data.products.packing + ' selected>' + data.products.packing + '</option>')
+             $('#editProducts #unit1').append('<option value=' + data.products.unit + ' selected>' + data.products.unit + '</option>')
+             $('#editProducts #subvariant1').append('<option value=' + data.products.subvariant + ' selected>' + data.products.subvariant + '</option>')
+             $('#editProducts #weight1').append('<option value=' + data.products.weight + ' selected>' + data.products.weight + '</option>')
+             $('#editProducts #weightunit1').append('<option value=' + data.products.weightunit + ' selected>' + data.products.weightunit + '</option>')
+             $('#editProducts input[name="cbm_length"]').val(data.products.cbm_length);
+             $('#editProducts input[name="cbm_width"]').val(data.products.cbm_width);
+             $('#editProducts input[name="cbm_height"]').val(data.products.cbm_height);
+             $('#editProducts input[name="cbm_volume"]').val(data.products.cbm_volume);
+             $('#editProducts textarea[name="description"]').val(data.products.description);
          }
       });
 

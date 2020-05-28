@@ -49,21 +49,38 @@ class Purchaseorders extends MY_Controller {
 		$this->load_page('addpurchaseorder', @$data);
 	}
 
+	public function getProductBySupplier(){
+		$supplier = $this->input->post('supplier');
+
+		$param['where'] = array('status' => 1 , 'supplier' => $supplier);
+		$param['select'] = '*';
+		$data['products'] = $this->MY_Model->getRows('products', $param);
+
+		echo json_encode($data);
+	}
+
 	//get suppliers and warehouse by company
 	public function get_suppliers_by_companies(){
-		$parameters['where'] = array('company' => $this->input->post('company_id'), 'status' => 1);
+		$parameters['where'] = array(
+			'company' => $this->input->post('company_id'),
+			'status' => 1
+		);
 		$data['warehouse'] = $this->MY_Model->getRows('warehouse_management',$parameters);
 
-			$parameters['where'] = array('company' => $this->input->post('company_id'), 'status' => 1);
-			$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
-			json($data);
+		$parameters['where'] = array(
+			'company' => $this->input->post('company_id'),
+			'status' => 1
+		);
+		$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
+
+		json($data);
 	}
 
 	public function get_productName_by_code(){
+		// $parameters['where'] = array('supplier.id' => $this->input->post('id'));
 		$parameters['where'] = array('products.id' => $this->input->post('prod_id'));
 		$parameters['join'] = $join = array('products_cost_price' => 'products_cost_price.fk_product_id = products.id');
 		$data['products'] = $this->MY_Model->getRows('products',$parameters);
-
 		json($data);
 	}
 
@@ -99,7 +116,9 @@ class Purchaseorders extends MY_Controller {
 	}
 
 	public function get_products(){
-			$params['where'] = array('status' => 1);
+			$supplier = $this->input->post('supplier');
+
+			$params['where'] = array('status' => 1 , 'supplier' => $supplier);
 			$data['products'] = $this->MY_Model->getRows('products', $params);
 			json($data);
 	}
