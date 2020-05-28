@@ -106,7 +106,7 @@
                     </table>
                     <ul class="list-group" id="result"></ul>
                 </div>
-                <span class="btn btn-sm btn-primary" id="addNewPO"><i class="fa fa-plus"></i>
+                <span class="btn btn-sm btn-primary" id="addNewPO" style="display:none"><i class="fa fa-plus"></i>
                     Add Product</span>
                 <br>
                 <hr>

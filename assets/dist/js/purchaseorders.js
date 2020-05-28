@@ -254,7 +254,7 @@ $(document).ready(function(){
       placeholder: "Select SKU"
     });
 
-  //autocomplete product name after choosing sku Code
+  //autocomplete product name after choosing sku Codef
   $(document).on('change','.code',function(){
     $.ajax({
         url: base_url+'purchaseorders/get_productName_by_code',
@@ -264,7 +264,6 @@ $(document).ready(function(){
         success: function(data){
                 $.each(data.products,function(index,element){
                       $('.prod_name').val(element.product_name);
-                      $('.purchase_quantity ').val(1);
                       $('.purchase_price  ').val(element.sell_price);
                 });
 
@@ -281,8 +280,11 @@ $(document).ready(function(){
         type: 'post',
         dataType: 'json',
         success: function(data){
+            console.log('test');
+            console.log($(that).parent().next().next().next().find('.purchase_price '));
                 $.each(data.products,function(index,element){
                       $(that).parent().next().find('.add_prod').val(element.product_name);
+                      $(that).parent().next().next().next().find('.purchase_price').val(element.cost_price);
                 });
 
         }
@@ -558,6 +560,8 @@ $(document).ready(function(){
 
         var opt = '';
 
+        $('#addNewPO').show();
+
         $.ajax({
             url: base_url+'purchaseorders/getProductBySupplier',
             data: {supplier:sup},
@@ -795,11 +799,13 @@ $(document).ready(function(){
     var x = 1;
     var str = '';
 
+    var sup = $('select[name="supplier"]').val();
+
     str += '<tr class="add_purch">';
       str += '<td class="purch_td">';
            str += '<select class="form-control add_code select2_add" style="width: 100%;" name="prod_code[]">';
               str += '<option value="" selected="true" disabled="disabled">Select SKU</option>';
-              str += get_products();
+              str += get_products(sup);
            str += '</select>';
            str += '<span class="err"></span>';
       str += '</td>';
@@ -812,7 +818,7 @@ $(document).ready(function(){
            str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
-          str += '<input type="text" class="form-control purchase_price number_only" name="unit_price[]" value="">';
+          str += '<input type="text" class="form-control purchase_price number_only" readonly name="unit_price[]" value="">';
           str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
@@ -1050,13 +1056,16 @@ function get_warehouse(){
   return data_return;
 }
 
-function get_products(){
+function get_products(event){
+
+    var supplier = event;
   // var id = $('.select2_edit').attr('data-id');
   // alert(id);
   var data_return = '';
   $.ajax({
     url: base_url + '/purchaseorders/get_products/',
     type:'post',
+    data: {supplier: supplier},
     dataType:'json',
     async:false,
     success:function(data){

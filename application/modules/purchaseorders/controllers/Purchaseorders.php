@@ -116,7 +116,9 @@ class Purchaseorders extends MY_Controller {
 	}
 
 	public function get_products(){
-			$params['where'] = array('status' => 1);
+			$supplier = $this->input->post('supplier');
+
+			$params['where'] = array('status' => 1 , 'supplier' => $supplier);
 			$data['products'] = $this->MY_Model->getRows('products', $params);
 			json($data);
 	}
