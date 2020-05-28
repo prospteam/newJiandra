@@ -553,6 +553,30 @@ $(document).ready(function(){
     });
   });
 
+    $(document).on('change','select[name="supplier"]',function(){
+        var sup = $('select[name="supplier"]').val();
+
+        var opt = '';
+
+        $.ajax({
+            url: base_url+'purchaseorders/getProductBySupplier',
+            data: {supplier:sup},
+            type: 'post',
+            dataType: 'json',
+            success: function(data){
+                opt += '<select class="form-control code select2" style="width: 100%;" name="prod_code[]">';
+                    opt += '<option value="">Select SKU</option>';
+                    $.each(data.products,function(index,key){
+                        opt += '<option value='+key.id+'>'+key.code+'</option>';
+                    });
+                opt += '</select>';
+                $('#prodOption').html(opt);
+            }
+        });
+
+
+    });
+
   // $(document).on('change', 'select[name="prod_code[]"]', function(){
   //    $.ajax({
   //        url: base_url+'purchaseorders/get_code_by_supplier',
