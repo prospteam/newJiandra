@@ -482,6 +482,9 @@ $(document).ready(function(){
       // alert('rerer');
     var pTr = $(this).parents('tr');
 
+    // console.log('ptr');
+    // console.log(pTr.find('td:eq(6)').text());
+
     pTr.find('.edit_deliv').show().prop('disabled', false).prop('hidden', false);
     pTr.find('.deliv').hide();
 
@@ -493,11 +496,12 @@ $(document).ready(function(){
       var str='';
       var id = pTr.find('.edit_purchID').val();
       var qty = pTr.find('.edit_deliv').val();
-      var edit_qty = pTr.find('.td_qty').val();
+      var edit_qty = pTr.find('.td_qty').text();
       var code = pTr.find('.edit_prod_code').val();
       var product = pTr.find('.edit_product').val();
       var delivery_status = pTr.find('.edit_delivery_status').val();
-      var variance= pTr.find('.edit_variance').val();
+      // var variance= pTr.find('.edit_variance').val();
+      var delivered= pTr.find('.edit_deliv ').val();
       // var get_variance =
 
       $.ajax({
@@ -506,14 +510,14 @@ $(document).ready(function(){
         type: 'post',
         dataType: 'json',
         success: function(data){
-            console.log(data);
+            var variance = edit_qty - data.delivered;
             pTr.find('.deliv').text(qty).show();
             pTr.find('.edit_deliv').hide().prop('hidden', true);
             pTr.find('.edit_delivered').show().prop('hidden', false);
             pTr.find('.submit_delivered_qty').hide().prop('hidden', true);
             // $(`.submit_delivered[data-id='${id}']`).trigger('click');
              // $("#view_purchase_orders_details").DataTable().ajax.reload();
-             pTr.find('.edit_variance').text('66');
+             pTr.find('.edit_variance').text(variance);
         }
       });
     });
