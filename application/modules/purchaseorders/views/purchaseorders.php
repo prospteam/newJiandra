@@ -349,6 +349,7 @@
                                 <div class="modal-body" id="addProduct">
                                     <div class="row">
                                         <div class="col-6">
+                                            <div id="sup" style="display:none">  </div>
                                             <div class="form-group">
                                                 <input type="hidden" class="form-control" name="edit_purchase_code"
                                                     value="">
@@ -420,7 +421,8 @@
                                         </table>
                                     </div>
                                     <span class="btn btn-sm btn-primary" id="addNewPO_edit"><i class="fa fa-plus"></i>
-                                        Add Product</span>
+                                        Add Product
+                                    </span>
                                     <br>
                                     <hr>
                                     <div class="row">
@@ -491,7 +493,7 @@
             <!--View Delete Modal -->
             <!-- Modal -->
             <div class="modal fade" id="DeleteUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">\
+                aria-hidden="true">
                 <form id="adduser" method="post">
                     <div class="modal-dialog modal-xs" role="document">
                         <div class="modal-content">

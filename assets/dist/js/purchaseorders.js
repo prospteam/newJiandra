@@ -27,17 +27,18 @@ $(document).ready(function(){
                         str += '<div class="actions">';
                         if(row.status == 1 && row.delivery_status != 4){
                           str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"><abbr title="View Purchase Order"><i class="fas fa-eye text-info"></i></a>';
-                          str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'"><abbr title="Edit Purchase Order"><i class="fas fa-pen text-warning"></i></a>';
+                          str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'" data-sup="'+row.supplier_name+'"><abbr title="Edit Purchase Order"><i class="fas fa-pen text-warning"></i></a>';
                           str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><abbr title="Delete Purchase Order"><i class="fa fa-trash" aria-hidden="true"></i></a>';
                         }else if(row.status == 2 && row.delivery_status != 4){
                           str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"><abbr title="View Purchase Order"><i class="fas fa-eye text-info"></i></abbr></a>';
                           str += '<a href="javascript:;" class="remarks" data-id="'+row.purchase_code+'"<abbr title="Remarks"><i class="fa fa-comment" aria-hidden="true"></i></abbr></a>';
-                          str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'"><abbr title="Edit Purchase Order"><i class="fas fa-pen text-warning"></i></abbr></a>';
+                          str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'" data-sup="'+row.supplier_name+'"><abbr title="Edit Purchase Order"><i class="fas fa-pen text-warning"></i></abbr></a>';
                           str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><abbr title="Delete Purchase Order"><i class="fa fa-trash" aria-hidden="true"</i></abbr></a>';
                         }else if(row.status == 3 && row.delivery_status != 4){
                             str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"><abbr title="View Purchase Order"><i class="fas fa-eye text-info"></i></abbr></a>';
                             str += '<a href="javascript:;" class="remarks" data-id="'+row.purchase_code+'"<abbr title="Remarks"><i class="fa fa-comment" aria-hidden="true"></i></abbr></a>';
-                            str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'"><abbr title="Edit Purchase Order"><i class="fas fa-pen text-warning"></i></abbr></a>';
+                            str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'" data-sup="'+row.supplier_name+'"><abbr title="Edit Purchase Order"><i class="fas fa-pen text-warning"></i></abbr></a>';
+                            str += '<a href="javascript:;" class="editPurchase" data-id="'+row.purchase_code+'" ><abbr title="Edit Purchase Order"><i class="fas fa-pen text-warning"></i></abbr></a>';
                             str += '<a href="javascript:;" class="deletePurchase" data-id="'+row.purchase_code+'"><abbr title="Delete Purchase Order"><i class="fa fa-trash" aria-hidden="true"</i></abbr></a>';
                             // str+= '<div class="form-group">';
                             // str+='<label for="remarks">Remarks:</label>';
@@ -322,9 +323,12 @@ $(document).ready(function(){
         type: 'post',
         dataType: 'json',
         success: function(data){
+            console.log('data');
+            console.log(data);
                 $.each(data.products,function(index,element){
                       // $('.edit_name').val(element.product_name);
                       $(that).parent().next().find('.edit_name').val(element.product_name);
+                      $(that).parent().next().next().next().find('.purchase_price ').val(element.cost_price);
                 });
 
         }
@@ -647,6 +651,9 @@ $(document).ready(function(){
   //view edit Orders
   $(document).on('click', '.editPurchase', function(){
     var id = $(this).attr('data-id');
+    var datasup = $(this).attr('data-sup');
+
+    $('#sup').html(datasup);
 
     $.ajax({
         url: base_url+'purchaseorders/purchase_details',
@@ -661,8 +668,9 @@ $(document).ready(function(){
           var total_cost = 0;
           var grand_total = 0;
 
+          var sup = data.purch_details[0].supplier;
+
           $.each(data.purch_details,function(index,element){
-            console.log(element.warehouse_id);
             total = parseFloat(element.quantity) + parseFloat(element.unit_price)
             total_quantity = parseFloat(total_quantity) + parseFloat(element.quantity);
             total_cost = parseFloat(total_cost) + parseFloat(element.unit_price);
@@ -849,15 +857,18 @@ $(document).ready(function(){
   });
 
   //add multiple product in add purchase order
-  $(document).on('click', '#addNewPO_edit', function(){
+  $(document).on('click', '#addNewPO_edit', function(e){
+      e.preventDefault();
     var x = 1;
+    var sup = $('#sup').text();
+
     var str = '';
 
     str += '<tr>';
       str += '<td class="purch_td">';
         str += '<select class="form-control edit_code select2_edit" style="width: 100%;" name="edit_prod_code[]">';
          str += '<option value="" selected="true" disabled="disabled">Select SKU</option>';
-         str += get_products();
+         str += get_products(sup);
         str += '</select>';
            str += '<span class="err"></span>';
       str += '</td>';
