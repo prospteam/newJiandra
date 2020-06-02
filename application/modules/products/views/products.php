@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-sm-6">
                     <button class="users button1 float-sm-right" data-toggle="modal" data-target="#AddProducts"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add Products </button>
-                    <button class="prod_csv_btn button1 float-sm-right" data-toggle="modal" data-target="#csv_btn" onclick="window.location.href = 'http://localhost/newjiandra/productsimport';"><i class="fas fa-file-csv"></i> Upload CSV File </button>
+                    <button class="prod_csv_btn button1 float-sm-right" data-toggle="modal" data-target="#csv_btn" onclick="window.location.href = 'http://nje.web2.ph/productsimport';"><i class="fas fa-file-csv"></i> Upload CSV File </button>
 
                     <!--Add Products Modal -->
                     <!-- Modal -->

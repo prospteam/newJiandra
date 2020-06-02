@@ -40,7 +40,6 @@ class Products extends MY_Controller {
 		'cbm_width' => $this->input->post('cbm_width'),
 		'cbm_height' => $this->input->post('cbm_height'),
 		'cbm_volume' => $this->input->post('cbm_volume'),
-		'supplier' => $this->input->post('supplier'),
 		'description' => $this->input->post('description'),
         'status' => 1
       );
@@ -301,7 +300,6 @@ class Products extends MY_Controller {
 				 	  }	else if ($post['search_type'] == 'subvariant') {
 							$where = "subvariant LIKE '%" . $postLike . "%'";
 						 	$select = "subvariant AS product_id, subvariant AS product_name";
-
 				 	  }else if ($post['search_type'] == 'weight') {
 							$where = "weight LIKE '%" . $postLike . "%'";
 						 	$select = "weight AS product_id, weight AS product_name";

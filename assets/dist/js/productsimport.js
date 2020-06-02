@@ -7,7 +7,7 @@ $(document).ready(function () {
         event.preventDefault();
         var formData = new FormData($(this)[0]);
         $.ajax({
-            url: base_url + 'Productsimport/prod_import',
+            url: base_url + 'productsimport/prod_import',
             method: "POST",
             data: formData,
             dataType: 'json',

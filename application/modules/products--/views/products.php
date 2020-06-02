@@ -133,7 +133,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                <label for="supplier">Supplier: <span class="required">*</span></label>
+                                                <label for="supplier">Supplier:</label>
                                                     <select class="form-control" class="supplier" name="supplier">
                                                         <option value="" selected hidden>Select Supplier</option>
                                                         <?php foreach($supplier as $k => $value) : ?>
