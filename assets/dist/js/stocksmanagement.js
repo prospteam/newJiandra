@@ -26,7 +26,7 @@ $(document).ready(function(){
               {"data":"purchase_code"},
               {"data":"wh_name"},
               {"data":"code"},
-              {"data":"supplier_name"},
+              {"data":"supplier"},
               {"data":"brand"},
               {"data":"product_name"},
               {"data":"packing"},
