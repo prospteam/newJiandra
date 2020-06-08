@@ -19,7 +19,7 @@ class Stockout extends MY_Controller {
       $search = $this->input->post('search');
       $order = $this->input->post('order');
       $draw = $this->input->post('draw');
- 
+
 
       $column_order = array('stockmovement_date','date_delivered','stockmovement_code','stockmovemenent_note','status');
       $where = array(
@@ -46,24 +46,22 @@ class Stockout extends MY_Controller {
    }
 		// Edit Stock Out
 		public function stockout_edit(){
-			$stocktrans_id = $this->input->post('stockmovement_id');
+			$stockmovement_code = $this->input->post('stockmovement_code');
 
 			$data_array = array();
 
 
 			//$parameters['where'] = array('stock_movement.stockmovement_id'=>$stocktrans_id);
-			$parameters['where'] = array('stock_movement.stockmovement_id'=>$stocktrans_id);
-			$parameters['select'] = 'stockmovement_date, type, date_delivered, products.id, products.code, product_name, physical_count, SUM(quantity) as quantity, stockmovement_note,stock_out';
+			$parameters['where'] = array('stock_movement.stockmovement_code'=>$stockmovement_code);
+			$parameters['select'] = 'stockmovement_date, type, date_delivered, products.id, products.code, product_name, physical_count, stockmovement_note,stock_out';
+			// $parameters['select'] = 'stock_movement.*';
 			// $parameters['select'] = 'products.code, stocks.physical_count, stockmovement_date, transferred_warehouse, date_delivered, products.status';
 			$parameters['join'] =  array(
 			   'products' => 'products.id = stock_movement.product',
-			   'stocks' => 'stocks.product = stock_movement.product'
+		     	'stocks' => 'stocks.product = stock_movement.product'
 			);
 			$data = $this->MY_Model->getrows('stock_movement',$parameters);
 			// echo $this->db->last_query();
-			// echo "<pre>";
-			//  print_r($data);
-			 // exit;
 
 			$data_array['stock_movement'] = $data;
 			json($data_array);

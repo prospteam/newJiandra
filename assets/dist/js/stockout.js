@@ -74,53 +74,54 @@ $(document).ready(function(){
      });
      // EDIT STOCK out
      $(document).on("click",".editstockout", function(){
-     var stockmovement_id = $(this).attr('data-id');
+     var stockmovement_code = $(this).attr('data-id');
      var product = $(this).attr('data-product');
+
      $.ajax({
           method: 'POST',
           url: base_url+'stockout/stockout_edit',
-          data: {stockmovement_id:stockmovement_id,product:product},
+          data: {stockmovement_code:stockmovement_code,product:product},
           dataType: "json",
           success: function(data){
-               // console.log("data");
-               // alert("hi");
-               // alert('hi');
+               console.log("data");
+               console.log(data);
                $('#editStockOut').modal('show');
                     var str = '';
                     var total_quantity = 0;
                     $.each(data.stock_movement,function(index,element){
                     // var total_quantity  =  parseInt(element.quantity) + parseInt(element.physical_count);
-                     var remaining_stocks = parseInt(element.physical_count) + parseInt(element.quantity);
+                     var quantity =  parseInt(element.stock_out) - parseInt(element.physical_count);
 
+                     var remaining_stocks = parseInt(element.stock_out) - quantity;
 
-               str+= '<tr>';
-               str += '<td class="purch_td hide">';
-               str += '<input type="hidden" class="form-control" name="edit_purchase_id[]" value='+element.id+'>';
-               str += '<input type="hidden" class="form-control" name="stockmovement_id" value='+stockmovement_id+'>';
-               str += '</td>';
-                str+= ' <td class="purch_td">';
-                str += '<select class="form-control js-example-basic-multiple-editStockTransfer select2_edit edit_new_code" style="width: 100%;" name="prod_code[]" data-id="'+element.id+'" value="'+element.code+'">';
-                   str += get_edit_products(element.id);
-                  str+= ' </select>';
-                  str+= ' <span class="err"></span>';
-                 str+= '</td>';
-                str+= ' <td class="purch_td">';
-                   str+= '<input type="text" class="form-control prod_name" name="prod_name[]" value="'+element.product_name+'" readonly>';
-                   str+= ' <span class="err"></span>';
-                 str+= '</td>';
-                 str+= '<td class="purch_td">';
-                    str+= '<input type="text" class="form-control remaining_stocks" name="remaining_stocks[]" value="'+remaining_stocks+'" readonly>';
-                  str+= ' <span class="err"></span>';
-                str+= ' </td>';
-                str+= ' <td class="purch_td">';
-               str+= '    <input type="text" class="form-control purchase_quantity sm_quantity number_only" name="quantity[]" value="'+element.quantity+'">';
-               str+= '    <span class="err"></span>';
-                str+= ' </td>';
-                $('#editstockout textarea[name="stockmovement_note"]').val(element.stockmovement_note);
+                       str+= '<tr>';
+                       str += '<td class="purch_td hide">';
+                       str += '<input type="hidden" class="form-control" name="edit_purchase_id[]" value='+element.id+'>';
+                       str += '<input type="hidden" class="form-control" name="stockmovement_id" value=>';
+                       str += '</td>';
+                        str+= ' <td class="purch_td">';
+                        str += '<select class="form-control js-example-basic-multiple-editStockTransfer select2_edit edit_new_code" style="width: 100%;" name="prod_code[]" data-id="'+element.id+'" value="'+element.code+'">';
+                           str += get_edit_products(element.id);
+                          str+= ' </select>';
+                          str+= ' <span class="err"></span>';
+                         str+= '</td>';
+                        str+= ' <td class="purch_td">';
+                           str+= '<input type="text" class="form-control prod_name" name="prod_name[]" value="'+element.product_name+'" readonly>';
+                           str+= ' <span class="err"></span>';
+                         str+= '</td>';
+                         str+= '<td class="purch_td">';
+                            str+= '<input type="text" class="form-control remaining_stocks" name="remaining_stocks[]" value="'+remaining_stocks+'" readonly>';
+                          str+= ' <span class="err"></span>';
+                        str+= ' </td>';
+                        str+= ' <td class="purch_td">';
+                       str+= '    <input type="text" class="form-control purchase_quantity sm_quantity number_only" name="quantity[]" value="'+quantity+'">';
+                       str+= '    <span class="err"></span>';
+                        str+= ' </td>';
+                        $('#editstockout textarea[name="stockmovement_note"]').val(element.stockmovement_note);
 
-               str+= '</tr>';
+                       str+= '</tr>';
 
-                total_quantity += +element.quantity;
+                        total_quantity += +quantity;
 
                });
 
@@ -188,7 +189,7 @@ $(document).ready(function(){
                              str += '<div class="actions">';
                              if(row.status == 1) {
                                str += '<a href="javascript:;" class="viewstockout" data-id="'+row.stockmovement_code+'"><abbr title="View Stock Out"><i class="fas fa-eye text-info"></i></abbr></a>';
-                               str += '<a href="javascript:;" class="editstockout" data-id="'+row.stockmovement_id+'" data-product="'+row.product+'"><abbr title="Edit Stock Out"><i class="fas fa-pen text-warning"></i></abbr></a>';
+                               str += '<a href="javascript:;" class="editstockout" data-id="'+row.stockmovement_code+'" data-product="'+row.product+'"><abbr title="Edit Stock Out"><i class="fas fa-pen text-warning"></i></abbr></a>';
                                str += '<a href="javascript:;" class="deletestockOut" data-id="'+row.stockmovement_id+'"><abbr title="Delete Stock Out"><i class="fa fa-trash" aria-hidden="true"></abbr></a>';
                              }
                              str += '</div>';
