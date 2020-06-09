@@ -140,8 +140,6 @@ $(document).ready(function(){
          var stockmovement_id = $('input[name="stockmovement_id"]').val();
          var quantity = $('input[name="quantity[]"]').val();
 
-         console.log('buang');
-
          console.log(stockmovement_id);
          console.log(quantity);
 
