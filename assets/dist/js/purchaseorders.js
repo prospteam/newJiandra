@@ -265,7 +265,7 @@ $(document).ready(function(){
         success: function(data){
                 $.each(data.products,function(index,element){
                       $('.prod_name').val(element.product_name);
-                      $('.purchase_price  ').val(element.sell_price);
+                      $('.purchase_price').val(element.sell_price);
                 });
 
         },
@@ -287,7 +287,6 @@ $(document).ready(function(){
                       $(that).parent().next().find('.add_prod').val(element.product_name);
                       $(that).parent().next().next().next().find('.purchase_price').val(element.cost_price);
                 });
-
         }
     });
   });

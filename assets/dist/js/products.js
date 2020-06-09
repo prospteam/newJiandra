@@ -134,7 +134,7 @@ $(document).ready(function () {
          data: { id: id },
          dataType: "json",
          success: function (data) {
-             console.log(id);
+             console.log(data);
              $('#editProducts').modal('show');
              $('#editProducts input[name="products_id"]').val(data.products.id);
              $('#editProducts #product_name1').append('<option value=' + data.products.product_name + ' selected>' + data.products.product_name + '</option>')
@@ -142,7 +142,7 @@ $(document).ready(function () {
              $('#editProducts .editproducts_id').val(id);
              $('#editProducts input[name="code"]').val(data.products.code);
              // $('#editProducts .supplier]').val(data.products.code);
-             $('#editProducts select[name="supplier_edit"]').val(data.products.supplier);
+             $('#editProducts select[name="supplier"]').val(data.products.supplier);
              // $('#editProducts select[name="supplier_edit"]').trigger('change');
              $('#editProducts #category1').append('<option value=' + data.products.category + ' selected>' + data.products.category + '</option>')
              $('#editProducts #variant1').append('<option value=' + data.products.variant + ' selected>' + data.products.variant + '</option>')

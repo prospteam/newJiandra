@@ -236,7 +236,7 @@
                     <th class="header-title">Inventory Date</th>
                     <th class="header-title">Quantity On hand</th>
                     <th class="header-title">Physical Count</th>
-                    <th class="header-title">Out/Transfer</th>
+                    <th class="header-title">Variance</th>
                     <!-- <th class="header-title">Out/Transfer</th> -->
                   </thead>
                   <tbody>
