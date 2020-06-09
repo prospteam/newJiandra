@@ -23,9 +23,15 @@ class Products extends MY_Controller {
   public function addproducts() {
 
 	$this->validate_fields();
+
 	$data = array(
+<<<<<<< HEAD
+	 'code' => $this->input->post('code'),
+	 'volume'=> $this->input->post('volume'),
+=======
 	  'code' => $this->input->post('code'),
 	 'volume'=> $this->input->post('prod_volume'),
+>>>>>>> 45dc68f1e8158fc4a89cc99583484915f874d037
 	 'unit'=> $this->input->post('unit'),
 	 'packing'=> $this->input->post('packing'),
 	 'brand' => $this->input->post('brand'),
@@ -47,7 +53,7 @@ class Products extends MY_Controller {
 
         $insert = $this->MY_Model->insert('products',$data);
           if ($insert) {
-                 echo json_encode( array('status'=>true));
+                 echo json_encode( array ('status'=>true));
 		}
   }
 
@@ -107,19 +113,6 @@ class Products extends MY_Controller {
 			echo json_encode($output);
 		}
 
-		public function view_all_products(){
-			$product_id = $this->input->post('id');
-
-			$data_array = array();
-			$parameters['select'] = '*';
-			$parameters['where'] = array('products.id'=>$product_id);
-			$parameters['join'] = array('supplier as s' => 's.supplier_name = products.supplier');
-			$data = $this->MY_Model->getrows('products',$parameters,'row');
-
-			$data_array['products'] = $data;
-			json($data_array);
-
-		}
 		public function cost_sell_tbl(){
 			$product_id = $this->input->post('id');
 			$data_array = array();
@@ -179,6 +172,19 @@ class Products extends MY_Controller {
 				}
 				die($result);
 			}
+		public function view_all_products(){
+				$product_id = $this->input->post('id');
+
+				$data_array = array();
+				$parameters['select'] = '*';
+				$parameters['where'] = array('products.id'=>$product_id);
+				$parameters['join'] = array('supplier as s' => 's.supplier_name = products.supplier');
+				$data = $this->MY_Model->getrows('products',$parameters,'row');
+
+				$data_array['products'] = $data;
+				json($data_array);
+
+		}
 
 		public function edit_products(){
 
@@ -199,7 +205,7 @@ class Products extends MY_Controller {
 					  'variant' => $this->input->post('variant'),
 					  'weight' => $this->input->post('weight'),
 					  'weightunit' => $this->input->post('weightunit'),
-					  'supplier' => $this->input->post('supplier_edit'),
+					  'supplier' => $this->input->post('supplier_name'),
 					  'cbm_length' => $this->input->post('cbm_length'),
 					  'cbm_width' => $this->input->post('cbm_width'),
 					  'cbm_height' => $this->input->post('cbm_height'),
@@ -208,7 +214,9 @@ class Products extends MY_Controller {
 					  'description' => $this->input->post('description'),
 					  'status' => 1
 					);
+
 				$update = $this->MY_Model->update('products', $data, array('id' => $products_id));
+
 
 				if ($update) {
 					$response = array('status' => 'ok');
@@ -281,7 +289,7 @@ class Products extends MY_Controller {
 						}else if ($post['search_type']== 'brand') {
 							$where = "brand LIKE '%" . $postLike . "%'";
 							$select = "brand AS product_id, brand AS product_name";
-						}else if($post['search_type']== 'volume') {
+						}else if($post['search_type'] == 'volume') {
 							$where = "volume LIKE '%" . $postLike . "%'";
 							$select = "volume AS product_id, volume AS product_name";
 						} else if ($post['search_type']== 'packing') {

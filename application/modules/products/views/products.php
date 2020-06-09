@@ -631,10 +631,10 @@
                                     </div>
                                     <div class="col-6">
                                         <label for="supplier">Supplier:</label>
-                                            <select class="form-control" class="supplier" name="supplier_edit" value="" data-type="supplier">
+                                            <select class="form-control" class="supplier" name="supplier" data-type="supplier">
                                                 <!-- <option value="" selected hidden>Select Supplier</option> -->
                                                 <?php foreach($supplier as $k => $value) : ?>
-                                                    <option value="<?php echo $value['id'] ?>">
+                                                    <option value="<?php echo $value['supplier_name'] ?>">
                                                     <?php echo $value['supplier_name'] ?></option>
                                                 <?php  endforeach; ?>
                                             </select>
