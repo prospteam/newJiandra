@@ -37,7 +37,7 @@
                                             <div class="col-6">
                                                 <div class="form-group">
                                                     <label for="volume">Volume: <span class="required">*</span></label>
-                                                    <select class="form-control js-example-basic-multiple-addproducts" name="volume" id="volume" data-type="volume">
+                                                    <select class="form-control js-example-basic-multiple-addproducts" name="prod_volume" id="prod_volume" data-type="volume">
                                                         <option></option>
                                                     </select>
                                                     <span class="err"></span>

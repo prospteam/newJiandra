@@ -25,8 +25,13 @@ class Products extends MY_Controller {
 	$this->validate_fields();
 
 	$data = array(
+<<<<<<< HEAD
 	 'code' => $this->input->post('code'),
 	 'volume'=> $this->input->post('volume'),
+=======
+	  'code' => $this->input->post('code'),
+	 'volume'=> $this->input->post('prod_volume'),
+>>>>>>> 45dc68f1e8158fc4a89cc99583484915f874d037
 	 'unit'=> $this->input->post('unit'),
 	 'packing'=> $this->input->post('packing'),
 	 'brand' => $this->input->post('brand'),
@@ -97,7 +102,6 @@ class Products extends MY_Controller {
 			);
 			$select = "p.id,p.code,p.packing,p.product_name,p.brand,p.category,p.volume,p.unit,p.status, s.supplier_name";
 			$list = $this->MY_Model->get_datatables('products as p',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
-
 
 			$output = array(
 					"draw" => $draw,
