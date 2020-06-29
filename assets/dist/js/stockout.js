@@ -25,7 +25,7 @@ $(document).ready(function(){
          )
            $.ajax({
            type: 'POST',
-             url:base_url + 'Stockout/deletestockout',
+             url:base_url + 'stockout/deletestockout',
              data: {stockmovement_id: stockmovement_id},
              success:function(data) {
                $(".stockout_tbl").DataTable().ajax.reload();

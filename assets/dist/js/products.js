@@ -11,9 +11,11 @@ $(document).ready(function () {
            total *= cbm_cap;
          }
        });
-
-       $('#volume_cbm').val(total);
-
+       if (total >= 100) {
+           $('#volume_cbm').val(total + ' m');
+       } else {
+           $('#volume_cbm').val(total + ' cm');
+       }
     });
     // add end Products CBM
 
