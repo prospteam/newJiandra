@@ -48,13 +48,15 @@
                     <table class="table table-bordered table-striped purchase" role="grid"
                         aria-describedby="example1_info" id="add_new_product">
                         <thead>
-                            <th class="header-title purch">SKU <span class="required">*</span>
+                            <th class="header-title purch">Product <span class="required">*</span>
                             </th>
-                            <th class="header-title purch">Product <span
+                            <th class="header-title purch">SKU <span
                                     class="required">*</span></th>
                             <th class="header-title purch">Quantity <span
                                     class="required">*</span></th>
                             <th class="header-title purch">Cost Price <span
+                                    class="required">*</span></th>
+                            <th class="header-title purch">Discount <span
                                     class="required">*</span></th>
                             <th class="header-title purch">Total <span class="required">*</span>
                             </th>
@@ -93,6 +95,12 @@
                                     <input type="text"
                                         class="form-control purchase_price number_only"
                                         name="unit_price[]" value="" readonly>
+                                    <span class="err"></span>
+                                </td>
+                                <td class="purch_td">
+                                    <input type="text"
+                                        class="form-control discount number_only"
+                                        name="discount[]" value="" >
                                     <span class="err"></span>
                                 </td>
                                 <td class="purch_td">

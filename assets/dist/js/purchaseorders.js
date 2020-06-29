@@ -264,8 +264,8 @@ $(document).ready(function(){
         dataType: 'json',
         success: function(data){
                 $.each(data.products,function(index,element){
-                      $('.prod_name').val(element.product_name);
-                      $('.purchase_price').val(element.sell_price);
+                      $('.prod_name').val(element.code);
+                      $('.purchase_price').val(element.cost_price);
                 });
 
         },
@@ -284,7 +284,7 @@ $(document).ready(function(){
             console.log('test');
             console.log($(that).parent().next().next().next().find('.purchase_price '));
                 $.each(data.products,function(index,element){
-                      $(that).parent().next().find('.add_prod').val(element.product_name);
+                      $(that).parent().next().find('.add_prod').val(element.code);
                       $(that).parent().next().next().next().find('.purchase_price').val(element.cost_price);
                 });
         }
@@ -307,7 +307,7 @@ $(document).ready(function(){
                   // console.log($(this).closest('tr').find('.edit_new_name').val($('option:selected', this).data('price')));
                   // $('.edit_new_code').next().closest('td').find('.edit_new_name').val($('option:selected', this).data('price'));
                   // $('input[name="prod_name[]"]').val(element.product_name);
-                  el.parents('tr').find('input[name="prod_name[]"]').val(element.product_name);
+                  el.parents('tr').find('input[name="prod_name[]"]').val(element.code);
                 });
         }
     });
@@ -326,7 +326,7 @@ $(document).ready(function(){
             console.log(data);
                 $.each(data.products,function(index,element){
                       // $('.edit_name').val(element.product_name);
-                      $(that).parent().next().find('.edit_name').val(element.product_name);
+                      $(that).parent().next().find('.edit_name').val(element.code);
                       $(that).parent().next().next().next().find('.purchase_price ').val(element.cost_price);
                 });
 
@@ -576,9 +576,9 @@ $(document).ready(function(){
             dataType: 'json',
             success: function(data){
                 opt += '<select class="form-control code select2" style="width: 100%;" name="prod_code[]">';
-                    opt += '<option value="">Select SKU</option>';
+                    opt += '<option value="">Select Product</option>';
                     $.each(data.products,function(index,key){
-                        opt += '<option value='+key.id+'>'+key.code+'</option>';
+                        opt += '<option value='+key.id+'>'+key.product_name+'</option>';
                     });
                 opt += '</select>';
                 $('#prodOption').html(opt);
@@ -815,7 +815,7 @@ $(document).ready(function(){
     str += '<tr class="add_purch">';
       str += '<td class="purch_td">';
            str += '<select class="form-control add_code select2_add" style="width: 100%;" name="prod_code[]">';
-              str += '<option value="" selected="true" disabled="disabled">Select SKU</option>';
+              str += '<option value="" selected="true" disabled="disabled">Select Product</option>';
               str += get_products(sup);
            str += '</select>';
            str += '<span class="err"></span>';
@@ -830,6 +830,10 @@ $(document).ready(function(){
       str += '</td>';
       str += '<td class="purch_td">';
           str += '<input type="text" class="form-control purchase_price number_only" readonly name="unit_price[]" value="">';
+          str += '<span class="err"></span>';
+      str += '</td>';
+      str += '<td class="purch_td">';
+          str += '<input type="text" class="form-control discount number_only" name="discount[]" value="">';
           str += '<span class="err"></span>';
       str += '</td>';
       str += '<td class="purch_td">';
@@ -866,7 +870,7 @@ $(document).ready(function(){
     str += '<tr>';
       str += '<td class="purch_td">';
         str += '<select class="form-control edit_code select2_edit" style="width: 100%;" name="edit_prod_code[]">';
-         str += '<option value="" selected="true" disabled="disabled">Select SKU</option>';
+         str += '<option value="" selected="true" disabled="disabled">Select Products</option>';
          str += get_products(sup);
         str += '</select>';
            str += '<span class="err"></span>';
@@ -905,16 +909,17 @@ $(document).ready(function(){
   });
 
   //compute total for qunatity * unit Price
-    $(document).on('keyup', '.purchase_price, .purchase_quantity', function(){
+    $(document).on('keyup', '.purchase_price, .purchase_quantity, .discount', function(){
         var total = 1;
         var grand_total = '';
         var price = $(this).parents('tr').find('.purchase_price').val();
         var quantity = $(this).parents('tr').find('.purchase_quantity').val();
+        var discount = $(this).parents('tr').find('.discount').val();
 
         quantity = quantity === undefined || quantity === null || quantity === '' ? 0 : quantity;
         price = price === undefined || price === null || price === '' ? 0 : price;
 
-        var total = price * quantity;
+        var total = price * quantity - discount;
 
          $(this).parents('tr').find('.purchase_total').val(total.toFixed(2));
 
@@ -939,10 +944,8 @@ $(document).ready(function(){
               total_cost += +$(this).val();
           });
           $(".total_cost").val(total_cost.toFixed(2));
-
-
-
       });
+
 
       // DELETE PURCHASE ORDER
       $(document).on('click', '.deletePurchase', function(e){
@@ -1085,7 +1088,7 @@ function get_products(event){
     success:function(data){
       var str = '';
       $.each(data.products,function(index,element){
-        str += '<option value="'+element.id+'">'+element.code+'</option>';
+        str += '<option value="'+element.id+'">'+element.product_name+'</option>';
       });
       data_return = str;
     }
