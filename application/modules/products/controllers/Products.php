@@ -25,30 +25,25 @@ class Products extends MY_Controller {
 	$this->validate_fields();
 
 	$data = array(
-<<<<<<< HEAD
-	 'code' => $this->input->post('code'),
-	 'volume'=> $this->input->post('volume'),
-=======
-	  'code' => $this->input->post('code'),
-	 'volume'=> $this->input->post('prod_volume'),
->>>>>>> 45dc68f1e8158fc4a89cc99583484915f874d037
-	 'unit'=> $this->input->post('unit'),
-	 'packing'=> $this->input->post('packing'),
-	 'brand' => $this->input->post('brand'),
-	  'product_name' => $this->input->post('product_name'),
-	  'category' => $this->input->post('category'),
-	  'subvariant' => $this->input->post('subvariant'),
-	  'variant' => $this->input->post('variant'),
-	  'weight' => $this->input->post('weight'),
-	  'weightunit' => $this->input->post('weightunit'),
-	 'supplier' => $this->input->post('supplier'),
-	 'cbm_length' => $this->input->post('cbm_length'),
-	 'cbm_width' => $this->input->post('cbm_width'),
-	 'cbm_height' => $this->input->post('cbm_height'),
-	 'cbm_volume' => $this->input->post('cbm_volume'),
-	 'supplier' => $this->input->post('supplier'),
-	 'description' => $this->input->post('description'),
-	  'status' => 1
+	  	'code' => $this->input->post('code'),
+	 	'volume'=> $this->input->post('prod_volume'),
+	 	'unit'=> $this->input->post('unit'),
+	 	'packing'=> $this->input->post('packing'),
+	 	'brand' => $this->input->post('brand'),
+	  	'product_name' => $this->input->post('product_name'),
+	  	'category' => $this->input->post('category'),
+	  	'subvariant' => $this->input->post('subvariant'),
+	  	'variant' => $this->input->post('variant'),
+	  	'weight' => $this->input->post('weight'),
+	  	'weightunit' => $this->input->post('weightunit'),
+	 	'supplier' => $this->input->post('supplier'),
+	 	'cbm_length' => $this->input->post('cbm_length'),
+	 	'cbm_width' => $this->input->post('cbm_width'),
+	 	'cbm_height' => $this->input->post('cbm_height'),
+	 	'cbm_volume' => $this->input->post('cbm_volume'),
+	 	'supplier' => $this->input->post('supplier'),
+	 	'description' => $this->input->post('description'),
+	  	'status' => 1
 	);
 
         $insert = $this->MY_Model->insert('products',$data);

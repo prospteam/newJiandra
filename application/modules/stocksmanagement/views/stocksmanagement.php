@@ -33,7 +33,6 @@
                                   <th class="header-title purch">Quantity On hand </th>
                                   <th class="header-title purch">Physical Count</th>
                                   <th class="header-title purch">Notes </th>
-
                               </thead>
                               <tbody>
                                 <tr>

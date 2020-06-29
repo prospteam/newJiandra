@@ -147,7 +147,7 @@
                                                 <div class="col-lg-2">
                                                     <div class="form-group cbm">
                                                         <label for="cbm_length">Length:</label>
-                                                        <input type="number" class="form-control capacity" name="cbm_length" value="">
+                                                        <input type="number" class="form-control capacity" name="cbm_length" value="" placeholder="cm">
                                                         <span class="err"></span>
                                                     </div>
                                                 </div>
@@ -157,7 +157,7 @@
                                                 <div class="col-lg-2">
                                                     <div class="form-group cbm">
                                                         <label for="cbm_width">Width:</label>
-                                                        <input type="number" class="form-control capacity" name="cbm_width" value="">
+                                                        <input type="number" class="form-control capacity" name="cbm_width" value="" placeholder="cm">
                                                         <span class="err"></span>
                                                     </div>
                                                 </div>
@@ -167,7 +167,7 @@
                                                 <div class="col-lg-2">
                                                     <div class="form-group cbm">
                                                         <label for="cbm_height">Height:</label>
-                                                        <input type="number" class="form-control capacity" name="cbm_height" value="">
+                                                        <input type="number" class="form-control capacity" name="cbm_height" value="" placeholder="cm">
                                                         <span class="err"></span>
                                                     </div>
                                                 </div>
@@ -177,7 +177,7 @@
                                                 <div class="col-lg-2">
                                                     <div class="form-group cbm">
                                                         <label for="cbm_volume">Volume:</label>
-                                                        <input type="number" class="form-control" id="volume_cbm" name="cbm_volume" value="">
+                                                        <input type="text" class="form-control" id="volume_cbm" name="cbm_volume" value="">
                                                         <span class="err"></span>
                                                     </div>
                                                 </div>
@@ -675,7 +675,7 @@
                                         <div class="col-lg-2">
                                             <div class="form-group cbm">
                                                 <label for="cbm_volume">Volume:</label>
-                                                <input type="number" class="form-control" id="volume_cbm_edit" name="cbm_volume" value="">
+                                                <input type="text" class="form-control" id="volume_cbm_edit" name="cbm_volume" value="">
                                                 <span class="err"></span>
                                             </div>
                                         </div>
