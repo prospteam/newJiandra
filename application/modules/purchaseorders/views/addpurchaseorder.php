@@ -56,16 +56,14 @@
                                     class="required">*</span></th>
                             <th class="header-title purch">Cost Price <span
                                     class="required">*</span></th>
-                            <th class="header-title purch">Discount <span
-                                    class="required">*</span></th>
                             <th class="header-title purch">Total <span class="required">*</span>
                             </th>
 
                         </thead>
                         <tbody>
 
-                            <tr>
-                                <td class="purch_td">
+                            <!-- <tr>
+                                <td class="purch_td"> -->
                                     <!-- <select class="form-control code select2" style="width: 100%;" name="prod_code[]">
                                         <option value="">Select SKU</option>
                                         <span id="prodOption"></span>
@@ -75,40 +73,35 @@
                                           // }
                                       ?>
                                     </select> -->
-                                    <div id="prodOption"></div>
+                                    <!-- <div id="prodOption"></div> -->
                                     <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
-                                    <span class="err"></span>
+                                    <!-- <span class="err"></span>
                                 </td>
                                 <td class="purch_td">
-                                    <input type="text" class="form-control prod_name"
-                                        name="prod_name[]" value="" readonly>
+                                    <input type="text" class="form-control prod_name" name="prod_name[]" value="" readonly> -->
                                     <!-- <input type="text" class="form-control" name="prod_name[]" value=""> -->
+                                    <!-- <span class="err"></span>
+                                </td>
+                                <td class="purch_td">
+                                    <input type="text"
+                                        class="form-control purchase_quantity number_only" name="quantity[]" value="">
                                     <span class="err"></span>
                                 </td>
                                 <td class="purch_td">
                                     <input type="text"
-                                        class="form-control purchase_quantity number_only"
-                                        name="quantity[]" value="">
+                                        class="form-control purchase_price number_only" name="unit_price[]" value="" readonly>
                                     <span class="err"></span>
                                 </td>
                                 <td class="purch_td">
                                     <input type="text"
-                                        class="form-control purchase_price number_only"
-                                        name="unit_price[]" value="" readonly>
+                                        class="form-control discount number_only" name="discount[]" value="" >
                                     <span class="err"></span>
                                 </td>
                                 <td class="purch_td">
-                                    <input type="text"
-                                        class="form-control discount number_only"
-                                        name="discount[]" value="" >
+                                    <input type="text" class="form-control purchase_total" name="total[]" value="" readonly>
                                     <span class="err"></span>
                                 </td>
-                                <td class="purch_td">
-                                    <input type="text" class="form-control purchase_total"
-                                        name="total[]" value="" readonly>
-                                    <span class="err"></span>
-                                </td>
-                            </tr>
+                            </tr> -->
 
                         </tbody>
                     </table>
@@ -140,7 +133,7 @@
                     <div class="form-horizontal">
                         <div class="form-group row m-b-10">
                             <label for="batchCode"
-                                class="col-md-12 col-lg-4 col-form-label">Cost <span
+                                class="col-md-12 col-lg-4 col-form-label">Sub Total <span
                                     class="text-red">*</span></label>
                             <div class="col-lg-8 col-md-12">
                                 <div class="input-group m-b-0">
@@ -150,6 +143,21 @@
                                     <input type="text"
                                         class="form-control disabled-normal total_cost"
                                         name="total_cost" readonly="" disabled="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-horizontal">
+                        <div class="form-group row m-b-10">
+                            <label for="batchCode"
+                                class="col-md-12 col-lg-4 col-form-label">Discount by %<span
+                                    class="text-red">*</span></label>
+                            <div class="col-lg-8 col-md-12">
+                                <div class="input-group m-b-0">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">₱</span>
+                                    </div>
+                                    <input type="number"class="form-control disabled-normal discount" name="discount">
                                 </div>
                             </div>
                         </div>

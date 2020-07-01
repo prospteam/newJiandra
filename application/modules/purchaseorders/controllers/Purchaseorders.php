@@ -52,8 +52,9 @@ class Purchaseorders extends MY_Controller {
 	public function getProductBySupplier(){
 		$supplier = $this->input->post('supplier');
 
-		$param['where'] = array('status' => 1 , 'supplier' => $supplier);
-		$param['select'] = '*';
+		$param['where'] = array('products.status' => 1 , 'supplier' => $supplier);
+		$param['join'] = array('products_cost_price' => 'products_cost_price.fk_product_id = products.id');
+		$param['select'] = 'products.product_name,products.code,products_cost_price.cost_price';
 		$data['products'] = $this->MY_Model->getRows('products', $param);
 
 		echo json_encode($data);

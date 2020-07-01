@@ -575,13 +575,48 @@ $(document).ready(function(){
             type: 'post',
             dataType: 'json',
             success: function(data){
-                opt += '<select class="form-control code select2" style="width: 100%;" name="prod_code[]">';
-                    opt += '<option value="">Select Product</option>';
+                console.log('PO data');
+                console.log(data.products);
+                var str = "";
+                if (data.products.length === 0) {
+                    str += "No product available"
+                }else{
                     $.each(data.products,function(index,key){
-                        opt += '<option value='+key.id+'>'+key.product_name+'</option>';
+                        str += '<tr>';
+                            str += '<td class="purch_td">';
+                                str += '<input type="text" class="form-control prod_name" name="prod_name[]" value="'+key.product_name+'">';
+                                str += '<span class="err"></span>';
+                            str += '</td>'
+                            str += '<td class="purch_td">';
+                                str += '<input type="text" class="form-control prod_name" name="prod_code[]" value="'+key.code+'" readonly>';
+                                str += ' <span class="err">';
+                            str += '</td>'
+                            str += '<td class="purch_td">';
+                                str += '<input type="text" class="form-control purchase_quantity number_only" name="quantity[]" value="">';
+                                str += ' <span class="err">';
+                            str += '</td>'
+                            str += '<td class="purch_td">';
+                                str += '<input type="text" class="form-control purchase_price number_only" name="unit_price[]" value="'+key.cost_price+'" readonly>';
+                                str += ' <span class="err">';
+                            str += '</td>'
+
+                            str += '<td class="purch_td">';
+                                str += '<input type="text" class="form-control purchase_total" name="total[]" value="" readonly>';
+                                str += ' <span class="err">';
+                            str += '</td>'
+                         str+= '</tr>';
                     });
-                opt += '</select>';
-                $('#prodOption').html(opt);
+                }
+
+                 $('#add_new_product tbody').html(str);
+
+                // opt += '<select class="form-control code select2" style="width: 100%;" name="prod_code[]">';
+                //     opt += '<option value="">Select Product</option>';
+                //     $.each(data.products,function(index,key){
+                //         opt += '<option value='+key.id+'>'+key.product_name+'</option>';
+                //     });
+                // opt += '</select>';
+                // $('#prodOption').html(opt);
             }
         });
 
@@ -914,12 +949,11 @@ $(document).ready(function(){
         var grand_total = '';
         var price = $(this).parents('tr').find('.purchase_price').val();
         var quantity = $(this).parents('tr').find('.purchase_quantity').val();
-        var discount = $(this).parents('tr').find('.discount').val();
 
         quantity = quantity === undefined || quantity === null || quantity === '' ? 0 : quantity;
         price = price === undefined || price === null || price === '' ? 0 : price;
 
-        var total = price * quantity - discount;
+        var total = price * quantity;
 
          $(this).parents('tr').find('.purchase_total').val(total.toFixed(2));
 
@@ -930,7 +964,14 @@ $(document).ready(function(){
              grand_total += +gtval.replace(/\,/g, '');
          });
 
-          $('.grand_total').val(grand_total.toFixed(2));
+         var discount_amount = 0;
+         var discount_total = 0;
+         var discount = $('.discount').val();
+
+         discount_amount = (grand_total/100)*discount;
+         discount_total = grand_total - discount_amount;
+
+          $('.grand_total').val(discount_total.toFixed(2));
 
           //  total quantity
           var total_quantity = 0;
@@ -943,8 +984,16 @@ $(document).ready(function(){
           $(".purchase_price").each(function() {
               total_cost += +$(this).val();
           });
-          $(".total_cost").val(total_cost.toFixed(2));
+          $(".total_cost").val(grand_total.toFixed(2));
       });
+
+      $(document).on('keyup keydown', '.discount', function(e) {
+            var $myInput = $(this);
+
+            if ($myInput.val() > 100) {
+                $myInput.val(100);
+            }
+        });
 
 
       // DELETE PURCHASE ORDER
