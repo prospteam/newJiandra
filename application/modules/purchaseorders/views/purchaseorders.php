@@ -237,7 +237,11 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <!-- button for p.o Arrived -->
+                                <button type="button" class="cost cost_btn po_arrived_btn float-sm-right" data-toggle="modal" data-target="#po_arrived">
+                                    <i class="fas fa-plus-circle" aria-hidden="true"></i> P.O Arrived
+                                </button>
+                            <!-- button for p.o Arrived -->
                             <div class="table-responsive purch_prod po_tbl">
                                 <table class="table table-bordered table-striped purchase" role="grid"
                                     aria-describedby="example1_info" id="view_purchase_orders_details">
@@ -326,8 +330,60 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- End View user Modal -->
+                <!-- modal for p.o arrived -->
+                <div class="modal fade" id="po_arived_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
+                    <form id="po_arrived_up" method="post">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-info2">
+                                    <h5 class="modal-title" id="exampleModalLabel">P.O Arrived</h5>
+                                    <input type="hidden" class="form-control product_id" name="product_id"  value="">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="table-responsive purch_prod">
+                                    <table class="table table-bordered table-striped purchase_arrived" role="grid" aria-describedby="example1_info" id="view_po_arrived">
+                                        <thead>
+                                            <th class="header-title purch">SKU</th>
+                                            <th class="header-title purch">Product</th>
+                                            <th class="header-title purch">Quantity</th>
+                                            <th class="header-title purch">Delivered </th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <!-- <td>test</td>
+                                                <td>est</td>
+                                                <td>test</td> -->
+                                                <!-- <td class="purch_td">
+                                        <input type="text" class="form-control" name="prod_name[]" value="">
+                                        <span class="err"></span>
+                                      </td>
+                                      <td class="purch_td">
+                                        <input type="number" class="form-control purchase_quantity" name="quantity[]" value="">
+                                        <span class="err"></span>
+                                      </td>
+                                      <td class="purch_td">
+                                        <input type="number" class="form-control purchase_price" name="unit_price[]" value="">
+                                        <span class="err"></span>
+                                      </td>
+                                      <td class="purch_td">
+                                        <input type="number" class="form-control purchase_total" name="total[]" value="" readonly>
+                                        <span class="err"></span>
+                                      </td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary arrivedpo add">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- modal for p.o arrived -->
 
                 <!--View Edit Modal -->
                 <!-- Modal -->
