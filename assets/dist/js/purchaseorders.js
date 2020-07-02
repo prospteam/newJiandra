@@ -84,7 +84,6 @@ $(document).ready(function(){
                  }else if(row.delivery_status == 3){
                    str += '<a href="javascript:;" class="btn btn-block btn-sm btn-warning deliveryStat" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">on process</a>';
                  }else if(row.delivery_status == 4){
-
                    str += '<a href="javascript:;" class="btn btn-block btn-sm btn-success deliveryStat" data-status="'+row.delivery_status+'" data-id="'+row.purchase_code+'">delivered</a>';
                  }
                  return str;
