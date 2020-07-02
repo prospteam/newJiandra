@@ -360,7 +360,7 @@ class Purchaseorders extends MY_Controller {
 		$post = $this->input->post();
 
 		$parameters['where'] = array('purchase_code' => $post['id']);
-		$parameters['join'] = array('products' => 'products.id = purchase_orders.product');
+		$parameters['join'] = array('products' => 'products.code = purchase_orders.product');
 		$parameters['select'] = 'purchase_orders.*, products.code';
 
 		$data['delivery'] = $this->MY_Model->getRows('purchase_orders',$parameters,'row');
