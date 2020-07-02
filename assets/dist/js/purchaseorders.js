@@ -199,6 +199,7 @@ $(document).ready(function(){
 
   //Update delivery status
   $(document).on('click', '.deliveryStat', function(){
+
      var id = $(this).attr('data-id');
      var deliv_status = $(this).attr('data-status');
      $.ajax({
@@ -226,7 +227,7 @@ $(document).ready(function(){
     var id = $('input[name="product"]').val();
     var code = $('input[name="code"]').val();
     var warehouse_id = $('input[name="warehouse_id"]').val();
-    // alert(id);
+    alert(id);
     formData.append("warehouse_id",warehouse_id);
     formData.append("id",id);
     formData.append("code",code);
