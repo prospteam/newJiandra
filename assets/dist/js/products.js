@@ -53,6 +53,10 @@ $(document).ready(function () {
                 location.reload();
               });
               blankVal_products();
+          } else if (response.error) {
+               Swal.fire("Error",response.error, "error");
+          } else if (response.skucode_error) {
+               Swal.fire("Error!",response.skucode_error, "error");
           }else {
                 for (var i = 0; i < response.return.input_name.length; i++) {
                     console.log( response.return.input_name[i], response.return.input_error[i]);
