@@ -305,9 +305,12 @@ class Purchaseorders extends MY_Controller {
 	public function purchase_details(){
 		$purchase_id = $this->input->post('id');
 
+
 		$parameters['where'] = array('purchase_code' => $purchase_id);
 		// $parameters['group'] = array('purchase_code');
-		$parameters['join'] = array('company' => 'company.company_id = purchase_orders.company','supplier' => 'supplier.supplier_name = purchase_orders.supplier', 'products' => 'products.id = purchase_orders.product');
+		$parameters['join'] = array('company' => 'company.company_id = purchase_orders.company',
+									'supplier' => 'supplier.supplier_name = purchase_orders.supplier',
+									'products' => 'products.code = purchase_orders.product');
 		$parameters['select'] = 'purchase_orders.*, purchase_orders.id AS purchase_id, supplier.id AS supplier_id, supplier.*, company.*,products.id AS product_id, products.*';
 
 		$data['purch_details'] = $this->MY_Model->getRows('purchase_orders', $parameters);
@@ -320,15 +323,16 @@ class Purchaseorders extends MY_Controller {
 	public function view_purchase_orders(){
 		$purchase_id = $this->input->post('id');
 
-		$parameters['where'] = array('purchase_code' => $purchase_id);
+		$parameters['where'] = array('purchase_orders.purchase_code' => $purchase_id);
 		// $parameters['group'] = array('purchase_code');
 		$parameters['join'] = array('company' => 'company.company_id = purchase_orders.company',
 								'supplier' => 'supplier.supplier_name = purchase_orders.supplier',
-								'products' => 'products.id = purchase_orders.product',
+								'products' => 'products.code = purchase_orders.product',
 								'warehouse_management' => 'warehouse_management.id = purchase_orders.warehouse_id'  );
 		$parameters['select'] = 'purchase_orders.*, purchase_orders.id AS purchase_id, supplier.id AS supplier_id, supplier.*, company.*, products.id AS product_id, products.*, warehouse_management.wh_name';
 
 		$data = $this->MY_Model->getRows('purchase_orders',$parameters);
+
 
 		$data_array['purchase'] = $data;
 		// exit;
@@ -362,7 +366,7 @@ class Purchaseorders extends MY_Controller {
 		//  print_r($post);
 		//  exit;
 		$parameters['where'] = array('purchase_code' => $post['id']);
-		$parameters['join'] = array('products' => 'products.id = purchase_orders.product');
+		$parameters['join'] = array('products' => 'products.code = purchase_orders.product');
 		$parameters['select'] = 'purchase_orders.*, products.code';
 
 		$data['delivery'] = $this->MY_Model->getRows('purchase_orders',$parameters,'row');
