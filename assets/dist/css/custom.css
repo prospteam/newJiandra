@@ -401,3 +401,13 @@ span#addNewSO {
       font-size: 14px;
   }
 }
+.modal-header.bg-info2 {
+    background: #28a745;
+    color: #ffff;
+}
+.btn.btn-primary.arrivedpo.add {
+    width: 155px;
+    background-color: #28a745;
+    border-color: #28a745;
+    font-size: 20px;
+}

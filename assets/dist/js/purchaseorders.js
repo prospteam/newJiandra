@@ -376,6 +376,7 @@ $(document).ready(function(){
   //view list of Orders
   $(document).on('click', '.viewPurchase', function(){
      var id = $(this).attr('data-id');
+     $('.po_arrived_btn').attr('data-id', id);
      // alert('hi');
      $.ajax({
        method: 'POST',
@@ -454,7 +455,7 @@ $(document).ready(function(){
                    str += '</td>';
                   if(element.delivery_status == 4){
                     str += '<td class="purch_td submit_delivered">';
-                    str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_delivered" data-id="'+element.id+'"><i class="fa fa-edit"></i></a>';
+                    // str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_delivered" data-id="'+element.id+'"><i class="fa fa-edit"></i></a>';
                     str += '<a href="javascript:;" class="btn btn-xs btn-success submit_delivered_qty" data-id="'+element.id+'"hidden><i class="fa fa-check"></i></a>';
                     str += '</td>';
                   }else{
@@ -1163,6 +1164,75 @@ function get_edit_products(selected_product = ''){
   });
   return data_return;
 }
+
+// P_O Arrived
+// $(document).on("click", ".po_arrived_btn", function () {
+//    var id = $(this).attr("data-id");
+//    console.log($(this).data("id"));
+//    console.log($(this).data());
+//    $('#po_arived_edit').modal('show')
+// });
+// P_O Arrived
+// P_O Arrive modal table
+$(document).on('click', '.po_arrived_btn', function(){
+   var id = $(this).attr('data-id');
+
+   // alert('hi');
+   $.ajax({
+     method: 'POST',
+     url: base_url + 'purchaseorders/view_purchase_orders',
+     data: {id:id},
+     dataType: "json",
+     success: function(data){
+       console.log('asas');
+       console.log(data);
+       $('#po_arived_edit').modal('show');
+        var str = '';
+
+        $.each(data.purchase,function(index,element){
+          console.log(data.purchase);
+
+          console.log('elemt');
+          console.log(element);
+
+          str += '<tr>';
+          str +=     '<td class="purch_td hide">';
+              str +=   '<input type="hidden" class="edit_purchID" name="view_purchase_id[]" value='+element.purchase_id+'>';
+             str += '</td>';
+             str +=     '<td class="purch_td hide">';
+                 str +=   '<input type="hidden" class="edit_product" name="view_prod[]" value='+element.product+'>';
+                str += '</td>';
+                str +=     '<td class="purch_td hide">';
+                    str +=   '<input type="hidden" class="edit_prod_code" name="view_prod_code[]" value='+element.code+'>';
+                   str += '</td>';
+                   str +=     '<td class="purch_td hide">';
+                       str +=   '<input type="hidden" class="edit_delivery_status" name="view_delivery_status[]" value='+element.delivery_status+'>';
+                      str += '</td>';
+
+             str +=     '<td class="purch_td">';
+                 str +=   element.code;
+                str += '</td>';
+                str += '<td class="purch_td">';
+                str +=   element.product_name;
+               str += '</td>';
+               str += ' <td class="purch_td td_qty">';
+                   str += element.quantity;
+               str += '</td>';
+              str +=  '<td class="purch_td delivered">';
+                 str += '<span class="deliv"></span>';
+                 str +=   '<input type="text" class="edit_deliv number_only" name="delivered[]" value="">';
+               str += '</td>';
+            str += '</tr>';
+      });
+
+      $('#view_po_arrived tbody').html(str);
+ }
+});
+});
+
+
+// P_O Arrive modal table
+
 
 
 function blankVal_purchase(){
