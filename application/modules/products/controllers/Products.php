@@ -22,34 +22,44 @@ class Products extends MY_Controller {
 
   public function addproducts() {
 
-	$this->validate_fields();
+	  $sku_code = $this->input->post('code');
+	  $parameters['where'] = array('code' => $sku_code);
+	  $parameters['select'] = 'code';
+	  $code_exist = $this->MY_Model->getRows('products',$parameters);
 
-	$data = array(
-	  	'code' => $this->input->post('code'),
-	 	'volume'=> $this->input->post('prod_volume'),
-	 	'unit'=> $this->input->post('unit'),
-	 	'packing'=> $this->input->post('packing'),
-	 	'brand' => $this->input->post('brand'),
-	  	'product_name' => $this->input->post('product_name'),
-	  	'category' => $this->input->post('category'),
-	  	'subvariant' => $this->input->post('subvariant'),
-	  	'variant' => $this->input->post('variant'),
-	  	'weight' => $this->input->post('weight'),
-	  	'weightunit' => $this->input->post('weightunit'),
-	 	'supplier' => $this->input->post('supplier'),
-	 	'cbm_length' => $this->input->post('cbm_length'),
-	 	'cbm_width' => $this->input->post('cbm_width'),
-	 	'cbm_height' => $this->input->post('cbm_height'),
-	 	'cbm_volume' => $this->input->post('cbm_volume'),
-	 	'supplier' => $this->input->post('supplier'),
-	 	'description' => $this->input->post('description'),
-	  	'status' => 1
-	);
+	  $count_code = count($code_exist);
+	  if ($count_code) {
+		  $response = array('skucode_error' =>  'Sku Code already exists!' );
+  		  echo json_encode($response);
+	  } else {
+		  $this->validate_fields();
+	  	$data = array(
+	  	  	'code' => $this->input->post('code'),
+	  	 	'volume'=> $this->input->post('prod_volume'),
+	  	 	'unit'=> $this->input->post('unit'),
+	  	 	'packing'=> $this->input->post('packing'),
+	  	 	'brand' => $this->input->post('brand'),
+	  	  	'product_name' => $this->input->post('product_name'),
+	  	  	'category' => $this->input->post('category'),
+	  	  	'subvariant' => $this->input->post('subvariant'),
+	  	  	'variant' => $this->input->post('variant'),
+	  	  	'weight' => $this->input->post('weight'),
+	  	  	'weightunit' => $this->input->post('weightunit'),
+	  	 	'supplier' => $this->input->post('supplier'),
+	  	 	'cbm_length' => $this->input->post('cbm_length'),
+	  	 	'cbm_width' => $this->input->post('cbm_width'),
+	  	 	'cbm_height' => $this->input->post('cbm_height'),
+	  	 	'cbm_volume' => $this->input->post('cbm_volume'),
+	  	 	'supplier' => $this->input->post('supplier'),
+	  	 	'description' => $this->input->post('description'),
+	  	  	'status' => 1
+	  	);
+          $insert = $this->MY_Model->insert('products',$data);
+            if ($insert) {
+                   echo json_encode( array ('status'=>true));
+	  		}
+	  }
 
-        $insert = $this->MY_Model->insert('products',$data);
-          if ($insert) {
-                 echo json_encode( array ('status'=>true));
-		}
   }
 
 	  public function add_cost_price(){

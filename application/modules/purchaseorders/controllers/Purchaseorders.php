@@ -362,7 +362,9 @@ class Purchaseorders extends MY_Controller {
 	//view delivery Status
 	public function view_deliv_status(){
 		$post = $this->input->post();
-
+		// echo "<pre>";
+		//  print_r($post);
+		//  exit;
 		$parameters['where'] = array('purchase_code' => $post['id']);
 		$parameters['join'] = array('products' => 'products.code = purchase_orders.product');
 		$parameters['select'] = 'purchase_orders.*, products.code';
@@ -375,7 +377,9 @@ class Purchaseorders extends MY_Controller {
 	//change delivery Status
 	public function change_deliv_status(){
 		$post = $this->input->post();
-
+		// echo "<pre>";
+		//  print_r($post);
+		//  exit;
 		if($post['delivery_status'] == 2){
 			$remarks = empty($post['remarks_deliv']) ? "None" : $post['remarks_deliv'];
 		}else if($post['delivery_status'] == 3){
@@ -393,6 +397,7 @@ class Purchaseorders extends MY_Controller {
 			'product' => $post['product'],
 			'warehouse_id' => $post['purchase_code_delivery']
 		);
+
 		$params['select'] = '*';
 		$params_for_gettings_products_from_order['where']=array('purchase_code' => $post['purchase_code_delivery']);
 		// $params_for_gettings_products_from_order['where']=array('purchase_code' => $post['purchase_code_delivery']);
@@ -505,9 +510,9 @@ class Purchaseorders extends MY_Controller {
 				'delivery_remarks'  => '',
 				'order_status'  => '1',
 			);
-			echo "<pre>";
-			 print_r($data);
-			 exit;
+			// echo "<pre>";
+			//  print_r($data);
+			//  exit;
 			$insert = $this->MY_Model->insert('purchase_orders', $data);
 		}
 
