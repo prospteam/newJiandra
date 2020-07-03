@@ -17,19 +17,88 @@ $(document).ready(function(){
   });
 
   //display purchase_tbl
+    // var purchase_tbl = $('.stocks_tbl').DataTable({
+    //     "responsive": true,
+    //      "processing": true, //Feature control the processing indicator.
+    //      "serverSide": true, //Feature control DataTables' server-side processing mode.
+    //      "order": [[0,'desc']], //Initial no order.
+    //      "columns":[
+    //           {"data":"purchase_code"},
+    //           {"data":"wh_name"},
+    //           {"data":"code"},
+    //           {"data":"supplier"},
+    //           {"data":"brand"},
+    //           {"data":"product_name"},
+    //           {"data":"packing"},
+    //
+    //         //   {"data":"packing","render": function(data, type, row,meta){
+    //         //     var str = '';
+    //         //       str += '<div>';
+    //         //         str += '<span class="variance">0</span>';
+    //         //       str += '</div>';
+    //         //     return str;
+    //         //   }
+    //         // },
+    //         {"data":"date_delivered"},
+    //           {"data":"system_count"},
+    //
+    //           // {"data":"type"},
+    //           {"data":"physical_count","render": function(data, type, row,meta){
+    //                     var str = '';
+    //                      str += '<div>';
+    //                      str += '<span class="physical_count">';
+    //                        str += row.physical_count;
+    //
+    //                      str += '</span>';
+    //                     str += '</div>';
+    //                     return str;
+    //                }
+    //           },
+    //           {"data":"variance","render": function(data, type, row,meta){
+    //             var variance = row.system_count - row.physical_count;
+    //             var str = '';
+    //               str += '<div>';
+    //               if(row.physical_count == 0){
+    //                 str += '<span class="variance">0</span>';
+    //               }else{
+    //
+    //                 str += '<span class="variance">'+variance+'</span>';
+    //               }
+    //               str += '</div>';
+    //             return str;
+    //           }
+    //         }
+    //
+    //      ],
+    //      // Load data for the table's content from an Ajax source
+    //
+    //      "ajax": {
+    //           "url":base_url+"stocksmanagement/display_delivered_products/",
+    //           "type": "POST"
+    //      },
+    //      //Set column definition initialisation properties.
+    //      "columnDefs": [
+    //           {
+    //                "targets": [2,3], //first column / numbering column
+    //                "orderable": false, //set not orderable
+    //
+    //            },
+    //       ],
+    //   });
+
+//New stock Management table
+
     var purchase_tbl = $('.stocks_tbl').DataTable({
         "responsive": true,
          "processing": true, //Feature control the processing indicator.
          "serverSide": true, //Feature control DataTables' server-side processing mode.
          "order": [[0,'desc']], //Initial no order.
          "columns":[
+              {"data":"date_ordered"},
+              {"data":"date_ordered"},
               {"data":"purchase_code"},
-              {"data":"wh_name"},
-              {"data":"code"},
-              {"data":"supplier"},
-              {"data":"brand"},
-              {"data":"product_name"},
-              {"data":"packing"},
+              {"data":"company_name"},
+              {"data":"supplier_name"},
 
             //   {"data":"packing","render": function(data, type, row,meta){
             //     var str = '';
@@ -39,31 +108,11 @@ $(document).ready(function(){
             //     return str;
             //   }
             // },
-            {"data":"date_delivered"},
-              {"data":"system_count"},
-
-              // {"data":"type"},
-              {"data":"physical_count","render": function(data, type, row,meta){
-                        var str = '';
-                         str += '<div>';
-                         str += '<span class="physical_count">';
-                           str += row.physical_count;
-
-                         str += '</span>';
-                        str += '</div>';
-                        return str;
-                   }
-              },
               {"data":"variance","render": function(data, type, row,meta){
                 var variance = row.system_count - row.physical_count;
                 var str = '';
-                  str += '<div>';
-                  if(row.physical_count == 0){
-                    str += '<span class="variance">0</span>';
-                  }else{
-
-                    str += '<span class="variance">'+variance+'</span>';
-                  }
+                  str += '<div class="action" style="text-align:center">';
+                    str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"><abbr title="View Purchase Order"><i class="fas fa-eye text-info"></i></abbr></a>';
                   str += '</div>';
                 return str;
               }
@@ -73,19 +122,20 @@ $(document).ready(function(){
          // Load data for the table's content from an Ajax source
 
          "ajax": {
-              "url":base_url+"stocksmanagement/display_delivered_products/",
+              "url":base_url+"stocksmanagement/display_stock_managment/",
               "type": "POST"
          },
          //Set column definition initialisation properties.
          "columnDefs": [
               {
-                   "targets": [2,3], //first column / numbering column
+                   "targets": [1,5], //first column / numbering column
                    "orderable": false, //set not orderable
 
                },
           ],
       });
   //end display purchase_tbl
+
 
 
 //view list of stocks

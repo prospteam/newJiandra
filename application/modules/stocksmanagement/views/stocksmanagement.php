@@ -225,7 +225,7 @@
                   <div class="col-sm-12">
                     <table class="table table-bordered table-striped dataTable stocks_tbl" role="grid" aria-describedby="example1_info">
                   <thead>
-                    <th class="header-title">Purchase Code</th>
+                    <!-- <th class="header-title">Purchase Code</th>
                     <th class="header-title">Warehouse</th>
                     <th class="header-title">Product Code</th>
                     <th class="header-title">Principal Name</th>
@@ -235,7 +235,13 @@
                     <th class="header-title">Inventory Date</th>
                     <th class="header-title">Quantity On hand</th>
                     <th class="header-title">Physical Count</th>
-                    <th class="header-title">Variance</th>
+                    <th class="header-title">Variance</th> -->
+                    <th class="header-title">Date Ordered</th>
+                    <th class="header-title">Date Date Delivered</th>
+                    <th class="header-title">Purchase Code</th>
+                    <th class="header-title">Company</th>
+                    <th class="header-title">Supplier</th>
+                    <th class="header-title">Action</th>
                     <!-- <th class="header-title">Out/Transfer</th> -->
                   </thead>
                   <tbody>

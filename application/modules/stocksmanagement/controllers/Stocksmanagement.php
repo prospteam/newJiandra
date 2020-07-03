@@ -73,6 +73,36 @@ class Stocksmanagement extends MY_Controller {
 		echo json_encode($output);
 	}
 
+	public function display_stock_managment(){
+		$limit = $this->input->post('length');
+		$offset = $this->input->post('start');
+		$search = $this->input->post('search');
+		$order = $this->input->post('order');
+		$draw = $this->input->post('draw');
+
+
+		$column_order = array('date_ordered','purchase_code','company.company_name','supplier.supplier_name');
+		$where = array('purchase_orders.delivery_status' => 4,
+						'purchase_orders.status' => 2);
+
+		$group = array('purchase_orders.purchase_code');
+		$join = array(
+			'supplier' => 'supplier.supplier_name = purchase_orders.supplier',
+			'company' => 'company.company_id = purchase_orders.company'
+		);
+		$select = "purchase_orders.id AS purchase_id, purchase_orders.date_ordered,purchase_orders.purchase_code,company.company_id, company.company_name, supplier.id,supplier.supplier_name,purchase_orders.status,purchase_orders.delivery_status,purchase_orders.order_status";
+		$list = $this->MY_Model->get_datatables('purchase_orders',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
+
+		$output = array(
+				"draw" => $draw,
+				"recordsTotal" => $list['count_all'],
+				"recordsFiltered" => $list['count'],
+				"data" => $list['data']
+		);
+
+		echo json_encode($output);
+	}
+
 	//add view reports
 	public function view_reports(){
 		$param['where'] 	= array('po.delivery_status' => 4);
