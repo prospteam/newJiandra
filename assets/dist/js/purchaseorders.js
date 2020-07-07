@@ -391,7 +391,7 @@ $(document).ready(function(){
           cache: false,
           dataType: 'json',
           success: function(data){
-              console.log(id);
+              console.log(data);
               if (data.status == 'ok') {
                   console.log(data.success);
                   Swal.fire("Added Delivered items!", data.success, 'success');
