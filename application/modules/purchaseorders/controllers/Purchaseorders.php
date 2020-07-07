@@ -342,19 +342,18 @@ class Purchaseorders extends MY_Controller {
 
 	//change delivered quantity on purchase Orders
 	public function change_delivered_qty(){
-		$post = $this->input->post();
-		$delivered_date = date("F d, Y");
 
-		foreach ($post as $key => $value) {
-			$data = array(
-				'delivered' => $value,
-				'date_delivered' => $delivered_date
-			);
+			// $post = $this->input->post();
+			$delivered_date = date("F d, Y");
 
-		}
-		$data['delivered_qty'] = $this->MY_Model->update('purchase_orders', $data, array('id' => $post['id']));
-		json($data);
-
+			foreach ($_POST['delivered'] as $key => $value) {
+				$data = array(
+					'delivered' => $_POST['delivered'][$key],
+					'date_delivered' => $delivered_date
+				);
+				$query = $this->MY_Model->update('purchase_orders',$data,array('id' => $_POST['id'][$key]));
+			}
+			json($query);
 	}
 
 
