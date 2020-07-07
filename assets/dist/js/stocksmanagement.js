@@ -112,7 +112,7 @@ $(document).ready(function(){
                 var variance = row.system_count - row.physical_count;
                 var str = '';
                   str += '<div class="action" style="text-align:center">';
-                    str += '<a href="javascript:;" class="viewPurchase" data-id="'+row.purchase_code+'"><abbr title="View Purchase Order"><i class="fas fa-eye text-info"></i></abbr></a>';
+                    str += '<a href="javascript:;" class="viewStock" data-id="'+row.purchase_code+'"><abbr title="View Purchase Order"><i class="fas fa-eye text-info"></i></abbr></a>';
                   str += '</div>';
                 return str;
               }
@@ -136,7 +136,56 @@ $(document).ready(function(){
       });
   //end display purchase_tbl
 
+//View STOCK
+$(document).on('click', '.viewStock', function(){
+    $('#viewStockManagement').modal('show');
+    var purchase_code = $(this).attr('data-id');
 
+    $.ajax({
+      method: 'POST',
+      url: base_url + 'stocksmanagement/view_stock_management',
+      data : {purchase_code: purchase_code},
+      dataType: "json",
+      success: function(data){
+          console.log(data.view_stock);
+          var str ='';
+
+          $.each(data.view_stock,function(index,element){
+              var total = parseFloat(element.quantity) * parseFloat(element.unit_price).toFixed(2);
+              str += '<tr>';
+                  str += '<td class="purch_td">';
+                    str += element.code
+                  str += '</td>';
+                  str += '<td class="purch_td">';
+                    str += element.product_name
+                  str += '</td>';
+                  str += '<td class="purch_td">';
+                    str += element.quantity
+                  str += '</td>';
+                  str += '<td class="purch_td">';
+                    str += element.unit_price
+                  str += '</td>';
+                  str += '<td class="purch_td">';
+                    str += total
+                  str += '</td>';
+                  str += '<td class="purch_td">';
+                    if(element.delivered == ''){
+                        str += '0'
+                    }else{
+                        str += element.delivered
+                    }
+                  str += '</td>';
+                  str +=  '<td class="purch_td">';
+                    var variance = element.quantity - element.delivered;
+                        str += variance;
+                   str += '</td>';
+             str += '</tr>'
+        });
+
+          $('#test tbody').html(str);
+      }
+    })
+});
 
 //view list of stocks
 $(document).on('click', '.generatereport', function(){

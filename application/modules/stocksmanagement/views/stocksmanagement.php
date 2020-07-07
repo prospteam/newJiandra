@@ -256,6 +256,53 @@
               <!-- /.card-body -->
             </div>
 
+            <div class="modal fade" id="viewStockManagement" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info1">
+                            <h5 class="modal-title" id="exampleModalLabel">View Stocks</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="table-responsive purch_prod po_tbl">
+                            <table class="table table-bordered table-striped purchase" role="grid"
+                                aria-describedby="example1_info" id="test">
+                                <thead>
+                                    <th class="header-title purch">SKU</th>
+                                    <th class="header-title purch">Product</th>
+                                    <th class="header-title purch">Quantity </th>
+                                    <th class="header-title purch">Unit Price</th>
+                                    <th class="header-title purch">Total </th>
+                                    <th class="header-title purch">Quantiy On Hand </th>
+                                    <th class="header-title purch">Variance</th>
+                                </thead>
+                                <tbody>
+                                        <!-- <td class="purch_td">
+                                <input type="text" class="form-control" name="prod_name[]" value="">
+                                <span class="err"></span>
+                              </td>
+                              <td class="purch_td">
+                                <input type="number" class="form-control purchase_quantity" name="quantity[]" value="">
+                                <span class="err"></span>
+                              </td>
+                              <td class="purch_td">
+                                <input type="number" class="form-control purchase_price" name="unit_price[]" value="">
+                                <span class="err"></span>
+                              </td>
+                              <td class="purch_td">
+                                <input type="number" class="form-control purchase_total" name="total[]" value="" readonly>
+                                <span class="err"></span>
+                              </td> -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
 
   </section>
   <!-- /.content -->

@@ -314,6 +314,21 @@ class Stocksmanagement extends MY_Controller {
 			}
 		}
 	}
+
+	public function view_stock_management(){
+		$purchase_code = $this->input->post('purchase_code');
+
+		$parameters['where'] = array('purchase_orders.purchase_code' => $purchase_code);
+		// $parameters['group'] = array('purchase_code');
+		$parameters['join'] = array('products' => 'products.code = purchase_orders.product');
+		$parameters['select'] = 'products.code, products.product_name, purchase_orders.quantity, purchase_orders.unit_price, purchase_orders.delivered';
+
+		$data = $this->MY_Model->getRows('purchase_orders',$parameters);
+
+		$data_array['view_stock'] = $data;
+
+		json($data_array);
+	}
 }
 
 ?>
