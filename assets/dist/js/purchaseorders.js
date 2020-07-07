@@ -373,6 +373,36 @@ $(document).ready(function(){
     })
   });
 
+
+  $(document).on('submit', 'form#po_arrived_up', function(e){
+      e.preventDefault();
+      // alert('yayay');
+
+      let formData = new FormData($(this)[0]);
+      var id = $('input[name="update_arrived_delivered"]').val();
+      formData.append("id", id);
+
+      $.ajax({
+          method: 'POST',
+          url: base_url+'purchaseorders/change_delivered_qty',
+          data: formData,
+          processData: false,
+          contentType: false,
+          cache: false,
+          dataType: 'json',
+          success: function(data){
+              console.log(id);
+              if (data.status == 'ok') {
+                  console.log(data.success);
+                  Swal.fire("Added Delivered items!", data.success, 'success');
+                   location.reload();
+              }else {
+                  Swal.fire("Error!", data.status, 'invalid');
+              }
+          }
+      })
+  });
+
   //view list of Orders
   $(document).on('click', '.viewPurchase', function(){
      var id = $(this).attr('data-id');
@@ -453,17 +483,17 @@ $(document).ready(function(){
                         // }
                         str += variance;
                    str += '</td>';
-                  if(element.delivery_status == 4){
-                    str += '<td class="purch_td submit_delivered">';
-                    // str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_delivered" data-id="'+element.id+'"><i class="fa fa-edit"></i></a>';
-                    str += '<a href="javascript:;" class="btn btn-xs btn-success submit_delivered_qty" data-id="'+element.id+'"hidden><i class="fa fa-check"></i></a>';
-                    str += '</td>';
-                  }else{
-                    str += '<td class="purch_td submit_delivered">';
-                    str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_delivered disabled" data-id="'+element.id+'"><i class="fa fa-edit"></i></a>';
-                    str += '<a href="javascript:;" class="btn btn-xs btn-success submit_delivered_qty" data-id="'+element.id+'" hidden><i class="fa fa-check"></i></a>';
-                    str += '</td>';
-                  }
+                  // if(element.delivery_status == 4){
+                  //   str += '<td class="purch_td submit_delivered">';
+                  //   str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_delivered" data-id="'+element.id+'"><i class="fa fa-edit"></i></a>';
+                  //   // str += '<a href="javascript:;" class="btn btn-xs btn-success submit_delivered_qty" data-id="'+element.id+'"hidden><i class="fa fa-check"></i></a>';
+                  //   str += '</td>';
+                  // }else{
+                  //   str += '<td class="purch_td submit_delivered">';
+                  //   str += '<a href="javascript:;" class="btn btn-xs btn-primary edit_delivered disabled" data-id="'+element.id+'"><i class="fa fa-edit"></i></a>';
+                  //   str += '<a href="javascript:;" class="btn btn-xs btn-success submit_delivered_qty" data-id="'+element.id+'" hidden><i class="fa fa-check"></i></a>';
+                  //   str += '</td>';
+                  // }
                str += '</tr>';
 
 
@@ -481,52 +511,53 @@ $(document).ready(function(){
 });
 
   //show edit delivered input on view purchase order
-  $(document).on('click','.edit_delivered', function(e){
-      e.preventDefault();
-      // alert('rerer');
-    var pTr = $(this).parents('tr');
-
-    // console.log('ptr');
-    // console.log(pTr.find('td:eq(6)').text());
-
-    pTr.find('.edit_deliv').show().prop('disabled', false).prop('hidden', false);
-    pTr.find('.deliv').hide();
-
-    pTr.find('.submit_delivered_qty').show().prop('hidden', false);
-    pTr.find('.edit_delivered').hide().prop('hidden', true);
-
-
-    $('.submit_delivered_qty').unbind('click').click(function(e) {
-      var str='';
-      var id = pTr.find('.edit_purchID').val();
-      var qty = pTr.find('.edit_deliv').val();
-      var edit_qty = pTr.find('.td_qty').text();
-      var code = pTr.find('.edit_prod_code').val();
-      var product = pTr.find('.edit_product').val();
-      var delivery_status = pTr.find('.edit_delivery_status').val();
-      // var variance= pTr.find('.edit_variance').val();
-      var delivered= pTr.find('.edit_deliv ').val();
-      // var get_variance =
-
-      $.ajax({
-        url: base_url+'purchaseorders/change_delivered_qty',
-        data: {id:id,delivered:qty,code:code,product:product,delivery_status:delivery_status},
-        type: 'post',
-        dataType: 'json',
-        success: function(data){
-            var variance = edit_qty - data.delivered;
-            pTr.find('.deliv').text(qty).show();
-            pTr.find('.edit_deliv').hide().prop('hidden', true);
-            pTr.find('.edit_delivered').show().prop('hidden', false);
-            pTr.find('.submit_delivered_qty').hide().prop('hidden', true);
-            // $(`.submit_delivered[data-id='${id}']`).trigger('click');
-             // $("#view_purchase_orders_details").DataTable().ajax.reload();
-             pTr.find('.edit_variance').text(variance);
-        }
-      });
-    });
-
-  });
+  // $(document).on('click','.edit_delivered', function(e){
+  //
+  //     e.preventDefault();
+  //     // alert('rerer');
+  //   var pTr = $(this).parents('tr');
+  //
+  //   // console.log('ptr');
+  //   // console.log(pTr.find('td:eq(6)').text());
+  //
+  //   pTr.find('.edit_deliv').show().prop('disabled', false).prop('hidden', false);
+  //   pTr.find('.deliv').hide();
+  //
+  //   pTr.find('.submit_delivered_qty').show().prop('hidden', false);
+  //   pTr.find('.edit_delivered').hide().prop('hidden', true);
+  //
+  //
+  //   $('.submit_delivered_qty').unbind('click').click(function(e) {
+  //     var str='';
+  //     var id = pTr.find('.edit_purchID').val();
+  //     var qty = pTr.find('.edit_deliv').val();
+  //     var edit_qty = pTr.find('.td_qty').text();
+  //     var code = pTr.find('.edit_prod_code').val();
+  //     var product = pTr.find('.edit_product').val();
+  //     var delivery_status = pTr.find('.edit_delivery_status').val();
+  //     // var variance= pTr.find('.edit_variance').val();
+  //     var delivered= pTr.find('.edit_deliv ').val();
+  //     // var get_variance =
+  //
+  //     $.ajax({
+  //       url: base_url+'purchaseorders/change_delivered_qty',
+  //       data: {id:id,delivered:qty,code:code,product:product,delivery_status:delivery_status},
+  //       type: 'post',
+  //       dataType: 'json',
+  //       success: function(data){
+  //           var variance = edit_qty - data.delivered;
+  //           pTr.find('.deliv').text(qty).show();
+  //           pTr.find('.edit_deliv').hide().prop('hidden', true);
+  //           pTr.find('.edit_delivered').show().prop('hidden', false);
+  //           pTr.find('.submit_delivered_qty').hide().prop('hidden', true);
+  //           // $(`.submit_delivered[data-id='${id}']`).trigger('click');
+  //            // $("#view_purchase_orders_details").DataTable().ajax.reload();
+  //            pTr.find('.edit_variance').text(variance);
+  //       }
+  //     });
+  //   });
+  //
+  // });
 
   //display suppliers according to company
   $(document).on('change','select[name="company"]',function(){
@@ -1175,9 +1206,9 @@ function get_edit_products(selected_product = ''){
 // P_O Arrived
 // P_O Arrive modal table
 $(document).on('click', '.po_arrived_btn', function(){
+
    var id = $(this).attr('data-id');
 
-   // alert('hi');
    $.ajax({
      method: 'POST',
      url: base_url + 'purchaseorders/view_purchase_orders',
@@ -1189,8 +1220,9 @@ $(document).on('click', '.po_arrived_btn', function(){
        $('#po_arived_edit').modal('show');
         var str = '';
 
-        $.each(data.purchase,function(index,element){
-          console.log(data.purchase);
+         $.each(data.purchase,function(index,element){
+        $('#po_arived_edit .update_arrived_delivered_id').val(element.purchase_id);
+          console.log(data.purchase_id);
 
           console.log('elemt');
           console.log(element);

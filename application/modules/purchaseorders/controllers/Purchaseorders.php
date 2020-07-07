@@ -344,20 +344,19 @@ class Purchaseorders extends MY_Controller {
 	public function change_delivered_qty(){
 		$post = $this->input->post();
 		$delivered_date = date("F d, Y");
-		// echo $this->db->last_query();
-		// echo "<pre>";
-		//  print_r($post);
-		//  exit;
-		// if($post['delivery_status'] == 4){
-		// 	$data = array('code' => $post['code'], 'product' => $post['product']);
-		// 	$data['addStocks'] = $this->MY_Model->insert('stocks',$data);
-		// }
-		$data = array('delivered' => $post['delivered'], 'date_delivered' => $delivered_date);
-		// $data['delivered_qty'] = $this->MY_Model->update('purchase_orders', $data, array('id' => $post['id']));
+
+		foreach ($post as $key => $value) {
+			$data = array(
+				'delivered' => $value,
+				'date_delivered' => $delivered_date
+			);
+
+		}
 		$data['delivered_qty'] = $this->MY_Model->update('purchase_orders', $data, array('id' => $post['id']));
 		json($data);
 
 	}
+
 
 	//view delivery Status
 	public function view_deliv_status(){

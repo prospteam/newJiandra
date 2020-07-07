@@ -338,7 +338,7 @@
                             <div class="modal-content">
                                 <div class="modal-header bg-info2">
                                     <h5 class="modal-title" id="exampleModalLabel">P.O Arrived</h5>
-                                    <input type="hidden" class="form-control product_id" name="product_id"  value="">
+                                    <input type="hidden" class="form-control update_arrived_delivered_id" name="update_arrived_delivered"  value="">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
