@@ -561,7 +561,7 @@ $(document).ready(function(){
 
   //display suppliers according to company
   $(document).on('change','select[name="company"]',function(){
-      alert('nevin gwapo');
+
     $.ajax({
         url: base_url+'purchaseorders/get_suppliers_by_companies',
         data: {company_id:$(this).val()},

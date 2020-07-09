@@ -1,42 +1,6 @@
 
 var base_url = $('input[name="base_url"]').val();
-
 $(document).ready(function(){
-
-    $(document).on('change','select[name="company_bo"]',function(){
-        alert('tttt3456');
-      $.ajax({
-          url: base_url+'stockmanagement/get_suppliers_by_companies_bo',
-          data: {company_id:$(this).val()},
-          type: 'post',
-          dataType: 'json',
-          success: function(data){
-            console.log(data);
-            var str = '';
-            str += '<label for="supplier">Supplier: <span class="required">*</span></label>';
-            str += '<select class="form-control" class="supplier" name="supplier" >';
-                str += '<option value="" selected hidden>Select Supplier</option>';
-                  $.each(data.suppliers,function(index,element){
-                        str += '<option value="'+element.supplier_name+'">'+element.supplier_name+'</option>';
-                  });
-            str += '</select>';
-            str += '<span class="err"></span>';
-            $('#show_supplier').html(str);
-              var str1 = '';
-              str1 += '<label for="warehouse">Warehouse: <span class="required">*</span></label>';
-              str1 += '<select class="form-control" class="warehouse" name="warehouse" >';
-                  str1 += '<option value="" selected hidden>Select Warehouse</option>';
-                    $.each(data.warehouse,function(index,element){
-                          str1 += '<option value="'+element.id+'|'+element.wh_name+'">'+element.wh_name+'</option>';
-                    });
-              str1 += '</select>';
-              str1 += '<span class="err"></span>';
-
-              $('#show_warehouse').html(str1);
-          }
-      });
-    });
-
 
      //end select SKU
    var stocksmov_tbl = $('.stocksmov_tbl').DataTable({
@@ -100,4 +64,38 @@ $(document).ready(function(){
      });
 
 
+});
+
+$(document).on('change','select[name="company_bo"]',function(){
+    alert('tttt3456');
+  // $.ajax({
+  //     url: base_url+'stocktransfer/get_suppliers_by_companies_bo',
+  //     data: {company_id:$(this).val()},
+  //     type: 'post',
+  //     dataType: 'json',
+  //     success: function(data){
+  //       console.log(data);
+  //       var str = '';
+  //       str += '<label for="supplier">Supplier: <span class="required">*</span></label>';
+  //       str += '<select class="form-control" class="supplier" name="supplier" >';
+  //           str += '<option value="" selected hidden>Select Supplier</option>';
+  //             $.each(data.suppliers,function(index,element){
+  //                   str += '<option value="'+element.supplier_name+'">'+element.supplier_name+'</option>';
+  //             });
+  //       str += '</select>';
+  //       str += '<span class="err"></span>';
+  //       $('#show_supplier').html(str);
+  //         var str1 = '';
+  //         str1 += '<label for="warehouse">Warehouse: <span class="required">*</span></label>';
+  //         str1 += '<select class="form-control" class="warehouse" name="warehouse" >';
+  //             str1 += '<option value="" selected hidden>Select Warehouse</option>';
+  //               $.each(data.warehouse,function(index,element){
+  //                     str1 += '<option value="'+element.id+'|'+element.wh_name+'">'+element.wh_name+'</option>';
+  //               });
+  //         str1 += '</select>';
+  //         str1 += '<span class="err"></span>';
+  //
+  //         $('#show_warehouse').html(str1);
+  //     }
+  // });
 });

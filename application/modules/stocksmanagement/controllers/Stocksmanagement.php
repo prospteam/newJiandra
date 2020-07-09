@@ -333,28 +333,7 @@ class Stocksmanagement extends MY_Controller {
 
 		json($data_array);
 	}
-	// FOR Bad Order
-	// FOR Bad Order
-	// FOR Bad Order
-	// FOR Bad Order
-	// FOR Bad Order
-	// FOR Bad Order
-	// FOR Bad Order
-	public function get_suppliers_by_companies_bo(){
-		$parameters['where'] = array(
-			'company' => $this->input->post('company_id'),
-			'status' => 1
-		);
-		$data['warehouse'] = $this->MY_Model->getRows('warehouse_management',$parameters);
 
-		$parameters['where'] = array(
-			'company' => $this->input->post('company_id'),
-			'status' => 1
-		);
-		$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
-
-		json($data);
-	}
 
 }
 

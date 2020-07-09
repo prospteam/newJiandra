@@ -14,8 +14,7 @@
 
                     <!--Add Products Modal -->
                     <!-- Modal -->
-                    <div class="modal fade" id="AddProducts" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">\
+                    <div class="modal fade" id="AddProducts" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
                         <form id="addproduct" method="post">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">

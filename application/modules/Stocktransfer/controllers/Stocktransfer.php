@@ -11,12 +11,31 @@ class  Stocktransfer extends MY_Controller {
 		$data['warehouse_management'] = $this->MY_Model->getrows('warehouse_management');
 		$data['stocks'] = $this->MY_Model->getrows('stocks');
 		$data['products'] = $this->MY_Model->getrows('products');
+		$data['company'] = $this->MY_Model->getrows('company');
+		$data['suppliers'] = $this->MY_Model->getrows('supplier');
 		$this->load_page('stocktransfer');
 	}
 	// echo "<pre>";
 	//  print_r(params);
 	//  exit;
-	function disp_stocktransfer(){
+
+	public function get_suppliers_by_companies_bo(){
+		$parameters['where'] = array(
+			'company' => $this->input->post('company_id'),
+			'status' => 1
+		);
+		$data['warehouse'] = $this->MY_Model->getRows('warehouse_management',$parameters);
+
+		$parameters['where'] = array(
+			'company' => $this->input->post('company_id'),
+			'status' => 1
+		);
+		$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
+
+		json($data);
+	}
+
+	public function disp_stocktransfer(){
 
 		$limit = $this->input->post('length');
 		$offset = $this->input->post('start');
@@ -51,6 +70,8 @@ class  Stocktransfer extends MY_Controller {
 		);
 		echo json_encode($output);
 	}
+
+
 	// edit purchase Orders
 	public function edit_stocktransfer(){
 

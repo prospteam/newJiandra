@@ -9,9 +9,11 @@
                     INVENTORY MANAGEMENT > <span class="active1"> B.O WAREHOUSE </p>
                 </div>
                 <div class="col-sm-6">
-                    <button class="users button1 float-sm-right" data-toggle="modal" data-target="#AddProducts"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add B.O </button>
-                    <div class="modal fade" id="AddProducts" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
-                        <form id="addproduct" method="post">
+                    <button class="users button1 float-sm-right" data-toggle="modal" data-target="#Addbo"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add B.O </button>
+
+
+                    <div class="modal fade" id="Addbo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
+                        <form id="addbo" method="post">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header bg-info1">
@@ -40,7 +42,7 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <label for="supplier">Company: <span class="required">*</span></label>
+                                                    <label for="company_bo">Company: <span class="required">*</span></label>
                                                     <!-- <input type="text" class="form-control" name="position" value=""> -->
                                                     <select class="form-control" class="company" name="company_bo">
                                                         <option value="" selected hidden>Select Company</option>
@@ -79,12 +81,12 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <!-- <div class="col-6">
                                                 <label for="note">Expiration Date/Damage: </label>
                                                 <input type="text" class="form-control datepicker" name="sodate" value="" placeholder="Select Date">
-                                                <!-- <span class="err"></span> -->
-                                            </div>
-                                            <div class="col-6">
+                                                <span class="err"></span>
+                                            </div> -->
+                                            <div class="col-12">
                                                 <label for="note">Reason: (Ex. Expired/Damage) </label>
                                                 <textarea rows="4" cols="50" class="form-control" name="stockmovement_note" value=""></textarea>
                                                 <span class="err"></span>
@@ -96,6 +98,8 @@
                             </div>
                         </form>
                     </div>
+
+
                 </div>
             </div>
         </div><!-- /.container-fluid -->
