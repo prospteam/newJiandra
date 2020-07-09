@@ -10,7 +10,7 @@
         </div>
         <div class="col-sm-6">
             <button class="users stockmovement button1 float-sm-right" data-toggle="modal"><i class="fas fa-truck-loading" aria-hidden="true"></i> Stock Movement </button>
-            <button class="users generatereport button1 float-sm-right" data-toggle="modal"><i class="fas fa-file" aria-hidden="true"></i> Generate Report </button>
+            <!-- <button class="users generatereport button1 float-sm-right" data-toggle="modal"><i class="fas fa-file" aria-hidden="true"></i> Generate Report </button> -->
 
             <!-- Modal for View Products-->
 
@@ -240,7 +240,7 @@
                     <th class="header-title">Date Date Delivered</th>
                     <th class="header-title">Purchase Code</th>
                     <th class="header-title">Company</th>
-                    <th class="header-title">Supplier</th>
+                    <th class="header-title">Principal Name</th>
                     <th class="header-title">Action</th>
                     <!-- <th class="header-title">Out/Transfer</th> -->
                   </thead>

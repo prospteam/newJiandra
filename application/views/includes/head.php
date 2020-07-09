@@ -245,18 +245,13 @@
                    <!-- <ul class="nav nav-treeview"> -->
                    <ul style="list-style-type:none;">
                        <li class="nav-item">
-                        <a href="<?php echo base_url('stockreceive'); ?>" class="nav-link">
-                           <p>Stock Receive</p>
-                        </a>
-                       </li>
-                       <li class="nav-item">
                         <a href="<?php echo base_url('stocktransfer'); ?>" class="nav-link">
-                           <p>Stock Transfer</p>
+                           <p>B.O Warehouse</p>
                         </a>
                        </li>
                        <li class="nav-item">
                        <a href="<?php echo base_url('stockout'); ?>" class="nav-link">
-                          <p>Stock Out</p>
+                          <p>Stock Autoloading</p>
                        </a>
                       </li>
                 </ul>

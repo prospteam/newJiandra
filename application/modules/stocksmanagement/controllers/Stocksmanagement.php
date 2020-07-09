@@ -321,14 +321,41 @@ class Stocksmanagement extends MY_Controller {
 		$parameters['where'] = array('purchase_orders.purchase_code' => $purchase_code);
 		// $parameters['group'] = array('purchase_code');
 		$parameters['join'] = array('products' => 'products.code = purchase_orders.product');
-		$parameters['select'] = 'products.code, products.product_name, purchase_orders.quantity, purchase_orders.unit_price, purchase_orders.delivered';
+		$parameters['select'] = 'products.code, , purchase_orders.quantity, purchase_orders.unit_price, products.volume,
+								products.unit,products.packing,products.brand, products.product_name, purchase_orders.delivered' ;
 
 		$data = $this->MY_Model->getRows('purchase_orders',$parameters);
+		// echo "<pre>";
+		// print_r($data);
+		// exit;
 
 		$data_array['view_stock'] = $data;
 
 		json($data_array);
 	}
+	// FOR Bad Order
+	// FOR Bad Order
+	// FOR Bad Order
+	// FOR Bad Order
+	// FOR Bad Order
+	// FOR Bad Order
+	// FOR Bad Order
+	public function get_suppliers_by_companies_bo(){
+		$parameters['where'] = array(
+			'company' => $this->input->post('company_id'),
+			'status' => 1
+		);
+		$data['warehouse'] = $this->MY_Model->getRows('warehouse_management',$parameters);
+
+		$parameters['where'] = array(
+			'company' => $this->input->post('company_id'),
+			'status' => 1
+		);
+		$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
+
+		json($data);
+	}
+
 }
 
 ?>

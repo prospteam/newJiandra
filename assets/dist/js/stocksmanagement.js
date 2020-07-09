@@ -150,6 +150,7 @@ $(document).on('click', '.viewStock', function(){
           console.log(data.view_stock);
           var str ='';
 
+
           $.each(data.view_stock,function(index,element){
               var total = parseFloat(element.quantity) * parseFloat(element.unit_price).toFixed(2);
               str += '<tr>';
@@ -157,7 +158,7 @@ $(document).on('click', '.viewStock', function(){
                     str += element.code
                   str += '</td>';
                   str += '<td class="purch_td">';
-                    str += element.product_name
+                    str += element.volume +''+ element.unit + '/'+ element.packing +'/'+ element.brand +'/'+element.product_name
                   str += '</td>';
                   str += '<td class="purch_td">';
                     str += element.quantity
