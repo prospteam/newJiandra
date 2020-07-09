@@ -5,11 +5,11 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1> PRODUCTS</h1>
-                    HOME > <span class="active1"> PRODUCTS </p>
+                    <h1> BAD ORDER WAREHOUSE</h1>
+                    INVENTORY MANAGEMENT > <span class="active1"> B.O WAREHOUSE </p>
                 </div>
                 <div class="col-sm-6">
-                    <button class="users button1 float-sm-right" data-toggle="modal" data-target="#AddProducts"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add Products </button>
+                    <button class="users button1 float-sm-right" data-toggle="modal" data-target="#AddProducts"><i class="fas fa-plus-circle" aria-hidden="true"></i> Add B.O </button>
                     <div class="modal fade" id="AddProducts" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
                         <form id="addproduct" method="post">
                             <div class="modal-dialog modal-lg" role="document">
@@ -38,7 +38,7 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="supplier">Company: <span class="required">*</span></label>
                                                     <!-- <input type="text" class="form-control" name="position" value=""> -->
@@ -64,8 +64,30 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
-                                                <label for="note">Reason: </label>
+                                                <div class="form-group">
+                                                    <label for="sodate"> Quantiy: <span class="text-red">*</span></label>
+                                                    <input type="text" class="form-control" name="quantity" value="" placeholder="Enter Quantity">
+                                                    <span class="err"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-group">
+                                                    <label for="code">Cost Price: <span class="required">*</span></label>
+                                                    <input type="text" class="form-control" name="sellprice" value="" placeholder="Enter Sell Price">
+                                                    <span class="err"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label for="note">Expiration Date/Damage: </label>
+                                                <input type="text" class="form-control datepicker" name="sodate" value="" placeholder="Select Date">
+                                                <!-- <span class="err"></span> -->
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="note">Reason: (Ex. Expired/Damage) </label>
                                                 <textarea rows="4" cols="50" class="form-control" name="stockmovement_note" value=""></textarea>
+                                                <span class="err"></span>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary float-right add">Submit</button>
@@ -90,8 +112,8 @@
                                 <table class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info">
                                     <!-- <table class="table table-bordered table-striped dataTable stocksmov_tbl" role="grid" aria-describedby="example1_info"> -->
                                     <thead>
+                                        <th class="header-title">Date Purchased</th>
                                         <th class="header-title">Date Returned</th>
-                                        <th class="header-title">Purchase Code</th>
                                         <th class="header-title">Product Name</th>
                                         <th class="header-title">Reason</th>
                                         <th class="header-title">Action</th>
