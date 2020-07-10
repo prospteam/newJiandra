@@ -50,6 +50,7 @@ class Warehouse_management extends MY_Controller {
 					'wh_assigned' => $this->input->post('wh_assigned'),
 					'status' => 1
 				);
+
 				$insert = $this->MY_Model->insert('warehouse_management',$data);
 				if ($insert) {
 					$response = array(
