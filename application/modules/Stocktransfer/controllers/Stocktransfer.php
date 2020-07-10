@@ -3,17 +3,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class  Stocktransfer extends MY_Controller {
 	public function index(){
-		// $parameters['select'] = 'fullname,username';
-		// $parameters['search_like'] = 'da';
-		// $parameters['column_order'] = array('fullname','username');
-		// $data = getrow('users',$parameters,'array',true);
-		// json($data,false);
-		$data['warehouse_management'] = $this->MY_Model->getrows('warehouse_management');
-		$data['stocks'] = $this->MY_Model->getrows('stocks');
-		$data['products'] = $this->MY_Model->getrows('products');
-		$data['company'] = $this->MY_Model->getrows('company');
-		$data['suppliers'] = $this->MY_Model->getrows('supplier');
-		$this->load_page('stocktransfer');
+		$parameters['select'] = '*';
+		$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
+
+		$parameters['where'] = array('company_id !=' => 0);
+		$parameters['select'] = '*';
+		$data['company'] = $this->MY_Model->getRows('company',$parameters);
+
+		$param['where'] = array('status' => 1);
+		$param['select'] = '*';
+		$data['products'] = $this->MY_Model->getRows('products', $param);
+
+		$data['users'] = $this->MY_Model->getrows('users');
+		$data['vehicles'] = $this->MY_Model->getrows('vehicles');
+
+		$parameters1['select'] = '*';
+		$parameters1['limit'] = array(1,0);;
+		$parameters1['order'] = 'purchase_code DESC';
+		$data['purchase'] = $this->MY_Model->getRows('purchase_orders',$parameters1);
+
+		$this->load_page('stocktransfer', @$data);
 	}
 	// echo "<pre>";
 	//  print_r(params);
@@ -35,42 +44,91 @@ class  Stocktransfer extends MY_Controller {
 		json($data);
 	}
 
-	public function disp_stocktransfer(){
+	public function getProductBySupplier(){
+		$supplier = $this->input->post('supplier');
 
-		$limit = $this->input->post('length');
-		$offset = $this->input->post('start');
-		$search = $this->input->post('search');
-		$order = $this->input->post('order');
-		$draw = $this->input->post('draw');
-
-		$column_order = array('stockmovement_date','transferred_warehouse','date_delivered','stockmovement_code','stockmovemenent_note','status');
-
-
-		$where = array(
-			'stock_movement.status !=' => 3,
-			'transfer_status' => 2,
-			// 'type' => 2
+		$param['where'] = array('products.status' => 1 , 'supplier' => $supplier);
+		$param['join'] = array(
+			'products' => 'products.id = products_cost_price.fk_product_id',
 		);
-		$group = array('stock_movement.stockmovement_code');
-		$join = array(
-			'warehouse_management' => 'warehouse_management.id = stock_movement.transferred_warehouse',
-			'products' => 'products.id = stock_movement.product'
-		);
-		$select = "stock_movement.stockmovement_id,stock_movement.stockmovement_date,stock_movement.transferred_warehouse,stock_movement.date_delivered,stock_movement.product,
-		stock_movement.stockmovement_note,stock_movement.status, warehouse_management.wh_name, products.product_name, stock_movement.stockmovement_code";
+		// $param['select'] = '*';
+		$param['select'] = 'products.product_name,products.code,products_cost_price.cost_price,products.volume,products.unit,products.brand,products.packing';
+		$data['products'] = $this->MY_Model->getRows('products', $param);
 
-		$list = $this->MY_Model->get_datatables('stock_movement',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
-
-
-		$output = array(
-				"draw" => $draw,
-				"recordsTotal" => $list['count_all'],
-				"recordsFiltered" => $list['count'],
-				"data" => $list['data']
-		);
-		echo json_encode($output);
+		echo json_encode($data);
 	}
 
+	 public function disp_stocktransfer($id){
+		 $limit = $this->input->post('length');
+		 $offset = $this->input->post('start');
+		 $search = $this->input->post('search');
+		 $order = $this->input->post('order');
+		 $draw = $this->input->post('draw');
+
+
+		 $column_order = array('date_purchased','date_returned','product_name','reason.status');
+		 if ($id == 0) {
+			 $where = array('warehouse_management.status !=' => 3);
+
+		 }else {
+			 $where = array('warehouse_management.status !=' => 3,
+			 'warehouse_management.company' => $id);
+		 }
+		 $join = array(
+			 // 'company' => 'company.company_id = users.company',
+			 'users' => 'users.id = badorder.supplier'
+		 );
+		 $select = "badorder.id,badorder.date_purchased,badorder.date_returned,badorder.product_name,badorder.reason,badorder.status";
+		 $list = $this->MY_Model->get_datatables('badorder',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
+
+
+		 $output = array(
+				 "draw" => $draw,
+				 "recordsTotal" => $list['count_all'],
+				 "recordsFiltered" => $list['count'],
+				 "data" => $list['data']
+		 );
+
+		 echo json_encode($output);
+	 }
+
+	public function addbadorder(){
+		// $company_name = $this->input->post('company');
+		$post = $this->input->post();
+		$this->load->library("form_validation");
+		$this->form_validation->set_rules('date_purchased','Date Purchased','required');
+		$this->form_validation->set_rules('date_returned','Date Returned', 'required');
+		$this->form_validation->set_rules('product_name','Product Name','required');
+		$this->form_validation->set_rules('reason','Reason','required');
+
+
+		$error = array();
+
+		if ($this->form_validation->run() !== FALSE) {
+				$data = array(
+					'date_purchased' 			=> $this->input->post('date_purchased'),
+					'date_returned' 			=> $this->input->post('date_returned'),
+					'quantity' 					=> $this->input->post('quantity'),
+					'sellprice' 				=> $this->input->post('sellprice'),
+					'company'					=> $this->input->post('company'),
+					'supplier' 					=> $this->input->post('supplier'),
+					'warehouse' 				=> $this->input->post('warehouse'),
+					'product_name' 				=> $this->input->post('product_name'),
+					'reason' 					=> $this->input->post('reason'),
+					'status' 					=> 1
+				);
+
+				$insert = $this->MY_Model->insert('badorder',$data);
+				if ($insert) {
+					$response = array(
+						'status'=>'ok'
+					);
+				}
+		}else {
+				$response = array('form_error'=> array_merge($this->form_validation->error_array(),$error) );
+			}
+				echo json_encode($response);
+		}
 
 	// edit purchase Orders
 	public function edit_stocktransfer(){
