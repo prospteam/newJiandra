@@ -380,6 +380,8 @@ $(document).ready(function(){
 
       let formData = new FormData($(this)[0]);
       var id = $('input[name="update_arrived_delivered"]').val();
+
+      console.log(formData);
       formData.append("id", id);
 
       $.ajax({
@@ -395,7 +397,8 @@ $(document).ready(function(){
               if (data.status == 'ok') {
                   console.log(data.success);
                   Swal.fire("Added Delivered items!", data.success, 'success');
-                   location.reload();
+                    // $('#po_arived_edit').modal('toggle');
+                     location.reload();
               }else {
                   Swal.fire("Error!", data.status, 'invalid');
               }
