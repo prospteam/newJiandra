@@ -203,6 +203,7 @@ class Purchaseorders extends MY_Controller {
 					'product' => $pVal,
 					'quantity' => $post['quantity'][$pkey],
 					'unit_price' => $post['unit_price'][$pkey],
+					'delivered' => '0',
 					'supplier' => $supplier_name,
 					'warehouse_id' => $warehouse_id,
 					'company' => $post['company'],
@@ -368,7 +369,7 @@ class Purchaseorders extends MY_Controller {
 					'status' => 'ok'
 				);
 			}
-			
+
 			json($response);
 	}
 

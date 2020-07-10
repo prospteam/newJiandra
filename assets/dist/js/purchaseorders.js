@@ -227,7 +227,6 @@ $(document).ready(function(){
     var id = $('input[name="product"]').val();
     var code = $('input[name="code"]').val();
     var warehouse_id = $('input[name="warehouse_id"]').val();
-    alert(id);
     formData.append("warehouse_id",warehouse_id);
     formData.append("id",id);
     formData.append("code",code);
@@ -417,7 +416,6 @@ $(document).ready(function(){
        data: {id:id},
        dataType: "json",
        success: function(data){
-         console.log(data);
          $('#ViewPurchaseOrders').modal('show');
          var str = '';
          var total_quantity = 0;
@@ -425,7 +423,15 @@ $(document).ready(function(){
          var grand_total = 0;
 
            $.each(data.purchase,function(index,element){
-             console.log(element);
+
+             var delevery_status = element.delivery_status;
+
+             if(delevery_status != 4){
+                 $('#PO_Arrived').css('display','none');
+             }else{
+                  $('#PO_Arrived').css('display','block');
+             }
+
              total_quantity = parseFloat(total_quantity) + parseFloat(element.quantity);
              total_cost = parseFloat(total_cost) + parseFloat(element.unit_price);
              var total = parseFloat(element.quantity) * parseFloat(element.unit_price);
@@ -437,8 +443,6 @@ $(document).ready(function(){
              }else{
                 var deliv = element.delivered;
              }
-             console.log('elemt');
-             console.log(element);
              $('.code').text(element.purchase_code);
              $('.date').text(element.date_ordered);
              $('.company').text(element.company_name);
@@ -1256,7 +1260,7 @@ $(document).on('click', '.po_arrived_btn', function(){
                str += '</td>';
               str +=  '<td class="purch_td delivered">';
                  str += '<span class="deliv"></span>';
-                 str +=   '<input type="text" class="edit_deliv number_only" name="delivered[]" value="">';
+                 str +=   '<input type="text" class="edit_deliv number_only" name="delivered[]" value="'+element.delivered+'">';
                str += '</td>';
             str += '</tr>';
       });
