@@ -238,7 +238,7 @@
                                 </div>
                             </div>
                             <!-- button for p.o Arrived -->
-                                <button type="button" class="cost cost_btn po_arrived_btn float-sm-right" data-toggle="modal" data-target="#po_arrived">
+                                <button id="PO_Arrived" type="button" class="cost cost_btn po_arrived_btn float-sm-right" data-toggle="modal" data-target="#po_arrived">
                                     <i class="fas fa-plus-circle" aria-hidden="true"></i> P.O Arrived
                                 </button>
                             <!-- button for p.o Arrived -->
