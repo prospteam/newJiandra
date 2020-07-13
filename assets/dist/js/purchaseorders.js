@@ -380,6 +380,9 @@ $(document).ready(function(){
       let formData = new FormData($(this)[0]);
       var id = $('input[name="update_arrived_delivered"]').val();
 
+      console.log('testtt');
+      console.log(id);
+
       console.log(formData);
       formData.append("id", id);
 
@@ -395,9 +398,13 @@ $(document).ready(function(){
               console.log(data);
               if (data.status == 'ok') {
                   console.log(data.success);
-                  Swal.fire("Added Delivered items!", data.success, 'success');
+                  Swal.fire("Added Delivered items!", data.success, 'success')
+                  .then((result) => {
+                  // Reload the Page
+                  location.reload();
+                });
                     // $('#po_arived_edit').modal('toggle');
-                     location.reload();
+
               }else {
                   Swal.fire("Error!", data.status, 'invalid');
               }
@@ -421,6 +428,8 @@ $(document).ready(function(){
          var total_quantity = 0;
          var total_cost = 0;
          var grand_total = 0;
+
+         console.log(data);
 
            $.each(data.purchase,function(index,element){
 
@@ -1223,17 +1232,16 @@ $(document).on('click', '.po_arrived_btn', function(){
      data: {id:id},
      dataType: "json",
      success: function(data){
-       console.log('asas');
-       console.log(data);
        $('#po_arived_edit').modal('show');
         var str = '';
 
          $.each(data.purchase,function(index,element){
-        $('#po_arived_edit .update_arrived_delivered_id').val(element.purchase_id);
-          console.log(data.purchase_id);
+        $('#po_arived_edit .update_arrived_delivered_id').val(element.purchase_code);
 
           console.log('elemt');
           console.log(element);
+
+          var date_delivered = element.date_delivered;
 
           str += '<tr>';
           str +=     '<td class="purch_td hide">';
@@ -1262,6 +1270,13 @@ $(document).on('click', '.po_arrived_btn', function(){
                  str += '<span class="deliv"></span>';
                  str +=   '<input type="text" class="edit_deliv number_only" name="delivered[]" value="'+element.delivered+'">';
                str += '</td>';
+               str +=  '<td class="purch_td delivered">';
+                  if(date_delivered == ''){
+                    str += 'No data found'
+                }else{
+                    str += element.date_delivered;
+                }
+                str += '</td>';
             str += '</tr>';
       });
 

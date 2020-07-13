@@ -347,24 +347,20 @@ class Purchaseorders extends MY_Controller {
 			// $post = $this->input->post();
 			$delivered_date = date("F d, Y");
 
+			$code = $this->input->post('update_arrived_delivered');
 			$purchase_id = $this->input->post('view_purchase_id');
 			$delivered = $this->input->post('delivered');
 
-
 			foreach ($purchase_id as $key => $value) {
-				foreach ($delivered as $key1 => $value1) {
-				}
-				$data = array(
-					'delivered' => $value1
-				);
-				$query = $this->MY_Model->update('purchase_orders',$data,array('id' => $value));
+			$data = array(
+				'delivered' => $delivered[$key],
+				'date_delivered' => $delivered_date
+			);
+
+			$query = $this->MY_Model->update('purchase_orders',$data,array( 'id' => $value));
 			}
 
 			if ($query) {
-				$response = array(
-					'status' => 'ok'
-				);
-			}	else if ($update1) {
 				$response = array(
 					'status' => 'ok'
 				);

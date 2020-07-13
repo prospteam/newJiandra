@@ -350,6 +350,7 @@
                                             <th class="header-title purch">Product</th>
                                             <th class="header-title purch">Quantity</th>
                                             <th class="header-title purch">Delivered </th>
+                                            <th class="header-title purch">Date Delivered </th>
                                         </thead>
                                         <tbody>
                                             <tr>
