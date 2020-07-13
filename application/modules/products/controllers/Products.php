@@ -105,7 +105,9 @@ class Products extends MY_Controller {
 				'supplier as s' => 's.supplier_name = p.supplier'
 				// 'position' => 'position.id = users.position'
 			);
+
 			$select = "p.id,p.code,p.packing,p.product_name,p.brand,p.category,p.volume,p.unit,p.status, s.supplier_name";
+
 			$list = $this->MY_Model->get_datatables('products as p',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 
 			$output = array(

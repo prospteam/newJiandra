@@ -100,6 +100,85 @@
                         </form>
                     </div>
 
+                    <!-- View Bad order -->
+                    <div class="modal fade" id="viewbo" tabindex="-1" role="dialog" aria-
+                        labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header bg-info1">
+                                    <h5 class="modal-title" id="exampleModalLabel"> View Bad Order Details</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="date_purchased">Date Purchased:</label>
+                                                <p class="date_purchased"> </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="date_returned">Date Returned:</label>
+                                                <p class="date_returned"> </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <label for="quantity">Quantity: </label>
+                                            <p class="quantity"> </p>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="sellprice">Sell Price: </label>
+                                                <p class="sellprice"> </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="company">Company:</label>
+                                                <p class="company"> </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="supplier">Supplier:</label>
+                                                <p class="supplier"> </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="warehouse">Warehouse:</label>
+                                                <p class="warehouse"> </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="product_name">Products:</label>
+                                                <p class="product_name"> </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label for="reason">Reason:</label>
+                                                <p class="reason"> </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- View Bad order -->
 
                 </div>
             </div>
@@ -121,6 +200,7 @@
                                         <th class="header-title">Date Returned</th>
                                         <th class="header-title">Product Name</th>
                                         <th class="header-title">Reason</th>
+                                        <th class="header-title">Supplier</th>
                                         <th class="header-title">Action</th>
                                         <th class="header-title">Status</th>
                                     </thead>

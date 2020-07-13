@@ -2,59 +2,6 @@
 var base_url = $('input[name="base_url"]').val();
 $(document).ready(function(){
 
-    //end select SKU
-    function disp_stocktransfer(){
-      $('.badorder_tbl').DataTable({
-          "responsive": true,
-            "destroy"   : true,
-            "processing": true, //Feature control the processing indicator.
-            "serverSide": true, //Feature control DataTables' server-side processing mode.
-            "order": [[0,'desc']], //Initial no order.
-            "columns":[
-                 {"data":"date_purchased"},
-                 {"data":"date_returned"},
-                 {"data":"product_name"},
-                 {"data":"reason"},
-                 {"data":"action","render": function(data, type, row,meta){
-                           var str = '';
-                           str += '<div class="actions">';
-                           if(row.status == 1){
-                             str += '<a href="javascript:;" class="viewWarehouse" data-id="''"><abbr title="View Warehouse"><i class="fas fa-eye text-info"></i></abbr></a>';
-                           }else if(row.status == 2){
-                               str += '<a href="javascript:;" class="viewWarehouse" data-id="''"><abbr title="View Warehouse"><i class="fas fa-eye text-info"></i></abbr></a>';
-                           }
-                           str += '</div>';
-                           return str;
-                      }
-                 },
-                 {"data":"status","render": function(data, type, row,meta){
-
-                     var str = '';
-                      if(row.status == 1){
-                        str += '<span class="active btn btn-block btn-sm btn-success">active</button>';
-                      }else if(row.status == 2){
-                        str += '<span class="active btn btn-block btn-sm btn-danger">inactive</button>';
-                      }
-                      return str;
-                 }
-               }
-            ],
-            // Load data for the table's content from an Ajax source
-            "ajax": {
-                 "url" : base_url+"stocktransfer/disp_stocktransfer/",
-                 "type": "POST"
-            },
-            //Set column definition initialisation properties.
-            "columnDefs": [
-                 {
-                      "targets": [4,5], //first column / numbering column
-                      "orderable": false, //set not orderable
-                  },
-             ],
-         });
-    }
-
-
 
 $(document).on('change','select[name="company"]',function(e){
     e.preventDefault();
@@ -81,7 +28,7 @@ $(document).on('change','select[name="company"]',function(e){
                         str1 += '<select class="form-control" class="warehouse" name="warehouse" >';
                             str1 += '<option value="" selected hidden>Select Warehouse</option>';
                               $.each(data.warehouse,function(index,element){
-                                        str1 += '<option value="'+element.id+'|'+element.wh_name+'">'+element.wh_name+'</option>';
+                                        str1 += '<option value="'+element.wh_name+'">'+element.wh_name+'</option>';
                                   });
                             str1 += '</select>';
                             str1 += '<span class="err"></span>';
@@ -117,20 +64,34 @@ $(document).on('change','select[name="company"]',function(e){
                             str += '<span class="err"></span>';
                             $('#show_products').html(str1);
                     }
-
-
-                    // opt += '<select class="form-control code select2" style="width: 100%;" name="prod_code[]">';
-                    //     opt += '<option value="">Select Product</option>';
-                    //     $.each(data.products,function(index,key){
-                    //         opt += '<option value='+key.id+'>'+key.product_name+'</option>';
-                    //     });
-                    // opt += '</select>';
-                    // $('#prodOption').html(opt);
                 }
             });
-
-
         });
+
+        $(document).on("click", ".viewbo", function () {
+           var id = $(this).attr('data-id');
+           $.ajax({
+              method: 'POST',
+              url: base_url + 'stocktransfer/view_all_bo',
+              data: { id: id },
+              dataType: "json",
+              success: function (data) {
+                 console.log(data);
+                 $('#viewbo').modal('show');
+                 $('.date_purchased').text(data.badorder.date_purchased);
+                 $('.date_returned').text(data.badorder.date_returned);
+                 $('.quantity').text(data.badorder.date_purchased);
+                 $('.sellprice').text(data.badorder.sellprice);
+                 $('.company').text(data.badorder.company);
+                 $('.supplier').text(data.badorder.supplier);
+                 $('.warehouse').text(data.badorder.warehouse);
+                 $('.product_name').text(data.badorder.product_name);
+                 $('.reason').text(data.badorder.reason);
+              }
+           })
+        });
+
+    
 
     $(document).on('submit','#addbo',function(e){
         alert('hiii');
@@ -165,4 +126,63 @@ $(document).on('change','select[name="company"]',function(e){
             }
         });
     });
+});
+
+
+var badorder_tbl = $('.badorder_tbl').DataTable({
+    "responsive": true,
+   "processing": true,
+   "serverside": true,
+   "order": [[0, 'desc']],
+   "columns": [
+      { "data": "date_purchased" },
+      { "data": "date_returned" },
+      { "data": "product_name" },
+      { "data": "reason" },
+      { "data": "supplier" },
+      {
+         "data": "action", "render": function (data, type, row, meta) {
+            var str = '';
+            str += '<div class="actions">';
+            if (row.status == 1) {
+               str += '<a href="javascript:;" class="viewbo" data-id="' + row.id + '"><abbr title="View Products"><i class="fas fa-eye text-info"></i></abbr></a>';
+               str += '<a href="javascript:;" class="editbo" data-id="' + row.id + '"><abbr title="Edit Products Supplier"><i class="fas fa-pen text-warning"></i></abbr></a>';
+               str += '<a href="javascript:;" class="disableproducts" data-id="' + row.id + '"><abbr title="Disable Products"><i class="fa fa-window-close"></i></abbr></a>';
+               str += '<a href="javascript:;" class="deleteproducts" data-id="' + row.id + '"><abbr title="Delete Products"><i class="fa fa-trash" aria-hidden="true"></abbr></a>';
+            } else if (row.status == 2) {
+               str += '<a href="javascript:;" class="viewbo" data-id="' + row.id + '"><abbr title="View Products"><i class="fas fa-eye text-info"></i></abbr></a>';
+               str += '<a href="javascript:;" class="enableproducts" data-id="' + row.id + '"><abbr title="Enable Products"><i class="fa fa-check-square"></i></abbr></a>';
+               str += '<a href="javascript:;" class="deleteproducts" data-id="' + row.id + '"><abbr title="Delete Products"><i class="fa fa-trash" aria-hidden="true"></abbr></a>';
+            }
+            str += '</div>';
+            return str;
+         }
+      },
+
+      {
+         "data": "status", "render": function (data, type, row, meta) {
+            var str = '';
+            if (row.status == 1) {
+               str += '<span class="active btn btn-block btn-sm btn-success">active</button>';
+            } else if (row.status == 2) {
+               str += '<span class="inactive btn btn-block btn-sm btn-danger">inactive</button>';
+            }
+            return str;
+         }
+      }
+
+   ],
+
+   "ajax": {
+      "url": base_url + "stocktransfer/display_badorder/",
+      "type": "POST"
+   },
+   //Set column definition initialisation properties.
+   "columnDefs": [
+      {
+         "targets": [5, 6], //first column / numbering column
+         "orderable": false, //set not orderable
+
+      },
+   ],
 });
