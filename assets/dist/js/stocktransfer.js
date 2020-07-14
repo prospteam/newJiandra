@@ -91,7 +91,173 @@ $(document).on('change','select[name="company"]',function(e){
            })
         });
 
-    
+        $(document).on('change','select[name="company_edit"]',function(){
+          $.ajax({
+              url: base_url+'stocktransfer/get_suppliers_by_companies_bo',
+              data: {company_id:$(this).val()},
+              type: 'post',
+              dataType: 'json',
+              success: function(data){
+
+                var str = '';
+                str += '<label for="supplier">Supplier: <span class="required">*</span></label>';
+                str += '<select class="form-control" class="supplier" name="supplier_edit" value="" >';
+                      $.each(data.suppliers,function(index,element){
+                            str += '<option value="'+element.id+'">'+element.supplier_name+'</option>';
+                      });
+                str += '</select>';
+                str += '<span class="err"></span>';
+
+                  $('#edit_show_supplier').html(str);
+
+                  var str1 = '';
+                  str1 += '<label for="warehouse">Warehouse: <span class="required">*</span></label>';
+                  str1 += '<select class="form-control" class="warehouse" name="warehouse_edit" value="" >';
+                        $.each(data.warehouse,function(index,element){
+                              str1 += '<option value="'+element.id+'">'+element.wh_name+'</option>';
+                        });
+                  str1 += '</select>';
+                  str1 += '<span class="err"></span>';
+
+                  $('#edit_show_warehouse').html(str1);
+
+              }
+          });
+        });
+
+
+        $(document).on("click",".editbo", function(){
+          var id = $(this).attr('data-id');
+
+
+
+          $.ajax({
+              method: 'POST',
+              url: base_url+'stocktransfer/view_all_bo',
+              data: {id:id},
+              dataType: "json",
+              success: function(data){
+                 console.log('rogen lang gwapa------------------');
+                 console.log(data.company);
+                $('#Editbo').modal('show');
+                    $('#Editbo input[name="edit_bo_id"]').val(data.badorder.id)
+                    $('#Editbo input[name="date_purchased"]').val(data.badorder.date_purchased)
+                    $('#Editbo input[name="date_returned"]').val(data.badorder.date_returned)
+                    $('#Editbo input[name="quantity"]').val(data.badorder.quantity)
+                    $('#Editbo input[name="sellprice"]').val(data.badorder.sellprice)
+
+                    $('#Editbo select[name=company_edit]').val(data.company);
+                    $('#Editbo select[name="company_edit"]').trigger('change');
+
+                    setTimeout(function(){
+                      $('#Editbo select[name="supplier_edit"]').val(data.supplier);
+                      $('#Editbo select[name="warehouse_edit"]').val(data.warehouse);
+                      $('#Editbo select[name="warehouse_edit"]').val(data.warehouse);
+                    }, 0100);
+                    //
+                    // $('#Editbo select[name="product_name"]').val(data.badorder.product_name)
+                    // $('#Editbo textarea[name="reason"]').val(data.badorder.reason)
+                }
+          });
+
+        });
+        $(document).on("click", ".enablebo", function (e) {
+           e.preventDefault();
+           var id = $(this).attr('data-id');
+           console.log(id);
+
+           Swal.fire({
+              title: 'Are you sure?',
+              text: "You want to enable this BO!",
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#d33',
+              cancelButtonColor: '#068101',
+              confirmButtonText: 'Yes, Enable BO!'
+           }).then((result) => {
+              if (result.value) {
+                 Swal.fire(
+                    'Disabled!',
+                    'Successfully Enable BO!',
+                    'success'
+                 )
+                 $.ajax({
+                    type: 'POST',
+                    url: base_url + 'stocktransfer/enable_bo',
+                    data: { id: id },
+                    success: function (data) {
+                       $(".badorder_tbl").DataTable().ajax.reload();
+                    }
+                 })
+              }
+           });
+        });
+
+        $(document).on("click", ".disablebo", function (e) {
+           e.preventDefault();
+           var id = $(this).attr('data-id');
+           console.log(id);
+
+           Swal.fire({
+              title: 'Are you sure?',
+              text: "You want to disable this BO!",
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#d33',
+              cancelButtonColor: '#068101',
+              confirmButtonText: 'Yes, Disable BO!'
+           }).then((result) => {
+              if (result.value) {
+                 Swal.fire(
+                    'Disabled!',
+                    'Successfully Disabled BO!',
+                    'success'
+                 )
+                 $.ajax({
+                    type: 'POST',
+                    url: base_url + 'stocktransfer/disable_bo',
+                    data: { id: id },
+                    success: function (data) {
+                       $(".badorder_tbl").DataTable().ajax.reload();
+                    }
+                 })
+              }
+           });
+        });
+
+        $(document).on("click", '.deletebo', function (e) {
+           e.preventDefault();
+           var id = $(this).attr('data-id');
+           console.log(id);
+
+           Swal.fire({
+              title: 'Are you sure?',
+              text: "You want to permanently delete this BO!",
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#d33',
+              cancelButtonColor: '#068101',
+              confirmButtonText: 'Yes, Permanently Delete BO!',
+           }).then((result) => {
+              if (result.value) {
+                 Swal.fire(
+                    'Deleted!',
+                    'Successfully Deleted BO!',
+                    'success'
+                 )
+                 $.ajax({
+                    type: 'POST',
+                    url: base_url + 'stocktransfer/delete_bo',
+                    data: { id: id },
+                    success: function (data) {
+                       $(".badorder_tbl").DataTable().ajax.reload();
+                    }
+                 })
+              }
+           });
+
+        });
+
 
     $(document).on('submit','#addbo',function(e){
         alert('hiii');
@@ -145,14 +311,14 @@ var badorder_tbl = $('.badorder_tbl').DataTable({
             var str = '';
             str += '<div class="actions">';
             if (row.status == 1) {
-               str += '<a href="javascript:;" class="viewbo" data-id="' + row.id + '"><abbr title="View Products"><i class="fas fa-eye text-info"></i></abbr></a>';
-               str += '<a href="javascript:;" class="editbo" data-id="' + row.id + '"><abbr title="Edit Products Supplier"><i class="fas fa-pen text-warning"></i></abbr></a>';
-               str += '<a href="javascript:;" class="disableproducts" data-id="' + row.id + '"><abbr title="Disable Products"><i class="fa fa-window-close"></i></abbr></a>';
-               str += '<a href="javascript:;" class="deleteproducts" data-id="' + row.id + '"><abbr title="Delete Products"><i class="fa fa-trash" aria-hidden="true"></abbr></a>';
+               str += '<a href="javascript:;" class="viewbo" data-id="' + row.id + '"><abbr title="View Bad Order"><i class="fas fa-eye text-info"></i></abbr></a>';
+               str += '<a href="javascript:;" class="editbo" data-id="' + row.id + '"><abbr title="Edit Bad Order"><i class="fas fa-pen text-warning"></i></abbr></a>';
+               str += '<a href="javascript:;" class="disablebo" data-id="' + row.id + '"><abbr title="Disable Bad Order"><i class="fa fa-window-close"></i></abbr></a>';
+               str += '<a href="javascript:;" class="deletebo" data-id="' + row.id + '"><abbr title="Delete Bad Order"><i class="fa fa-trash" aria-hidden="true"></abbr></a>';
             } else if (row.status == 2) {
-               str += '<a href="javascript:;" class="viewbo" data-id="' + row.id + '"><abbr title="View Products"><i class="fas fa-eye text-info"></i></abbr></a>';
-               str += '<a href="javascript:;" class="enableproducts" data-id="' + row.id + '"><abbr title="Enable Products"><i class="fa fa-check-square"></i></abbr></a>';
-               str += '<a href="javascript:;" class="deleteproducts" data-id="' + row.id + '"><abbr title="Delete Products"><i class="fa fa-trash" aria-hidden="true"></abbr></a>';
+               str += '<a href="javascript:;" class="viewbo" data-id="' + row.id + '"><abbr title="View Bad Order"><i class="fas fa-eye text-info"></i></abbr></a>';
+               str += '<a href="javascript:;" class="enablebo" data-id="' + row.id + '"><abbr title="Enable Bad Order"><i class="fa fa-check-square"></i></abbr></a>';
+               str += '<a href="javascript:;" class="deletebo" data-id="' + row.id + '"><abbr title="Delete Bad Order"><i class="fa fa-trash" aria-hidden="true"></abbr></a>';
             }
             str += '</div>';
             return str;

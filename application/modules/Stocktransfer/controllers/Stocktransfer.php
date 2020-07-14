@@ -118,7 +118,37 @@ class  Stocktransfer extends MY_Controller {
 				$data = $this->MY_Model->getrows('badorder',$parameters,'row');
 				$data_array['badorder'] = $data;
 				json($data_array);
+		}
 
+		public function enable_bo(){
+
+				$bo_id = $this->input->post('id');
+				$bo_status = 1;
+				$data = array(
+					'status' => $bo_status
+				);
+				$datas['delete'] = $this->MY_Model->update('badorder',$data,array('id' => $bo_id));
+				echo json_encode($datas);
+		}
+		public function disable_bo(){
+
+				$bo_id = $this->input->post('id');
+				$bo_status = 2;
+				$data = array(
+					'status' => $bo_status
+				);
+				$datas['delete'] = $this->MY_Model->update('badorder',$data,array('id' => $bo_id));
+				echo json_encode($datas);
+		}
+		public function delete_bo(){
+
+				$bo_id = $this->input->post('id');
+				$bo_status = 3;
+				$data = array(
+					'status' => $bo_status
+				);
+				$datas['delete'] = $this->MY_Model->update('badorder',$data,array('id' => $bo_id));
+				echo json_encode($datas);
 		}
 
 }
