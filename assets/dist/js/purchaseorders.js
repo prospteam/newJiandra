@@ -628,7 +628,7 @@ $(document).ready(function(){
                 console.log(data.products);
                 var str = "";
                 if (data.products.length === 0) {
-                    str += "No product available"
+                    str += "<p class='noprod_avail'>No product available</p>"
                 }else{
                     $.each(data.products,function(index,key){
                         str += '<tr>';
@@ -733,6 +733,7 @@ $(document).ready(function(){
 
   //view edit Orders
   $(document).on('click', '.editPurchase', function(){
+      alert('Rogen gwapa');
     var id = $(this).attr('data-id');
     var datasup = $(this).attr('data-sup');
 
