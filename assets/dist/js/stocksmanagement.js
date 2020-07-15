@@ -13,7 +13,46 @@ $(document).ready(function(){
     $("#wh_stock_code").prop("disabled", true);
       $('.from_warehouse').css('display', 'block');
       $('.to_warehouse').css('display', 'none');
+      $('.puchase_code').css('display', 'block');
     }
+  });
+
+  $('#purchase_code').on('change', function(){
+     var code = $(this).val();
+
+     $.ajax({
+       method: 'POST',
+       url: base_url + 'stocksmanagement/stock_movement_code',
+       data : {code: code},
+       dataType: "json",
+       success: function(data){
+           var str ='';
+
+           if(data.stock_by_code.length > 0){
+               $.each(data.stock_by_code,function(index,element){
+                   var total = parseFloat(element.quantity) * parseFloat(element.unit_price).toFixed(2);
+                       str += '<tr>';
+                            str += '<td class="purch_td">';
+                                str += element.code
+                            str += '</td>';
+                            str += '<td class="purch_td">';
+                                str += element.product_name
+                            str += '</td>';
+                            str += '<td class="purch_td">';
+                                str += element.quantity
+                            str += '</td>';
+                            str += '<td class="purch_td">';
+                                str += '<input type="text" class="prod_code" name="transfer_quant[]" id="transfer_quant">';
+                            str += '</td>';
+                       str += '</tr>'
+             });
+         }else{
+                str += '<span style="text-align:center">No Data Found</span>';
+         }
+
+           $('#add_new_product tbody').html(str);
+       }
+    });
   });
 
   //display purchase_tbl
