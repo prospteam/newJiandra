@@ -35,7 +35,25 @@ class Stocksmanagement extends MY_Controller {
 		$parameters1['order'] 	= 'stockmovement_code DESC';
 		$data['stockmovement'] 	= $this->MY_Model->getRows('stock_movement',$parameters1);
 
+		//Select Purchase Code
+		$parameters2['select'] 	= 'purchase_code';
+		$parameters2['group'] 	= 'purchase_code';
+		$data['purchase_orders'] 	= $this->MY_Model->getRows('purchase_orders',$parameters2);
+
     	$this->load_page('stocksmanagement', $data);
+	}
+
+	public function stock_movement_code(){
+		$code = $this->input->post('code');
+
+		$parameters2['select'] 	= 'code, product_name, quantity';
+		$parameters2['join']			= array('products ' => 'products.code = purchase_orders.product');
+		$parameters2['where'] 	= array('purchase_code' => $code,
+										'purchase_orders.delivery_status' => 4,
+										'purchase_orders.status' => 2);
+		$data['stock_by_code'] 	= $this->MY_Model->getRows('purchase_orders',$parameters2);
+
+		echo json_encode($data);
 	}
 
   	//display delivered products

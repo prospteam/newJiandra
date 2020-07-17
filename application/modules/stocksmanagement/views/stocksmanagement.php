@@ -80,6 +80,7 @@
                               </div>
                             </div>
                           </div>
+
                           <div class="form-horizontal">
                             <div class="form-group row m-b-10">
                               <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Type: <span class="text-red">*</span></label>
@@ -128,6 +129,22 @@
                               </div>
                             </div>
                           </div>
+                          <div class="form-horizontal puchase_code" style="display:none">
+                              <div class="form-group row m-b-10">
+                              <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Purchase Code: <span class="text-red">*</span></label>
+                              <div class="col-lg-8 col-md-12">
+                                  <div class="input-group m-b-0">
+                                      <select class="form-control" class="warehouse" name="purchase_code" id="purchase_code">
+                                        <option value="" selected hidden>Select To Purchase Code</option>
+                                      <?php foreach($purchase_orders as $k => $value) : ?>
+                                          <option value="<?php echo $value['purchase_code'] ?>"><?php echo $value['purchase_code'] ?></option>
+                                    <?php  endforeach; ?>
+                                  </select>
+                                      <span class="err"></span>
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
                           <div class="form-horizontal">
                               <div class="form-group row m-b-10">
                               <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Date Delivered: <span class="text-red">*</span></label>
@@ -153,7 +170,7 @@
                                   </thead>
                                   <tbody>
                                       <tr>
-                                        <td class="purch_td" >
+                                        <!-- <td class="purch_td" >
                                           <select class="form-control stock_prod_code select2" id="wh_stock_code" style="width: 100%;" name="wh_prod_code[]" disabled>
                                               <option value="" disabled selected hidden>Select SKU</option>
                                             <?php
@@ -163,8 +180,8 @@
 
                                             ?>
                                           </select>
-                                          <span class="err"></span>
-                                        </td>
+                                          <span class="err"></span> -->
+                                        <!-- </td>
                                         <td class="purch_td" style="display:none">
                                             <input type="text" class="form-control stock_id" name="stock_id[]" value="" readonly>
                                           <span class="err"></span>
@@ -180,7 +197,7 @@
                                         <td class="purch_td">
                                           <input type="text" class="form-control purchase_quantity sm_quantity number_only" name="quantity[]" value="">
                                           <span class="err"></span>
-                                        </td>
+                                        </td>-->
                                       </tr>
                                   </tbody>
                                 </table>
