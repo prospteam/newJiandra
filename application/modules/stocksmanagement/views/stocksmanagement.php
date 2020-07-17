@@ -87,8 +87,8 @@
                                       <div class="input-group m-b-0">
                                             <select class="form-control" id="so_type" class="so_type" name="so_type" >
                                                 <option value="" selected hidden>Select Type</option>
-                                                <option value="1">Transfer to Stock Autoloading (Ex-Truck)</option>
-                                                <!-- <option value="2">Stock Transfer</option> -->
+                                                <option value="1"> Stock Autoloading</option>
+                                                <option value="2"> Delivery Trucks</option>
                                             </select>
                                       <span class="err"></span>
                                       </div>
