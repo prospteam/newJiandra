@@ -417,7 +417,8 @@
                                                     <!-- <option value="" selected hidden>Select Company</option> -->
                                                     <?php foreach($company as $k => $value) : ?>
                                                     <option value="<?php echo $value['company_id'] ?>">
-                                                        <?php echo $value['company_name'] ?></option>
+                                                        <?php echo $value['company_name'] ?>
+                                                    </option>
                                                     <?php  endforeach; ?>
                                                 </select>
                                                 <span class="err"></span>

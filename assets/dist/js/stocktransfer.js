@@ -39,10 +39,11 @@ $(document).on('change','select[name="company"]',function(e){
                 });
 
         $(document).on('change','select[name="supplier"]',function(){
+            alert('ggg');
             var sup = $('select[name="supplier"]').val();
             var opt = '';
             $.ajax({
-                url: base_url+'purchaseorders/getProductBySupplier',
+                url: base_url+'Stocktransfer/getProductBySupplier',
                 data: {supplier:sup},
                 type: 'post',
                 dataType: 'json',
@@ -61,7 +62,7 @@ $(document).on('change','select[name="company"]',function(e){
 
                                         });
                                 str1 += '</select>';
-                            str += '<span class="err"></span>';
+                            str1 += '<span class="err"></span>';
                             $('#show_products').html(str1);
                     }
                 }
@@ -125,26 +126,55 @@ $(document).on('change','select[name="company"]',function(e){
           });
         });
 
+        // $(document).on('change','select[name="supplier_edit"]',function(){
+        //     var sup = $('select[name="supplier_edit"]').val();
+        //     var opt = '';
+        //     $.ajax({
+        //         url: base_url+'stocktransfer/getProductBySupplier',
+        //         data: {supplier:sup},
+        //         type: 'post',
+        //         dataType: 'json',
+        //         success: function(data){
+        //             console.log(data.products);
+        //             var str = "";
+        //             var str1 = "";
+        //             if (data.products.length === 0) {
+        //                 str += "No product available"
+        //             }else{
+        //                     str1 += '<label for="product_name">Products: <span class="required">*</span></label>';
+        //                         str1 += '<select class="form-control" class="product_name" name="product_name" >';
+        //                             str1 += '<option value="" selected hidden>Select Warehouse</option>';
+        //                                 $.each(data.products,function(index,element){
+        //                                     str1 += '<option value="'+element.product_name+'">'+element.product_name +'</option>';
+        //
+        //                                 });
+        //                         str1 += '</select>';
+        //                     str += '<span class="err"></span>';
+        //                     $('#edit_show_products').html(str1);
+        //             }
+        //         }
+        //     });
+        // });
+
+
 
         $(document).on("click",".editbo", function(){
           var id = $(this).attr('data-id');
-
-
-
           $.ajax({
               method: 'POST',
-              url: base_url+'stocktransfer/view_all_bo',
+              url: base_url+'stocktransfer/editview_all_bo',
               data: {id:id},
               dataType: "json",
               success: function(data){
                  console.log('rogen lang gwapa------------------');
-                 console.log(data.company);
+                 console.log(data);
                 $('#Editbo').modal('show');
                     $('#Editbo input[name="edit_bo_id"]').val(data.badorder.id)
                     $('#Editbo input[name="date_purchased"]').val(data.badorder.date_purchased)
                     $('#Editbo input[name="date_returned"]').val(data.badorder.date_returned)
                     $('#Editbo input[name="quantity"]').val(data.badorder.quantity)
                     $('#Editbo input[name="sellprice"]').val(data.badorder.sellprice)
+                    $('#Editbo textarea[name="reason"]').val(data.badorder.reason)
 
                     $('#Editbo select[name=company_edit]').val(data.company);
                     $('#Editbo select[name="company_edit"]').trigger('change');
