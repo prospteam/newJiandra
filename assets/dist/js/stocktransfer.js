@@ -191,6 +191,10 @@ $(document).on('change','select[name="company"]',function(e){
           });
 
         });
+        $(document).on("submit","#editbo", function(e){
+            e.preventDefault();
+            alert('test');
+        });
         $(document).on("click", ".enablebo", function (e) {
            e.preventDefault();
            var id = $(this).attr('data-id');

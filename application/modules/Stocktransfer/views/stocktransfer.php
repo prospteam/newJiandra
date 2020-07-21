@@ -182,7 +182,6 @@
 
                     <!-- edit bad order -->
                     <div class="modal fade" id="Editbo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
-                        <form id="editbo" method="post">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header bg-info1">
@@ -193,6 +192,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
+                                    <form id="editbo" method="post">
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group">
@@ -265,10 +265,10 @@
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary float-right add">Submit</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                        </form>
                     </div>
                     <!-- edit bad order -->
 
