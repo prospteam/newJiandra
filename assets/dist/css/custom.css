@@ -45,6 +45,10 @@ img.logo {
     max-width: 100%;
 }
 
+.non_border{
+    border:0 !important;
+}
+
 .bg-info1 {
     background: #6b6ca5;
     color: white;

@@ -288,6 +288,36 @@ class Stocksmanagement extends MY_Controller {
 		echo json_encode($response);
 	}
 
+	public function to_extrack(){
+		$purchase_code = $this->input->post('purchase_code');
+		$so_type = $this->input->post('so_type');
+		$sodate = $this->input->post('sodate');
+		$so_datedelivered = $this->input->post('so_datedelivered');
+		$from_warehouse = $this->input->post('from_warehouse');
+		$transfer_code = $this->input->post('transfer_code');
+		$transfer_quant = $this->input->post('transfer_quant');
+		$stockmovement_note = $this->input->post('stockmovement_note');
+
+		foreach ($transfer_code as $key => $value) {
+			$datas = array(
+				'stockmovement_code' => $purchase_code,
+				'stockmovement_date' => $sodate,
+				'type' => $so_type,
+				'from_warehouse' => $from_warehouse,
+				'date_delivered' => $so_datedelivered,
+				'product' => $transfer_code[$key],
+				'quantity' => $transfer_quant[$key],
+				'stockmovement_note' => $stockmovement_note,
+			);
+			$insert = $this->MY_Model->insert('stock_movement',$datas);
+		}
+		if ($insert) {
+			$response = 'ok';
+		}
+
+		echo json_encode($response);
+
+	}
 	//deduct system count and physical after submitting stock out and stock transfer
 	public function update_qty(){
 		$post = $this->input->post();
