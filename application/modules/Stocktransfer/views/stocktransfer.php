@@ -60,7 +60,7 @@
                                                 <div class="form-group">
                                                     <label for="supplier">Company: <span class="required">*</span></label>
                                                     <!-- <input type="text" class="form-control" name="position" value=""> -->
-                                                    <select class="form-control" class="company" name="company" id="company" >
+                                                    <select class="form-control bo_company" name="company" id="company" >
                                                         <option value="" selected hidden>Select Company</option>
                                                         <?php foreach ($company as $k => $value) : ?>
                                                             <option value="<?php echo $value['company_id'] ?>"><?php echo $value['company_name'] ?></option>
@@ -243,12 +243,12 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
-                                                <div class="form-group" id="edit_show_supplier">
-                                                </div>
+                                                <!-- <div class="form-group" id="edit_show_supplier">
+                                                </div> -->
                                             </div>
                                             <div class="col-6">
-                                                <div class="form-group" id="edit_show_warehouse" >
-                                                </div>
+                                                <!-- <div class="form-group" id="edit_show_warehouse" >
+                                                </div> -->
                                             </div>
                                         </div>
                                         <div class="row">

@@ -61,14 +61,15 @@ class  Stocktransfer extends MY_Controller {
 		json($data);
 	}
 
-	public function getProductBySupplier(){
+	public function getBOProducts(){
 		$supplier = $this->input->post('supplier');
 
-		$param['where'] = array('products.status' => 1 , 'supplier' => $supplier);
+		$param['where'] = array('products.status' => 1 , 'products.supplier' => $supplier);
 		$param['join'] = array(
-			'products' => 'products.product_name = badorder.product',
+			'badorder' => 'products.product_name = badorder.product_name',
 		);
-		$param['select'] = 'products.product_name,products.code,products_cost_price.cost_price,products.volume,products.unit,products.brand,products.packing';
+		$param['select'] = 'products.product_name,products.code,products.volume,products.unit,products.brand,products.packing';
+		//$param['select'] = '*';
 		$data['products'] = $this->MY_Model->getRows('products', $param);
 		
 		echo json_encode($data);
@@ -92,11 +93,11 @@ class  Stocktransfer extends MY_Controller {
 					'quantity' 					=> $this->input->post('quantity'),
 					'sellprice' 				=> $this->input->post('sellprice'),
 					'company'					=> $this->input->post('company'),
-					'supplier' 					=> $this->input->post('supplier'),
+					'supplier' 					=> $this->input->post('bo_supplier'),
 					'warehouse' 				=> $this->input->post('warehouse'),
 					'product_name' 				=> $this->input->post('product_name'),
 					'reason' 					=> $this->input->post('reason'),
-					'status' 					=> 1
+					'status' 					=> '1'
 				);
 
 				$insert = $this->MY_Model->insert('badorder',$data);
@@ -144,12 +145,29 @@ class  Stocktransfer extends MY_Controller {
 				json($data_array);
 		}
 		public function editview_all_bo(){
+				$bo_id = $this->input->post('id');
+				$parameters['where'] = array('id' => $bo_id);
 				$parameters['select'] = '*';
 
-				$data = $this->MY_Model->getrows('badorder',$parameters,'row');
+				$data = $this->MY_Model->getrows('badorder',$parameters);
 				$data_array['badorder'] = $data;
 
 				json($data_array);
+		}
+
+		public function update_bo(){
+				$bo_id = $this->input->post('id');
+				
+				echo "<pre>";
+				print_r($_POST);
+				exit();
+
+				$bo_status = 1;
+				$data = array(
+					'status' => $bo_status
+				);
+				$datas[] = $this->MY_Model->update('badorder',$data,array('id' => $bo_id));
+				echo json_encode($datas);
 		}
 
 		public function purchase_details(){
