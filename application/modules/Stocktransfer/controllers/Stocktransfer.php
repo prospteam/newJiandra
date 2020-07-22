@@ -14,6 +14,14 @@ class  Stocktransfer extends MY_Controller {
 		$param['where'] = array('status' => 1);
 		$param['select'] = '*';
 		$data['products'] = $this->MY_Model->getRows('products', $param);
+		
+		$param_sup['where'] = array('status' => 1);
+		$param_sup['select'] = 'supplier_name';
+		$data['supplier'] = $this->MY_Model->getRows('supplier', $param);
+
+		$param_warehouse['where'] = array('status' => 1);
+		$param_warehouse['select'] = 'wh_name';
+		$data['warehouse'] = $this->MY_Model->getRows('warehouse_management', $param);
 
 		$this->load_page('stocktransfer', @$data);
 	}
@@ -156,17 +164,19 @@ class  Stocktransfer extends MY_Controller {
 		}
 
 		public function update_bo(){
-				$bo_id = $this->input->post('id');
-				
-				echo "<pre>";
-				print_r($_POST);
-				exit();
+				$bo_id = $this->input->post('edit_bo_id');
 
-				$bo_status = 1;
 				$data = array(
-					'status' => $bo_status
+					'date_purchased' => $this->input->post('date_purchased'),
+					'date_returned' => $this->input->post('date_returned'),
+					'quantity' => $this->input->post('quantity'),
+					'sellprice' => $this->input->post('sellprice'),
+					'company' => $this->input->post('company_edit'),
+					'supplier' => $this->input->post('edit_supplier'),
+					'warehouse' => $this->input->post('edit_warehouse'),
+					'reason' => $this->input->post('reason'),
 				);
-				$datas[] = $this->MY_Model->update('badorder',$data,array('id' => $bo_id));
+				$datas['update_bo'] = $this->MY_Model->update('badorder',$data,array('id' => $bo_id));
 				echo json_encode($datas);
 		}
 

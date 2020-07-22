@@ -214,6 +214,7 @@ $(document).ready(function(){
                     $('#Editbo input[name="date_returned"]').val(data.badorder[0].date_returned)
                     $('#Editbo input[name="quantity"]').val(data.badorder[0].quantity)
                     $('#Editbo input[name="sellprice"]').val(data.badorder[0].sellprice)
+                    $('#Editbo input[name="edit_supplier"]').val(data.badorder[0].supplier)
                     $('#Editbo textarea[name="reason"]').val(data.badorder[0].reason)
 
                     $('#Editbo select[name=company_edit]').val(data.company);
@@ -243,6 +244,11 @@ $(document).ready(function(){
                 data: formData,
                 dataType: "json",
                 success: function(data){
+                    if(data){
+                        Swal.fire("Successfully BO Update!", data.success, "success");
+                        $(".badorder_tbl").DataTable().ajax.reload();
+                        $('#Editbo').modal('hide');
+                    }
                 }
             })
         });
