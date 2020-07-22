@@ -96,7 +96,7 @@
                                   </div>
                             </div>
                           </div>
-
+<!--   FROM WAREHOUSE
                           <div class="form-horizontal from_warehouse" style="display:none">
                               <div class="form-group row m-b-10">
                               <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">From Warehouse: <span class="text-red">*</span></label>
@@ -104,15 +104,15 @@
                                   <div class="input-group m-b-0">
                                       <select class="form-control" id="from_warehouse" class="from_warehouse" name="from_warehouse" >
                                         <option value="" selected hidden>Select From Warehouse</option>
-                                      <?php foreach($from_warehouse as $k => $value) : ?>
-                                          <option class="from_warehouse_opt" value="<?php echo $value['warehouse_id'] ?>"><?php echo $value['wh_name'] ?></option>
-                                    <?php  endforeach; ?>
+                                      <?php //foreach($from_warehouse as $k => $value) : ?>
+                                          <option class="from_warehouse_opt" value="<?php //echo $value['warehouse_id'] ?>"><?php// echo $value['wh_name'] ?></option>
+                                    <?php // endforeach; ?>
                                   </select>
                                       <span class="err"></span>
                                   </div>
                               </div>
                             </div>
-                          </div>
+                          </div> -->
                           <div class="form-horizontal to_warehouse" style="display:none">
                               <div class="form-group row m-b-10">
                               <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Transfer to Warehouse: <span class="text-red">*</span></label>
@@ -145,7 +145,7 @@
                               </div>
                             </div>
                           </div>
-                          <div class="form-horizontal">
+                          <!-- <div class="form-horizontal">
                               <div class="form-group row m-b-10">
                               <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Date Delivered: <span class="text-red">*</span></label>
                               <div class="col-lg-8 col-md-12">
@@ -153,11 +153,11 @@
                                       <div class="input-group-prepend">
                                           <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                                       </div>
-                                      <input type="text" class="form-control datepicker" name="so_datedelivered" value="<?php echo date('F d, Y'); ?>">
+                                      <input type="text" class="form-control datepicker" name="so_datedelivered" value="<?php //echo date('F d, Y'); ?>">
                                   </div>
                               </div>
                             </div>
-                          </div>
+                          </div> -->
                           <hr>
                           <!--when stock movement type is stock transfer -->
                           <div class="table-responsive view_purchase_orders_details" id="stock_transfer_movement">
@@ -256,6 +256,7 @@
                     <th class="header-title">Date Ordered</th>
                     <th class="header-title">Date Date Delivered</th>
                     <th class="header-title">Purchase Code</th>
+                    <!-- <th class="header-title">Remaining Stocks</th> -->
                     <th class="header-title">Company</th>
                     <th class="header-title">Principal Name</th>
                     <th class="header-title">Action</th>
