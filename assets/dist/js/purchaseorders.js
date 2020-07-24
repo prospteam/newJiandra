@@ -221,6 +221,7 @@ $(document).ready(function(){
   });
 
   $(document).on('submit','form#change_deliveryStat',function(e){
+      alert('chichi');
 
     e.preventDefault();
     let formData =  new FormData($(this)[0]);
@@ -414,9 +415,9 @@ $(document).ready(function(){
 
   //view list of Orders
   $(document).on('click', '.viewPurchase', function(){
+
      var id = $(this).attr('data-id');
      $('.po_arrived_btn').attr('data-id', id);
-     // alert('hi');
      $.ajax({
        method: 'POST',
        url: base_url + 'purchaseorders/view_purchase_orders',

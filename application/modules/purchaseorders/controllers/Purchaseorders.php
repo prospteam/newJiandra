@@ -322,6 +322,7 @@ class Purchaseorders extends MY_Controller {
 	}
 	//view list of orders
 	public function view_purchase_orders(){
+
 		$purchase_id = $this->input->post('id');
 
 		$parameters['where'] = array('purchase_orders.purchase_code' => $purchase_id);
@@ -331,51 +332,21 @@ class Purchaseorders extends MY_Controller {
 								'products' => 'products.code = purchase_orders.product',
 								'warehouse_management' => 'warehouse_management.id = purchase_orders.warehouse_id'  );
 		$parameters['select'] = 'purchase_orders.*, purchase_orders.id AS purchase_id, supplier.id AS supplier_id, supplier.*, company.*, products.id AS product_id, products.*, warehouse_management.wh_name';
-
-		$data = $this->MY_Model->getRows('purchase_orders',$parameters);
-
-
+		//
+		$data = $this->MY_Model->getRows('purchase_orders', $parameters);
+			// echo "<pre>";
+			//  print_r($data);
+			//  exit;
 		$data_array['purchase'] = $data;
-		// exit;
 
 		json($data_array);
-	}
-
-	//change delivered quantity on purchase Orders
-	public function change_delivered_qty(){
-
-			// $post = $this->input->post();
-			$delivered_date = date("F d, Y");
-
-			$code = $this->input->post('update_arrived_delivered');
-			$purchase_id = $this->input->post('view_purchase_id');
-			$delivered = $this->input->post('delivered');
-
-			foreach ($purchase_id as $key => $value) {
-			$data = array(
-				'delivered' => $delivered[$key],
-				'date_delivered' => $delivered_date
-			);
-
-			$query = $this->MY_Model->update('purchase_orders',$data,array( 'id' => $value));
-			}
-
-			if ($query) {
-				$response = array(
-					'status' => 'ok'
-				);
-			}
-
-			json($response);
 	}
 
 
 	//view delivery Status
 	public function view_deliv_status(){
 		$post = $this->input->post();
-		// echo "<pre>";
-		//  print_r($post);
-		//  exit;
+
 		$parameters['where'] = array('purchase_code' => $post['id']);
 		$parameters['join'] = array('products' => 'products.code = purchase_orders.product');
 		$parameters['select'] = 'purchase_orders.*, products.code';
@@ -430,6 +401,47 @@ class Purchaseorders extends MY_Controller {
 			}
 
 		json($data);
+	}
+
+	//change delivered quantity on purchase Orders
+	public function change_delivered_qty(){
+
+			// $post = $this->input->post();
+			$delivered_date = date("F d, Y");
+
+			$code = $this->input->post('update_arrived_delivered');
+			$purchase_id = $this->input->post('view_purchase_id');
+			$delivered = $this->input->post('delivered');
+
+			foreach ($purchase_id as $key => $value) {
+			$data = array(
+				'delivered' => $delivered[$key],
+				'date_delivered' => $delivered_date
+			);
+
+			$query = $this->MY_Model->update('purchase_orders',$data,array( 'id' => $value));
+			}
+
+			foreach ($purchase_id as $key => $value) {
+			$data1 = array(
+				'physical_count' => $delivered[$key],
+			);
+
+			$query1 = $this->MY_Model->update('stocks',$data1,array( 'id' => $value));
+			}
+
+			if ($query) {
+				$response = array(
+					'status' => 'ok'
+				);
+			}elseif ($query1) {
+				$response = array(
+					'status' => 'ok'
+				);
+			} else {
+
+			}
+			json($response);
 	}
 
 	//view Status
