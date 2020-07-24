@@ -210,83 +210,83 @@ class Stocksmanagement extends MY_Controller {
 		json($data);
 	}
 
-	public function addStockMovement(){
-		$post = $this->input->post();
-
-		$id = $this->input->post('stockmovement_id');
-		$stockmovement_id = $id + 1;
-		$code = sprintf('%04d',$stockmovement_id);
-
-		$this->load->library('form_validation');
-
-		$this->form_validation->set_rules('sodate', 'Date', 'required');
-		$this->form_validation->set_rules('so_type', 'Type', 'required');
-		$this->form_validation->set_rules('so_datedelivered', 'Date Delivered', 'required');
-		$this->form_validation->set_rules('wh_prod_code[]', 'code', 'required');
-		// $this->form_validation->set_rules('prod_name[]', 'Product Name', 'required');
-		$this->form_validation->set_rules('quantity[]', 'Quantity', 'required');
-
-		$error = array();
-
-		if(!empty($post['warehouse'])){
-			$warehouse 			= $post['warehouse'];
-			$transfer_status 	= 1;
-		}else{
-			$warehouse 			= NULL;
-			$transfer_status 	= NULL;
-		}
-		foreach($post['stock_id'] as $sKey => $sVal){
-			$parameters['where'] = array('stock_id' => $sVal);
-			$parameters['select'] = 'physical_count, product';
-			$data_prod_qty = $this->MY_Model->getRows('stocks',$parameters);
-			$errormsg = false;
-
-			foreach($data_prod_qty as $sqKey => $sVal){
-				if($post['quantity'][$sKey] > $sVal['physical_count'] ){
-					$errormsg = true;
-				}
-			}
-		}
-
-		if(!empty($errormsg)){
-			$response = $errormsg;
-		}else{
-			//adds to stock movement
-			foreach($post['wh_prod_code'] as $pkey => $pVal){
-				$params['select'] = 'product, quantity';
-				$data_prod['qty'] = $this->MY_Model->getRows('purchase_orders', $params);
-				$qty = $post['quantity'][$pkey];
-
-				if ($this->form_validation->run() !== FALSE) {
-
-					$data = array(
-						'stockmovement_code'	=> $code,
-						'stockmovement_date' 	=> $post['sodate'],
-						'type' 					=> $post['so_type'],
-						'from_warehouse' 		=> $post['from_warehouse'],
-						'transferred_warehouse' => $warehouse,
-						'date_delivered'		=> $post['so_datedelivered'],
-						'product' 				=> $pVal,
-						'quantity' 				=> $qty,
-						'stockmovement_note' 	=> $post['stockmovement_note'],
-						'transfer_status'		=> $transfer_status,
-						'status' 				=> 1
-					);
-					$insert = $this->MY_Model->insert('stock_movement', $data);
-					if ($insert) {
-						$response = array(
-							'status' => 'ok'
-						);
-					}
-				}else{
-					$response = array('form_error' =>  array_merge($this->form_validation->error_array(), $error) );
-				}
-
-			}
-		}
-
-		echo json_encode($response);
-	}
+	// public function addStockMovement(){
+	// 	$post = $this->input->post();
+	//
+	// 	$id = $this->input->post('stockmovement_id');
+	// 	$stockmovement_id = $id + 1;
+	// 	$code = sprintf('%04d',$stockmovement_id);
+	//
+	// 	$this->load->library('form_validation');
+	//
+	// 	$this->form_validation->set_rules('sodate', 'Date', 'required');
+	// 	$this->form_validation->set_rules('so_type', 'Type', 'required');
+	// 	$this->form_validation->set_rules('so_datedelivered', 'Date Delivered', 'required');
+	// 	$this->form_validation->set_rules('wh_prod_code[]', 'code', 'required');
+	// 	// $this->form_validation->set_rules('prod_name[]', 'Product Name', 'required');
+	// 	$this->form_validation->set_rules('quantity[]', 'Quantity', 'required');
+	//
+	// 	$error = array();
+	//
+	// 	if(!empty($post['warehouse'])){
+	// 		$warehouse 			= $post['warehouse'];
+	// 		$transfer_status 	= 1;
+	// 	}else{
+	// 		$warehouse 			= NULL;
+	// 		$transfer_status 	= NULL;
+	// 	}
+	// 	foreach($post['stock_id'] as $sKey => $sVal){
+	// 		$parameters['where'] = array('stock_id' => $sVal);
+	// 		$parameters['select'] = 'physical_count, product';
+	// 		$data_prod_qty = $this->MY_Model->getRows('stocks',$parameters);
+	// 		$errormsg = false;
+	//
+	// 		foreach($data_prod_qty as $sqKey => $sVal){
+	// 			if($post['quantity'][$sKey] > $sVal['physical_count'] ){
+	// 				$errormsg = true;
+	// 			}
+	// 		}
+	// 	}
+	//
+	// 	if(!empty($errormsg)){
+	// 		$response = $errormsg;
+	// 	}else{
+	// 		//adds to stock movement
+	// 		foreach($post['wh_prod_code'] as $pkey => $pVal){
+	// 			$params['select'] = 'product, quantity';
+	// 			$data_prod['qty'] = $this->MY_Model->getRows('purchase_orders', $params);
+	// 			$qty = $post['quantity'][$pkey];
+	//
+	// 			if ($this->form_validation->run() !== FALSE) {
+	//
+	// 				$data = array(
+	// 					'stockmovement_code'	=> $code,
+	// 					'stockmovement_date' 	=> $post['sodate'],
+	// 					'type' 					=> $post['so_type'],
+	// 					'from_warehouse' 		=> $post['from_warehouse'],
+	// 					'transferred_warehouse' => $warehouse,
+	// 					'date_delivered'		=> $post['so_datedelivered'],
+	// 					'product' 				=> $pVal,
+	// 					'quantity' 				=> $qty,
+	// 					'stockmovement_note' 	=> $post['stockmovement_note'],
+	// 					'transfer_status'		=> $transfer_status,
+	// 					'status' 				=> 1
+	// 				);
+	// 				$insert = $this->MY_Model->insert('stock_movement', $data);
+	// 				if ($insert) {
+	// 					$response = array(
+	// 						'status' => 'ok'
+	// 					);
+	// 				}
+	// 			}else{
+	// 				$response = array('form_error' =>  array_merge($this->form_validation->error_array(), $error) );
+	// 			}
+	//
+	// 		}
+	// 	}
+	//
+	// 	echo json_encode($response);
+	// }
 
 	public function to_extrack(){
 		$purchase_code = $this->input->post('purchase_code');
@@ -309,9 +309,7 @@ class Stocksmanagement extends MY_Controller {
 				'quantity' => $transfer_quant[$key],
 				'stockmovement_note' => $stockmovement_note,
 			);
-			echo "<pre>";
-			 print_r($datas);
-			 exit;
+
 			$insert = $this->MY_Model->insert('stock_movement',$datas);
 		}
 		if ($insert) {

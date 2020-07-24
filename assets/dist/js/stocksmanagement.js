@@ -27,6 +27,7 @@ $(document).ready(function(){
        dataType: "json",
        success: function(data){
            var str ='';
+           var grand_total = '';
 
            if(data.stock_by_code.length > 0){
                $.each(data.stock_by_code,function(index,element){
@@ -42,7 +43,7 @@ $(document).ready(function(){
                                 str += element.quantity
                             str += '</td>';
                             str += '<td class="purch_td">';
-                                str += '<input type="text" class="prod_code" name="transfer_quant[]" id="transfer_quant">';
+                                str += '<input type="text" class="prod_code purchase_quantity" name="transfer_quant[]" id="transfer_quant">';
                             str += '</td>';
                        str += '</tr>'
              });
@@ -54,6 +55,48 @@ $(document).ready(function(){
        }
     });
   });
+
+  //compute total for qunatity * unit Price
+    $(document).on('keyup', '.purchase_price, .purchase_quantity', function(){
+
+        var total = 1;
+        var grand_total = '';
+        var price = $(this).parents('tr').find('.purchase_price').val();
+        var quantity = $(this).parents('tr').find('.purchase_quantity').val();
+
+        quantity = quantity === undefined || quantity === null || quantity === '' ? 0 : quantity;
+        price = price === undefined || price === null || price === '' ? 0 : price;
+
+        var total = price * quantity;
+
+         $(this).parents('tr').find('.purchase_total').val(total.toFixed(2));
+
+         // grand total
+         var grand_total = 0;
+         $(".purchase_total").each(function() {
+             var gtval = $(this).val();
+             grand_total += +gtval.replace(/\,/g, '');
+         });
+
+          $('.grand_total').val(grand_total.toFixed(2));
+
+          //  total quantity
+          var total_quantity = 0;
+          $(".purchase_quantity").each(function() {
+              total_quantity += +$(this).val();
+          });
+          $(".total_quantity").val(total_quantity);
+
+          var total_cost = 0;
+          $(".purchase_price").each(function() {
+              total_cost += +$(this).val();
+          });
+          $(".total_cost").val(total_cost.toFixed(2));
+
+
+
+      });
+
 
   //display purchase_tbl
     // var purchase_tbl = $('.stocks_tbl').DataTable({
@@ -369,7 +412,7 @@ $(document).on('click', '.generatereport', function(){
         url : base_url + 'stocksmanagement/to_extrack',
         data : formData,
         success : function(data) {
-            console.log('data');
+            console.log('data---------------------ROgen');
             console.log(data);
             if (data == "ok") {
                 Swal.fire("Successfully Transfer to Ex Track", data.success, 'success')
@@ -385,6 +428,7 @@ $(document).on('click', '.generatereport', function(){
         }
     })
   });
+  // stocks_tbl
 
   //autocomplete product name after choosing sku Code
   $(document).on('select2:select','.stock_prod_code',function(e){

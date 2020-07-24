@@ -463,6 +463,9 @@ $(document).ready(function(){
                  str +=   '<input type="hidden" class="edit_purchID" name="view_purchase_id[]" value='+element.purchase_id+'>';
                 str += '</td>';
                 str +=     '<td class="purch_td hide">';
+                    str +=   '<input type="hidden" class="edit_purchID" name="stock_id[]" value='+element.stock_id+'>';
+                   str += '</td>';
+                str +=     '<td class="purch_td hide">';
                     str +=   '<input type="hidden" class="edit_product" name="view_prod[]" value='+element.product+'>';
                    str += '</td>';
                    str +=     '<td class="purch_td hide">';

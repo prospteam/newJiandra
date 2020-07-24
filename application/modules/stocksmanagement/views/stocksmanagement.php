@@ -256,7 +256,7 @@
                     <th class="header-title">Date Ordered</th>
                     <th class="header-title">Date Date Delivered</th>
                     <th class="header-title">Purchase Code</th>
-                    <!-- <th class="header-title">Remaining Stocks</th> -->
+                    <!-- <th class="header-title">Quantity On Hand</th> -->
                     <th class="header-title">Company</th>
                     <th class="header-title">Principal Name</th>
                     <th class="header-title">Action</th>
