@@ -375,8 +375,8 @@ $(document).ready(function(){
 
 
   $(document).on('submit', 'form#po_arrived_up', function(e){
-      e.preventDefault();
       // alert('yayay');
+      e.preventDefault();
 
       let formData = new FormData($(this)[0]);
       var id = $('input[name="update_arrived_delivered"]').val();

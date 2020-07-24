@@ -418,18 +418,14 @@ class Purchaseorders extends MY_Controller {
 				'delivered' => $delivered[$key],
 				'date_delivered' => $delivered_date
 			);
-
 			$query = $this->MY_Model->update('purchase_orders',$data,array( 'id' => $value));
-			}
 
-			foreach ($purchase_id as $key => $value) {
 			$data1 = array(
 				'physical_count' => $delivered[$key],
 			);
 
-			$query1 = $this->MY_Model->update('stocks',$data1,array( 'id' => $value));
+			$query1 = $this->MY_Model->insert('stocks',$data1,array( 'id' => $value));
 			}
-
 			if ($query) {
 				$response = array(
 					'status' => 'ok'
