@@ -737,7 +737,6 @@ $(document).ready(function(){
 
   //view edit Orders
   $(document).on('click', '.editPurchase', function(){
-      alert('Rogen gwapa');
     var id = $(this).attr('data-id');
     var datasup = $(this).attr('data-sup');
 
@@ -783,15 +782,10 @@ $(document).ready(function(){
             str += '<td class="purch_td hide">';
             str += '<input type="hidden" class="form-control edit_purchase_id" name="edit_purchase_id[]" value='+element.purchase_id+'>';
             str += '</td>';
-              str += '<td class="purch_td">';
-              str += '<input type="hidden" class="form-control" name="edit_purchase_id_select[]" value='+element.purchase_id+'>';
-              str += '<select class="form-control edit_new_code select2_edit" data-prod="'+element.purchase_id+'" style="width: 100%;" name="prod_code[]" data-id="'+element.product_id+'" value="'+element.code+'">';
-                  // str += '<option value="'+element.id+'" selected hidden>'+element.code+'</option>';
-                   str += get_edit_products(element.id);
-                str += '</select>';
-                   // str += '<input type="text" class="form-control" name="prod_name[]" value='+element.product+'>';
-                   str += '<span class="err"></span>';
-              str += '</td>';
+            str += '<td class="purch_td">';
+                 str += '<input type="text" data-price="'+element.code+'" class="form-control edit_new_name" name="prod_code[]" value="'+element.code+'" readonly>';
+                 str += '<span class="err"></span>';
+            str += '</td>'
               str += '<td class="purch_td">';
                    str += '<input type="text" data-price="'+element.product_name+'" class="form-control edit_new_name" name="prod_name[]" value="'+element.product_name+'" readonly>';
                    str += '<span class="err"></span>';
@@ -801,7 +795,7 @@ $(document).ready(function(){
                    str += '<span class="err"></span>';
               str += '</td>';
               str += '<td class="purch_td">';
-                  str += '<input type="text" class="form-control purchase_price number_only" name="unit_price[]" value='+element.unit_price+'>';
+                  str += '<input  type="text" class="form-control purchase_price number_only" name="unit_price[]" value="'+element.unit_price+'" readonly>';
                   str += '<span class="err"></span>';
               str += '</td>';
               str += '<td class="purch_td">';
@@ -857,7 +851,7 @@ $(document).ready(function(){
     formData.append("id",id);
     $.ajax({
         method: 'POST',
-        url : base_url + 'purchaseorders/edit_purchase_orders',
+        url : base_url + 'purchaseorders/purchase_order_edit',
         data : formData,
         processData: false,
        contentType: false,
@@ -865,30 +859,17 @@ $(document).ready(function(){
         dataType: 'json',
         success : function(data) {
             console.log(data);
-            // if(data.status == "ok"){
-            //   $('#EditPurchaseOrder').modal('hide');
-            //       Swal.fire("Successfully updated purchase order!",data.success, "success");
-            //       $(".purchase_tbl").DataTable().ajax.reload();
-            //       // setTimeout(function(){
-            //       //    location.reload();
-            //       //  }, 1000);
-            //  }else if(data.status == 'invalid'){
-            //     Swal.fire("Error",data.status, "invalid");
-            //  }
-            if(data.form_error){
-                clearError();
-                let keyNames = Object.keys(data.form_error);
-                $(keyNames).each(function(index , value) {
-                    $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
-                    $("select[name='"+value+"']").next().next().text(data.form_error[value]);
-                });
-            }else if (data.error) {
-                Swal.fire("Error",data.error, "error");
+            if (data.status == 'ok') {
+                console.log(data.success);
+                Swal.fire("Purchase Order Updated Successfully!", data.success, 'success')
+                .then((result) => {
+                // Reload the Page
+                location.reload();
+              });
+                  // $('#po_arived_edit').modal('toggle');
+
             }else {
-               // blankVal();
-                $('#EditPurchaseOrder').modal('hide');
-                Swal.fire("Successfully updated purchase order!",data.success, "success");
-                $(".purchase_tbl").DataTable().ajax.reload();
+                Swal.fire("Error!", data.status, 'invalid');
             }
         }
     })

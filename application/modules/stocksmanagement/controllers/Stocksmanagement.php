@@ -37,6 +37,7 @@ class Stocksmanagement extends MY_Controller {
 
 		//Select Purchase Code
 		$parameters2['select'] 	= 'purchase_code';
+		$parameters2['where'] 	= array('delivery_status' => '4');
 		$parameters2['group'] 	= 'purchase_code';
 		$data['purchase_orders'] 	= $this->MY_Model->getRows('purchase_orders',$parameters2);
 

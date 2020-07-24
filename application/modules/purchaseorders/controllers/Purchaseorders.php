@@ -303,6 +303,25 @@ class Purchaseorders extends MY_Controller {
 
 	}
 
+	public function purchase_order_edit(){
+		
+		$quantity = $this->input->post('quantity');
+		$purchase_code = $this->input->post('edit_purchase_code');
+
+		foreach($_POST['edit_purchase_id'] as $key => $value){
+			$datas = array('quantity' => $quantity[$key]);
+			$query = $this->MY_Model->update('purchase_orders', $datas, array( 'id' => $value));
+		}
+		
+		if($query) {
+			$response = array(
+				'status' => 'ok'
+			);
+		}
+
+		json($response);
+	}
+
 	public function purchase_details(){
 		$purchase_id = $this->input->post('id');
 
