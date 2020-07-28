@@ -93,6 +93,9 @@ class Stocksmanagement extends MY_Controller {
 	}
 
 	public function display_stock_managment(){
+		// echo "<pre>";
+		//  print_r($_POST);
+		//  exit;
 		$limit = $this->input->post('length');
 		$offset = $this->input->post('start');
 		$search = $this->input->post('search');
@@ -107,9 +110,14 @@ class Stocksmanagement extends MY_Controller {
 		$group = array('purchase_orders.purchase_code');
 		$join = array(
 			'supplier' => 'supplier.supplier_name = purchase_orders.supplier',
-			'company' => 'company.company_id = purchase_orders.company'
+			'company' => 'company.company_id = purchase_orders.company',
+			'stocks' =>'stocks.code = purchase_orders.purchase_code'
+
+
+			// 'stocks as s' => 's.product = product.product AND stocks.warehouse_id = purchase_orders.warehouse_id:left',
+			// 'stocks' => 'stocks.physical_count = purchase_orders.quantity'
 		);
-		$select = "purchase_orders.id AS purchase_id, purchase_orders.date_ordered,purchase_orders.purchase_code,company.company_id, company.company_name, supplier.id,supplier.supplier_name,purchase_orders.status,purchase_orders.delivery_status,purchase_orders.order_status";
+		$select = "purchase_orders.id AS purchase_id,stocks.physical_count, purchase_orders.date_ordered, purchase_orders.date_delivered, purchase_orders.delivered, purchase_orders.purchase_code,company.company_id, company.company_name, supplier.id,supplier.supplier_name,purchase_orders.status,purchase_orders.delivery_status,purchase_orders.order_status";
 		$list = $this->MY_Model->get_datatables('purchase_orders',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
 
 		$output = array(
@@ -118,6 +126,7 @@ class Stocksmanagement extends MY_Controller {
 				"recordsFiltered" => $list['count'],
 				"data" => $list['data']
 		);
+		
 
 		echo json_encode($output);
 	}

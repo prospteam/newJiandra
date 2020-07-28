@@ -416,3 +416,16 @@ span#addNewSO {
     border-color: #28a745;
     font-size: 20px;
 }
+.sm_dateordered {
+    background: #76994b;
+    color: white;
+    padding: 3px;
+    border-radius: 5px;
+}
+.sm_datedeliv {
+    background: #d52424;
+    color: white;
+    margin: 11px;
+    padding: 3px;
+    border-radius: 5px;
+}

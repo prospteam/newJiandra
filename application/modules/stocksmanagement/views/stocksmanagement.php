@@ -253,8 +253,10 @@
                     <th class="header-title">Quantity On hand</th>
                     <th class="header-title">Physical Count</th>
                     <th class="header-title">Variance</th> -->
-                    <th class="header-title">Date Ordered</th>
-                    <th class="header-title">Date Date Delivered</th>
+                    <th class="header-title">Date Ordered - Date Delivered</th>
+                    <th class="header-title">Delivered Items</th>
+                    <th class="header-title">Remaining Stocks</th>
+                    <!-- <th class="header-title">Date Date Delivered</th> -->
                     <th class="header-title">Purchase Code</th>
                     <!-- <th class="header-title">Quantity On Hand</th> -->
                     <th class="header-title">Company</th>
