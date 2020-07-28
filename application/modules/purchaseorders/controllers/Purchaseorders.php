@@ -305,14 +305,19 @@ class Purchaseorders extends MY_Controller {
 
 	public function purchase_order_edit(){
 		
+
 		$quantity = $this->input->post('quantity');
 		$purchase_code = $this->input->post('edit_purchase_code');
 
 		foreach($_POST['edit_purchase_id'] as $key => $value){
 			$datas = array('quantity' => $quantity[$key]);
+			$datas = array(
+				'quantity' => $quantity[$key]
+			);
 			$query = $this->MY_Model->update('purchase_orders', $datas, array( 'id' => $value));
 		}
 		
+
 		if($query) {
 			$response = array(
 				'status' => 'ok'
@@ -427,21 +432,25 @@ class Purchaseorders extends MY_Controller {
 	public function change_delivered_qty(){
 
 			// $post = $this->input->post();
+			$post = $this->input->post();
 			$delivered_date = date("F d, Y");
 
 			$code = $this->input->post('update_arrived_delivered');
 			$purchase_id = $this->input->post('view_purchase_id');
 			$delivered = $this->input->post('delivered');
+			$prod_code = $this->input->post('view_prod_code');
 
 			foreach ($purchase_id as $key => $value) {
 			$data = array(
 				'delivered' => $delivered[$key],
+				'delivered' => $post['delivered'][$key],
 				'date_delivered' => $delivered_date
 			);
 			$query = $this->MY_Model->update('purchase_orders',$data,array( 'id' => $value));
 
 			$data1 = array(
 				'physical_count' => $delivered[$key],
+				'physical_count' =>$post['delivered'][$key1]
 			);
 
 			$query1 = $this->MY_Model->update('stocks',$data1,array( 'po_id' => $value));

@@ -176,8 +176,16 @@ $(document).ready(function(){
          "serverSide": true, //Feature control DataTables' server-side processing mode.
          "order": [[0,'desc']], //Initial no order.
          "columns":[
-              {"data":"date_ordered"},
-              {"data":"date_ordered"},
+              // {"data":"date_ordered"},
+              {
+                 "data": "date_ordered", "render": function (data, type, row, meta) {
+                    var str = '';
+                    str = '<span class="sm_dateordered">'+row.date_ordered+'</span>' + '<span class="sm_datedeliv">' + row.date_delivered +'</span>';
+                    return str;
+                 }
+              },
+              {"data":"delivered"},
+              {"data":"physical_count"},
               {"data":"purchase_code"},
               {"data":"company_name"},
               {"data":"supplier_name"},
@@ -210,7 +218,7 @@ $(document).ready(function(){
          //Set column definition initialisation properties.
          "columnDefs": [
               {
-                   "targets": [1,5], //first column / numbering column
+                   "targets": [6], //first column / numbering column
                    "orderable": false, //set not orderable
 
                },
