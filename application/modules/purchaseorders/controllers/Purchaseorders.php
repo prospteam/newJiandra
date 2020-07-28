@@ -372,6 +372,7 @@ class Purchaseorders extends MY_Controller {
 
 		$data['delivery'] = $this->MY_Model->getRows('purchase_orders',$parameters,'row');
 
+
 		json($data);
 	}
 
@@ -398,25 +399,25 @@ class Purchaseorders extends MY_Controller {
 			'product' => $post['product'],
 			'warehouse_id' => $post['purchase_code_delivery']
 		);
-
 		$params['select'] = '*';
 		$params_for_gettings_products_from_order['where']=array('purchase_code' => $post['purchase_code_delivery']);
 		// $params_for_gettings_products_from_order['where']=array('purchase_code' => $post['purchase_code_delivery']);
 		// $params_for_gettings_products_from_order['join']= array('stocks as s'=>'s.stock_id = purchase_orders.stocks');
-
-		$params_for_gettings_products_from_order['select']='purchase_orders.product, purchase_orders.warehouse_id, purchase_orders.purchase_code, purchase_orders.quantity';
+		$params_for_gettings_products_from_order['select']='purchase_orders.id,purchase_orders.product, purchase_orders.warehouse_id, purchase_orders.purchase_code, purchase_orders.quantity';
 		$res_products_from_order = $this->MY_Model->getRows('purchase_orders', $params_for_gettings_products_from_order);
 
 		$res = $this->MY_Model->getRows('stocks', $params,'row');
 		$last = $this->db->last_query();
+
 		foreach ($res_products_from_order as $key => $value) {
 				$data_stocks = array(
-					'product' => $value['product'],
+					'po_id' => $value['id'],
 					'code' => $value['purchase_code'],
+					'product' => $value['product'],
 					'warehouse_id' => $value['warehouse_id'],
-					'stock_out' => $value['quantity']
+					'physical_count' => $value['quantity']
 				);
-				$data_insert = $this->MY_Model->insert('stocks',$data_stocks);
+				 $data_insert = $this->MY_Model->insert('stocks',$data_stocks);
 			}
 
 		json($data);
@@ -443,7 +444,7 @@ class Purchaseorders extends MY_Controller {
 				'physical_count' => $delivered[$key],
 			);
 
-			$query1 = $this->MY_Model->insert('stocks',$data1,array( 'id' => $value));
+			$query1 = $this->MY_Model->update('stocks',$data1,array( 'po_id' => $value));
 			}
 			if ($query) {
 				$response = array(
