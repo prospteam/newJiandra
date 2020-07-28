@@ -60,7 +60,7 @@
                                                 <div class="form-group">
                                                     <label for="supplier">Company: <span class="required">*</span></label>
                                                     <!-- <input type="text" class="form-control" name="position" value=""> -->
-                                                    <select class="form-control" class="company" name="company" id="company" >
+                                                    <select class="form-control bo_company" name="company" id="company" >
                                                         <option value="" selected hidden>Select Company</option>
                                                         <?php foreach ($company as $k => $value) : ?>
                                                             <option value="<?php echo $value['company_id'] ?>"><?php echo $value['company_name'] ?></option>
@@ -182,7 +182,6 @@
 
                     <!-- edit bad order -->
                     <div class="modal fade" id="Editbo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">\
-                        <form id="editbo" method="post">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header bg-info1">
@@ -193,6 +192,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
+                                    <form id="editbo" method="post">
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group">
@@ -230,11 +230,11 @@
                                                 <div class="form-group">
                                                     <label for="supplier">Company: <span class="required">*</span></label>
                                                     <!-- <input type="text" class="form-control" name="position" value=""> -->
-                                                    <input type="hidden" class="form-control" name="edit_bo_id" value="">
+                                                    <!-- <input type="hidden" class="form-control" name="edit_bo_id" value=""> -->
                                                     <select class="form-control" class="company" name="company_edit">
                                                         <option value="" selected hidden>Select Company</option>
                                                         <?php foreach ($company as $k => $value) : ?>
-                                                            <option value="<?php echo $value['company_id'] ?>"><?php echo $value['company_name'] ?></option>
+                                                            <option value="<?php echo $value['company_name'] ?>"><?php echo $value['company_name'] ?></option>
                                                         <?php endforeach; ?>
                                                     </select>
                                                     <span class="err"></span>
@@ -243,11 +243,31 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
-                                                <div class="form-group" id="edit_show_supplier">
+                                                <div class="form-group" >
+                                                <label for="supplier">Supplier: <span class="required">*</span></label>
+                                                    <!-- <input type="text" class="form-control" name="position" value=""> -->
+                                                    <input type="hidden" class="form-control" name="edit_supplier" value="">
+                                                    <select class="form-control" class="edit_supplier" name="edit_supplier">
+                                                        <option value="" selected>Select Supplier</option>
+                                                        <?php foreach ($supplier as $k => $value) : ?>
+                                                            <option value="<?php echo $value['supplier_name'] ?>"><?php echo $value['supplier_name'] ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                    <span class="err"></span>
                                                 </div>
                                             </div>
                                             <div class="col-6">
-                                                <div class="form-group" id="edit_show_warehouse" >
+                                                <div class="form-group">
+                                                <label for="supplier">Warehouse: <span class="required">*</span></label>
+                                                    <!-- <input type="text" class="form-control" name="position" value=""> -->
+                                                    <input type="hidden" class="form-control" name="edit_warehouse" value="">
+                                                    <select class="form-control" class="edit_warehouse" name="edit_warehouse">
+                                                        <option value="" selected>Select Warehouse</option>
+                                                        <?php foreach ($warehouse as $k => $value) : ?>
+                                                            <option value="<?php echo $value['wh_name'] ?>"><?php echo $value['wh_name'] ?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                    <span class="err"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -265,10 +285,10 @@
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary float-right add">Submit</button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                        </form>
                     </div>
                     <!-- edit bad order -->
 

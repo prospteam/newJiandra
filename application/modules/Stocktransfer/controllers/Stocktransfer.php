@@ -14,6 +14,14 @@ class  Stocktransfer extends MY_Controller {
 		$param['where'] = array('status' => 1);
 		$param['select'] = '*';
 		$data['products'] = $this->MY_Model->getRows('products', $param);
+		
+		$param_sup['where'] = array('status' => 1);
+		$param_sup['select'] = 'supplier_name';
+		$data['supplier'] = $this->MY_Model->getRows('supplier', $param);
+
+		$param_warehouse['where'] = array('status' => 1);
+		$param_warehouse['select'] = 'wh_name';
+		$data['warehouse'] = $this->MY_Model->getRows('warehouse_management', $param);
 
 		$this->load_page('stocktransfer', @$data);
 	}
@@ -32,21 +40,46 @@ class  Stocktransfer extends MY_Controller {
 			'company' => $this->input->post('company_id'),
 			'status' => 1
 		);
+
 		$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
 
 		json($data);
 	}
 
-	public function getProductBySupplier(){
+	public function get_suppliers_by_companies_bo_edit(){
+		$parameters['where'] = array(
+			'company' => $this->input->post('company_id'),
+			'status' => 1
+		);
+		$data['warehouse'] = $this->MY_Model->getRows('warehouse_management',$parameters);
+
+		$parameters['where'] = array(
+			'company' => $this->input->post('company_id'),
+			'status' => 1
+		);
+
+		$data['suppliers'] = $this->MY_Model->getRows('supplier',$parameters);
+
+		$parameters['where'] = array(
+			'company' => $this->input->post('company_id'),
+			'status' => 1
+		);
+		$data['productlist'] = $this->MY_Model->getRows('products',$parameters);
+
+		json($data);
+	}
+
+	public function getBOProducts(){
 		$supplier = $this->input->post('supplier');
 
-		$param['where'] = array('products.status' => 1 , 'supplier' => $supplier);
+		$param['where'] = array('products.status' => 1 , 'products.supplier' => $supplier);
 		$param['join'] = array(
-			'products' => 'products.product_name = badorder.product',
+			'badorder' => 'products.product_name = badorder.product_name',
 		);
-		$param['select'] = 'products.product_name,products.code,products_cost_price.cost_price,products.volume,products.unit,products.brand,products.packing';
+		$param['select'] = 'products.product_name,products.code,products.volume,products.unit,products.brand,products.packing';
+		//$param['select'] = '*';
 		$data['products'] = $this->MY_Model->getRows('products', $param);
-
+		
 		echo json_encode($data);
 	}
 
@@ -68,11 +101,11 @@ class  Stocktransfer extends MY_Controller {
 					'quantity' 					=> $this->input->post('quantity'),
 					'sellprice' 				=> $this->input->post('sellprice'),
 					'company'					=> $this->input->post('company'),
-					'supplier' 					=> $this->input->post('supplier'),
+					'supplier' 					=> $this->input->post('bo_supplier'),
 					'warehouse' 				=> $this->input->post('warehouse'),
 					'product_name' 				=> $this->input->post('product_name'),
 					'reason' 					=> $this->input->post('reason'),
-					'status' 					=> 1
+					'status' 					=> '1'
 				);
 
 				$insert = $this->MY_Model->insert('badorder',$data);
@@ -118,6 +151,47 @@ class  Stocktransfer extends MY_Controller {
 				$data = $this->MY_Model->getrows('badorder',$parameters,'row');
 				$data_array['badorder'] = $data;
 				json($data_array);
+		}
+		public function editview_all_bo(){
+				$bo_id = $this->input->post('id');
+				$parameters['where'] = array('id' => $bo_id);
+				$parameters['select'] = '*';
+
+				$data = $this->MY_Model->getrows('badorder',$parameters);
+				$data_array['badorder'] = $data;
+
+				json($data_array);
+		}
+
+		public function update_bo(){
+				$bo_id = $this->input->post('edit_bo_id');
+
+				$data = array(
+					'date_purchased' => $this->input->post('date_purchased'),
+					'date_returned' => $this->input->post('date_returned'),
+					'quantity' => $this->input->post('quantity'),
+					'sellprice' => $this->input->post('sellprice'),
+					'company' => $this->input->post('company_edit'),
+					'supplier' => $this->input->post('edit_supplier'),
+					'warehouse' => $this->input->post('edit_warehouse'),
+					'reason' => $this->input->post('reason'),
+				);
+				$datas['update_bo'] = $this->MY_Model->update('badorder',$data,array('id' => $bo_id));
+				echo json_encode($datas);
+		}
+
+		public function purchase_details(){
+			$purchase_id = $this->input->post('id');
+
+			$parameters['where'] = array('id' => $purchase_id);
+			// $parameters['group'] = array('purchase_code');
+			$parameters['join'] = array('company' => 'company.company_id = badorder.company',
+										'supplier' => 'supplier.supplier_name = badorder.supplier',
+										'products' => 'products.id = badorder.product');
+			$parameters['select'] = 'badorder.*, badorder.id AS purchase_id, supplier.id AS supplier_id, supplier.*, company.*,products.id AS product_id, products.*';
+
+			$data['purch_details'] = $this->MY_Model->getRows('badorder', $parameters);
+				echo json_encode($data);
 		}
 
 		public function enable_bo(){

@@ -27,22 +27,23 @@ $(document).ready(function(){
        dataType: "json",
        success: function(data){
            var str ='';
+           var grand_total = '';
 
            if(data.stock_by_code.length > 0){
                $.each(data.stock_by_code,function(index,element){
                    var total = parseFloat(element.quantity) * parseFloat(element.unit_price).toFixed(2);
                        str += '<tr>';
                             str += '<td class="purch_td">';
-                                str += element.code
+                                str += '<input type="text" class="prod_code non_border" name="transfer_code[]" id="transfer_quant" value="'+element.code+'" readonly>';
                             str += '</td>';
                             str += '<td class="purch_td">';
-                                str += element.product_name
+                                str += element.product_name;
                             str += '</td>';
                             str += '<td class="purch_td">';
                                 str += element.quantity
                             str += '</td>';
                             str += '<td class="purch_td">';
-                                str += '<input type="text" class="prod_code" name="transfer_quant[]" id="transfer_quant">';
+                                str += '<input type="text" class="prod_code purchase_quantity" name="transfer_quant[]" id="transfer_quant">';
                             str += '</td>';
                        str += '</tr>'
              });
@@ -54,6 +55,48 @@ $(document).ready(function(){
        }
     });
   });
+
+  //compute total for qunatity * unit Price
+    $(document).on('keyup', '.purchase_price, .purchase_quantity', function(){
+
+        var total = 1;
+        var grand_total = '';
+        var price = $(this).parents('tr').find('.purchase_price').val();
+        var quantity = $(this).parents('tr').find('.purchase_quantity').val();
+
+        quantity = quantity === undefined || quantity === null || quantity === '' ? 0 : quantity;
+        price = price === undefined || price === null || price === '' ? 0 : price;
+
+        var total = price * quantity;
+
+         $(this).parents('tr').find('.purchase_total').val(total.toFixed(2));
+
+         // grand total
+         var grand_total = 0;
+         $(".purchase_total").each(function() {
+             var gtval = $(this).val();
+             grand_total += +gtval.replace(/\,/g, '');
+         });
+
+          $('.grand_total').val(grand_total.toFixed(2));
+
+          //  total quantity
+          var total_quantity = 0;
+          $(".purchase_quantity").each(function() {
+              total_quantity += +$(this).val();
+          });
+          $(".total_quantity").val(total_quantity);
+
+          var total_cost = 0;
+          $(".purchase_price").each(function() {
+              total_cost += +$(this).val();
+          });
+          $(".total_cost").val(total_cost.toFixed(2));
+
+
+
+      });
+
 
   //display purchase_tbl
     // var purchase_tbl = $('.stocks_tbl').DataTable({
@@ -316,50 +359,76 @@ $(document).on('click', '.generatereport', function(){
   })
 
   //successfully added stock movement
+  // $(document).on('submit','form#stockmovement',function(e){
+  //   e.preventDefault();
+  //   let formData = $(this).serialize();
+  //   $.ajax({
+  //       method: 'POST',
+  //       url : base_url + 'stocksmanagement/addStockMovement',
+  //       data : formData,
+  //       success : function(response) {
+  //           let data = JSON.parse(response);
+  //           console.log(data);
+  //             // $(data.true).each(function(index , value) {
+  //             //   console.log(value);
+  //             // });
+  //           if(data.form_error){
+  //               clearError();
+  //               let keyNames = Object.keys(data.form_error);
+  //               $(keyNames).each(function(index , value) {
+  //                 console.log(value);
+  //                   $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
+  //                   $("select[name='"+value+"']").next('.err').text(data.form_error[value]);
+  //                   $("select[name='"+value+"']").next('.err').text(data.form_error[value]);
+  //                   $("select[name='"+value+"']").next().next().text(data.form_error[value]);
+  //                   // $("select[name='"+value+"']").parents('.form-group').next('.err').text(data.form_error[value]);
+  //               });
+  //           }else if (data.error) {
+  //               Swal.fire("Error",data.error, "error");
+  //             }else if (data == true) {
+  //                 Swal.fire("Warning", "Enter quantity less than or equal to current stock","warning");
+  //           }else {
+  //             $.ajax({
+  //                 method: 'POST',
+  //                 url : base_url + 'stocksmanagement/update_qty',
+  //                 data : formData,
+  //                 success : function(response) {
+  //                   blankVal_stock();
+  //                   $('#StockMovement').modal('hide');
+  //                   Swal.fire("Successfully added stock movement!",data.success, "success");
+  //                   $(".stocks_tbl").DataTable().ajax.reload();
+  //                 }
+  //             });
+  //           }
+  //       }
+  //   })
+  // });
+
   $(document).on('submit','form#stockmovement',function(e){
     e.preventDefault();
     let formData = $(this).serialize();
     $.ajax({
         method: 'POST',
-        url : base_url + 'stocksmanagement/addStockMovement',
+        url : base_url + 'stocksmanagement/to_extrack',
         data : formData,
-        success : function(response) {
-            let data = JSON.parse(response);
+        success : function(data) {
+            console.log('data---------------------ROgen');
             console.log(data);
-              // $(data.true).each(function(index , value) {
-              //   console.log(value);
-              // });
-            if(data.form_error){
-                clearError();
-                let keyNames = Object.keys(data.form_error);
-                $(keyNames).each(function(index , value) {
-                  console.log(value);
-                    $("input[name='"+value+"']").next('.err').text(data.form_error[value]);
-                    $("select[name='"+value+"']").next('.err').text(data.form_error[value]);
-                    $("select[name='"+value+"']").next('.err').text(data.form_error[value]);
-                    $("select[name='"+value+"']").next().next().text(data.form_error[value]);
-                    // $("select[name='"+value+"']").parents('.form-group').next('.err').text(data.form_error[value]);
-                });
-            }else if (data.error) {
-                Swal.fire("Error",data.error, "error");
-              }else if (data == true) {
-                  Swal.fire("Warning", "Enter quantity less than or equal to current stock","warning");
-            }else {
-              $.ajax({
-                  method: 'POST',
-                  url : base_url + 'stocksmanagement/update_qty',
-                  data : formData,
-                  success : function(response) {
-                    blankVal_stock();
-                    $('#StockMovement').modal('hide');
-                    Swal.fire("Successfully added stock movement!",data.success, "success");
-                    $(".stocks_tbl").DataTable().ajax.reload();
-                  }
+            if (data == "ok") {
+                Swal.fire("Successfully Transfer to Ex Track", data.success, 'success')
+                .then((result) => {
+                // Reload the Page
+                location.reload();
               });
+
+            }else {
+                Swal.fire("Error!", data.status, 'invalid');
             }
+
         }
     })
   });
+  // stocks_tbl
 
   //autocomplete product name after choosing sku Code
   $(document).on('select2:select','.stock_prod_code',function(e){
