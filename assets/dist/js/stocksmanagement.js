@@ -32,18 +32,19 @@ $(document).ready(function(){
            if(data.stock_by_code.length > 0){
                $.each(data.stock_by_code,function(index,element){
                    var total = parseFloat(element.quantity) * parseFloat(element.unit_price).toFixed(2);
+                   console.log(data.stock_by_code);
                        str += '<tr>';
                             str += '<td class="purch_td">';
-                                str += '<input type="text" class="prod_code non_border" name="transfer_code[]" id="transfer_quant" value="'+element.code+'" readonly>';
+                                str += '<input type="text" class="prod_code non_border" name="transfer_code[]" id="transfer_quant" value="'+element.product+'" readonly>';
                             str += '</td>';
                             str += '<td class="purch_td">';
-                                str += element.product_name;
+                                str += '<input type="text" class="prod_code non_border" name="transfer_product[]" id="transfer_quant" value="'+element.product_name+'" readonly>';
                             str += '</td>';
                             str += '<td class="purch_td">';
                                 str += element.physical_count
                             str += '</td>';
                             str += '<td class="purch_td">';
-                                str += '<input type="text" class="prod_code purchase_quantity" name="transfer_quant[]" id="transfer_quant">';
+                                str += '<input type="text" class="prod_code purchase_quantity" name="transfer_quant[]" required id="transfer_quant">';
                             str += '</td>';
                        str += '</tr>'
              });
@@ -421,19 +422,11 @@ $(document).on('click', '.generatereport', function(){
         url : base_url + 'stocksmanagement/to_extrack',
         data : formData,
         success : function(data) {
-            console.log('data---------------------ROgen');
-            console.log(data);
-            if (data == "ok") {
-                Swal.fire("Successfully Transfer to Ex Track", data.success, 'success')
+                Swal.fire("Successfully Transfer to Auto loading", data.success, 'success')
                 .then((result) => {
                 // Reload the Page
                 location.reload();
               });
-
-            }else {
-                Swal.fire("Error!", data.status, 'invalid');
-            }
-
         }
     })
   });

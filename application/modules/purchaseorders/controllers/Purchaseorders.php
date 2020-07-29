@@ -304,7 +304,7 @@ class Purchaseorders extends MY_Controller {
 	}
 
 	public function purchase_order_edit(){
-		
+
 
 		$quantity = $this->input->post('quantity');
 		$purchase_code = $this->input->post('edit_purchase_code');
@@ -316,7 +316,7 @@ class Purchaseorders extends MY_Controller {
 			);
 			$query = $this->MY_Model->update('purchase_orders', $datas, array( 'id' => $value));
 		}
-		
+
 
 		if($query) {
 			$response = array(
@@ -449,8 +449,7 @@ class Purchaseorders extends MY_Controller {
 			$query = $this->MY_Model->update('purchase_orders',$data,array( 'id' => $value));
 
 			$data1 = array(
-				'physical_count' => $delivered[$key],
-				'physical_count' =>$post['delivered'][$key1]
+				'physical_count' => $delivered[$key]
 			);
 
 			$query1 = $this->MY_Model->update('stocks',$data1,array( 'po_id' => $value));
