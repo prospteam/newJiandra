@@ -45,13 +45,20 @@ class Stocksmanagement extends MY_Controller {
 	}
 
 	public function stock_movement_code(){
+
 		$code = $this->input->post('code');
 
-		$parameters2['select'] 	= 'code, product_name, quantity';
-		$parameters2['join']			= array('products ' => 'products.code = purchase_orders.product');
-		$parameters2['where'] 	= array('purchase_code' => $code,
+		$parameters2['join']	= array(
+			'products' => 'products.code = purchase_orders.product',
+			'stocks' => 'stocks.code = purchase_orders.purchase_code'
+		 );
+
+		$parameters2['select'] 	= 'products.code, product_name, stocks.physical_count';
+		$parameters2['where'] 	= array(
+										'purchase_code' => $code,
 										'purchase_orders.delivery_status' => 4,
-										'purchase_orders.status' => 2);
+										'purchase_orders.status' => 2,
+									);
 		$data['stock_by_code'] 	= $this->MY_Model->getRows('purchase_orders',$parameters2);
 
 		echo json_encode($data);
@@ -126,7 +133,7 @@ class Stocksmanagement extends MY_Controller {
 				"recordsFiltered" => $list['count'],
 				"data" => $list['data']
 		);
-		
+
 
 		echo json_encode($output);
 	}

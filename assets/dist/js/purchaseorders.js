@@ -415,7 +415,7 @@ $(document).ready(function(){
 
   //view list of Orders
   $(document).on('click', '.viewPurchase', function(){
-
+    
      var id = $(this).attr('data-id');
      $('.po_arrived_btn').attr('data-id', id);
      $.ajax({

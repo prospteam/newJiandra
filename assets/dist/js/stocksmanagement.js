@@ -40,13 +40,14 @@ $(document).ready(function(){
                                 str += element.product_name;
                             str += '</td>';
                             str += '<td class="purch_td">';
-                                str += element.quantity
+                                str += element.physical_count
                             str += '</td>';
                             str += '<td class="purch_td">';
                                 str += '<input type="text" class="prod_code purchase_quantity" name="transfer_quant[]" id="transfer_quant">';
                             str += '</td>';
                        str += '</tr>'
              });
+
          }else{
                 str += '<span style="text-align:center">No Data Found</span>';
          }
