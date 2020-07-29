@@ -117,10 +117,8 @@ class Stocksmanagement extends MY_Controller {
 		$group = array('purchase_orders.purchase_code');
 		$join = array(
 			'supplier' => 'supplier.supplier_name = purchase_orders.supplier',
-			'company' => 'company.company_id = purchase_orders.company'
 			'company' => 'company.company_id = purchase_orders.company',
 			'stocks' =>'stocks.code = purchase_orders.purchase_code'
-
 
 			// 'stocks as s' => 's.product = product.product AND stocks.warehouse_id = purchase_orders.warehouse_id:left',
 			// 'stocks' => 'stocks.physical_count = purchase_orders.quantity'
