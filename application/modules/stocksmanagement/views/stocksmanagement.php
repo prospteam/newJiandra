@@ -96,6 +96,21 @@
                                   </div>
                             </div>
                           </div>
+                          <div class="form-horizontal deliv_person">
+                              <div class="form-group row m-b-10">
+                              <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Delivery Personnel:</label>
+                              <div class="col-lg-8 col-md-12">
+                                  <div class="input-group m-b-0">
+                                      <select class="form-control" class="warehouse" name="purchase_code" id="deliv_person">
+                                        <option value="" selected hidden>Select Delivery Personnel Assigned</option>
+                                      <!-- <?php //foreach($deliv_users as $keys => $values) : ?>
+                                          <option value="<?php //echo $values['id'] ?>"><?php //echo $values['fullname'] ?></option>
+                                    <?php  //endforeach; ?> -->
+                                  </select>
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
 <!--   FROM WAREHOUSE
                           <div class="form-horizontal from_warehouse" style="display:none">
                               <div class="form-group row m-b-10">

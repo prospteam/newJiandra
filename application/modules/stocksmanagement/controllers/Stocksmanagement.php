@@ -18,6 +18,9 @@ class Stocksmanagement extends MY_Controller {
 		//select to warehouse
 		$param1['where']			= array('status' => 1);
 		$data['to_warehouse'] 	= $this->MY_Model->getRows('warehouse_management',$param1);
+		//get delivery Personnel
+		$param2['where'] = array('position' => 6);
+		$data['deliv_users'] = $this->MY_Model->getrows('users',$param2);
 
 		// get all products
 		$parameters['group']	= array('stocks.warehouse_id');
@@ -196,6 +199,15 @@ class Stocksmanagement extends MY_Controller {
 
 		json($data);
 	}
+	//
+	// public function get_deliv_personnel(){
+	// 	$user = $this->input->post('from_warehouse_id');
+	//
+	// 	$param['where'] 	= array('id !=' => $warehouse, 'status' => 1);
+	// 	$data['warehouse']	= $this->MY_Model->getRows('warehouse_management', $param);
+	//
+	// 	json($data);
+	// }
 
 	//display prodducts in dropdown when adding another field for stock movement
 	public function get_productsSO(){
@@ -324,7 +336,7 @@ class Stocksmanagement extends MY_Controller {
 				'product' => $transfer_product[$key],
 				'quantity' => $transfer_quant[$key],
 				'stockmovement_note' => $stockmovement_note,
-			);	
+			);
 			 $insert = $this->MY_Model->insert('stock_movement',$datas);
 		}
 		if ($insert) {

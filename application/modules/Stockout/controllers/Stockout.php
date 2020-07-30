@@ -13,7 +13,9 @@ class Stockout extends MY_Controller {
 	}
 
    function disp_stockout(){
-
+	   echo "<pre>";
+	    print_r($_POST);
+	    exit;
       $limit = $this->input->post('length');
       $offset = $this->input->post('start');
       $search = $this->input->post('search');
@@ -42,6 +44,7 @@ class Stockout extends MY_Controller {
             "recordsFiltered" => $list['count'],
             "data" => $list['data']
       );
+
       echo json_encode($output);
    }
 		// Edit Stock Out

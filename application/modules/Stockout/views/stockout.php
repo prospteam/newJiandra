@@ -5,8 +5,8 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1> Stock Out</h1>
-          INVENTORY MANAGEMENT > <span class="active1"> STOCK OUT </p>
+          <h1> Stock Autoloading</h1>
+          INVENTORY MANAGEMENT > <span class="active1"> STOCK AUTOLOADING </p>
         </div>
         <div class="col-sm-6">
            <div class="modal fade" id="editStockOut" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -200,9 +200,9 @@
                   <div class="col-sm-12">
                     <table class="table table-bordered table-striped dataTable stockout_tbl" role="grid" aria-describedby="example1_info">
                   <thead>
-                    <th class="header-title">Date</th>
-                    <th class="header-title">Date Delivered</th>
+                    <th class="header-title">Date Transferred</th>
                     <th class="header-title">Product</th>
+                    <th class="header-title">Delivery Personnel</th>
                     <th class="header-title">Note</th>
                     <th class="header-title">Actions</th>
                     <th class="header-title">Status</th>

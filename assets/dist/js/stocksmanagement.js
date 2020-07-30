@@ -6,7 +6,7 @@ $(document).ready(function(){
       blankVal_onchange_stockType();
 
     if($(this).val() == "2"){
-      $('.to_warehouse').css('display', 'block');
+      $('.deliv_person').css('display', 'block');
       $('.from_warehouse').css('display', 'block');
       $("#wh_stock_code").prop("disabled", true);
     }else{
