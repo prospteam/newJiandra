@@ -56,7 +56,7 @@ class Stocksmanagement extends MY_Controller {
 			'stocks' => 'stocks.po_id = purchase_orders.id'
 		 );
 
-		$parameters2['select'] 	= 'purchase_orders.product,stocks.physical_count,products.product_name';
+		$parameters2['select'] 	= 'purchase_orders.id,purchase_orders.product,stocks.physical_count,products.product_name';
 		$parameters2['where'] 	= array(
 										'purchase_orders.purchase_code' => $code,
 									);
@@ -118,14 +118,13 @@ class Stocksmanagement extends MY_Controller {
 		$group = array('purchase_orders.purchase_code');
 		$join = array(
 			'supplier' => 'supplier.supplier_name = purchase_orders.supplier',
-			'company' => 'company.company_id = purchase_orders.company',
-			'stocks' =>'stocks.code = purchase_orders.purchase_code'
+			'company' => 'company.company_id = purchase_orders.company'
 
 			// 'stocks as s' => 's.product = product.product AND stocks.warehouse_id = purchase_orders.warehouse_id:left',
 			// 'stocks' => 'stocks.physical_count = purchase_orders.quantity'
 		);
 		$select = "purchase_orders.id AS purchase_id, purchase_orders.date_ordered,purchase_orders.purchase_code,company.company_id, company.company_name, supplier.id,supplier.supplier_name,purchase_orders.status,purchase_orders.delivery_status,purchase_orders.order_status";
-		$select = "purchase_orders.id AS purchase_id,stocks.physical_count, purchase_orders.date_ordered, purchase_orders.date_delivered, purchase_orders.delivered, purchase_orders.purchase_code,company.company_id, company.company_name, supplier.id,supplier.supplier_name,purchase_orders.status,purchase_orders.delivery_status,purchase_orders.order_status";
+		$select = "purchase_orders.id AS purchase_id, purchase_orders.date_ordered, purchase_orders.date_delivered, purchase_orders.delivered, purchase_orders.purchase_code,company.company_id, company.company_name, supplier.id,supplier.supplier_name,purchase_orders.status,purchase_orders.delivery_status,purchase_orders.order_status";
 		$list = $this->MY_Model->get_datatables('purchase_orders',$column_order, $select, $where, $join, $limit, $offset ,$search, $order, $group);
 
 		$output = array(
@@ -325,6 +324,7 @@ class Stocksmanagement extends MY_Controller {
 		$transfer_product = $this->input->post('transfer_product');
 		$transfer_quant = $this->input->post('transfer_quant');
 		$stockmovement_note = $this->input->post('stockmovement_note');
+		$stock_id = $this->input->post('stock_id');
 
 		foreach ($transfer_code as $key => $value) {
 			$datas = array(
@@ -337,9 +337,10 @@ class Stocksmanagement extends MY_Controller {
 				'quantity' => $transfer_quant[$key],
 				'stockmovement_note' => $stockmovement_note,
 			);
-			 $insert = $this->MY_Model->insert('stock_movement',$datas);
+
+			 $update = $this->MY_Model->update('stock_movement', $datas, array('po_id' => $stock_id[$key]), '', '');
 		}
-		if ($insert) {
+		if ($update) {
 			$response = 'ok';
 		}
 
@@ -396,14 +397,13 @@ class Stocksmanagement extends MY_Controller {
 
 		$parameters['where'] = array('purchase_orders.purchase_code' => $purchase_code);
 		// $parameters['group'] = array('purchase_code');
-		$parameters['join'] = array('products' => 'products.code = purchase_orders.product');
+		$parameters['join'] = array('products' => 'products.code = purchase_orders.product',
+									'stocks' => 'purchase_orders.id = stocks.po_id',
+									'stock_movement' => 'stock_movement.po_id = stocks.po_id');
 		$parameters['select'] = 'products.code, , purchase_orders.quantity, purchase_orders.unit_price, products.volume,
-								products.unit,products.packing,products.brand, products.product_name, purchase_orders.delivered' ;
+								products.unit,products.packing,products.brand, products.product_name, purchase_orders.delivered,stocks.physical_count,stock_movement.quantity as stock_movement_quant' ;
 
 		$data = $this->MY_Model->getRows('purchase_orders',$parameters);
-		// echo "<pre>";
-		// print_r($data);
-		// exit;
 
 		$data_array['view_stock'] = $data;
 

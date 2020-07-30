@@ -408,23 +408,31 @@ class Purchaseorders extends MY_Controller {
 		$params_for_gettings_products_from_order['where']=array('purchase_code' => $post['purchase_code_delivery']);
 		// $params_for_gettings_products_from_order['where']=array('purchase_code' => $post['purchase_code_delivery']);
 		// $params_for_gettings_products_from_order['join']= array('stocks as s'=>'s.stock_id = purchase_orders.stocks');
-		$params_for_gettings_products_from_order['select']='purchase_orders.id,purchase_orders.product, purchase_orders.warehouse_id, purchase_orders.purchase_code, purchase_orders.quantity';
+		$params_for_gettings_products_from_order['select']='purchase_orders.id,purchase_orders.product, purchase_orders.warehouse_id, purchase_orders.purchase_code, purchase_orders.quantity, purchase_orders.delivery_status';
 		$res_products_from_order = $this->MY_Model->getRows('purchase_orders', $params_for_gettings_products_from_order);
 
 		$res = $this->MY_Model->getRows('stocks', $params,'row');
 		$last = $this->db->last_query();
 
 		foreach ($res_products_from_order as $key => $value) {
-				$data_stocks = array(
-					'po_id' => $value['id'],
-					'code' => $value['purchase_code'],
-					'product' => $value['product'],
-					'warehouse_id' => $value['warehouse_id'],
-					'physical_count' => $value['quantity']
-				);
-				 $data_insert = $this->MY_Model->insert('stocks',$data_stocks);
-			}
+				$delived_stat = $value['delivery_status'];
+				if($delived_stat == 4){
+					$data_stocks = array(
+						'po_id' => $value['id'],
+						'code' => $value['purchase_code'],
+						'product' => $value['product'],
+						'warehouse_id' => $value['warehouse_id'],
+						'physical_count' => 0
+					);
+					 $data_insert = $this->MY_Model->insert('stocks',$data_stocks);
 
+					$data_movement = array(
+						'po_id' => $value['id'],
+						'stockmovement_code' => $value['purchase_code'],
+					);
+					$data_insert_movement = $this->MY_Model->insert('stock_movement',$data_movement);
+				}
+			}
 		json($data);
 	}
 

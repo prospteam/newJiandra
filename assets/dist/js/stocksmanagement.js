@@ -33,6 +33,7 @@ $(document).ready(function(){
                $.each(data.stock_by_code,function(index,element){
                    var total = parseFloat(element.quantity) * parseFloat(element.unit_price).toFixed(2);
                    console.log(data.stock_by_code);
+                    str += '<input type="hidden" class="prod_code non_border" name="stock_id[]" id="stock_id" value="'+element.id+'" readonly>';
                        str += '<tr>';
                             str += '<td class="purch_td">';
                                 str += '<input type="text" class="prod_code non_border" name="transfer_code[]" id="transfer_quant" value="'+element.product+'" readonly>';
@@ -186,8 +187,7 @@ $(document).ready(function(){
                     return str;
                  }
               },
-              {"data":"delivered"},
-              {"data":"physical_count"},
+
               {"data":"purchase_code"},
               {"data":"company_name"},
               {"data":"supplier_name"},
@@ -220,7 +220,7 @@ $(document).ready(function(){
          //Set column definition initialisation properties.
          "columnDefs": [
               {
-                   "targets": [6], //first column / numbering column
+                   "targets": [3], //first column / numbering column
                    "orderable": false, //set not orderable
 
                },
@@ -253,7 +253,7 @@ $(document).on('click', '.viewStock', function(){
                     str += element.volume +''+ element.unit + '/'+ element.packing +'/'+ element.brand +'/'+element.product_name
                   str += '</td>';
                   str += '<td class="purch_td">';
-                    str += element.quantity
+                    str += element.delivered
                   str += '</td>';
                   str += '<td class="purch_td">';
                     str += element.unit_price
@@ -261,16 +261,9 @@ $(document).on('click', '.viewStock', function(){
                   str += '<td class="purch_td">';
                     str += total
                   str += '</td>';
-                  str += '<td class="purch_td">';
-                    if(element.delivered == ''){
-                        str += '0'
-                    }else{
-                        str += element.delivered
-                    }
-                  str += '</td>';
                   str +=  '<td class="purch_td">';
-                    var variance = element.quantity - element.delivered;
-                        str += variance;
+                    var remaining_stocks = element.physical_count - element.stock_movement_quant;
+                        str += remaining_stocks;
                    str += '</td>';
              str += '</tr>'
         });

@@ -96,21 +96,21 @@
                                   </div>
                             </div>
                           </div>
-                          <div class="form-horizontal deliv_person">
+                          <!-- <div class="form-horizontal deliv_person">
                               <div class="form-group row m-b-10">
                               <label for="so_datedelivered" class="col-md-12 col-lg-4 col-form-label">Delivery Personnel:</label>
                               <div class="col-lg-8 col-md-12">
                                   <div class="input-group m-b-0">
                                       <select class="form-control" class="warehouse" name="purchase_code" id="deliv_person">
-                                        <option value="" selected hidden>Select Delivery Personnel Assigned</option>
+                                        <option value="" selected hidden>Select Delivery Personnel Assigned</option> -->
                                       <!-- <?php //foreach($deliv_users as $keys => $values) : ?>
                                           <option value="<?php //echo $values['id'] ?>"><?php //echo $values['fullname'] ?></option>
                                     <?php  //endforeach; ?> -->
-                                  </select>
+                                  <!-- </select>
                                   </div>
                               </div>
                             </div>
-                          </div>
+                          </div> -->
 <!--   FROM WAREHOUSE
                           <div class="form-horizontal from_warehouse" style="display:none">
                               <div class="form-group row m-b-10">
@@ -271,8 +271,7 @@
                     <!-- <th class="header-title">Date Ordered</th> -->
                     <!-- <th class="header-title">Date Date Delivered</th> -->
                     <th class="header-title">Date Ordered - Date Delivered</th>
-                    <th class="header-title">Delivered Items</th>
-                    <th class="header-title">Remaining Stocks</th>
+
                     <!-- <th class="header-title">Date Date Delivered</th> -->
                     <th class="header-title">Purchase Code</th>
                     <!-- <th class="header-title">Quantity On Hand</th> -->
@@ -310,11 +309,10 @@
                                 <thead>
                                     <th class="header-title purch">SKU</th>
                                     <th class="header-title purch">Product</th>
-                                    <th class="header-title purch">Quantity </th>
+                                    <th class="header-title purch">Delivered </th>
                                     <th class="header-title purch">Unit Price</th>
                                     <th class="header-title purch">Total </th>
-                                    <th class="header-title purch">Quantiy On Hand </th>
-                                    <th class="header-title purch">Variance</th>
+                                    <th class="header-title purch">Remaining Stocks </th>
                                 </thead>
                                 <tbody>
                                         <!-- <td class="purch_td">
