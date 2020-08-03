@@ -13,30 +13,27 @@ class Stockout extends MY_Controller {
 	}
 
    function disp_stockout(){
-	   echo "<pre>";
-	    print_r($_POST);
-	    exit;
+
       $limit = $this->input->post('length');
       $offset = $this->input->post('start');
       $search = $this->input->post('search');
       $order = $this->input->post('order');
       $draw = $this->input->post('draw');
 
-
-      $column_order = array('stockmovement_date','date_delivered','stockmovement_code','stockmovemenent_note','status');
+      $column_order = array('stockmovement_date','stockmovement_code','product','stockmovemenent_note','status');
       $where = array(
 			'stock_movement.status !=' => 3,
 			'type' => 1
 		);
-			$group = array('stock_movement.stockmovement_code');
+		// $group = array('stock_movement.stockmovement_code');
       $join = array(
          // 'company' => 'company.company_id = users.company',
          'products' => 'products.id = stock_movement.product'
       );
-      $select = "stock_movement.stockmovement_id,stock_movement.stockmovement_date,stock_movement.date_delivered,stock_movement.product,stock_movement.stockmovement_note,stock_movement.status, products.product_name,stock_movement.stockmovement_code, (SELECT COUNT(stock_movement.stockmovement_code) FROM stock_movement WHERE stock_movement.stockmovement_code = stock_movement.stockmovement_code ) as stockmovement_qty";
+      // $select = "stock_movement.stockmovement_id,stock_movement.stockmovement_date,stock_movement.product,stock_movement.stockmovement_note,stock_movement.status,stock_movement.stockmovement_code, (SELECT COUNT(stock_movement.stockmovement_code) FROM stock_movement WHERE stock_movement.stockmovement_code = stock_movement.stockmovement_code ) as stockmovement_qty";
+      $select = "stock_movement.stockmovement_id,stock_movement.stockmovement_date,stock_movement.product,stock_movement.stockmovement_note,stock_movement.status,stock_movement.stockmovement_code";
 
-      $list = $this->MY_Model->get_datatables('stock_movement',$column_order, $select, $where, $join, $limit, $offset ,$search, $order,$group);
-
+      $list = $this->MY_Model->get_datatables('stock_movement',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 
       $output = array(
             "draw" => $draw,

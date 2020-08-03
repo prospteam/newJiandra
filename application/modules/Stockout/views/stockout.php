@@ -199,18 +199,17 @@
                   <div class="table-responsive">
                   <div class="col-sm-12">
                     <table class="table table-bordered table-striped dataTable stockout_tbl" role="grid" aria-describedby="example1_info">
-                  <thead>
-                    <th class="header-title">Date Transferred</th>
-                    <th class="header-title">Product</th>
-                    <th class="header-title">Delivery Personnel</th>
-                    <th class="header-title">Note</th>
-                    <th class="header-title">Actions</th>
-                    <th class="header-title">Status</th>
+                      <thead>
+                        <th class="header-title">Date Transferred</th>
+                        <th class="header-title">Stock Code</th>
+                        <th class="header-title">Product</th>
+                        <th class="header-title">Note</th>
+                        <th class="header-title">Actions</th>
+                        <th class="header-title">Status</th>
+                      </thead>
+                      <tbody>
 
-                  </thead>
-                  <tbody>
-
-                </tbody>
+                    </tbody>
                 </table>
                 </div>
               </div>

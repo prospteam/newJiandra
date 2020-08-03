@@ -92,6 +92,7 @@ class Products extends MY_Controller {
 	}
 
     function display_products(){
+
 			$limit = $this->input->post('length');
 			$offset = $this->input->post('start');
 			$search = $this->input->post('search');

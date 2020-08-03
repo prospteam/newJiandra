@@ -168,8 +168,8 @@ $(document).ready(function(){
     "order"       : [[0,'desc']],
     "columns"     :[
            {"data":"stockmovement_date"},
-           {"data":"date_delivered"},
            {"data":"stockmovement_code"},
+           {"data":"product"},
            // {"data":"stockmovement_qty"},
            // {"data":"stockmovement_note"},
            {"data":"stockmovement_note","render": function(data, type, row,meta){
@@ -219,6 +219,7 @@ $(document).ready(function(){
 
                 },
            ],
+
        });
 
 
