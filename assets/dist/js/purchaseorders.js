@@ -386,7 +386,7 @@ $(document).ready(function(){
 
       $.ajax({
           method: 'POST',
-          url: base_url+'purchaseorders/change_delivered_qty',
+              url: base_url+'purchaseorders/change_delivered_qty',
           data: formData,
           processData: false,
           contentType: false,

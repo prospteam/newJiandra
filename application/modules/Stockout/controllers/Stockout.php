@@ -28,10 +28,10 @@ class Stockout extends MY_Controller {
 		// $group = array('stock_movement.stockmovement_code');
       $join = array(
          // 'company' => 'company.company_id = users.company',
-         'products' => 'products.id = stock_movement.product'
+         // 'products' => 'products.id = stock_movement.product'
       );
       // $select = "stock_movement.stockmovement_id,stock_movement.stockmovement_date,stock_movement.product,stock_movement.stockmovement_note,stock_movement.status,stock_movement.stockmovement_code, (SELECT COUNT(stock_movement.stockmovement_code) FROM stock_movement WHERE stock_movement.stockmovement_code = stock_movement.stockmovement_code ) as stockmovement_qty";
-      $select = "stock_movement.stockmovement_id,stock_movement.stockmovement_date,stock_movement.product,stock_movement.stockmovement_note,stock_movement.status,stock_movement.stockmovement_code";
+      $select = "stock_movement.stockmovement_id,stock_movement.stockmovement_date,stock_movement.product,stock_movement.stockmovement_note,stock_movement.status,stock_movement.stockmovement_code,stock_movement.quantity";
 
       $list = $this->MY_Model->get_datatables('stock_movement',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 

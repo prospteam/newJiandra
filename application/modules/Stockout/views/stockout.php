@@ -203,9 +203,9 @@
                         <th class="header-title">Date Transferred</th>
                         <th class="header-title">Stock Code</th>
                         <th class="header-title">Product</th>
-                        <th class="header-title">Note</th>
+                        <th class="header-title">Quantity</th>
                         <th class="header-title">Actions</th>
-                        <th class="header-title">Status</th>
+                        <!-- <th class="header-title">Status</th> -->
                       </thead>
                       <tbody>
 

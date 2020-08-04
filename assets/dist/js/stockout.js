@@ -170,41 +170,39 @@ $(document).ready(function(){
            {"data":"stockmovement_date"},
            {"data":"stockmovement_code"},
            {"data":"product"},
-           // {"data":"stockmovement_qty"},
+            {"data":"quantity"},
            // {"data":"stockmovement_note"},
-           {"data":"stockmovement_note","render": function(data, type, row,meta){
-                var str = '';
-                if(row.stockmovement_note == '') {
-                  str += 'None';
-                }else{
-                  str += row.stockmovement_note;
-                }
-                return str;
-              }
-            },
+           // {"data":"stockmovement_note","render": function(data, type, row,meta){
+           //      var str = '';
+           //      if(row.stockmovement_note == '') {
+           //        str += 'None';
+           //      }else{
+           //        str += row.stockmovement_note;
+           //      }
+           //      return str;
+           //    }
+           //  },
            {"data":"action","render": function(data, type, row,meta){
                              var str = '';
                              str += '<div class="actions">';
-                             if(row.status == 1) {
                                str += '<a href="javascript:;" class="viewstockout" data-id="'+row.stockmovement_code+'"><abbr title="View Stock Out"><i class="fas fa-eye text-info"></i></abbr></a>';
                                str += '<a href="javascript:;" class="editstockout" data-id="'+row.stockmovement_code+'" data-product="'+row.product+'"><abbr title="Edit Stock Out"><i class="fas fa-pen text-warning"></i></abbr></a>';
                                // str += '<a href="javascript:;" class="deletestockOut" data-id="'+row.stockmovement_id+'"><abbr title="Delete Stock Out"><i class="fa fa-trash" aria-hidden="true"></abbr></a>';
-                             }
                              str += '</div>';
                              return str;
                         }
-                   },
+               },
 
-             {"data":"status","render": function(data, type, row,meta){
-                     var str = '';
-                      if(row.status == 1){
-                        str += '<span class="active btn btn-block btn-sm btn-success">active</button>';
-                      }else if(row.status == 2){
-                        str += '<span class="inactive btn btn-block btn-sm btn-danger">inactive</button>';
-                      }
-                      return str;
-                 }
-               }
+             // {"data":"status","render": function(data, type, row,meta){
+             //         var str = '';
+             //          if(row.status == 1){
+             //            str += '<span class="active btn btn-block btn-sm btn-success">active</button>';
+             //          }else if(row.status == 2){
+             //            str += '<span class="inactive btn btn-block btn-sm btn-danger">inactive</button>';
+             //          }
+             //          return str;
+             //     }
+             //   }
            ],
 
            "ajax": {
@@ -214,7 +212,7 @@ $(document).ready(function(){
           //Set column definition initialisation properties.
           "columnDefs": [
                {
-                    "targets": [4,5], //first column / numbering column
+                    "targets": [3,4], //first column / numbering column
                     "orderable": false, //set not orderable
 
                 },
