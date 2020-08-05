@@ -6,6 +6,7 @@ $(document).ready(function(){
       blankVal_onchange_stockType();
 
     if($(this).val() == "2"){
+     $('.puchase_code').css('display', 'block');
       $('.deliv_person').css('display', 'block');
       $('.from_warehouse').css('display', 'block');
       $("#wh_stock_code").prop("disabled", true);
@@ -47,6 +48,9 @@ $(document).ready(function(){
                             str += '<td class="purch_td">';
                                 str += '<input type="text" class="prod_code purchase_quantity" name="transfer_quant[]" required id="transfer_quant">';
                             str += '</td>';
+                            str += '<td class="purch_td">';
+                                str += '<button id="removeNewPO" class="btn btn-md btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>';
+                            str += '</td>';
                        str += '</tr>'
              });
 
@@ -57,6 +61,9 @@ $(document).ready(function(){
            $('#add_new_product tbody').html(str);
        }
     });
+  });
+  $(document).on('click', '#removeNewPO', function(){
+    $(this).parent().parent().remove(); x--;
   });
 
   //compute total for qunatity * unit Price
