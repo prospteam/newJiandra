@@ -53,10 +53,11 @@ class Stocksmanagement extends MY_Controller {
 
 		$parameters2['join']	= array(
 			'products' => 'products.code = purchase_orders.product',
-			'stocks' => 'stocks.po_id = purchase_orders.id'
+			'stocks' => 'stocks.po_id = purchase_orders.id',
+			'stock_movement' => 'stocks.po_id = stock_movement.po_id'
 		 );
 
-		$parameters2['select'] 	= 'purchase_orders.id,purchase_orders.product,stocks.physical_count,products.product_name';
+		$parameters2['select'] 	= 'purchase_orders.id,purchase_orders.product,stocks.physical_count,products.product_name,stock_movement.quantity';
 		$parameters2['where'] 	= array(
 										'purchase_orders.purchase_code' => $code,
 									);
@@ -326,7 +327,13 @@ class Stocksmanagement extends MY_Controller {
 		$stockmovement_note = $this->input->post('stockmovement_note');
 		$stock_id = $this->input->post('stock_id');
 
+
 		foreach ($transfer_code as $key => $value) {
+			$param['where'] 		= array('stock_movement.po_id' => $stock_id[$key]);
+			$param['select']		= "quantity";
+			$movement_quant = $this->MY_Model->getRows('stock_movement',$param);
+			$reamining_stock = $movement_quant[0]['quantity'];
+
 			$datas = array(
 				'stockmovement_code' => $purchase_code,
 				'stockmovement_date' => $sodate,
@@ -334,12 +341,12 @@ class Stocksmanagement extends MY_Controller {
 				// 'from_warehouse' => $from_warehouse,
 				// 'date_delivered' => $so_datedelivered,
 				'product' => $transfer_product[$key],
-				'quantity' => $transfer_quant[$key],
+				'quantity' => $transfer_quant[$key] + $reamining_stock,
 				'stockmovement_note' => $stockmovement_note,
 			);
-
 			 $update = $this->MY_Model->update('stock_movement', $datas, array('po_id' => $stock_id[$key]), '', '');
 		}
+
 		if ($update) {
 			$response = 'ok';
 		}

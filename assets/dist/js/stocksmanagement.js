@@ -43,7 +43,7 @@ $(document).ready(function(){
                                 str += '<input type="text" class="prod_code non_border" name="transfer_product[]" id="transfer_quant" value="'+element.product_name+'" readonly>';
                             str += '</td>';
                             str += '<td class="purch_td">';
-                                str += element.physical_count
+                                str += element.physical_count - element.quantity;
                             str += '</td>';
                             str += '<td class="purch_td">';
                                 str += '<input type="text" class="prod_code purchase_quantity" name="transfer_quant[]" required id="transfer_quant">';
