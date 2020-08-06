@@ -476,7 +476,7 @@ $(document).ready(function(){
                     str +=   element.code;
                    str += '</td>';
                str +=     '<td class="purch_td">';
-                   str +=   element.product_name;
+                   str +=    element.volume +''+ element.unit + '/'+ element.packing +'/'+ element.brand +'/'+element.product_name;
                   str += '</td>';
                  str += ' <td class="purch_td td_qty">';
                      str += element.quantity;
@@ -634,7 +634,7 @@ $(document).ready(function(){
                     $.each(data.products,function(index,key){
                         str += '<tr>';
                             str += '<td class="purch_td">';
-                                str += '<input type="text" class="form-control prod_name" name="prod_name[]" value="'+key.product_name+'">';
+                                str += '<input type="text" class="form-control prod_name" name="prod_name[]" value="'+key.volume+'/'+key.unit+'/'+key.packing+'/'+key.brand+'/'+key.product_name+'">';
                                 str += '<span class="err"></span>';
                             str += '</td>'
                             str += '<td class="purch_td">';
@@ -1210,6 +1210,7 @@ function get_edit_products(selected_product = ''){
 // P_O Arrive modal table
 $(document).on('click', '.po_arrived_btn', function(){
 
+
    var id = $(this).attr('data-id');
 
    $.ajax({
@@ -1247,7 +1248,7 @@ $(document).on('click', '.po_arrived_btn', function(){
                  str +=   element.code;
                 str += '</td>';
                 str += '<td class="purch_td">';
-                str +=   element.product_name;
+                str +=  element.volume +''+ element.unit + '/'+ element.packing +'/'+ element.brand +'/'+element.product_name
                str += '</td>';
                str += ' <td class="purch_td td_qty">';
                    str += element.quantity;

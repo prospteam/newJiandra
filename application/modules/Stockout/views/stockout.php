@@ -162,7 +162,7 @@
                         <th class="header-title">Stock Code</th>
                         <th class="header-title">Product</th>
                         <th class="header-title">Quantity</th>
-                        <th class="header-title">View More Details</th>
+                        <th class="header-title">More Details</th>
                         <!-- <th class="header-title">Status</th> -->
                       </thead>
                       <tbody>
