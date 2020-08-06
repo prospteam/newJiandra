@@ -254,11 +254,11 @@
                           <p>Stock Autoloading</p>
                        </a>
                       </li>
-                      <li class="nav-item">
-                      <a href="<?php echo base_url('bookingdeliveries'); ?>" class="nav-link">
+                      <!-- <li class="nav-item">
+                      <a href="<?php// echo base_url('bookingdeliveries'); ?>" class="nav-link">
                          <p>Booking Deliveries</p>
                       </a>
-                     </li>
+                     </li> -->
                 </ul>
               </li>
             </ul>
