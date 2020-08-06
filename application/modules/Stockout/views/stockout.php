@@ -125,61 +125,20 @@
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header bg-info1">
-                  <h5 class="modal-title" id="exampleModalLabel">View Stock Out Products</h5>
+                  <h5 class="modal-title" id="exampleModalLabel">View Stock Autoloading</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div class="modal-body" id="stockOutProducts">
-                  <div class="row">
-                    <div class="col-6">
-                      <h1 class="inp_head">#<span class="code"></span> </h1> <br>
+                    <div class="form-group">
+                        <label for="">Date Stock Load</label>
+                        <input type="text" name="" class="form-control date_load" readonly value="">
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-6">
-                      <div class="form-group">
-                        <label for="date_ordered">Date:</label>
-                          <p class="date_ordered"></p> <br>
-                      </div>
+                    <div class="form-group">
+                        <label for="">Note</label>
+                        <textarea name="stockloading_note" readonly class="form-control stockloading_note" rows="8" cols="80"></textarea>
                     </div>
-                    <div class="col-6">
-                      <label for="date_delivered">Date Delivered:</label>
-                        <p class="date_delivered"></p> <br>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="table-responsive stockout_prod">
-                        <table class="table table-bordered table-striped stockout" role="grid" aria-describedby="example1_info" id="view_stockouts">
-                          <thead>
-                              <th class="header-title purch">SKU</th>
-                              <th class="header-title purch">Product</th>
-                              <th class="header-title purch">Quantity </th>
-
-                          </thead>
-                          <tbody>
-                            
-                          </tbody>
-                        </table>
-                  </div>
-                  <hr>
-                  <div class="row summary">
-                    <div class="col-6">
-                          <label for="note">Note: </label>
-                          <p class="note"></p> <br>
-                    </div>
-                    <div class="col-md-12 col-lg-6 order-md-2">
-                                    <div class="form-horizontal">
-                                        <div class="form-group row m-b-10">
-                                            <label for="batchCode" class="col-md-12 col-lg-4 col-form-label">Total Quantity</label>
-                                            <div class="col-lg-8 col-md-12">
-                                                <input type="text" class="form-control disabled-normal qty" readonly="" disabled="" value="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                </div>
                 </div>
               </div>
             </div>

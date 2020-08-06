@@ -159,7 +159,7 @@ $(document).ready(function(){
                     })
              }
          });
-     }); 
+     });
 
      var stockout_tbl = $('.stockout_tbl').DataTable({
     "responsive": true,
@@ -185,7 +185,7 @@ $(document).ready(function(){
            {"data":"action","render": function(data, type, row,meta){
                              var str = '';
                              str += '<div class="actions">';
-                               str += '<a href="javascript:;" class="viewstockout" data-id="'+row.stockmovement_code+'"><abbr title="View Stock Out"><i class="fas fa-eye text-info"></i></abbr></a>';
+                               str += '<a href="javascript:;" class="viewstockout" data-id="'+row.stockmovement_id+'"><abbr title="View Stock Out"><i class="fas fa-eye text-info"></i></abbr></a>';
                                // str += '<a href="javascript:;" class="editstockout" data-id="'+row.stockmovement_code+'" data-product="'+row.product+'"><abbr title="Edit Stock Out"><i class="fas fa-pen text-warning"></i></abbr></a>';
                                // str += '<a href="javascript:;" class="deletestockOut" data-id="'+row.stockmovement_id+'"><abbr title="Delete Stock Out"><i class="fa fa-trash" aria-hidden="true"></abbr></a>';
                              str += '</div>';
@@ -226,36 +226,26 @@ $(document).ready(function(){
           var id = $(this).attr('data-id');
           $.ajax({
             method: 'POST',
-            url: base_url + 'stockout/view_stockouts',
+            url: base_url + 'stockout/stockloading_details',
             data: {id:id},
             dataType: "json",
             success: function(data){
               console.log(data);
               $('#ViewStockout').modal('show');
-              var str = '';
-              var total_quantity = 0;
-               $.each(data.stockout,function(index,element){
-                 total_quantity = parseFloat(total_quantity) + parseFloat(element.quantity);
-                 $('.code').text(element.stockmovement_code);
-                 $('.date_ordered').text(element.stockmovement_date);
-                 $('.date_delivered').text(element.date_delivered);
 
-                 str += '<tr>';
-                    str +=     '<td class="purch_td">';
-                      str +=   element.code;
-                    str += '</td>';
-                    str +=  '<td class="purch_td">';
-                      str +=   element.product_name;
-                    str += '</td>';
-                    str += ' <td class="purch_td qty">';
-                      str += element.quantity;
-                      str += '</td>';
-                  str += '</tr>';
+              var date_load = data.load_more_detials[0].stockmovement_date
+              var note = data.load_more_detials[0].stockmovement_note
 
-                  $('.note').text(element.stockmovement_note);
-               });
-               $('.qty').val(total_quantity);
-               $('#view_stockouts tbody').html(str);
+              var autoload_note = '';
+              if(note == ''){
+                  autoload_note = 'No note submitted';
+              }else{
+                  autoload_note = note;
+              }
+
+              $('.date_load').val(date_load);
+              $('.stockloading_note').text(autoload_note);
+
             }
 
        });
