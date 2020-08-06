@@ -654,6 +654,9 @@ $(document).ready(function(){
                                 str += '<input type="text" class="form-control purchase_total" name="total[]" value="" readonly>';
                                 str += ' <span class="err">';
                             str += '</td>'
+                            str += '<td class="purch_td">';
+                                str += '<button id="removeNewPO" class="btn btn-md btn-danger"><i class="fa fa-times" aria-hidden="true"></i></button>';
+                            str += '</td>';
                          str+= '</tr>';
                     });
                 }

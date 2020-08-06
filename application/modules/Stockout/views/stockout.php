@@ -159,8 +159,7 @@
 
                           </thead>
                           <tbody>
-                            <tr>
-                            </tr>
+                            
                           </tbody>
                         </table>
                   </div>
@@ -204,7 +203,7 @@
                         <th class="header-title">Stock Code</th>
                         <th class="header-title">Product</th>
                         <th class="header-title">Quantity</th>
-                        <th class="header-title">Actions</th>
+                        <th class="header-title">View More Details</th>
                         <!-- <th class="header-title">Status</th> -->
                       </thead>
                       <tbody>

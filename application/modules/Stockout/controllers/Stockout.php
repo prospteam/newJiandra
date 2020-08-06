@@ -124,9 +124,9 @@ class Stockout extends MY_Controller {
 	//view list of orders
 	public function view_stockouts(){
 		$stockmovement_id = $this->input->post('id');
-		// echo "<pre>";
-		// print_r($this->input->post());
-		// exit;
+		echo "<pre>";
+		print_r($this->input->post());
+		exit;
 		$parameters['where'] = array('stock_movement.stockmovement_code' => $stockmovement_id, 'type' => 1);
 		// $parameters['group'] = array('stock_movement.stockmovement_code');
 		$parameters['join'] = array('products' => 'products.id = stock_movement.product');

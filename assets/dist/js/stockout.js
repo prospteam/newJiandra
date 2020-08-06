@@ -186,7 +186,7 @@ $(document).ready(function(){
                              var str = '';
                              str += '<div class="actions">';
                                str += '<a href="javascript:;" class="viewstockout" data-id="'+row.stockmovement_code+'"><abbr title="View Stock Out"><i class="fas fa-eye text-info"></i></abbr></a>';
-                               str += '<a href="javascript:;" class="editstockout" data-id="'+row.stockmovement_code+'" data-product="'+row.product+'"><abbr title="Edit Stock Out"><i class="fas fa-pen text-warning"></i></abbr></a>';
+                               // str += '<a href="javascript:;" class="editstockout" data-id="'+row.stockmovement_code+'" data-product="'+row.product+'"><abbr title="Edit Stock Out"><i class="fas fa-pen text-warning"></i></abbr></a>';
                                // str += '<a href="javascript:;" class="deletestockOut" data-id="'+row.stockmovement_id+'"><abbr title="Delete Stock Out"><i class="fa fa-trash" aria-hidden="true"></abbr></a>';
                              str += '</div>';
                              return str;
