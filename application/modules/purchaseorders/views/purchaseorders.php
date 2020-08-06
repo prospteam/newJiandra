@@ -129,8 +129,8 @@
                                             </table>
                                             <ul class="list-group" id="result"></ul>
                                         </div>
-                                        <span class="btn btn-sm btn-primary" id="addNewPO"><i class="fa fa-plus"></i>
-                                            Add Product</span>
+                                        <!-- <span class="btn btn-sm btn-primary" id="addNewPO"><i class="fa fa-plus"></i>
+                                            Add Product</span> -->
                                         <br>
                                         <hr>
                                         <div class="row">
@@ -478,9 +478,9 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <span class="btn btn-sm btn-primary" id="addNewPO_edit"><i class="fa fa-plus"></i>
+                                    <!-- <span class="btn btn-sm btn-primary" id="addNewPO_edit"><i class="fa fa-plus"></i>
                                         Add Product
-                                    </span>
+                                    </span> -->
                                     <br>
                                     <hr>
                                     <div class="row">

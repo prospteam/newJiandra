@@ -54,7 +54,7 @@ class Purchaseorders extends MY_Controller {
 
 		$param['where'] = array('products.status' => 1 , 'supplier' => $supplier);
 		$param['join'] = array('products_cost_price' => 'products_cost_price.fk_product_id = products.id');
-		$param['select'] = 'products.product_name,products.code,products_cost_price.cost_price';
+		$param['select'] = 'products.product_name,products.code,products_cost_price.cost_price, products.unit, products.packing, products.brand, products.volume, products.category';
 		$data['products'] = $this->MY_Model->getRows('products', $param);
 
 		echo json_encode($data);
@@ -358,9 +358,7 @@ class Purchaseorders extends MY_Controller {
 		$parameters['select'] = 'purchase_orders.*, purchase_orders.id AS purchase_id, supplier.id AS supplier_id, supplier.*, company.*, products.id AS product_id, products.*, warehouse_management.wh_name';
 		//
 		$data = $this->MY_Model->getRows('purchase_orders', $parameters);
-			// echo "<pre>";
-			//  print_r($data);
-			//  exit;
+			
 		$data_array['purchase'] = $data;
 
 		json($data_array);
