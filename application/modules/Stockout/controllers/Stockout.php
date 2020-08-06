@@ -144,5 +144,18 @@ class Stockout extends MY_Controller {
 		json($data_array);
 	}
 
+	public function stockloading_details(){
+		$stockmovement_id = $this->input->post('id');
+
+		$parameters['where'] = array('stockmovement_id' => $stockmovement_id,);
+		$parameters['select'] = 'stockmovement_date,stockmovement_note';
+
+		$data = $this->MY_Model->getRows('stock_movement',$parameters);
+
+		$data_array['load_more_detials'] = $data;
+
+		json($data_array);
+	}
+
 }
 ?>
