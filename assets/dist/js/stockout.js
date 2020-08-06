@@ -159,7 +159,7 @@ $(document).ready(function(){
                     })
              }
          });
-     });
+     }); 
 
      var stockout_tbl = $('.stockout_tbl').DataTable({
     "responsive": true,
