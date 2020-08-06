@@ -211,7 +211,7 @@ $(document).ready(function(){
                 var variance = row.system_count - row.physical_count;
                 var str = '';
                   str += '<div class="action" style="text-align:center">';
-                    str += '<a href="javascript:;" class="viewStock" data-id="'+row.purchase_code+'"><abbr title="View Purchase Order"><i class="fas fa-eye text-info"></i></abbr></a>';
+                    str += '<a href="javascript:;" class="viewStock" data-id="'+row.purchase_code+'"><abbr class="view_morestocks" title="View Purchase Order">View More</abbr></a>';
                   str += '</div>';
                 return str;
               }

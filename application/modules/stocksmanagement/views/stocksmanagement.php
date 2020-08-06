@@ -277,7 +277,7 @@
                     <!-- <th class="header-title">Quantity On Hand</th> -->
                     <th class="header-title">Company</th>
                     <th class="header-title">Principal Name</th>
-                    <th class="header-title">Action</th>
+                    <th class="header-title">More Details</th>
                     <!-- <th class="header-title">Out/Transfer</th> -->
                   </thead>
                   <tbody>

@@ -429,3 +429,9 @@ span#addNewSO {
     padding: 3px;
     border-radius: 5px;
 }
+.view_morestocks {
+    background: #1ba224;
+    color: #fff;
+    padding: 6px;
+    border-radius: 3px;
+}
