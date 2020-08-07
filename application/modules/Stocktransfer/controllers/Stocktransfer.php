@@ -69,6 +69,23 @@ class  Stocktransfer extends MY_Controller {
 		json($data);
 	}
 
+	// public function getBOProducts(){
+	// 	$supplier = $this->input->post('supplier');
+	// 	echo "<pre>";
+	// 	 print_r($supplier);
+	// 	 exit;
+	// 	$param['where'] = array('products.status' => 1 , 'products.supplier' => $supplier);
+	// 	$param['join'] = array(
+	// 		'badorder' => 'products.product_name = badorder.product_name',
+	// 	);
+	// 	$param['select'] = 'products.product_name,products.code,products.volume,products.unit,products.brand,products.packing';
+	// 	//$param['select'] = '*';
+	// 	$data['products'] = $this->MY_Model->getRows('products', $param);
+	// 	// echo "<pre>";
+	// 	//  print_r($data);
+	// 	//  exit;
+	// 	echo json_encode($data);
+	// }
 	public function getBOProducts(){
 		$supplier = $this->input->post('supplier');
 

@@ -6,10 +6,11 @@ $(document).ready(function(){
       blankVal_onchange_stockType();
 
     if($(this).val() == "2"){
-     $('.puchase_code').css('display', 'block');
-      $('.deliv_person').css('display', 'block');
-      $('.from_warehouse').css('display', 'block');
-      $("#wh_stock_code").prop("disabled", true);
+        alert('We are still updating the System!');
+     // $('.puchase_code').css('display', 'block');
+     //  $('.deliv_person').css('display', 'block');
+     //  $('.from_warehouse').css('display', 'block');
+     //  $("#wh_stock_code").prop("disabled", true);
     }else{
     $("#wh_stock_code").prop("disabled", true);
       $('.from_warehouse').css('display', 'block');
@@ -268,7 +269,7 @@ $(document).on('click', '.viewStock', function(){
                   str += '<td class="purch_td">';
                     str += total
                   str += '</td>';
-                  str +=  '<td class="purch_td">';
+                  str +=  '<td class="purch_td remain_stocks">';
                     var remaining_stocks = element.physical_count - element.stock_movement_quant;
                         str += remaining_stocks;
                    str += '</td>';
