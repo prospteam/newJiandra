@@ -23,7 +23,7 @@ class Stockout extends MY_Controller {
       $column_order = array('stockmovement_date','stockmovement_code','product','stockmovemenent_note','status');
       $where = array(
 			'stock_movement.status !=' => 3,
-			'type' => 1
+			'stock_movement.type' => 1
 		);
 		// $group = array('stock_movement.stockmovement_code');
       $join = array(

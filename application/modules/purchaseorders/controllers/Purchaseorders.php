@@ -199,7 +199,7 @@ class Purchaseorders extends MY_Controller {
 
 				$data = array(
 					'date_ordered' => $date_ordered,
-					'purchase_code' => $code,
+					'purchase_code' => $post['prod_code'][$pkey],
 					'product' => $pVal,
 					'quantity' => $post['quantity'][$pkey],
 					'unit_price' => $post['unit_price'][$pkey],
@@ -358,7 +358,7 @@ class Purchaseorders extends MY_Controller {
 		$parameters['select'] = 'purchase_orders.*, purchase_orders.id AS purchase_id, supplier.id AS supplier_id, supplier.*, company.*, products.id AS product_id, products.*, warehouse_management.wh_name';
 		//
 		$data = $this->MY_Model->getRows('purchase_orders', $parameters);
-			
+
 		$data_array['purchase'] = $data;
 
 		json($data_array);
