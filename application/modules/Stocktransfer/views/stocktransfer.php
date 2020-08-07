@@ -311,7 +311,7 @@
                                         <th class="header-title">Date Purchased</th>
                                         <th class="header-title">Date Returned</th>
                                         <th class="header-title">Product Name</th>
-                                        <th class="header-title">Reason</th>
+                                        <th class="header-title">Remarks</th>
                                         <th class="header-title">Supplier</th>
                                         <th class="header-title">Action</th>
                                         <th class="header-title">Status</th>
