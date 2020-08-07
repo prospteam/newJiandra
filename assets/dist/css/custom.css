@@ -417,7 +417,7 @@ span#addNewSO {
     font-size: 20px;
 }
 .sm_dateordered {
-    background: #76994b;
+    background: #1ba224;
     color: white;
     padding: 3px;
     border-radius: 5px;
@@ -434,4 +434,7 @@ span#addNewSO {
     color: #fff;
     padding: 6px;
     border-radius: 3px;
+}
+.purch_td.remain_stocks {
+    background: #66cc6e;
 }

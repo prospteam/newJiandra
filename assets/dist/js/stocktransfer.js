@@ -40,10 +40,11 @@ $(document).ready(function(){
 
 
       $(document).on('change','.bo_supplier',function(){
+          alert('ggigig');
            var sup = $('select[name="bo_supplier"]').val();
             var opt = '';
             $.ajax({
-                url: base_url+'Stocktransfer/getBOProducts',
+                url: base_url+'stocktransfer/getBOProducts',
                 data: {supplier:sup},
                 type: 'post',
                 dataType: 'json',
@@ -186,7 +187,7 @@ $(document).ready(function(){
         //                             str1 += '<option value="" selected hidden>Select Warehouse</option>';
         //                                 $.each(data.products,function(index,element){
         //                                     str1 += '<option value="'+element.product_name+'">'+element.product_name +'</option>';
-        
+
         //                                 });
         //                         str1 += '</select>';
         //                     str += '<span class="err"></span>';

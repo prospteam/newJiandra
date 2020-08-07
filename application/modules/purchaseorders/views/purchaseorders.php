@@ -278,6 +278,7 @@
                                     </tbody>
                                 </table>
                             </div>
+
                             <hr>
                             <div class="row summary">
                                 <div class="col-6">

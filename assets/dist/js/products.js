@@ -214,7 +214,7 @@ $(document).ready(function () {
                       str += '</tr>';
                }else{
                    $.each(data.cost_price,function(index,element){
-                       $('.prod_cost_name').text(element.volume +''+ element.unit + '/'+ element.packing +'/'+ element.brand +'/'+element.product_name);
+                       $('.prod_cost_name').text(element.volume +''+ element.unit + ' x '+ element.packing +'/'+ element.brand +'/'+element.product_name);
                        $('.no_products_found').hide();
                        str += '<tr>';
                            str+= '<td class= "purch_td">';
@@ -459,7 +459,7 @@ var products_tbl = $('.products_tbl').DataTable({
       {
          "data": "description", "render": function (data, type, row, meta) {
             var str = '';
-            str = row.volume +''+ row.unit + '/'+ row.packing +'/'+ row.brand +'/'+row.product_name;
+            str = row.volume +''+ row.unit + ' x '+ row.packing +'/'+ row.brand +'/'+row.product_name;
             return str;
          }
       },

@@ -218,7 +218,7 @@
                                 </table>
                           </div>
                           <!--end -->
-                          <span class="btn btn-sm btn-primary" id="addNewSO"><i class="fa fa-plus"></i> Add Product</span>
+                          <!-- <span class="btn btn-sm btn-primary" id="addNewSO"><i class="fa fa-plus"></i> Add Product</span> -->
                         <br>
                           <hr>
                           <div class="row">

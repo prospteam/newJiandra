@@ -25,7 +25,7 @@ class Purchaseorders extends MY_Controller {
 		$parameters1['order'] = 'purchase_code DESC';
 		$data['purchase'] = $this->MY_Model->getRows('purchase_orders',$parameters1);
 
-    	$this->load_page('purchaseorders', @$data);
+    	$this->load_page('purchaseorders',  @$data); 
 	}
 
 	public function viewaddpurchaseorder(){
@@ -358,7 +358,7 @@ class Purchaseorders extends MY_Controller {
 		$parameters['select'] = 'purchase_orders.*, purchase_orders.id AS purchase_id, supplier.id AS supplier_id, supplier.*, company.*, products.id AS product_id, products.*, warehouse_management.wh_name';
 		//
 		$data = $this->MY_Model->getRows('purchase_orders', $parameters);
-			
+
 		$data_array['purchase'] = $data;
 
 		json($data_array);
