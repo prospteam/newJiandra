@@ -169,14 +169,15 @@ $(document).ready(function(){
     "columns"     :[
            {"data":"stockmovement_date"},
            {"data":"stockmovement_code"},
-           // {"data":"product"},
-           {
-              "data": "product", "render": function (data, type, row, meta) {
-                 var str = '';
-                    str = row.volume +''+ row.unit + '/'+ row.packing +'/'+ row.brand +'/'+row.product_name;
-                 return str;
-              }
-           },
+            {"data":"product"},
+           // {
+           //    "data": "product", "render": function (data, type, row, meta) {
+           //       var str = '';
+           //          //str = row.volume +''+ row.unit + '/'+ row.packing +'/'+ row.brand +'/'+row.product_name;
+           //          str = row.product;
+           //       return str;
+           //    }
+           // },
             {"data":"quantity"},
            // {"data":"stockmovement_note"},
            // {"data":"stockmovement_note","render": function(data, type, row,meta){
@@ -219,7 +220,7 @@ $(document).ready(function(){
           //Set column definition initialisation properties.
           "columnDefs": [
                {
-                    "targets": [3,4], //first column / numbering column
+                    "targets": [4,4], //first column / numbering column
                     "orderable": false, //set not orderable
 
                 },

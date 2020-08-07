@@ -28,10 +28,11 @@ class Stockout extends MY_Controller {
 		// $group = array('stock_movement.stockmovement_code');
       $join = array(
          // 'company' => 'company.company_id = users.company',
-         'products' => 'products.code = stock_movement.stockmovement_code'
+         // 'products' => 'products.code = stock_movement.stockmovement_code'
       );
       // $select = "stock_movement.stockmovement_id,stock_movement.stockmovement_date,stock_movement.product,stock_movement.stockmovement_note,stock_movement.status,stock_movement.stockmovement_code, (SELECT COUNT(stock_movement.stockmovement_code) FROM stock_movement WHERE stock_movement.stockmovement_code = stock_movement.stockmovement_code ) as stockmovement_qty";
-      $select = "products.volume,products.unit,products.packing, products.brand,products.product_name, stock_movement.stockmovement_id,stock_movement.stockmovement_date,stock_movement.product,stock_movement.stockmovement_note,stock_movement.status,stock_movement.stockmovement_code,stock_movement.quantity";
+     // $select = "products.volume,products.unit,products.packing, products.brand,products.product_name, stock_movement.stockmovement_id,stock_movement.stockmovement_date,stock_movement.product,stock_movement.stockmovement_note,stock_movement.status,stock_movement.stockmovement_code,stock_movement.quantity";
+      $select = "*";
     // str = row.volume +''+ row.unit + '/'+ row.packing +'/'+ row.brand +'/'+row.product_name;
       $list = $this->MY_Model->get_datatables('stock_movement',$column_order, $select, $where, $join, $limit, $offset ,$search, $order);
 
